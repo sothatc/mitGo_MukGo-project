@@ -32,9 +32,9 @@
 		<beans:property name="driverClassName"
 			value="oracle.jdbc.driver.OracleDriver" />
 		<beans:property name="url"
-			value="jdbc:oracle:thin:@127.0.0.1:1521:xe" />
-		<beans:property name="username" value="아이디" />
-		<beans:property name="password" value="비밀번호" />
+			value="jdbc:oracle:thin:@1.220.236.74:15214:xe" />
+		<beans:property name="username" value="gogo" />
+		<beans:property name="password" value="gogo123" />
 	</beans:bean>
 
 	<!-- Mybatis 설정 객체 -->
@@ -66,6 +66,7 @@
 	</beans:bean>
 
 	<context:component-scan base-package="kr.or.iei" />
+	<context:component-scan base-package="kr.co.mitgomukgo.store" />
 
 
 
