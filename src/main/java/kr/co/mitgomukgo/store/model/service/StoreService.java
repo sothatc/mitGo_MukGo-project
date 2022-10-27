@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.mitgomukgo.store.model.dao.StoreDao;
+import kr.co.mitgomukgo.store.model.vo.Store;
+import kr.co.mitgomukgo.store.model.vo.StoreImg;
 
 @Service
 public class StoreService {
@@ -13,5 +15,17 @@ public class StoreService {
 
 	public StoreService() {
 		super();
+	}
+
+	public int addStore(Store s) {
+		int result = dao.addStore(s);
+		if(result > 0) {
+			for (StoreImg si : s.getStoreImgList()) {
+				si.setStoreNo(s.getStoreNo());
+				result += dao.insertImg(si);
+			}
+		}
+		
+		return result;
 	}
 }

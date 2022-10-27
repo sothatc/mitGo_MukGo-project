@@ -9,5 +9,6 @@
 	<!-- mapper 약어등록 -->
 	<typeAliases>
 		<typeAlias type="kr.co.mitgomukgo.store.model.vo.Store" alias="s" />
+		<typeAlias type="kr.co.mitgomukgo.store.model.vo.StoreImg" alias="si" />
 	</typeAliases>
 </configuration>
