@@ -50,7 +50,7 @@
 	<!-- DB작업을 수행하는 객체 -->
 	<beans:bean id="sqlSessionTemplate"
 		class="org.mybatis.spring.SqlSessionTemplate">
-		<beans:constructor-arg ref="sqlSession" />
+		<beans:constructor-arg ref="sqlSession"/>
 	</beans:bean>
 	
 	<!-- 다중파일 업로드 -->
