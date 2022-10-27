@@ -5,4 +5,9 @@
 		<!-- null값 처리 -->
 		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
+
+	<!-- mapper 약어등록 -->
+	<typeAliases>
+		<typeAlias type="kr.co.mitgomukgo.store.model.vo.Store" alias="s" />
+	</typeAliases>
 </configuration>
