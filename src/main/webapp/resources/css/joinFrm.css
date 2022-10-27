@@ -1,0 +1,176 @@
+@charset "UTF-8";
+
+*{
+    padding: 0;
+    margin: 0;
+}
+.header{
+    width: 100vw;
+    height: 200px;
+    background-color: black;
+    text-align: center;
+    font-size: 60px;
+    color: white;
+}
+input {
+	outline: none;
+}
+
+.form-write>h4{
+    padding-bottom: 12px;
+    border-bottom: 2px solid #000;
+}
+.membership-form>.form-write>form>ul li{
+    list-style: none;
+}
+.contents{
+    width: 850px;
+    padding-top: 50px;
+    margin: 0 auto;
+}
+.form-write>form>ul{
+    padding-top: 30px;
+}
+.form-write>form>ul li{
+    padding-top: 30px;
+}
+.tit{
+    float: left;
+    color: #999;
+    height: 40px;
+    line-height: 40px;
+}
+.cnt{
+    margin-left: 120px;
+}
+.input01{
+    border: 1px solid #d7d7d7;
+    height: 38px;
+    padding: 0 12px;
+    position: relative;
+}
+.form-write>form>ul li div .input01{
+    color: #999;
+    line-height: 36px;
+}
+.input01>input{
+    width: 100%;
+    border: none;
+    height: 30px;
+}
+.label{
+    position: absolute;
+}
+.membership-form input {
+	margin-top: 4px;
+}
+.text-note{
+    color: #999;
+    font-size: 12px;
+    padding-top: 8px;
+}
+.box01{
+    float: left;
+    width: 200px;
+}
+.selBox01>select{
+    width: 200px;
+    height: 38px;
+    border: 1px solid #d7d7d7;
+}
+.box02{
+    float: left;
+    width: 380px;
+    height: 36px;
+    border: 1px solid #d7d7d7;
+    margin-left: 10px;
+    padding: 0 12px;
+    position: relative;
+}
+.box02>input{
+    width: 100%;
+    border: none;
+    height: 30px;
+}
+.box02>.label{
+    line-height: 35px;
+    color: #999;
+}
+.phoneChkSendBtn{
+    height: 38px;
+    width: 103px;
+    margin-left: 10px;
+    background-color: #568A35;
+    color: #fff;
+    border: none;
+}
+.box03{
+    float: left;
+    width: 198px;
+    height: 38px;
+    border: 1px solid #d7d7d7;
+    margin-top: 10px;
+}
+.box03>input{
+    width: 97%;
+    height: 34px;
+    border: none;
+}
+.box03>label{
+    line-height: 35px;
+    color: #999;
+}
+.phoneChkBtn{
+    margin-left: 10px;
+    margin-top: 10px;
+    width: 70px;
+    height: 40px;
+    background-color: #568A35;
+    color: #fff;
+    border: none;
+}
+
+.agreeChkBox-wrap{
+    border-top: 1px solid #d7d7d7;
+    border-bottom: 1px solid #d7d7d7;
+    margin-top: 40px;
+    padding-top: 30px;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+}
+.agreeChkBox{
+    width: 620px;
+    margin: 0 auto;
+}
+hr{
+    display: block;
+    margin: 1em 0;
+    border: 0;
+    border-top: 1px solid #ccc;
+}
+.chk-box2{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+}
+.chk-box2 label{
+    display: inline-block;
+    font-size: 13px;
+}
+.chk-box2 a{
+    font-size: 13px;
+}
+.allowContent{
+    float: right;
+}
+.joinBtn{
+    text-align: center;
+}
+.joinBtn>input{
+    width: 300px;
+    height: 40px;
+    margin: 0 auto;
+    background-color: #568A35;
+    color: #fff;
+    border: none;
+}

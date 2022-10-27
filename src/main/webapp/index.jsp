@@ -8,5 +8,7 @@
 </head>
 <body>
 	<h1>믿고먹고</h1>
+	<a href="/loginFrm.do">로그인</a>
+	<a href="/joinFrm.do">회원가입</a>
 </body>
 </html>
