@@ -8,5 +8,6 @@
 </head>
 <body>
 	<h1>믿고먹고</h1>
+	<a href="/storeDetailView.do">맛집상세페이지</a>
 </body>
 </html>
