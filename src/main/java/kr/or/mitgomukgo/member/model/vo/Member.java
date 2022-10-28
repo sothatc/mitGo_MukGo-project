@@ -1,4 +1,4 @@
-package kr.or.member.model.vo;
+package kr.or.mitgomukgo.member.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +12,7 @@ public class Member {
 	private String memberId;
 	private String memberPw;
 	private String memberName;
-	private String memberPhone;
+	private int memberPhone;
 	private String MemEnrollDate;
 	private int memberClass;
 }

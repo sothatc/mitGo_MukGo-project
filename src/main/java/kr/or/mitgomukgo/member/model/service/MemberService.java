@@ -1,4 +1,4 @@
-package kr.or.member.model.service;
+package kr.or.mitgomukgo.member.model.service;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.google.gson.JsonObject;
 
-import kr.or.member.model.dao.MemberDao;
+import kr.or.mitgomukgo.member.model.dao.MemberDao;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 

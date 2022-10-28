@@ -2,10 +2,14 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
 	<settings>
-		<!-- null값이 발생하면 빈칸("")이 아닌 null로 처리 -->
-		<setting name="jdbcTypeForNull" value="NULL"/>
+		<!-- null값 처리 -->
+		<setting name="jdbcTypeForNull" value="NULL" />
 	</settings>
+
+	<!-- mapper 약어등록 -->
 	<typeAliases>
-		<typeAlias type="kr.or.member.model.vo.Member" alias="m"/>
+		<typeAlias type="kr.or.mitgomukgo.member.model.vo.Member" alias="m"/>
+		<typeAlias type="kr.co.mitgomukgo.store.model.vo.Store" alias="s" />
+
 	</typeAliases>
 </configuration>

@@ -20,8 +20,7 @@
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
 		in the /WEB-INF/views directory -->
-	<beans:bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
@@ -31,10 +30,10 @@
 		class="org.apache.commons.dbcp.BasicDataSource">
 		<beans:property name="driverClassName"
 			value="oracle.jdbc.driver.OracleDriver" />
-		<beans:property name="url"
-			value="jdbc:oracle:thin:@127.0.0.1:1521:xe" />
-		<beans:property name="username" value="api_test" />
-		<beans:property name="password" value="1234" />
+		<beans:property name="url" value="jdbc:oracle:thin:@1.220.236.74:15214:xe" />
+		<beans:property name="username" value="gogo" />
+		<beans:property name="password" value="gogo123" />
+
 	</beans:bean>
 
 	<!-- Mybatis 설정 객체 -->
@@ -52,7 +51,8 @@
 		class="org.mybatis.spring.SqlSessionTemplate">
 		<beans:constructor-arg ref="sqlSession" />
 	</beans:bean>
-
+	
+	<!-- 다중파일 업로드 -->
 	<beans:bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="maxUploadSize" value="10485760" />
@@ -64,9 +64,12 @@
 		<beans:property name="dataSource" ref="dataSource" />
 	</beans:bean>
 
-
 	<context:component-scan base-package="kr.or.iei" />
-	<context:component-scan base-package="kr.or.member" />
+
+	<context:component-scan base-package="kr.or.mitgomukgo.member" />
+
+	<context:component-scan base-package="kr.co.mitgomukgo.store" />
+
 
 
 

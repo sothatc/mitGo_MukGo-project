@@ -1,4 +1,4 @@
-package kr.or.member.controller;
+package kr.or.mitgomukgo.member.controller;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -6,10 +6,11 @@ import java.util.Random;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.or.member.model.service.MemberService;
+import kr.or.mitgomukgo.member.model.service.MemberService;
 import net.nurigo.java_sdk.Coolsms;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
@@ -29,9 +30,11 @@ public class MemberController {
 	public String loginFrm() {
 		return "/member/loginFrm";
 	}
+	/*
 	@ResponseBody
 	@RequestMapping(value="/memberPhoneCheck")
-	public String memberPhoneCheck(String phone) throws CoolsmsException {
+	public String memberPhoneCheck(String phone, String phone2, Model model) throws CoolsmsException {
+		
 		String api_key = "NCSWCXKJNQFT0JWN";
 		  String api_secret = "MGVZXWLCEBOJRYV6RZZGAZELC7H5VTEA";
 		  Message coolsms = new Message(api_key, api_secret);
@@ -60,8 +63,17 @@ public class MemberController {
 	      System.out.println(e.getMessage());
 	      System.out.println(e.getCode());
 	    }
-
-		  return "/";
+		  model.addAttribute("phone", phone);
+		  model.addAttribute("phone2", phone2);
+		  return "/member/joinFrm";
 		
+	}
+	*/
+	@ResponseBody
+	@RequestMapping(value="/memberPhoneCheck2.do")
+	public String memberPhoneCheck2(String memberPhone, Model model) {
+		System.out.println("Ddddd");
+		model.addAttribute("memberPhone",memberPhone);
+		return "/";
 	}
 }
