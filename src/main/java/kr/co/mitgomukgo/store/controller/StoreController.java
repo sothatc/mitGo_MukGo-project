@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
-
 import common.FileRename;
 import kr.co.mitgomukgo.store.model.service.StoreService;
 import kr.co.mitgomukgo.store.model.vo.Store;
@@ -22,13 +21,16 @@ import kr.co.mitgomukgo.store.model.vo.StoreImg;
 @Controller
 public class StoreController {
 
+
 	@Autowired
 	private StoreService service;
 	@Autowired
 	private FileRename fileRename;
 
-	public StoreController() {
-		super();
+	//맛집 상세 보기 페이지 이동
+	@RequestMapping(value="/storeDetailView.do")
+	public String storeDetailView() {
+		return "store/storeDetail";
 	}
 
 	@RequestMapping(value = "/addStoreFrm.do")
