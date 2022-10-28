@@ -20,6 +20,9 @@
     border: solid 2px black;
     border-radius: 25px;
 }
+.selectCar:hover,.selectFoot:hover{
+    cursor: pointer;
+}
 .map_wrap{
 	display: flex;
     justify-content: center;
@@ -31,10 +34,16 @@
 
 #result{
     display: flex;
+    justify-content: center;
     align-items: center;
     border: solid 2px black;
     width: 100%;
     height: 25px;
     border-radius: 10px;
     padding-left: 15px;
+}
+
+#fullAddr{
+    border: solid 2px black;
+    border-radius: 10px;
 }
