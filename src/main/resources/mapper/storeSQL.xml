@@ -1,4 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="store">
+
+<insert id="addStore" parameterType="s">
+	insert into store 
+	values
+	(store_seq.nextval,
+	#{storeName},
+	2,
+	#{address},
+	#{phone},
+	#{content},
+	#{openHour},
+	#{closedDay},
+	0,
+	0,
+	#{category},
+	#{withEatCate},
+	#{whereEatCate}
+	)
+</insert>
+
+<select id="selectStoreNo" resultType="_int">
+	select max(store_no) as storeNo
+	from store
+</select>
+
+<insert id="insertImg" parameterType="si">
+	insert into store_img
+	values
+	(storeimg_seq.nextval,
+	#{storeNo},
+	#{imgpath}
+	)
+</insert>
 </mapper>
