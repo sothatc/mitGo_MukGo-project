@@ -3,6 +3,8 @@ package kr.co.mitgomukgo.store.model.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sun.corba.se.impl.io.FVDCodeBaseImpl;
+
 import kr.co.mitgomukgo.store.model.dao.StoreDao;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import kr.co.mitgomukgo.store.model.vo.StoreImg;
@@ -20,12 +22,12 @@ public class StoreService {
 	public int addStore(Store s) {
 		int result = dao.addStore(s);
 		if(result > 0) {
+			int storeNo = dao.selectStoreNo();
 			for (StoreImg si : s.getStoreImgList()) {
-				si.setStoreNo(s.getStoreNo());
+				si.setStoreNo(storeNo);
 				result += dao.insertImg(si);
 			}
 		}
-		
 		return result;
 	}
 }

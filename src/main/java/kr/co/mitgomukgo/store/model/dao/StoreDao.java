@@ -9,7 +9,7 @@ import kr.co.mitgomukgo.store.model.vo.StoreImg;
 
 @Repository
 public class StoreDao {
-	
+
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
@@ -19,6 +19,11 @@ public class StoreDao {
 
 	public int addStore(Store s) {
 		return sqlSession.insert("store.addStore", s);
+	}
+
+	public int selectStoreNo() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("store.selectStoreNo");
 	}
 
 	public int insertImg(StoreImg si) {
