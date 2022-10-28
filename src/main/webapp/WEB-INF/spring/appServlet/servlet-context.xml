@@ -68,6 +68,7 @@
 	<context:component-scan base-package="kr.or.iei" />
 	<context:component-scan base-package="kr.co.mitgomukgo.store" />
 	<context:component-scan base-package="common" />
+	<context:component-scan base-package="kr.co.mitgomukgo.map" />
 
 
 
