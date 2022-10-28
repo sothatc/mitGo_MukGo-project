@@ -9,5 +9,6 @@
 <body>
 	<h1>믿고먹고</h1>
 	<a href="addStoreFrm.do">업체 등록</a>
+	<a href="/selectAllFaq.do?reqPage=1">faqList</a>
 </body>
 </html>
