@@ -10,6 +10,8 @@
 	<typeAliases>
 		<typeAlias type="kr.or.mitgomukgo.member.model.vo.Member" alias="m"/>
 		<typeAlias type="kr.co.mitgomukgo.store.model.vo.Store" alias="s" />
+		<typeAlias type="kr.co.mitgomukgo.faq.model.vo.Faq" alias="f"/>
+		<typeAlias type="kr.co.mitgomukgo.store.model.vo.StoreImg" alias="si" />
 
 	</typeAliases>
 </configuration>

@@ -1,5 +1,7 @@
 package kr.co.mitgomukgo.store.model.vo;
 
+import java.util.ArrayList;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +19,10 @@ public class Store {
 	private String content;
 	private String openHour;
 	private String closedDay;
+	private String category;
+	private String whereEatCate;
+	private String withEatCate;
 	private int rating;
 	private int reviewCount;
+	private ArrayList<StoreImg> storeImgList;
 }
