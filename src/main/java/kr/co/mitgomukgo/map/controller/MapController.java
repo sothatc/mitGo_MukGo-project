@@ -8,9 +8,9 @@ public class MapController {
 
 	public MapController() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	@RequestMapping(value = "mapFrm.do")
+
+	@RequestMapping(value = "/mapFrm.do")
 	public String mapFrm() {
 		return "map/mapFrm";
 	}

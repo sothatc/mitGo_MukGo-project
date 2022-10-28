@@ -6,9 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<h2>
 	<h1>믿고먹고</h1>
-	<a href="/addStoreFrm.do">업체 등록</a>
-	<a href="mapFrm.do">map 길찾기 생성중</a>
+	<h2><a href="/addStoreFrm.do">업체 등록</a></h2>
+	<h2><a href="/mapFrm.do">map 길찾기 생성중</a></h2>
 </body>
 </html>
