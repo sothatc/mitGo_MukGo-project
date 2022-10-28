@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="faq">
+	<select id="selectAllFaq" parameterType="map" resultType="f">
+		select * from
+			(select row_number() over (order by rnum desc) as rnum1, rb.* from
+			(select rownum as rnum, b.* from
+			(select 
+		        faq_no as faqNo,
+		        faq_theme as faqTheme,
+		        faq_title as faqTitle,
+		        faq_content as faqContent
+        from faq_tbl order by faqNo desc)b)rb order by 3 desc) where rnum between #{start} and #{end}
+	</select>
+	
+	<insert id="insertFaq" parameterType="f">
+		insert into faq_tbl values
+		(faq_seq.nextval, #{faqTheme}, #{faqTitle}, #{faqContent})
+	</insert>
+	
+	<select id="countAllFaq" resultType="int">
+		select count(*) from faq_tbl
+	</select>
+	
+	<delete id="deleteFaq" parameterType="int">
+		delete from faq_tbl where faq_no = #{faqNo}
+	</delete>
+	
+	<select id="selectOneFaq" parameterType="int" resultType="f">
+		select 
+			faq_no as faqNo,
+		    faq_theme as faqTheme,
+		    faq_title as faqTitle,
+		    faq_content as faqContent
+		from faq_tbl where faq_no = #{faqNo}
+	</select>
+	
+	<update id="updateFaq" parameterType="f">
+		update faq_tbl set faq_title = #{faqTitle}, faq_theme = #{faqTheme}, faq_content = #{faqContent} where faq_no = #{faqNo}
+	</update>
+	
+	<select id="selectThemeFaq" parameterType="string" resultType="f">
+		select * from
+			(select row_number() over (order by rnum desc) as rnum1, rb.* from
+			(select rownum as rnum, b.* from
+			(select 
+		        faq_no as faqNo,
+		        faq_theme as faqTheme,
+		        faq_title as faqTitle,
+		        faq_content as faqContent
+        from faq_tbl order by faqNo desc)b)rb order by 3 desc) where rnum between 1 and 7 and  faqTheme = #{faqTheme}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -20,7 +20,7 @@
 		<link rel="stylesheet" href="/resources/css/map.css">
 		<div class="ft_area">
 			<div class="map-content-wrap">
-				
+
 				<div id="map_wrap" class="map_wrap">
 					<div id="map_div"></div>
 				</div>

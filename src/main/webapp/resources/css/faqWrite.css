@@ -1,0 +1,43 @@
+.faq-write-wrap{
+    margin: 0 auto;
+    margin-top: 200px;
+    width: 900px;
+}
+
+.faq-write-title{
+    margin-bottom: 25px;
+}
+
+.faq-write-title>h1{
+    text-align: center;
+}
+
+.require-sign{
+    text-align: right;
+}
+
+
+
+.faq-tbl{
+    width: 900px;
+    text-align: center;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    padding-bottom: 20px;
+}
+
+table>tr{
+    height: 70px;
+}
+
+.faq-tbl>tr>th{
+    text-align: center;
+}
+
+.faq-write-btn{
+    margin : 0 auto;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 60px;
+}
+
