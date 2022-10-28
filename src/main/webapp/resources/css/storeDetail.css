@@ -131,6 +131,11 @@ body{
     margin-top: 10px;
 }
 
+#share{
+	text-decoration-line:none;
+}
+
+
 .favorite{
     float: right;
     margin-top: 10px;
@@ -432,8 +437,7 @@ button[name=recommendBtn]:hover{
 
 .photo-wrap2{
     margin: 0 auto;
-    width:1200px;
-    background-color:white;
+	width:60vw;
     height:420px;
     border: 0.5px solid gainsboro;
     margin-bottom: 20px;
@@ -450,7 +454,7 @@ button[name=recommendBtn]:hover{
 }
 
 .photo-wrap2>ul>li{
-    width:1200px;
+	width:60vw;
     float: left;
 	display:flex;
 	justify-content: center;

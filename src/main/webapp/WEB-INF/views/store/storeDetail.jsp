@@ -230,12 +230,13 @@
                 4가지의 담백한 치즈로 만들어내는 치즈피자가 인기.</i></p>
         </blockquote> 
 
-                <!-- 사진 슬라이드 영역 -->
+        <!-- 사진 슬라이드 영역 -->
+
             <div class="photo-wrap2">
                 <ul>
-                    <li><img src="/resources/img/pizza1.png" style="height: 420px; width:50vw;"></li>
-                    <li><img src="/resources/img/pizza2.png" style="height: 420px; width:50vw;"></li>
-                    <li><img src="/resources/img/pizza1.png" style="height: 420px; width:50vw;"></li>
+                    <li><img src="/resources/img/pizza1.png" style="height: 420px; width:100%;"></li>
+                    <li><img src="/resources/img/pizza2.png" style="height: 420px; width:100%;"></li>
+                    <li><img src="/resources/img/pizza1.png" style="height: 420px; width:100%;"></li>
                 </ul>
 
                 <div class="slide-navi2 prev2">
@@ -390,10 +391,11 @@
 	});
 	
 	//------------ 매장 사진 슬라이더 -----------------
+	
 	let imgNo2=0; 
 	const ul2 = $(".photo-wrap2>ul");
 	const imgCount2 = ul2.children().length;
-	const width2 = 1200;
+	const width2 = 922;
 	ul2.css("width",(imgCount2*width2)+"px"); 
 	
 	$(".prev2").on("click",function(){
@@ -413,6 +415,7 @@
 	});
 	
 	// ----------- datePicker ---------------------
+	
     $.datepicker.setDefaults({
         dateFormat: 'yy-mm-dd',
         prevText: '이전 달',
@@ -450,11 +453,11 @@
      function shareMessage() {
     	    Kakao.Share.sendDefault({
     	      objectType: 'location',
-    	      address: '경기 성남시 분당구 판교역로 166 3층',
-    	      addressTitle: '카카오 판교아지트 카페톡',
+    	      address: '서울 영등포구 선유도 이레빌딩',
+    	      addressTitle: 'PIZZA',
     	      content: {
-    	        title: '신메뉴 출시♥︎ 체리블라썸라떼',
-    	        description: '이번 주는 체리블라썸라떼 1+1',
+    	        title: '신메뉴 출시~ PIZZA',
+    	        description: '이번 주는 PIZZA 1+1',
     	        imageUrl:
     	          'http://k.kakaocdn.net/dn/bSbH9w/btqgegaEDfW/vD9KKV0hEintg6bZT4v4WK/kakaolink40_original.png',
     	        link: {
