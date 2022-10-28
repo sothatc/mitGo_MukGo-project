@@ -21,6 +21,11 @@
 	)
 </insert>
 
+<select id="selectStoreNo" resultType="_int">
+	select max(store_no) as storeNo
+	from store
+</select>
+
 <insert id="insertImg" parameterType="si">
 	insert into store_img
 	values
