@@ -37,42 +37,38 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/addStore.do")
-	public String addStore(Store s, MultipartFile[] file, HttpServletRequest request, String address1, String address2,
-			String detailAddress, String openHour1, String openHour2) {
+	public String addStore(Store s, MultipartFile[] file, HttpServletRequest request, String zipCode,
+			String detailAddress, String closedHour) {
 
 		// 첨부이미지 목록 저장할 리스트 생성
 		ArrayList<StoreImg> storeImgList = new ArrayList<StoreImg>();
 
 		if (!file[0].isEmpty()) {
-			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/store");
+			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/store/");
 
 			for (MultipartFile file2 : file) {
 				String filename = file2.getOriginalFilename();
 				String imgpath = fileRename.fileRename(savePath, filename);
-
-				FileOutputStream fos;
 				try {
+					FileOutputStream fos;
 					fos = new FileOutputStream(new File(savePath + imgpath));
 					BufferedOutputStream bos = new BufferedOutputStream(fos);
 					byte[] bytes = file2.getBytes();
 					bos.write(bytes);
 					bos.close();
 				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				StoreImg storeImg = new StoreImg();
 				storeImg.setImgpath(imgpath);
 				storeImgList.add(storeImg);
 			}
-
 		}
 		s.setStoreImgList(storeImgList);
-		s.setAddress(address1 + address2 + detailAddress);
-		s.setOpenHour(openHour1 + " ~ " + openHour2);
+		s.setAddress(zipCode + s.getAddress() + detailAddress);
+		s.setOpenHour(s.getOpenHour() + " ~ " + closedHour);
 		int result = service.addStore(s);
 		return "redirect:/storeList.do?reqPage=1";
 	}
