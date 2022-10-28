@@ -793,7 +793,7 @@ function drawLine(arrPoint, traffic) {
 	} else {
 		polyline_ = new Tmapv2.Polyline({
 			path: arrPoint,
-			strokeColor: "#DD0000",
+			strokeColor: "#1D1CE5",
 			strokeWeight: 6,
 			map: map
 		});
@@ -847,7 +847,15 @@ function searchAddr() {
 
 //밑은 그냥 클릭이벤트 js
 const selectCar = $(".selectCar");
+const selectFoot = $(".selectFoot");
+
 selectCar.on("click", function () {
+	selectCar.css("background-color","black")
+	selectCar.css("color","white")
+
+	selectFoot.css("background-color","white")
+	selectFoot.css("color","black")
+
 	$(".car-content").css("display", "block")
 	$(".foot-content").css("display", "none")
 
@@ -855,8 +863,14 @@ selectCar.on("click", function () {
 	$(".map-content-wrap>div:first-child>div:last-child").css("border-bottom", "solid 2px black");
 });
 
-const selectFoot = $(".selectFoot");
+
 selectFoot.on("click", function () {
+	selectCar.css("background-color","white")
+	selectCar.css("color","black")
+
+	selectFoot.css("background-color","black")
+	selectFoot.css("color","white")
+
 	$(".foot-content").css("display", "block")
 	$(".car-content").css("display", "none")
 
