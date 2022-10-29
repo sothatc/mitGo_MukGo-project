@@ -1,6 +1,5 @@
 package kr.co.mitgomukgo.faq.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +19,7 @@ public class faqController {
 	@RequestMapping(value="/selectAllFaq.do")
 	public String selectAllFaq(int reqPage, Model model) {
 		HashMap<String, Object> map = service.selectAllFaq(reqPage);
+		
 		
 		if(map == null) {
 			model.addAttribute("msg", "아직 등록된 faq가 없습니다.");
@@ -69,22 +69,8 @@ public class faqController {
 		HashMap<String, Object> map = service.selectThemeFaq(faqTheme, reqPage);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", map.get("reqPage"));
-		model.addAttribute("theme", faqTheme);
 		
 		return "faq/faqList";
-	}
-	
-	@RequestMapping(value="/selectSearchFaq.do")
-	public String selectSearchFaq(String type, String keyword, Model model) {
-		ArrayList<Faq> list = service.selectSearchFaq(type, keyword);
-		
-		if(list == null) {
-			model.addAttribute("msg", "아직 등록된 faq가 없습니다.");
-			return "faq/faqList";
-		}else {
-			model.addAttribute("list", list);
-			return "faq/faqList";
-		}
 	}
 }
 
