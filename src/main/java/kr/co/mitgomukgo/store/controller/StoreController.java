@@ -21,14 +21,13 @@ import kr.co.mitgomukgo.store.model.vo.StoreImg;
 @Controller
 public class StoreController {
 
-
 	@Autowired
 	private StoreService service;
 	@Autowired
 	private FileRename fileRename;
 
-	//맛집 상세 보기 페이지 이동
-	@RequestMapping(value="/storeDetailView.do")
+	// 맛집 상세 보기 페이지 이동
+	@RequestMapping(value = "/storeDetailView.do")
 	public String storeDetailView() {
 		return "store/storeDetail";
 	}
@@ -74,9 +73,14 @@ public class StoreController {
 		int result = service.addStore(s);
 		return "redirect:/storeList.do?reqPage=1";
 	}
-	
+
 	@RequestMapping(value = "/storeList.do")
 	public String storeListFrm() {
 		return "store/storeListFrm";
+	}
+	
+	@RequestMapping(value = "/writeReviewFrm.do")
+	public String writeReviewFrm() {
+		return "store/writeReviewFrm";
 	}
 }
