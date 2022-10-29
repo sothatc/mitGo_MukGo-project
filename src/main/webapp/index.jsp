@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -16,7 +15,7 @@ a:hover {
 	color: red;
 }
 
-.review:hover{
+.review:hover {
 	cursor: pointer;
 	color: red;
 }
@@ -35,19 +34,10 @@ a:hover {
 
 
 
-
-
-
-
-
-
-
-
 <script>
 	$(".review").on("click", function() {
 		var win = window.open("/writeReviewFrm.do", "_blank", "toolbar=yes,scrollbars=yes,top=100,left=500,width=520,height=450");
 	});
 </script>
 </body>
-
 </html>
