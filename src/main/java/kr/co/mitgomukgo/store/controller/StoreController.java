@@ -74,4 +74,9 @@ public class StoreController {
 		int result = service.addStore(s);
 		return "redirect:/storeList.do?reqPage=1";
 	}
+	
+	@RequestMapping(value = "/storeList.do")
+	public String storeListFrm() {
+		return "store/storeListFrm";
+	}
 }
