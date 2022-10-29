@@ -36,7 +36,7 @@ a:hover {
 
 <script>
 	$(".review").on("click", function() {
-		var win = window.open("/writeReviewFrm.do", "_blank", "toolbar=yes,scrollbars=yes,top=100,left=500,width=520,height=450");
+		var win = window.open("/writeReviewFrm.do", "_blank", "toolbar=yes,scrollbars=yes,top=200,left=600,width=520,height=500");
 	});
 </script>
 </body>

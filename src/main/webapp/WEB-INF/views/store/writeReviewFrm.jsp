@@ -5,6 +5,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>리뷰쓰기</title>
+		<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 		<style>
 			.reviewTitle {
 				text-align: center;
@@ -49,16 +50,16 @@
 
 			#reviewForm label:hover {
 				cursor: pointer;
-				text-shadow: 0 0 0 rgba(255,83,86,0.99);
-				
+				text-shadow: 0 0 0 rgba(255, 83, 86, 0.99);
+
 			}
 
 			#reviewForm label:hover~label {
-				text-shadow: 0 0 0 rgba(255,83,86,0.99);
+				text-shadow: 0 0 0 rgba(255, 83, 86, 0.99);
 			}
 
 			#reviewForm input[type=radio]:checked~label {
-				text-shadow: 0 0 0 rgba(255,83,86,0.99);
+				text-shadow: 0 0 0 rgba(255, 83, 86, 0.99);
 			}
 
 			#reviewContents {
@@ -123,7 +124,7 @@
 			<h1>리뷰쓰기 : 가게명</h1>
 		</div>
 		<hr><br>
-		<form class="mb-3" id="reviewForm" method="post" action="#">
+		<form class="mb-3" id="reviewForm" method="post" action="/writeReview.do">
 			<div><strong>식사는 만족하셨나요?</strong></div>
 			<fieldset>
 				<input type="radio" name="rating" value="5" id="rate1">
@@ -141,10 +142,36 @@
 				<textarea type="text" id="reviewContents" name="content"
 					placeholder="정성스런 리뷰는 가게와 고객분들께 큰 도움이 됩니다!"></textarea>
 			</div>
+			<div>
+				<input type="file" name="file" class="file-upload" id="file" style="  visibility: hidden;
+  position: absolute;">
+				<button class="inputPhoto" type="button" id="inputPhoto"
+					style="width: 100%; height: 50px; border: 1px dashed gray; background-color: transparent;">사진
+					첨부하기</button>
+			</div>
 			<div class="btnWrap">
 				<button type="submit" value="등록">등록</button>
 				<button type="button" value="취소" onclick="window.close()">취소</button>
 			</div>
 		</form>
+		<script>
+			(function ($) {
+				'use strict';
+				$(function () {
+					$('.inputPhoto').on('click', function () {
+						var file = $(this).parent().find('.file-upload');
+						file.trigger('click');
+					});
+					$('.file-upload').on('change', function () {
+						if ($(this).val() == '') {
+							$(this).parent().find('.inputPhoto').text('사진 첨부하기');
+						} else {
+							$(this).parent().find('.inputPhoto').text($(this).val().replace(/C:\\fakepath\\/i, ''));
+						}
+					});
+				});
+			})(jQuery);
+		</script>
 	</body>
+
 	</html>
