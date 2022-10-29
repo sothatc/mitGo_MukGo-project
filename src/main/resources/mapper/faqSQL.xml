@@ -10,7 +10,7 @@
 		        faq_theme as faqTheme,
 		        faq_title as faqTitle,
 		        faq_content as faqContent
-        from faq_tbl order by faqNo desc)b)rb order by 3 desc) where rnum between #{start} and #{end}
+        from faq_tbl order by faqNo desc)b)rb order by 3 desc) where rnum between #{start} and #{end} order by faqTheme desc
 	</select>
 	
 	<insert id="insertFaq" parameterType="f">
@@ -48,7 +48,30 @@
 		        faq_theme as faqTheme,
 		        faq_title as faqTitle,
 		        faq_content as faqContent
-        from faq_tbl order by faqNo desc)b)rb order by 3 desc) where rnum between 1 and 7 and  faqTheme = #{faqTheme}
+        from faq_tbl order by faqNo desc)b)rb order by 3 desc) where rnum between 1 and 7 and faqTheme = #{faqTheme}
+        
+	</select>
+	
+	<select id="selectSearchFaq" parameterType="map" resultType="f">
+		select 
+			faq_no as faqNo,
+		    faq_theme as faqTheme,
+		    faq_title as faqTitle,
+		    faq_content as faqContent
+		from faq_tbl
+		<choose>
+			<when test="type.equals('titleContent')">
+				where faq_title like '%' || #{keyword} || '%' or faq_content like '%' || #{keyword} || '%'
+			</when>
+			
+			<when test="type.equals('title')">
+				where faq_title like '%' || #{keyword} || '%'
+			</when>
+			
+			<when test="type.equals('content')">
+				where faq_content like '%' || #{keyword} || '%'
+			</when>
+		</choose>
 	</select>
 </mapper>
 
