@@ -1,5 +1,7 @@
 package kr.co.mitgomukgo.store.model.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +14,7 @@ import kr.co.mitgomukgo.store.model.vo.StoreImg;
 
 @Service
 public class StoreService {
-	
+
 	@Autowired
 	private StoreDao dao;
 
@@ -22,7 +24,7 @@ public class StoreService {
 
 	public int addStore(Store s) {
 		int result = dao.addStore(s);
-		if(result > 0) {
+		if (result > 0) {
 			int storeNo = dao.selectStoreNo();
 			for (StoreImg si : s.getStoreImgList()) {
 				si.setStoreNo(storeNo);
@@ -34,5 +36,9 @@ public class StoreService {
 
 	public int writeReview(Review r) {
 		return dao.WriteReview(r);
+	}
+
+	public ArrayList<Store> storeList() {
+		return dao.storeList();
 	}
 }
