@@ -34,4 +34,16 @@
 	#{imgpath}
 	)
 </insert>
+
+<insert id="reviewWrite" parameterType="r">
+	insert into review
+	values
+	(review_seq.nextval,
+	#{menuNo},
+	#{write},
+	#{rating},
+	#{reviewImg},
+	to_char(sysdate, 'yyyy-mm-dd')
+	)
+</insert>
 </mapper>

@@ -3,7 +3,10 @@ package kr.co.mitgomukgo.store.model.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
+
 import kr.co.mitgomukgo.store.model.dao.StoreDao;
+import kr.co.mitgomukgo.store.model.vo.Review;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import kr.co.mitgomukgo.store.model.vo.StoreImg;
 
@@ -27,5 +30,9 @@ public class StoreService {
 			}
 		}
 		return result;
+	}
+
+	public int writeReview(Review r) {
+		return dao.WriteReview(r);
 	}
 }

@@ -4,6 +4,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.mitgomukgo.store.model.vo.Review;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import kr.co.mitgomukgo.store.model.vo.StoreImg;
 
@@ -28,6 +29,10 @@ public class StoreDao {
 
 	public int insertImg(StoreImg si) {
 		return sqlSession.insert("insertImg", si);
+	}
+
+	public int WriteReview(Review r) {
+		return sqlSession.insert("reviewWrite", r);
 	}
 
 }
