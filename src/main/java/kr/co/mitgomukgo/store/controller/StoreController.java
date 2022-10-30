@@ -86,4 +86,9 @@ public class StoreController {
 	public String writeReviewFrm() {
 		return "store/writeReviewFrm";
 	}
+	
+	@RequestMapping(value = "/writeReview.do")
+	public String writeReview() {
+		return "store/writeReviewFrm";
+	}
 }
