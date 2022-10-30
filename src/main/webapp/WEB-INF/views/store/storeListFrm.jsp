@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,105 +52,11 @@
 		</div>
 		<div class="storeList-list">
 			<div class="storeList-list-content">
-				<div class="showList">
-					<div>
-						<img src="/resources/img/테스트.jpg">
-					</div>
-					<div>
-						<div>별점</div>
-						<div>가게이름</div>
-						<div>조회수</div>
-					</div>
-				</div>
-
-				<div class="showList">
-					<div>
-						<img src="/resources/img/테스트.jpg">
-					</div>
-					<div>
-						<div>별점</div>
-						<div>가게이름</div>
-						<div>조회수</div>
-					</div>
-				</div>
-
-				<div class="showList">
-					<div>
-						<img src="/resources/img/테스트.jpg">
-					</div>
-					<div>
-						<div>별점</div>
-						<div>가게이름</div>
-						<div>조회수</div>
-					</div>
-				</div>
-
-				<div class="showList">
-					<div>
-						<img src="/resources/img/테스트.jpg">
-					</div>
-					<div>
-						<div>별점</div>
-						<div>가게이름</div>
-						<div>조회수</div>
-					</div>
-				</div>
-
-				<div class="showList">
-					<div>
-						<img src="/resources/img/테스트.jpg">
-					</div>
-					<div>
-						<div>별점</div>
-						<div>가게이름</div>
-						<div>조회수</div>
-					</div>
-				</div>
-
-				<div class="showList">
-					<div>
-						<img src="/resources/img/테스트.jpg">
-					</div>
-					<div>
-						<div>별점</div>
-						<div>가게이름</div>
-						<div>조회수</div>
-					</div>
-				</div>
-
-				<div class="showList">
-					<div>
-						<img src="/resources/img/테스트.jpg">
-					</div>
-					<div>
-						<div>별점</div>
-						<div>가게이름</div>
-						<div>조회수</div>
-					</div>
-				</div>
-
-				<div class="showList">
-					<div>
-						<img src="/resources/img/테스트.jpg">
-					</div>
-					<div>
-						<div>별점</div>
-						<div>가게이름</div>
-						<div>조회수</div>
-					</div>
-				</div>
-
-				<div class="showList">
-					<div>
-						<img src="/resources/img/테스트.jpg">
-					</div>
-					<div>
-						<div>별점</div>
-						<div>가게이름</div>
-						<div>조회수</div>
-					</div>
-				</div>
+				<c:forEach items="${list }" var="s">
+					<div>${s.storeNo }</div>
+				</c:forEach>
 			</div>
+		</div>
 		</div>
 	</div>
 	<!--푸터-->

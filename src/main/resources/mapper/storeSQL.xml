@@ -34,4 +34,24 @@
 	#{imgpath}
 	)
 </insert>
+
+<select id="storeList" resultType="s">
+	select
+		store_no as storeNo,
+		store_name as storeName,
+		owner_no as ownerNo,
+		address,
+		phone,
+		content,
+		open_hour as openHour,
+		closed_day as closedDay, 
+		rating,
+		review_count as reviewCount,
+		category,
+		whitheat_cate as withEatCate,
+		whereeat_cate as whereEatCate,
+		storeimg_no as storeImgList,
+		imgpath
+	from store left join store_img using(store_no)
+</select>
 </mapper>
