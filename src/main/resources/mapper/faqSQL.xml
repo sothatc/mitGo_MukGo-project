@@ -50,6 +50,31 @@
 		        faq_content as faqContent
         from faq_tbl order by faqNo desc)b)rb order by 3 desc) where rnum between 1 and 7 and  faqTheme = #{faqTheme}
 	</select>
+	
+	<select id="selectSearchFaq" parameterType="map" resultType="f">
+		select * from
+			(select row_number() over (order by rnum desc) as rnum1, rb.* from
+			(select rownum as rnum, b.* from
+			(select 
+		        faq_no as faqNo,
+		        faq_theme as faqTheme,
+		        faq_title as faqTitle,
+		        faq_content as faqContent
+        from faq_tbl order by faqNo desc)b)rb order by 3 desc) where rnum between 1 and 7 and
+        <choose>
+        	<when test="type.equals('titleContent')">
+        		 faqTitle like '%' || #{keyword} || '%' or faqContent like '%' || #{keyword} || '%'
+        	</when>
+        	
+        	<when test="type.equals('title')">
+        		 faqTitle like '%' || #{keyword} || '%'
+        	</when>
+        	
+        	<when test="type.equals('content')">
+        		 faqContent like '%' || #{keyword} || '%'
+        	</when>
+        </choose>
+	</select>
 </mapper>
 
 
