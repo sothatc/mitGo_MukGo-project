@@ -24,5 +24,6 @@ a:hover {
 	<h2><a href="/storeDetailView.do">맛집상세페이지</a></h2>
 	<h2><a href="/selectAllFaq.do?reqPage=1">FAQ List</a></h2>
 	<h2><a href="/storeList.do">업체 상세보기 생성중</a></h2>
+	<h2><a href="/selectNoticeList.do?reqPage=1">공지사항</a></h2>
 </body>
 </html>
