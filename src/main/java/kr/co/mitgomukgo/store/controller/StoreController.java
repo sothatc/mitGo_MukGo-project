@@ -13,7 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.Gson;
+
 import common.FileRename;
 import kr.co.mitgomukgo.store.model.service.StoreService;
 import kr.co.mitgomukgo.store.model.vo.Review;
@@ -33,7 +37,18 @@ public class StoreController {
 	public String storeDetailView() {
 		return "store/storeDetail";
 	}
-
+	
+	// 맛집 상세 데이터 가져오기 (모달)
+	@ResponseBody
+	@RequestMapping(value="/ajaxSelectStore.do",produces="application/json;charset=utf-8")
+	public String ajaxSelectStore() {
+		ArrayList<Store> list = service.ajaxSelectStore();
+		Gson gson = new Gson();
+		String result = gson.toJson(list);
+		System.out.println(result);
+		return result;
+	}
+	
 	@RequestMapping(value = "/addStoreFrm.do")
 	public String addStoreFrm() {
 		return "store/addStoreFrm";
