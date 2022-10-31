@@ -20,7 +20,7 @@ input {
     padding-bottom: 12px;
     border-bottom: 2px solid #000;
 }
-.membership-form>.form-write>form>ul li{
+.membership-form>.form-write>ul li{
     list-style: none;
 }
 .contents{
@@ -28,10 +28,10 @@ input {
     padding-top: 50px;
     margin: 0 auto;
 }
-.form-write>form>ul{
+.form-write>ul{
     padding-top: 30px;
 }
-.form-write>form>ul li{
+.form-write>ul li{
     padding-top: 30px;
 }
 .tit{
@@ -53,7 +53,7 @@ input {
     padding: 0 12px;
     position: relative;
 }
-.form-write>form>ul li div .input01{
+.form-write>ul li div .input01{
     color: #999;
     line-height: 36px;
 }
