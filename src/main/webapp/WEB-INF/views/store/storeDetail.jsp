@@ -498,8 +498,29 @@
 			const modal = document.querySelector(".modal-wrap");
 				
 			function init(){
+				/*
 				open.addEventListener("click",function(){
 					modal.classList.remove("hidden");
+					
+					$.ajax({
+						url: "/ajaxSelectStore.do",
+						success: function(data){
+							const table=$("<table>");
+							const titleTr =$("<tr>");
+							titleTr.html("<th>번호</th><th>아이디</th><th>이름</th><th>전화번호</th>");
+							table.append(titleTr);
+							for(let i=0; i<data.length; i++){
+								const tr = $("<tr>");
+								tr.append("<td>"+data[i].memberNo+"</td>");
+								tr.append("<td>"+data[i].memberId+"</td>");
+								tr.append("<td>"+data[i].memberName+"</td>");
+								tr.append("<td>"+data[i].phone+"</td>");
+								table.append(tr);
+							}
+							$("#ajaxResult").html(table);
+						}
+					});
+					*/
 				});
 				
 				close.addEventListener("click",function(){
@@ -507,6 +528,9 @@
 				});
 			}
 			init();
+			
+	
+			
 
 		</script>
 </body>
