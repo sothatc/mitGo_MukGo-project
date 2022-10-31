@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +15,7 @@
         <div class="login-input">
             <div>로그인</div>
             <div>가입하신 아이디로 로그인 하세요.</div>
-            <form action="#" method="post">
+            <form action="/login.do" method="post">
                 <div class="login">
                     <ul>
                         <li>         
@@ -31,8 +32,8 @@
                                 <input type="password" name="memberPw">
                             </div>
                         </li>
+                        <button class="login-btn" type="submit">로그인</button>
                     </ul>
-                    <input class="login-btn" type="submit" value="로그인">
                 </div>
             </form>
         </div>
@@ -41,5 +42,26 @@
             <a href="#">회원가입 하기</a>
         </div>
     </div> 
+
+    <script>
+        $("input").on("focus",function(){
+		    const label = $(this).prev();
+		    label.css("display","none");
+		});
+		$("input").on("blur",function(){
+		    const label = $(this).prev();
+		    if($(this).val() == ""){
+			    label.css("display","");
+		    }
+		});
+        $(".login-btn").on("mouseover",function(){
+			$(this).css("background-color","rgb(97, 76, 76)");
+			$(this).css("border","1px solid black");
+		})
+		$(".login-btn").on("mouseleave",function(){
+			$(this).css("background-color","");
+		})
+
+    </script>
 </body>
 </html>
