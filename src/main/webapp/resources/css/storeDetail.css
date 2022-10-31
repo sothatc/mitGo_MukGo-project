@@ -573,3 +573,108 @@ button[name=recommendBtn]:hover{
     margin-top: 10%;
 }
 
+
+.modal-wrap{
+    background-color: rgba(51, 51, 51, 0.5);
+    position: fixed;
+    top:0; left: 0; bottom: 0; right: 0;
+}
+
+.modal-box{
+    position: absolute;
+    top: 30vh;
+    left: 70vh;
+    background-color: white;
+    border-radius: 10px;
+    width: 30vw;
+    height: 40vh;
+    min-width: 385px;
+    min-height: 288px;
+}
+
+.modal-title{
+    width: 100%;
+    height: 10%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-indent: 35px;
+    font-weight: bolder;
+    border-bottom: 0.5px solid darkgray;
+}
+
+.modal-content{
+    width: 100%;
+    height: 75%;
+    display: block;
+}
+
+#reserveCheckTbl{
+    width: 90%;
+    height: 70%;
+    margin: 0 auto;
+    font-size: 13px;
+}
+
+#reserveCheckTbl>tbody>tr>th{
+    background-color: rgba(224, 224, 224, 0.36); 
+    width: 30%; 
+    text-align: center;
+}
+
+#reserveCheckTbl>tbody>tr>td{
+    text-indent: 10px;
+}
+.closeModal{
+    border: 1px solid rgb(51, 51, 51);
+    border-radius: 10px;
+    background-color: rgb(51, 51, 51);
+    color: white;
+    margin-left: 3%;
+    margin-top: 3%;
+    font-size: 12px; 
+}
+
+.closeModal:hover{
+    border: 1px solid rgb(51, 51, 51);
+    border-radius: 10px;
+    background-color: white;
+    color: rgb(51, 51, 51);
+    margin-left: 3%;
+    margin-top: 3%;
+    font-size: 12px; 
+}
+
+.reserveBtn{
+    border: 1px solid rgb(51, 51, 51);
+    border-radius: 10px;
+    background-color: rgb(51, 51, 51);
+    color: white;
+    float: right;
+    margin-right: 3%;
+    margin-top: 3%;
+    font-size: 12px; 
+}
+
+.reserveBtn:hover{
+    border: 1px solid rgb(51, 51, 51);
+    border-radius: 10px;
+    background-color: white;
+    color: rgb(51, 51, 51);
+    float: right;
+    margin-right: 3%;
+    margin-top: 3%;
+    font-size: 12px; 
+}
+.explanation{
+    width:90%; 
+    height: 8%; 
+    font-size: 12px; 
+    margin: 0 auto;
+    margin-top: 3%;
+}
+
+.hidden{
+	display:none;
+}
+
+
