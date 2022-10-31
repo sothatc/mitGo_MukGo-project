@@ -24,5 +24,6 @@ public class Store {
 	private String withEatCate;
 	private int rating;
 	private int reviewCount;
+	private String thumbNail;
 	private ArrayList<StoreImg> storeImgList;
 }

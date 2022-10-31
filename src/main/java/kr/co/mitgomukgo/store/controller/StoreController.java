@@ -79,6 +79,7 @@ public class StoreController {
 	public String storeListFrm(Model model) {
 		ArrayList<Store> list = service.storeList();
 		model.addAttribute("list", list);
+		System.out.println(list);
 		return "store/storeListFrm";
 	}
 
