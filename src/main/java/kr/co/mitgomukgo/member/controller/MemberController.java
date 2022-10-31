@@ -1,7 +1,9 @@
-package kr.or.mitgomukgo.member.controller;
+package kr.co.mitgomukgo.member.controller;
 
 import java.util.HashMap;
 import java.util.Random;
+
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.or.mitgomukgo.member.model.service.MemberService;
+import kr.co.mitgomukgo.member.model.service.MemberService;
+import kr.co.mitgomukgo.member.model.vo.Member;
 import net.nurigo.java_sdk.Coolsms;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
@@ -30,15 +33,15 @@ public class MemberController {
 	public String loginFrm() {
 		return "/member/loginFrm";
 	}
-	/*
+	
 	@ResponseBody
 	@RequestMapping(value="/memberPhoneCheck")
-	public String memberPhoneCheck(String phone, String phone2, Model model) throws CoolsmsException {
+	public String memberPhoneCheck(String phone, Model model) throws CoolsmsException {
 		
 		String api_key = "NCSWCXKJNQFT0JWN";
 		  String api_secret = "MGVZXWLCEBOJRYV6RZZGAZELC7H5VTEA";
 		  Message coolsms = new Message(api_key, api_secret);
-
+		  
 		  Random rand = new Random(); 
 			String numStr = "";
 			for(int i=0; i<4; i++) {
@@ -63,17 +66,48 @@ public class MemberController {
 	      System.out.println(e.getMessage());
 	      System.out.println(e.getCode());
 	    }
-		  model.addAttribute("phone", phone);
-		  model.addAttribute("phone2", phone2);
-		  return "/member/joinFrm";
+		  model.addAttribute("numStr", numStr);
+		  return numStr;
 		
 	}
-	*/
-	@ResponseBody
-	@RequestMapping(value="/memberPhoneCheck2.do")
-	public String memberPhoneCheck2(String memberPhone, Model model) {
-		System.out.println("Ddddd");
-		model.addAttribute("memberPhone",memberPhone);
-		return "/";
+	
+	@RequestMapping(value="/checkId.do")
+	public String checkId(String checkId, Model model) {
+		String memberId = service.checkId(checkId);
+		if(memberId != null) {
+			model.addAttribute("result",false);
+			model.addAttribute("memberId",memberId);
+			model.addAttribute("checkId", checkId);
+		}else {
+			model.addAttribute("result",true);
+			model.addAttribute("memberId",memberId);
+			model.addAttribute("checkId", checkId);
+		}
+		return "/member/checkId";
+	}
+	@RequestMapping(value="/join.do")
+	public String join(Member m) {
+		int result = service.insertMember(m);
+		if(result > 0) {
+			return "redirect:/";
+		}else {
+			return "member/joinFrm";
+		}
+	}
+	@RequestMapping(value="/login.do")
+	public String login(Member member, HttpSession session) {
+		Member m = service.selectOneMember(member);
+		if(m != null) {
+			session.setAttribute("m", m);
+		}
+		return "redirect:/";
+	}
+	@RequestMapping(value="/pwChk.do")
+	public String pwChk(HttpSession session) {
+		return "member/pwChk";
+	}
+	@RequestMapping(value="/mypage.do")
+	public String mypage() {
+		return "member/mypage";
 	}
 }
