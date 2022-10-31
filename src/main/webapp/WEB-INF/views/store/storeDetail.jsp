@@ -498,10 +498,10 @@
 			const modal = document.querySelector(".modal-wrap");
 				
 			function init(){
-				/*
+				
 				open.addEventListener("click",function(){
 					modal.classList.remove("hidden");
-					
+					/*
 					$.ajax({
 						url: "/ajaxSelectStore.do",
 						success: function(data){
