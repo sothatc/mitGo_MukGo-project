@@ -15,10 +15,13 @@
 
     <div class="header"></div>
     <div class="contents">
+        <form name="checkIdFrm" action="/checkId.do">
+			<input type="hidden" name="checkId">
+		</form>
+        <form action="/join.do" method="post">
         <div class="membership-form">
             <div class="form-write">
                 <h4>회원정보</h4>
-                <form action="#" method="post">
                     <ul>
                         <li>
                             <span class="tit">이름</span>
@@ -46,7 +49,7 @@
                             <div class="cnt">
                                 <div class="input01">
                                     <label class="label" for="memberPw">대/소문자와 숫자를 포함한 최소 8자리를 입력해주세요.</label>
-                                    <input type="text" id="memberPw" name="memberPw">
+                                    <input type="password" id="memberPw" name="memberPw">
                                 </div>
                                 <p class="text-note"></p>
                             </div>
@@ -56,7 +59,7 @@
                             <div class="cnt">
                                 <div class="input01">
                                     <label class="label" for="memberPw2">비밀번호를 한 번 더 입력해주세요.</label>
-                                    <input type="text" id="memberPw2" name="memberPw2">
+                                    <input type="password" id="memberPw2" name="memberPw2">
                                 </div>
                                 <p class="text-note"></p>
                             </div>
@@ -75,18 +78,16 @@
                                         </div>
                                     </div>
                                     <div class="box02">
-                                    	<form action="/memberPhoneCheck2.do">
                                         <label class="label" for="memberPhone">전화번호를 입력해주세요.</label>
-                                        <input type="number" id="memberPhone" name="memberPhone" value="${phone2 }">
-	                                    <span id="result">${memberPhone }</span>
-	                                    <button type="submit" class="phoneChkSendBtn">인증번호 발송</button>
-	                                    </form>
+                                        <input type="number" id="memberPhone" name="memberPhone">
                                     </div>
+                                    <button type="button" class="phoneChkSendBtn">인증번호 발송</button>
                                     <div class="box03">
                                         <label class="label" for="certifyNum">인증번호를 입력해주세요.</label>
                                         <input type="text" id="certifyNum" name="certifyNum">
+                                        <input type="hidden" class="certifyNum2">
                                     </div>
-                                    <button class="phoneChkBtn">확인</button>
+                                    <button type="button" class="phoneChkBtn">확인</button>
                                     <p class="text-note"></p>
                                 </div>
                             </div>
@@ -134,29 +135,24 @@
 	
 	
 	<script>
-		<%--
-		번호 테스트용
-		$(".phoneChkSendBtn").on("click",function(){
-			const phone1 = $("[name=frontNum]").val();
-			var phone2 = $("[name=memberPhone]").val();
-			const result = $("#result");
-			$.ajax({
-				url : "/memberPhoneCheck2.do",
-				type : "POST",
-				data : {phone2 : phone2},
-				success : function(data) {
-					result.text(data);
-					console.log("성공");
-				},
-				error : function() {
-					console.log("실패");
-				}
-			});
+		
+		/*아이디 중복체크*/
+		$("#idChkBtn").on("click",function(){
+			const memberId = $("#memberId").val();
+			if(memberId == ""){
+				alert("아이디를 입력하세요");
+				return;
+			}
+			$("[name=checkId]").val(memberId);
+			const popup = window.open("","checkId","left=700px, top=300px, width=300px, height=200px, menubar=no, status=no, scrollbars=yes");
+			//새창에서 form을 전송하기 위한 연결작업
+			$("[name=checkIdFrm]").attr("target","checkId");
+			$("[name=checkIdFrm]").submit();
 		});
-		--%>
 	
-		<%--
+		/*휴대폰 인증확인*/
 		$(".phoneChkSendBtn").click(function(){
+			
 			alert("인증번호가 발송되었습니다.");
 			var phone1 = $("[name=frontNum]").val();
 			var phone2 = $("[name=memberPhone]").val();
@@ -164,18 +160,14 @@
 			$.ajax({
 				type : "POST",
 				url : "/memberPhoneCheck.do",
-				data : {phone : phone, phone2 : phone2},
-				success : function(data) {
-					alert("성공");
+				data : {phone : phone},
+				success : function(numStr) {
+                    $(".certifyNum2").val(numStr);
 				}
 			});
 		});
-		--%>
 		
-		$(".phoneChkBtn").on("click",function(){
-			console.log(${numStr});
-		});
-		
+		/*정규표현식 유효성검사*/
 		$("#joinBtn").on("click",function(event){
 			//이름 유효성 검사
 			const nameReg = /^[가-힣]{2,5}$/;
@@ -227,10 +219,21 @@
 				event.preventDefault();
 			}
 			
+			
+			
 		});
 		
-		
-		
+        $(".phoneChkBtn").on("click",function(){
+            const certifyNum = $("#certifyNum").val();
+            const certifyNum2 = $(".certifyNum2").val();
+            if(certifyNum == certifyNum2) {
+                alert("인증 확인되었습니다.");
+                $("#joinBtn").attr("type","submit");
+            }else {
+                alert("인증번호를 다시 확인해주세요.");
+                //$("#joinBtn").attr("type","hidden");
+            }
+        });
 		
 		
 			

@@ -1,0 +1,45 @@
+@charset "UTF-8";
+*{
+    padding: 0;
+    margin: 0;
+}
+.header{
+    width: 100vw;
+    height: 200px;
+    background-color: black;
+    text-align: center;
+    font-size: 60px;
+    color: white;
+}
+body{
+    width: 100vw;
+}
+.pwChk-wrap{
+    height: 400px;
+    width: 420px;
+    margin: 50px auto;
+    border: 1px solid #d7d7d7;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.pwChk-content>div{
+    font-size: 20px;
+    font-weight: 500;
+}
+#rePwChk{
+    height: 30px;
+    width: 200px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+.pwChkBtn{
+    background-color: rgb(51,51,51);
+    color: #fff;
+    border: none;
+    width: 70px;
+    height: 35px;
+    border-radius: 10px;
+}
