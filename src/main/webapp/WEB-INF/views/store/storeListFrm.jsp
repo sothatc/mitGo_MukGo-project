@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,9 +34,10 @@
 					<li><img src="/resources/img/food.png">양식</li>
 					<li><img src="/resources/img/salmon.png">일식</li>
 					<li><img src="/resources/img/dimpling.png">중식</li>
-					<li><img src="/resources/img/chicken.png" alt="">육류</li>
-					<li><img src="/resources/img/sea-food.png">씨푸드</li>
 					<li><img src="/resources/img/tteokbokki.png">분식</li>
+					<li><img src="/resources/img/chicken.png">육류</li>
+					<li><img src="/resources/img/sea-food.png">씨푸드</li>
+					<li><img src="/resources/img/dessert.png">디저트</li>
 					<li>기타</li>
 				</ul>
 			</div>
@@ -53,11 +54,22 @@
 		<div class="storeList-list">
 			<div class="storeList-list-content">
 				<c:forEach items="${list }" var="s">
-					<div>${s.storeNo }</div>
+					<div class="showList">
+					<a href="/storeDetail.do?storeNo=${s.storeNo }">
+						<div>
+							<img src="resources/upload/store/${s.thumbNail }">
+						</div>
+						<div>
+							<div style="display: none">${s.storeNo }</div>
+							<div>가게이름 : ${s.storeName }</div>
+							<div>전화번호 : ${s.phone }</div>
+						</div>
+					</a>
+					</div>
 				</c:forEach>
 			</div>
 		</div>
-		</div>
+	</div>
 	</div>
 	<!--푸터-->
 	<div class="footer-wrap"></div>
