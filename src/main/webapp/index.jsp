@@ -52,6 +52,10 @@ a:hover {
 	<span class="review">리뷰 작성하기(이정우)</span>
 </h2>
 
+<h2>
+	<a href="/selectNoticeList.do?reqPage=1">공지사항(안형관)</a>
+</h2>
+
 
 
 <script>
