@@ -55,16 +55,6 @@ public class faqDao {
 		List list = sqlsession.selectList("faq.selectThemeFaq", faqTheme);
 		return (ArrayList<Faq>)list;
 	}
-
-	public ArrayList<Faq> selectSearchFaq(HashMap<String, Object> map) {
-		List list = sqlsession.selectList("faq.selectSearchFaq", map);
-		
-		if(list.isEmpty()) {
-			return null;
-		}else {
-			return (ArrayList<Faq>)list;
-		}
-	}
 }
 
 

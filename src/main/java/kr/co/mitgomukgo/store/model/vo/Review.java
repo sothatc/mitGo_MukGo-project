@@ -9,9 +9,10 @@ import lombok.NoArgsConstructor;
 @Data
 public class Review {
 	private int reviewNo;
-	private int menuNo;
+	private int storeNo;
 	private String writer;
 	private int rating;
 	private String content;
+	private String reivewImg;
 	private String enrollDate;
 }

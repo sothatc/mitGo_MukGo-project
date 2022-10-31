@@ -11,24 +11,25 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import common.FileRename;
 import kr.co.mitgomukgo.store.model.service.StoreService;
+import kr.co.mitgomukgo.store.model.vo.Review;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import kr.co.mitgomukgo.store.model.vo.StoreImg;
 
 @Controller
 public class StoreController {
 
-
 	@Autowired
 	private StoreService service;
 	@Autowired
 	private FileRename fileRename;
 
-	//맛집 상세 보기 페이지 이동
-	@RequestMapping(value="/storeDetailView.do")
+	// 맛집 상세 보기 페이지 이동
+	@RequestMapping(value = "/storeDetailView.do")
 	public String storeDetailView() {
 		return "store/storeDetail";
 	}
@@ -52,8 +53,7 @@ public class StoreController {
 				String filename = file2.getOriginalFilename();
 				String imgpath = fileRename.fileRename(savePath, filename);
 				try {
-					FileOutputStream fos;
-					fos = new FileOutputStream(new File(savePath + imgpath));
+					FileOutputStream fos = new FileOutputStream(new File(savePath + imgpath));
 					BufferedOutputStream bos = new BufferedOutputStream(fos);
 					byte[] bytes = file2.getBytes();
 					bos.write(bytes);
@@ -74,9 +74,42 @@ public class StoreController {
 		int result = service.addStore(s);
 		return "redirect:/storeList.do?reqPage=1";
 	}
-	
+
 	@RequestMapping(value = "/storeList.do")
-	public String storeListFrm() {
+	public String storeListFrm(Model model) {
+		ArrayList<Store> list = service.storeList();
+		model.addAttribute("list", list);
 		return "store/storeListFrm";
+	}
+
+	@RequestMapping(value = "/writeReviewFrm.do")
+	public String writeReviewFrm() {
+		return "store/writeReviewFrm";
+	}
+
+	@RequestMapping(value = "/writeReview.do")
+	public String writeReview(Review r, MultipartFile file, HttpServletRequest request) {
+
+		if (!file.isEmpty()) {
+			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/review/");
+			String imgName = file.getOriginalFilename();
+			String reviewImg = fileRename.fileRename(savePath, imgName);
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath + reviewImg));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				byte[] bytes = file.getBytes();
+				bos.write(bytes);
+				bos.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			r.setReivewImg(reviewImg);
+		}
+		int result = service.writeReview(r);
+		return "store/writeReviewFrm";
 	}
 }

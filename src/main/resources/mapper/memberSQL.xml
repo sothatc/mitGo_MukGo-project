@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="member">
-	
-	
+	<select id="checkId" parameterType="string" resultType="string">
+		select member_id as memberId
+		from member
+		where member_id = #{checkId}
+	</select>
+	<insert id="insertMember" parameterType="m">
+		insert into member
+		values(member_seq.nextval,2,#{memberId}, #{memberPw}, #{memberName}, #{memberPhone}, to_char(sysdate,'yyyy-mm-dd'))
+	</insert>
+	<select id="selectOneMember" parameterType="m" resultType="m">
+		select 
+			member_no as memberNo,
+			member_class as memberClass,
+			member_id as memberId,
+			member_pw as memberPw,
+			member_name as memberName,
+			member_phone as memberPhone,
+			m_enroll_date as MemEnrollDate
+		from member
+		where member_id=#{memberId} and member_pw=#{memberPw}
+	</select>
 </mapper>
