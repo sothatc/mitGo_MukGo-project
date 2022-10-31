@@ -216,9 +216,13 @@
 }
 
 .showList>div:nth-child(2) {
-	padding-left: 50px;
+	width: 200px;
+	margin-left : 50px;
+	margin-top : 10px;
+	margin-bottom : 30px;
 }
 
 .showList>div>img {
 	width: 200px;
+	height: 200px;
 }
