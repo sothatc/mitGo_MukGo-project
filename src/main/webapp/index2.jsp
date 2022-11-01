@@ -4,8 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <title>믿GO먹GO</title>
-<link rel="stylesheet" href="/resources/css/index/owl.carousel.min.css">
 <link rel="stylesheet" href="/resources/css/index/owl.theme.default.min.css">
+<link rel="stylesheet" href="/resources/css/index/owl.carousel.min.css">
 </head>
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -327,6 +327,7 @@
 		</div>
 	</section>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+
 	<!-- Modal -->
 	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered modal-xl">
@@ -371,13 +372,6 @@
 			</div>
 		</div>
 	</div>
-
-
-
-
-
-
-
 	<script src="/resources/js/index/jquery.min.js"></script>
 	<script src="/resources/js/index/bootstrap.bundle.min.js"></script>
 	<script src="/resources/js/index/owl.carousel.min.js"></script>
