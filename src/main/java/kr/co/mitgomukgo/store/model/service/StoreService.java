@@ -106,4 +106,63 @@ public class StoreService {
 	public int addMenu(Menu me) {
 		return dao.addMenu(me);
 	}
+
+	public HashMap<String, Object> storeList(int tagValue, int reqPage) {
+		int numPerPage = 9;
+		
+		int end = numPerPage * reqPage;
+		int start = (end - numPerPage) + 1;
+		HashMap<String, Object> map = new HashMap<String,Object>();
+		map.put("start",start);
+		map.put("end",end);
+		map.put("tagValue",tagValue);
+		
+		ArrayList<Store> list = dao.storeTagList(map);
+		
+		int totalPage = dao.countAllList();
+		int pageNaviSize = 2;
+		int pageNo = 1;
+		
+		if(reqPage > 2) {
+			pageNo = reqPage - 1;
+		}
+		
+		String pageNavi = "";
+		if(pageNo != 1) {
+			pageNavi += "<a href='/storeList.do?reqPage=" +(pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_left\r\n" + 
+					"            </span></a>";
+		}
+		
+		for(int i = 0; i < pageNaviSize; i++) {
+			if(reqPage == pageNo) {
+				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
+			}else {
+				pageNavi += "<a href='/storeList.do?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		
+		if(end <= totalPage) {
+			pageNavi += "<a href='/storeList.do?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_right\r\n" + 
+					"            </span></a>";
+		}
+		HashMap<String, Object> storeListMap = new HashMap<String, Object>();
+		storeListMap.put("list", list);
+		storeListMap.put("reqPage", reqPage);
+		storeListMap.put("pageNavi", pageNavi);
+		storeListMap.put("total", totalPage);
+		storeListMap.put("pageNo", pageNo);
+		
+		if(list == null) {
+			return null;
+		}else {
+			return storeListMap;
+		}
+	}
+	
 }

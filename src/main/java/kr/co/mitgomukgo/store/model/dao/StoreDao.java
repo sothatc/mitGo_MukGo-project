@@ -48,12 +48,21 @@ public class StoreDao {
 			return (ArrayList<Store>) list;	
 		}
 	}
-
+	
 	public int countAllList() {
 		return sqlSession.selectOne("store.countAllList");
 	}
 
 	public int addMenu(Menu me) {
 		return sqlSession.insert("addMenu", me);
+	}
+
+	public ArrayList<Store> storeTagList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("store.storeTagList",map);
+		if(list.isEmpty()) {
+			return null;
+		}else {
+			return (ArrayList<Store>) list;	
+		}
 	}
 }
