@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.mitgomukgo.notice.model.vo.Notice;
+import kr.co.mitgomukgo.notice.model.vo.NoticeFile;
 
 @Repository
 public class NoticeDao {
@@ -24,5 +25,20 @@ public class NoticeDao {
 			return (ArrayList<Notice>)list;
 		}
 		
+	}
+
+	public int insertNotice(Notice notice) {
+		int result = sqlSession.insert("notice.insertNotice", notice);
+		return result;
+	}
+
+	public int selectMaxNotice() {
+		int result  = sqlSession.selectOne("notice.selectMaxNotice");
+		return result;
+	}
+
+	public int insertNoticeFile(NoticeFile files) {
+		int result = sqlSession.insert("notice.insertNoticeFile", files);
+		return result;
 	}
 }
