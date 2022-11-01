@@ -50,14 +50,15 @@
                     <tr style="height: 70px; border-bottom: 1px solid rgba(224, 224, 224, 0.7);">
                         <th>*제목</th>
                         <td style="width: 700px;">
-                            <input class="w3-input w3-border w3-round-large" id="noticeTitle" type="text" style="width: 630px; margin: 0 auto;">
+                            <input class="w3-input w3-border w3-round-large" name="noticeTitle" type="text" style="width: 630px; margin: 0 auto;">
                         </td>
                     </tr>
 
                     <tr style="height: 70px; border-bottom: 1px solid rgba(224, 224, 224, 0.7);">
                         <th>*작성자</th>
                         <td style="width: 700px;">
-                            신짱구
+                        <input type="hidden" name="noticeWriter" value="${sessionScope.m.memberId }">
+                            ${sessionScope.m.memberName }
                         </td>
                     </tr>
 
@@ -82,7 +83,7 @@
                         </td>
                     </tr>
                     
-                    <tr style="height: 70px; border-bottom: 1px solid rgba(224, 224, 224, 0.7);">
+                    <tr style="height: 70px; border-bottom: 1px solid rgba(224, 224, 224, 0.7); display: none;" class="fileListTr">
                     	<th>첨부파일목록</th>
                     	<td style="width: 700px;">
                     		<div class="fileList">
@@ -91,7 +92,6 @@
                     	</td>
                     </tr>
                     
-
                     <tr style="height: 400px;">
                         <th style="vertical-align: top; padding-top: 30px;">*내용</th>
                         <td>
@@ -112,6 +112,28 @@
     </div>
 
     <script>
+    	const fileZone = $(".fileList");
+    	const files = new Array();
+    
+    	$(".btn-upload").on("click", function(){
+    		const fileVal = $("#file").val();
+    		
+    		if(fileVal){
+    			$(".fileListTr").slideDown();
+    			for(let i = 0; i < files.length; i++){
+    				files.push(files[i]);
+    				console.log(files[i]);
+    				
+    				const fileDiv = $(".fileList");
+    				const fileSpan = $("<span>");
+    				
+    				fileSpan.text(files[i].name);
+    				fileDiv.append(fileSpan);
+    			}
+    		}else{
+    			$(".fileListTr").slideUp();
+    		}
+    	})
     	
     	$("[name=noticeContent]").summernote({
     		height : 400,

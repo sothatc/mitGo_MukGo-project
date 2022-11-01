@@ -13,8 +13,9 @@ public class Notice {
 	private int rnum;
 	private int noticeNo;
 	private String noticeTitle;
-	private String noticeWtriter;
+	private String noticeWriter;
 	private String noticeContent;
 	private String readCnt;
+	private String noticeDate;
 	private ArrayList<NoticeFile> fileList;
 }
