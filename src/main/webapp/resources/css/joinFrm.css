@@ -16,6 +16,7 @@ input {
 	outline: none;
 }
 
+/*joinFrm*/
 .form-write>h4{
     padding-bottom: 12px;
     border-bottom: 2px solid #000;
@@ -188,4 +189,45 @@ hr{
     background-color: rgb(51,51,51);
     color: #fff;
     border: none;
+}
+
+/*selectJoin*/
+
+.select-wrap{
+    width: 800px;
+    height: 450px;
+    margin: 110px auto;
+    border: 1px solid #d7d7d7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+}
+.selNomal{
+    width: 250px;
+    height: 250px;
+    border: 1px solid #d7d7d7;
+    margin-right: 60px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 23px;
+    background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+    text-decoration: none;
+}
+.selOwner{
+    width: 250px;
+    height: 250px;
+    border: 1px solid #d7d7d7;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 23px;
+    background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+    text-decoration: none;
 }

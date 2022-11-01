@@ -10,6 +10,7 @@ import com.google.gson.JsonObject;
 
 import kr.co.mitgomukgo.member.model.dao.MemberDao;
 import kr.co.mitgomukgo.member.model.vo.Member;
+import kr.co.mitgomukgo.member.model.vo.Owner;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
@@ -31,6 +32,15 @@ public class MemberService {
 	public Member selectOneMember(Member member) {
 		Member m = dao.selectOneMember(member);
 		return m;
+	}
+
+	public int insertOwner(Owner o) {
+		return dao.insertOwner(o);
+	}
+
+	public String ownerCheckId(String ownerCheckId) {
+		String ownerId = dao.ownerCheckId(ownerCheckId);
+		return ownerId;
 	}
 
 	

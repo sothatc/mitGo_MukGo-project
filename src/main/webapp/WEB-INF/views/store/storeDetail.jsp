@@ -7,13 +7,13 @@
 <title>맛집상세 페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="/resources/css/storeDetail.css">
+<link rel="stylesheet" href="/resources/css/store/storeDetail.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,200" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
+<link rel="stylesheet" href="/resources/demos/store/style.css">
 <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.0/kakao.min.js" integrity="sha384-PFHeU/4gvSH8kpvhrigAPfZGBDPs372JceJq3jAXce11bVA6rMvGWzvP4fMQuBGL" crossorigin="anonymous"></script>
 <script>
 	Kakao.init('c089c8172def97eb00c07217cae17495');
@@ -555,9 +555,33 @@
 			const modal = document.querySelector(".modal-wrap");
 
 			function init(){
+<<<<<<< HEAD
 				// 예약하기 버튼 클릭 시
+=======
+				/*
+>>>>>>> refs/remotes/origin/master
 				open.addEventListener("click",function(){
 					modal.classList.remove("hidden");
+					
+					$.ajax({
+						url: "/ajaxSelectStore.do",
+						success: function(data){
+							const table=$("<table>");
+							const titleTr =$("<tr>");
+							titleTr.html("<th>번호</th><th>아이디</th><th>이름</th><th>전화번호</th>");
+							table.append(titleTr);
+							for(let i=0; i<data.length; i++){
+								const tr = $("<tr>");
+								tr.append("<td>"+data[i].memberNo+"</td>");
+								tr.append("<td>"+data[i].memberId+"</td>");
+								tr.append("<td>"+data[i].memberName+"</td>");
+								tr.append("<td>"+data[i].phone+"</td>");
+								table.append(tr);
+							}
+							$("#ajaxResult").html(table);
+						}
+					});
+					*/
 				});
 				
 				
@@ -574,6 +598,11 @@
 			init();
 			
 	
+<<<<<<< HEAD
+=======
+			
+
+>>>>>>> refs/remotes/origin/master
 		</script>
 </body>
 </html>

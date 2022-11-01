@@ -78,8 +78,9 @@
                                         </div>
                                     </div>
                                     <div class="box02">
-                                        <label class="label" for="memberPhone">전화번호를 입력해주세요.</label>
-                                        <input type="number" id="memberPhone" name="memberPhone">
+                                        <label class="label" for="memberPhone1">전화번호를 입력해주세요.</label>
+                                        <input type="number" id="memberPhone1" name="memberPhone1">
+                                        <input type="hidden" id="memberPhone" name="memberPhone">
                                     </div>
                                     <button type="button" class="phoneChkSendBtn">인증번호 발송</button>
                                     <div class="box03">
@@ -135,6 +136,8 @@
 	
 	
 	<script>
+		var idFlag = 0;
+		var phoneFlag = 0;
 		
 		/*아이디 중복체크*/
 		$("#idChkBtn").on("click",function(){
@@ -148,14 +151,15 @@
 			//새창에서 form을 전송하기 위한 연결작업
 			$("[name=checkIdFrm]").attr("target","checkId");
 			$("[name=checkIdFrm]").submit();
+			idFlag = 1;
 		});
 	
-		/*휴대폰 인증확인*/
+		/*휴대폰 인증번호 발송*/
 		$(".phoneChkSendBtn").click(function(){
 			
 			alert("인증번호가 발송되었습니다.");
 			var phone1 = $("[name=frontNum]").val();
-			var phone2 = $("[name=memberPhone]").val();
+			var phone2 = $("[name=memberPhone1]").val();
 			var phone = phone1+phone2;
 			$.ajax({
 				type : "POST",
@@ -166,6 +170,19 @@
 				}
 			});
 		});
+		/*휴대폰 인증확인*/
+		 $(".phoneChkBtn").on("click",function(){
+	            const certifyNum = $("#certifyNum").val();
+	            const certifyNum2 = $(".certifyNum2").val();
+	            if(certifyNum == certifyNum2) {
+	                alert("인증 확인되었습니다.");
+	                phoneFlag = 1;
+	            }else {
+	                alert("인증번호를 다시 확인해주세요.");
+	            }
+	      });
+		
+		
 		
 		/*정규표현식 유효성검사*/
 		$("#joinBtn").on("click",function(event){
@@ -219,21 +236,20 @@
 				event.preventDefault();
 			}
 			
+			var phone1 = $("[name=frontNum]").val();
+			var phone2 = $("[name=memberPhone1]").val();
+			var phone = phone1+phone2;
+			$("[name=memberPhone]").val(phone);
+			
+			if(idFlag == 0 || phoneFlag == 0) {
+				event.preventDefault();
+			}
+			
 			
 			
 		});
 		
-        $(".phoneChkBtn").on("click",function(){
-            const certifyNum = $("#certifyNum").val();
-            const certifyNum2 = $(".certifyNum2").val();
-            if(certifyNum == certifyNum2) {
-                alert("인증 확인되었습니다.");
-                $("#joinBtn").attr("type","submit");
-            }else {
-                alert("인증번호를 다시 확인해주세요.");
-                //$("#joinBtn").attr("type","hidden");
-            }
-        });
+       
 		
 		
 			
