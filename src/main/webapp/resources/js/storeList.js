@@ -10,7 +10,7 @@ tag.on("click",function(){
         }
     }
     
-    $(tag).eq(index).css("color","#568A35");
+    $(tag).eq(index).css("color","#F76E11");
 });
 
 const sort = $(".storeList-sort-content>ul>li");
@@ -21,7 +21,7 @@ sort.on("click",function(){
             $(sort).eq(i).css("color","black");
         }
     }
-    $(sort).eq(sortindex).css("color","#568A35");
+    $(sort).eq(sortindex).css("color","#F76E11");
 });
 
 const locationTag = $(".storeList-map-content>div");
@@ -34,3 +34,5 @@ locationTag.on("click",function(){
         TagText.innerText = locationTagText+" 지역 맛집 찾기";
     }
 });
+locationTag[0].click();
+tag[0].click();
