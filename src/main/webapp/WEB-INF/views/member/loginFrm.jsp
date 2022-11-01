@@ -39,7 +39,7 @@
         </div>
         <div class="member-box">
             <a href="#">아이디/비밀번호 찾기 |</a>
-            <a href="#">회원가입 하기</a>
+            <a href="/selectJoin.do">회원가입 하기</a>
         </div>
     </div> 
 

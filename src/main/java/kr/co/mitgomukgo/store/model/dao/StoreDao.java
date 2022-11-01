@@ -1,12 +1,14 @@
 package kr.co.mitgomukgo.store.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.mitgomukgo.store.model.vo.Menu;
 import kr.co.mitgomukgo.store.model.vo.Review;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import kr.co.mitgomukgo.store.model.vo.StoreImg;
@@ -38,8 +40,20 @@ public class StoreDao {
 		return sqlSession.insert("reviewWrite", r);
 	}
 
-	public ArrayList<Store> storeList() {
-		List list = sqlSession.selectList("store.storeList");
-		return (ArrayList<Store>) list;
+	public ArrayList<Store> storeList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("store.storeList",map);
+		if(list.isEmpty()) {
+			return null;
+		}else {
+			return (ArrayList<Store>) list;	
+		}
+	}
+
+	public int countAllList() {
+		return sqlSession.selectOne("store.countAllList");
+	}
+
+	public int addMenu(Menu me) {
+		return sqlSession.insert("addMenu", me);
 	}
 }
