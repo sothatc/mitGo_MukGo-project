@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.mitgomukgo.notice.model.dao.NoticeDao;
 import kr.co.mitgomukgo.notice.model.vo.Notice;
+import kr.co.mitgomukgo.notice.model.vo.NoticeFile;
 
 @Service
 public class NoticeService {
@@ -39,4 +40,41 @@ public class NoticeService {
 		}
 		
 	}
+
+	public int insertNotice(Notice notice, ArrayList<NoticeFile> fileList) {
+		int result = dao.insertNotice(notice);
+		if(result > 0) {
+			int noticeNo = 0;
+			
+			if(!fileList.isEmpty()) {
+				noticeNo = dao.selectMaxNotice();
+				for(NoticeFile files : fileList) {
+					files.setNoticeNo(noticeNo);
+					result += dao.insertNoticeFile(files);
+				}
+			}
+			
+			
+		}
+		return result;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

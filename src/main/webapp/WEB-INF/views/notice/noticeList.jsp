@@ -81,10 +81,11 @@
             </form>
         </div>
 
-        <div class="notice-write-btn">
-            <a href="/goNoticeFrm.do">글쓰기</a>
-        </div>
-        
+		<c:if test="${not empty sessionScope.m and sessionScope.m.memberClass == 1 }">
+	        <div class="notice-write-btn">
+	            <a href="/goNoticeFrm.do">글쓰기</a>
+	        </div>
+        </c:if>
         <c:choose>
         	<c:when test="${empty list }">
         		<div class="warningMark">

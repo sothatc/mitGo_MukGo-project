@@ -7,7 +7,7 @@
 <title>업체 등록</title>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-<link rel="stylesheet" href="/resources/css/addStoreFrm.css">
+<link rel="stylesheet" href="/resources/css/store/addStoreFrm.css">
 </head>
 
 <body>
@@ -122,6 +122,6 @@
 	<!-- script 구역 -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script type="text/javascript" src="/resources/js/addStoreFrm.js"></script>
+	<script type="text/javascript" src="/resources/js/store/addStoreFrm.js"></script>
 </body>
 </html>

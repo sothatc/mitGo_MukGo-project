@@ -107,21 +107,18 @@ body{
 }
 
 .content-wrap1-1{
-    width:fit-content;
-    float:left;
+    width:200px;
+    float: left;
 }
-
 
 .star{
     margin-top: 12px;
-    margin-left: 10px;
     position: absolute;
-    color:rgba(255, 83, 86, 0.99);
+    
 }
 
 .reviewNum{
     float: right;
-    margin-left: 35px;
 }
 
 .content-wrap1-2{
