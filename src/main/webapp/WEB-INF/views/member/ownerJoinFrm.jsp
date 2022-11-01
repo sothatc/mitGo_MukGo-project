@@ -176,7 +176,6 @@
 				url : "/ownerPhoneCheck.do",
 				data : {phone : phone},
 				success : function(numStr) {
-					alert(numStr);
                     $(".certifyNum2").val(numStr);
 				}
 			});

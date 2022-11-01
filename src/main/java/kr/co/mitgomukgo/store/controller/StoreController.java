@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -93,11 +94,21 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/storeList.do")
-	public String storeListFrm(Model model) {
-		ArrayList<Store> list = service.storeList();
-		model.addAttribute("list", list);
-		System.out.println(list);
-		return "store/storeListFrm";
+	public String storeListFrm(int reqPage, Model model) {
+		HashMap<String, Object> map = service.storeList(reqPage);
+		
+		if(map == null) {
+			model.addAttribute("msg", "아직 등록된 업체 가 없습니다.");
+			return "store/storeListFrm";
+		}else {
+			model.addAttribute("list", map.get("list"));
+			model.addAttribute("reqPage", reqPage);
+			model.addAttribute("pageNavi", map.get("pageNavi"));
+			model.addAttribute("total", map.get("total"));
+			model.addAttribute("pageNo", map.get("pageNo"));
+			return "store/storeListFrm";
+		}
+		//ArrayList<Store> list = service.storeList();	
 	}
 
 	@RequestMapping(value = "/writeReviewFrm.do")
