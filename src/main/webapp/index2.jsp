@@ -44,7 +44,7 @@
 			<div class="dropdown">
 				<button class="dropbtn">
 					<span class="dropbtn_click">
-						<img class="mini" src="/img/who.icon02.svg">친구와
+						<img class="mini" src="/resources/img/index/who친구.svg">친구와
 					</span>
 				</button>
 				<div class="dropdown-content">
@@ -60,7 +60,7 @@
 			<div class="dropdown2">
 				<button class="dropbtn2">
 					<span class="dropbtn_click2">
-						<img class="mini" src="/img/what.icon03.svg">분위기 좋은 곳
+						<img class="mini" src="/resources/img/index/where분위기.svg">분위기 좋은 곳
 					</span>
 				</button>
 				<div class="dropdown-content2">
@@ -79,7 +79,7 @@
 			<div class="dropdown3">
 				<button class="dropbtn3">
 					<span class="dropbtn_click3">
-						<img class="mini" src="/img/icons8-dango-48.png">일식을
+						<img class="mini" src="/resources/img/index/what일식.png">일식을
 					</span>
 				</button>
 
@@ -91,7 +91,7 @@
 			</div>
 			<div class="dropdown-label4">먹고싶어요</div>
 			<div class="dropdown-label5">
-				<img src="/img/icons8-raising-hands-light-skin-tone-48.png">
+				<img src="/resources/img/index/싶어요!.png">
 			</div>
 		</div>
 	</section>
@@ -102,19 +102,19 @@
 			<div class="row text-center justify-content-center gy-4">
 				<div class="col-lg-2 col-sm-6">
 					<h1 class="display-4">25개 구</h1>
-					<p class="mb-0">서울 전 지역</p>
+					<p class="mb-0" id="font">서울 전 지역</p>
 				</div>
 				<div class="col-lg-2 col-sm-6">
 					<h1 class="display-4">+500</h1>
-					<p class="mb-0">맛집리스트</p>
+					<p class="mb-0" id="font">맛집리스트</p>
 				</div>
 				<div class="col-lg-2 col-sm-6">
 					<h1 class="display-4">+300</h1>
-					<p class="mb-0">밀키트</p>
+					<p class="mb-0" id="font">밀키트</p>
 				</div>
 				<div class="col-lg-2 col-sm-6">
 					<h1 class="display-4">+1000</h1>
-					<p class="mb-0">검증된 후기</p>
+					<p class="mb-0" id="font">검증된 후기</p>
 				</div>
 			</div>
 		</div>
