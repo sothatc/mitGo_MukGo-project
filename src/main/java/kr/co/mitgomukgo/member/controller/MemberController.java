@@ -157,13 +157,30 @@ public class MemberController {
 		}
 		return "redirect:/";
 	}
+	@RequestMapping(value="/ownerLogin.do")
+	public String ownerLogin(Owner owner, HttpSession session) {
+		Owner o = service.selectOneOwner(owner);
+		if(o != null) {
+			session.setAttribute("o", o);
+		}
+		return "redirect:/";
+	}
 	@RequestMapping(value="/pwChk.do")
 	public String pwChk(HttpSession session) {
 		return "member/pwChk";
 	}
+	@RequestMapping(value="/ownerPwChk.do")
+	public String ownerPwChk(HttpSession session) {
+		return "member/ownerPwChk";
+	}
+	
 	@RequestMapping(value="/mypage.do")
 	public String mypage() {
 		return "member/mypage";
+	}
+	@RequestMapping(value="/ownerMypage.do")
+	public String ownerMypage() {
+		return "member/ownerMypage";
 	}
 	@RequestMapping(value="/selectJoin.do")
 	public String selectJoin() {
