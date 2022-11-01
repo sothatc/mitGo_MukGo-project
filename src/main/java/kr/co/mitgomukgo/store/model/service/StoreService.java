@@ -97,13 +97,15 @@ public class StoreService {
 		}
 	}
 
-	//맛집 상세 모달로 가져오기
-	public ArrayList<Store> ajaxSelectStore() {
-		// TODO Auto-generated method stub
-		return null;
+	//모달 상세
+	public Store ajaxSelectStore(Store store) {
+		Store s = dao.selectOneStore(store);
+		return s;
 	}
+
 
 	public int addMenu(Menu me) {
 		return dao.addMenu(me);
 	}
+
 }
