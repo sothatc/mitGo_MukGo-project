@@ -13,6 +13,8 @@
 		<typeAlias type="kr.co.mitgomukgo.store.model.vo.Store" alias="s" />
 		<typeAlias type="kr.co.mitgomukgo.faq.model.vo.Faq" alias="f"/>
 		<typeAlias type="kr.co.mitgomukgo.store.model.vo.StoreImg" alias="si" />
+		<typeAlias type="kr.co.mitgomukgo.notice.model.vo.Notice" alias="n"/>
+		<typeAlias type="kr.co.mitgomukgo.notice.model.vo.NoticeFile" alias="nf"/>
 		<typeAlias type="kr.co.mitgomukgo.store.model.vo.Review" alias="r" />
 	
 	</typeAliases>

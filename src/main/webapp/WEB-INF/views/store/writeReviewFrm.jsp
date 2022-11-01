@@ -163,8 +163,8 @@ hr {
 			<button class="inputPhoto" type="button" id="inputPhoto">사진 첨부하기</button>
 		</div>
 		<div class="btnWrap">
-			<button type="submit" value="등록">등록</button>
 			<button type="button" value="취소" onclick="window.close()">취소</button>
+			<button type="submit" value="등록">등록</button>
 		</div>
 	</form>
 	<script>

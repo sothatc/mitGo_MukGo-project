@@ -41,4 +41,10 @@ public class StoreService {
 	public ArrayList<Store> storeList() {
 		return dao.storeList();
 	}
+
+	//맛집 상세 모달로 가져오기
+	public ArrayList<Store> ajaxSelectStore() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
