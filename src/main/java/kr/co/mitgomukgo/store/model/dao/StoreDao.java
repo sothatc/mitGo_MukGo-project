@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.mitgomukgo.store.model.vo.Menu;
 import kr.co.mitgomukgo.store.model.vo.Review;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import kr.co.mitgomukgo.store.model.vo.StoreImg;
@@ -50,5 +51,9 @@ public class StoreDao {
 
 	public int countAllList() {
 		return sqlSession.selectOne("store.countAllList");
+	}
+
+	public int addMenu(Menu me) {
+		return sqlSession.insert("addMenu", me);
 	}
 }

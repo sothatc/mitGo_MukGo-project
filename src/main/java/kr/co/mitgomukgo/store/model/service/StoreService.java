@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 
 import kr.co.mitgomukgo.store.model.dao.StoreDao;
+import kr.co.mitgomukgo.store.model.vo.Menu;
 import kr.co.mitgomukgo.store.model.vo.Review;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import kr.co.mitgomukgo.store.model.vo.StoreImg;
@@ -100,5 +101,9 @@ public class StoreService {
 	public ArrayList<Store> ajaxSelectStore() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public int addMenu(Menu me) {
+		return dao.addMenu(me);
 	}
 }

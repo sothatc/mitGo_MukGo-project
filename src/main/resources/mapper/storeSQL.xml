@@ -76,4 +76,14 @@
 	<select id="countAllList" resultType="_int">
 		select count(*) from store
 	</select>
+	
+	<insert id="addMenu" parameterType="me">
+		insert into menu
+		(menu_seq.nextval,
+		#{storeNo},
+		#{menuName},
+		#{menuPrice},
+		#{menuImg}
+		)
+	</insert>
 </mapper>

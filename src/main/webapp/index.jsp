@@ -43,6 +43,8 @@
 	<h2><a href="/storeList.do?reqPage=1">맛집 리스트 생성중(이규진)</a></h2>
 	<h2><span class="review">리뷰 작성하기(이정우)</span></h2>
 	<h2><a href="/selectNoticeList.do?reqPage=1">공지사항(안형관)</a></h2>
+	<h2><a href="/addMenuFrm.do">메뉴 추가(이정우)</a></h2>
+	<h2><a href="index2.jsp">인덱스</a></h2>
 
 
 
