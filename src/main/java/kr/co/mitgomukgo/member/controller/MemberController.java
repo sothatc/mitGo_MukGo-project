@@ -75,6 +75,7 @@ public class MemberController {
 		  return numStr;
 		
 	}
+	@ResponseBody
 	@RequestMapping(value="/ownerPhoneCheck.do")
 	public String ownerPhoneCheck(String phone, Model model) throws CoolsmsException {
 		
@@ -106,6 +107,7 @@ public class MemberController {
 	      System.out.println(e.getCode());
 	    }
 		  model.addAttribute("numStr", numStr);
+		  System.out.println(numStr);
 		  return numStr;
 		
 	}
