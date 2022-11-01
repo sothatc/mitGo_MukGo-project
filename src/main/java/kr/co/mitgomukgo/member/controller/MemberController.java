@@ -39,6 +39,11 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:/";
 	}
+	@RequestMapping(value="/ownerLogout.do")
+	public String ownerLogout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
 	
 	@ResponseBody
 	@RequestMapping(value="/memberPhoneCheck.do")

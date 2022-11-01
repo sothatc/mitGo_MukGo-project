@@ -94,7 +94,7 @@
 		
 		/*일반, 사업자 로그인 구분*/
 		$("#normal").click();
-		$("#normalLoginFrm").css("display","none");
+		$("#ownerLoginFrm").css("display","none");
 		$("[name=selLogin]").on("click",function(){
 			var selLogin = $("input[name=selLogin]:checked").val();
 			console.log(selLogin);

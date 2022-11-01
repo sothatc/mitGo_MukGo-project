@@ -36,7 +36,7 @@
 				<span>사업자</span>
 				<span>[ ${sessionScope.o.ownerId } ]</span>
 				<a href="/ownerPwChk.do">마이페이지</a>
-				<a href="#">로그아웃</a>
+				<a href="/ownerLogout.do">로그아웃</a>
 			</c:if>
 			<c:if test="${not empty sessionScope.m }">
 				<span>일반회원</span>
