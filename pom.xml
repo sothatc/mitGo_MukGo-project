@@ -125,6 +125,12 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
+		
+		
+		
+		
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -136,6 +142,14 @@
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
+		</dependency>
+		<!-- 이것도 하나 추가 -->
+		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+		    <version>1.9.9.1</version>
+		    <scope>runtime</scope>
 		</dependency>
 
 		<!-- Logging -->

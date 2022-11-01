@@ -5,7 +5,7 @@ $(document).ready(function () {
 
 $('.time').timepicker({
   timeFormat: 'HH:mm',
-  interval: 30,
+  interval: 60,
   startTime: '24:00',
   dynamic: false,
   dropdown: true,

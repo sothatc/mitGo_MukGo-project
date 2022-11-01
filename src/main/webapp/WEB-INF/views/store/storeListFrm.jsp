@@ -7,9 +7,10 @@
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
-	<link rel="stylesheet" href="/resources/css/storeList.css">
+	<link rel="stylesheet" href="/resources/css/store/storeList.css">
 	<div class="header-wrap"></div>
 	<!--헤더-->
 	<div class="storeList-content-wrap">
@@ -69,10 +70,13 @@
 				</c:forEach>
 			</div>
 		</div>
+		<div class="page">
+			${pageNavi }
+		</div>
 	</div>
 	</div>
 	<!--푸터-->
 	<div class="footer-wrap"></div>
-	<script src="/resources/js/storeList.js"></script>
+	<script src="/resources/js/store/storeList.js"></script>
 </body>
 </html>
