@@ -27,10 +27,11 @@ a:hover {
 <c:choose>
 	<c:when test="${empty sessionScope.m }">
 		<a href="/loginFrm.do">로그인</a>
-		<a href="/joinFrm.do">회원가입</a>
+		<a href="/selectJoin.do">회원가입</a>
 	</c:when>
 	<c:otherwise>
 		<a href="/pwChk.do">마이페이지</a>
+		<a href="/logout.do">로그아웃</a>
 	</c:otherwise>
 </c:choose>
 <h2>

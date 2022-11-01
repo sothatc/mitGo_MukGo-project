@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	
+	<aside id="aside" class="sidebar">
+		<div class="sidebar-1">
+			
+		</div>
+	</aside>
 </body>
 </html>

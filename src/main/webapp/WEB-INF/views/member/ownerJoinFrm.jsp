@@ -12,23 +12,22 @@
 	
 </head>
 <body>
-
     <div class="header"></div>
     <div class="contents">
-        <form name="checkIdFrm" action="/checkId.do">
-			<input type="hidden" name="checkId">
+        <form name="ownerCheckIdFrm" action="/ownerCheckId.do">
+			<input type="hidden" name="ownerCheckId">
 		</form>
-        <form action="/join.do" method="post">
+        <form action="/ownerJoin.do" method="post">
         <div class="membership-form">
             <div class="form-write">
-                <h4>회원정보</h4>
+                <h4>사업자 정보</h4>
                     <ul>
                         <li>
                             <span class="tit">이름</span>
                             <div class="cnt">
                                 <div class="input01">
-                                    <label class="label" for="memberName">한글로 2~5자리 이내로 입력해주세요.</label>
-                                    <input type="text" id="memberName" name="memberName">
+                                    <label class="label" for="ownerName">한글로 2~5자리 이내로 입력해주세요.</label>
+                                    <input type="text" id="ownerName" name="ownerName">
                                 </div>
                                 <p class="text-note"></p>
                             </div>
@@ -37,8 +36,8 @@
                             <span class="tit">아이디</span>
                             <div class="cnt">
                                 <div class="input01" id="input01">
-                                    <label class="label" for="memberId">4~20자리 이내로 입력해주세요.</label>
-                                    <input type="text" id="memberId" name="memberId">
+                                    <label class="label" for="ownerId">4~20자리 이내로 입력해주세요.</label>
+                                    <input type="text" id="ownerId" name="ownerId">
                                 </div>
                                 <p class="text-note"></p>
                                 <button type="button" id="idChkBtn">중복체크</button>
@@ -48,8 +47,8 @@
                             <span class="tit">비밀번호</span>
                             <div class="cnt">
                                 <div class="input01">
-                                    <label class="label" for="memberPw">대/소문자와 숫자를 포함한 최소 8자리를 입력해주세요.</label>
-                                    <input type="password" id="memberPw" name="memberPw">
+                                    <label class="label" for="ownerPw">대/소문자와 숫자를 포함한 최소 8자리를 입력해주세요.</label>
+                                    <input type="password" id="ownerPw" name="ownerPw">
                                 </div>
                                 <p class="text-note"></p>
                             </div>
@@ -58,8 +57,8 @@
                             <span class="tit">비밀번호 확인</span>
                             <div class="cnt">
                                 <div class="input01">
-                                    <label class="label" for="memberPw2">비밀번호를 한 번 더 입력해주세요.</label>
-                                    <input type="password" id="memberPw2" name="memberPw2">
+                                    <label class="label" for="ownerPw2">비밀번호를 한 번 더 입력해주세요.</label>
+                                    <input type="password" id="ownerPw2" name="ownerPw2">
                                 </div>
                                 <p class="text-note"></p>
                             </div>
@@ -78,9 +77,9 @@
                                         </div>
                                     </div>
                                     <div class="box02">
-                                        <label class="label" for="memberPhone1">전화번호를 입력해주세요.</label>
-                                        <input type="number" id="memberPhone1" name="memberPhone1">
-                                        <input type="hidden" id="memberPhone" name="memberPhone">
+                                        <label class="label" for="ownerPhone1">전화번호를 입력해주세요.</label>
+                                        <input type="number" id="ownerPhone1" name="ownerPhone1">
+                                        <input type="hidden" id="ownerPhone" name="ownerPhone">
                                     </div>
                                     <button type="button" class="phoneChkSendBtn">인증번호 발송</button>
                                     <div class="box03">
@@ -92,6 +91,17 @@
                                     <p class="text-note"></p>
                                 </div>
                             </div>
+                        </li>
+                        <li>
+                        	<span class="tit">마켓사용여부</span>
+                        	<div class="cnt">
+                        		<div class="selBox01">
+	                                <select id="selectMarket" name="ownerLevel">
+	                                    <option value="1">매장이용</option>
+	                                    <option value="2">매장 및 마켓이용</option>
+	                                </select>
+	                            </div>
+                        	</div>
                         </li>
                     </ul>
                 </div>
@@ -141,16 +151,16 @@
 		
 		/*아이디 중복체크*/
 		$("#idChkBtn").on("click",function(){
-			const memberId = $("#memberId").val();
-			if(memberId == ""){
+			const ownerId = $("#ownerId").val();
+			if(ownerId == ""){
 				alert("아이디를 입력하세요");
 				return;
 			}
-			$("[name=checkId]").val(memberId);
-			const popup = window.open("","checkId","left=700px, top=300px, width=300px, height=200px, menubar=no, status=no, scrollbars=yes");
+			$("[name=ownerCheckId]").val(ownerId);
+			const popup = window.open("","ownerCheckId","left=700px, top=300px, width=300px, height=200px, menubar=no, status=no, scrollbars=yes");
 			//새창에서 form을 전송하기 위한 연결작업
-			$("[name=checkIdFrm]").attr("target","checkId");
-			$("[name=checkIdFrm]").submit();
+			$("[name=ownerCheckIdFrm]").attr("target","ownerCheckId");
+			$("[name=ownerCheckIdFrm]").submit();
 			idFlag = 1;
 		});
 	
@@ -159,36 +169,36 @@
 			
 			alert("인증번호가 발송되었습니다.");
 			var phone1 = $("[name=frontNum]").val();
-			var phone2 = $("[name=memberPhone1]").val();
+			var phone2 = $("[name=ownerPhone1]").val();
 			var phone = phone1+phone2;
 			$.ajax({
 				type : "POST",
-				url : "/memberPhoneCheck.do",
+				url : "/ownerPhoneCheck.do",
 				data : {phone : phone},
 				success : function(numStr) {
+					alert(numStr);
                     $(".certifyNum2").val(numStr);
 				}
 			});
 		});
-		/*휴대폰 인증확인*/
-		 $(".phoneChkBtn").on("click",function(){
-	            const certifyNum = $("#certifyNum").val();
-	            const certifyNum2 = $(".certifyNum2").val();
-	            if(certifyNum == certifyNum2) {
-	                alert("인증 확인되었습니다.");
-	                phoneFlag = 1;
-	            }else {
-	                alert("인증번호를 다시 확인해주세요.");
-	            }
-	      });
-		
+		/*휴대폰 인증 확인*/
+		$(".phoneChkBtn").on("click",function(){
+            const certifyNum = $("#certifyNum").val();
+            const certifyNum2 = $(".certifyNum2").val();
+            if(certifyNum == certifyNum2) {
+                alert("인증 확인되었습니다.");
+                phoneFlag = 1;
+            }else {
+                alert("인증번호를 다시 확인해주세요.");
+            }
+        });
 		
 		
 		/*정규표현식 유효성검사*/
 		$("#joinBtn").on("click",function(event){
 			//이름 유효성 검사
 			const nameReg = /^[가-힣]{2,5}$/;
-			const name = $("#memberName");
+			const name = $("#ownerName");
 			nameValue = name.val();
 			const nameComment = name.parent().next();
 			if(nameReg.test(nameValue)){
@@ -200,7 +210,7 @@
 			}
 			//아아디 유효성검사
 			const idReg = /^[A-Za-z]{1}[A-Za-z0-9]{3,19}$/;
-			const id = $("#memberId");
+			const id = $("#ownerId");
 			idValue = id.val();
 			const idComment = id.parent().next();
 			if(idReg.test(idValue)){
@@ -213,7 +223,7 @@
 			}
 			//비밀번호 유효성 검사
 			const pwReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-			const pw = $("#memberPw");
+			const pw = $("#ownerPw");
 			pwValue = pw.val();
 			const pwComment = pw.parent().next();
 			if(pwReg.test(pwValue)){
@@ -225,7 +235,7 @@
 			}
 			// 비밀번호 확인 검사
 			const pwVal = pw.val();
-			const pwChk = $("#memberPw2");
+			const pwChk = $("#ownerPw2");
 			const pwChkVal = pwChk.val();
 			const pwChkComment = pwChk.parent().next();
 			if(pwChkVal == pwVal) {
@@ -237,9 +247,9 @@
 			}
 			
 			var phone1 = $("[name=frontNum]").val();
-			var phone2 = $("[name=memberPhone1]").val();
+			var phone2 = $("[name=ownerPhone1]").val();
 			var phone = phone1+phone2;
-			$("[name=memberPhone]").val(phone);
+			$("[name=ownerPhone]").val(phone);
 			
 			if(idFlag == 0 || phoneFlag == 0) {
 				event.preventDefault();
@@ -249,7 +259,7 @@
 			
 		});
 		
-       
+        
 		
 		
 			
