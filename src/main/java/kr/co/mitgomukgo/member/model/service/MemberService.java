@@ -43,6 +43,11 @@ public class MemberService {
 		return ownerId;
 	}
 
+	public Owner selectOneOwner(Owner owner) {
+		Owner o = dao.selectOneOwner(owner);
+		return o;
+	}
+
 	
 	
 }

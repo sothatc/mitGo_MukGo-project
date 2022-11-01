@@ -57,6 +57,7 @@ public class StoreDao {
 		return sqlSession.insert("addMenu", me);
 	}
 
+
 	public ArrayList<Store> storeTagList(HashMap<String, Object> map) {
 		List list = sqlSession.selectList("store.storeTagList",map);
 		if(list.isEmpty()) {
@@ -65,4 +66,11 @@ public class StoreDao {
 			return (ArrayList<Store>) list;	
 		}
 	}
+
+	//모달 상세
+	public Store selectOneStore(Store store) {
+		Store s = sqlSession.selectOne("store.selectOneStore",store);
+		return s;
+	}
+	
 }

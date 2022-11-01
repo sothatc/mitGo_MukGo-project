@@ -46,7 +46,7 @@
 		<div class="content-wrap1">
 			<div class="content-wrap1-1">
 				<span>[양식]</span>
-				<span>스파카나폴리</span>
+				<span class="storeNameSpan"></span>
 				<span class="material-symbols-rounded star">star</span>
 				<span class="reviewNum">4.3</span>
 			</div>
@@ -87,19 +87,19 @@
 					<table class="w3-table w3-bordered" id="infoTable">
 						<tr>
 							<th>주소</th>
-							<td colspan="3">서울특별시 마포구 양화로 2길 2층</td>
+							<td colspan="3" class="addressTd"></td>
 						</tr>
 						<tr>
 							<th>전화번호</th>
-							<td colspan="3">02-300-3000</td>
+							<td colspan="3" class="phoneTd"></td>
 						</tr>
 						<tr>
 							<th>운영시간</th>
-							<td colspan="3">11:00~20:00</td>
+							<td colspan="3" class="openHourTd"></td>
 						</tr>
 						<tr>
 							<th>휴일</th>
-							<td colspan="3"></td>
+							<td colspan="3" class="closedDayTd"></td>
 						</tr>
 
 						<tr style="height: 47px;">
@@ -354,7 +354,7 @@
 				</ul>
 			</div>
 		</div>
-
+		<!-- 모달 부분 -->
 	    <div class="modal-wrap hidden">
 		    <div class="modal-box">
 		        <div class="modal-title">예약 정보</div>
@@ -362,19 +362,19 @@
 		            <table class="w3-table w3-bordered" id="reserveCheckTbl">
 		                <tr>
 		                    <th>상호명</th>
-		                    <td>스파카나폴리</td>
+		                    <td class="storeNameTd"></td>
 		                </tr>
 		                <tr>
 		                    <th>일자</th>
-		                    <td>2022-10-24</td>
+		                    <td class="dateTd"></td>
 		                </tr>
 		                <tr>
 		                    <th>시간</th>
-		                    <td>18:00</td>
+		                    <td></td>
 		                </tr>
 		                <tr>
 		                    <th>인원</th>
-		                    <td>2</td>
+		                    <td class="peopleNumTd"></td>
 		                </tr>
 		            </table>
 		            <div class="explanation">* 가게에서 최종 확정 시 예약이 확정됩니다.</div>
@@ -385,7 +385,7 @@
 	    </div>
 	    </div>
 		<script>
-		//----------------------------------------------------------------------------------
+		//------------------------------------------------------------------------------------------------------------------------------
 			//------------ 메뉴 사진 슬라이더 -----------------
 			let imgNo = 0;
 
@@ -444,12 +444,57 @@
 				dayNamesShort : [ '일', '월', '화', '수', '목', '금', '토' ],
 				dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
 				showMonthAfterYear : true,
-				yearSuffix : '년'
+				yearSuffix : '년',
+				beforeShowDay: disabledDays
+				
 			});
-
+			
 			$(function() {
-				$("#datePicker").datepicker();
+				//데이트피커 생성 및 오늘날짜 이전 선택 불가
+				$("#datePicker").datepicker({minDate:0});
 			});
+			
+			
+			//휴일은 데이트피커 비활성화
+			function disabledDays(date){
+				
+				var day = date.getDay();
+				var dayArr = new Array();
+				dayArr = closedDay.split(",");
+				var daysArr = new Array();
+				var dayArr2 = new Array();
+				for(let i= 0; i<dayArr.length; i++){	
+					if(dayArr[i]=="월"){
+						daysArr.push("1");
+					}
+					if(dayArr[i]=="화"){
+						daysArr.push("2");
+					}
+					if(dayArr[i]=="수"){
+						daysArr.push("3");
+					}
+					if(dayArr[i]=="목"){
+						daysArr.push("4");
+					}
+					if(dayArr[i]=="금"){
+						daysArr.push("5");
+					}
+					if(dayArr[i]=="토"){
+						daysArr.push("6");
+					}
+					if(dayArr[i]=="일"){
+						daysArr.push("7");
+					}
+				}//for문 종료
+				console.log("그래서 휴일은"+daysArr);
+				for(let i= 0; i<daysArr.length; i++){	
+					return [day!=daysArr[i]];
+					
+				}//for문 종료
+				
+	
+			}
+			
 
 			//------------------ 인원수 늘리기 --------------------
 			let count = 1;
@@ -458,7 +503,7 @@
 				count++;
 				$(".people").text(count);
 			});
-
+			
 			$("#down").on("click", function(e) {
 				if (count == 1) {
 					return false;
@@ -471,12 +516,12 @@
 			function shareMessage() {
 				Kakao.Share.sendDefault({
 					objectType : 'location',
-					address : '경기 성남시 분당구 판교역로 166 3층',
-					addressTitle : '카카오 판교아지트 카페톡',
+					address : address,
+					addressTitle : storeName,
 					content : {
-						title : '신메뉴 출시♥︎ 체리블라썸라떼',
-						description : '이번 주는 체리블라썸라떼 1+1',
-						imageUrl : 'http://k.kakaocdn.net/dn/bSbH9w/btqgegaEDfW/vD9KKV0hEintg6bZT4v4WK/kakaolink40_original.png',
+						title : storeName,
+						description : storeName+"먹으러갈까요~~?",
+						imageUrl : 'http://192.168.10.26/resources/img/logo.png',
 						link : {
 							mobileWebUrl : 'http://192.168.10.26/storeDetailView.do',
 							webUrl : 'http://192.168.10.26/storeDetailView.do',
@@ -491,17 +536,42 @@
 					} ]
 				});
 			}
+			//-------------------- AJAX ----------------------------
+			var closedDay;
+			var hour;
+			var address;
+			var storeName;
+			$.ajax({
+				url: "/ajaxSelectStore.do",
+				success: function(data){
+					
+					hour = data.openHour;
+					closedDay = data.closedDay;
+					console.log("값: "+hour);
+					console.log("휴일: "+closedDay);
+					address=data.address;
+					storeName=data.storeName;
+					$(".storeNameTd").append(data.storeName); 
+					$(".peopleNumTd").append(count);
+					let selectDate = $("#datePicker").val();
+					$(".dateTd").append(selectDate);
+					$(".openHourTd").append(hour);
+					$(".addressTd").append(data.address);
+					$(".phoneTd").append(data.phone);
+					$(".closedDayTd").append(data.closedDay);
+					$(".storeNameSpan").append(data.storeName); 
+				}
+			});
 			
 			//-------------------- 모달 ----------------------------
 			const open = document.querySelector(".reserveBtn2");
 			const close = document.querySelector(".closeModal");
 			const modal = document.querySelector(".modal-wrap");
-				
+
 			function init(){
-				/*
+
 				open.addEventListener("click",function(){
 					modal.classList.remove("hidden");
-					
 					$.ajax({
 						url: "/ajaxSelectStore.do",
 						success: function(data){
@@ -520,18 +590,22 @@
 							$("#ajaxResult").html(table);
 						}
 					});
-					*/
+					
 				});
 				
+				
+				// 모달 닫기 버튼 클릭 시
 				close.addEventListener("click",function(){
 					modal.classList.add("hidden");
+					$(".storeNameTd").empty();
+					$(".peopleNumTd").empty();
+					$(".dateTd").empty();
+
 				});
 			}
+			
 			init();
 			
-	
-			
-
 		</script>
 </body>
 </html>

@@ -17,7 +17,7 @@
 	생성한 것을 id="map_div"에 띄우는거 -->
 
 	<body onload="initTmap()">
-		<link rel="stylesheet" href="/resources/css/map.css">
+		<link rel="stylesheet" href="/resources/css/store/map.css">
 		<div class="ft_area">
 			<div class="map-content-wrap">
 
@@ -70,7 +70,7 @@
 				<div class="clear"></div>
 			</div>
 		</div>
-		<script src="/resources/js/map.js"></script>
+		<script src="/resources/js/store/map.js"></script>
 	</body>
 
 	</html>
