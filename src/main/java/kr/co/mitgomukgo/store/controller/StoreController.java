@@ -41,11 +41,10 @@ public class StoreController {
 	// 맛집 상세 데이터 가져오기 (모달)
 	@ResponseBody
 	@RequestMapping(value="/ajaxSelectStore.do",produces="application/json;charset=utf-8")
-	public String ajaxSelectStore() {
-		ArrayList<Store> list = service.ajaxSelectStore();
+	public String ajaxSelectStore(Store store, Model model) {
+		Store s = service.ajaxSelectStore(store);
 		Gson gson = new Gson();
-		String result = gson.toJson(list);
-		System.out.println(result);
+		String result = gson.toJson(s);
 		return result;
 	}
 	
@@ -85,7 +84,7 @@ public class StoreController {
 		}
 		s.setStoreImgList(storeImgList);
 		s.setAddress(zipCode + s.getAddress() + detailAddress);
-		s.setOpenHour(s.getOpenHour() + " ~ " + closedHour);
+		s.setOpenHour(s.getOpenHour() + "~" + closedHour);
 		int result = service.addStore(s);
 		return "redirect:/storeList.do?reqPage=1";
 	}

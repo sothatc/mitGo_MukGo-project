@@ -66,4 +66,15 @@
 	    (select imgpath from store_img si where storeimg_no = (select min(storeimg_no) from store_img si2 where si2.store_no = s.store_no)) as thumbNail
 	from store s order by storeNo desc
 	</select>
+	
+	<select id="selectOneStore" parameterType="s" resultType="s">
+		select
+			store_name as storeName,
+			open_hour as openHour,
+			address,
+			phone,
+			closed_day as closedDay
+		from store 
+		where store_no =84
+	</select>
 </mapper>
