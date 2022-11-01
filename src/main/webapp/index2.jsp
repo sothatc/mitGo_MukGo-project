@@ -456,7 +456,7 @@
 
 
     <script src="/resources/js/index/jquery.min.js"></script>
-    <script src="/resources/js/index/bootstrap.bundle.min.js"></script>
+  
     <script src="/resources/js/index/owl.carousel.min.js"></script>
     <script src="/resources/js/index/app.js"></script>
 </body>
