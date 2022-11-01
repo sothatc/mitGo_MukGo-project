@@ -31,6 +31,8 @@ a:hover {
 <h2><a href="/selectAllFaq.do?reqPage=1">FAQ List(안형관)</a></h2>
 <h2><a href="/storeList.do">맛집 리스트 생성중(이규진)</a></h2>
 <h2><span class="review">리뷰 작성하기(이정우)</span></h2>
+<h2><a href="/main.do">메인화면 생성중(김아람)</a></h2>
+
 
 
 
