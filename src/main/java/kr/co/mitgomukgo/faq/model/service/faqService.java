@@ -132,6 +132,21 @@ public class faqService {
 		
 		return themeMap;
 	}
+
+	public ArrayList<Faq> selectSearchFaq(String type, String keyword) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("type", type);
+		map.put("keyword", keyword);
+		
+		ArrayList<Faq> list = dao.selectSearchFaq(map);
+		
+		if(list == null) {
+			return null;
+		}else {
+			return list;
+		}
+		
+	}
 }
 
 

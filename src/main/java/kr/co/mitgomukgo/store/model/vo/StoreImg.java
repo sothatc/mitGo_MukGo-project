@@ -1,7 +1,5 @@
 package kr.co.mitgomukgo.store.model.vo;
 
-import org.omg.CORBA.PRIVATE_MEMBER;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -9,7 +9,7 @@ tag.on("click",function(){
             $(tag).eq(i).css("color","black");
         }
     }
-    console.log(index);
+    
     $(tag).eq(index).css("color","#568A35");
 });
 

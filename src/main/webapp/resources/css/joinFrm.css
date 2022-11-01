@@ -16,11 +16,12 @@ input {
 	outline: none;
 }
 
+/*joinFrm*/
 .form-write>h4{
     padding-bottom: 12px;
     border-bottom: 2px solid #000;
 }
-.membership-form>.form-write>form>ul li{
+.membership-form>.form-write>ul li{
     list-style: none;
 }
 .contents{
@@ -28,10 +29,10 @@ input {
     padding-top: 50px;
     margin: 0 auto;
 }
-.form-write>form>ul{
+.form-write>ul{
     padding-top: 30px;
 }
-.form-write>form>ul li{
+.form-write>ul li{
     padding-top: 30px;
 }
 .tit{
@@ -53,7 +54,7 @@ input {
     padding: 0 12px;
     position: relative;
 }
-.form-write>form>ul li div .input01{
+.form-write>ul li div .input01{
     color: #999;
     line-height: 36px;
 }
@@ -188,4 +189,45 @@ hr{
     background-color: rgb(51,51,51);
     color: #fff;
     border: none;
+}
+
+/*selectJoin*/
+
+.select-wrap{
+    width: 800px;
+    height: 450px;
+    margin: 110px auto;
+    border: 1px solid #d7d7d7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
+}
+.selNomal{
+    width: 250px;
+    height: 250px;
+    border: 1px solid #d7d7d7;
+    margin-right: 60px;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 23px;
+    background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+    text-decoration: none;
+}
+.selOwner{
+    width: 250px;
+    height: 250px;
+    border: 1px solid #d7d7d7;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 23px;
+    background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+    text-decoration: none;
 }

@@ -143,7 +143,7 @@
 							</td>
 						</tr>
 					</table>
-					<button name="reserveBtn">예약하기</button>
+					<button name="reserveBtn" class="reserveBtn2">예약하기</button>
 					<button name="recommendBtn">추천글작성</button>
 				</div>
 			</div>
@@ -308,7 +308,6 @@
 								<span style="display: inline; float: left;"> 너무 맛있어서 눈물이 다 났어요... 또 올게요 사장님ㅠㅠㅠㅠㅠㅠㅠㅠㅠ ㅠㅠㅠㅠㅠㅠㅠㅠㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ 너무 맛있어서 눈물이 다 났어요... 또 올게요 사장님ㅠㅠㅠㅠㅠㅠㅠㅠㅠ ㅠㅠㅠㅠㅠㅠㅠㅠㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ</span>
 								<br>
 								<div class="w3-bar-item-1">
-									<span>피자A</span>
 									<span class="regDate">2022-10-26</span>
 								</div>
 							</div>
@@ -328,7 +327,6 @@
 								<span style="display: inline; float: left;"> 너무 맛있어서 눈물이 다 났어요... 또 올게요 사장님ㅠㅠㅠㅠㅠㅠㅠㅠㅠ ㅠㅠㅠㅠㅠㅠㅠㅠㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ 너무 맛있어서 눈물이 다 났어요... 또 올게요 사장님ㅠㅠㅠㅠㅠㅠㅠㅠㅠ ㅠㅠㅠㅠㅠㅠㅠㅠㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ</span>
 								<br>
 								<div class="w3-bar-item-1">
-									<span>피자A</span>
 									<span class="regDate">2022-10-26</span>
 								</div>
 							</div>
@@ -348,7 +346,6 @@
 								<span style="display: inline; float: left;"> 너무 맛있어서 눈물이 다 났어요... 또 올게요 사장님ㅠㅠㅠㅠㅠㅠㅠㅠㅠ ㅠㅠㅠㅠㅠㅠㅠㅠㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ 너무 맛있어서 눈물이 다 났어요... 또 올게요 사장님ㅠㅠㅠㅠㅠㅠㅠㅠㅠ ㅠㅠㅠㅠㅠㅠㅠㅠㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ</span>
 								<br>
 								<div class="w3-bar-item-1">
-									<span>피자A</span>
 									<span class="regDate">2022-10-26</span>
 								</div>
 							</div>
@@ -358,7 +355,37 @@
 			</div>
 		</div>
 
+	    <div class="modal-wrap hidden">
+		    <div class="modal-box">
+		        <div class="modal-title">예약 정보</div>
+		        <div class="modal-content">
+		            <table class="w3-table w3-bordered" id="reserveCheckTbl">
+		                <tr>
+		                    <th>상호명</th>
+		                    <td>스파카나폴리</td>
+		                </tr>
+		                <tr>
+		                    <th>일자</th>
+		                    <td>2022-10-24</td>
+		                </tr>
+		                <tr>
+		                    <th>시간</th>
+		                    <td>18:00</td>
+		                </tr>
+		                <tr>
+		                    <th>인원</th>
+		                    <td>2</td>
+		                </tr>
+		            </table>
+		            <div class="explanation">* 가게에서 최종 확정 시 예약이 확정됩니다.</div>
+		            <button class="closeModal pointer">닫기</button>
+		            <button class="reserveBtn pointer">예약하기</button>
+		        </div>
+		    </div>
+	    </div>
+	    </div>
 		<script>
+		//----------------------------------------------------------------------------------
 			//------------ 메뉴 사진 슬라이더 -----------------
 			let imgNo = 0;
 
@@ -464,6 +491,47 @@
 					} ]
 				});
 			}
+			
+			//-------------------- 모달 ----------------------------
+			const open = document.querySelector(".reserveBtn2");
+			const close = document.querySelector(".closeModal");
+			const modal = document.querySelector(".modal-wrap");
+				
+			function init(){
+				/*
+				open.addEventListener("click",function(){
+					modal.classList.remove("hidden");
+					
+					$.ajax({
+						url: "/ajaxSelectStore.do",
+						success: function(data){
+							const table=$("<table>");
+							const titleTr =$("<tr>");
+							titleTr.html("<th>번호</th><th>아이디</th><th>이름</th><th>전화번호</th>");
+							table.append(titleTr);
+							for(let i=0; i<data.length; i++){
+								const tr = $("<tr>");
+								tr.append("<td>"+data[i].memberNo+"</td>");
+								tr.append("<td>"+data[i].memberId+"</td>");
+								tr.append("<td>"+data[i].memberName+"</td>");
+								tr.append("<td>"+data[i].phone+"</td>");
+								table.append(tr);
+							}
+							$("#ajaxResult").html(table);
+						}
+					});
+					*/
+				});
+				
+				close.addEventListener("click",function(){
+					modal.classList.add("hidden");
+				});
+			}
+			init();
+			
+	
+			
+
 		</script>
 </body>
 </html>
