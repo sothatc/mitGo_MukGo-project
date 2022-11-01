@@ -56,4 +56,14 @@ public class StoreDao {
 	public int addMenu(Menu me) {
 		return sqlSession.insert("addMenu", me);
 	}
+
+	//모달 상세
+	public Store selectOneStore(Store store) {
+		Store s = sqlSession.selectOne("store.selectOneStore",store);
+		return s;
+	}
+	
+
+	
+	
 }
