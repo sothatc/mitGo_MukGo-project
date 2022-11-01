@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<link rel="stylesheet" href="/resources/css/storeList.css">
+	<link rel="stylesheet" href="/resources/css/store/storeList.css">
 	<div class="header-wrap"></div>
 	<!--헤더-->
 	<div class="storeList-content-wrap">
@@ -73,6 +73,6 @@
 	</div>
 	<!--푸터-->
 	<div class="footer-wrap"></div>
-	<script src="/resources/js/storeList.js"></script>
+	<script src="/resources/js/store/storeList.js"></script>
 </body>
 </html>
