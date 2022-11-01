@@ -1,6 +1,7 @@
 package kr.co.mitgomukgo.store.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -38,8 +39,16 @@ public class StoreDao {
 		return sqlSession.insert("reviewWrite", r);
 	}
 
-	public ArrayList<Store> storeList() {
-		List list = sqlSession.selectList("store.storeList");
-		return (ArrayList<Store>) list;
+	public ArrayList<Store> storeList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("store.storeList",map);
+		if(list.isEmpty()) {
+			return null;
+		}else {
+			return (ArrayList<Store>) list;	
+		}
+	}
+
+	public int countAllList() {
+		return sqlSession.selectOne("store.countAllList");
 	}
 }
