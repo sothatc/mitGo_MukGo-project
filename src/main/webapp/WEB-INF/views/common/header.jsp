@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-<link rel="stylesheet" href="/resources/css/style.css">
-<link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/css/header/style.css">
+<link rel="stylesheet" href="/resources/css/header/bootstrap.min.css">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
 <!-- TOP NAV -->
 <div class="top-nav" id="home">
 	<div class="container">
