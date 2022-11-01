@@ -44,7 +44,7 @@ public class StoreController {
 	// 맛집 상세 데이터 가져오기 (모달)
 	@ResponseBody
 	@RequestMapping(value="/ajaxSelectStore.do",produces="application/json;charset=utf-8")
-	public String ajaxSelectStore(Store store, Model model) {
+	public String ajaxSelectStore(Store store) {
 		Store s = service.ajaxSelectStore(store);
 		Gson gson = new Gson();
 		String result = gson.toJson(s);

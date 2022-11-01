@@ -454,31 +454,45 @@
 				$("#datePicker").datepicker({minDate:0});
 			});
 			
+			
 			//휴일은 데이트피커 비활성화
 			function disabledDays(date){
+				
 				var day = date.getDay();
 				var dayArr = new Array();
 				dayArr = closedDay.split(",");
 				var daysArr = new Array();
-
+				var dayArr2 = new Array();
 				for(let i= 0; i<dayArr.length; i++){	
-					if(dayArr[i].equals("월")){
+					if(dayArr[i]=="월"){
 						daysArr.push("1");
-					}else if(dayArr[i].equals("화")){
+					}
+					if(dayArr[i]=="화"){
 						daysArr.push("2");
-					}else if(dayArr[i].equals("수")){
+					}
+					if(dayArr[i]=="수"){
 						daysArr.push("3");
-					}else if(dayArr[i].equals("목")){
+					}
+					if(dayArr[i]=="목"){
 						daysArr.push("4");
-					}else if(dayArr[i].equals("금")){
+					}
+					if(dayArr[i]=="금"){
 						daysArr.push("5");
-					}else if(dayArr[i].equals("토")){
+					}
+					if(dayArr[i]=="토"){
 						daysArr.push("6");
-					}else if(dayArr[i].equals("일")){
+					}
+					if(dayArr[i]=="일"){
 						daysArr.push("7");
 					}
 				}//for문 종료
-				console.log(daysArr);
+				console.log("그래서 휴일은"+daysArr);
+				for(let i= 0; i<daysArr.length; i++){	
+					return [day!=daysArr[i]];
+					
+				}//for문 종료
+				
+	
 			}
 			
 
@@ -555,11 +569,6 @@
 			const modal = document.querySelector(".modal-wrap");
 
 			function init(){
-<<<<<<< HEAD
-				// 예약하기 버튼 클릭 시
-=======
-				/*
->>>>>>> refs/remotes/origin/master
 				open.addEventListener("click",function(){
 					modal.classList.remove("hidden");
 					
@@ -581,7 +590,7 @@
 							$("#ajaxResult").html(table);
 						}
 					});
-					*/
+					
 				});
 				
 				
@@ -597,12 +606,6 @@
 			
 			init();
 			
-	
-<<<<<<< HEAD
-=======
-			
-
->>>>>>> refs/remotes/origin/master
 		</script>
 </body>
 </html>
