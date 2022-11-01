@@ -16,13 +16,14 @@
         <div class="login-input">
             <div>로그인</div>
             <div>가입하신 아이디로 로그인 하세요.</div>
+            
             <input type="radio" name="selLogin" id="normal" value="1">
             <label for="normal">일반회원</label>
             <input type="radio" name="selLogin" id="owner" value="2">
             <label for="owner">사업자</label>
             <input type="hidden" class="radio" name="radio">
-            
-            <form action="/login.do" method="post">
+  
+            <form action="/login.do" method="post" id="normalLoginFrm">
                 <div class="login">
                     <ul>
                         <li>         
@@ -37,6 +38,27 @@
                             <div class="input01">
                                 <label class="label" for="memberPw">비밀번호</label>
                                 <input type="password" name="memberPw" id="memberPw">
+                            </div>
+                        </li>
+                        <button class="login-btn" type="submit">로그인</button>
+                    </ul>
+                </div>
+            </form>
+            <form action="/ownerLogin.do" method="post" id="ownerLoginFrm">
+                <div class="login">
+                    <ul>
+                        <li>         
+                            <div class="input01">
+                                <div>
+                                    <label class="label" for="ownerId">아이디</label>
+                                    <input type="text" name="ownerId" id="ownerId">
+                                </div>
+                            </div>                
+                        </li>
+                        <li>
+                            <div class="input01">
+                                <label class="label" for="ownerPw">비밀번호</label>
+                                <input type="password" name="ownerPw" id="ownerPw">
                             </div>
                         </li>
                         <button class="login-btn" type="submit">로그인</button>
@@ -71,11 +93,21 @@
 		});
 		
 		/*일반, 사업자 로그인 구분*/
-		$("input").on("click",function(){
+		$("#normal").click();
+		$("#normalLoginFrm").css("display","none");
+		$("[name=selLogin]").on("click",function(){
 			var selLogin = $("input[name=selLogin]:checked").val();
-			$(".radio").val(selLogin);	
-			
+			console.log(selLogin);
+			if(selLogin == 1) {
+				$("#ownerLoginFrm").css("display","none");
+				$("#normalLoginFrm").css("display","block");
+			}else if(selLogin == 2){
+				$("#normalLoginFrm").css("display","none");
+				$("#ownerLoginFrm").css("display","block");
+			}
 		});
+		
+		
     </script>
 </body>
 </html>
