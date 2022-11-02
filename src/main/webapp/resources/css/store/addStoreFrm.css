@@ -209,7 +209,6 @@ textarea {
   width: auto;
   position: relative;
   z-index: 2;
-  height: 46px;
   line-height: 2;
 }
 
@@ -439,4 +438,8 @@ textarea {
 .form-group input {
   border: 0;
   border-bottom: 1px solid gainsboro;
+}
+
+.form-control[readonly] {
+	background-color: #fff;	
 }

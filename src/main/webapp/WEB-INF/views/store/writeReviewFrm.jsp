@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
+
 <head>
 <meta charset="UTF-8">
 <title>리뷰쓰기</title>
@@ -131,13 +132,14 @@ hr {
 }
 </style>
 </head>
+
 <body>
 	<div class="reviewTitle">
 		<h1>리뷰쓰기 : ${s.storeName }</h1>
 	</div>
 	<hr>
 	<br>
-	<form class="mb-3" id="reviewForm" method="post" action="/writeReview.do" enctype="multipart/form-data">
+	<form class="mb-3" id="reviewForm" action="/writeReview.do" method="post" enctype="multipart/form-data">
 		<div>
 			<strong>식사는 만족하셨나요?</strong>
 		</div>
@@ -158,8 +160,8 @@ hr {
 		</div>
 		<div>
 			<input type="hidden" name="write" value="${sessionScope.m.memberId }">
-			<input type="hidden" name="storeNo" value="${s.storeNo }">
-			<input type="file" name="reviewImg" class="file-upload" id="file" style="visibility: hidden; position: absolute;" accept="image/gif, image/jpg, image/jpeg, image/png">
+			<%-- <input type="hidden" name="storeNo" value="${s.storeNo }"> --%>
+			<input type="file" name="reviewImgName" class="file-upload" id="file" style="visibility: hidden; position: absolute;" accept="image/gif, image/jpg, image/jpeg, image/png">
 			<button class="inputPhoto" type="button" id="inputPhoto">사진 첨부하기</button>
 		</div>
 		<div class="btnWrap">
@@ -186,4 +188,5 @@ hr {
 		})(jQuery);
 	</script>
 </body>
+
 </html>

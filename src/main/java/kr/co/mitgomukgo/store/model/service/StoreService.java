@@ -6,8 +6,7 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
-
+import kr.co.mitgomukgo.member.model.vo.Owner;
 import kr.co.mitgomukgo.store.model.dao.StoreDao;
 import kr.co.mitgomukgo.store.model.vo.Menu;
 import kr.co.mitgomukgo.store.model.vo.Review;
@@ -108,6 +107,11 @@ public class StoreService {
 		return dao.addMenu(me);
 	}
 
+
+	public Store selectStore(Owner o) {
+		Store s = dao.selectStore(o);
+		return s;
+	}
 
 	public HashMap<String, Object> storeList(int tagValue, int reqPage) {
 		int numPerPage = 9;

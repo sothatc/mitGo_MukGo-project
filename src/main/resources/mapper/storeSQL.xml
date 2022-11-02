@@ -7,7 +7,7 @@
 		values
 		(store_seq.nextval,
 		#{storeName},
-		2,
+		#{ownerNo},
 		#{address},
 		#{phone},
 		#{content},
@@ -39,9 +39,10 @@
 		insert into review
 		values
 		(review_seq.nextval,
-		#{menuNo},
-		#{write},
+		85,
+		'user01',
 		#{rating},
+		#{content},
 		#{reviewImg},
 		to_char(sysdate, 'yyyy-mm-dd')
 		)
@@ -63,7 +64,7 @@
 				rating,
 				review_count as reviewCount,
 				category,
-				whitheat_cate as
+				witheat_cate as
 				withEatCate,
 				whereeat_cate as whereEatCate,
 				(select imgpath from store_img si where storeimg_no = (select
@@ -90,7 +91,7 @@
 				rating,
 				review_count as reviewCount,
 				category,
-				whitheat_cate as
+				witheat_cate as
 				withEatCate,
 				whereeat_cate as whereEatCate,
 				(select imgpath from store_img si where storeimg_no = (select
@@ -127,5 +128,33 @@
 		#{menuImg}
 		)
 	</insert>
-
+	<!--  
+	<select id="selectMyStore" parameterType="o" resultType="s">
+		select
+			store_name as storeName,
+			open_hour as openHour,
+			address,
+			phone,
+			closed_day as closedDay,
+			category,
+			witheat_cate as withEatCate,
+			whereeat_cate as whereEatCate,
+			content
+		from store 
+		where owner_no = 2
+	</select>
+	-->
+	
+	<select id="getRatingAvg" resultType="double">
+		select avg(rating)
+		from review
+		where store_no = #{storeNo}
+	</select>
+	
+	<update id="updateRating">
+		update store
+		set rating = #{rating}
+		where store_no = #{storeNo}
+	</update>
+	
 </mapper>

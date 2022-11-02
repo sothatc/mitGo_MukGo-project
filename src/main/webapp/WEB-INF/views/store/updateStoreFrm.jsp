@@ -1,29 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="UTF-8">
-<title>업체 등록</title>
-<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-
+<title>Insert title here</title>
 </head>
-
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 	<link rel="stylesheet" href="/resources/css/store/addStoreFrm.css">
-	<div class="col-12 grid-margin stretch-card" style="margin-bottom: 200px;">
+	<div class="col-12 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
-				<h1 class="card-title">업체 등록</h1>
+				<h1 class="card-title">업체  정보 수정</h1>
 				<br>
-				<form method="post" action="/addStore.do" enctype="multipart/form-data">
+				<form method="post" action="/updateStore.do" enctype="multipart/form-data">
 					<div class="form-group">
-						<label for="inputName">업체명을 입력해주세요</label>
-						<br>
-						<input type="text" class="form-control" id="inputName" name="storeName" placeholder="대표 업체명을 입력해주세요." required oninvalid="this.setCustomValidity('업체명을 입력해주세요')" oninput="this.setCustomValidity('')">
-						<input type="hidden" name="ownerNo" value="${sessionScope.o.ownerNo }">
+						<input type="text" class="form-control" id="inputName" name="storeName" value="${storeName }">
 					</div>
 					<br>
 					<div class="form-group">
