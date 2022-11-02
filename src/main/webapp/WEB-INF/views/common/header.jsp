@@ -48,7 +48,7 @@
 					<a class="nav-link" href="#realreview">생생리뷰</a>
 				</li>
 			</ul>
-			<a href="#" id="font" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-brand1 ms-lg-3">로그인 | 회원가입 </a>
+			<a href="/loginFrm.do" id="font" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-brand1 ms-lg-3">로그인 | 회원가입 </a>
 
 		</div>
 	</div>
