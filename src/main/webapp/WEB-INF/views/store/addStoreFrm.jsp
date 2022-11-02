@@ -23,6 +23,7 @@
 						<label for="inputName">업체명을 입력해주세요</label>
 						<br>
 						<input type="text" class="form-control" id="inputName" name="storeName" placeholder="대표 업체명을 입력해주세요." required oninvalid="this.setCustomValidity('업체명을 입력해주세요')" oninput="this.setCustomValidity('')">
+						<input type="hidden" name="ownerNo" value="#{ownerNo }">
 					</div>
 					<br>
 					<div class="form-group">
