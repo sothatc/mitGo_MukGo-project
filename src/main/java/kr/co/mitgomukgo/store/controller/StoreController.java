@@ -137,6 +137,7 @@ public class StoreController {
 			}
 		}
 		int result = service.writeReview(r);
+		
 		return "store/successReivewFrm";
 	}
 
