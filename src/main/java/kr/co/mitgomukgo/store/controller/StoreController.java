@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.annotation.JacksonInject.Value;
 import com.google.gson.Gson;
 
 import common.FileRename;
@@ -105,6 +104,7 @@ public class StoreController {
 			model.addAttribute("pageNavi", map.get("pageNavi"));
 			model.addAttribute("total", map.get("total"));
 			model.addAttribute("pageNo", map.get("pageNo"));
+			System.out.println(model);
 			return "store/storeListFrm";
 		}
 		// ArrayList<Store> list = service.storeList();
@@ -119,23 +119,23 @@ public class StoreController {
 	public String writeReview(Review r, MultipartFile reviewImgName, HttpServletRequest request) {
 		if (!reviewImgName.isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/review/");
-				String filename = reviewImgName.getOriginalFilename();
-				String imgpath = fileRename.fileRename(savePath, filename);
-				try {
-					FileOutputStream fos = new FileOutputStream(new File(savePath + imgpath));
-					BufferedOutputStream bos = new BufferedOutputStream(fos);
-					byte[] bytes = reviewImgName.getBytes();
-					bos.write(bytes);
-					bos.close();
-					r.setReviewImg(imgpath);
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			String filename = reviewImgName.getOriginalFilename();
+			String imgpath = fileRename.fileRename(savePath, filename);
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath + imgpath));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				byte[] bytes = reviewImgName.getBytes();
+				bos.write(bytes);
+				bos.close();
+				r.setReviewImg(imgpath);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+		}
 		int result = service.writeReview(r);
 		return "redirect:/storeList.do?reqPage=1";
 	}
@@ -173,12 +173,14 @@ public class StoreController {
 	@ResponseBody
 	@RequestMapping(value = "/ajaxClicktag.do", produces = "application/json;charset=utf-8")
 	public String ajaxClicktag(int tagValue, int reqPage, Model model) {
-		HashMap<String, Object> map = service.storeList(tagValue, reqPage);
 
+		HashMap<String, Object> map = service.storeList(tagValue, reqPage);
+		System.out.println(map);
 		if (map == null) {
 			model.addAttribute("msg", "아직 등록된 업체 가 없습니다.");
 			return "store/storeListFrm";
 		} else {
+
 			model.addAttribute("list", map.get("list"));
 			model.addAttribute("reqPage", reqPage);
 			model.addAttribute("pageNavi", map.get("pageNavi"));
@@ -189,14 +191,7 @@ public class StoreController {
 			// 그런고로 String 타입으로 받음
 			Gson gson = new Gson();
 			String result = gson.toJson(map);
-
-			System.out.println(result);
-			System.out.println("구분");
-			System.out.println(model);
-
-			return "result";
+			return result;
 		}
-
 	}
-
 }

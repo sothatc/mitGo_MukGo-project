@@ -69,7 +69,7 @@
 				whereeat_cate as whereEatCate,
 				(select imgpath from store_img si where storeimg_no = (select
 				min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
-				as imgpath
+				as thumbNail
 			from store s order by storeNo desc)b)rb order by 3 desc)
 		where rnum between #{start} and #{end} 
 		
@@ -96,7 +96,7 @@
 				whereeat_cate as whereEatCate,
 				(select imgpath from store_img si where storeimg_no = (select
 				min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
-				as imgpath
+				as thumbNail
 			from store s order by storeNo desc)b)rb order by 3 desc)
 		where rnum between #{start} and #{end} and category = ${tagValue}
 	</select>
@@ -108,9 +108,11 @@
 			open_hour as openHour,
 			address,
 			phone,
-			closed_day as closedDay
+			closed_day as closedDay,
+			category,
+			content
 		from store 
-		where store_no =84
+		where store_no =85
 	</select>
 
 	<select id="countAllList" resultType="_int">
