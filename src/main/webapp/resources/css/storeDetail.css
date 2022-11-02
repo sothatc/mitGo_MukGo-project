@@ -1,92 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&display=swap');
 /*------------헤더-----------*/
 body{
     margin: 0 auto;
     position: relative;
 }
 
-.login-join{
-    position: absolute;
-    top: -25px;
-    left: 80vw;
-}
-
-.login-join>a{
-    text-decoration: none;
-    color: rgb(51, 51, 51);
-}
-
-.header-wrap{
-    width: 100vw;
-    background-color:  rgb(51, 51, 51);
-    margin: 0 auto;
-    margin-top: 40px;
-}
-
-.header-list1{
-    height: 45px;
-    display: flex;
-    position: relative;
-}
-
-.ul1{
-    list-style-type: none;
-    display: inline-block;
-    padding: 0px;
-    margin: 0 auto;
-    
-    }
-
-.ul1>li{
-    float: left;
-    width: 300px;
-    height: 45px;
-    line-height: 45px;
-    text-align: center;
-    color: white;
-    font-size: 18px;
-}
-
-.ul1>li:hover{
-    cursor: pointer;
-    font-weight: 900;
-    font-size: 18px;
-}
-
-.ul2{
-    list-style-type: none;
-    padding: 0px;
-    margin: 0 auto;
-}
-
-.ul2>li{
-    float: right;
-    width: 300px;
-    height: 45px;
-    line-height: 45px;
-    text-align: center;
-    color: white;
-    font-size: 18px;
-}
-
-.ul2>li:hover{
-    cursor: pointer;
-    font-weight: 900;
-    font-size: 18px;
-}
-
-.header-list1>a{
-    position: absolute;
-    left: 47vw;
-    top: -43px;
-}
-
-.logoImg{
-    border-radius: 100%;
-}
-
-.header-list1{
-    margin-top: 50px;
-}
 
 /*------------맛집 상세 페이지-----------*/
 
@@ -121,7 +40,7 @@ body{
 
 .reviewNum{
     float: right;
-    margin-left: 35px;
+    margin-left: 10px;
 }
 
 .content-wrap1-2{
@@ -287,13 +206,13 @@ select[name=selectMenu]{
     margin-top: 1%;
     border-radius: 5px;
     border: 0.5px solid rgb(51, 51, 51);
-    background-color: rgb(51, 51, 51);
-    color: white;
+    background-color: white;
+    color:rgb(51, 51, 51);
 }
 
 .timeBtn:hover{
-    background-color: white;
-    color: rgb(51, 51, 51);
+    background-color: rgb(51, 51, 51);
+    color: white;
 }
 
 
@@ -549,7 +468,7 @@ button[name=recommendBtn]:hover{
 }
 
 
-.w3-bar-item{
+#w3-bar-item{
     max-width: 450px;
     height: 245px;
     display: inline;
@@ -587,10 +506,10 @@ button[name=recommendBtn]:hover{
     position: absolute;
     top: 30vh;
     left: 70vh;
-    background-color: white;
+    background-color: yellow;
     border-radius: 10px;
-    width: 30vw;
-    height: 40vh;
+    width: 40vw;
+    height: 60vh;
     min-width: 385px;
     min-height: 288px;
 }
@@ -605,9 +524,9 @@ button[name=recommendBtn]:hover{
     border-bottom: 0.5px solid darkgray;
 }
 
-.modal-content{
+.modal-contents{
     width: 100%;
-    height: 75%;
+    height: 60%;
     display: block;
 }
 
@@ -628,6 +547,7 @@ button[name=recommendBtn]:hover{
     text-indent: 10px;
 }
 .closeModal{
+	width:30px;
     border: 1px solid rgb(51, 51, 51);
     border-radius: 10px;
     background-color: rgb(51, 51, 51);

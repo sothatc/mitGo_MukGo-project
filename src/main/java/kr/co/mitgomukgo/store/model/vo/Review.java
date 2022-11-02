@@ -13,6 +13,6 @@ public class Review {
 	private String writer;
 	private int rating;
 	private String content;
-	private String reivewImg;
+	private String reviewImg;
 	private String enrollDate;
 }
