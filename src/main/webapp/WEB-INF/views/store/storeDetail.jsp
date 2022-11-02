@@ -598,9 +598,11 @@
 
 				open.addEventListener("click",function(){
 					modal.classList.remove("hidden");
+
 					
 					$(".dateTd").text($("#datePicker").val());
 					$(".peopleNumTd").text(count);
+
 					$.ajax({
 						url: "/ajaxSelectStore.do",
 						success: function(data){
@@ -619,7 +621,10 @@
 							$("#ajaxResult").html(table);
 						}
 					});
-					
+
+
+					$(".dateTd").text($("#datePicker").val());
+					$(".peopleNumTd").text(count);
 					//날짜를 선택하지 않았을 때
 					if($("#datePicker").val() == ""){
 						alert("날짜를 선택해주세요");
@@ -634,9 +639,6 @@
 			}
 			init();
 			
-			
-			
-
 			
 		</script>
 
