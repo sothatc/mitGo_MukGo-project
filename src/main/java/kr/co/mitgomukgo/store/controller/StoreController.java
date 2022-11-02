@@ -116,19 +116,18 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/writeReview.do")
-	public String writeReview(Review r, MultipartFile[] file, HttpServletRequest request) {
-		if (!file[0].isEmpty()) {
+	public String writeReview(Review r, MultipartFile reviewImgName, HttpServletRequest request) {
+		if (!reviewImgName.isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/review/");
-			for (MultipartFile file2 : file) {
-				String filename = file2.getOriginalFilename();
+				String filename = reviewImgName.getOriginalFilename();
 				String imgpath = fileRename.fileRename(savePath, filename);
 				try {
 					FileOutputStream fos = new FileOutputStream(new File(savePath + imgpath));
 					BufferedOutputStream bos = new BufferedOutputStream(fos);
-					byte[] bytes = file2.getBytes();
+					byte[] bytes = reviewImgName.getBytes();
 					bos.write(bytes);
 					bos.close();
-					r.setReivewImg(imgpath);
+					r.setReviewImg(imgpath);
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -137,7 +136,6 @@ public class StoreController {
 					e.printStackTrace();
 				}
 			}
-		}
 		int result = service.writeReview(r);
 		return "redirect:/storeList.do?reqPage=1";
 	}
@@ -148,15 +146,15 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/addMenu.do")
-	String addMenu(Menu me, MultipartFile file, HttpServletRequest request) {
-		if (!file.isEmpty()) {
+	String addMenu(Menu me, MultipartFile menuImg, HttpServletRequest request) {
+		if (!menuImg.isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/menu/");
-			String imgName = file.getOriginalFilename();
-			String menuImg = fileRename.fileRename(savePath, imgName);
+			String imgName = menuImg.getOriginalFilename();
+			String menuPath = fileRename.fileRename(savePath, imgName);
 			try {
 				FileOutputStream fos = new FileOutputStream(new File(savePath + menuImg));
 				BufferedOutputStream bos = new BufferedOutputStream(fos);
-				byte[] bytes = file.getBytes();
+				byte[] bytes = menuImg.getBytes();
 				bos.write(bytes);
 				bos.close();
 			} catch (FileNotFoundException e) {
@@ -166,7 +164,7 @@ public class StoreController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			me.setMenuImg(menuImg);
+			me.setMenuImg(menuPath);
 		}
 		int result = service.addMenu(me);
 		return "store/storeDetail";
