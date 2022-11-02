@@ -64,7 +64,7 @@
 				rating,
 				review_count as reviewCount,
 				category,
-				whitheat_cate as
+				witheat_cate as
 				withEatCate,
 				whereeat_cate as whereEatCate,
 				(select imgpath from store_img si where storeimg_no = (select
@@ -91,7 +91,7 @@
 				rating,
 				review_count as reviewCount,
 				category,
-				whitheat_cate as
+				witheat_cate as
 				withEatCate,
 				whereeat_cate as whereEatCate,
 				(select imgpath from store_img si where storeimg_no = (select
