@@ -3,52 +3,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>맛집상세 페이지</title>
-<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="/resources/css/store/storeDetail.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,200" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/store/style.css">
-<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.0/kakao.min.js" integrity="sha384-PFHeU/4gvSH8kpvhrigAPfZGBDPs372JceJq3jAXce11bVA6rMvGWzvP4fMQuBGL" crossorigin="anonymous"></script>
-<script>
-	Kakao.init('c089c8172def97eb00c07217cae17495');
-</script>
+	<meta charset="UTF-8">
+	<title>맛집상세 페이지</title>
+
 
 </head>
+
 <body>
-	<!--------------------헤더------------------------->
-	<div class="login-join">
-		<a href="#">로그인/회원가입</a>
-	</div>
-	<div class="header-wrap">
-		<div class="header-list1">
-			<ul class="ul1">
-				<li>맛집리스트</li>
-				<li>상품리스트</li>
-			</ul>
-
-			<ul class="ul2">
-				<li>공지사항</li>
-				<li>고객센터</li>
-			</ul>
-
-			<a href="#"><img src="/resources/img/pizza.PNG/logo.png" class="logoImg"></a>
-		</div>
-	</div>
-
+	<%@ include file="/WEB-INF/views/common/header.jsp" %>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,200" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/store/style.css">
+	<link rel="stylesheet" href="/resources/css/store/storeDetail.css">
+	
 	<!---------------------내용----------------------->
 	<div class="content-wrap">
 		<div class="content-wrap1">
 			<div class="content-wrap1-1">
-				<span>[양식]</span>
-				<span class="storeNameSpan"></span>
+				<span class="categorySpan" style="font-family:Gowun Dodum;"></span>
+				<span class="storeNameSpan" style="font-family:Gowun Dodum;"></span>
 				<span class="material-symbols-rounded star">star</span>
-				<span class="reviewNum">4.3</span>
+				<span class="reviewNum" style="font-family:Gowun Dodum;">4.3</span>
 			</div>
 
 			<div class="content-wrap1-2">
@@ -84,7 +62,7 @@
 				</div>
 
 				<div class="info-reserve-wrap">
-					<table class="w3-table w3-bordered" id="infoTable">
+					<table class="w3-table w3-bordered" id="infoTable" style="font-family:Gowun Dodum;">
 						<tr>
 							<th>주소</th>
 							<td colspan="3" class="addressTd"></td>
@@ -129,29 +107,18 @@
 						</tr>
 						<tr>
 							<th class="timeTh">시간</th>
-							<td colspan="3">
-								<button class="timeBtn pointer">11:00</button>
-								<button class="timeBtn pointer">12:00</button>
-								<button class="timeBtn pointer">13:00</button>
-								<button class="timeBtn pointer">14:00</button>
-								<button class="timeBtn pointer">15:00</button>
-								<button class="timeBtn pointer">16:00</button>
-								<button class="timeBtn pointer">17:00</button>
-								<button class="timeBtn pointer">18:00</button>
-								<button class="timeBtn pointer">19:00</button>
-								<button class="timeBtn pointer">20:00</button>
-							</td>
+							<td colspan="3" class="buttonTd"></td>
 						</tr>
 					</table>
-					<button name="reserveBtn" class="reserveBtn2">예약하기</button>
-					<button name="recommendBtn">추천글작성</button>
+					<button name="reserveBtn" class="reserveBtn2" style="font-family:Gowun Dodum;">예약하기</button>
+					<button name="recommendBtn" style="font-family:Gowun Dodum;">추천글작성</button>
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<!--조회수 및 후기 수-->
-	<div class="content-wrap3">
+	<div class="content-wrap3" style="font-family:Gowun Dodum;">
 		<div class="content-wrap3-1">
 			<span class="material-symbols-outlined">visibility</span>
 			<span>100</span>
@@ -161,11 +128,11 @@
 	</div>
 
 	<!--상세 페이지-->
-	<div class="content-wrap4">
+	<div class="content-wrap4" style="font-family:Gowun Dodum;">
 		<div class="testDiv">
 			<p class="menuTitle">MENU</p>
 			<blockquote class="w3-panel w3-leftbar w3-light-grey" id="menuWrap">
-				<div class="menuWrap">
+				<div class="menuWrap" style="font-family:Gowun Dodum;">
 					<p class="menuSubTitle">대표메뉴</p>
 					<table class="w3-table w3-bordered" id="menuTable">
 						<tr>
@@ -234,8 +201,8 @@
 			<!----- store부분 ----->
 			<p class="menuTitle">STORE</p>
 			<blockquote class="w3-panel w3-leftbar w3-light-grey" id="aboutStore">
-				<p>
-					<i>이대 뒷문 김옥길 기념관 내에 자리한 샌드위치 전문점. 노출 콘크리트의 모던한 건물 내부로 들어서면 미술품들이 벽에 걸려 갤러리를 연상. 이대의 이탈리안 레스토랑 <지노 프란체스카> 사장님이 운영하고 있음. 치아바타 빵에 매콤한 닭다리살과 루꼴라가 들어간 매콤 치킨 샌드위치와 고른곤졸라, 모짜렐라 등 4가지의 담백한 치즈로 만들어내는 치즈피자가 인기.</i>
+				<p style="margin:0;">
+					<i class="contentI"></i>
 				</p>
 			</blockquote>
 
@@ -297,9 +264,9 @@
 				<ul class="w3-ul w3-card-4" id="reviewWrapUl">
 					<li class="w3-bar" style="height: 270px;">
 						<div class="w3-bar-1">
-							<span class="reviewDelete" style="line-height: 250px;">×</span>
+							<span class="reviewDelete" style="line-height: 250px; ">×</span>
 							<img src="/resources/img/pizza.PNG" class="w3-hide-small" style="float: left;">
-							<div class="w3-bar-item">
+							<div class="w3-bar-item" id="w3-bar-item">
 								<span class="w3-large">홍길동</span>
 								<span class="material-symbols-rounded">star</span>
 								<span class="material-symbols-rounded">star</span>
@@ -318,7 +285,7 @@
 						<div class="w3-bar-1">
 							<span class="reviewDelete" style="line-height: 250px;">×</span>
 							<img src="/resources/img/pizza.PNG" class="w3-hide-small" style="float: left;">
-							<div class="w3-bar-item">
+							<div class="w3-bar-item" id="w3-bar-item">
 								<span class="w3-large">홍길동</span>
 								<span class="material-symbols-rounded">star</span>
 								<span class="material-symbols-rounded">star</span>
@@ -337,7 +304,7 @@
 						<div class="w3-bar-1">
 							<span class="reviewDelete" style="line-height: 250px;">×</span>
 							<img src="/resources/img/pizza.PNG" class="w3-hide-small" style="float: left;">
-							<div class="w3-bar-item">
+							<div class="w3-bar-item" id="w3-bar-item">
 								<span class="w3-large">홍길동</span>
 								<span class="material-symbols-rounded">star</span>
 								<span class="material-symbols-rounded">star</span>
@@ -358,7 +325,7 @@
 	    <div class="modal-wrap hidden">
 		    <div class="modal-box">
 		        <div class="modal-title">예약 정보</div>
-		        <div class="modal-content">
+		        <div class="modal-contents">
 		            <table class="w3-table w3-bordered" id="reserveCheckTbl">
 		                <tr>
 		                    <th>상호명</th>
@@ -384,9 +351,17 @@
 		    </div>
 	    </div>
 	    </div>
+	    
+	    
+	    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+	    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.0/kakao.min.js" integrity="sha384-PFHeU/4gvSH8kpvhrigAPfZGBDPs372JceJq3jAXce11bVA6rMvGWzvP4fMQuBGL" crossorigin="anonymous"></script>
+		<script>
+			Kakao.init('c089c8172def97eb00c07217cae17495');
+		</script>
 		<script>
 		//------------------------------------------------------------------------------------------------------------------------------
-			//------------ 메뉴 사진 슬라이더 -----------------
+			//--------------------------메뉴 사진 슬라이더
 			let imgNo = 0;
 
 			const ul = $(".photo-wrap>ul");
@@ -410,7 +385,7 @@
 				}
 			});
 
-			//------------ 매장 사진 슬라이더 -----------------
+			//------------------------- 매장 사진 슬라이더 
 			let imgNo2 = 0;
 			const ul2 = $(".photo-wrap2>ul");
 			const imgCount2 = ul2.children().length;
@@ -433,7 +408,7 @@
 				}
 			});
 
-			// ----------- datePicker ---------------------
+			//----------------------- datePicker
 			$.datepicker.setDefaults({
 				dateFormat : 'yy-mm-dd',
 				prevText : '이전 달',
@@ -446,7 +421,6 @@
 				showMonthAfterYear : true,
 				yearSuffix : '년',
 				beforeShowDay: disabledDays
-				
 			});
 			
 			$(function() {
@@ -454,65 +428,67 @@
 				$("#datePicker").datepicker({minDate:0});
 			});
 			
-			
-			//휴일은 데이트피커 비활성화
+			//--------------------------휴일 데이터피커 비활성화
+			var daysArr;
 			function disabledDays(date){
 				
 				var day = date.getDay();
 				var dayArr = new Array();
 				dayArr = closedDay.split(",");
-				var daysArr = new Array();
-				var dayArr2 = new Array();
+				daysArr = new Array();
+				
 				for(let i= 0; i<dayArr.length; i++){	
-					if(dayArr[i]=="월"){
-						daysArr.push("1");
-					}
-					if(dayArr[i]=="화"){
-						daysArr.push("2");
-					}
-					if(dayArr[i]=="수"){
-						daysArr.push("3");
-					}
-					if(dayArr[i]=="목"){
-						daysArr.push("4");
-					}
-					if(dayArr[i]=="금"){
-						daysArr.push("5");
-					}
-					if(dayArr[i]=="토"){
-						daysArr.push("6");
-					}
-					if(dayArr[i]=="일"){
-						daysArr.push("7");
-					}
-				}//for문 종료
-				console.log("그래서 휴일은"+daysArr);
-				for(let i= 0; i<daysArr.length; i++){	
-					return [day!=daysArr[i]];
-					
+						if(dayArr[i]=="월"){
+							daysArr.push("1");
+						}
+						if(dayArr[i]=="화"){
+							daysArr.push("2");
+						}
+						if(dayArr[i]=="수"){
+							daysArr.push("3");
+						}
+						if(dayArr[i]=="목"){
+							daysArr.push("4");
+						}
+						if(dayArr[i]=="금"){
+							daysArr.push("5");
+						}
+						if(dayArr[i]=="토"){
+							daysArr.push("6");
+						}
+						if(dayArr[i]=="일"){
+							daysArr.push("0");
+						}
 				}//for문 종료
 				
-	
+				//데이트피커 휴일 비활성화 코드
+				let result = true;
+				for(let i=0;i<daysArr.length;i++){
+					result = result && (day != Number(daysArr[i]));
+				}
+				return [result];
 			}
 			
 
-			//------------------ 인원수 늘리기 --------------------
-			let count = 1;
+			//----------------------------- 인원수 늘리기
+	         let count = 1;
+	
+	         $("#up").on("click", function(e) {
+	            count++;
 
-			$("#up").on("click", function(e) {
-				count++;
-				$(".people").text(count);
-			});
-			
-			$("#down").on("click", function(e) {
-				if (count == 1) {
-					return false;
-				}
-				count--;
-				$(".people").text(count);
-			});
+	            $(".people").text(count);
+	         });
+	         
+	         $("#down").on("click", function(e) {
+	            if (count == 1) {
+	               return false;
+	            }
+	            count--;
+	            $(".people").text(count);
+	         });
 
-			//-------------------- 공유하기 버튼 ----------------------------
+
+			//----------------------------- 공유하기 버튼
 			function shareMessage() {
 				Kakao.Share.sendDefault({
 					objectType : 'location',
@@ -536,42 +512,93 @@
 					} ]
 				});
 			}
-			//-------------------- AJAX ----------------------------
-			var closedDay;
-			var hour;
-			var address;
-			var storeName;
-			$.ajax({
-				url: "/ajaxSelectStore.do",
-				success: function(data){
-					
-					hour = data.openHour;
-					closedDay = data.closedDay;
-					console.log("값: "+hour);
-					console.log("휴일: "+closedDay);
-					address=data.address;
-					storeName=data.storeName;
-					$(".storeNameTd").append(data.storeName); 
-					$(".peopleNumTd").append(count);
-					let selectDate = $("#datePicker").val();
-					$(".dateTd").append(selectDate);
-					$(".openHourTd").append(hour);
-					$(".addressTd").append(data.address);
-					$(".phoneTd").append(data.phone);
-					$(".closedDayTd").append(data.closedDay);
-					$(".storeNameSpan").append(data.storeName); 
-				}
-			});
+		 //---------------------------------------- AJAX 
+         var closedDay;
+         var hour;
+         var address;
+         var storeName;
+         var selectDate;
+         var openTime;
+         var closeTime;
+         var hourArr;
+         var realOpenTime; //실오픈시간
+         var realCloseTime; //실폐점시간
+         var categoryNum;
+         var category;//실카테고리
+         var content;
+         $.ajax({
+            url: "/ajaxSelectStore.do",
+            success: function(data){
+               
+               hour = data.openHour;
+               closedDay = data.closedDay;
+               hourArr = new Array();
+               hourArr = hour.split("~");
+               openTime = new Array();
+               openTime = hourArr[0].split(":");
+               closeTime = new Array();
+               closeTime = hourArr[1].split(":");
+               realOpenTime = openTime[0];
+               realCloseTime = closeTime[0];
+               categoryNum = data.category;
+               content = data.content;
+               //카테고리 
+               //1:한식 , 2: 양식, 3: 일식, 4: 중식, 5:분식, 6:육류, 7:기타
+               if(categoryNum=="1"){
+            		category="한식";
+               }else if(categoryNum=="2"){
+            	   category="양식";
+               }else if(categoryNum=="3"){
+            	   category="일식";
+               }else if(categoryNum=="4"){
+            	   category="중식";
+               }else if(categoryNum=="5"){
+            	   category="분식";
+               }else if(categoryNum=="6"){
+            	   category="육류";
+               }else if(categoryNum=="7"){
+            	   category="기타";
+               }
+               address=data.address;
+               storeName=data.storeName;
+               $(".storeNameTd").append(data.storeName); 
+               $(".peopleNumTd").append(count);
+               $(".categorySpan").append("["+category+"]");
+               selectDate = $("#datePicker").val();
+               $(".dateTd").append(selectDate);
+               $(".openHourTd").append(hour);
+               $(".addressTd").append(data.address);
+               $(".phoneTd").append(data.phone);
+               $(".closedDayTd").append(data.closedDay);
+               $(".storeNameSpan").append(data.storeName); 
+               $(".contentI").append(data.content); 
+               //시간 버튼 생성
+               for(let i=realOpenTime; i<realCloseTime; i++){
+            	   $(".buttonTd").append("<button class=timeBtn style=margin-right:1%;>"+i+":00"+"</button>");
+               }
+				//-----------------버튼 클릭
+				const timeBtns = $(".timeBtn");
+				timeBtns.on("click",function(){
+					timeBtns.css("color","rgb(51,51,51)").css("background-color","white");
+					$(this).css("color","white").css("background-color","rgb(51,51,51)");
+					const index = timeBtns.index(this);
+					console.log("몇번째 버튼을 클릭했을까  "+index);
+				});
+            }
+         });
+
 			
-			//-------------------- 모달 ----------------------------
+			//---------------------------------- 모달 
 			const open = document.querySelector(".reserveBtn2");
 			const close = document.querySelector(".closeModal");
 			const modal = document.querySelector(".modal-wrap");
 
 			function init(){
+				//모달 여는 코드
 
 				open.addEventListener("click",function(){
 					modal.classList.remove("hidden");
+
 					$.ajax({
 						url: "/ajaxSelectStore.do",
 						success: function(data){
@@ -590,22 +617,25 @@
 							$("#ajaxResult").html(table);
 						}
 					});
-					
-				});
-				
+
+					$(".dateTd").text($("#datePicker").val());
+					$(".peopleNumTd").text(count);
+					//날짜를 선택하지 않았을 때
+					if($("#datePicker").val() == ""){
+						alert("날짜를 선택해주세요");
+						modal.classList.add("hidden");
+					}
+				 });
 				
 				// 모달 닫기 버튼 클릭 시
 				close.addEventListener("click",function(){
 					modal.classList.add("hidden");
-					$(".storeNameTd").empty();
-					$(".peopleNumTd").empty();
-					$(".dateTd").empty();
-
 				});
 			}
-			
 			init();
 			
+			
 		</script>
+
 </body>
 </html>
