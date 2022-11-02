@@ -20,9 +20,9 @@ tag.on("click",function(){
         url : "/ajaxClicktag.do?reqPage=1",
         data : {tagValue : tagValue},
         success : function(data){
-
-            const storeListListContent = $(".storeList-list-content");
-            
+            const storeList = $(".storeList-list");
+            const storeListListContent = $("<div>");
+            storeListListContent.addClass("storeList-list-content");
             for(let i=0;i<data.list.length;i++){
                 const div = $("<div>");
                 div.addClass("showList");
@@ -30,8 +30,9 @@ tag.on("click",function(){
                 a.append("<div><img src='resources/upload/store/"+data.list[i].thumbNail+"'></img></div>");
             	a.append("<div><div>가게이름 : "+data.list[i].storeName+"</div></div>");
             	div.append(a);
+                storeListListContent.append(div)
             }
-            storeListListContent.html();
+            storeList.html(storeListListContent);
         }
     });
 });

@@ -161,7 +161,9 @@
 		where store_no = #{storeNo}
 	</update>
 	
+
 	<select id="searchStore" parameterType="int" resultType="s">
 		select * from store where owner_no = #{ownerNo}	
 	</select>
+
 </mapper>
