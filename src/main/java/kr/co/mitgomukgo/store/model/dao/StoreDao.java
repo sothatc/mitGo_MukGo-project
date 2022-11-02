@@ -48,7 +48,7 @@ public class StoreDao {
 			return (ArrayList<Store>) list;	
 		}
 	}
-
+	
 	public int countAllList() {
 		return sqlSession.selectOne("store.countAllList");
 	}
@@ -57,13 +57,20 @@ public class StoreDao {
 		return sqlSession.insert("addMenu", me);
 	}
 
+
+	public ArrayList<Store> storeTagList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("store.storeTagList",map);
+		if(list.isEmpty()) {
+			return null;
+		}else {
+			return (ArrayList<Store>) list;	
+		}
+	}
+
 	//모달 상세
 	public Store selectOneStore(Store store) {
 		Store s = sqlSession.selectOne("store.selectOneStore",store);
 		return s;
 	}
-	
-
-	
 	
 }

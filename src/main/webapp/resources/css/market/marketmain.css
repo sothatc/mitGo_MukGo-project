@@ -1,0 +1,68 @@
+.py-5 {
+    padding-top: 3rem !important;
+    padding-bottom: 3rem !important;
+  }
+  .px-4 {
+    padding-right: 1.5rem !important;
+    padding-left: 1.5rem !important;
+  }  
+
+  .px-lg-5 {
+    padding-right: 3rem !important;
+    padding-left: 3rem !important;
+  }
+
+  
+.mt-5 {
+    margin-top: 3rem !important;
+  }
+.card-img-top{
+    width: 250px;
+    height: 200px;
+}
+.card.h-100{
+    width: 252px;
+}
+
+.market1{
+    width: 200px;
+    margin-bottom: 40px;
+    border-bottom: 2px solid #ffc107;
+   
+}
+
+.market1 h6{
+    font-size: 18px;
+   margin: 0;
+}
+
+.mid-nav {
+  background-color: #ffc107;
+  color: #fff;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  width: 1250px;
+  margin: 0 auto;
+
+}
+
+.mid-nav a {
+  display: inline-block;
+  margin-bottom: 0;
+  margin-right: 10px;
+}
+
+
+.mid-nav li {
+  vertical-align: middle;
+  float: left;
+  margin-right: 75px;
+  margin-left: 75px;
+  list-style: none;
+ text-align: center;
+ 
+}
+
+.nav-link{
+  color: #fff;
+}

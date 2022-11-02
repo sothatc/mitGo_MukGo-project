@@ -13,7 +13,7 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 	<link rel="stylesheet" href="/resources/css/store/addStoreFrm.css">
-	<div class="col-12 grid-margin stretch-card">
+	<div class="col-12 grid-margin stretch-card" style="margin-bottom: 200px;">
 		<div class="card">
 			<div class="card-body">
 				<h1 class="card-title">업체 등록</h1>

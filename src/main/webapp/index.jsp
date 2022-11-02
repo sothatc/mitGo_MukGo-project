@@ -57,6 +57,7 @@
 	<h2><a href="/main.do">메인 생성중(김아람)</a></h2>
 	<h2><a href="/addMenuFrm.do">메뉴 추가(이정우)</a></h2>
 	<h2><a href="index2.jsp">인덱스</a></h2>
+	<h2><a href="marketMain.jsp">마켓메인</a></h2>
 
 
 
