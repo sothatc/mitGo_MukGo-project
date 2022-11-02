@@ -31,7 +31,7 @@ tag.on("click",function(){
             	a.append("<div><div>가게이름 : "+data.list[i].storeName+"</div></div>");
             	div.append(a);
             }
-            storeListListContent.html(div);
+            storeListListContent.html();
         }
     });
 });

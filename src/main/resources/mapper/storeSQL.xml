@@ -39,7 +39,7 @@
 		insert into review
 		values
 		(review_seq.nextval,
-		84,
+		85,
 		'user01',
 		#{rating},
 		#{content},

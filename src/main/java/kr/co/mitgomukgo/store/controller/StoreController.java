@@ -137,7 +137,7 @@ public class StoreController {
 			}
 		}
 		int result = service.writeReview(r);
-		return "redirect:/storeList.do?reqPage=1";
+		return "store/successReivewFrm";
 	}
 
 	@RequestMapping(value = "/addMenuFrm.do")
@@ -146,15 +146,15 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/addMenu.do")
-	String addMenu(Menu me, MultipartFile menuImg, HttpServletRequest request) {
-		if (!menuImg.isEmpty()) {
+	String addMenu(Menu me, MultipartFile file, HttpServletRequest request) {
+		if (!file.isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/menu/");
-			String imgName = menuImg.getOriginalFilename();
+			String imgName = file.getOriginalFilename();
 			String menuPath = fileRename.fileRename(savePath, imgName);
 			try {
-				FileOutputStream fos = new FileOutputStream(new File(savePath + menuImg));
+				FileOutputStream fos = new FileOutputStream(new File(savePath + file));
 				BufferedOutputStream bos = new BufferedOutputStream(fos);
-				byte[] bytes = menuImg.getBytes();
+				byte[] bytes = file.getBytes();
 				bos.write(bytes);
 				bos.close();
 			} catch (FileNotFoundException e) {
