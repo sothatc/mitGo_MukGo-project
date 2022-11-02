@@ -107,9 +107,11 @@
 			open_hour as openHour,
 			address,
 			phone,
-			closed_day as closedDay
+			closed_day as closedDay,
+			category,
+			content
 		from store 
-		where store_no =84
+		where store_no =85
 	</select>
 
 	<select id="countAllList" resultType="_int">
