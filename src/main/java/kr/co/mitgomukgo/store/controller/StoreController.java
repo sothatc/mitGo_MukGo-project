@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ import com.fasterxml.jackson.annotation.JacksonInject.Value;
 import com.google.gson.Gson;
 
 import common.FileRename;
+import kr.co.mitgomukgo.member.model.vo.Owner;
 import kr.co.mitgomukgo.store.model.service.StoreService;
 import kr.co.mitgomukgo.store.model.vo.Menu;
 import kr.co.mitgomukgo.store.model.vo.Review;
@@ -169,5 +171,13 @@ public class StoreController {
 		}
 		int result = service.addMenu(me);
 		return "store/storeDetail";
+	}
+	
+	@RequestMapping(value="/updateStoreFrm.do")
+	public String updateStoreFrm(HttpSession session, Model model) {
+		Owner o = (Owner)session.getAttribute("o");
+		Store s = service.selectStore(o);
+		model.addAttribute("s", s);
+		return "/store/updateStoreFrm";
 	}
 }
