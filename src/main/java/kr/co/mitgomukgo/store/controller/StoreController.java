@@ -192,9 +192,6 @@ public class StoreController {
 			// 그런고로 String 타입으로 받음
 			Gson gson = new Gson();
 			String result = gson.toJson(map);
-			
-			System.out.println(result);
-			System.out.println(model);
 			return result;
 		}
 		
