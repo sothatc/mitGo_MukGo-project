@@ -7,7 +7,7 @@
 		values
 		(store_seq.nextval,
 		#{storeName},
-		2,
+		#{ownerNo},
 		#{address},
 		#{phone},
 		#{content},
