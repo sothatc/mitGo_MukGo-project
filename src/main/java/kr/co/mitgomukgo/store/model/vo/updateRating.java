@@ -3,16 +3,13 @@ package kr.co.mitgomukgo.store.model.vo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-@NoArgsConstructor
+@ToString
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
-public class Review {
-	private int reviewNo;
+public class updateRating {
 	private int storeNo;
-	private String writer;
 	private double rating;
-	private String content;
-	private String reviewImg;
-	private String enrollDate;
 }

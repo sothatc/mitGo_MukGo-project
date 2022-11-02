@@ -7,7 +7,7 @@
 		values
 		(store_seq.nextval,
 		#{storeName},
-		2,
+		#{ownerNo},
 		#{address},
 		#{phone},
 		#{content},
@@ -128,5 +128,17 @@
 		#{menuImg}
 		)
 	</insert>
+	
+	<select id="getRatingAvg" resultType="double">
+		select avg(rating)
+		from review
+		where store_no = #{storeNo}
+	</select>
+	
+	<update id="updateRating">
+		update store
+		set rating = #{rating}
+		where store_no = #{storeNo}
+	</update>
 
 </mapper>
