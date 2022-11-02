@@ -39,9 +39,10 @@
 		insert into review
 		values
 		(review_seq.nextval,
-		#{menuNo},
-		#{write},
+		84,
+		'user01',
 		#{rating},
+		#{content},
 		#{reviewImg},
 		to_char(sysdate, 'yyyy-mm-dd')
 		)

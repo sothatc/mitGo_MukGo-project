@@ -43,7 +43,7 @@ public class StoreController {
 
 	// 맛집 상세 데이터 가져오기 (모달)
 	@ResponseBody
-	@RequestMapping(value="/ajaxSelectStore.do",produces="application/json;charset=utf-8")
+	@RequestMapping(value = "/ajaxSelectStore.do", produces = "application/json;charset=utf-8")
 	public String ajaxSelectStore(Store store) {
 		Store s = service.ajaxSelectStore(store);
 		Gson gson = new Gson();
@@ -95,11 +95,11 @@ public class StoreController {
 	@RequestMapping(value = "/storeList.do")
 	public String storeListFrm(int reqPage, Model model) {
 		HashMap<String, Object> map = service.storeList(reqPage);
-		
-		if(map == null) {
+
+		if (map == null) {
 			model.addAttribute("msg", "아직 등록된 업체 가 없습니다.");
 			return "store/storeListFrm";
-		}else {
+		} else {
 			model.addAttribute("list", map.get("list"));
 			model.addAttribute("reqPage", reqPage);
 			model.addAttribute("pageNavi", map.get("pageNavi"));
@@ -107,7 +107,7 @@ public class StoreController {
 			model.addAttribute("pageNo", map.get("pageNo"));
 			return "store/storeListFrm";
 		}
-		//ArrayList<Store> list = service.storeList();	
+		// ArrayList<Store> list = service.storeList();
 	}
 
 	@RequestMapping(value = "/writeReviewFrm.do")
@@ -116,29 +116,30 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/writeReview.do")
-	public String writeReview(Review r, MultipartFile file, HttpServletRequest request) {
-
-		if (!file.isEmpty()) {
+	public String writeReview(Review r, MultipartFile[] file, HttpServletRequest request) {
+		if (!file[0].isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/review/");
-			String imgName = file.getOriginalFilename();
-			String reviewImg = fileRename.fileRename(savePath, imgName);
-			try {
-				FileOutputStream fos = new FileOutputStream(new File(savePath + reviewImg));
-				BufferedOutputStream bos = new BufferedOutputStream(fos);
-				byte[] bytes = file.getBytes();
-				bos.write(bytes);
-				bos.close();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			for (MultipartFile file2 : file) {
+				String filename = file2.getOriginalFilename();
+				String imgpath = fileRename.fileRename(savePath, filename);
+				try {
+					FileOutputStream fos = new FileOutputStream(new File(savePath + imgpath));
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					byte[] bytes = file2.getBytes();
+					bos.write(bytes);
+					bos.close();
+					r.setReivewImg(imgpath);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
-			r.setReivewImg(reviewImg);
 		}
 		int result = service.writeReview(r);
-		return "store/writeReviewFrm";
+		return "redirect:/storeList.do?reqPage=1";
 	}
 
 	@RequestMapping(value = "/addMenuFrm.do")
@@ -170,34 +171,34 @@ public class StoreController {
 		int result = service.addMenu(me);
 		return "store/storeDetail";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/ajaxClicktag.do", produces = "application/json;charset=utf-8")
 	public String ajaxClicktag(int tagValue, int reqPage, Model model) {
-		HashMap<String, Object> map = service.storeList(tagValue,reqPage);
-		
-		if(map == null) {
+		HashMap<String, Object> map = service.storeList(tagValue, reqPage);
+
+		if (map == null) {
 			model.addAttribute("msg", "아직 등록된 업체 가 없습니다.");
 			return "store/storeListFrm";
-		}else {
+		} else {
 			model.addAttribute("list", map.get("list"));
 			model.addAttribute("reqPage", reqPage);
 			model.addAttribute("pageNavi", map.get("pageNavi"));
 			model.addAttribute("total", map.get("total"));
 			model.addAttribute("pageNo", map.get("pageNo"));
-			
+
 			// 착각하지말것 json은 객체타입이 아닌 문자열임
 			// 그런고로 String 타입으로 받음
 			Gson gson = new Gson();
 			String result = gson.toJson(map);
-			
+
 			System.out.println(result);
 			System.out.println("구분");
 			System.out.println(model);
-			
+
 			return "result";
 		}
-		
+
 	}
-	
+
 }
