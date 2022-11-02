@@ -105,6 +105,7 @@ public class StoreController {
 			model.addAttribute("pageNavi", map.get("pageNavi"));
 			model.addAttribute("total", map.get("total"));
 			model.addAttribute("pageNo", map.get("pageNo"));
+			System.out.println(model);
 			return "store/storeListFrm";
 		}
 		//ArrayList<Store> list = service.storeList();	
@@ -175,11 +176,12 @@ public class StoreController {
 	@RequestMapping(value = "/ajaxClicktag.do", produces = "application/json;charset=utf-8")
 	public String ajaxClicktag(int tagValue, int reqPage, Model model) {
 		HashMap<String, Object> map = service.storeList(tagValue,reqPage);
-		
+		System.out.println(map);
 		if(map == null) {
 			model.addAttribute("msg", "아직 등록된 업체 가 없습니다.");
 			return "store/storeListFrm";
 		}else {
+			
 			model.addAttribute("list", map.get("list"));
 			model.addAttribute("reqPage", reqPage);
 			model.addAttribute("pageNavi", map.get("pageNavi"));
@@ -192,10 +194,8 @@ public class StoreController {
 			String result = gson.toJson(map);
 			
 			System.out.println(result);
-			System.out.println("구분");
 			System.out.println(model);
-			
-			return "result";
+			return result;
 		}
 		
 	}

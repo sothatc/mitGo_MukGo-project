@@ -68,6 +68,10 @@
 					</a>
 					</div>
 				</c:forEach>
+				
+				<div id="showTagList">
+				
+				</div>
 			</div>
 		</div>
 		<div class="page">

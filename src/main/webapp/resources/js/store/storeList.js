@@ -21,14 +21,51 @@ tag.on("click",function(){
         data : {tagValue : tagValue},
         success : function(data){
             console.log(data);
-            if(data == "0"){
-               
-            }else{
-               
+            
+            const table = $("<table>");
+			const titleTr = $("<tr>");
+            titleTr.html("<th>번호</th><th>아이디</th><th>이름</th><th>전화번호</th>")
+            table.append(titleTr);
+            for(let i=0;i<data.list.length;i++){
+            	const tr =  $("<tr>");
+            	tr.append("<td>"+"</td>");
+            	tr.append("<td>"+data.list[i].storeNo+"</td>");
+            	tr.append("<td>"+data.list[i].storeName+"</td>");
+            	tr.append("<td>"+data.list[i].thumbNail+"</td>");
+            	table.append(tr);
             }
+            $("#showTagList").html(table)
         }
     });
 });
+/*
+tag.on("click",function(){
+    const tagValue = tag.index(this);
+    
+    $.ajax({
+        url : "/ajaxClicktag.do?reqPage=1",
+        data : {tagValue : tagValue},
+        success : function(data){
+            console.log(data);
+            
+            const table = $("<table>");
+			const titleTr = $("<tr>");
+            titleTr.html("<th>번호</th><th>아이디</th><th>이름</th><th>전화번호</th>")
+            table.append(titleTr);
+            for(let i=0;i<data.list.length;i++){
+            	//let list = data[i].list
+            	const tr =  $("<tr>");
+            	tr.append("<td>"+"</td>");
+            	tr.append("<td>"+data.list[i].storeNo+"</td>");
+            	tr.append("<td>"+data.list[i].storeName+"</td>");
+            	tr.append("<td>"+data.list[i].thumbNail+"</td>");
+            	table.append(tr);
+            }
+            $("#test").html(table)
+        }
+    });
+});
+*/
 /*
 var test = new Array();
 tag.on("click",function(){
