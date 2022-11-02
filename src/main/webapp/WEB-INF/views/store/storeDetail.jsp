@@ -594,13 +594,31 @@
 			const modal = document.querySelector(".modal-wrap");
 
 			function init(){
-				
 				//모달 여는 코드
+
 				open.addEventListener("click",function(){
 					modal.classList.remove("hidden");
 					
 					$(".dateTd").text($("#datePicker").val());
 					$(".peopleNumTd").text(count);
+					$.ajax({
+						url: "/ajaxSelectStore.do",
+						success: function(data){
+							const table=$("<table>");
+							const titleTr =$("<tr>");
+							titleTr.html("<th>번호</th><th>아이디</th><th>이름</th><th>전화번호</th>");
+							table.append(titleTr);
+							for(let i=0; i<data.length; i++){
+								const tr = $("<tr>");
+								tr.append("<td>"+data[i].memberNo+"</td>");
+								tr.append("<td>"+data[i].memberId+"</td>");
+								tr.append("<td>"+data[i].memberName+"</td>");
+								tr.append("<td>"+data[i].phone+"</td>");
+								table.append(tr);
+							}
+							$("#ajaxResult").html(table);
+						}
+					});
 					
 					//날짜를 선택하지 않았을 때
 					if($("#datePicker").val() == ""){
