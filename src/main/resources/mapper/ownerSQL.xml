@@ -10,4 +10,16 @@
 		from owner
 		where owner_id = #{ownerCheckId}
 	</select>
+	<select id="selectOneOwner" parameterType="o" resultType="o">
+		select 
+			owner_no as ownerNo,
+			owner_id as ownerId,
+			owner_pw as ownerPw,
+			owner_name as ownerName,
+			owner_phone as ownerPhone,
+			o_enroll_date as ownerEnrollDate,
+			owner_level as ownerLevel
+		from owner
+		where owner_id=#{ownerId} and owner_pw=#{ownerPw}
+	</select>
 </mapper>

@@ -9,6 +9,7 @@
 <style>
 .menuTitle {
 	text-align: center;
+	margin-top: 50px;
 }
 
 hr {
@@ -39,6 +40,7 @@ hr {
 
 .btnWrap {
 	text-align: center;
+	margin-bottom: 50px;
 }
 
 .btnWrap>button {
@@ -96,6 +98,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 </style>
 </head>
 <body>
+	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="menuTitle">
 		<h1>메뉴 추가</h1>
 	</div>
@@ -114,14 +117,16 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 			<span class="comment" style="font-size: 12px; padding-left: 10px;"></span>
 		</div>
 		<div>
-			<input type="hidden" name="storeNo" value="${s.storeNo }">
-			<input type="file" name="menuImg" class="file-upload" id="file" style="visibility: hidden; position: absolute;" accept="image/gif, image/jpg, image/jpeg, image/png">
+			<!-- <input type="hidden" name="storeNo" value="${s.storeNo }"> -->
+			<input type="file" name="file" class="file-upload" id="file" style="visibility: hidden; position: absolute;" accept="image/gif, image/jpg, image/jpeg, image/png">
 			<button class="inputPhoto" type="button" id="inputPhoto">사진 첨부하기</button>
 		</div>
 		<div class="btnWrap">
 			<button type="submit" value="등록">등록</button>
 		</div>
 	</form>
+	
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	<script>
 		(function($) {
 			'use strict';

@@ -27,13 +27,24 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<h1>믿고먹고</h1>
 	<c:choose>
-		<c:when test="${empty sessionScope.m }">
+		<c:when test="${empty sessionScope.m && empty sessionScope.o}">
 			<a href="/loginFrm.do">로그인</a>
 			<a href="/selectJoin.do">회원가입</a>
 		</c:when>
 		<c:otherwise>
-			<a href="/pwChk.do">마이페이지</a>
-			<a href="/logout.do">로그아웃</a>
+			<c:if test="${not empty sessionScope.o }">
+				<span>사업자</span>
+				<span>[ ${sessionScope.o.ownerId } ]</span>
+				<a href="/ownerPwChk.do">마이페이지</a>
+				<a href="/ownerLogout.do">로그아웃</a>
+			</c:if>
+			<c:if test="${not empty sessionScope.m }">
+				<span>일반회원</span>
+				<span>[ ${sessionScope.m.memberId } ]</span>
+				<a href="/pwChk.do">마이페이지</a>
+				<a href="/logout.do">로그아웃</a>
+			</c:if>
+
 		</c:otherwise>
 	</c:choose>
 	<h2><a href="/addStoreFrm.do">업체 등록(이정우)</a></h2>
@@ -43,8 +54,11 @@
 	<h2><a href="/storeList.do?reqPage=1">맛집 리스트 생성중(이규진)</a></h2>
 	<h2><span class="review">리뷰 작성하기(이정우)</span></h2>
 	<h2><a href="/selectNoticeList.do?reqPage=1">공지사항(안형관)</a></h2>
+	<h2><a href="cart.jsp">카트 생성중(김아람)</a></h2>
 	<h2><a href="/addMenuFrm.do">메뉴 추가(이정우)</a></h2>
 	<h2><a href="index2.jsp">인덱스</a></h2>
+	<h2><a href="marketMain.jsp">마켓메인</a></h2>
+	
 
 
 

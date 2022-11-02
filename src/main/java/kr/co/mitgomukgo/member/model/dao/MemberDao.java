@@ -36,5 +36,10 @@ public class MemberDao {
 		String ownerId = sqlSession.selectOne("owner.ownerCheckId", ownerCheckId);
 		return ownerId;
 	}
+
+	public Owner selectOneOwner(Owner owner) {
+		Owner o = sqlSession.selectOne("owner.selectOneOwner", owner);
+		return o;
+	}
 	
 }

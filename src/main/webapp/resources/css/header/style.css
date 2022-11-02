@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&display=swap');
 :root {
-    --brand: #ff4d29;
+    --brand: #ffc107;
     --dark: #092032;
     --body: #516171;
     --border: rgba(0,0,0,0.08);
@@ -104,14 +104,14 @@ section {
 }
 
 .slide1 {
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/webapp/resources/img/index/1000029442983_i1_1200.jpg);
+    background: linear-gradient(rgba(117, 79, 79, 0.4), rgba(0, 0, 0, 0.4)), url(/resources/img/index/메인맛집리스트슬라이드.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
 .slide2 {
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(../img/platter-2009590_1920.jpg);
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(/resources/img/index/메인고고마켓슬라이드.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -472,7 +472,7 @@ text-align: center;}
 }
 
 footer {
-    background: linear-gradient(0deg, rgba(8, 32, 50, 0.9), rgba(8, 32, 50, 0.9)), url(../img/platter-2009590_1920.jpg), #082032;;
+    background: linear-gradient(0deg, rgba(8, 32, 50, 0.9), rgba(8, 32, 50, 0.9)), url(/resources/img/index/footer배경.jpeg), #082032;;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -632,4 +632,9 @@ input.form-control {
 
   .refont{
     color: #082032;
+  }
+  
+   .nav-link:hover{
+    color: #000000;
+    font-weight: bolder;
   }

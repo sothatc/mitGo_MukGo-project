@@ -1,23 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
-<link rel="stylesheet" href="/resources/css/header/style.css">
-<link rel="stylesheet" href="/resources/css/header/bootstrap.min.css">
 <link rel="icon" type="image/x-icon" href="favicon.ico">
+<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+<link rel="stylesheet" href="/resources/css/header/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/css/header/style.css">
 <!-- TOP NAV -->
 <div class="top-nav" id="home">
 	<div class="container">
 		<div class="row justify-content-between">
 			<div class="col-auto">
 				<p>
-					<i class='bx bxs-envelope'></i> info@example.com
+					<i class='bx bxs-envelope'></i> mgmg@gmail.com
 				</p>
 				<p>
-					<i class='bx bxs-phone-call'></i> 123 456-7890
+					<i class='bx bxs-phone-call'></i> 02 123-7890
 				</p>
 			</div>
 			<div class="col-auto social-icons">
-				<a href="#"><i class='bx bxl-facebook'></i></a> <a href="#"><i class='bx bxl-twitter'></i></a> <a href="#"><i class='bx bxl-instagram'></i></a> <a href="#"><i class='bx bxl-pinterest'></i></a>
+				<a href="#"><i class='bx bxl-facebook'></i></a> <a href="#"><i class='bx bxl-twitter'></i></a> <a href="#"><i class='bx bxl-instagram'></i></a>
 			</div>
 		</div>
 	</div>
@@ -42,13 +42,13 @@
 					<a class="nav-link" href="#services">GOGO리스트</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="http://127.0.0.1:5501/marketmain.html#mealkit-list">GOGO마켓</a>
+					<a class="nav-link" href="/marketMain.do">GOGO마켓</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#realreview">생생리뷰</a>
 				</li>
 			</ul>
-			<a href="#" id="font" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-brand1 ms-lg-3">로그인 | 회원가입 </a>
+			<a href="/loginFrm.do" id="font" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-brand1 ms-lg-3">로그인 | 회원가입 </a>
 		</div>
 	</div>
 </nav>

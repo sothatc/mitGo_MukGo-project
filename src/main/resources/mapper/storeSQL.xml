@@ -7,7 +7,7 @@
 		values
 		(store_seq.nextval,
 		#{storeName},
-		2,
+		#{ownerNo},
 		#{address},
 		#{phone},
 		#{content},
@@ -39,9 +39,10 @@
 		insert into review
 		values
 		(review_seq.nextval,
-		#{menuNo},
-		#{write},
+		85,
+		'user01',
 		#{rating},
+		#{content},
 		#{reviewImg},
 		to_char(sysdate, 'yyyy-mm-dd')
 		)
@@ -63,14 +64,41 @@
 				rating,
 				review_count as reviewCount,
 				category,
-				whitheat_cate as
+				witheat_cate as
 				withEatCate,
 				whereeat_cate as whereEatCate,
 				(select imgpath from store_img si where storeimg_no = (select
 				min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
-				as imgpath
+				as thumbNail
 			from store s order by storeNo desc)b)rb order by 3 desc)
-		where rnum between #{start} and #{end}
+		where rnum between #{start} and #{end} 
+		
+	</select>
+	
+	<select id="storeTagList" parameterType="map" resultType="s">
+		select * from
+			(select row_number() over (order by rnum desc) as rnum1, rb.* from
+			(select rownum as rnum, b.* from
+			(select
+				store_no as storeNo,
+				store_name as storeName,
+				owner_no as ownerNo,
+				address,
+				phone,
+				content,
+				open_hour as openHour,
+				closed_day as closedDay,
+				rating,
+				review_count as reviewCount,
+				category,
+				witheat_cate as
+				withEatCate,
+				whereeat_cate as whereEatCate,
+				(select imgpath from store_img si where storeimg_no = (select
+				min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
+				as thumbNail
+			from store s order by storeNo desc)b)rb order by 3 desc)
+		where rnum between #{start} and #{end} and category = ${tagValue}
 	</select>
 	
 
@@ -80,9 +108,11 @@
 			open_hour as openHour,
 			address,
 			phone,
-			closed_day as closedDay
+			closed_day as closedDay,
+			category,
+			content
 		from store 
-		where store_no =84
+		where store_no =85
 	</select>
 
 	<select id="countAllList" resultType="_int">
@@ -98,5 +128,33 @@
 		#{menuImg}
 		)
 	</insert>
-
+	<!--  
+	<select id="selectMyStore" parameterType="o" resultType="s">
+		select
+			store_name as storeName,
+			open_hour as openHour,
+			address,
+			phone,
+			closed_day as closedDay,
+			category,
+			witheat_cate as withEatCate,
+			whereeat_cate as whereEatCate,
+			content
+		from store 
+		where owner_no = 2
+	</select>
+	-->
+	
+	<select id="getRatingAvg" resultType="double">
+		select avg(rating)
+		from review
+		where store_no = #{storeNo}
+	</select>
+	
+	<update id="updateRating">
+		update store
+		set rating = #{rating}
+		where store_no = #{storeNo}
+	</update>
+	
 </mapper>

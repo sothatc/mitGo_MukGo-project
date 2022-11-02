@@ -96,7 +96,7 @@ textarea {
   padding-right: 0.75rem;
   padding-left: 0.75rem;
   justify-content: center;
-  top: 250px;
+  top: 100px;
   width: 1280px;
   margin: 0 auto;
 }
@@ -209,7 +209,6 @@ textarea {
   width: auto;
   position: relative;
   z-index: 2;
-  height: 46px;
   line-height: 2;
 }
 
@@ -301,7 +300,7 @@ textarea {
 
 .submitBtn {
   text-align: center;
-  margin-top: 100px;
+  margin-top: 80px;
 }
 
 .submitBtn>button {
@@ -439,4 +438,8 @@ textarea {
 .form-group input {
   border: 0;
   border-bottom: 1px solid gainsboro;
+}
+
+.form-control[readonly] {
+	background-color: #fff;	
 }

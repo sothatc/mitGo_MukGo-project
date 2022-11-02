@@ -11,8 +11,8 @@ public class Review {
 	private int reviewNo;
 	private int storeNo;
 	private String writer;
-	private int rating;
+	private double rating;
 	private String content;
-	private String reivewImg;
+	private String reviewImg;
 	private String enrollDate;
 }

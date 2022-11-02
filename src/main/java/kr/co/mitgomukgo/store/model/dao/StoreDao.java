@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.mitgomukgo.member.model.vo.Owner;
 import kr.co.mitgomukgo.store.model.vo.Menu;
 import kr.co.mitgomukgo.store.model.vo.Review;
 import kr.co.mitgomukgo.store.model.vo.Store;
@@ -48,7 +49,7 @@ public class StoreDao {
 			return (ArrayList<Store>) list;	
 		}
 	}
-
+	
 	public int countAllList() {
 		return sqlSession.selectOne("store.countAllList");
 	}
@@ -57,13 +58,25 @@ public class StoreDao {
 		return sqlSession.insert("addMenu", me);
 	}
 
+
+	public ArrayList<Store> storeTagList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("store.storeTagList",map);
+		if(list.isEmpty()) {
+			return null;
+		}else {
+			return (ArrayList<Store>) list;	
+		}
+	}
+
 	//모달 상세
 	public Store selectOneStore(Store store) {
 		Store s = sqlSession.selectOne("store.selectOneStore",store);
 		return s;
 	}
-	
 
-	
+	public Store selectStore(Owner o) {
+		Store s = sqlSession.selectOne("store.selectMyStore",o);
+		return s;
+	}
 	
 }
