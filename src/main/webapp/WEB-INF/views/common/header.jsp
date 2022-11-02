@@ -42,14 +42,13 @@
 					<a class="nav-link" href="#services">GOGO리스트</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="http://127.0.0.1:5501/marketmain.html#mealkit-list">GOGO마켓</a>
+					<a class="nav-link" href="/marketMain.do">GOGO마켓</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="#realreview">생생리뷰</a>
 				</li>
 			</ul>
 			<a href="/loginFrm.do" id="font" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-brand1 ms-lg-3">로그인 | 회원가입 </a>
-
 		</div>
 	</div>
 </nav>
