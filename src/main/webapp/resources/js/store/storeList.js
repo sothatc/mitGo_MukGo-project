@@ -20,15 +20,43 @@ tag.on("click",function(){
         url : "/ajaxClicktag.do?reqPage=1",
         data : {tagValue : tagValue},
         success : function(data){
-            console.log(data);
-            if(data == "0"){
-               
-            }else{
-               
+
+            const storeListListContent = $(".storeList-list-content");
+            
+            for(let i=0;i<data.list.length;i++){
+                const div = $("<div>");
+                div.addClass("showList");
+            	const a =  $("<a>");
+                a.append("<div><img src='resources/upload/store/"+data.list[i].thumbNail+"'></img></div>");
+            	a.append("<div><div>가게이름 : "+data.list[i].storeName+"</div></div>");
+            	div.append(a);
             }
+            storeListListContent.html();
         }
     });
 });
+/*
+tag.on("click",function(){
+    const tagValue = tag.index(this);
+    const storeListListContent = $(".storeList-list-content");
+    $.ajax({
+        url : "/ajaxClicktag.do?reqPage=1",
+        data : {tagValue : tagValue},
+        success : function(data){
+            
+            for(let i=0;i<data.list.length;i++){
+                const showTagList = $("#showTagList");
+            	const a =  $("<a>");
+                a.append("<div><img src='resources/upload/store/"+data.list[i].thumbNail+"'></img></div>");
+            	a.append("<div><div>가게이름 : "+data.list[i].storeName+"</div></div>");
+            	showTagList.append(a);
+                storeListListContent.append(showTagList);
+            }
+            storeListListContent.html(showTagList)
+        }
+    });
+});
+*/
 /*
 var test = new Array();
 tag.on("click",function(){
