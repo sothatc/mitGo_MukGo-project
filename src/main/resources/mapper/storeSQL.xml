@@ -13,8 +13,6 @@
 		#{content},
 		#{openHour},
 		#{closedDay},
-		0,
-		0,
 		#{category},
 		#{withEatCate},
 		#{whereEatCate}
@@ -61,8 +59,6 @@
 				content,
 				open_hour as openHour,
 				closed_day as closedDay,
-				rating,
-				review_count as reviewCount,
 				category,
 				witheat_cate as
 				withEatCate,
@@ -88,8 +84,6 @@
 				content,
 				open_hour as openHour,
 				closed_day as closedDay,
-				rating,
-				review_count as reviewCount,
 				category,
 				witheat_cate as
 				withEatCate,
@@ -146,21 +140,7 @@
         left join store_img b
         on a.store_no = b.store_no
 		where owner_no = #{ownerNo}
-	</select>
-	
-	
-	<select id="getRatingAvg" resultType="double">
-		select avg(rating)
-		from review
-		where store_no = #{storeNo}
-	</select>
-	
-	<update id="updateRating">
-		update store
-		set rating = #{rating}
-		where store_no = #{storeNo}
-	</update>
-	
+	</select>	
 
 	<select id="searchStore" parameterType="int" resultType="s">
 		select * from store where owner_no = #{ownerNo}	
