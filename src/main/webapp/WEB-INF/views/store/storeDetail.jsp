@@ -594,7 +594,6 @@
          }
          init();
          
-         
       </script>
 
 </body>
