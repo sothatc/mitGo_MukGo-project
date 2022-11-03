@@ -61,8 +61,6 @@
 				content,
 				open_hour as openHour,
 				closed_day as closedDay,
-				rating,
-				review_count as reviewCount,
 				category,
 				witheat_cate as
 				withEatCate,
@@ -75,7 +73,7 @@
 		
 	</select>
 	
-	<select id="storeTagList" parameterType="map" resultType="s">
+	<select id="selectTag" parameterType="map" resultType="s">
 		select * from
 			(select row_number() over (order by rnum desc) as rnum1, rb.* from
 			(select rownum as rnum, b.* from
@@ -88,17 +86,14 @@
 				content,
 				open_hour as openHour,
 				closed_day as closedDay,
-				rating,
-				review_count as reviewCount,
 				category,
 				witheat_cate as
 				withEatCate,
 				whereeat_cate as whereEatCate,
 				(select imgpath from store_img si where storeimg_no = (select
 				min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
-				as thumbNail
-			from store s order by storeNo desc)b)rb order by 3 desc)
-		where rnum between #{start} and #{end} and category = ${tagValue}
+				as thumbNail from store s order by storeNo desc)b where category = #{category})rb order by 3 desc)
+		where rnum between #{start} and #{end}
 	</select>
 	
 
@@ -166,4 +161,7 @@
 		select * from store where owner_no = #{ownerNo}	
 	</select>
 
+	<select id="countTagList" parameterType="string" resultType="_int">
+		select count(*) from store where category = #{category}
+	</select>
 </mapper>

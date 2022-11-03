@@ -12,7 +12,7 @@ tag.on("click",function(){
     }
     $(tag).eq(index).css("color","#FF9F45");
 });
-
+/*
 tag.on("click",function(){
     const tagValue = tag.index(this);
     
@@ -36,7 +36,7 @@ tag.on("click",function(){
         }
     });
 });
-/*
+
 tag.on("click",function(){
     const tagValue = tag.index(this);
     const storeListListContent = $(".storeList-list-content");
