@@ -7,14 +7,12 @@
 		values
 		(store_seq.nextval,
 		#{storeName},
-		2,
+		#{ownerNo},
 		#{address},
 		#{phone},
 		#{content},
 		#{openHour},
 		#{closedDay},
-		0,
-		0,
 		#{category},
 		#{withEatCate},
 		#{whereEatCate}
@@ -22,7 +20,8 @@
 	</insert>
 
 	<select id="selectStoreNo" resultType="_int">
-		select max(store_no) as storeNo
+		select max(store_no) as
+		storeNo
 		from store
 	</select>
 
@@ -39,9 +38,10 @@
 		insert into review
 		values
 		(review_seq.nextval,
-		#{menuNo},
-		#{write},
+		85,
+		'user01',
 		#{rating},
+		#{content},
 		#{reviewImg},
 		to_char(sysdate, 'yyyy-mm-dd')
 		)
@@ -69,9 +69,9 @@
 				as thumbNail
 			from store s order by storeNo desc)b)rb order by 3 desc)
 		where rnum between #{start} and #{end} 
-		
 	</select>
 	
+
 		<select id="storeTagList" parameterType="map" resultType="s">
 		      select
 		      * from
@@ -97,6 +97,31 @@
 		      where rnum between
 		      #{start} and #{end} and category = ${tagValue}
 		   </select>
+
+	<select id="selectTag" parameterType="map" resultType="s">
+		select * from
+			(select row_number() over (order by rnum desc) as rnum1, rb.* from
+			(select rownum as rnum, b.* from
+			(select
+				store_no as storeNo,
+				store_name as storeName,
+				owner_no as ownerNo,
+				address,
+				phone,
+				content,
+				open_hour as openHour,
+				closed_day as closedDay,
+				category,
+				witheat_cate as
+				withEatCate,
+				whereeat_cate as whereEatCate,
+				(select imgpath from store_img si where storeimg_no = (select
+				min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
+				as thumbNail from store s order by storeNo desc)b where category = #{category})rb order by 3 desc)
+		where rnum between #{start} and #{end}
+	</select>
+
+
 
 	<select id="selectOneStoreAjax" parameterType="_int" resultType="sj">
 		select
@@ -135,7 +160,7 @@
 	<select id="countAllList" resultType="_int">
 		select count(*) from store
 	</select>
-	
+
 	<insert id="addMenu" parameterType="me">
 		insert into menu
 		(menu_seq.nextval,
@@ -145,5 +170,32 @@
 		#{menuImg}
 		)
 	</insert>
+	
+	<select id="selectMyStore" parameterType="o" resultType="s">
+		select
 
+		store_name as storeName,
+		open_hour as openHour,
+		address,
+		phone,
+		closed_day as closedDay,
+		category,
+		witheat_cate as withEatCate,
+		whereeat_cate as whereEatCate,
+		content,
+		imgpath as storeImgList
+		from store a
+		left join store_img b
+		on a.store_no = b.store_no
+		where owner_no = #{ownerNo}
+	</select>
+
+	<select id="searchStore" parameterType="int" resultType="s">
+		select *
+		from store where owner_no = #{ownerNo}
+	</select>
+
+	<select id="countTagList" parameterType="string" resultType="_int">
+		select count(*) from store where category = #{category}
+	</select>
 </mapper>

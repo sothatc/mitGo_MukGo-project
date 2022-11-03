@@ -6,8 +6,7 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
-
+import kr.co.mitgomukgo.member.model.vo.Owner;
 import kr.co.mitgomukgo.store.model.dao.StoreDao;
 import kr.co.mitgomukgo.store.model.vo.Menu;
 import kr.co.mitgomukgo.store.model.vo.Review;
@@ -51,7 +50,7 @@ public class StoreService {
 		map.put("end",end);
 		
 		ArrayList<Store> list = dao.storeList(map);
-		
+		System.out.println(list);
 		int totalPage = dao.countAllList();
 		int pageNaviSize = 2;
 		int pageNo = 1;
@@ -106,6 +105,11 @@ public class StoreService {
 	}
 
 
+	public ArrayList<Store> selectStore(Owner o) {
+		ArrayList<Store> s = dao.selectStore(o);
+		return (ArrayList<Store>) s;
+	}
+	/*
 	public HashMap<String, Object> storeList(int tagValue, int reqPage) {
 		int numPerPage = 9;
 		
@@ -162,6 +166,64 @@ public class StoreService {
 		}else {
 			return storeListMap;
 		}
+	}
+	*/
+	public HashMap<String, Object> selectTag(String category, int reqPage) {
+		// 화면에 보여주는 게시물 수
+		int numPerPage = 9;
+		
+		// 끝페이지
+		int end = numPerPage * reqPage;
+		
+		// 시작페이지
+		int start = (end-numPerPage) + 1;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("category", category);
+		ArrayList<Store> list = dao.selectTag(map);
+		System.out.println(list);
+		int totalPage = dao.countTagList(category);
+		int pageNaviSize = 2;
+		int pageNo = 1;
+		
+		if(reqPage > 2) {
+			pageNo = reqPage - 1;
+		}
+		
+		String pageNavi = "";
+		if(pageNo != 1) {
+			pageNavi += "<a href='/selectTag.do?category="+category+"&reqPage=" +(pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_left\r\n" + 
+					"            </span></a>";
+		}
+		
+		for(int i = 0; i < pageNaviSize; i++) {
+			if(reqPage == pageNo) {
+				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
+			}else {
+				pageNavi += "<a href='/selectTag.do?category="+category+"&reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		
+		if(end <= totalPage) {
+			pageNavi += "<a href='/selectTag.do?category="+category+"&reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_right\r\n" + 
+					"            </span></a>";
+		}
+		HashMap<String, Object> tagMap = new HashMap<String, Object>();
+		tagMap.put("list", list);
+		tagMap.put("reqPage", reqPage);
+		tagMap.put("pageNavi", pageNavi);
+		tagMap.put("total", totalPage);
+		tagMap.put("pageNo", pageNo);
+		
+		return tagMap;
 	}
 	
 	//맛집 상세

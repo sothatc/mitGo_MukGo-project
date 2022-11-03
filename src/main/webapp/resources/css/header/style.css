@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Gowun+Dodum&display=swap');
 :root {
-    --brand: #ff4d29;
+    --brand: #ffc107;
     --dark: #092032;
     --body: #516171;
     --border: rgba(0,0,0,0.08);
@@ -632,4 +632,9 @@ input.form-control {
 
   .refont{
     color: #082032;
+  }
+  
+   .nav-link:hover{
+    color: #000000;
+    font-weight: bolder;
   }

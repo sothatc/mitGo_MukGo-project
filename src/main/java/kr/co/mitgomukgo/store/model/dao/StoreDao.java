@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.mitgomukgo.member.model.vo.Owner;
 import kr.co.mitgomukgo.store.model.vo.Menu;
 import kr.co.mitgomukgo.store.model.vo.Review;
 import kr.co.mitgomukgo.store.model.vo.Store;
@@ -59,25 +60,31 @@ public class StoreDao {
 	}
 
 
-	public ArrayList<Store> storeTagList(HashMap<String, Object> map) {
-		List list = sqlSession.selectList("store.storeTagList",map);
-		if(list.isEmpty()) {
-			return null;
-		}else {
-			return (ArrayList<Store>) list;	
-		}
-	}
-
-	//맛집 상세
-	public Store selectOneStore(int storeNo) {
-		Store s = sqlSession.selectOne("store.selectOneStore",storeNo);
+	//모달 상세
+	public Store selectOneStore(Store store) {
+		Store s = sqlSession.selectOne("store.selectOneStore",store);
 		return s;
 	}
+
 
 	//맛집 상세 - 조인
 	public ArrayList<Store> selectOneStoreAjax(int StoreNo) {
 		List list = sqlSession.selectList("store.selectOneStoreAjax",StoreNo);
 		return (ArrayList<Store>)list;
+	}
+	
+	public ArrayList<Store> selectStore(Owner o) {
+		List s = sqlSession.selectList("store.selectMyStore",o);
+		return (ArrayList<Store>) s;
+	}
+
+	public ArrayList<Store> selectTag(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("store.selectTag",map);
+		return (ArrayList<Store>)list;
+	}
+	
+	public int countTagList(String category) {
+		return sqlSession.selectOne("store.countTagList",category);
 	}
 	
 

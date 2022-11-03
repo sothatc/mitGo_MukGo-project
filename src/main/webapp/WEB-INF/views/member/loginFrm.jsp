@@ -11,10 +11,10 @@
 <link rel="stylesheet" href="/resources/css/loginFrm.css">
 </head>
 <body>
-	<div class="header">ㅡㅡ</div>
+	<jsp:include page="/WEB-INF/views/common/header.jsp" />
     <div class="login-wrap">
         <div class="login-input">
-            <div>로그인</div>
+            <div>Login</div>
             <div>가입하신 아이디로 로그인 하세요.</div>
             
             <input type="radio" name="selLogin" id="normal" value="1">
@@ -25,7 +25,7 @@
   
             <form action="/login.do" method="post" id="normalLoginFrm">
                 <div class="login">
-                    <ul>
+                    <ul id="login-ul">
                         <li>         
                             <div class="input01">
                                 <div>
@@ -46,7 +46,7 @@
             </form>
             <form action="/ownerLogin.do" method="post" id="ownerLoginFrm">
                 <div class="login">
-                    <ul>
+                    <ul id="login-ul">
                         <li>         
                             <div class="input01">
                                 <div>
@@ -72,6 +72,9 @@
         </div>
     </div> 
 
+
+
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
     <script>
         const input = $(".label").next();
         input.on("focus",function(){
@@ -84,12 +87,15 @@
 			    label.css("display","");
 		    }
 		});
+		
         $(".login-btn").on("mouseover",function(){
 			$(this).css("background-color","rgb(97, 76, 76)");
 			$(this).css("border","1px solid black");
+			$(".login-btn").css("color","#ffc107");
 		});
 		$(".login-btn").on("mouseleave",function(){
 			$(this).css("background-color","");
+			$(".login-btn").css("color","");
 		});
 		
 		/*일반, 사업자 로그인 구분*/
@@ -106,7 +112,6 @@
 				$("#ownerLoginFrm").css("display","block");
 			}
 		});
-		
 		
     </script>
 </body>

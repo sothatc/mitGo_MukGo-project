@@ -12,32 +12,6 @@ tag.on("click",function(){
     }
     $(tag).eq(index).css("color","#FF9F45");
 });
-
-tag.on("click",function(){
-    const tagValue = tag.index(this);
-    
-    $.ajax({
-        url : "/ajaxClicktag.do?reqPage=1",
-        data : {tagValue : tagValue},
-        success : function(data){
-            console.log(data);
-            
-            const table = $("<table>");
-			const titleTr = $("<tr>");
-            titleTr.html("<th>번호</th><th>아이디</th><th>이름</th><th>전화번호</th>")
-            table.append(titleTr);
-            for(let i=0;i<data.list.length;i++){
-            	const tr =  $("<tr>");
-            	tr.append("<td>"+"</td>");
-            	tr.append("<td>"+data.list[i].storeNo+"</td>");
-            	tr.append("<td>"+data.list[i].storeName+"</td>");
-            	tr.append("<td>"+data.list[i].thumbNail+"</td>");
-            	table.append(tr);
-            }
-            $("#showTagList").html(table)
-        }
-    });
-});
 /*
 tag.on("click",function(){
     const tagValue = tag.index(this);
@@ -46,22 +20,40 @@ tag.on("click",function(){
         url : "/ajaxClicktag.do?reqPage=1",
         data : {tagValue : tagValue},
         success : function(data){
-            console.log(data);
-            
-            const table = $("<table>");
-			const titleTr = $("<tr>");
-            titleTr.html("<th>번호</th><th>아이디</th><th>이름</th><th>전화번호</th>")
-            table.append(titleTr);
+            const storeList = $(".storeList-list");
+            const storeListListContent = $("<div>");
+            storeListListContent.addClass("storeList-list-content");
             for(let i=0;i<data.list.length;i++){
-            	//let list = data[i].list
-            	const tr =  $("<tr>");
-            	tr.append("<td>"+"</td>");
-            	tr.append("<td>"+data.list[i].storeNo+"</td>");
-            	tr.append("<td>"+data.list[i].storeName+"</td>");
-            	tr.append("<td>"+data.list[i].thumbNail+"</td>");
-            	table.append(tr);
+                const div = $("<div>");
+                div.addClass("showList");
+            	const a =  $("<a>");
+                a.append("<div><img src='resources/upload/store/"+data.list[i].thumbNail+"'></img></div>");
+            	a.append("<div><div>가게이름 : "+data.list[i].storeName+"</div></div>");
+            	div.append(a);
+                storeListListContent.append(div)
             }
-            $("#test").html(table)
+            storeList.html(storeListListContent);
+        }
+    });
+});
+
+tag.on("click",function(){
+    const tagValue = tag.index(this);
+    const storeListListContent = $(".storeList-list-content");
+    $.ajax({
+        url : "/ajaxClicktag.do?reqPage=1",
+        data : {tagValue : tagValue},
+        success : function(data){
+            
+            for(let i=0;i<data.list.length;i++){
+                const showTagList = $("#showTagList");
+            	const a =  $("<a>");
+                a.append("<div><img src='resources/upload/store/"+data.list[i].thumbNail+"'></img></div>");
+            	a.append("<div><div>가게이름 : "+data.list[i].storeName+"</div></div>");
+            	showTagList.append(a);
+                storeListListContent.append(showTagList);
+            }
+            storeListListContent.html(showTagList)
         }
     });
 });
