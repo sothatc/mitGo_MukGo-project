@@ -74,9 +74,9 @@ public class StoreDao {
 		return s;
 	}
 
-	public Store selectStore(Owner o) {
-		Store s = sqlSession.selectOne("store.selectMyStore",o);
-		return s;
+	public ArrayList<Store> selectStore(Owner o) {
+		List s = sqlSession.selectList("store.selectMyStore",o);
+		return (ArrayList<Store>) s;
 	}
 	
 }

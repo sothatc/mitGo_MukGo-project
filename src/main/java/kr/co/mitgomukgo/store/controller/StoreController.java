@@ -177,10 +177,13 @@ public class StoreController {
 	@RequestMapping(value="/updateStoreFrm.do")
 	public String updateStoreFrm(HttpSession session, Model model) {
 		Owner o = (Owner)session.getAttribute("o");
-		Store s = service.selectStore(o);
-		model.addAttribute("s", s);
+		ArrayList<Store> s = service.selectStore(o);
+		model.addAttribute("s",(ArrayList<Store>)s);
 		return "/store/updateStoreFrm";
 	}
+	
+	
+	
 	@ResponseBody
 	@RequestMapping(value = "/ajaxClicktag.do", produces = "application/json;charset=utf-8")
 	public String ajaxClicktag(int tagValue, int reqPage, Model model) {

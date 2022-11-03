@@ -22,8 +22,7 @@ public class Store {
 	private String category;
 	private String whereEatCate;
 	private String withEatCate;
-	private int rating;
-	private int reviewCount;
+	private double rating;
 	private String thumbNail;
 	private ArrayList<StoreImg> storeImgList;
 }
