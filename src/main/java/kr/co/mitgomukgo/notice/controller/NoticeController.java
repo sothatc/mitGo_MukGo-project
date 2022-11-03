@@ -105,34 +105,43 @@ public class NoticeController {
 	
 	@ResponseBody
 	@RequestMapping(value="/noticeEditorUpload.do", produces = "application/json;charset=utf-8")
-	public String noticeEditorUpload(@RequestParam("file") MultipartFile multiFile, HttpServletRequest request) {
+	public String noticeEditorUpload(MultipartFile[] files, HttpServletRequest request) {
+		NoticeFile nf = null;
 		
-		// 파일경로 설정
-		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/notice/editor/");
-		
-		// 파일이름
-		String filename = multiFile.getOriginalFilename();
-		String extention = filename.substring(filename.lastIndexOf("."));
-		
-		try {
-			FileOutputStream fos = new FileOutputStream(savePath + filename + extention);
-			BufferedOutputStream bos = new BufferedOutputStream(fos);
-			byte[] bytes = multiFile.getBytes();
+		// 파일이 비어있지 않다면
+		if(!files[0].isEmpty()) {
+			// 파일 경로 설정
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/notice/editor/");
+			// 파일 중복처리
+			for(MultipartFile fileList : files) {
+				String filename = fileList.getOriginalFilename();
+				String filepath = fileRename.fileRename(savePath, filename);
+				
+				try {
+					FileOutputStream fos = new FileOutputStream(savePath + filepath);
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					byte[] bytes = fileList.getBytes();
+					
+					bos.write(bytes);
+					bos.close();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				nf = new NoticeFile();
+				nf.setFilename(filename);
+				nf.setFilepath(filepath);
+			}
 			
-			bos.write(bytes);
-			bos.close();
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 		Gson gson = new Gson();
-		String result = gson.toJson(savePath + filename + extention);
+		String result = gson.toJson("/resources/upload/notice/editor/" + nf.getFilepath());
 		return result;
-		
 	}
 }
 

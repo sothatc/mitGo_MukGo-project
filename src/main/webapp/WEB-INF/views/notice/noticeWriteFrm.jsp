@@ -67,7 +67,7 @@
         </div>
 
         <div class="notice-write-frm">
-            <form action="/insertNoticeWrite.do" method="post" enctype="multipart/form-data">
+            <form action="/insertNoticeWrite.do" id="noticeFrm" method="post" enctype="multipart/form-data">
                 <table class="notice-tbl">
                     <tr style="height: 70px; border-bottom: 1px solid rgba(224, 224, 224, 0.7);">
                         <th>*제목</th>
@@ -194,7 +194,7 @@
     	$("[name=noticeContent]").summernote({
     		height : 400,
     		lang : "ko-KR",
-    		callback : {
+    		callbacks : {
     			onImageUpload : function(files){
     				uploadImage(files[0], this);
     			}
@@ -204,7 +204,7 @@
     	function uploadImage(files, editor){
     		// <form>태그와 똑같은 기능을 하는 변수
     		const form = new FormData();
-    		form.append("file", files);
+    		form.append("files", files);
     		
     		$.ajax({
     			url : "/noticeEditorUpload.do",
@@ -214,6 +214,7 @@
     			contentType : false,
     			success : function(data){
     				$(editor).summernote("insertImage", data);
+    				
     				console.log(data);
     			}
     		});
@@ -224,7 +225,7 @@
         }
 
         function noticeWrite(){
-            if($("#noticeTitle").val() == ""){
+            if($("[name=noticeTitle]").val() == ""){
                 alert("제목을 입력하세요.")
             }else if($("#floatingTextarea2").val() == ""){
                 alert("내용을 입력하세요.");
