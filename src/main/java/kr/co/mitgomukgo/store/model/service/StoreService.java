@@ -108,9 +108,9 @@ public class StoreService {
 	}
 
 
-	public Store selectStore(Owner o) {
-		Store s = dao.selectStore(o);
-		return s;
+	public ArrayList<Store> selectStore(Owner o) {
+		ArrayList<Store> s = dao.selectStore(o);
+		return (ArrayList<Store>) s;
 	}
 
 	public HashMap<String, Object> storeList(int tagValue, int reqPage) {

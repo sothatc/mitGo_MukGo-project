@@ -5,8 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>맛집상세 페이지</title>
-<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="/resources/css/store/storeDetail.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,200" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
@@ -18,7 +16,8 @@
 <script>
 	Kakao.init('c089c8172def97eb00c07217cae17495');
 </script>
-
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </head>
 <body>
 	<!--------------------헤더------------------------->
@@ -597,9 +596,7 @@
 				// 모달 닫기 버튼 클릭 시
 				close.addEventListener("click",function(){
 					modal.classList.add("hidden");
-					$(".storeNameTd").empty();
-					$(".peopleNumTd").empty();
-					$(".dateTd").empty();
+			
 
 				});
 			}

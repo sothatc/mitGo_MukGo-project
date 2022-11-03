@@ -3,14 +3,7 @@
     padding: 0;
     margin: 0;
 }
-.header{
-    width: 100vw;
-    height: 200px;
-    background-color: black;
-    text-align: center;
-    font-size: 60px;
-    color: white;
-}
+
 body{
     width: 100vw;
 }
@@ -34,6 +27,7 @@ body{
     width: 200px;
     margin-top: 30px;
     margin-bottom: 20px;
+    border-radius: 5px;
 }
 .pwChkBtn{
     background-color: rgb(51,51,51);
@@ -42,4 +36,5 @@ body{
     width: 70px;
     height: 35px;
     border-radius: 10px;
+    transition: 0.5s;
 }

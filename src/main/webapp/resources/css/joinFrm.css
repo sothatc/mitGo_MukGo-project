@@ -3,15 +3,9 @@
 *{
     padding: 0;
     margin: 0;
+    font-family: 'Gowun Dodum', sans-serif;
 }
-.header{
-    width: 100vw;
-    height: 200px;
-    background-color: black;
-    text-align: center;
-    font-size: 60px;
-    color: white;
-}
+
 input {
 	outline: none;
 }
@@ -27,7 +21,7 @@ input {
 .contents{
     width: 850px;
     padding-top: 50px;
-    margin: 0 auto;
+    margin: 0 auto 40px;
 }
 .form-write>ul{
     padding-top: 30px;
@@ -78,11 +72,12 @@ input {
 	position: absolute;
 	right: 0;
 	top: 0;
-	height: 40px;
+	height: 38px;
 	width: 103px;
 	background-color: rgb(51,51,51);
     color: #fff;
     border: none;
+    transition: 0.5s;
 }
 
 .box01{
@@ -91,7 +86,7 @@ input {
 }
 .selBox01>select{
     width: 200px;
-    height: 38px;
+    height: 36px;
     border: 1px solid #d7d7d7;
 }
 .box02{
@@ -113,23 +108,25 @@ input {
     color: #999;
 }
 .phoneChkSendBtn{
-    height: 38px;
-    width: 103px;
+    height: 36px;
+    width: 98px;
     margin-left: 10px;
     background-color: rgb(51,51,51);
     color: #fff;
     border: none;
+    font-size: 14px;
+    transition: 0.5s;
 }
 .box03{
     float: left;
-    width: 198px;
+    width: 200px;
     height: 38px;
     border: 1px solid #d7d7d7;
     margin-top: 10px;
 }
 .box03>input{
     width: 97%;
-    height: 34px;
+    height: 32px;
     border: none;
 }
 .box03>label{
@@ -137,13 +134,14 @@ input {
     color: #999;
 }
 .phoneChkBtn{
-    margin-left: 10px;
+    margin-left: 11px;
     margin-top: 10px;
     width: 70px;
-    height: 40px;
+    height: 38px;
     background-color: rgb(51,51,51);
     color: #fff;
     border: none;
+    transition: 0.5s;
 }
 
 .agreeChkBox-wrap{
@@ -189,6 +187,7 @@ hr{
     background-color: rgb(51,51,51);
     color: #fff;
     border: none;
+    transition: 0.5s;
 }
 
 /*selectJoin*/
