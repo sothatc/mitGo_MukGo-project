@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.mitgomukgo.member.model.vo.Member;
 import kr.co.mitgomukgo.member.model.vo.Owner;
-import kr.co.mitgomukgo.store.model.vo.Store;
 
 @Repository
 public class MemberDao {
@@ -41,11 +40,6 @@ public class MemberDao {
 	public Owner selectOneOwner(Owner owner) {
 		Owner o = sqlSession.selectOne("owner.selectOneOwner", owner);
 		return o;
-	}
-
-	public Store searchStore(int ownerNo) {
-		Store s = sqlSession.selectOne("store.searchStore", ownerNo);
-		return s;
 	}
 	
 }

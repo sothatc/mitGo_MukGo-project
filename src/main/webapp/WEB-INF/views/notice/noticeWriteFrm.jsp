@@ -12,28 +12,6 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-<style type="text/css">
-	.fileList>div{
-		width: 500px;
-		margin: 0 auto;
-		text-align: left;
-		position: relative;
-	}
-	
-	.deleteBtn{
-		position: absolute;
-		right: 20px;
-	}
-	
-	.note-modal-content{
-		height: 370px
-	}
-	
-	.note-modal-footer{
-		margin-top: 50px;
-		margin-right: 15px;
-	}
-</style>
 </head>
 <body>
 	<script src="/resources/summernote/summernote-lite.js"></script>
@@ -96,7 +74,7 @@
                     </tr>  -->
                     
                     <tr style="height: 70px; border-bottom: 1px solid rgba(224, 224, 224, 0.7);">
-                        <th>첨부파일(최대 5개)</th>
+                        <th>첨부파일</th>
                         <td style="width: 700px;">
                             <label for="file">
                                 <div class="btn-upload">파일 업로드하기</div>
@@ -116,7 +94,7 @@
                     
                     <tr style="height: 400px;">
                         <th style="vertical-align: top; padding-top: 30px;">*내용</th>
-                        <td style="text-align: left;">
+                        <td>
                             <div class="form-floating" style="padding-top: 30px; padding-bottom: 30px">
                                 <textarea class="form-control" name="noticeContent" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 340px"></textarea>
                                 
@@ -134,62 +112,28 @@
     </div>
 
     <script>
-    	
-    
     	const fileZone = $(".fileList");
-    	const span = $("<span>");
-    	
-    	const filesGo = new Array();
-    	
-    	$("#file").on("change", function(){
+    	const files = new Array();
+    
+    	$(".btn-upload").on("click", function(){
+    		const fileVal = $("#file").val();
     		
-    		const fileList = $("#file")[0].files;
-    		console.log(fileList);
-    		
-    		if(fileList.length > 5){
-				alert("파일은 최대 5개까지만 가능합니다.");
-			}else{
-				
-				for(let i = 0; i < fileList.length; i++){
-	    			filesGo.push(fileList[i]);
-	    			$(".fileListTr").slideDown();
-	    			const fileDiv = $("<div>");
-	    			if(filesGo.length > 5){
-	    				alert("파일은 최대 5개까지만 가능합니다.");
-	    				filesGo.pop();
-	    				break;
-	    			}
-	    			fileDiv.append("<span class=''>" + fileList[i].name + "</span><span class='deleteBtn'>x</span><br>");
-	    			fileZone.append(fileDiv);
-	    		}
-				
-	    		$(".deleteBtn").attr("onclick", "deleteFile(this)");
-	    		console.log(filesGo.length);
-			}
-    		
-    		
-    	});
-    	
-    	function deleteFile(obj){
-    		const delFile = $(obj).prev().text();
-    		
-    		for(let i = 0; i < filesGo.length; i++){
-    			if(filesGo[i].name == delFile){
-    				filesGo.splice(i, 1);
-    				break;
+    		if(fileVal){
+    			$(".fileListTr").slideDown();
+    			for(let i = 0; i < files.length; i++){
+    				files.push(files[i]);
+    				console.log(files[i]);
+    				
+    				const fileDiv = $(".fileList");
+    				const fileSpan = $("<span>");
+    				
+    				fileSpan.text(files[i].name);
+    				fileDiv.append(fileSpan);
     			}
-    		}
-    		
-    		if(filesGo.length == 0){
+    		}else{
     			$(".fileListTr").slideUp();
-    			
     		}
-    		
-    		$(obj).parent().remove();
-    		
-    		console.log(filesGo.length);
-    		
-    	}
+    	})
     	
     	$("[name=noticeContent]").summernote({
     		height : 400,
@@ -199,25 +143,7 @@
     				uploadImage(files[0], this);
     			}
     		}
-    	});
-    	
-    	function uploadImage(files, editor){
-    		// <form>태그와 똑같은 기능을 하는 변수
-    		const form = new FormData();
-    		form.append("file", files);
-    		
-    		$.ajax({
-    			url : "/noticeEditorUpload.do",
-    			type : "post",
-    			data : form,
-    			processData : false,
-    			contentType : false,
-    			success : function(data){
-    				$(editor).summernote("insertImage", data);
-    				console.log(data);
-    			}
-    		});
-    	}
+    	})
     
         function goNoticeList(){
             location.href="/selectNoticeList.do?reqPage=1";
