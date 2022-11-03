@@ -55,12 +55,10 @@
 				</c:when>
 				<c:otherwise>
 					<c:if test="${not empty sessionScope.o }">
-						<div>[사업자]</div>
-						<a href="/ownerPwChk.do" id="font" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-brand1 ms-lg-3">${sessionScope.o.ownerId }</a>
+						<a href="/ownerPwChk.do" id="font" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-brand1 ms-lg-3">[사업자] ${sessionScope.o.ownerId }</a>
 					</c:if>
 					<c:if test="${not empty sessionScope.m }">
-						<div>[일반회원]</div>
-						<a href="/pwChk.do" id="font" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-brand1 ms-lg-3">[ ${sessionScope.m.memberId } ]</a>
+						<a href="/pwChk.do" id="font" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-brand1 ms-lg-3">[일반회원] ${sessionScope.m.memberId }</a>
 					</c:if>
 				</c:otherwise>
 			</c:choose>
