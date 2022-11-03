@@ -180,7 +180,6 @@ public class StoreController {
 		return "/store/updateStoreFrm";
 	}
 	/*
->>>>>>> refs/heads/master
 	@ResponseBody
 	@RequestMapping(value = "/ajaxClicktag.do", produces = "application/json;charset=utf-8")
 	public String ajaxClicktag(int tagValue, int reqPage, Model model) {
