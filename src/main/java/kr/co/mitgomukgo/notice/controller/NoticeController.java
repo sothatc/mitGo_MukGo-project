@@ -14,7 +14,10 @@ import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.Gson;
 
 import common.FileRename;
 import kr.co.mitgomukgo.notice.model.service.NoticeService;
@@ -91,6 +94,48 @@ public class NoticeController {
 		
 		return "redirect:/selectNoticeList.do?reqPage=1";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/noticeEditorUpload.do", produces = "application/json;charset=utf-8")
+	public String noticeEditorUpload(MultipartFile[] files, HttpServletRequest request) {
+		NoticeFile nf = null;
+		
+		// 파일이 비어있지 않다면
+		if(!files[0].isEmpty()) {
+			// 파일 경로 설정
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/notice/editor/");
+			// 파일 중복처리
+			for(MultipartFile fileList : files) {
+				String filename = fileList.getOriginalFilename();
+				String filepath = fileRename.fileRename(savePath, filename);
+				
+				try {
+					FileOutputStream fos = new FileOutputStream(savePath + filepath);
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					byte[] bytes = fileList.getBytes();
+					
+					bos.write(bytes);
+					bos.close();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				nf = new NoticeFile();
+				nf.setFilename(filename);
+				nf.setFilepath(filepath);
+			}
+			
+		}
+		
+		Gson gson = new Gson();
+		String result = gson.toJson("/resources/upload/notice/editor/" + nf.getFilepath());
+		return result;
+	}
+
 }
 
 
