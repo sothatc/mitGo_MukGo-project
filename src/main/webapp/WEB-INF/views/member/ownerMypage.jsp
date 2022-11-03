@@ -26,6 +26,7 @@
 								<div><a href="#">메뉴 추가</a></div>
 							</c:otherwise>
 						</c:choose>
+						<div><a href="/ownerLogout.do">로그아웃</a></div>
 						<div><a href="#">회원 탈퇴</a></div>
 					</li>
 				</ul>
@@ -42,8 +43,8 @@
 			${sessionScope.o.ownerId }
 		</article>
 	</div>
-	<!--  
+	 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
-	-->
+	
 </body>
 </html>

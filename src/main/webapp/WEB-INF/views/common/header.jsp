@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
@@ -48,7 +49,21 @@
 					<a class="nav-link" href="#realreview">생생리뷰</a>
 				</li>
 			</ul>
-			<a href="/loginFrm.do" id="font" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-brand1 ms-lg-3">로그인 | 회원가입 </a>
+			<c:choose>
+				<c:when test="${empty sessionScope.m && empty sessionScope.o }">
+					<a href="/loginFrm.do" id="font" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-brand1 ms-lg-3">로그인 | 회원가입 </a>
+				</c:when>
+				<c:otherwise>
+					<c:if test="${not empty sessionScope.o }">
+						<div>[사업자]</div>
+						<a href="/ownerPwChk.do" id="font" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-brand1 ms-lg-3">${sessionScope.o.ownerId }</a>
+					</c:if>
+					<c:if test="${not empty sessionScope.m }">
+						<div>[일반회원]</div>
+						<a href="/pwChk.do" id="font" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-brand1 ms-lg-3">[ ${sessionScope.m.memberId } ]</a>
+					</c:if>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 </nav>
