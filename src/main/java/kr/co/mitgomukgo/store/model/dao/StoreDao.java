@@ -60,7 +60,7 @@ public class StoreDao {
 	}
 
 
-
+	//맛집 상세 
 	public Store selectOneStore(int storeNo) {
 		Store s = sqlSession.selectOne("store.selectOneStore",storeNo);
 		return s;
@@ -68,10 +68,11 @@ public class StoreDao {
 
 
 	//맛집 상세 - 조인
-	public ArrayList<Store> selectOneStoreAjax(int StoreNo) {
-		List list = sqlSession.selectList("store.selectOneStoreAjax",StoreNo);
-		return (ArrayList<Store>)list;
+	public ArrayList<StoreJoin> selectOneStoreAjax(StoreJoin sj) {
+		List list = sqlSession.selectList("store.selectOneStoreAjax",sj);
+		return (ArrayList<StoreJoin>) list;
 	}
+	
 	
 	public ArrayList<Store> selectStore(Owner o) {
 		List s = sqlSession.selectList("store.selectMyStore",o);
