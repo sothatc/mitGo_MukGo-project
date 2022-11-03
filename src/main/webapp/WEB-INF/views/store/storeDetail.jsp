@@ -115,20 +115,11 @@
       </div>
    </div>
 
-   <!--조회수 및 후기 수-->
-   <div class="content-wrap3" style="font-family:Gowun Dodum;">
-      <div class="content-wrap3-1">
-         <span class="material-symbols-outlined">visibility</span>
-         <span>100</span>
-         <span class="material-symbols-outlined">rate_review</span>
-         <span>100</span>
-      </div>
-   </div>
 
    <!--상세 페이지-->
-   <div class="content-wrap4" style="font-family:Gowun Dodum;">
+   <div class="content-wrap4" style="font-family:Gowun Dodum; margin-top:30px;">
       <div class="testDiv">
-         <p class="menuTitle">MENU</p>
+         <p class="menuTitle" style="margin-top: 10px;">MENU</p>
          <blockquote class="w3-panel w3-leftbar w3-light-grey" id="menuWrap">
             <div class="menuWrap" style="font-family:Gowun Dodum;">
                <p class="menuSubTitle">대표메뉴</p>
@@ -319,6 +310,9 @@
           </div>
        </div>
        </div>
+       <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+       
+       
        
        <!------------------------ 시간 날짜 미입력 모달 -->
        <div class="w3-container" style="font-family:Gowun Dodum;">
@@ -561,8 +555,8 @@
                addressTitle : "${s.storeName}",
                content : {
                   title : "${s.storeName}",
-                  description : "${s.storeName}"+"먹으러갈까요~~?",
-                  imageUrl : 'http://192.168.10.26/resources/img/logo.png',
+                  description : "${s.storeName}"+" 로 지금 먹으러갈까요~~?",
+                  imageUrl : 'http://192.168.10.26/resources/img/logo.pmg',
                   link : {
                      mobileWebUrl : 'http://192.168.10.26/storeDetail.do?storeNo='+storeNo,
                      webUrl : 'http://192.168.10.26/storeDetail.do?storeNo='+storeNo

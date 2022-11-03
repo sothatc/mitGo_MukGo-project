@@ -138,7 +138,7 @@
 		from store 
 		join store_img using(store_no)
 		where store_no = #{storeNo}
-		ORDER BY storeimg_no desc
+		ORDER BY storeimg_no asc
 	</select>
 
 
