@@ -123,7 +123,7 @@
 
 
 
-	<select id="selectOneStoreAjax" parameterType="_int" resultType="sj">
+	<select id="selectOneStoreAjax" parameterType="sj" resultType="sj">
 		select
 			store_no as storeNo, 
 			store_name as storeName,
@@ -137,7 +137,7 @@
 			imgpath
 		from store 
 		join store_img using(store_no)
-		where store_no = #{_parameter}
+		where store_no = #{storeNo}
 		ORDER BY storeimg_no desc
 	</select>
 

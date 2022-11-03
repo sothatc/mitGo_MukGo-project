@@ -232,9 +232,9 @@ public class StoreService {
 		return s;
 	}
 	
-	//맛집 상세보기
-	public ArrayList<Store> selectOneStoreAjax(int storeNo) {
-		ArrayList<Store> list = dao.selectOneStoreAjax(storeNo);
+	//맛집 - 조인
+	public ArrayList<StoreJoin> selectOneStoreAjax(StoreJoin sj) {
+		ArrayList<StoreJoin> list = dao.selectOneStoreAjax(sj);
 		return list;
 	}
 	

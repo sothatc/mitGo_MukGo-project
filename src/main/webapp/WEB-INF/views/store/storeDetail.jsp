@@ -450,6 +450,16 @@
             return [result];
             
          }
+         
+         
+         //-------------------주소 * 없애기
+         function addrSlice() {
+             const addr = $(".addressTd");
+             console.log(addr);
+             const splitWord = addr.text().split("*");
+                addr.text(splitWord[1] + " " +splitWord[2]);
+             }
+             addrSlice();
 
          //----------------------------- 인원수 늘리기
             let count = 1;
@@ -499,10 +509,13 @@
       
        //-------------------------------------------------------------------@@@@@@@@@@@@@@@@@@@@@       AJAX 
          var storePhoto;
+       	 var storeNo = "${s.storeNo}";
          $.ajax({
             url: "/ajaxSelectStore.do",
+            type:"post",
+            data: {storeNo:storeNo},
             success: function(data){
-               console.log(data);
+               console.log(storeNo);
                const storeImgUl = $(".storeImgUl");
                storePhoto = new Array();
             for(let i=0; i<data.length; i++){
@@ -551,15 +564,15 @@
                   description : "${s.storeName}"+"먹으러갈까요~~?",
                   imageUrl : 'http://192.168.10.26/resources/img/logo.png',
                   link : {
-                     mobileWebUrl : 'http://192.168.10.26/storeDetailView.do',
-                     webUrl : 'http://192.168.10.26/storeDetailView.do',
+                     mobileWebUrl : 'http://192.168.10.26/storeDetail.do?storeNo='+storeNo,
+                     webUrl : 'http://192.168.10.26/storeDetail.do?storeNo='+storeNo
                   },
                },
                buttons : [ {
                   title : '웹으로 보기',
                   link : {
-                     mobileWebUrl : 'http://192.168.10.26/storeDetailView.do',
-                     webUrl : 'http://192.168.10.26/storeDetailView.do',
+                     mobileWebUrl : 'http://192.168.10.26/storeDetail.do?storeNo='+storeNo,
+                     webUrl : 'http://192.168.10.26/storeDetail.do?storeNo='+storeNo
                   }
                } ]
             });

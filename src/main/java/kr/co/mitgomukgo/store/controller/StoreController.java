@@ -58,9 +58,9 @@ public class StoreController {
 	// 맛집 이미지 배열로 가져오기
 	@ResponseBody
 	@RequestMapping(value="/ajaxSelectStore.do",produces="application/json;charset=utf-8")
-	public String ajaxSelectStore(int StoreNo) {
-		System.out.println(StoreNo);
-		ArrayList<Store> list = service.selectOneStoreAjax(StoreNo);
+	public String ajaxSelectStore(StoreJoin sj) {
+
+		ArrayList<StoreJoin> list = service.selectOneStoreAjax(sj);
 		Gson gson = new Gson();
 		String result = gson.toJson(list);
 		return result;
