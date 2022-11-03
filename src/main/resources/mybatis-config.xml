@@ -17,7 +17,10 @@
 		<typeAlias type="kr.co.mitgomukgo.notice.model.vo.NoticeFile" alias="nf"/>
 		<typeAlias type="kr.co.mitgomukgo.store.model.vo.Review" alias="r" />
 		<typeAlias type="kr.co.mitgomukgo.store.model.vo.Menu" alias="me" />
+
+		<typeAlias type="kr.co.mitgomukgo.store.model.vo.StoreJoin" alias="sj" />
 		<typeAlias type="kr.co.mitgomukgo.store.model.vo.updateRating" alias="rt" />
 	
+
 	</typeAliases>
 </configuration>

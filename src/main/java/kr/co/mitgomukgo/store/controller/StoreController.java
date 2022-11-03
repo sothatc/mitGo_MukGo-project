@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -28,6 +29,7 @@ import kr.co.mitgomukgo.store.model.vo.Menu;
 import kr.co.mitgomukgo.store.model.vo.Review;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import kr.co.mitgomukgo.store.model.vo.StoreImg;
+import kr.co.mitgomukgo.store.model.vo.StoreJoin;
 
 @Controller
 public class StoreController {
@@ -42,17 +44,28 @@ public class StoreController {
 	public String storeDetailView() {
 		return "store/storeDetail";
 	}
-
-	// 맛집 상세 데이터 가져오기 (모달)
+	
+	//맛집 상세 보기
+	@RequestMapping(value = "/storeDetail.do")
+	public String StoreDetail(int storeNo, Model model) {
+		//ArrayList<Store> list = service.selectOneStore(storeNo);
+		Store s = service.selectOneStore(storeNo);
+		model.addAttribute("s",s);
+		return "store/storeDetail";
+	}
+	
+	
+	// 맛집 이미지 배열로 가져오기
 	@ResponseBody
-	@RequestMapping(value = "/ajaxSelectStore.do", produces = "application/json;charset=utf-8")
-	public String ajaxSelectStore(Store store) {
-		Store s = service.ajaxSelectStore(store);
+	@RequestMapping(value="/ajaxSelectStore.do",produces="application/json;charset=utf-8")
+	public String ajaxSelectStore(StoreJoin sj) {
+
+		ArrayList<StoreJoin> list = service.selectOneStoreAjax(sj);
 		Gson gson = new Gson();
-		String result = gson.toJson(s);
+		String result = gson.toJson(list);
 		return result;
 	}
-
+	 
 	@RequestMapping(value = "/addStoreFrm.do")
 	public String addStoreFrm() {
 		return "store/addStoreFrm";
@@ -88,7 +101,7 @@ public class StoreController {
 			}
 		}
 		s.setStoreImgList(storeImgList);
-		s.setAddress(zipCode + s.getAddress() + detailAddress);
+		s.setAddress(zipCode + "*" + s.getAddress() + "*" + detailAddress);
 		s.setOpenHour(s.getOpenHour() + "~" + closedHour);
 		int result = service.addStore(s);
 		return "redirect:/storeList.do?reqPage=1";
@@ -139,12 +152,13 @@ public class StoreController {
 			}
 		}
 		int result = service.writeReview(r);
-		
+
 		return "store/successReivewFrm";
 	}
 
 	@RequestMapping(value = "/addMenuFrm.do")
-	String addMenuFrm() {
+	String addMenuFrm(@RequestParam int storeNo, Model model) {
+		model.addAttribute("storeNo", storeNo);
 		return "store/addMenuFrm";
 	}
 
@@ -172,21 +186,22 @@ public class StoreController {
 		int result = service.addMenu(me);
 		return "store/storeDetail";
 	}
-	
 
-	@RequestMapping(value="/updateStoreFrm.do")
+	@RequestMapping(value = "/updateStoreFrm.do")
 	public String updateStoreFrm(HttpSession session, Model model) {
-		Owner o = (Owner)session.getAttribute("o");
+		Owner o = (Owner) session.getAttribute("o");
 		ArrayList<Store> s = service.selectStore(o);
-		model.addAttribute("s",(ArrayList<Store>)s);
+		model.addAttribute("s", (ArrayList<Store>) s);
 		return "/store/updateStoreFrm";
 	}
-	
 	
 	/*
 	@ResponseBody
 	@RequestMapping(value = "/ajaxClicktag.do", produces = "application/json;charset=utf-8")
 	public String ajaxClicktag(int tagValue, int reqPage, Model model) {
+		HashMap<String, Object> map = service.storeList(tagValue,reqPage);
+		//System.out.println(map);
+		if(map == null) {
 
 		HashMap<String, Object> map = service.storeList(tagValue, reqPage);
 		System.out.println(map);
@@ -205,10 +220,15 @@ public class StoreController {
 			// 그런고로 String 타입으로 받음
 			Gson gson = new Gson();
 			String result = gson.toJson(map);
+			//System.out.println(result);
+			//System.out.println(model);
+
 			return result;
 		}
 	}
 	*/
+	
+	
 	@RequestMapping(value = "/selectTag.do")
 	public String selectTag(String category, int reqPage, Model model) {
 		HashMap<String, Object> map = service.selectTag(category,reqPage);
