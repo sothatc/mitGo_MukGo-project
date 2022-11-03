@@ -26,6 +26,7 @@ import kr.co.mitgomukgo.store.model.vo.Menu;
 import kr.co.mitgomukgo.store.model.vo.Review;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import kr.co.mitgomukgo.store.model.vo.StoreImg;
+import kr.co.mitgomukgo.store.model.vo.StoreJoin;
 
 @Controller
 public class StoreController {
@@ -40,17 +41,28 @@ public class StoreController {
 	public String storeDetailView() {
 		return "store/storeDetail";
 	}
-
-	// 맛집 상세 데이터 가져오기 (모달)
+	
+	//맛집 상세 보기
+	@RequestMapping(value = "/storeDetail.do")
+	public String StoreDetail(int storeNo, Model model) {
+		//ArrayList<Store> list = service.selectOneStore(storeNo);
+		Store s = service.selectOneStore(storeNo);
+		model.addAttribute("s",s);
+		return "store/storeDetail";
+	}
+	
+	
+	// 맛집 이미지 배열로 가져오기
 	@ResponseBody
 	@RequestMapping(value="/ajaxSelectStore.do",produces="application/json;charset=utf-8")
-	public String ajaxSelectStore(Store store) {
-		Store s = service.ajaxSelectStore(store);
+	public String ajaxSelectStore(int StoreNo) {
+		System.out.println(StoreNo);
+		ArrayList<Store> list = service.selectOneStoreAjax(StoreNo);
 		Gson gson = new Gson();
-		String result = gson.toJson(s);
+		String result = gson.toJson(list);
 		return result;
 	}
-
+	 
 	@RequestMapping(value = "/addStoreFrm.do")
 	public String addStoreFrm() {
 		return "store/addStoreFrm";
@@ -105,7 +117,7 @@ public class StoreController {
 			model.addAttribute("pageNavi", map.get("pageNavi"));
 			model.addAttribute("total", map.get("total"));
 			model.addAttribute("pageNo", map.get("pageNo"));
-			System.out.println(model);
+			//System.out.println(model);
 			return "store/storeListFrm";
 		}
 		//ArrayList<Store> list = service.storeList();	
@@ -176,7 +188,7 @@ public class StoreController {
 	@RequestMapping(value = "/ajaxClicktag.do", produces = "application/json;charset=utf-8")
 	public String ajaxClicktag(int tagValue, int reqPage, Model model) {
 		HashMap<String, Object> map = service.storeList(tagValue,reqPage);
-		System.out.println(map);
+		//System.out.println(map);
 		if(map == null) {
 			model.addAttribute("msg", "아직 등록된 업체 가 없습니다.");
 			return "store/storeListFrm";
@@ -193,8 +205,8 @@ public class StoreController {
 			Gson gson = new Gson();
 			String result = gson.toJson(map);
 			
-			System.out.println(result);
-			System.out.println(model);
+			//System.out.println(result);
+			//System.out.println(model);
 			return result;
 		}
 		

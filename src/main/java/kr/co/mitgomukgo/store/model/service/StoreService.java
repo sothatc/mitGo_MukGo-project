@@ -13,6 +13,7 @@ import kr.co.mitgomukgo.store.model.vo.Menu;
 import kr.co.mitgomukgo.store.model.vo.Review;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import kr.co.mitgomukgo.store.model.vo.StoreImg;
+import kr.co.mitgomukgo.store.model.vo.StoreJoin;
 
 @Service
 public class StoreService {
@@ -97,11 +98,7 @@ public class StoreService {
 		}
 	}
 
-	//모달 상세
-	public Store ajaxSelectStore(Store store) {
-		Store s = dao.selectOneStore(store);
-		return s;
-	}
+
 
 
 	public int addMenu(Menu me) {
@@ -167,4 +164,19 @@ public class StoreService {
 		}
 	}
 	
+	//맛집 상세
+	public Store selectOneStore(int storeNo) {
+		Store s = dao.selectOneStore(storeNo);
+		return s;
+	}
+	
+	//맛집 상세보기
+	public ArrayList<Store> selectOneStoreAjax(int storeNo) {
+		ArrayList<Store> list = dao.selectOneStoreAjax(storeNo);
+		return list;
+	}
+	
+	
+	
+
 }

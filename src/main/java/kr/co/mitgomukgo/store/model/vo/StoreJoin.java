@@ -9,22 +9,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Store {
-
-	private int storeNo;
+public class StoreJoin {
+	private int storeNo; 
 	private String storeName;
-	private int ownerNo;
+	private String openHour;
 	private String address;
 	private String phone;
-	private String content;
-	private String openHour;
 	private String closedDay;
 	private String category;
-	private String whereEatCate;
-	private String withEatCate;
-	private int rating;
-	private int reviewCount;
-	private String thumbNail;
-	private ArrayList<StoreImg> storeImgList;
-	
+	private String content;
+	private int storeImgNo;
+	private String imgpath;
 }

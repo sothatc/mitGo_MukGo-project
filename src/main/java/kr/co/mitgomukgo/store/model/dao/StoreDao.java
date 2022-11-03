@@ -12,6 +12,7 @@ import kr.co.mitgomukgo.store.model.vo.Menu;
 import kr.co.mitgomukgo.store.model.vo.Review;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import kr.co.mitgomukgo.store.model.vo.StoreImg;
+import kr.co.mitgomukgo.store.model.vo.StoreJoin;
 
 @Repository
 public class StoreDao {
@@ -67,10 +68,19 @@ public class StoreDao {
 		}
 	}
 
-	//모달 상세
-	public Store selectOneStore(Store store) {
-		Store s = sqlSession.selectOne("store.selectOneStore",store);
+	//맛집 상세
+	public Store selectOneStore(int storeNo) {
+		Store s = sqlSession.selectOne("store.selectOneStore",storeNo);
 		return s;
 	}
+
+	//맛집 상세 - 조인
+	public ArrayList<Store> selectOneStoreAjax(int StoreNo) {
+		List list = sqlSession.selectList("store.selectOneStoreAjax",StoreNo);
+		return (ArrayList<Store>)list;
+	}
 	
+
+
+
 }
