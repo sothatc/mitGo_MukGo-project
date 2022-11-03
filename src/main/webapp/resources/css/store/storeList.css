@@ -15,6 +15,7 @@
 	margin-right: 20px;
 	border: solid 2px black;
 	border-radius: 20px;
+	padding-left: 20px;
 }
 
 .storeList-searchinput>button {
@@ -233,4 +234,10 @@
 .showList>a>div>img {
 	width: 200px;
 	height: 200px;
+}
+/*========================page*/
+.page{
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
