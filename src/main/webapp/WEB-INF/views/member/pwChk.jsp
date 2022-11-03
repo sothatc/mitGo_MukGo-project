@@ -9,7 +9,7 @@
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 </head>
 <body>
-	<div class="header">ㅡㅡ</div>
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="pwChk-wrap">
 		<div class="pwChk-content">
 			<div>비밀번호 확인</div>
@@ -21,7 +21,7 @@
 		</div>
 	</div>
 </body>
-
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 <script>
 	$(".pwChkBtn").on("mouseover",function(){
 		$(this).css("background-color","rgb(97, 76, 76)");
