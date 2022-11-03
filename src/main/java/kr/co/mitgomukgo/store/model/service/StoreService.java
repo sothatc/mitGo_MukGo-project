@@ -12,6 +12,7 @@ import kr.co.mitgomukgo.store.model.vo.Menu;
 import kr.co.mitgomukgo.store.model.vo.Review;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import kr.co.mitgomukgo.store.model.vo.StoreImg;
+import kr.co.mitgomukgo.store.model.vo.StoreJoin;
 
 @Service
 public class StoreService {
@@ -49,7 +50,7 @@ public class StoreService {
 		map.put("end",end);
 		
 		ArrayList<Store> list = dao.storeList(map);
-		
+		System.out.println(list);
 		int totalPage = dao.countAllList();
 		int pageNaviSize = 2;
 		int pageNo = 1;
@@ -96,11 +97,7 @@ public class StoreService {
 		}
 	}
 
-	//모달 상세
-	public Store ajaxSelectStore(Store store) {
-		Store s = dao.selectOneStore(store);
-		return s;
-	}
+
 
 
 	public int addMenu(Menu me) {
@@ -112,7 +109,7 @@ public class StoreService {
 		ArrayList<Store> s = dao.selectStore(o);
 		return (ArrayList<Store>) s;
 	}
-
+	/*
 	public HashMap<String, Object> storeList(int tagValue, int reqPage) {
 		int numPerPage = 9;
 		
@@ -170,5 +167,78 @@ public class StoreService {
 			return storeListMap;
 		}
 	}
+	*/
+	public HashMap<String, Object> selectTag(String category, int reqPage) {
+		// 화면에 보여주는 게시물 수
+		int numPerPage = 9;
+		
+		// 끝페이지
+		int end = numPerPage * reqPage;
+		
+		// 시작페이지
+		int start = (end-numPerPage) + 1;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("category", category);
+		ArrayList<Store> list = dao.selectTag(map);
+		System.out.println(list);
+		int totalPage = dao.countTagList(category);
+		int pageNaviSize = 2;
+		int pageNo = 1;
+		
+		if(reqPage > 2) {
+			pageNo = reqPage - 1;
+		}
+		
+		String pageNavi = "";
+		if(pageNo != 1) {
+			pageNavi += "<a href='/selectTag.do?category="+category+"&reqPage=" +(pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_left\r\n" + 
+					"            </span></a>";
+		}
+		
+		for(int i = 0; i < pageNaviSize; i++) {
+			if(reqPage == pageNo) {
+				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
+			}else {
+				pageNavi += "<a href='/selectTag.do?category="+category+"&reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		
+		if(end <= totalPage) {
+			pageNavi += "<a href='/selectTag.do?category="+category+"&reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_right\r\n" + 
+					"            </span></a>";
+		}
+		HashMap<String, Object> tagMap = new HashMap<String, Object>();
+		tagMap.put("list", list);
+		tagMap.put("reqPage", reqPage);
+		tagMap.put("pageNavi", pageNavi);
+		tagMap.put("total", totalPage);
+		tagMap.put("pageNo", pageNo);
+		
+		return tagMap;
+	}
 	
+	//맛집 상세
+	public Store selectOneStore(int storeNo) {
+		Store s = dao.selectOneStore(storeNo);
+		return s;
+	}
+	
+	//맛집 상세보기
+	public ArrayList<Store> selectOneStoreAjax(int storeNo) {
+		ArrayList<Store> list = dao.selectOneStoreAjax(storeNo);
+		return list;
+	}
+	
+	
+	
+
 }
