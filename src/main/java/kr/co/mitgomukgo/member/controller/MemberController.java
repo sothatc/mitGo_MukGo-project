@@ -187,7 +187,7 @@ public class MemberController {
 	@RequestMapping(value="/ownerMypage.do")
 	public String ownerMypage(int ownerNo, Model model) {
 		Store s = service.searchStore(ownerNo);
-		model.addAttribute("s",s);
+		model.addAttribute("s", s);
 		return "member/ownerMypage";
 	}
 	@RequestMapping(value="/selectJoin.do")
