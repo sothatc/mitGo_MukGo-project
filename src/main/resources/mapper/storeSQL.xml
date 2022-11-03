@@ -20,7 +20,8 @@
 	</insert>
 
 	<select id="selectStoreNo" resultType="_int">
-		select max(store_no) as storeNo
+		select max(store_no) as
+		storeNo
 		from store
 	</select>
 
@@ -47,72 +48,76 @@
 	</insert>
 
 	<select id="storeList" parameterType="map" resultType="s">
-		select * from
-			(select row_number() over (order by rnum desc) as rnum1, rb.* from
-			(select rownum as rnum, b.* from
-			(select
-				store_no as storeNo,
-				store_name as storeName,
-				owner_no as ownerNo,
-				address,
-				phone,
-				content,
-				open_hour as openHour,
-				closed_day as closedDay,
-				category,
-				witheat_cate as
-				withEatCate,
-				whereeat_cate as whereEatCate,
-				(select imgpath from store_img si where storeimg_no = (select
-				min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
-				as thumbNail
-			from store s order by storeNo desc)b)rb order by 3 desc)
-		where rnum between #{start} and #{end} 
-		
+		select *
+		from
+		(select row_number() over (order by rnum desc) as rnum1, rb.* from
+		(select rownum as rnum, b.* from
+		(select
+		store_no as storeNo,
+		store_name as storeName,
+		owner_no as ownerNo,
+		address,
+		phone,
+		content,
+		open_hour as openHour,
+		closed_day as closedDay,
+		category,
+		witheat_cate as
+		withEatCate,
+		whereeat_cate as whereEatCate,
+		(select imgpath from store_img si where storeimg_no = (select
+		min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
+		as thumbNail
+		from store s order by storeNo desc)b)rb order by 3 desc)
+		where rnum between
+		#{start} and #{end}
+
 	</select>
-	
+
 	<select id="storeTagList" parameterType="map" resultType="s">
-		select * from
-			(select row_number() over (order by rnum desc) as rnum1, rb.* from
-			(select rownum as rnum, b.* from
-			(select
-				store_no as storeNo,
-				store_name as storeName,
-				owner_no as ownerNo,
-				address,
-				phone,
-				content,
-				open_hour as openHour,
-				closed_day as closedDay,
-				category,
-				witheat_cate as
-				withEatCate,
-				whereeat_cate as whereEatCate,
-				(select imgpath from store_img si where storeimg_no = (select
-				min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
-				as thumbNail
-			from store s order by storeNo desc)b)rb order by 3 desc)
-		where rnum between #{start} and #{end} and category = ${tagValue}
+		select
+		* from
+		(select row_number() over (order by rnum desc) as rnum1, rb.* from
+		(select rownum as rnum, b.* from
+		(select
+		store_no as storeNo,
+		store_name as storeName,
+		owner_no as ownerNo,
+		address,
+		phone,
+		content,
+		open_hour as openHour,
+		closed_day as closedDay,
+		category,
+		witheat_cate as
+		withEatCate,
+		whereeat_cate as whereEatCate,
+		(select imgpath from store_img si where storeimg_no = (select
+		min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
+		as thumbNail
+		from store s order by storeNo desc)b)rb order by 3 desc)
+		where rnum between
+		#{start} and #{end} and category = ${tagValue}
 	</select>
-	
+
 
 	<select id="selectOneStore" parameterType="s" resultType="s">
 		select
-			store_name as storeName,
-			open_hour as openHour,
-			address,
-			phone,
-			closed_day as closedDay,
-			category,
-			content
-		from store 
+		store_name as storeName,
+		open_hour as openHour,
+		address,
+		phone,
+		closed_day as closedDay,
+		category,
+		content
+		from store
 		where store_no =85
 	</select>
 
 	<select id="countAllList" resultType="_int">
 		select count(*) from store
 	</select>
-	
+
 	<insert id="addMenu" parameterType="me">
 		insert into menu
 		(menu_seq.nextval,
@@ -125,25 +130,26 @@
 	
 	<select id="selectMyStore" parameterType="o" resultType="s">
 		select
-			
-			store_name as storeName,
-			open_hour as openHour,
-			address,
-			phone,
-			closed_day as closedDay,
-			category,
-			witheat_cate as withEatCate,
-			whereeat_cate as whereEatCate,
-			content,
-			imgpath as storeImgList
+
+		store_name as storeName,
+		open_hour as openHour,
+		address,
+		phone,
+		closed_day as closedDay,
+		category,
+		witheat_cate as withEatCate,
+		whereeat_cate as whereEatCate,
+		content,
+		imgpath as storeImgList
 		from store a
-        left join store_img b
-        on a.store_no = b.store_no
+		left join store_img b
+		on a.store_no = b.store_no
 		where owner_no = #{ownerNo}
-	</select>	
+	</select>
 
 	<select id="searchStore" parameterType="int" resultType="s">
-		select * from store where owner_no = #{ownerNo}	
+		select *
+		from store where owner_no = #{ownerNo}
 	</select>
 
 </mapper>

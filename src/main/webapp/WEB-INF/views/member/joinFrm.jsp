@@ -12,7 +12,7 @@
 	
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
+
     <div class="header"></div>
     <div class="contents">
         <form name="checkIdFrm" action="/checkId.do">
@@ -135,9 +135,6 @@
     </div>
 	
 	
-	
-	
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	<script>
 		var idFlag = 0;
 		var phoneFlag = 0;
@@ -270,39 +267,31 @@
 		$(".phoneChkSendBtn").on("mouseover",function(){
 			$(this).css("background-color","rgb(97, 76, 76)");
 			$(this).css("border","1px solid black");
-			$(this).css("color","#ffc107");
 		})
 		$(".phoneChkSendBtn").on("mouseleave",function(){
 			$(this).css("background-color","");
-			$(this).css("color","");
 		})
         $(".phoneChkBtn").on("mouseover",function(){
 			$(this).css("background-color","rgb(97, 76, 76)");
 			$(this).css("border","1px solid black");
-			$(this).css("color","#ffc107");
 		})
 		$(".phoneChkBtn").on("mouseleave",function(){
 			$(this).css("background-color","");
-			$(this).css("color","");
 		})
 		$("#idChkBtn").on("mouseover",function(){
 			$(this).css("background-color","rgb(97, 76, 76)");
 			$(this).css("border","1px solid black");
-			$(this).css("color","#ffc107");
 		})
 		$("#idChkBtn").on("mouseleave",function(){
 			$(this).css("background-color","");
-			$(this).css("color","");
 		})
 		const joinBtn = $(".joinBtn").children();
 		$("#joinBtn").on("mouseover",function(){
 			$(this).css("background-color","rgb(97, 76, 76)");
 			$(this).css("border","1px solid black");
-			$(this).css("color","#ffc107");
 		})
 		$("#joinBtn").on("mouseleave",function(){
 			joinBtn.css("background-color","");
-			$(this).css("color","");
 		})
 		
 		

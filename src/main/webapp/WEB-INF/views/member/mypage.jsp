@@ -7,14 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<aside id="aside" class="sidebar">
 		<div class="sidebar-1">
 			
 		</div>
 	</aside>
-	
-	
-	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>

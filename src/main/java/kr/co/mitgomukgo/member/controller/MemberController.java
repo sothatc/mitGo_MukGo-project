@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.mitgomukgo.member.model.service.MemberService;
 import kr.co.mitgomukgo.member.model.vo.Member;
 import kr.co.mitgomukgo.member.model.vo.Owner;
-import kr.co.mitgomukgo.store.model.vo.Store;
 import net.nurigo.java_sdk.Coolsms;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
@@ -185,9 +184,7 @@ public class MemberController {
 		return "member/mypage";
 	}
 	@RequestMapping(value="/ownerMypage.do")
-	public String ownerMypage(int ownerNo, Model model) {
-		Store s = service.searchStore(ownerNo);
-		model.addAttribute("s",s);
+	public String ownerMypage() {
 		return "member/ownerMypage";
 	}
 	@RequestMapping(value="/selectJoin.do")
