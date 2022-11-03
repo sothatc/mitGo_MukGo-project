@@ -164,7 +164,6 @@
     		});
     	}
     	
-    	})
     
         function goNoticeList(){
             location.href="/selectNoticeList.do?reqPage=1";
