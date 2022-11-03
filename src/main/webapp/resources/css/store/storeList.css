@@ -152,8 +152,13 @@
 	margin-left: 3px;
 	margin-right: 3px;
 }
-
-.storeList-tag-content>ul>li>img {
+.storeList-tag-content>ul>li>a{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+}
+.storeList-tag-content>ul>li>a>img {
 	width: 50px;
 }
 /* =====================================sort */
@@ -216,12 +221,15 @@
 }
 
 .showList>a>div:nth-child(2) {
-	width: 200px;
-	margin-left : 50px;
+	width: 300px;
 	margin-top : 10px;
 	margin-bottom : 30px;
 }
-
+.showList>a>div:nth-child(2)>div{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
 .showList>a>div>img {
 	width: 200px;
 	height: 200px;

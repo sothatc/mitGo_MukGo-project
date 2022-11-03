@@ -106,7 +106,6 @@ public class StoreController {
 			model.addAttribute("pageNavi", map.get("pageNavi"));
 			model.addAttribute("total", map.get("total"));
 			model.addAttribute("pageNo", map.get("pageNo"));
-			System.out.println(model);
 			return "store/storeListFrm";
 		}
 		// ArrayList<Store> list = service.storeList();
@@ -180,7 +179,8 @@ public class StoreController {
 		model.addAttribute("s", (ArrayList<Store>) s);
 		return "/store/updateStoreFrm";
 	}
-
+	/*
+>>>>>>> refs/heads/master
 	@ResponseBody
 	@RequestMapping(value = "/ajaxClicktag.do", produces = "application/json;charset=utf-8")
 	public String ajaxClicktag(int tagValue, int reqPage, Model model) {
@@ -204,5 +204,20 @@ public class StoreController {
 			String result = gson.toJson(map);
 			return result;
 		}
+	}
+	*/
+	@RequestMapping(value = "/selectTag.do")
+	public String selectTag(String category, int reqPage, Model model) {
+		HashMap<String, Object> map = service.selectTag(category,reqPage);
+
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("category", category);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
+		
+		System.out.println(model);
+		return "store/storeListFrm";
 	}
 }
