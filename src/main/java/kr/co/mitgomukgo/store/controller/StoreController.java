@@ -87,7 +87,7 @@ public class StoreController {
 			}
 		}
 		s.setStoreImgList(storeImgList);
-		s.setAddress(zipCode + s.getAddress() + detailAddress);
+		s.setAddress(zipCode + "*" + s.getAddress() + "*" + detailAddress);
 		s.setOpenHour(s.getOpenHour() + "~" + closedHour);
 		int result = service.addStore(s);
 		return "redirect:/storeList.do?reqPage=1";
@@ -139,7 +139,7 @@ public class StoreController {
 			}
 		}
 		int result = service.writeReview(r);
-		
+
 		return "store/successReivewFrm";
 	}
 
@@ -172,18 +172,15 @@ public class StoreController {
 		int result = service.addMenu(me);
 		return "store/storeDetail";
 	}
-	
 
-	@RequestMapping(value="/updateStoreFrm.do")
+	@RequestMapping(value = "/updateStoreFrm.do")
 	public String updateStoreFrm(HttpSession session, Model model) {
-		Owner o = (Owner)session.getAttribute("o");
+		Owner o = (Owner) session.getAttribute("o");
 		ArrayList<Store> s = service.selectStore(o);
-		model.addAttribute("s",(ArrayList<Store>)s);
+		model.addAttribute("s", (ArrayList<Store>) s);
 		return "/store/updateStoreFrm";
 	}
-	
-	
-	
+
 	@ResponseBody
 	@RequestMapping(value = "/ajaxClicktag.do", produces = "application/json;charset=utf-8")
 	public String ajaxClicktag(int tagValue, int reqPage, Model model) {
