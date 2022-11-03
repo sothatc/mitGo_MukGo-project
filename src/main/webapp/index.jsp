@@ -26,27 +26,7 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<h1>믿고먹고</h1>
-	<c:choose>
-		<c:when test="${empty sessionScope.m && empty sessionScope.o}">
-			<a href="/loginFrm.do">로그인</a>
-			<a href="/selectJoin.do">회원가입</a>
-		</c:when>
-		<c:otherwise>
-			<c:if test="${not empty sessionScope.o }">
-				<span>사업자</span>
-				<span>[ ${sessionScope.o.ownerId } ]</span>
-				<a href="/ownerPwChk.do">마이페이지</a>
-				<a href="/ownerLogout.do">로그아웃</a>
-			</c:if>
-			<c:if test="${not empty sessionScope.m }">
-				<span>일반회원</span>
-				<span>[ ${sessionScope.m.memberId } ]</span>
-				<a href="/pwChk.do">마이페이지</a>
-				<a href="/logout.do">로그아웃</a>
-			</c:if>
-
-		</c:otherwise>
-	</c:choose>
+	
 	<h2><a href="/addStoreFrm.do">업체 등록(이정우)</a></h2>
 	<h2><a href="/mapFrm.do">map 길찾기 생성중(이규진)</a></h2>
 	<h2><a href="/storeDetailView.do">맛집상세페이지(양내윤)</a></h2>

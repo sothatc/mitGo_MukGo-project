@@ -13,6 +13,7 @@ import kr.co.mitgomukgo.store.model.vo.Menu;
 import kr.co.mitgomukgo.store.model.vo.Review;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import kr.co.mitgomukgo.store.model.vo.StoreImg;
+import kr.co.mitgomukgo.store.model.vo.StoreJoin;
 
 @Repository
 public class StoreDao {
@@ -59,24 +60,40 @@ public class StoreDao {
 	}
 
 
-	public ArrayList<Store> storeTagList(HashMap<String, Object> map) {
-		List list = sqlSession.selectList("store.storeTagList",map);
-		if(list.isEmpty()) {
-			return null;
-		}else {
-			return (ArrayList<Store>) list;	
-		}
-	}
-
-	//모달 상세
-	public Store selectOneStore(Store store) {
-		Store s = sqlSession.selectOne("store.selectOneStore",store);
+	//맛집 상세 
+	public Store selectOneStore(int storeNo) {
+		Store s = sqlSession.selectOne("store.selectOneStore",storeNo);
 		return s;
 	}
 
+
+	//맛집 상세 - 조인
+	public ArrayList<StoreJoin> selectOneStoreAjax(StoreJoin sj) {
+		List list = sqlSession.selectList("store.selectOneStoreAjax",sj);
+		return (ArrayList<StoreJoin>) list;
+	}
+	
+	
 	public ArrayList<Store> selectStore(Owner o) {
 		List s = sqlSession.selectList("store.selectMyStore",o);
 		return (ArrayList<Store>) s;
 	}
+
+	public ArrayList<Store> selectTag(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("store.selectTag",map);
+		return (ArrayList<Store>)list;
+	}
 	
+	public int countTagList(String category) {
+		return sqlSession.selectOne("store.countTagList",category);
+	}
+
+	public ArrayList<Store> searchStoreList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("store.searchStoreList",map);
+		return (ArrayList<Store>)list;
+	}
+	
+
+
+
 }

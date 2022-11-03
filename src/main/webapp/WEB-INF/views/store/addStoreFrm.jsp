@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
-
 <head>
 <meta charset="UTF-8">
 <title>업체 등록</title>
@@ -23,7 +23,7 @@
 						<label for="inputName">업체명을 입력해주세요</label>
 						<br>
 						<input type="text" class="form-control" id="inputName" name="storeName" placeholder="대표 업체명을 입력해주세요." required oninvalid="this.setCustomValidity('업체명을 입력해주세요')" oninput="this.setCustomValidity('')">
-						<input type="hidden" name="ownerNo" value="#{ownerNo }">
+						<input type="hidden" name="ownerNo" value="${sessionScopre.o.ownerNo }">
 					</div>
 					<br>
 					<div class="form-group">
