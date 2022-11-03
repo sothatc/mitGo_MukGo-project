@@ -14,7 +14,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -155,7 +157,8 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/addMenuFrm.do")
-	String addMenuFrm() {
+	String addMenuFrm(@RequestParam int storeNo, Model model) {
+		model.addAttribute("storeNo", storeNo);
 		return "store/addMenuFrm";
 	}
 
