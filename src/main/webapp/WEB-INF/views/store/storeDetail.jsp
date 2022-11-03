@@ -607,7 +607,6 @@
          }
          init();
          
-         
       </script>
 
 </body>

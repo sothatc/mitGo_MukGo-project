@@ -23,7 +23,7 @@
 							</c:when>
 							<c:otherwise>
 								<div><a href="/updateStoreFrm.do">업체 정보 수정</a></div>
-								<div><a href="#">메뉴 추가</a></div>
+								<div><a href="/addMenuFrm.do">메뉴 추가</a></div>
 							</c:otherwise>
 						</c:choose>
 						<div><a href="/ownerLogout.do">로그아웃</a></div>

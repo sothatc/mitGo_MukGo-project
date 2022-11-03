@@ -162,7 +162,7 @@
 	</select>
 
 	<insert id="addMenu" parameterType="me">
-		insert into menu
+		insert into menu values
 		(menu_seq.nextval,
 		#{storeNo},
 		#{menuName},
