@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -219,7 +220,12 @@ public class StoreController {
 		model.addAttribute("total", map.get("total"));
 		model.addAttribute("pageNo", map.get("pageNo"));
 		
-		System.out.println(model);
+		return "store/storeListFrm";
+	}
+	@RequestMapping(value = "/searchStoreList.do")
+	public String searchStoreList(String searchTag, int reqPage, Model model,@RequestParam String category) {
+		ArrayList<Store> list = service.searchStoreList(searchTag,reqPage,category);
+		
 		return "store/storeListFrm";
 	}
 }
