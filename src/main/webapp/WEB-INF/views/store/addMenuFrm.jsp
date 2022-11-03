@@ -108,7 +108,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		<div>
 			<label for="inputName">메뉴이름을 입력해주세요</label>
 			<br>
-			<input type="text" id="inputName" name="content">
+			<input type="text" id="inputName" name="menuName">
 		</div>
 		<div>
 			<label for="inputPrice">가격을 입력해주세요</label>

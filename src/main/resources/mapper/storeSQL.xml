@@ -173,29 +173,55 @@
 	
 	<select id="selectMyStore" parameterType="o" resultType="s">
 		select
-
-		store_name as storeName,
-		open_hour as openHour,
-		address,
-		phone,
-		closed_day as closedDay,
-		category,
-		witheat_cate as withEatCate,
-		whereeat_cate as whereEatCate,
-		content,
-		imgpath as storeImgList
+			a.store_no as storeNo,
+			store_name as storeName,
+			open_hour as openHour,
+			address,
+			phone,
+			closed_day as closedDay,
+			category,
+			witheat_cate as withEatCate,
+			whereeat_cate as whereEatCate,
+			content,
+			imgpath as storeImgList
 		from store a
 		left join store_img b
 		on a.store_no = b.store_no
 		where owner_no = #{ownerNo}
 	</select>
-
+  
 	<select id="searchStore" parameterType="int" resultType="s">
-		select *
-		from store where owner_no = #{ownerNo}
+		select 
+			store_no as storeNo
+		from store 
+		where owner_no = #{ownerNo}
 	</select>
+	
 
 	<select id="countTagList" parameterType="string" resultType="_int">
 		select count(*) from store where category = #{category}
+	</select>
+	
+	<select id="searchStoreList" parameterType="string" resultType="s">
+		select * from
+			(select row_number() over (order by rnum desc) as rnum1, rb.* from
+			(select rownum as rnum, b.* from
+			(select
+				store_no as storeNo,
+				store_name as storeName,
+				owner_no as ownerNo,
+				address,
+				phone,
+				content,
+				open_hour as openHour,
+				closed_day as closedDay,
+				category,
+				witheat_cate as
+				withEatCate,
+				whereeat_cate as whereEatCate,
+				(select imgpath from store_img si where storeimg_no = (select
+				min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
+				as thumbNail from store s order by storeNo desc)b where category = #{category})rb order by 3 desc)
+		where rnum between 1 and 9
 	</select>
 </mapper>
