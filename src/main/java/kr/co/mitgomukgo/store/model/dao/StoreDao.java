@@ -60,9 +60,9 @@ public class StoreDao {
 	}
 
 
-	//모달 상세
-	public Store selectOneStore(Store store) {
-		Store s = sqlSession.selectOne("store.selectOneStore",store);
+
+	public Store selectOneStore(int storeNo) {
+		Store s = sqlSession.selectOne("store.selectOneStore",storeNo);
 		return s;
 	}
 
