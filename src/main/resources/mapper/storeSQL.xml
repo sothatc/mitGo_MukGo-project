@@ -71,6 +71,33 @@
 		where rnum between #{start} and #{end} 
 	</select>
 	
+
+		<select id="storeTagList" parameterType="map" resultType="s">
+		      select
+		      * from
+		      (select row_number() over (order by rnum desc) as rnum1, rb.* from
+		      (select rownum as rnum, b.* from
+		      (select
+		      store_no as storeNo,
+		      store_name as storeName,
+		      owner_no as ownerNo,
+		      address,
+		      phone,
+		      content,
+		      open_hour as openHour,
+		      closed_day as closedDay,
+		      category,
+		      witheat_cate as
+		      withEatCate,
+		      whereeat_cate as whereEatCate,
+		      (select imgpath from store_img si where storeimg_no = (select
+		      min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
+		      as thumbNail
+		      from store s order by storeNo desc)b)rb order by 3 desc)
+		      where rnum between
+		      #{start} and #{end} and category = ${tagValue}
+		   </select>
+
 	<select id="selectTag" parameterType="map" resultType="s">
 		select * from
 			(select row_number() over (order by rnum desc) as rnum1, rb.* from
@@ -95,18 +122,40 @@
 	</select>
 
 
-	<select id="selectOneStore" parameterType="s" resultType="s">
+
+	<select id="selectOneStoreAjax" parameterType="_int" resultType="sj">
 		select
-		store_name as storeName,
-		open_hour as openHour,
-		address,
-		phone,
-		closed_day as closedDay,
-		category,
-		content
-		from store
-		where store_no =85
+			store_no as storeNo, 
+			store_name as storeName,
+			open_hour as openHour,
+			address,
+			phone,
+			closed_day as closedDay,
+			category,
+			content,
+			storeimg_no as storeImgNo,
+			imgpath
+		from store 
+		join store_img using(store_no)
+		where store_no = #{_parameter}
+		ORDER BY storeimg_no desc
 	</select>
+
+
+	<select id="selectOneStore" parameterType="_int" resultType="s">
+		select
+			store_no as storeNo, 
+			store_name as storeName,
+			open_hour as openHour,
+			address,
+			phone,
+			closed_day as closedDay,
+			category,
+			content
+		from store 
+		where store_no = #{_parameter}
+	</select>
+
 
 	<select id="countAllList" resultType="_int">
 		select count(*) from store
