@@ -102,9 +102,10 @@
 		                  <label>업체 사진</label>
 		                  <input type="file" name="file" class="file-upload-default" id="file" multiple>
 		                  <div class="input-group col-xs-12">
-		                  	
 		                  		<c:forEach var="s" items="${s }">
-			                     	<input type="text" class="form-control file-upload-info" value="${s.storeImgList}" disabled>
+		                  			<c:forEach var="img" items="${s.storeImgList }">
+				                     	<input type="text" class="form-control file-upload-info" value="${img.imgpath}" disabled>
+		                  			</c:forEach>
 		                  			
 		                  		</c:forEach>
 		                     <span class="input-group-append">
