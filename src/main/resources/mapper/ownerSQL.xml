@@ -22,4 +22,10 @@
 		from owner
 		where owner_id=#{ownerId} and owner_pw=#{ownerPw}
 	</select>
+	
+	<update id="updateOwner" parameterType="o">
+		update owner
+		set owner_pw=#{ownerPw}, owner_level=#{ownerLevel}
+		where owner_no=#{ownerNo}
+	</update>
 </mapper>

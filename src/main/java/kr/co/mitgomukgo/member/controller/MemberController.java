@@ -208,4 +208,14 @@ public class MemberController {
 			return "member/ownerJoinFrm";
 		}
 	}
+	
+	@RequestMapping(value="/updateOwner.do")
+	public String updateOwner(Owner o) {
+		int result = service.updateOwner(o);
+		if(result > 0) {
+			return "redirect:/";
+		}else {
+			return "member/ownerMyPage";
+		}
+	}
 }
