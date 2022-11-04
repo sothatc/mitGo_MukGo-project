@@ -32,13 +32,15 @@
          </div>
 
          <div class="content-wrap1-2">
-            <a class="material-symbols-rounded share pointer" id="share" href="javascript:shareMessage()">share</a>
-            <span class="material-symbols-rounded favorite pointer" id="favorite" style="display:none;">favorite</span>
-            <span class="material-symbols-outlined unfavorite pointer" id="unfavorite" style="float:right; margin-top:10px; margin-right:20px;">favorite</span>
+         	<c:choose>
+	        	<c:when test="${!empty sessionScope.m }">
+	            	<a class="material-symbols-rounded share pointer" id="share" href="javascript:shareMessage()">share</a>
+            		<span class="material-symbols-rounded favorite pointer" id="favorite" style="display:none;">favorite</span>
+            		<span class="material-symbols-outlined unfavorite pointer" id="unfavorite" style="float:right; margin-top:10px; margin-right:20px;">favorite</span>
+	            </c:when>
+			</c:choose>
          </div>
-
       </div>
-
 
       <div class="content-wrap2">
          <div class="content-wrap2-1">
@@ -108,8 +110,18 @@
                      <td colspan="3" class="buttonTd"></td>
                   </tr>
                </table>
-               <button name="reserveBtn" class="reserveBtn2" style="font-family:Gowun Dodum;">예약하기</button>
-               <button name="recommendBtn" style="font-family:Gowun Dodum;">추천글작성</button>
+               <c:choose>
+	               <c:when test="${empty sessionScope.m }">
+	               		<a href="/loginFrm.do">
+		                	<button id="loginBtn" style="font-family:Gowun Dodum;  width:560px; height:50px; background-color: rgb(51,51,51); color: white;
+		                	margin-top: 10px;">로그인</button>
+	                	</a>
+	               </c:when>
+	               <c:otherwise>
+	                    <button name="reserveBtn" class="reserveBtn2" style="font-family:Gowun Dodum;">예약하기</button>
+	             		<button name="recommendBtn" style="font-family:Gowun Dodum;">추천글작성</button>
+	               </c:otherwise>
+				</c:choose>
             </div>
          </div>
       </div>
