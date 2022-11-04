@@ -10,12 +10,12 @@
 </head>
 <body>
 	<link rel="stylesheet" href="/resources/css/store/storeList.css">
-	<div class="header-wrap"></div>
+	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<!--헤더-->
 	<div class="storeList-content-wrap">
 		<form action="/searchStoreList.do" method="post">
 			<div class="storeList-searchinput">
-				<input type="text" name="searchTag">
+				<input type="text" name="search">
 				<button>검색</button>
 			</div>
 		</form>
@@ -67,8 +67,8 @@
 		<div class="storeList-sort">
 			<div class="storeList-sort-content">
 				<ul>
-					<li>조회순</li>
-					<li>인기순</li>
+					<li>최신순</li>
+					<li>오래된순</li>
 					<li>평점순</li>
 				</ul>
 			</div>
@@ -94,7 +94,7 @@
 	</div>
 	</div>
 	<!--푸터-->
-	<div class="footer-wrap"></div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	<script src="/resources/js/store/storeList.js"></script>
 </body>
 </html>

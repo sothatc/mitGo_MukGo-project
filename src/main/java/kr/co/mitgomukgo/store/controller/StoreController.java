@@ -26,6 +26,7 @@ import common.FileRename;
 import kr.co.mitgomukgo.member.model.vo.Owner;
 import kr.co.mitgomukgo.store.model.service.StoreService;
 import kr.co.mitgomukgo.store.model.vo.Menu;
+import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Review;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import kr.co.mitgomukgo.store.model.vo.StoreImg;
@@ -64,6 +65,18 @@ public class StoreController {
 		String result = gson.toJson(list);
 		return result;
 	}
+	
+	//예약하기
+	@RequestMapping(value = "/reserve.do")
+	public String StoreDetail(int memberNo, Reserve r) {
+		int result = service.reserve(r);
+		if(result>0) {
+			return "redirect:/";
+		}else {
+			return "redirect:/";
+		}
+	}
+	
 
 	@RequestMapping(value = "/addStoreFrm.do")
 	public String addStoreFrm() {
@@ -239,9 +252,16 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/searchStoreList.do")
-	public String searchStoreList(String searchTag, int reqPage, Model model, @RequestParam String category) {
-		ArrayList<Store> list = service.searchStoreList(searchTag, reqPage, category);
-
+	public String searchStoreList(String search, int reqPage, Model model,@RequestParam String category) {	
+		HashMap<String, Object> map = service.searchStoreList(search,reqPage,category);
+		
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("category", category);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
+		
 		return "store/storeListFrm";
 	}
 }

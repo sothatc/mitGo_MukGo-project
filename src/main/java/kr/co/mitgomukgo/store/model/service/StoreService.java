@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import kr.co.mitgomukgo.member.model.vo.Owner;
 import kr.co.mitgomukgo.store.model.dao.StoreDao;
 import kr.co.mitgomukgo.store.model.vo.Menu;
+import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Review;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import kr.co.mitgomukgo.store.model.vo.StoreImg;
@@ -226,7 +227,7 @@ public class StoreService {
 		return tagMap;
 	}
 
-	public ArrayList<Store> searchStoreList(String searchTag, int reqPage, String category) {
+	public HashMap<String, Object> searchStoreList(String searchTag, int reqPage, String category) {
 		// 화면에 보여주는 게시물 수
 		int numPerPage = 9;
 		
@@ -276,7 +277,14 @@ public class StoreService {
 					"            </span></a>";
 		}
 		
-		return list;	
+		HashMap<String, Object> searchTagMap = new HashMap<String, Object>();
+		searchTagMap.put("list", list);
+		searchTagMap.put("reqPage", reqPage);
+		searchTagMap.put("pageNavi", pageNavi);
+		searchTagMap.put("total", totalPage);
+		searchTagMap.put("pageNo", pageNo);
+		
+		return searchTagMap;	
 	}
 	
 	//맛집 상세
@@ -291,8 +299,15 @@ public class StoreService {
 		return list;
 	}
 
+
+	//예약하기
+	public int reserve(Reserve r) {
+		return dao.reserve(r);
+	}
+	
 	public ArrayList<Menu> menuList(int storeNo) {
 		return dao.menuList(storeNo);
+
 	}
 	
 	
