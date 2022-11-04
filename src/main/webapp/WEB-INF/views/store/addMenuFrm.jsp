@@ -129,7 +129,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 									<a href="/addMenuFrm.do">메뉴 추가</a>
 								</div>
 								<div>
-									<a href="/MenuFrm.do?storeNo">메뉴 관리</a>
+									<a href="/menuFrm.do">메뉴 관리</a>
 								</div>
 							</c:otherwise>
 						</c:choose>

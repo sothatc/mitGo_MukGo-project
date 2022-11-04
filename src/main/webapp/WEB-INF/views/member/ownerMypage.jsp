@@ -50,12 +50,28 @@
 		            <div class="form-write">
 		                <h4>사업자 정보 수정</h4>
 		                    <ul>
+								<li>
+		                            <span class="tit">이름</span>
+		                            <div class="cnt">
+		                                <div class="input01">
+		                                    <input type="text" id="memberName" name="memberName" value="${sessionScope.o.ownerName }" disabled>
+		                                </div>
+		                            </div>
+                       			</li>
+								<li>
+								<span class="tit">아이디</span>
+								<div class="cnt">
+									<div class="input01" id="input01">
+										<input type="text" id="memberId" name="memberId" value="${sessionScope.o.ownerId }" disabled>
+									</div>
+								</div>
+                        		</li>
 		                        <li>
 		                            <span class="tit">비밀번호</span>
 		                            <div class="cnt">
 		                                <div class="input01">
 		                                    <label class="label" for="ownerPw">대/소문자와 숫자를 포함한 최소 8자리를 입력해주세요.(특수문자x)</label>
-		                                    <input type="password" id="ownerPw" name="ownerPw">
+		                                    <input type="password" id="ownerPw" name="ownerPw" style="outline: none;">
 		                                </div>
 		                                <p class="text-note"></p>
 		                            </div>
@@ -65,16 +81,24 @@
 		                            <div class="cnt">
 		                                <div class="input01">
 		                                    <label class="label" for="ownerPw2">비밀번호를 한 번 더 입력해주세요.</label>
-		                                    <input type="password" id="ownerPw2" name="ownerPw2">
+		                                    <input type="password" id="ownerPw2" name="ownerPw2" style="outline: none;">
 		                                </div>
 		                                <p class="text-note"></p>
 		                            </div>
 		                        </li>
+								<li>
+									<span class="tit">휴대폰</span>
+									<div class="cnt">
+										<div class="input02">
+											<input type="text" id="memberPhone1" name="memberPhone1" value="${sessionScope.o.ownerPhone }" disabled>
+										</div>
+									</div>
+								</li>
 		                        <li>
 		                        	<span class="tit">마켓사용여부</span>
 		                        	<div class="cnt">
 		                        		<div class="selBox01">
-		                        		<input type="hidden" class="myLevel" value>
+		                        		<input type="hidden" class="myLevel">
 			                                <select id="selectMarket" name="ownerLevel">
 			                                    <option value="${sessionScope.o.ownerLevel }" selected="selected"></option>
 			                                    <option value="1">매장이용</option>
@@ -83,6 +107,14 @@
 			                            </div>
 		                        	</div>
 		                        </li>
+		                        <li>
+		                            <span class="tit">가입일</span>
+		                            <div class="cnt">
+		                                <div class="input01">
+		                                    <input type="text" id="memberName" name="memberName" value="${sessionScope.o.ownerEnrollDate }" disabled>
+		                                </div>
+		                            </div>
+                       			</li>
 		                    </ul>
 		                </div>
 		            </div>
@@ -146,6 +178,16 @@
 				event.preventDefault();
 			}
 		});
+		
+		$("#updateBtn").on("mouseover",function(){
+			$(this).css("background-color","rgb(97, 76, 76)");
+			$(this).css("border","1px solid black");
+			$(this).css("color","#ffc107");
+		})
+		$("#updateBtn").on("mouseleave",function(){
+			$(this).css("background-color","");
+			$(this).css("color","");
+		})
 	<!-- 
 	function callFunction(){
 		var storeInfo = $(".storeInfo").val();

@@ -33,10 +33,14 @@
     margin-left: 120px;
     position: relative;
 }
-#input01{
-	width: 535px;
-}
+
 .input01{
+    border: 1px solid #d7d7d7;
+    height: 38px;
+    padding: 0 12px;
+    position: relative;
+}
+.input02{
     border: 1px solid #d7d7d7;
     height: 38px;
     padding: 0 12px;
@@ -49,7 +53,15 @@
 .input01>input{
     width: 100%;
     border: none;
-    height: 30px;
+    height: 35px;
+}
+.input02{
+	width: 648px;
+}
+.input02>input{
+	 width: 100%;
+    border: none;
+    height: 35px;
 }
 .label{
     position: absolute;
@@ -58,7 +70,7 @@
     margin-bottom: 50px;
 }
 .membership-form input {
-	margin-top: 4px;
+	
 }
 .text-note{
     color: #999;
@@ -88,17 +100,16 @@
 }
 .box02{
     float: left;
-    width: 330px;
+    width: 648px;
     height: 36px;
     border: 1px solid #d7d7d7;
-    margin-left: 10px;
     padding: 0 12px;
     position: relative;
 }
 .box02>input{
     width: 100%;
     border: none;
-    height: 30px;
+    height: 35px;
 }
 .box02>.label{
     line-height: 35px;
@@ -176,6 +187,7 @@ hr{
 }
 .joinBtn{
     text-align: center;
+    margin-top: 120px;
 }
 .joinBtn>input{
     width: 300px;
@@ -186,4 +198,5 @@ hr{
     border: none;
     transition: 0.5s;
 }
+
 
