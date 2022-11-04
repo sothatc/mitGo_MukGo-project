@@ -80,8 +80,8 @@
 		<article id="content" class="content">
 			<div class="page-content" style="display: flex;">
 				<div class="content-wrap">
-					<div class="tabcontent" id="menuList">
-						<div class="contentHead">
+					<div id="menuList">
+						<div class="content-head">
 							<h2>메뉴 관리</h2>
 						</div>
 						<table class="table"
