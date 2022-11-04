@@ -126,10 +126,10 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 									<a href="/updateStoreFrm.do">업체 정보 수정</a>
 								</div>
 								<div>
-									<a href="/addMenuFrm.do?storeNo=${storeNo }">메뉴 추가</a>
+									<a href="/addMenuFrm.do">메뉴 추가</a>
 								</div>
 								<div>
-									<a href="/MenuFrm.do?storeNo=${storeNo }">메뉴 관리</a>
+									<a href="/MenuFrm.do?storeNo">메뉴 관리</a>
 								</div>
 							</c:otherwise>
 						</c:choose>
@@ -169,7 +169,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							<span class="comment" style="font-size: 12px; padding-left: 10px;"></span>
 						</div>
 						<div>
-							<input type="hidden" name="storeNo" value="${storeNo }">
+							<input type="hidden" name="storeNo" value="${sessionScope.s.storeNo }">
 							<input type="file" name="file" class="file-upload" id="file" style="visibility: hidden; position: absolute;" accept="image/gif, image/jpg, image/jpeg, image/png">
 							<button class="inputPhoto" type="button" id="inputPhoto">사진 첨부하기</button>
 						</div>

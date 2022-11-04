@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
@@ -154,16 +155,14 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/menuFrm.do")
-	public String menuFrm(@RequestParam int storeNo, Model model) {
-		model.addAttribute("storeNo", storeNo);
-		ArrayList<Menu> list = service.menuList(storeNo);
+	public String menuFrm(@SessionAttribute Store s, Model model) {
+		ArrayList<Menu> list = service.menuList(s.getStoreNo());
 		model.addAttribute("list", list);
 		return "store/menuFrm";
 	}
 
 	@RequestMapping(value = "/addMenuFrm.do")
-	public String addMenuFrm(@RequestParam int storeNo, Model model) {
-		model.addAttribute("storeNo", storeNo);
+	public String addMenuFrm() {
 		return "store/addMenuFrm";
 	}
 
@@ -193,11 +192,10 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/updateStoreFrm.do")
-	public String updateStoreFrm(HttpSession session, Model model, @RequestParam int storeNo) {
+	public String updateStoreFrm(HttpSession session, Model model) {
 		Owner o = (Owner) session.getAttribute("o");
 		ArrayList<Store> s = service.selectStore(o);
 		model.addAttribute("s", (ArrayList<Store>) s);
-		model.addAttribute("storeNo", storeNo);
 		return "/store/updateStoreFrm";
 	}
 

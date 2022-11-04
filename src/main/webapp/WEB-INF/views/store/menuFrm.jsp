@@ -29,10 +29,10 @@
 									<a href="/updateStoreFrm.do">업체 정보 수정</a>
 								</div>
 								<div>
-									<a href="/addMenuFrm.do?storeNo=${storeNo }">메뉴 추가</a>
+									<a href="/addMenuFrm.do">메뉴 추가</a>
 								</div>
 								<div>
-									<a href="/MenuFrm.do?storeNo=${storeNo }">메뉴 관리</a>
+									<a href="/MenuFrm.do">메뉴 관리</a>
 								</div>
 							</c:otherwise>
 						</c:choose>
@@ -76,10 +76,10 @@
 									<td>${me.menuName }</td>
 									<td>${me.menuPrice }</td>
 									<td>
-										<button type="button">수정</button>
+										<button type="button" class="btn" style="background-color: rgb(51, 51, 51); color: #fff; padding: 0 10px 0 10px;">수정</button>
 									</td>
 									<td>
-										<button type="button">삭제</button>
+										<button type="button" class="btn" style="background-color: rgb(230, 83, 20); color: #fff; padding: 0 10px 0 10px;">삭제</button>
 									</td>
 								</tr>
 							</c:forEach>
