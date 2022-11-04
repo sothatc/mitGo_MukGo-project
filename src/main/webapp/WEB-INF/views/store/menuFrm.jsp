@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +33,7 @@
 									<a href="/addMenuFrm.do">메뉴 추가</a>
 								</div>
 								<div>
-									<a href="/MenuFrm.do">메뉴 관리</a>
+									<a href="/menuFrm.do">메뉴 관리</a>
 								</div>
 							</c:otherwise>
 						</c:choose>
@@ -64,7 +65,7 @@
 							<tr>
 								<th scope="col">메뉴사진</th>
 								<th scope="col">메뉴명</th>
-								<th scope="col">가격</th>
+								<th scope="col">가격(&#8361;)</th>
 								<th scope="col">수정</th>
 								<th scope="col">삭제</th>
 							</tr>
@@ -74,7 +75,7 @@
 										<img src="resources/upload/menu/${me.menuImg }" style="width: 50px; height: 50px;">
 									</td>
 									<td>${me.menuName }</td>
-									<td>${me.menuPrice }</td>
+									<td><fmt:formatNumber value="${me.menuPrice}" pattern="#,###"/></td>
 									<td>
 										<button type="button" class="btn" style="background-color: rgb(51, 51, 51); color: #fff; padding: 0 10px 0 10px;">수정</button>
 									</td>
