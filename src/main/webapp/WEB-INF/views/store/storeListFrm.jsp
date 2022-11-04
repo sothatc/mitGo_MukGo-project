@@ -15,10 +15,12 @@
 	<div class="header-wrap"></div>
 	<!--헤더-->
 	<div class="storeList-content-wrap">
-		<div class="storeList-searchinput">
-			<input type="text">
-			<button>검색</button>
-		</div>
+		<form action="/searchStoreList.do" method="post">
+			<div class="storeList-searchinput">
+				<input type="text" name="searchTag">
+				<button>검색</button>
+			</div>
+		</form>
 		<div class="storeList-map">
 			<div class="storeList-map-content">
 				<div>강북</div>

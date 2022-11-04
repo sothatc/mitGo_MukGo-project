@@ -241,7 +241,12 @@ public class StoreController {
 		model.addAttribute("total", map.get("total"));
 		model.addAttribute("pageNo", map.get("pageNo"));
 		
-		System.out.println(model);
+		return "store/storeListFrm";
+	}
+	@RequestMapping(value = "/searchStoreList.do")
+	public String searchStoreList(String searchTag, int reqPage, Model model,@RequestParam String category) {
+		ArrayList<Store> list = service.searchStoreList(searchTag,reqPage,category);
+		
 		return "store/storeListFrm";
 	}
 }
