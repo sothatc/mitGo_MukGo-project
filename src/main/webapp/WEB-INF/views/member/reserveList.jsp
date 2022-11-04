@@ -8,5 +8,6 @@
 </head>
 <body>
 	<h3>예약 내역</h3>
+	<div>${rs[0].storeName }</div>
 </body>
 </html>

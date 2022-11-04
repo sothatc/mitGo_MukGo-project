@@ -231,13 +231,13 @@ public class MemberController {
 		}
 	}
 	@RequestMapping(value="/reserveList.do")
-	public String reserveList(@SessionAttribute Member m) {
+	public String reserveList(@SessionAttribute Member m, Model model) {
 		ArrayList<Reserve> rs = service.selectReserveList(m);
-		if(rs != null) {
-			return "member/reserveList";
-		}else {
-			return "/";
+		if(rs.isEmpty()) {
+			return "redirect:/";
 		}
+		model.addAttribute("rs", (ArrayList<Reserve>)rs);
+		return "member/reserveList";
 	}
 	
 }
