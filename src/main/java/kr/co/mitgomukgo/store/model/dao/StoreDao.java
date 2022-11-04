@@ -105,4 +105,8 @@ public class StoreDao {
 		return (ArrayList<Menu>) list;
 	}
 
+	public int deleteMenu(int menuNo) {
+		return sqlSession.delete("deleteMenu", menuNo);
+	}
+
 }

@@ -309,6 +309,10 @@ public class StoreService {
 		return dao.menuList(storeNo);
 
 	}
+
+	public int deleteMenu(int menuNo) {
+		return dao.deleteMenu(menuNo);
+	}
 	
 	
 	
