@@ -224,4 +224,11 @@
 				as thumbNail from store s order by storeNo desc)b where category = #{category})rb order by 3 desc)
 		where rnum between 1 and 9
 	</select>
+	
+	<insert id="insertReserve" parameterType="r">
+		insert into reserve
+		values(RESERVE_SEQ.NEXTVAL, #{memberNo}, #{storeNo}, #{storeName}, to_char(sysdate,'yyyy-mm-dd'),
+		#{eatDate}, #{eatTime}, #{eatNum})
+	</insert>
+	
 </mapper>

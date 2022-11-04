@@ -25,6 +25,7 @@ import common.FileRename;
 import kr.co.mitgomukgo.member.model.vo.Owner;
 import kr.co.mitgomukgo.store.model.service.StoreService;
 import kr.co.mitgomukgo.store.model.vo.Menu;
+import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Review;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import kr.co.mitgomukgo.store.model.vo.StoreImg;
@@ -63,6 +64,18 @@ public class StoreController {
 		String result = gson.toJson(list);
 		return result;
 	}
+	
+	//예약하기
+	@RequestMapping(value = "/reserve.do")
+	public String StoreDetail(int memberNo, Reserve r) {
+		int result = service.reserve(r);
+		if(result>0) {
+			return "redirect:/";
+		}else {
+			return "redirect:/";
+		}
+	}
+	
 
 	@RequestMapping(value = "/addStoreFrm.do")
 	public String addStoreFrm() {
