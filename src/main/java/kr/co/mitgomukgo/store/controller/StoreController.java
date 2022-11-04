@@ -244,8 +244,15 @@ public class StoreController {
 		return "store/storeListFrm";
 	}
 	@RequestMapping(value = "/searchStoreList.do")
-	public String searchStoreList(String searchTag, int reqPage, Model model,@RequestParam String category) {
-		ArrayList<Store> list = service.searchStoreList(searchTag,reqPage,category);
+	public String searchStoreList(String search, int reqPage, Model model,@RequestParam String category) {	
+		HashMap<String, Object> map = service.searchStoreList(search,reqPage,category);
+		
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("category", category);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
 		
 		return "store/storeListFrm";
 	}

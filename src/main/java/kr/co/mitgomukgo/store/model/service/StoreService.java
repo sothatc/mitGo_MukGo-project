@@ -226,7 +226,7 @@ public class StoreService {
 		return tagMap;
 	}
 
-	public ArrayList<Store> searchStoreList(String searchTag, int reqPage, String category) {
+	public HashMap<String, Object> searchStoreList(String searchTag, int reqPage, String category) {
 		// 화면에 보여주는 게시물 수
 		int numPerPage = 9;
 		
@@ -276,7 +276,14 @@ public class StoreService {
 					"            </span></a>";
 		}
 		
-		return list;	
+		HashMap<String, Object> searchTagMap = new HashMap<String, Object>();
+		searchTagMap.put("list", list);
+		searchTagMap.put("reqPage", reqPage);
+		searchTagMap.put("pageNavi", pageNavi);
+		searchTagMap.put("total", totalPage);
+		searchTagMap.put("pageNo", pageNo);
+		
+		return searchTagMap;	
 	}
 	
 	//맛집 상세
