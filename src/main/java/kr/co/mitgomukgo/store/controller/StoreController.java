@@ -155,8 +155,8 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/menuFrm.do")
-	public String menuFrm(@RequestParam int storeNo, Model model) {
-		model.addAttribute("storeNo", storeNo);
+	public String menuFrm(Model model, Store s) {
+		model.addAttribute("s", s);
 		return "store/menuFrm";
 	}
 

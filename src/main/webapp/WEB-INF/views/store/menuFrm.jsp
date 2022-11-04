@@ -50,7 +50,10 @@
 				</ul>
 			</div>
 		</aside>
-		<article id="content" class="content">${sessionScope.o.ownerId }</article>
+		<article id="content" class="content">
+			<div>${s.storeName }</div>
+		
+		</article>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
