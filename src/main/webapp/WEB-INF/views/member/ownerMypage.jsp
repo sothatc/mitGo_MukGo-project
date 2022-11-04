@@ -44,19 +44,17 @@
 		</aside>
 		<article id="content" class="content">
 			<div class="contents">
-		        <form name="ownerCheckIdFrm" action="/ownerCheckId.do">
-					<input type="hidden" name="ownerCheckId">
-				</form>
-		        <form action="/ownerJoin.do" method="post">
+		        <form action="/updateOwner.do" method="post">
+		        <input type="hidden" name="ownerNo" value="${sessionScope.o.ownerNo }">
 		        <div class="membership-form">
 		            <div class="form-write">
-		                <h4>사업자 정보</h4>
+		                <h4>사업자 정보 수정</h4>
 		                    <ul>
 		                        <li>
 		                            <span class="tit">비밀번호</span>
 		                            <div class="cnt">
 		                                <div class="input01">
-		                                    <label class="label" for="ownerPw">대/소문자와 숫자를 포함한 최소 8자리를 입력해주세요.</label>
+		                                    <label class="label" for="ownerPw">대/소문자와 숫자를 포함한 최소 8자리를 입력해주세요.(특수문자x)</label>
 		                                    <input type="password" id="ownerPw" name="ownerPw">
 		                                </div>
 		                                <p class="text-note"></p>
@@ -76,7 +74,9 @@
 		                        	<span class="tit">마켓사용여부</span>
 		                        	<div class="cnt">
 		                        		<div class="selBox01">
+		                        		<input type="hidden" class="myLevel" value>
 			                                <select id="selectMarket" name="ownerLevel">
+			                                    <option value="${sessionScope.o.ownerLevel }" selected="selected"></option>
 			                                    <option value="1">매장이용</option>
 			                                    <option value="2">매장 및 마켓이용</option>
 			                                </select>
@@ -87,7 +87,7 @@
 		                </div>
 		            </div>
 		            <div class="joinBtn">
-		                <input type="submit" id="joinBtn" value="정보수정">
+		                <input type="submit" id="updateBtn" value="정보수정">
 		            </div>
 		        </form>
 		    </div>
@@ -97,8 +97,56 @@
 	 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
-	<!-- 
 	<script>
+		$("input").on("focus",function(){
+		    const label = $(this).prev();
+		    label.css("display","none");
+		});
+		$("input").on("blur",function(){
+		    const label = $(this).prev();
+		    if($(this).val() == ""){
+			    label.css("display","");
+		    }
+		});
+		
+		
+		var selLevel = $("[name=ownerLevel]").children().first();
+		var selLevelVal = selLevel.val();
+		if(selLevelVal == 1) {
+			selLevel.text("매장이용");			
+		}else if(selLevelVal == 2) {
+			selLevel.text("매장 및 마켓 이용");
+		}
+		
+		
+		/*유효성 검사*/
+		$("#updateBtn").on("click", function(){
+			//비밀번호 유효성 검사
+			const pwReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+			const pw = $("#ownerPw");
+			pwValue = pw.val();
+			const pwComment = pw.parent().next();
+			if(pwReg.test(pwValue)){
+				pwComment.text("");
+			}else {
+				pwComment.text("* 대/소문자와 숫자를 포함한 최소 8자리를 입력해주세요.(특수문자x)");
+				pwComment.css("color","red");
+				event.preventDefault();
+			}
+			// 비밀번호 확인 검사
+			const pwVal = pw.val();
+			const pwChk = $("#ownerPw2");
+			const pwChkVal = pwChk.val();
+			const pwChkComment = pwChk.parent().next();
+			if(pwChkVal == pwVal) {
+				
+			}else {
+				pwChkComment.text("* 비밀번호가 일치하지 않습니다.");
+				pwChkComment.css("color","red");
+				event.preventDefault();
+			}
+		});
+	<!-- 
 	function callFunction(){
 		var storeInfo = $(".storeInfo").val();
 		console.log(storeInfo);
@@ -111,8 +159,8 @@
 			}
 		});
 	}
+	 -->
 
 	</script>
-	 -->
 </body>
 </html>
