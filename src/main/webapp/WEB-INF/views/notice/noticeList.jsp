@@ -98,57 +98,20 @@
         	</c:when>
         	
         	<c:otherwise>
-     
+     			
         		<div class="notice-tbl-wrap">
             <table class="notice-tbl" style="border-top: 1px solid gray;">
                 <tr style="height: 70px;">
                     <th>등록일</th>
                     <th>제목</th>
                 </tr>
-
-                <tr>
-                    <td>2022-10-22</td>
-                    <td><a href="#">디지몬 어드벤처 가보자고!!</a></td>
-                </tr>
-
-                <tr>
-                    <td>2022-10-22</td>
-                    <td><a href="#">디지몬 어드벤처 가보자고!!</a></td>
-                </tr>
-
-                <tr>
-                    <td>2022-10-22</td>
-                    <td><a href="#">디지몬 어드벤처 가보자고!!</a></td>
-                </tr>
-
-                <tr>
-                    <td>2022-10-22</td>
-                    <td><a href="#">디지몬 어드벤처 가보자고!!</a></td>
-                </tr>
-
-                <tr>
-                    <td>2022-10-22</td>
-                    <td><a href="#">디지몬 어드벤처 가보자고!!</a></td>
-                </tr>
-
-                <tr>
-                    <td>2022-10-22</td>
-                    <td><a href="#">디지몬 어드벤처 가보자고!!</a></td>
-                </tr>
-
-                <tr>
-                    <td>2022-10-22</td>
-                    <td><a href="#">디지몬 어드벤처 가보자고!!</a></td>
-                </tr>
-                <tr>
-                    <td>2022-10-22</td>
-                    <td><a href="#">디지몬 어드벤처 가보자고!!</a></td>
-                </tr>
-
-                <tr>
-                    <td>2022-10-22</td>
-                    <td><a href="#">디지몬 어드벤처 가보자고!!</a></td>
-                </tr>
+				<c:forEach items="${list }" var="n">
+     				<tr>
+     					<td>${n.noticeDate }</td>
+     					<td><a href="/noticeDetail.do?noticeNo=${n.noticeNo }">${n.noticeTitle }</a></td>
+     				</tr>
+     			</c:forEach>
+                
             </table>
         </div>
         	</c:otherwise>
@@ -158,7 +121,7 @@
     </div>
 
     <div class="paging">
-        <a href="#"><span class="material-symbols-outlined" style="font-size: 30px;">
+        <!-- <a href="#"><span class="material-symbols-outlined" style="font-size: 30px;">
             chevron_left
             </span>
         </a>
@@ -167,7 +130,8 @@
         <a href="#"><span>3</span></a>
         <a href="#"><span class="material-symbols-outlined"  style="font-size: 30px;">
             chevron_right
-            </span></a>
+            </span></a> -->
+            ${pageNavi }
     </div>
 </body>
 </html>

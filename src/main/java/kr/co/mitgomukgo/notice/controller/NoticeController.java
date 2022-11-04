@@ -1,13 +1,17 @@
 package kr.co.mitgomukgo.notice.controller;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -41,6 +45,7 @@ public class NoticeController {
 			return "notice/noticeList";
 		}else {
 			model.addAttribute("list", list.get("list"));
+			model.addAttribute("pageNavi", list.get("pageNavi"));
 			return "notice/noticeList";
 		}
 	}
@@ -134,6 +139,62 @@ public class NoticeController {
 		Gson gson = new Gson();
 		String result = gson.toJson("/resources/upload/notice/editor/" + nf.getFilepath());
 		return result;
+	}
+	
+	@RequestMapping(value="/noticeDetail.do")
+	public String noticeDetail(int noticeNo, Model model) {
+		Notice notice = service.selectOneNotice(noticeNo);
+		
+		if(notice == null) {
+			model.addAttribute("msg", "없는데?");
+			return "notice/noticeDetail";
+		}else {
+			
+			model.addAttribute("n", notice);
+			return "notice/noticeDetail";
+			
+		}
+		
+	}
+	
+	@RequestMapping(value = "/noticeFileDown.do")
+	public void noticeFileDown(int noticeFileNo, Model model, HttpServletRequest request, HttpServletResponse respone) {
+		NoticeFile notice = service.selectOneNoticeFile(noticeFileNo);
+		
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/notice/");
+		String filepath = savePath + notice.getFilepath();
+		
+		try {
+			FileInputStream fis = new FileInputStream(filepath);
+			BufferedInputStream bis = new BufferedInputStream(fis);
+			
+			ServletOutputStream sos = respone.getOutputStream();
+			BufferedOutputStream bos = new BufferedOutputStream(sos);
+			
+			String resFilename = new String(notice.getFilename().getBytes("UTF-8"), "ISO-8859-1");
+			
+			respone.setContentType("application/octet-stream");
+			respone.setHeader("Content-Disposition", "attachment;filename=" + resFilename);
+			
+			while(true) {
+				int read = bis.read();
+				if(read != -1) {
+					bos.write(read);
+				}else {
+					break;
+				}
+			}
+			bis.close();
+			bos.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 }

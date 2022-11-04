@@ -15,7 +15,7 @@ public class Notice {
 	private String noticeTitle;
 	private String noticeWriter;
 	private String noticeContent;
-	private String readCnt;
+	private int readCnt;
 	private String noticeDate;
 	private ArrayList<NoticeFile> fileList;
 }
