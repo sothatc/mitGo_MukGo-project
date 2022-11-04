@@ -40,7 +40,7 @@
 				<ul class="category">
 					<li>
 						<div>
-							<a href="#">내 정보 수정</a>
+							<a href="/ownerMypage.do">내 정보 수정</a>
 						</div> <c:choose>
 							<c:when test="${empty s }">
 								<div>

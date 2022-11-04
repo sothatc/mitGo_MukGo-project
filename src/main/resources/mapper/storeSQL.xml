@@ -241,6 +241,7 @@
         menu_img as menuImg
 		from menu
 		where store_no = #{storeNo}
+		order by 1 DESC
 	</select>
 
 </mapper>

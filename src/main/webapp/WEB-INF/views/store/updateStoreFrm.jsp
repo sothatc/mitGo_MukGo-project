@@ -19,13 +19,13 @@
 			<div class="sidebar-1">
 				<ul class="category">
 					<li>
-						<div><a href="#">내 정보 수정</a></div>
+						<div><a href="/ownerMypage.do">내 정보 수정</a></div>
 						<c:choose>
 							<c:when test="${empty s }">
 								<div><a href="/addStoreFrm.do">업체 등록</a></div>
 							</c:when>
 							<c:otherwise>
-								<div><a href="#">업체 정보 수정</a></div>
+								<div><a href="/updateStoreFrm.do">업체 정보 수정</a></div>
 								<div><a href="/addMenuFrm.do">메뉴 추가</a></div>
 								<div><a href="/menuFrm.do">메뉴 관리</a></div>
 							</c:otherwise>
