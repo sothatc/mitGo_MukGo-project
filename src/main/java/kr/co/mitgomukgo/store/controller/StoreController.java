@@ -14,10 +14,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
@@ -26,6 +26,7 @@ import common.FileRename;
 import kr.co.mitgomukgo.member.model.vo.Owner;
 import kr.co.mitgomukgo.store.model.service.StoreService;
 import kr.co.mitgomukgo.store.model.vo.Menu;
+import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Review;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import kr.co.mitgomukgo.store.model.vo.StoreImg;
@@ -44,20 +45,19 @@ public class StoreController {
 	public String storeDetailView() {
 		return "store/storeDetail";
 	}
-	
-	//맛집 상세 보기
+
+	// 맛집 상세 보기
 	@RequestMapping(value = "/storeDetail.do")
 	public String StoreDetail(int storeNo, Model model) {
-		//ArrayList<Store> list = service.selectOneStore(storeNo);
+		// ArrayList<Store> list = service.selectOneStore(storeNo);
 		Store s = service.selectOneStore(storeNo);
-		model.addAttribute("s",s);
+		model.addAttribute("s", s);
 		return "store/storeDetail";
 	}
-	
-	
+
 	// 맛집 이미지 배열로 가져오기
 	@ResponseBody
-	@RequestMapping(value="/ajaxSelectStore.do",produces="application/json;charset=utf-8")
+	@RequestMapping(value = "/ajaxSelectStore.do", produces = "application/json;charset=utf-8")
 	public String ajaxSelectStore(StoreJoin sj) {
 
 		ArrayList<StoreJoin> list = service.selectOneStoreAjax(sj);
@@ -65,7 +65,19 @@ public class StoreController {
 		String result = gson.toJson(list);
 		return result;
 	}
-	 
+	
+	//예약하기
+	@RequestMapping(value = "/reserve.do")
+	public String StoreDetail(int memberNo, Reserve r) {
+		int result = service.reserve(r);
+		if(result>0) {
+			return "redirect:/";
+		}else {
+			return "redirect:/";
+		}
+	}
+	
+
 	@RequestMapping(value = "/addStoreFrm.do")
 	public String addStoreFrm() {
 		return "store/addStoreFrm";
@@ -152,24 +164,29 @@ public class StoreController {
 			}
 		}
 		int result = service.writeReview(r);
-
 		return "store/successReivewFrm";
 	}
 
+	@RequestMapping(value = "/menuFrm.do")
+	public String menuFrm(@SessionAttribute Store s, Model model) {
+		ArrayList<Menu> list = service.menuList(s.getStoreNo());
+		model.addAttribute("list", list);
+		return "store/menuFrm";
+	}
+
 	@RequestMapping(value = "/addMenuFrm.do")
-	String addMenuFrm(@RequestParam int storeNo, Model model) {
-		model.addAttribute("storeNo", storeNo);
+	public String addMenuFrm() {
 		return "store/addMenuFrm";
 	}
 
 	@RequestMapping(value = "/addMenu.do")
-	String addMenu(Menu me, MultipartFile file, HttpServletRequest request) {
+	public String addMenu(Menu me, MultipartFile file, HttpServletRequest request) {
 		if (!file.isEmpty()) {
 			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/menu/");
 			String imgName = file.getOriginalFilename();
 			String menuPath = fileRename.fileRename(savePath, imgName);
 			try {
-				FileOutputStream fos = new FileOutputStream(new File(savePath + file));
+				FileOutputStream fos = new FileOutputStream(new File(savePath + menuPath));
 				BufferedOutputStream bos = new BufferedOutputStream(fos);
 				byte[] bytes = file.getBytes();
 				bos.write(bytes);
@@ -188,51 +205,41 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/updateStoreFrm.do")
-	public String updateStoreFrm(HttpSession session, Model model, @RequestParam int storeNo) {
+	public String updateStoreFrm(HttpSession session, Model model) {
 		Owner o = (Owner) session.getAttribute("o");
 		ArrayList<Store> s = service.selectStore(o);
 		model.addAttribute("s", (ArrayList<Store>) s);
-		model.addAttribute("storeNo",storeNo);
 		return "/store/updateStoreFrm";
 	}
-	
+
 	/*
-	@ResponseBody
-	@RequestMapping(value = "/ajaxClicktag.do", produces = "application/json;charset=utf-8")
-	public String ajaxClicktag(int tagValue, int reqPage, Model model) {
-		HashMap<String, Object> map = service.storeList(tagValue,reqPage);
-		//System.out.println(map);
-		if(map == null) {
+	 * @ResponseBody
+	 * 
+	 * @RequestMapping(value = "/ajaxClicktag.do", produces =
+	 * "application/json;charset=utf-8") public String ajaxClicktag(int tagValue,
+	 * int reqPage, Model model) { HashMap<String, Object> map =
+	 * service.storeList(tagValue,reqPage); //System.out.println(map); if(map ==
+	 * null) {
+	 * 
+	 * HashMap<String, Object> map = service.storeList(tagValue, reqPage);
+	 * System.out.println(map); if (map == null) { model.addAttribute("msg",
+	 * "아직 등록된 업체 가 없습니다."); return "store/storeListFrm"; } else {
+	 * 
+	 * model.addAttribute("list", map.get("list")); model.addAttribute("reqPage",
+	 * reqPage); model.addAttribute("pageNavi", map.get("pageNavi"));
+	 * model.addAttribute("total", map.get("total")); model.addAttribute("pageNo",
+	 * map.get("pageNo"));
+	 * 
+	 * // 착각하지말것 json은 객체타입이 아닌 문자열임 // 그런고로 String 타입으로 받음 Gson gson = new Gson();
+	 * String result = gson.toJson(map); //System.out.println(result);
+	 * //System.out.println(model);
+	 * 
+	 * return result; } }
+	 */
 
-		HashMap<String, Object> map = service.storeList(tagValue, reqPage);
-		System.out.println(map);
-		if (map == null) {
-			model.addAttribute("msg", "아직 등록된 업체 가 없습니다.");
-			return "store/storeListFrm";
-		} else {
-
-			model.addAttribute("list", map.get("list"));
-			model.addAttribute("reqPage", reqPage);
-			model.addAttribute("pageNavi", map.get("pageNavi"));
-			model.addAttribute("total", map.get("total"));
-			model.addAttribute("pageNo", map.get("pageNo"));
-
-			// 착각하지말것 json은 객체타입이 아닌 문자열임
-			// 그런고로 String 타입으로 받음
-			Gson gson = new Gson();
-			String result = gson.toJson(map);
-			//System.out.println(result);
-			//System.out.println(model);
-
-			return result;
-		}
-	}
-	*/
-	
-	
 	@RequestMapping(value = "/selectTag.do")
 	public String selectTag(String category, int reqPage, Model model) {
-		HashMap<String, Object> map = service.selectTag(category,reqPage);
+		HashMap<String, Object> map = service.selectTag(category, reqPage);
 
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
@@ -240,9 +247,10 @@ public class StoreController {
 		model.addAttribute("pageNavi", map.get("pageNavi"));
 		model.addAttribute("total", map.get("total"));
 		model.addAttribute("pageNo", map.get("pageNo"));
-		
+
 		return "store/storeListFrm";
 	}
+
 	@RequestMapping(value = "/searchStoreList.do")
 	public String searchStoreList(String search, int reqPage, Model model,@RequestParam String category) {	
 		HashMap<String, Object> map = service.searchStoreList(search,reqPage,category);

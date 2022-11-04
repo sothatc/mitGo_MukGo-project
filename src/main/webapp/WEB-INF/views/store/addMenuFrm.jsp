@@ -7,8 +7,15 @@
 <title>리뷰쓰기</title>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <style>
+.menu{
+	padding-left: 20px;
+	width: 848px;
+}
+.menu-wrap{
+	width: 100%;
+}
+
 .menuTitle {
-	text-align: center;
 	margin-top: 50px;
 }
 
@@ -20,13 +27,12 @@ hr {
 }
 
 #menuForm {
-	width: 720px;
 	margin: 0 auto;
 }
 
 #menuForm input {
 	box-sizing: border-box;
-	width: 720px;
+	width: 100%;
 	height: 30px;
 	margin: 20px 0 20px 0;
 	border: 0;
@@ -99,33 +105,82 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<div class="menuTitle">
-		<h1>메뉴 추가</h1>
+	<link rel="stylesheet" href="/resources/css/member/owner.css">
+	<div class="content-wrap">
+		<h2>사업자 마이페이지</h2>
+		<aside id="aside" class="sidebar">
+			<div class="sidebar-1">
+				<ul class="category">
+					<li>
+						<div>
+							<a href="#">내 정보 수정</a>
+						</div>
+						<c:choose>
+							<c:when test="${empty s }">
+								<div>
+									<a href="/addStoreFrm.do">업체 등록</a>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div>
+									<a href="/updateStoreFrm.do">업체 정보 수정</a>
+								</div>
+								<div>
+									<a href="/addMenuFrm.do">메뉴 추가</a>
+								</div>
+								<div>
+									<a href="/menuFrm.do">메뉴 관리</a>
+								</div>
+							</c:otherwise>
+						</c:choose>
+						<div>
+							<a href="/ownerLogout.do">로그아웃</a>
+						</div>
+						<div>
+							<a href="#">회원 탈퇴</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+			<div class="sidebar-2">
+				<ul class="category">
+					<li>
+						<h4>공지사항</h4>
+					</li>
+				</ul>
+			</div>
+		</aside>
+		<article id="content" class="content">
+			<div class="menu" style="display: flex;">
+				<div class="menu-wrap">
+					<div class="menuTitle">
+						<h1>메뉴 추가</h1>
+					</div>
+					<hr>
+					<br>
+					<form class="mb-3" id="menuForm" method="post" action="/addMenu.do" enctype="multipart/form-data">
+						<div>
+							<label for="inputName">메뉴이름을 입력해주세요</label>
+							<input type="text" id="inputName" name="menuName">
+						</div>
+						<div>
+							<label for="inputPrice">가격을 입력해주세요</label>
+							<input type="number" id="inputPrice" name="menuPrice" placeholder="예) 1000원 -> 1000">
+							<span class="comment" style="font-size: 12px; padding-left: 10px;"></span>
+						</div>
+						<div>
+							<input type="hidden" name="storeNo" value="${sessionScope.s.storeNo }">
+							<input type="file" name="file" class="file-upload" id="file" style="visibility: hidden; position: absolute;" accept="image/gif, image/jpg, image/jpeg, image/png">
+							<button class="inputPhoto" type="button" id="inputPhoto">사진 첨부하기</button>
+						</div>
+						<div class="btnWrap">
+							<button type="submit" value="등록">등록</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</article>
 	</div>
-	<hr>
-	<br>
-	<form class="mb-3" id="menuForm" method="post" action="/addMenu.do" enctype="multipart/form-data">
-		<div>
-			<label for="inputName">메뉴이름을 입력해주세요</label>
-			<br>
-			<input type="text" id="inputName" name="menuName">
-		</div>
-		<div>
-			<label for="inputPrice">가격을 입력해주세요</label>
-			<br>
-			<input type="number" id="inputPrice" name="menuPrice" placeholder="예) 1000원 -> 1000">
-			<span class="comment" style="font-size: 12px; padding-left: 10px;"></span>
-		</div>
-		<div>
-			<input type="hidden" name="storeNo" value="${storeNo }">
-			<input type="file" name="file" class="file-upload" id="file" style="visibility: hidden; position: absolute;" accept="image/gif, image/jpg, image/jpeg, image/png">
-			<button class="inputPhoto" type="button" id="inputPhoto">사진 첨부하기</button>
-		</div>
-		<div class="btnWrap">
-			<button type="submit" value="등록">등록</button>
-		</div>
-	</form>
-	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	<script>
 		(function($) {

@@ -18,5 +18,6 @@ public class Reserve {
 	private String reserveDate;
 	private String eatDate;
 	private String eatTime;
+	private int eatNum;
 	
 }

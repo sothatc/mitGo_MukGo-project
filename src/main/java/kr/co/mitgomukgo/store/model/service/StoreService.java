@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import kr.co.mitgomukgo.member.model.vo.Owner;
 import kr.co.mitgomukgo.store.model.dao.StoreDao;
 import kr.co.mitgomukgo.store.model.vo.Menu;
+import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Review;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import kr.co.mitgomukgo.store.model.vo.StoreImg;
@@ -296,6 +297,17 @@ public class StoreService {
 	public ArrayList<StoreJoin> selectOneStoreAjax(StoreJoin sj) {
 		ArrayList<StoreJoin> list = dao.selectOneStoreAjax(sj);
 		return list;
+	}
+
+
+	//예약하기
+	public int reserve(Reserve r) {
+		return dao.reserve(r);
+	}
+	
+	public ArrayList<Menu> menuList(int storeNo) {
+		return dao.menuList(storeNo);
+
 	}
 	
 	

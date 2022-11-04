@@ -230,7 +230,7 @@
 			if(pwReg.test(pwValue)){
 				pwComment.text("");
 			}else {
-				pwComment.text("* 대/소문자와 숫자를 포함한 최소 8자리를 입력해주세요.");
+				pwComment.text("* 대/소문자와 숫자를 포함한 최소 8자리를 입력해주세요.(특수문자x)");
 				pwComment.css("color","red");
 				event.preventDefault();
 			}

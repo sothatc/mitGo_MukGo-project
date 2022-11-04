@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.annotation.SessionScope;
 
 import kr.co.mitgomukgo.member.model.service.MemberService;
 import kr.co.mitgomukgo.member.model.vo.Member;
@@ -185,9 +186,9 @@ public class MemberController {
 		return "member/mypage";
 	}
 	@RequestMapping(value="/ownerMypage.do")
-	public String ownerMypage(int ownerNo, Model model) {
+	public String ownerMypage(int ownerNo, HttpSession session) {
 		Store s = service.searchStore(ownerNo);
-		model.addAttribute("s", s);
+		session.setAttribute("s", s);
 		return "member/ownerMypage";
 	}
 	@RequestMapping(value="/selectJoin.do")
@@ -205,6 +206,16 @@ public class MemberController {
 			return "redirect:/";
 		}else {
 			return "member/ownerJoinFrm";
+		}
+	}
+	
+	@RequestMapping(value="/updateOwner.do")
+	public String updateOwner(Owner o) {
+		int result = service.updateOwner(o);
+		if(result > 0) {
+			return "redirect:/";
+		}else {
+			return "member/ownerMyPage";
 		}
 	}
 }

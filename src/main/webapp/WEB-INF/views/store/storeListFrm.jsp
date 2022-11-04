@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -7,8 +6,7 @@
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>Insert title here</title>
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
 	<link rel="stylesheet" href="/resources/css/store/storeList.css">
@@ -33,16 +31,36 @@
 		<div class="storeList-tag">
 			<div class="storeList-tag-content">
 				<ul>
-					<li><a href="/storeList.do?reqPage=1">전체</a></li>
-					<li><a href="/selectTag.do?category=1&reqPage=1"><img src="/resources/img/bibimpab.png">한식</a></li>
-					<li><a href="/selectTag.do?category=2&reqPage=1"><img src="/resources/img/food.png">양식</a></li>
-					<li><a href="/selectTag.do?category=3&reqPage=1"><img src="/resources/img/salmon.png">일식</a></li>
-					<li><a href="/selectTag.do?category=4&reqPage=1"><img src="/resources/img/dimpling.png">중식</a></li>
-					<li><a href="/selectTag.do?category=5&reqPage=1"><img src="/resources/img/tteokbokki.png">분식</a></li>
-					<li><a href="/selectTag.do?category=6&reqPage=1"><img src="/resources/img/chicken.png">육류</a></li>
-					<li><a href="/selectTag.do?category=7&reqPage=1"><img src="/resources/img/sea-food.png">씨푸드</a></li>
-					<li><a href="/selectTag.do?category=8&reqPage=1"><img src="/resources/img/dessert.png">디저트</a></li>
-					<li><a href="/selectTag.do?category=9&reqPage=1">기타</a></li>
+					<li>
+						<a href="/storeList.do?reqPage=1">전체</a>
+					</li>
+					<li>
+						<a href="/selectTag.do?category=1&reqPage=1"><img src="/resources/img/bibimpab.png">한식</a>
+					</li>
+					<li>
+						<a href="/selectTag.do?category=2&reqPage=1"><img src="/resources/img/food.png">양식</a>
+					</li>
+					<li>
+						<a href="/selectTag.do?category=3&reqPage=1"><img src="/resources/img/salmon.png">일식</a>
+					</li>
+					<li>
+						<a href="/selectTag.do?category=4&reqPage=1"><img src="/resources/img/dimpling.png">중식</a>
+					</li>
+					<li>
+						<a href="/selectTag.do?category=5&reqPage=1"><img src="/resources/img/tteokbokki.png">분식</a>
+					</li>
+					<li>
+						<a href="/selectTag.do?category=6&reqPage=1"><img src="/resources/img/chicken.png">육류</a>
+					</li>
+					<li>
+						<a href="/selectTag.do?category=7&reqPage=1"><img src="/resources/img/sea-food.png">씨푸드</a>
+					</li>
+					<li>
+						<a href="/selectTag.do?category=8&reqPage=1"><img src="/resources/img/dessert.png">디저트</a>
+					</li>
+					<li>
+						<a href="/selectTag.do?category=9&reqPage=1">기타</a>
+					</li>
 				</ul>
 			</div>
 		</div>
