@@ -155,6 +155,7 @@
 		from store 
 		where store_no = #{_parameter}
 	</select>
+	
 
 
 	<select id="countAllList" resultType="_int">

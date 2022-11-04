@@ -47,5 +47,6 @@ public class MemberDao {
 		Store s = sqlSession.selectOne("store.searchStore", ownerNo);
 		return s;
 	}
+
 	
 }
