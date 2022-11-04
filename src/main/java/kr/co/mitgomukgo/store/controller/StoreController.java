@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -155,8 +154,10 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/menuFrm.do")
-	public String menuFrm(Model model, Store s) {
-		model.addAttribute("s", s);
+	public String menuFrm(@RequestParam int storeNo, Model model) {
+		model.addAttribute("storeNo", storeNo);
+		ArrayList<Menu> list = service.menuList(storeNo);
+		model.addAttribute("list", list);
 		return "store/menuFrm";
 	}
 
@@ -173,7 +174,7 @@ public class StoreController {
 			String imgName = file.getOriginalFilename();
 			String menuPath = fileRename.fileRename(savePath, imgName);
 			try {
-				FileOutputStream fos = new FileOutputStream(new File(savePath + file));
+				FileOutputStream fos = new FileOutputStream(new File(savePath + menuPath));
 				BufferedOutputStream bos = new BufferedOutputStream(fos);
 				byte[] bytes = file.getBytes();
 				bos.write(bytes);

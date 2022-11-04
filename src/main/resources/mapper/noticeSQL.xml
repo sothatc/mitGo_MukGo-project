@@ -28,4 +28,66 @@
 		insert into
 		notice_file_tbl values(notice_file_seq.nextval, #{noticeNo}, #{filename}, #{filepath})
 	</insert>
+	
+	<select id="selectNoticeCount" resultType="int">
+		select count(*) from notice_tbl
+	</select>
+	
+	<update id="updateReadCount" parameterType="int">
+		update notice_tbl
+		set read_cnt = read_cnt + 1 where notice_no = #{noticeNo}
+	</update>
+	
+	<select id="selectReadCount" parameterType="int" resultType="int">
+		select read_cnt as readCnt from notice_tbl where notice_no = #{noticeNo}
+	</select>
+	
+	<select id="selectOneNotice" parameterType="int" resultType="n">
+		select 
+		        notice_no as noticeNo,
+		        notice_title as noticeTitle,
+		        notice_writer as noticeWriter,
+		        notice_content as noticeContent,
+		        read_cnt as readCnt,
+		        notice_date as noticeDate
+		from notice_tbl where notice_no = #{noticeNo}
+	</select>
+	
+	<select id="selectAllNoticeFile" parameterType="int" resultType="nf">
+		select
+			notice_file_no as noticeFileNo,
+			notice_no as noticeNo,
+			filename,
+			filepath
+		from notice_file_tbl where notice_no = #{noticeNo}
+	</select>
+	
+	<select id="selectOneNoticeFile" parameterType="int" resultType="nf">
+		select
+			notice_file_no as noticeFileNo,
+			notice_no as noticeNo,
+			filename,
+			filepath
+		from notice_file_tbl where notice_file_no = #{noticeFileNo}
+	</select>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
