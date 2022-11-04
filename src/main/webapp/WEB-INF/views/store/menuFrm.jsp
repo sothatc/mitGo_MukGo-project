@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
@@ -6,6 +7,28 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.btn1 {
+	background-color: rgb(51, 51, 51) !important;
+	color: #fff !important;
+	padding: 0 10px 0 10px !important;
+}
+
+.btn2 {
+	background-color: rgb(230, 83, 20) !important;
+	color: #fff !important;
+	padding: 0 10px 0 10px !important;
+}
+
+.btn1:hover {
+	font-weight: 600;
+}
+
+.btn2:hover {
+	font-weight: 600;
+	border: 1px solid rgb(230, 83, 20) !important;
+}
+</style>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -18,8 +41,7 @@
 					<li>
 						<div>
 							<a href="#">내 정보 수정</a>
-						</div>
-						<c:choose>
+						</div> <c:choose>
 							<c:when test="${empty s }">
 								<div>
 									<a href="/addStoreFrm.do">업체 등록</a>
@@ -61,7 +83,8 @@
 						<div class="contentHead">
 							<h2>메뉴 관리</h2>
 						</div>
-						<table class="table" style="text-align: center; vertical-align: middle;">
+						<table class="table"
+							style="text-align: center; vertical-align: middle;">
 							<tr>
 								<th scope="col">메뉴사진</th>
 								<th scope="col">메뉴명</th>
@@ -71,16 +94,16 @@
 							</tr>
 							<c:forEach items="${ list}" var="me">
 								<tr>
-									<td>
-										<img src="resources/upload/menu/${me.menuImg }" style="width: 50px; height: 50px;">
-									</td>
+									<td><img src="resources/upload/menu/${me.menuImg }"
+										style="width: 50px; height: 50px;"></td>
 									<td>${me.menuName }</td>
-									<td><fmt:formatNumber value="${me.menuPrice}" pattern="#,###"/></td>
+									<td><fmt:formatNumber value="${me.menuPrice}"
+											pattern="#,###" /></td>
 									<td>
-										<button type="button" class="btn" style="background-color: rgb(51, 51, 51); color: #fff; padding: 0 10px 0 10px;">수정</button>
+										<button type="button" class="btn btn1">수정</button>
 									</td>
 									<td>
-										<button type="button" class="btn" style="background-color: rgb(230, 83, 20); color: #fff; padding: 0 10px 0 10px;">삭제</button>
+										<button type="button" class="btn btn2">삭제</button>
 									</td>
 								</tr>
 							</c:forEach>
