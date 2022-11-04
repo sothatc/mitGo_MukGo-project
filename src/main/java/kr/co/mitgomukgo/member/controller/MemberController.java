@@ -186,9 +186,9 @@ public class MemberController {
 		return "member/mypage";
 	}
 	@RequestMapping(value="/ownerMypage.do")
-	public String ownerMypage(int ownerNo, Model model) {
+	public String ownerMypage(int ownerNo, HttpSession session) {
 		Store s = service.searchStore(ownerNo);
-		model.addAttribute("s", s);
+		session.setAttribute("s", s);
 		return "member/ownerMypage";
 	}
 	@RequestMapping(value="/selectJoin.do")
