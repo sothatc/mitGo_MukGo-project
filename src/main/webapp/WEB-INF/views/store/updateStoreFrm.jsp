@@ -19,6 +19,7 @@
 			<div class="sidebar-1">
 				<ul class="category">
 					<li>
+						<input type="hidden" class="sendOwnerNo" value="${sessionScope.o.ownerNo }">
 						<div><a href="/ownerMypage.do">내 정보 수정</a></div>
 						<c:choose>
 							<c:when test="${empty s }">

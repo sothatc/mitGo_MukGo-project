@@ -189,7 +189,9 @@ public class MemberController {
 		return "member/mypage";
 	}
 	@RequestMapping(value="/ownerMypage.do")
-	public String ownerMypage(int ownerNo, HttpSession session) {
+	public String ownerMypage(HttpSession session) {
+		Owner o = (Owner)session.getAttribute("o");
+		int ownerNo = o.getOwnerNo();
 		Store s = service.searchStore(ownerNo);
 		session.setAttribute("s", s);
 		return "member/ownerMypage";
