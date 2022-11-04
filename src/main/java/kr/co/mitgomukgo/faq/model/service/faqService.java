@@ -70,7 +70,7 @@ public class faqService {
 		if(end <= totalPage) {
 			pageNavi += "<a href='/selectAllFaq.do?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
 					"            chevron_right\r\n" + 
-					"            </span></a>";
+					"            </span></a>"; 
 		}
 		
 		
