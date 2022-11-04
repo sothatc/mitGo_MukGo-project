@@ -22,8 +22,8 @@
 								<div><a href="/addStoreFrm.do">업체 등록</a></div>
 							</c:when>
 							<c:otherwise>
-								<div><a href="/updateStoreFrm.do">업체 정보 수정</a></div>
-								<div><a href="/addMenuFrm.do?storeNo=${s.storeNo }">메뉴 추가</a></div>
+								<div><a href="/updateStoreFrm.do?storeNo=${s.storeNo }">업체 정보 수정</a></div>
+								<div><a href="/menuFrm.do?storeNo=${s.storeNo }">메뉴 관리</a></div>
 							</c:otherwise>
 						</c:choose>
 						<div><a href="/ownerLogout.do">로그아웃</a></div>
@@ -34,7 +34,7 @@
 			<div class="sidebar-2">
 				<ul class="category">
 					<li>
-						<h4>공지사항</h3>
+						<h4>공지사항</h4>
 					</li>
 				</ul>
 			</div>
