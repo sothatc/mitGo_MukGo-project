@@ -34,7 +34,7 @@
 			<div class="sidebar-2">
 				<ul class="category">
 					<li>
-						<h4>공지사항</h3>
+						<h4>공지사항</h4>
 					</li>
 				</ul>
 			</div>
