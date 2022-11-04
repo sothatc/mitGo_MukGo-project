@@ -65,18 +65,17 @@ public class StoreController {
 		String result = gson.toJson(list);
 		return result;
 	}
-	
-	//예약하기
+
+	// 예약하기
 	@RequestMapping(value = "/reserve.do")
 	public String StoreDetail(int memberNo, Reserve r) {
 		int result = service.reserve(r);
-		if(result>0) {
+		if (result > 0) {
 			return "redirect:/";
-		}else {
+		} else {
 			return "redirect:/";
 		}
 	}
-	
 
 	@RequestMapping(value = "/addStoreFrm.do")
 	public String addStoreFrm() {
@@ -204,6 +203,12 @@ public class StoreController {
 		return "redirect:/menuFrm.do";
 	}
 
+	@RequestMapping(value = "/deleteMenu.do")
+	public String deleteMenu(int menuNo) {
+		int result = service.deleteMenu(menuNo);
+		return "redirect:/menuFrm.do";
+	}
+
 	@RequestMapping(value = "/updateStoreFrm.do")
 	public String updateStoreFrm(HttpSession session, Model model) {
 		Owner o = (Owner) session.getAttribute("o");
@@ -252,16 +257,16 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/searchStoreList.do")
-	public String searchStoreList(String search, int reqPage, Model model,@RequestParam String category) {	
-		HashMap<String, Object> map = service.searchStoreList(search,reqPage,category);
-		
+	public String searchStoreList(String search, int reqPage, Model model, @RequestParam String category) {
+		HashMap<String, Object> map = service.searchStoreList(search, reqPage, category);
+
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
 		model.addAttribute("category", category);
 		model.addAttribute("pageNavi", map.get("pageNavi"));
 		model.addAttribute("total", map.get("total"));
 		model.addAttribute("pageNo", map.get("pageNo"));
-		
+
 		return "store/storeListFrm";
 	}
 }

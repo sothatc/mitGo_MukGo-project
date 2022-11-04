@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>메뉴 관리</title>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <style>
 .btn1 {
 	background-color: rgb(51, 51, 51) !important;
@@ -94,6 +95,7 @@
 							</tr>
 							<c:forEach items="${ list}" var="me">
 								<tr>
+									<td style="display: none">${me.menuNo }</td>
 									<td><img src="resources/upload/menu/${me.menuImg }"
 										style="width: 50px; height: 50px;"></td>
 									<td>${me.menuName }</td>
@@ -103,7 +105,7 @@
 										<button type="button" class="btn btn1">수정</button>
 									</td>
 									<td>
-										<button type="button" class="btn btn2">삭제</button>
+										<button type="button" class="btn btn2 deleteBtn">삭제</button>
 									</td>
 								</tr>
 							</c:forEach>
@@ -114,5 +116,13 @@
 		</article>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+	<script>
+		$(".deleteBtn").on("click", function() {
+			const menuNo = $(this).parent().parent().children().eq(0).text();
+			if (confirm("메뉴를 삭제하시겠습니까?")) {
+				$(location).attr('href', "/deleteMenu.do?menuNo=" + menuNo);
+			}
+		});
+	</script>
 </body>
 </html>

@@ -243,5 +243,9 @@
 		where store_no = #{storeNo}
 		order by 1 DESC
 	</select>
-
+	
+	<delete id="deleteMenu" parameterType="int">
+		delete from menu
+		where menu_No = #{menuNo}
+	</delete>
 </mapper>
