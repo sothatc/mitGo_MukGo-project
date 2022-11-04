@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -24,7 +23,7 @@
 						<label for="inputName">업체명을 입력해주세요</label>
 						<br>
 						<input type="text" class="form-control" id="inputName" name="storeName" placeholder="대표 업체명을 입력해주세요." required oninvalid="this.setCustomValidity('업체명을 입력해주세요')" oninput="this.setCustomValidity('')">
-						<input type="hidden" name="ownerNo" value="${ownerNo }">
+						<input type="hidden" name="ownerNo" value="${sessionScope.o.ownerNo }">
 					</div>
 					<br>
 					<div class="form-group">
@@ -128,5 +127,6 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script type="text/javascript" src="/resources/js/store/addStoreFrm.js"></script>
+	
 </body>
 </html>

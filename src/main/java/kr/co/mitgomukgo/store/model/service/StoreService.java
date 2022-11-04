@@ -183,7 +183,7 @@ public class StoreService {
 		map.put("end", end);
 		map.put("category", category);
 		ArrayList<Store> list = dao.selectTag(map);
-		System.out.println(list);
+
 		int totalPage = dao.countTagList(category);
 		int pageNaviSize = 2;
 		int pageNo = 1;
@@ -225,6 +225,59 @@ public class StoreService {
 		
 		return tagMap;
 	}
+
+	public ArrayList<Store> searchStoreList(String searchTag, int reqPage, String category) {
+		// 화면에 보여주는 게시물 수
+		int numPerPage = 9;
+		
+		// 끝페이지
+		int end = numPerPage * reqPage;
+		
+		// 시작페이지
+		int start = (end-numPerPage) + 1;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("category", category);
+		map.put("searchTag", searchTag);
+		ArrayList<Store> list = dao.searchStoreList(map);
+		
+		int totalPage = dao.countTagList(searchTag);
+		int pageNaviSize = 2;
+		int pageNo = 1;
+		
+		if(reqPage > 2) {
+			pageNo = reqPage - 1;
+		}
+		
+		String pageNavi = "";
+		if(pageNo != 1) {
+			pageNavi += "<a href='/selectTag.do?category="+category+"&reqPage=" +(pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_left\r\n" + 
+					"            </span></a>";
+		}
+		
+		for(int i = 0; i < pageNaviSize; i++) {
+			if(reqPage == pageNo) {
+				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
+			}else {
+				pageNavi += "<a href='/selectTag.do?category="+category+"&reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		
+		if(end <= totalPage) {
+			pageNavi += "<a href='/selectTag.do?category="+category+"&reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_right\r\n" + 
+					"            </span></a>";
+		}
+		
+		return list;	
+	}
 	
 	//맛집 상세
 	public Store selectOneStore(int storeNo) {
@@ -232,9 +285,9 @@ public class StoreService {
 		return s;
 	}
 	
-	//맛집 상세보기
-	public ArrayList<Store> selectOneStoreAjax(int storeNo) {
-		ArrayList<Store> list = dao.selectOneStoreAjax(storeNo);
+	//맛집 - 조인
+	public ArrayList<StoreJoin> selectOneStoreAjax(StoreJoin sj) {
+		ArrayList<StoreJoin> list = dao.selectOneStoreAjax(sj);
 		return list;
 	}
 	

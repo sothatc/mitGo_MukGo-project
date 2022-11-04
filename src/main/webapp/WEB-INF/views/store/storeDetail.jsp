@@ -32,13 +32,15 @@
          </div>
 
          <div class="content-wrap1-2">
-            <a class="material-symbols-rounded share pointer" id="share" href="javascript:shareMessage()">share</a>
-            <span class="material-symbols-rounded favorite pointer" id="favorite" style="display:none;">favorite</span>
-            <span class="material-symbols-outlined unfavorite pointer" id="unfavorite" style="float:right; margin-top:10px; margin-right:20px;">favorite</span>
+         	<c:choose>
+	        	<c:when test="${!empty sessionScope.m }">
+	            	<a class="material-symbols-rounded share pointer" id="share" href="javascript:shareMessage()">share</a>
+            		<span class="material-symbols-rounded favorite pointer" id="favorite" style="display:none;">favorite</span>
+            		<span class="material-symbols-outlined unfavorite pointer" id="unfavorite" style="float:right; margin-top:10px; margin-right:20px;">favorite</span>
+	            </c:when>
+			</c:choose>
          </div>
-
       </div>
-
 
       <div class="content-wrap2">
          <div class="content-wrap2-1">
@@ -108,27 +110,28 @@
                      <td colspan="3" class="buttonTd"></td>
                   </tr>
                </table>
-               <button name="reserveBtn" class="reserveBtn2" style="font-family:Gowun Dodum;">예약하기</button>
-               <button name="recommendBtn" style="font-family:Gowun Dodum;">추천글작성</button>
+               <c:choose>
+	               <c:when test="${empty sessionScope.m }">
+	               		<a href="/loginFrm.do">
+		                	<button id="loginBtn" style="font-family:Gowun Dodum;  width:560px; height:50px; background-color: rgb(51,51,51); color: white;
+		                	margin-top: 10px;">로그인</button>
+	                	</a>
+	               </c:when>
+	               <c:otherwise>
+	                    <button name="reserveBtn" class="reserveBtn2" style="font-family:Gowun Dodum;">예약하기</button>
+	             		<button name="recommendBtn" style="font-family:Gowun Dodum;">추천글작성</button>
+	               </c:otherwise>
+				</c:choose>
             </div>
          </div>
       </div>
    </div>
 
-   <!--조회수 및 후기 수-->
-   <div class="content-wrap3" style="font-family:Gowun Dodum;">
-      <div class="content-wrap3-1">
-         <span class="material-symbols-outlined">visibility</span>
-         <span>100</span>
-         <span class="material-symbols-outlined">rate_review</span>
-         <span>100</span>
-      </div>
-   </div>
 
    <!--상세 페이지-->
-   <div class="content-wrap4" style="font-family:Gowun Dodum;">
+   <div class="content-wrap4" style="font-family:Gowun Dodum; margin-top:30px;">
       <div class="testDiv">
-         <p class="menuTitle">MENU</p>
+         <p class="menuTitle" style="margin-top: 10px;">MENU</p>
          <blockquote class="w3-panel w3-leftbar w3-light-grey" id="menuWrap">
             <div class="menuWrap" style="font-family:Gowun Dodum;">
                <p class="menuSubTitle">대표메뉴</p>
@@ -319,6 +322,9 @@
           </div>
        </div>
        </div>
+       <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+       
+       
        
        <!------------------------ 시간 날짜 미입력 모달 -->
        <div class="w3-container" style="font-family:Gowun Dodum;">
@@ -450,6 +456,16 @@
             return [result];
             
          }
+         
+         
+         //-------------------주소 * 없애기
+         function addrSlice() {
+             const addr = $(".addressTd");
+             console.log(addr);
+             const splitWord = addr.text().split("*");
+                addr.text(splitWord[1] + " " +splitWord[2]);
+             }
+             addrSlice();
 
          //----------------------------- 인원수 늘리기
             let count = 1;
@@ -499,10 +515,13 @@
       
        //-------------------------------------------------------------------@@@@@@@@@@@@@@@@@@@@@       AJAX 
          var storePhoto;
+       	 var storeNo = "${s.storeNo}";
          $.ajax({
             url: "/ajaxSelectStore.do",
+            type:"post",
+            data: {storeNo:storeNo},
             success: function(data){
-               console.log(data);
+               console.log(storeNo);
                const storeImgUl = $(".storeImgUl");
                storePhoto = new Array();
             for(let i=0; i<data.length; i++){
@@ -548,18 +567,18 @@
                addressTitle : "${s.storeName}",
                content : {
                   title : "${s.storeName}",
-                  description : "${s.storeName}"+"먹으러갈까요~~?",
-                  imageUrl : 'http://192.168.10.26/resources/img/logo.png',
+                  description : "${s.storeName}"+" 로 지금 먹으러갈까요~~?",
+                  imageUrl : 'http://192.168.10.26/resources/img/logo.pmg',
                   link : {
-                     mobileWebUrl : 'http://192.168.10.26/storeDetailView.do',
-                     webUrl : 'http://192.168.10.26/storeDetailView.do',
+                     mobileWebUrl : 'http://192.168.10.26/storeDetail.do?storeNo='+storeNo,
+                     webUrl : 'http://192.168.10.26/storeDetail.do?storeNo='+storeNo
                   },
                },
                buttons : [ {
                   title : '웹으로 보기',
                   link : {
-                     mobileWebUrl : 'http://192.168.10.26/storeDetailView.do',
-                     webUrl : 'http://192.168.10.26/storeDetailView.do',
+                     mobileWebUrl : 'http://192.168.10.26/storeDetail.do?storeNo='+storeNo,
+                     webUrl : 'http://192.168.10.26/storeDetail.do?storeNo='+storeNo
                   }
                } ]
             });
@@ -593,7 +612,6 @@
             });
          }
          init();
-         
          
       </script>
 

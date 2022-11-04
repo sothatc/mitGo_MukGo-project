@@ -20,7 +20,7 @@
 
 		<typeAlias type="kr.co.mitgomukgo.store.model.vo.StoreJoin" alias="sj" />
 		<typeAlias type="kr.co.mitgomukgo.store.model.vo.updateRating" alias="rt" />
-	
+		<typeAlias type="kr.co.mitgomukgo.store.model.vo.Reserve" alias="rs" />
 
 	</typeAliases>
 </configuration>

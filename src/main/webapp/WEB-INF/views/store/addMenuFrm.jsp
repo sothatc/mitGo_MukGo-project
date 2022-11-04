@@ -108,7 +108,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		<div>
 			<label for="inputName">메뉴이름을 입력해주세요</label>
 			<br>
-			<input type="text" id="inputName" name="content">
+			<input type="text" id="inputName" name="menuName">
 		</div>
 		<div>
 			<label for="inputPrice">가격을 입력해주세요</label>
@@ -117,7 +117,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 			<span class="comment" style="font-size: 12px; padding-left: 10px;"></span>
 		</div>
 		<div>
-			<!-- <input type="hidden" name="storeNo" value="${s.storeNo }"> -->
+			<input type="hidden" name="storeNo" value="${storeNo }">
 			<input type="file" name="file" class="file-upload" id="file" style="visibility: hidden; position: absolute;" accept="image/gif, image/jpg, image/jpeg, image/png">
 			<button class="inputPhoto" type="button" id="inputPhoto">사진 첨부하기</button>
 		</div>

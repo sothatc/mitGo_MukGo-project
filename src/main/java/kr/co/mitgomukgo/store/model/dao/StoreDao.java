@@ -60,18 +60,19 @@ public class StoreDao {
 	}
 
 
-	//모달 상세
-	public Store selectOneStore(Store store) {
-		Store s = sqlSession.selectOne("store.selectOneStore",store);
+	//맛집 상세 
+	public Store selectOneStore(int storeNo) {
+		Store s = sqlSession.selectOne("store.selectOneStore",storeNo);
 		return s;
 	}
 
 
 	//맛집 상세 - 조인
-	public ArrayList<Store> selectOneStoreAjax(int StoreNo) {
-		List list = sqlSession.selectList("store.selectOneStoreAjax",StoreNo);
-		return (ArrayList<Store>)list;
+	public ArrayList<StoreJoin> selectOneStoreAjax(StoreJoin sj) {
+		List list = sqlSession.selectList("store.selectOneStoreAjax",sj);
+		return (ArrayList<StoreJoin>) list;
 	}
+	
 	
 	public ArrayList<Store> selectStore(Owner o) {
 		List s = sqlSession.selectList("store.selectMyStore",o);
@@ -85,6 +86,11 @@ public class StoreDao {
 	
 	public int countTagList(String category) {
 		return sqlSession.selectOne("store.countTagList",category);
+	}
+
+	public ArrayList<Store> searchStoreList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("store.searchStoreList",map);
+		return (ArrayList<Store>)list;
 	}
 	
 
