@@ -201,7 +201,7 @@ public class StoreController {
 			me.setMenuImg(menuPath);
 		}
 		int result = service.addMenu(me);
-		return "store/storeDetail";
+		return "redirect:/menuFrm.do";
 	}
 
 	@RequestMapping(value = "/updateStoreFrm.do")
