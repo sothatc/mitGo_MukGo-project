@@ -188,10 +188,11 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/updateStoreFrm.do")
-	public String updateStoreFrm(HttpSession session, Model model) {
+	public String updateStoreFrm(HttpSession session, Model model, @RequestParam int storeNo) {
 		Owner o = (Owner) session.getAttribute("o");
 		ArrayList<Store> s = service.selectStore(o);
 		model.addAttribute("s", (ArrayList<Store>) s);
+		model.addAttribute("storeNo",storeNo);
 		return "/store/updateStoreFrm";
 	}
 	

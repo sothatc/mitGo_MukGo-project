@@ -22,7 +22,7 @@
 								<div><a href="/addStoreFrm.do">업체 등록</a></div>
 							</c:when>
 							<c:otherwise>
-								<div><a href="/updateStoreFrm.do">업체 정보 수정</a></div>
+								<div><a href="/updateStoreFrm.do?storeNo=${s.storeNo }">업체 정보 수정</a></div>
 								<div><a href="/addMenuFrm.do?storeNo=${s.storeNo }">메뉴 추가</a></div>
 							</c:otherwise>
 						</c:choose>
