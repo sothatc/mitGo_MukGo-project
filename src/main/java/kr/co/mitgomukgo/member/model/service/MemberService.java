@@ -54,6 +54,11 @@ public class MemberService {
 		return s;
 	}
 
+	public int updateOwner(Owner o) {
+		return dao.updateOwner(o);
+	}
+
+
 	
 	
 }

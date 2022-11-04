@@ -292,9 +292,15 @@ public class StoreService {
 		return list;
 	}
 
+
 	//예약하기
 	public int reserve(Reserve r) {
 		return dao.reserve(r);
+	}
+	
+	public ArrayList<Menu> menuList(int storeNo) {
+		return dao.menuList(storeNo);
+
 	}
 	
 	

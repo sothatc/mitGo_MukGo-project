@@ -47,5 +47,11 @@ public class MemberDao {
 		Store s = sqlSession.selectOne("store.searchStore", ownerNo);
 		return s;
 	}
+
+	public int updateOwner(Owner o) {
+		int result = sqlSession.update("owner.updateOwner", o);
+		return result;
+	}
+
 	
 }
