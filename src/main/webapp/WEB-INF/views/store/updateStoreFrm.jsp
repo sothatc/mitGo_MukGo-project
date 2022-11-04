@@ -26,7 +26,7 @@
 							</c:when>
 							<c:otherwise>
 								<div><a href="#">업체 정보 수정</a></div>
-								<div><a href="/addMenuFrm.do?storeNo=${s.storeNo }">메뉴 추가</a></div>
+								<div><a href="/addMenuFrm.do?storeNo=${storeNo }">메뉴 추가</a></div>
 								<div><a href="/menuFrm.do?storeNo=${storeNo }">메뉴 관리</a></div>
 							</c:otherwise>
 						</c:choose>

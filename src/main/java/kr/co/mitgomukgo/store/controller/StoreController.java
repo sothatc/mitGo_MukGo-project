@@ -156,6 +156,8 @@ public class StoreController {
 	@RequestMapping(value = "/menuFrm.do")
 	public String menuFrm(@RequestParam int storeNo, Model model) {
 		model.addAttribute("storeNo", storeNo);
+		ArrayList<Menu> list = service.menuList(storeNo);
+		model.addAttribute("list", list);
 		return "store/menuFrm";
 	}
 
@@ -172,7 +174,7 @@ public class StoreController {
 			String imgName = file.getOriginalFilename();
 			String menuPath = fileRename.fileRename(savePath, imgName);
 			try {
-				FileOutputStream fos = new FileOutputStream(new File(savePath + file));
+				FileOutputStream fos = new FileOutputStream(new File(savePath + menuPath));
 				BufferedOutputStream bos = new BufferedOutputStream(fos);
 				byte[] bytes = file.getBytes();
 				bos.write(bytes);

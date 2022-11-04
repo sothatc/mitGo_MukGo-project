@@ -290,6 +290,10 @@ public class StoreService {
 		ArrayList<StoreJoin> list = dao.selectOneStoreAjax(sj);
 		return list;
 	}
+
+	public ArrayList<Menu> menuList(int storeNo) {
+		return dao.menuList(storeNo);
+	}
 	
 	
 	

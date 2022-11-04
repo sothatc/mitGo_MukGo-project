@@ -29,10 +29,10 @@
 									<a href="/updateStoreFrm.do">업체 정보 수정</a>
 								</div>
 								<div>
-									<a href="/addMenuFrm.do?storeNo=${s.storeNo }">메뉴 추가</a>
+									<a href="/addMenuFrm.do?storeNo=${storeNo }">메뉴 추가</a>
 								</div>
 								<div>
-									<a href="/MenuFrm.do?storeNo=${s.storeNo }">메뉴 관리</a>
+									<a href="/MenuFrm.do?storeNo=${storeNo }">메뉴 관리</a>
 								</div>
 							</c:otherwise>
 						</c:choose>
@@ -68,19 +68,21 @@
 								<th scope="col">수정</th>
 								<th scope="col">삭제</th>
 							</tr>
-							<tr>
-								<td>
-									<img src="#" style="width: 50px; height: 50px;">
-								</td>
-								<td>에그타르트</td>
-								<td>3000원</td>
-								<td>
-									<button type="button">수정</button>
-								</td>
-								<td>
-									<button type="button">삭제</button>
-								</td>
-							</tr>
+							<c:forEach items="${ list}" var="me">
+								<tr>
+									<td>
+										<img src="resources/upload/menu/${me.menuImg }" style="width: 50px; height: 50px;">
+									</td>
+									<td>${me.menuName }</td>
+									<td>${me.menuPrice }</td>
+									<td>
+										<button type="button">수정</button>
+									</td>
+									<td>
+										<button type="button">삭제</button>
+									</td>
+								</tr>
+							</c:forEach>
 						</table>
 					</div>
 				</div>

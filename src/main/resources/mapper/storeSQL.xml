@@ -224,4 +224,13 @@
 				as thumbNail from store s order by storeNo desc)b where category = #{category})rb order by 3 desc)
 		where rnum between 1 and 9
 	</select>
+	
+	<select id="menuList" parameterType="int" resultType="me">
+		select menu_no as menuNo,
+        name as menuName,
+        price as menuPrice,
+        menu_img as menuImg
+		from menu
+		where store_no = #{storeNo}
+	</select>
 </mapper>
