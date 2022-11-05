@@ -154,7 +154,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 			<div class="menu" style="display: flex;">
 				<div class="menu-wrap">
 					<div class="menuTitle">
-						<h1>메뉴 추가</h1>
+						<h1>메뉴 수정</h1>
 					</div>
 					<hr>
 					<br>
