@@ -227,7 +227,7 @@ public class StoreService {
 		return tagMap;
 	}
 
-	public HashMap<String, Object> searchStoreList(String searchTag, int reqPage, String category) {
+	public HashMap<String, Object> searchStoreList(String search, int reqPage) {
 		// 화면에 보여주는 게시물 수
 		int numPerPage = 9;
 		
@@ -240,11 +240,10 @@ public class StoreService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
-		map.put("category", category);
-		map.put("searchTag", searchTag);
+		map.put("search", search);
 		ArrayList<Store> list = dao.searchStoreList(map);
 		
-		int totalPage = dao.countTagList(searchTag);
+		int totalPage = dao.countTagList(search);
 		int pageNaviSize = 2;
 		int pageNo = 1;
 		
@@ -254,7 +253,7 @@ public class StoreService {
 		
 		String pageNavi = "";
 		if(pageNo != 1) {
-			pageNavi += "<a href='/selectTag.do?category="+category+"&reqPage=" +(pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+			pageNavi += "<a href='/storeList.do?reqPage=" +(pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
 					"            chevron_left\r\n" + 
 					"            </span></a>";
 		}
@@ -263,7 +262,7 @@ public class StoreService {
 			if(reqPage == pageNo) {
 				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
 			}else {
-				pageNavi += "<a href='/selectTag.do?category="+category+"&reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+				pageNavi += "<a href='/selectTag.do?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
 			}
 			pageNo++;
 			if(pageNo > totalPage) {
@@ -272,19 +271,19 @@ public class StoreService {
 		}
 		
 		if(end <= totalPage) {
-			pageNavi += "<a href='/selectTag.do?category="+category+"&reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+			pageNavi += "<a href='/selectTag.do?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
 					"            chevron_right\r\n" + 
 					"            </span></a>";
 		}
 		
-		HashMap<String, Object> searchTagMap = new HashMap<String, Object>();
-		searchTagMap.put("list", list);
-		searchTagMap.put("reqPage", reqPage);
-		searchTagMap.put("pageNavi", pageNavi);
-		searchTagMap.put("total", totalPage);
-		searchTagMap.put("pageNo", pageNo);
+		HashMap<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("list", list);
+		searchMap.put("reqPage", reqPage);
+		searchMap.put("pageNavi", pageNavi);
+		searchMap.put("total", totalPage);
+		searchMap.put("pageNo", pageNo);
 		
-		return searchTagMap;	
+		return searchMap;	
 	}
 	
 	//맛집 상세

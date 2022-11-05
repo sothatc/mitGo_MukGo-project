@@ -13,12 +13,14 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<!--헤더-->
 	<div class="storeList-content-wrap">
-		<form action="/searchStoreList.do" method="post">
+	
+		<form action="/searchStoreList.do?reqPage=1" method="post">
 			<div class="storeList-searchinput">
 				<input type="text" name="search">
 				<button>검색</button>
 			</div>
 		</form>
+		
 		<div class="storeList-map">
 			<div class="storeList-map-content">
 				<div>강북</div>

@@ -203,7 +203,7 @@
 		select count(*) from store where category = #{category}
 	</select>
 	
-	<select id="searchStoreList" parameterType="string" resultType="s">
+	<select id="searchStoreList" parameterType="map" resultType="s">
 		select * from
 			(select row_number() over (order by rnum desc) as rnum1, rb.* from
 			(select rownum as rnum, b.* from
@@ -222,8 +222,8 @@
 				whereeat_cate as whereEatCate,
 				(select imgpath from store_img si where storeimg_no = (select
 				min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
-				as thumbNail from store s order by storeNo desc)b where category = #{category})rb order by 3 desc)
-		where rnum between 1 and 9
+				as thumbNail from store s order by storeNo desc)b)rb order by 3 desc)
+		where rnum between #{start} and #{end} and storeName like '%' || #{search} || '%'
 	</select>
 	
 
