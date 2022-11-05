@@ -227,7 +227,7 @@ public class StoreService {
 		return tagMap;
 	}
 
-	public HashMap<String, Object> searchStoreList(String search, int reqPage) {
+	public HashMap<String, Object> searchStoreList(String search, int reqPage, String category) {
 		// 화면에 보여주는 게시물 수
 		int numPerPage = 9;
 		
@@ -241,6 +241,8 @@ public class StoreService {
 		map.put("start", start);
 		map.put("end", end);
 		map.put("search", search);
+		map.put("category",category);
+		
 		ArrayList<Store> list = dao.searchStoreList(map);
 		
 		int totalPage = dao.countTagList(search);
