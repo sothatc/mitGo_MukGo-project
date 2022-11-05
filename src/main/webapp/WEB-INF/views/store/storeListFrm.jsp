@@ -14,7 +14,7 @@
 	<!--헤더-->
 	<div class="storeList-content-wrap">
 	
-		<form action="/searchStoreList.do?reqPage=1" method="post">
+		<form action="/searchStoreList.do?reqPage=1" method="get">
 			<div class="storeList-searchinput">
 				<input type="text" name="search">
 				<button>검색</button>

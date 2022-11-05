@@ -314,10 +314,4 @@ public class StoreController {
 
 		return "store/storeListFrm";
 	}
-	
-	@RequestMapping(value = "/searchStoreList.do")
-	public String searchStoreList(String search, int reqPage, Model model, @RequestParam String category) {
-		
-		return "store/storeListFrm";
-	}
 }
