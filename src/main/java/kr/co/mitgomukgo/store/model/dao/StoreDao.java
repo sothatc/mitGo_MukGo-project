@@ -109,4 +109,8 @@ public class StoreDao {
 		return sqlSession.delete("deleteMenu", menuNo);
 	}
 
+	public Menu readOneMenu(int menuNo) {
+		return sqlSession.selectOne("readOneMenu", menuNo);
+	}
+
 }

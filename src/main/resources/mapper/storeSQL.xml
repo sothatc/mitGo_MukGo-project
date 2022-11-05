@@ -248,4 +248,13 @@
 		delete from menu
 		where menu_No = #{menuNo}
 	</delete>
+	
+	<select id="readOneMenu" parameterType="int" resultType="me">
+		select menu_no as menuNo,
+        name as menuName,
+        price as menuPrice,
+        menu_img as menuImg
+		from menu
+		where menu_No = #{menuNo}
+	</select>
 </mapper>

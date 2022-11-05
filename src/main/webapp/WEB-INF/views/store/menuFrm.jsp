@@ -125,7 +125,7 @@
 		});
 		
 		$(".updateBtn").on("click", function() {
-			$(location).attr('href', "/updateMenu.do?menuNo=" + menuNo);	
+			$(location).attr('href', "/updateMenuFrm.do?menuNo=" + menuNo);
 		});
 	</script>
 </body>

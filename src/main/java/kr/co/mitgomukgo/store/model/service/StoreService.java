@@ -313,6 +313,10 @@ public class StoreService {
 	public int deleteMenu(int menuNo) {
 		return dao.deleteMenu(menuNo);
 	}
+
+	public Menu readOneMenu(int menuNo) {
+		return dao.readOneMenu(menuNo);
+	}
 	
 	
 	

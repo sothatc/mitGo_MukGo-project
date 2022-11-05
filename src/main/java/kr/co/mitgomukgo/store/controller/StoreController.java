@@ -204,9 +204,22 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/deleteMenu.do")
-	public String deleteMenu(int menuNo) {
+	public String deleteMenu(int menuNo, HttpServletRequest request) {
 		int result = service.deleteMenu(menuNo);
-		return "redirect:/menuFrm.do";
+		if(result > 0) {
+			return "redirect:/menuFrm.do";
+		} else {
+			request.setAttribute("msg", "삭제시 문제가 발생했습니다.");
+			request.setAttribute("url", "/menuFrm.do");
+			return "common/alert";
+		}
+	}
+	
+	@RequestMapping(value = "/updateMenuFrm.do")
+	public String updateMenuFrm(int menuNo, Model model) {
+		Menu me = service.readOneMenu(menuNo);
+		model.addAttribute("me", me);
+		return "store/updateMenuFrm";
 	}
 
 	@RequestMapping(value = "/updateStoreFrm.do")
