@@ -163,11 +163,11 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 						<div>
 							<label for="inputName">메뉴명</label>
 							<input type="hidden" id="inputNo" name="menuNo" value="${me.menuNo }">
-							<input type="text" id="inputName" name="menuName" value="${me.menuName }">
+							<input type="text" id="inputName" name="menuName" value="${me.menuName }" required oninvalid="this.setCustomValidity('메뉴명을 입력하세요')" oninput="this.setCustomValidity('')">
 						</div>
 						<div>
 							<label for="inputPrice">가격</label>
-							<input type="number" id="inputPrice" name="menuPrice" value="${me.menuPrice }">
+							<input type="number" id="inputPrice" name="menuPrice" value="${me.menuPrice }" required oninvalid="this.setCustomValidity('가격을 입력하세요')" oninput="this.setCustomValidity('')">
 							<span class="comment" style="font-size: 12px; padding-left: 10px;"></span>
 						</div>
 						<div>
@@ -177,7 +177,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							<input type="hidden" id="menuImg" name="menuImg" value="${me.menuImg }">
 						</div>
 						<div class="btnWrap">
-							<button type="submit" value="등록">수정</button>
+							<button type="submit" id="submitBtn" value="등록">수정</button>
 						</div>
 					</form>
 				</div>
@@ -192,10 +192,22 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		}
 		
 		$('.file-upload').on('change', function() {
-			$(this).parent().find('.inputPhoto').text($(this).val().replace(/C:\\fakepath\\/i, ''));
+			if ($(this).val() == '') {
+				$(this).parent().find('.inputPhoto').text('사진을 반드시 올려주세요.');
+			} else {
+				$(this).parent().find('.inputPhoto').text($(this).val().replace(/C:\\fakepath\\/i, ''));
+			}
 			const menuImgval = $("#menuImg");
 			menuImgval.val($(this).val().replace(/C:\\fakepath\\/i, ''));
 			});
+		
+		$("#submitBtn").on('click', function(event) {
+			const fileValue = $('.inputPhoto').text();
+			if(fileValue == '사진을 반드시 올려주세요.') {
+				event.preventDefault();
+				alert("사진을 첨부해주세요.");
+			}
+		});
 	</script>
 </body>
 </html>

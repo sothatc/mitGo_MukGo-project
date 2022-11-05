@@ -161,11 +161,11 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 					<form class="mb-3" id="menuForm" method="post" action="/addMenu.do" enctype="multipart/form-data">
 						<div>
 							<label for="inputName">메뉴이름을 입력해주세요</label>
-							<input type="text" id="inputName" name="menuName" placeholder="예) 믿고먹고 맛집">
+							<input type="text" id="inputName" name="menuName" placeholder="예) 믿고먹고 맛집" required oninvalid="this.setCustomValidity('메뉴명을 입력하세요')" oninput="this.setCustomValidity('')">
 						</div>
 						<div>
 							<label for="inputPrice">가격을 입력해주세요</label>
-							<input type="number" id="inputPrice" name="menuPrice" placeholder="예) 1,000원 → 1000">
+							<input type="number" id="inputPrice" name="menuPrice" placeholder="예) 1,000원 → 1000" required oninvalid="this.setCustomValidity('가격을 입력하세요')" oninput="this.setCustomValidity('')">
 							<span class="comment" style="font-size: 12px; padding-left: 10px;"></span>
 						</div>
 						<div>
@@ -174,7 +174,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							<button class="inputPhoto" type="button" id="inputPhoto">사진 첨부하기</button>
 						</div>
 						<div class="btnWrap">
-							<button type="submit" value="등록">등록</button>
+							<button type="submit" id="submitBtn" value="등록">등록</button>
 						</div>
 					</form>
 				</div>
@@ -199,6 +199,15 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 				});
 			});
 		})(jQuery);
+		
+
+		$("#submitBtn").on('click', function(event) {
+			const fileValue = $('.inputPhoto').text();
+			if(fileValue == '사진 첨부하기') {
+				event.preventDefault();
+				alert("사진을 첨부해주세요.");
+			}
+		});
 	</script>
 </body>
 </html>
