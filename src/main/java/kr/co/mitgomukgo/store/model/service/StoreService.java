@@ -316,6 +316,10 @@ public class StoreService {
 	public Menu readOneMenu(int menuNo) {
 		return dao.readOneMenu(menuNo);
 	}
+
+	public int updateMenu(Menu menu) {
+		return dao.updateMenu(menu);
+	}
 	
 	
 	

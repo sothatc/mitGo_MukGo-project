@@ -221,6 +221,39 @@ public class StoreController {
 		model.addAttribute("me", me);
 		return "store/updateMenuFrm";
 	}
+	
+	@RequestMapping(value = "/updateMenu.do")
+	public String updateMenu(Menu menu, MultipartFile file, HttpServletRequest request) {
+		if (!file.isEmpty()) {
+			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/menu/");
+			String imgName = file.getOriginalFilename();
+			String menuPath = fileRename.fileRename(savePath, imgName);
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath + menuPath));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				byte[] bytes = file.getBytes();
+				bos.write(bytes);
+				bos.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			menu.setMenuImg(menuPath);
+		}
+		int result = service.updateMenu(menu);
+		if(result > 0) {
+			request.setAttribute("msg", "변경이 완료되었습니다.");
+			request.setAttribute("url", "/menuFrm.do");
+			return "common/alert";
+		} else {
+			request.setAttribute("msg", "변경 중 문제가 발생했습니다.");
+			request.setAttribute("url", "/menuFrm.do");
+			return "common/alert";
+		}
+	}
 
 	@RequestMapping(value = "/updateStoreFrm.do")
 	public String updateStoreFrm(HttpSession session, Model model) {
