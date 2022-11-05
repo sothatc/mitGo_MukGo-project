@@ -7,11 +7,12 @@
 <title>메뉴 수정</title>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <style>
-.menu{
+.menu {
 	padding-left: 20px;
 	width: 848px;
 }
-.menu-wrap{
+
+.menu-wrap {
 	width: 100%;
 }
 
@@ -161,6 +162,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 					<form class="mb-3" id="menuForm" method="post" action="/updateMenu.do" enctype="multipart/form-data">
 						<div>
 							<label for="inputName">메뉴명</label>
+							<input type="hidden" id="inputNo" name="menuNo" value="${me.menuNo }">
 							<input type="text" id="inputName" name="menuName" value="${me.menuName }">
 						</div>
 						<div>
@@ -171,7 +173,8 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 						<div>
 							<input type="hidden" name="storeNo" value="${sessionScope.s.storeNo }">
 							<input type="file" name="file" class="file-upload" id="file" style="visibility: hidden; position: absolute;" accept="image/gif, image/jpg, image/jpeg, image/png">
-							<button class="inputPhoto" type="button" id="inputPhoto">${me.menuImg }</button>
+							<button class="inputPhoto" type="button" id="inputPhoto" onclick="updateMenuImg(this)">${me.menuImg }</button>
+							<input type="hidden" id="menuImg" name="menuImg" value="${me.menuImg }">
 						</div>
 						<div class="btnWrap">
 							<button type="submit" value="등록">수정</button>
@@ -183,22 +186,16 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	<script>
-		(function($) {
-			'use strict';
-			$(function() {
-				$('.inputPhoto').on('click', function() {
-					var file = $(this).parent().find('.file-upload');
-					file.trigger('click');
-				});
-				$('.file-upload').on('change', function() {
-					if ($(this).val() == '') {
-						$(this).parent().find('.inputPhoto').text('사진 첨부하기');
-					} else {
-						$(this).parent().find('.inputPhoto').text($(this).val().replace(/C:\\fakepath\\/i, ''));
-					}
-				});
+		function updateMenuImg(obj) {
+			var file = $(obj).parent().find('.file-upload');
+			file.trigger('click');
+		}
+		
+		$('.file-upload').on('change', function() {
+			$(this).parent().find('.inputPhoto').text($(this).val().replace(/C:\\fakepath\\/i, ''));
+			const menuImgval = $("#menuImg");
+			menuImgval.val($(this).val().replace(/C:\\fakepath\\/i, ''));
 			});
-		})(jQuery);
 	</script>
 </body>
 </html>

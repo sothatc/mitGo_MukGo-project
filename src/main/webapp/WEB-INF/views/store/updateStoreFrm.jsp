@@ -152,7 +152,7 @@
 		                  <label for="btn-check7" class="btn btnday">일</label>
 		               </div>
 		               <div class="submitBtn">
-		                  <button type="reset" class="cancle">취소</button>
+		                  <button type="button" class="cancle" onclick="history.back()">취소</button>
 		                  <button type="submit" class="btn-primary">수정</button>
 		               </div>
 		            </form>

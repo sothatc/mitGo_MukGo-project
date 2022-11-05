@@ -91,14 +91,11 @@ public class StoreDao {
 		return (ArrayList<Store>) list;
 	}
 
-
-	//예약하기
+	// 예약하기
 	public int reserve(Reserve r) {
-		int result = sqlSession.insert("store.insertReserve",r);
+		int result = sqlSession.insert("store.insertReserve", r);
 		return result;
 	}
-	
-
 
 	public ArrayList<Menu> menuList(int storeNo) {
 		List list = sqlSession.selectList("menuList", storeNo);
@@ -111,6 +108,10 @@ public class StoreDao {
 
 	public Menu readOneMenu(int menuNo) {
 		return sqlSession.selectOne("readOneMenu", menuNo);
+	}
+
+	public int updateMenu(Menu menu) {
+		return sqlSession.update("updateMenu", menu);
 	}
 
 }

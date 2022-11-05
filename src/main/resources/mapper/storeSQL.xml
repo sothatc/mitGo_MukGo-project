@@ -257,4 +257,13 @@
 		from menu
 		where menu_No = #{menuNo}
 	</select>
+	
+	<update id="updateMenu" parameterType="me">
+		update menu
+		set
+		name = #{menuName},
+		price = #{menuPrice},
+		menu_img = #{menuImg}
+		where menu_no = #{menuNo}
+	</update>
 </mapper>
