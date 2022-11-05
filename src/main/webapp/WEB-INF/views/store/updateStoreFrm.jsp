@@ -48,10 +48,12 @@
 		   <div class="col-12 grid-margin stretch-card">
 		      <div class="card">
 		         <div class="card-body">
-		            <h1 class="card-title">업체  정보 수정</h1>
+		            <h1 class="card-title">업체 정보 수정</h1>
 		            <br>
 		            <form method="post" action="/updateStore.do" enctype="multipart/form-data">
 		               <div class="form-group">
+		              	  <label for="inputName">업체명</label>
+						  <br>
 		                  <input type="text" class="form-control" id="inputName" name="storeName" value="${s[0].storeName }">
 		               </div>
 		               <br>

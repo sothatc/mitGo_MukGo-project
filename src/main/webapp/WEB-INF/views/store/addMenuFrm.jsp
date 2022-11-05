@@ -161,11 +161,11 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 					<form class="mb-3" id="menuForm" method="post" action="/addMenu.do" enctype="multipart/form-data">
 						<div>
 							<label for="inputName">메뉴이름을 입력해주세요</label>
-							<input type="text" id="inputName" name="menuName">
+							<input type="text" id="inputName" name="menuName" placeholder="예) 믿고먹고 맛집">
 						</div>
 						<div>
 							<label for="inputPrice">가격을 입력해주세요</label>
-							<input type="number" id="inputPrice" name="menuPrice" placeholder="예) 1000원 -> 1000">
+							<input type="number" id="inputPrice" name="menuPrice" placeholder="예) 1,000원 → 1000">
 							<span class="comment" style="font-size: 12px; padding-left: 10px;"></span>
 						</div>
 						<div>
