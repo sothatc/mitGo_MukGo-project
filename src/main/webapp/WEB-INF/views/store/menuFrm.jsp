@@ -9,23 +9,23 @@
 <title>메뉴 관리</title>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <style>
-.btn1 {
+.updateBtn {
 	background-color: rgb(51, 51, 51) !important;
 	color: #fff !important;
 	padding: 0 10px 0 10px !important;
 }
 
-.btn2 {
+.deleteBtn {
 	background-color: rgb(230, 83, 20) !important;
 	color: #fff !important;
 	padding: 0 10px 0 10px !important;
 }
 
-.btn1:hover {
+.updateBtn:hover {
 	font-weight: 600;
 }
 
-.btn2:hover {
+.deleteBtn:hover {
 	font-weight: 600;
 	border: 1px solid rgb(230, 83, 20) !important;
 }
@@ -102,10 +102,10 @@
 									<td><fmt:formatNumber value="${me.menuPrice}"
 											pattern="#,###" /></td>
 									<td>
-										<button type="button" class="btn btn1">수정</button>
+										<button type="button" class="btn btnMenuNo updateBtn">수정</button>
 									</td>
 									<td>
-										<button type="button" class="btn btn2 deleteBtn">삭제</button>
+										<button type="button" class="btn btnMenuNo deleteBtn">삭제</button>
 									</td>
 								</tr>
 							</c:forEach>
@@ -117,11 +117,15 @@
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	<script>
+		const menuNo = $(".btnMenuNo").parent().parent().children().eq(0).text();
 		$(".deleteBtn").on("click", function() {
-			const menuNo = $(this).parent().parent().children().eq(0).text();
 			if (confirm("메뉴를 삭제하시겠습니까?")) {
 				$(location).attr('href', "/deleteMenu.do?menuNo=" + menuNo);
 			}
+		});
+		
+		$(".updateBtn").on("click", function() {
+			$(location).attr('href', "/updateMenu.do?menuNo=" + menuNo);	
 		});
 	</script>
 </body>
