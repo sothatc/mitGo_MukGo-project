@@ -222,7 +222,39 @@
 				whereeat_cate as whereEatCate,
 				(select imgpath from store_img si where storeimg_no = (select
 				min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
-				as thumbNail from store s order by storeNo desc)b)rb order by 3 desc)
+				as thumbNail from store s order by storeNo desc)b	
+					<if test="category.equals('')">
+					
+					</if>
+					<if test="category==1">
+						where category = #{category}
+					</if>
+					<if test="category==2">
+						where category = #{category}
+					</if>
+					<if test="category==3">
+						where category = #{category}
+					</if>
+					<if test="category==4">
+						where category = #{category}
+					</if>
+					<if test="category==5">
+						where category = #{category}
+					</if>
+					<if test="category==6">
+						where category = #{category}
+					</if>
+					<if test="category==7">
+						where category = #{category}
+					</if>	
+					<if test="category==8">
+						where category = #{category}
+					</if>
+					<if test="category==9">
+						where category = #{category}
+					</if>
+					
+				)rb order by 3 desc)
 		where rnum between #{start} and #{end} and storeName like '%' || #{search} || '%'
 	</select>
 	

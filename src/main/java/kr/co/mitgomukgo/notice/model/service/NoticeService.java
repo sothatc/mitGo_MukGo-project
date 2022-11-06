@@ -121,6 +121,27 @@ public class NoticeService {
 		NoticeFile notice = dao.selectOneNoticeFile(noticeFileNo);
 		return notice;
 	}
+
+	public int updateNotice(Notice n, int[] fileNoList) {
+		int result = dao.updateNotice(n);
+		
+		if(result > 0) {
+			
+			// 추가한 파일이 있으면
+			for(NoticeFile nf : n.getFileList()) {
+				nf.setNoticeNo(n.getNoticeNo());
+				result += dao.insertNoticeFile(nf);
+			}
+			
+			// 삭제한 파일이 있다면
+			if(fileNoList != null) {
+				for(int fileNo : fileNoList) {
+					result += dao.deleteNoticeFile(fileNo);
+				}
+			}
+		}
+		return result;
+	}
 }
 
 
