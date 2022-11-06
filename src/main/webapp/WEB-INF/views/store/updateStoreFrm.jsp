@@ -108,7 +108,7 @@
 		                  		<c:forEach var="s" items="${s }">
 		                  			
 			                     	<input type="text" class="form-control file-upload-info" value="${s.storeImgList}" disabled>
-		                  			
+		                  			<div>작업</div>
 		                  		</c:forEach>
 		                     <span class="input-group-append">
 		                        <button class="file-upload-browse btn btn-primary" type="button" id="storeImg">사진추가</button>
