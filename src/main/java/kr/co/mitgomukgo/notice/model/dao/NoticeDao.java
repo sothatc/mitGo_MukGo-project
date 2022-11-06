@@ -71,6 +71,16 @@ public class NoticeDao {
 		NoticeFile notice = sqlSession.selectOne("notice.selectOneNoticeFile", noticeFileNo);
 		return notice;
 	}
+
+	public int updateNotice(Notice n) {
+		int result = sqlSession.update("notice.updateNotice", n);
+		return result;
+	}
+
+	public int deleteNoticeFile(int fileNo) {
+		int result = sqlSession.delete("notice.deleteNotice", fileNo);
+		return result;
+	}
 }
 
 
