@@ -80,8 +80,8 @@
         <div class="notice-detail-btn">
         	<c:choose>
         		<c:when test="${not empty sessionScope.m and sessionScope.m.memberClass == 1}">
-        			<button type="button" class="btn btn-secondary" style="margin-right: 10px;">수정(관리자)</button>
-            		<button type="button" class="btn btn-outline-secondary" style="margin-left: 10px;">삭제(관리자)</button>
+        			<button type="button" class="btn btn-secondary" style="margin-right: 10px;" onclick="updateNoticeFrm(${n.noticeNo});">수정</button>
+            		<button type="button" class="btn btn-outline-secondary" style="margin-left: 10px;">삭제</button>
         		</c:when>
         		
         		<c:otherwise>
@@ -97,9 +97,24 @@
     
 
     <script>
+    	function updateNoticeFrm(noticeNo){
+    		location.href="/updateNoticeFrm.do?noticeNo=" + noticeNo;
+    	}
+    
         function goNoticeList(){
             location.href="/selectNoticeList.do?reqPage=1";
         }
+        
+        
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
