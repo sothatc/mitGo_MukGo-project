@@ -2,6 +2,8 @@
 
 .storeList-content-wrap {
 	width: 100vw;
+	padding-top:75px;
+	padding-bottom:75px;
 }
 
 .storeList-searchinput {
@@ -204,6 +206,7 @@
 	align-items: center;
 	margin-top: 20px;
 	width: 100vw;
+	min-height: 400px;
 }
 
 .storeList-list-content {

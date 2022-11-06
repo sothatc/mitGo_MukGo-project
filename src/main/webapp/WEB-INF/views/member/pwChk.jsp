@@ -15,8 +15,9 @@
 			<div>비밀번호 확인</div>
 			<form action="/mypage.do" method="post">
 				<input type="hidden" value="${sessionScope.m.memberId }">
+				<input type="hidden" class="myPw" value="${sessionScope.m.memberPw }">
 				<input type="password" id="rePwChk"><br>
-				<button type="button" class="pwChkBtn">확인</button> 
+				<button type="submit" class="pwChkBtn">확인</button> 
 			</form>
 		</div>
 	</div>
@@ -33,15 +34,16 @@
 		$(this).css("color","");
 	});
 	
-	$(".pwChkBtn").on("click", function(){
-		const inputPw = $("#rePwChk").val();
+	$(".pwChkBtn").on("click", function(event){
+		const inputPw = $("#rePwChk");
+		const inputPwVal = inputPw.val();
 		const myPw = $(".myPw").val();
-		if(myPw == inputPw) {
-			$(".pwChkBtn").attr("type","submit");
-		}else if(myPw != inputPw){
+		if(myPw != inputPwVal) {
 			alert("비밀번호를 다시 입력해주세요.");
-		}else if(inputPw = ""){
+			event.preventDefault();
+		}else if(inputPw == ""){
 			alert("비밀번호를 입력해주세요.");
+			event.preventDefault();
 		}
 	});
 </script>

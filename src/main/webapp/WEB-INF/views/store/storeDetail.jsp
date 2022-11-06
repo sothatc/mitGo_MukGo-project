@@ -1,3 +1,5 @@
+<%@page import="kr.co.mitgomukgo.member.model.vo.Owner"%>
+<%@page import="kr.co.mitgomukgo.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
@@ -5,7 +7,7 @@
 <head>
    <meta charset="UTF-8">
    <title>맛집상세 페이지</title>
-   
+
 
 </head>
 
@@ -111,15 +113,15 @@
                   </tr>
                </table>
                <c:choose>
-	               <c:when test="${empty sessionScope.m }">
+	               <c:when test="${empty sessionScope.m && empty sessionScope.o}">
 	               		<a href="/loginFrm.do">
 		                	<button id="loginBtn" style="font-family:Gowun Dodum;  width:560px; height:50px; background-color: rgb(51,51,51); color: white;
 		                	margin-top: 10px;">로그인</button>
 	                	</a>
-	               </c:when>
+	               </c:when> 
 	               <c:otherwise>
-	                    <button name="reserveBtn" class="reserveBtn2" style="font-family:Gowun Dodum;">예약하기</button>
-	             		<button name="recommendBtn" style="font-family:Gowun Dodum;">추천글작성</button>
+	                    <button name="reserveBtn" class="reserveBtn2" style="font-family:Gowun Dodum;  width:560px; height:50px; background-color: rgb(51,51,51); color: white;
+		                	margin-top: 10px;">예약하기</button>
 	               </c:otherwise>
 				</c:choose>
             </div>
@@ -297,8 +299,10 @@
           <div class="modal-box">
               <div class="modal-title">예약 정보</div>
               <div class="modal-contents">
+              <form action="/reserve.do?memberNo=${m.memberNo }">
                   <table class="w3-table w3-bordered" id="reserveCheckTbl">
                       <tr>
+                      
                           <th>상호명</th>
                           <td class="storeNameTd">${s.storeName }</td>
                       </tr>
@@ -315,9 +319,17 @@
                           <td class="peopleNumTd"></td>
                       </tr>
                   </table>
+                   
+                  <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
+                  <input type="hidden" name="storeNo" value="${s.storeNo }">
+                  <input type="hidden" name="storeName" value="${s.storeName }">
+                  <input type="hidden" name="eatDate" class="eatDate">
+                  <input type="hidden" name="eatTime" class="eatTime">
+                  <input type="hidden" name="eatNum" class="eatNum">
                   <div class="explanation">* 가게에서 최종 확정 시 예약이 확정됩니다.</div>
                   <button class="closeModal pointer">닫기</button>
-                  <button class="reserveBtn pointer">예약하기</button>
+                  <button class="reserveBtn pointer" type="submit">예약하기</button>
+              </form>
               </div>
           </div>
        </div>
@@ -328,13 +340,26 @@
        
        <!------------------------ 시간 날짜 미입력 모달 -->
        <div class="w3-container" style="font-family:Gowun Dodum;">
-           <div id="timeDateModal" class="w3-modal">
+           <div id="timeDateModal" class="w3-modal" style="font-family:Gowun Dodum; z-index:2000;">
              <div class="w3-modal-content w3-animate-top w3-card-4" style="width:30%; height: 40%;">
                <header class="w3-container w3-teal" style="height:10%;"> 
                  <span onclick="document.getElementById('timeDateModal').style.display='none'" 
                  class="w3-button w3-display-topright" style="width:5%; height:10%;">&times;</span>
                </header>
                  <p style="width:100%; height:100%;padding:0; margin:0;display:flex; justify-content: center; align-items: center; color:black;">예약하실 날짜와 시간을 선택해주세요.</p>
+             </div>
+           </div>
+      </div>
+      
+      <!-- ----------업주일 때 모달 -->
+       <div class="w3-container" style="font-family:Gowun Dodum;">
+           <div id="ownerModal" class="w3-modal" style="font-family:Gowun Dodum; z-index:2000;">
+             <div class="w3-modal-content w3-animate-top w3-card-4" style="width:30%; height: 40%;">
+               <header class="w3-container w3-teal" style="height:10%;"> 
+                 <span onclick="document.getElementById('ownerModal').style.display='none'" 
+                 class="w3-button w3-display-topright" style="width:5%; height:10%;">&times;</span>
+               </header>
+                 <p style="width:100%; height:100%;padding:0; margin:0;display:flex; justify-content: center; align-items: center; color:black;">업주입니다!!</p>
              </div>
            </div>
       </div>
@@ -356,7 +381,7 @@
          var category;//실카테고리
                
        //카테고리 
-         //1:한식 , 2: 양식, 3: 일식, 4: 중식, 5:분식, 6:육류, 7:기타
+       // 1:한식 , 2: 양식, 3: 일식, 4: 중식, 5:분식, 6:육류, 7:씨푸드,8:디저트,9:기타
                if(categoryNum=="1"){
                   category="한식";
                }else if(categoryNum=="2"){
@@ -370,6 +395,10 @@
                }else if(categoryNum=="6"){
                   category="육류";
                }else if(categoryNum=="7"){
+                  category="씨푸드";
+               }else if(categoryNum=="8"){
+                  category="디저트";
+               }else if(categoryNum=="9"){
                   category="기타";
                }
       
@@ -461,12 +490,12 @@
          //-------------------주소 * 없애기
          function addrSlice() {
              const addr = $(".addressTd");
-             console.log(addr);
              const splitWord = addr.text().split("*");
                 addr.text(splitWord[1] + " " +splitWord[2]);
              }
              addrSlice();
 
+             
          //----------------------------- 인원수 늘리기
             let count = 1;
    
@@ -514,6 +543,8 @@
             
       
        //-------------------------------------------------------------------@@@@@@@@@@@@@@@@@@@@@       AJAX 
+       
+    
          var storePhoto;
        	 var storeNo = "${s.storeNo}";
          $.ajax({
@@ -521,38 +552,35 @@
             type:"post",
             data: {storeNo:storeNo},
             success: function(data){
-               console.log(storeNo);
                const storeImgUl = $(".storeImgUl");
                storePhoto = new Array();
-            for(let i=0; i<data.length; i++){
-               storeImgUl.append("<li><img src=/resources/upload/store/"+data[i].imgpath+" style='height:460px; width:600px;'></li>");
-               storePhoto.push(data[i].imgpath);
-            }
+	            for(let i=0; i<data.length; i++){
+	               storeImgUl.append("<li><img src=/resources/upload/store/"+data[i].imgpath.replace(" ", "%20")+" style='height:460px; width:600px;'></li>");
+	            }
             
-              //--------------------------메뉴 사진 슬라이더
-            let imgNo = 0;
+              	//--------------------------메뉴 사진 슬라이더
+	            let imgNo = 0;
+	
+	            const ul = $(".photo-wrap>ul");
+	            const imgCount = ul.children().length;
+	            const width = 600;
+	            ul.css("width",(imgCount*width)+"px");
+	            
+	            $(".prev").on("click", function() {
+	               if (imgNo != 0) {
+	                  imgNo--;
+	                  const move = -imgNo * width;
+	                  ul.css("transform", "translateX(" + move + "px)").css("transition-duration", "1s");
+	               }
+	            });
 
-            const ul = $(".photo-wrap>ul");
-            const imgCount = ul.children().length;
-            const width = 600;
-            ul.css("width",(imgCount*width)+"px");
-            
-            $(".prev").on("click", function() {
-               if (imgNo != 0) {
-                  imgNo--;
-                  const move = -imgNo * width;
-                  ul.css("transform", "translateX(" + move + "px)").css("transition-duration", "1s");
-               }
-            });
-
-            $(".next").on("click", function() {
-               if (imgNo != imgCount - 1) {
-                  imgNo++;
-                  const move = -imgNo * width;
-                  ul.css("transform", "translateX(" + move + "px)").css("transition-duration", "1s");
-               }
-            });
-            
+	            $(".next").on("click", function() {
+	               if (imgNo != imgCount - 1) {
+	                  imgNo++;
+	                  const move = -imgNo * width;
+	                  ul.css("transform", "translateX(" + move + "px)").css("transition-duration", "1s");
+	               }
+	            });
             }
          }); //---------------------------------------------------------ajax 종료----------------------------------------------
          
@@ -588,15 +616,25 @@
          const open = document.querySelector(".reserveBtn2");
          const close = document.querySelector(".closeModal");
          const modal = document.querySelector(".modal-wrap");
-
+		 var ownerId = "${sessionScope.o.ownerId}";
+		 var memberId = "${sessionScope.s.memberId}";
+		 var selectedDate;
+		 
          function init(){
             //모달 여는 코드
 
             open.addEventListener("click",function(){
+            
                modal.classList.remove("hidden");
-
                
-               $(".dateTd").text($("#datePicker").val());
+			   if(ownerId != ""){
+				   document.getElementById('ownerModal').style.display='block';
+			   }
+			   selectedDate =$("#datePicker").val();
+			   $(".eatDate").attr("value",selectedDate);
+			   $(".eatTime").attr("value",selectTime);
+			   $(".eatNum").attr("value",count);
+              $(".dateTd").text(selectedDate);
                $(".peopleNumTd").text(count);
                $(".timeTd").text(selectTime);
                //날짜를 선택하지 않았을 때
@@ -606,11 +644,14 @@
                }
              });
             
+            
+            
             // 모달 닫기 버튼 클릭 시
             close.addEventListener("click",function(){
                modal.classList.add("hidden");
             });
-         }
+            
+         }//init 함수 종료 시점
          init();
          
       </script>

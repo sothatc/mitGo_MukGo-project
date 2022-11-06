@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
@@ -25,6 +26,7 @@ import common.FileRename;
 import kr.co.mitgomukgo.member.model.vo.Owner;
 import kr.co.mitgomukgo.store.model.service.StoreService;
 import kr.co.mitgomukgo.store.model.vo.Menu;
+import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Review;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import kr.co.mitgomukgo.store.model.vo.StoreImg;
@@ -62,6 +64,17 @@ public class StoreController {
 		Gson gson = new Gson();
 		String result = gson.toJson(list);
 		return result;
+	}
+
+	// 예약하기
+	@RequestMapping(value = "/reserve.do")
+	public String StoreDetail(int memberNo, Reserve r) {
+		int result = service.reserve(r);
+		if (result > 0) {
+			return "redirect:/";
+		} else {
+			return "redirect:/";
+		}
 	}
 
 	@RequestMapping(value = "/addStoreFrm.do")
@@ -154,14 +167,14 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/menuFrm.do")
-	public String menuFrm(@RequestParam int storeNo, Model model) {
-		model.addAttribute("storeNo", storeNo);
+	public String menuFrm(@SessionAttribute Store s, Model model) {
+		ArrayList<Menu> list = service.menuList(s.getStoreNo());
+		model.addAttribute("list", list);
 		return "store/menuFrm";
 	}
 
 	@RequestMapping(value = "/addMenuFrm.do")
-	public String addMenuFrm(@RequestParam int storeNo, Model model) {
-		model.addAttribute("storeNo", storeNo);
+	public String addMenuFrm() {
 		return "store/addMenuFrm";
 	}
 
@@ -172,7 +185,7 @@ public class StoreController {
 			String imgName = file.getOriginalFilename();
 			String menuPath = fileRename.fileRename(savePath, imgName);
 			try {
-				FileOutputStream fos = new FileOutputStream(new File(savePath + file));
+				FileOutputStream fos = new FileOutputStream(new File(savePath + menuPath));
 				BufferedOutputStream bos = new BufferedOutputStream(fos);
 				byte[] bytes = file.getBytes();
 				bos.write(bytes);
@@ -187,15 +200,66 @@ public class StoreController {
 			me.setMenuImg(menuPath);
 		}
 		int result = service.addMenu(me);
-		return "store/storeDetail";
+		return "redirect:/menuFrm.do";
+	}
+
+	@RequestMapping(value = "/deleteMenu.do")
+	public String deleteMenu(int menuNo, HttpServletRequest request) {
+		int result = service.deleteMenu(menuNo);
+		if(result > 0) {
+			return "redirect:/menuFrm.do";
+		} else {
+			request.setAttribute("msg", "삭제시 문제가 발생했습니다.");
+			request.setAttribute("url", "/menuFrm.do");
+			return "common/alert";
+		}
+	}
+	
+	@RequestMapping(value = "/updateMenuFrm.do")
+	public String updateMenuFrm(int menuNo, Model model) {
+		Menu me = service.readOneMenu(menuNo);
+		model.addAttribute("me", me);
+		return "store/updateMenuFrm";
+	}
+	
+	@RequestMapping(value = "/updateMenu.do")
+	public String updateMenu(Menu menu, MultipartFile file, HttpServletRequest request) {
+		if (!file.isEmpty()) {
+			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/menu/");
+			String imgName = file.getOriginalFilename();
+			String menuPath = fileRename.fileRename(savePath, imgName);
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath + menuPath));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				byte[] bytes = file.getBytes();
+				bos.write(bytes);
+				bos.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			menu.setMenuImg(menuPath);
+		}
+		int result = service.updateMenu(menu);
+		if(result > 0) {
+			request.setAttribute("msg", "변경이 완료되었습니다.");
+			request.setAttribute("url", "/menuFrm.do");
+			return "common/alert";
+		} else {
+			request.setAttribute("msg", "변경 중 문제가 발생했습니다.");
+			request.setAttribute("url", "/menuFrm.do");
+			return "common/alert";
+		}
 	}
 
 	@RequestMapping(value = "/updateStoreFrm.do")
-	public String updateStoreFrm(HttpSession session, Model model, @RequestParam int storeNo) {
+	public String updateStoreFrm(HttpSession session, Model model) {
 		Owner o = (Owner) session.getAttribute("o");
 		ArrayList<Store> s = service.selectStore(o);
 		model.addAttribute("s", (ArrayList<Store>) s);
-		model.addAttribute("storeNo", storeNo);
 		return "/store/updateStoreFrm";
 	}
 
@@ -237,10 +301,17 @@ public class StoreController {
 
 		return "store/storeListFrm";
 	}
-
+	
 	@RequestMapping(value = "/searchStoreList.do")
-	public String searchStoreList(String searchTag, int reqPage, Model model, @RequestParam String category) {
-		ArrayList<Store> list = service.searchStoreList(searchTag, reqPage, category);
+	public String searchStoreList(String search, int reqPage, Model model,@RequestParam String category) {
+		System.out.println(category);
+		HashMap<String, Object> map = service.searchStoreList(search, reqPage, category);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("category", category);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
 
 		return "store/storeListFrm";
 	}

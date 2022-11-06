@@ -155,6 +155,7 @@
 		from store 
 		where store_no = #{_parameter}
 	</select>
+	
 
 
 	<select id="countAllList" resultType="_int">
@@ -202,7 +203,7 @@
 		select count(*) from store where category = #{category}
 	</select>
 	
-	<select id="searchStoreList" parameterType="string" resultType="s">
+	<select id="searchStoreList" parameterType="map" resultType="s">
 		select * from
 			(select row_number() over (order by rnum desc) as rnum1, rb.* from
 			(select rownum as rnum, b.* from
@@ -221,7 +222,80 @@
 				whereeat_cate as whereEatCate,
 				(select imgpath from store_img si where storeimg_no = (select
 				min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
-				as thumbNail from store s order by storeNo desc)b where category = #{category})rb order by 3 desc)
-		where rnum between 1 and 9
+				as thumbNail from store s order by storeNo desc)b	
+					<if test="category.equals('')">
+					
+					</if>
+					<if test="category==1">
+						where category = #{category}
+					</if>
+					<if test="category==2">
+						where category = #{category}
+					</if>
+					<if test="category==3">
+						where category = #{category}
+					</if>
+					<if test="category==4">
+						where category = #{category}
+					</if>
+					<if test="category==5">
+						where category = #{category}
+					</if>
+					<if test="category==6">
+						where category = #{category}
+					</if>
+					<if test="category==7">
+						where category = #{category}
+					</if>	
+					<if test="category==8">
+						where category = #{category}
+					</if>
+					<if test="category==9">
+						where category = #{category}
+					</if>
+					
+				)rb order by 3 desc)
+		where rnum between #{start} and #{end} and storeName like '%' || #{search} || '%'
 	</select>
+	
+
+	<insert id="insertReserve" parameterType="r">
+		insert into reserve
+		values(RESERVE_SEQ.NEXTVAL, #{memberNo}, #{storeNo}, #{storeName}, to_char(sysdate,'yyyy-mm-dd'),
+		#{eatDate}, #{eatTime}, #{eatNum})
+	</insert>
+	
+
+	<select id="menuList" parameterType="int" resultType="me">
+		select menu_no as menuNo,
+        name as menuName,
+        price as menuPrice,
+        menu_img as menuImg
+		from menu
+		where store_no = #{storeNo}
+		order by 1 DESC
+	</select>
+	
+	<delete id="deleteMenu" parameterType="int">
+		delete from menu
+		where menu_No = #{menuNo}
+	</delete>
+	
+	<select id="readOneMenu" parameterType="int" resultType="me">
+		select menu_no as menuNo,
+        name as menuName,
+        price as menuPrice,
+        menu_img as menuImg
+		from menu
+		where menu_No = #{menuNo}
+	</select>
+	
+	<update id="updateMenu" parameterType="me">
+		update menu
+		set
+		name = #{menuName},
+		price = #{menuPrice},
+		menu_img = #{menuImg}
+		where menu_no = #{menuNo}
+	</update>
 </mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="reserve">
+	<select id="selectReserveList" parameterType="m" resultType="rs">
+		select 
+			reserve_no as reserveNo,
+			store_no as storeNo,
+			store_name as storeName,
+			reserve_date as reserveDate,
+			eat_date as eatDate,
+			eat_time as eatTime
+		from reserve
+		where member_no = #{memberNo}
+	</select>
+</mapper>

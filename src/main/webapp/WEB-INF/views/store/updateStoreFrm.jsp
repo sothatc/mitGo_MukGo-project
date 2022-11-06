@@ -19,15 +19,16 @@
 			<div class="sidebar-1">
 				<ul class="category">
 					<li>
-						<div><a href="#">내 정보 수정</a></div>
+						<input type="hidden" class="sendOwnerNo" value="${sessionScope.o.ownerNo }">
+						<div><a href="/ownerMypage.do">내 정보 수정</a></div>
 						<c:choose>
 							<c:when test="${empty s }">
 								<div><a href="/addStoreFrm.do">업체 등록</a></div>
 							</c:when>
 							<c:otherwise>
-								<div><a href="#">업체 정보 수정</a></div>
-								<div><a href="/addMenuFrm.do?storeNo=${s.storeNo }">메뉴 추가</a></div>
-								<div><a href="/menuFrm.do?storeNo=${storeNo }">메뉴 관리</a></div>
+								<div><a href="/updateStoreFrm.do">업체 정보 수정</a></div>
+								<div><a href="/addMenuFrm.do">메뉴 추가</a></div>
+								<div><a href="/menuFrm.do">메뉴 관리</a></div>
 							</c:otherwise>
 						</c:choose>
 						<div><a href="/ownerLogout.do">로그아웃</a></div>
@@ -47,10 +48,12 @@
 		   <div class="col-12 grid-margin stretch-card">
 		      <div class="card">
 		         <div class="card-body">
-		            <h1 class="card-title">업체  정보 수정</h1>
+		            <h1 class="card-title">업체 정보 수정</h1>
 		            <br>
 		            <form method="post" action="/updateStore.do" enctype="multipart/form-data">
 		               <div class="form-group">
+		              	  <label for="inputName">업체명</label>
+						  <br>
 		                  <input type="text" class="form-control" id="inputName" name="storeName" value="${s[0].storeName }">
 		               </div>
 		               <br>
@@ -102,9 +105,10 @@
 		                  <label>업체 사진</label>
 		                  <input type="file" name="file" class="file-upload-default" id="file" multiple>
 		                  <div class="input-group col-xs-12">
-		                  	
 		                  		<c:forEach var="s" items="${s }">
-			                     	<input type="text" class="form-control file-upload-info" value="${s.storeImgList}" disabled>
+		                  			<c:forEach var="img" items="${s.storeImgList }">
+				                     	<input type="text" class="form-control file-upload-info" value="${img.imgpath}" disabled>
+		                  			</c:forEach>
 		                  			
 		                  		</c:forEach>
 		                     <span class="input-group-append">
@@ -148,7 +152,7 @@
 		                  <label for="btn-check7" class="btn btnday">일</label>
 		               </div>
 		               <div class="submitBtn">
-		                  <button type="reset" class="cancle">취소</button>
+		                  <button type="button" class="cancle" onclick="history.back()">취소</button>
 		                  <button type="submit" class="btn-primary">수정</button>
 		               </div>
 		            </form>
