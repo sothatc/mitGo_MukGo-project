@@ -211,7 +211,7 @@
 				<li class="w3-bar" style="height: 270px;">
                   <div class="w3-bar-1" style="margin:0;">
                      <span class="reviewDelete" style="line-height: 250px;">×</span>
-                     <img src="/resources/img/${r.reviewImg }" class="w3-hide-small" style="float: left; width:30%; height:100%;">
+                     <img src="/resources/upload/review/${r.reviewImg }" class="w3-hide-small" style="float: left; width:30%; height:100%;">
                      <div class="w3-bar-item" id="w3-bar-item" style="width:60%;">
                         <span class="w3-large">${r.writer }</span>
                         <span style="color: rgb(255, 83, 86);"><c:forEach begin="1" step="1" end="${r.rating }" varStatus="i">★</c:forEach></span>
