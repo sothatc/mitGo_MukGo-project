@@ -198,15 +198,12 @@
 	            </div>
 	         </div>
 		</div>
-<<<<<<< HEAD
 		
 		
          <!--------- 후기 시작 ----->
-=======
          <!----- 후기 부분 ----->
        
 
->>>>>>> refs/remotes/origin/master
          <div class="review-wrap" style="margin-top:10px;">
             <div class="menuTitle" style="display: block;">REVIEW</div>
             <ul class="w3-ul w3-card-4" id="reviewWrapUl">
@@ -228,10 +225,7 @@
                      </div>
                   </div>
                </li>
-<<<<<<< HEAD
-=======
 			</c:forEach>
->>>>>>> refs/remotes/origin/master
             </ul>
          </div>
          <!--------후기 끝 -->
