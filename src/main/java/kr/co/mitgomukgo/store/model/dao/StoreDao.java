@@ -114,4 +114,9 @@ public class StoreDao {
 		return sqlSession.update("updateMenu", menu);
 	}
 
+	public ArrayList<StoreImg> selectImg(int storeNo) {
+		List list = sqlSession.selectList("store.selectImg",storeNo);
+		return (ArrayList<StoreImg>) list;
+	}
+
 }
