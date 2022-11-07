@@ -254,6 +254,36 @@ public class NoticeController {
 		return "redirect:/noticeDetail.do?noticeNo=" + n.getNoticeNo();
 	}
 	
+	@RequestMapping(value="/deleteNotice.do")
+	public String deleteNotice(int noticeNo, HttpServletRequest request) {
+		
+		ArrayList<NoticeFile> list = service.selectNoticeFile(noticeNo);
+		
+		if(list != null) {
+			String path = request.getSession().getServletContext().getRealPath("/resources/upload/notice/");
+			for(NoticeFile nf : list) {
+				File delFile = new File(path + nf.getFilepath());
+				delFile.delete();
+			}
+		}
+		return "redirect:/selectNoticeList.do?reqPage=1";
+	}
+	
+	@RequestMapping(value="/searchNotice.do")
+	public String searchNotice(String type, String keyword, int reqPage, Model model) {
+		
+		HashMap<String, Object> list = service.selectSearchNotice(type, keyword, reqPage);
+		
+		if(list == null) {
+			model.addAttribute("msg", "검색어와 일치하는 내용이 없습니다.");
+			return "notice/noticeList";
+		}else {
+			model.addAttribute("list", list.get("list"));
+			model.addAttribute("pageNavi", list.get("pageNavi"));
+			return "notice/noticeList";
+		}
+		
+	}
 
 }
 

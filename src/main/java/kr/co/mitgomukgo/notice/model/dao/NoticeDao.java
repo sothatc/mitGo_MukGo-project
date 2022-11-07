@@ -81,6 +81,32 @@ public class NoticeDao {
 		int result = sqlSession.delete("notice.deleteNotice", fileNo);
 		return result;
 	}
+
+	public int deleteNotice(int noticeNo) {
+		int result = sqlSession.delete("notice.deleteNoticeMan", noticeNo);
+		return result;
+	}
+
+	public int deleteNoticeFileList(int noticeNo) {
+		int result = sqlSession.delete("notice.deleteNoticeFileList", noticeNo);
+		return result;
+	}
+
+	public ArrayList<Notice> selectSearchNotice(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("notice.selectSearchNotice", map);
+		
+		if(list.isEmpty()) {
+			return null;
+		}else {
+			return (ArrayList<Notice>)list;
+		}
+ 		
+	}
+
+	public int noticeSearchCount(HashMap<String, Object> map) {
+		int result = sqlSession.selectOne("notice.noticeSearchCount", map);
+		return result;
+	}
 }
 
 
