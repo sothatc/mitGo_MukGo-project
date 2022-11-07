@@ -217,7 +217,6 @@
 		where owner_no = #{ownerNo}
 	</select>
 	
-
 	<select id="countTagList" parameterType="string"
 		resultType="_int">
 		select count(*) from store where category = #{category}
