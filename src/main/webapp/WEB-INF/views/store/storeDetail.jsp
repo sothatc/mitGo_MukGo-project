@@ -8,8 +8,6 @@
 <head>
    <meta charset="UTF-8">
    <title>맛집상세 페이지</title>
-
-
 </head>
 
 <body>
@@ -19,8 +17,9 @@
    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-   <link rel="stylesheet" href="/resources/css/store/storeDetail.css">
+
    <link rel="stylesheet" href="/resources/demos/store/style.css">
+   <link rel="stylesheet" href="/resources/css/store/storeDetail.css">
    
    
    
@@ -137,7 +136,7 @@
 
 
    <!--상세 페이지-->
-   <div class="content-wrap4" style="font-family:Gowun Dodum; margin-top:30px; width:1200px;">
+   <div class="content-wrap4" style="font-family:Gowun Dodum; margin-top:30px; height:100%; width:1200px; margin-bottom:100px;">
       <div class="testDiv">
          <p class="menuTitle" style="margin-top: 10px;">MENU</p>
          <blockquote class="w3-panel w3-leftbar w3-light-grey" id="menuWrap" style="height:100%; padding-bottom:20px;">
@@ -146,9 +145,9 @@
                <table class="w3-table w3-bordered" id="menuTable">
                <c:forEach items="${list }" var="me">
                   <tr>
-                     <td>${me.menuName }</td>
+                     <td style="text-align:left;">${me.menuName }</td>
                      <td>--------------------------------------</td>
-                     <td><fmt:formatNumber value="${me.menuPrice }" pattern="#,###원"/></td>
+                     <td style="text-align:right;"><fmt:formatNumber value="${me.menuPrice }" pattern="#,###원" /></td>
                   </tr>
 				</c:forEach>
                </table>
@@ -199,8 +198,9 @@
 	            </div>
 	         </div>
 		</div>
-         <!----- 후기 부분 ----->
-
+		
+		
+         <!--------- 후기 시작 ----->
          <div class="review-wrap" style="margin-top:10px;">
             <div class="menuTitle" style="display: block;">REVIEW</div>
             <ul class="w3-ul w3-card-4" id="reviewWrapUl">
@@ -222,46 +222,9 @@
                      </div>
                   </div>
                </li>
-
-               <li class="w3-bar" style="height: 270px;">
-                  <div class="w3-bar-1" style="margin:0;">
-                     <span class="reviewDelete" style="line-height: 250px;">×</span>
-                     <img src="/resources/img/pizza.PNG" class="w3-hide-small" style="float: left; width:30%; height:100%;">
-                     <div class="w3-bar-item" id="w3-bar-item">
-                        <span class="w3-large">홍길동</span>
-                        <span class="material-symbols-rounded">star</span>
-                        <span class="material-symbols-rounded">star</span>
-                        <span>3.0</span>
-                        <br>
-                        <span style="display: inline; float: left;"> 너무 맛있어서 눈물이 다 났어요... 또 올게요 사장님ㅠㅠㅠㅠㅠㅠㅠㅠㅠ ㅠㅠㅠㅠㅠㅠㅠㅠㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ 너무 맛있어서 눈물이 다 났어요... 또 올게요 사장님ㅠㅠㅠㅠㅠㅠㅠㅠㅠ ㅠㅠㅠㅠㅠㅠㅠㅠㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ</span>
-                        <br>
-                        <div class="w3-bar-item-1">
-                           <span class="regDate">2022-10-26</span>
-                        </div>
-                     </div>
-                  </div>
-               </li>
-
-               <li class="w3-bar" style="height: 270px;">
-                  <div class="w3-bar-1" style="margin:0;">
-                     <span class="reviewDelete" style="line-height: 250px;">×</span>
-                     <img src="/resources/img/pizza.PNG" class="w3-hide-small"  style="float: left; width:30%; height:100%;">
-                     <div class="w3-bar-item" id="w3-bar-item" style="width:70%;">
-                        <span class="w3-large">홍길동</span>
-                        <span class="material-symbols-rounded">star</span>
-                        <span class="material-symbols-rounded">star</span>
-                        <span>3.0</span>
-                        <br>
-                        <span style="display: inline; float: left;"> 너무 맛있어서 눈물이 다 났어요... 또 올게요 사장님ㅠㅠㅠㅠㅠㅠㅠㅠㅠ ㅠㅠㅠㅠㅠㅠㅠㅠㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ 너무 맛있어서 눈물이 다 났어요... 또 올게요 사장님ㅠㅠㅠㅠㅠㅠㅠㅠㅠ ㅠㅠㅠㅠㅠㅠㅠㅠㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ</span>
-                        <br>
-                        <div class="w3-bar-item-1">
-                           <span class="regDate">2022-10-26</span>
-                        </div>
-                     </div>
-                  </div>
-               </li>
             </ul>
          </div>
+         <!--------후기 끝 -->
       </div>
       
       
@@ -457,11 +420,11 @@
             
          }
          
-         
+         var addr;
          //-------------------주소 * 없애기
          function addrSlice() {
-             const addr = $(".addressTd");
-             const splitWord = addr.text().split("*");
+             addr = $(".addressTd");
+             splitWord = addr.text().split("*");
                 addr.text(splitWord[1] + " " +splitWord[2]);
              }
              addrSlice();
@@ -641,15 +604,14 @@
             
          //----------------------------- 공유하기 버튼
          function shareMessage() {
-
             Kakao.Share.sendDefault({
                objectType : 'location',
-               address : "${s.address}",
+               address : $(".addressTd").text(),
                addressTitle : "${s.storeName}",
                content : {
                   title : "${s.storeName}",
                   description : "${s.storeName}"+" 로 지금 먹으러갈까요~~?",
-                  imageUrl : 'http://192.168.10.26/resources/img/logo.pmg',
+                  imageUrl : 'http://192.168.10.26/resources/img/logo.png',
                   link : {
                      mobileWebUrl : 'http://192.168.10.26/storeDetail.do?storeNo='+storeNo,
                      webUrl : 'http://192.168.10.26/storeDetail.do?storeNo='+storeNo

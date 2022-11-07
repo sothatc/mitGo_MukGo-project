@@ -48,11 +48,11 @@ public class StoreController {
 
 	// 맛집 상세 보기
 	@RequestMapping(value = "/storeDetail.do")
-	public String StoreDetail(int storeNo, Model model,Menu m, Model model1) {
+	public String StoreDetail(int storeNo, Model model,Menu m) {
 		Store s = service.selectOneStore(storeNo);
 		model.addAttribute("s", s);
 		ArrayList<Menu> list = service.selectMenuList(storeNo);
-		model1.addAttribute("list", list);
+		model.addAttribute("list", list);
 		return "store/storeDetail";
 	}
 
