@@ -52,7 +52,9 @@ public class StoreController {
 		Store s = service.selectOneStore(storeNo);
 		model.addAttribute("s", s);
 		ArrayList<Menu> list = service.selectMenuList(storeNo);
+		ArrayList<Review> reviewList = service.selectReviewList(storeNo);
 		model1.addAttribute("list", list);
+		model1.addAttribute("rList", reviewList);
 		return "store/storeDetail";
 	}
 

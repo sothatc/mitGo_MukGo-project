@@ -342,6 +342,10 @@ public class StoreService {
 				return searchMap;
 
 	}
+
+	public ArrayList<Review> selectReviewList(int storeNo) {
+		return dao.selectReviewList(storeNo);
+	}
 	
 
 }

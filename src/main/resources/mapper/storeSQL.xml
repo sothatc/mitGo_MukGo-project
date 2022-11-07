@@ -217,18 +217,6 @@
 		where owner_no = #{ownerNo}
 	</select>
 	
-
-
-
-
-	<select id="searchStore" parameterType="int" resultType="s">
-		select
-		store_no as storeNo
-		from store
-		where owner_no = #{ownerNo}
-	</select>
-
-
 	<select id="countTagList" parameterType="string"
 		resultType="_int">
 		select count(*) from store where category = #{category}
@@ -382,6 +370,19 @@
 		</choose>
 		)
 		where rnum between #{start} and #{end}
+	</select>
+	
+	<!-- 리뷰리스트 -->
+	<select id="selectReviewList" parameterType="int" resultType="r">
+		select 
+		review_no as reivewNo,
+		writer,
+		rating,
+		content,
+		review_img as reviewImg,
+		enroll_date as enrollDate
+		from review
+		where store_no = #{_parameter}
 	</select>
 
 
