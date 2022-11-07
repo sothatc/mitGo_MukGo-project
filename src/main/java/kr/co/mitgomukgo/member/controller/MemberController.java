@@ -1,5 +1,6 @@
 package kr.co.mitgomukgo.member.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
@@ -11,10 +12,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.context.annotation.SessionScope;
 
 import kr.co.mitgomukgo.member.model.service.MemberService;
 import kr.co.mitgomukgo.member.model.vo.Member;
 import kr.co.mitgomukgo.member.model.vo.Owner;
+import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import net.nurigo.java_sdk.Coolsms;
 import net.nurigo.java_sdk.api.Message;
@@ -185,9 +189,11 @@ public class MemberController {
 		return "member/mypage";
 	}
 	@RequestMapping(value="/ownerMypage.do")
-	public String ownerMypage(int ownerNo, Model model) {
+	public String ownerMypage(HttpSession session) {
+		Owner o = (Owner)session.getAttribute("o");
+		int ownerNo = o.getOwnerNo();
 		Store s = service.searchStore(ownerNo);
-		model.addAttribute("s", s);
+		session.setAttribute("s", s);
 		return "member/ownerMypage";
 	}
 	@RequestMapping(value="/selectJoin.do")
@@ -207,4 +213,33 @@ public class MemberController {
 			return "member/ownerJoinFrm";
 		}
 	}
+	
+	@RequestMapping(value="/updateOwner.do")
+	public String updateOwner(Owner o) {
+		int result = service.updateOwner(o);
+		if(result > 0) {
+			return "redirect:/";
+		}else {
+			return "member/ownerMyPage";
+		}
+	}
+	@RequestMapping(value="/updateMember.do")
+	public String updateMember(Member m) {
+		int result = service.updateMember(m);
+		if(result > 0) {
+			return "redirect:/";
+		}else {
+			return "member/mypage";
+		}
+	}
+	@RequestMapping(value="/reserveList.do")
+	public String reserveList(@SessionAttribute Member m, Model model) {
+		ArrayList<Reserve> rs = service.selectReserveList(m);
+		if(rs.isEmpty()) {
+			return "redirect:/";
+		}
+		model.addAttribute("rs", (ArrayList<Reserve>)rs);
+		return "member/reserveList";
+	}
+	
 }

@@ -31,8 +31,50 @@ public class NoticeService {
 		
 		ArrayList<Notice> list = dao.selectAllNotice(map);
 		
+		int totalCnt = dao.selectNoticeCount();
+		
+		int totalPage = 0;
+		if(totalCnt % numPerPage == 0) {
+			totalPage = totalCnt / numPerPage;
+		}else {
+			totalPage = totalCnt / numPerPage + 1;
+		}
+		
+		int pageNaviSize = 5;
+		int pageNo = 1;
+		
+		if(reqPage > 3) {
+			pageNo = reqPage - 2;
+		}
+		
+		String pageNavi = "";
+		if(pageNo != 1) {
+			pageNavi +=  "<a href='/selectNoticeList.do?reqPage=" + (pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_left\r\n" + 
+					"            </span></a>";
+		}
+		
+		for(int i = 0; i < pageNaviSize; i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
+			}else {
+				pageNavi += "<a href='/selectNoticeList.do?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		
+		if(pageNo <= totalPage) {
+			pageNavi += "<a href='/selectNoticeList.do?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_right\r\n" + 
+					"            </span></a>";
+		}
+		
 		HashMap<String, Object> pageMap = new HashMap<String, Object>();
 		pageMap.put("list", list);
+		pageMap.put("pageNavi", pageNavi);
 		if(list == null) {
 			return null;
 		}else {
@@ -55,6 +97,48 @@ public class NoticeService {
 			}
 			
 			
+		}
+		return result;
+	}
+
+	public Notice selectOneNotice(int noticeNo) {
+		int result = dao.updateReadCount(noticeNo);
+		
+		Notice n = null;
+		
+		if(result > 0) {
+			n = dao.selectOneNotice(noticeNo);
+			ArrayList<NoticeFile> nfList = dao.selectALlNoticeFile(noticeNo);
+			n.setFileList(nfList);
+			return n;
+		}else {
+			return null;
+		}
+		
+	}
+
+	public NoticeFile selectOneNoticeFile(int noticeFileNo) {
+		NoticeFile notice = dao.selectOneNoticeFile(noticeFileNo);
+		return notice;
+	}
+
+	public int updateNotice(Notice n, int[] fileNoList) {
+		int result = dao.updateNotice(n);
+		
+		if(result > 0) {
+			
+			// 추가한 파일이 있으면
+			for(NoticeFile nf : n.getFileList()) {
+				nf.setNoticeNo(n.getNoticeNo());
+				result += dao.insertNoticeFile(nf);
+			}
+			
+			// 삭제한 파일이 있다면
+			if(fileNoList != null) {
+				for(int fileNo : fileNoList) {
+					result += dao.deleteNoticeFile(fileNo);
+				}
+			}
 		}
 		return result;
 	}

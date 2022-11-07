@@ -110,65 +110,7 @@ public class StoreService {
 		ArrayList<Store> s = dao.selectStore(o);
 		return (ArrayList<Store>) s;
 	}
-	/*
-	public HashMap<String, Object> storeList(int tagValue, int reqPage) {
-		int numPerPage = 9;
-		
-		int end = numPerPage * reqPage;
-		int start = (end - numPerPage) + 1;
-		HashMap<String, Object> map = new HashMap<String,Object>();
-		map.put("start",start);
-		map.put("end",end);
-		map.put("tagValue",tagValue);
-		
-		ArrayList<Store> list = dao.storeTagList(map);
-		
-		int totalPage = dao.countAllList();
-		int pageNaviSize = 2;
-		int pageNo = 1;
-		
-		if(reqPage > 2) {
-			pageNo = reqPage - 1;
-		}
-		
-		String pageNavi = "";
-		if(pageNo != 1) {
-			pageNavi += "<a href='/storeList.do?reqPage=" +(pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
-					"            chevron_left\r\n" + 
-					"            </span></a>";
-		}
-		
-		for(int i = 0; i < pageNaviSize; i++) {
-			if(reqPage == pageNo) {
-				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
-			}else {
-				pageNavi += "<a href='/storeList.do?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
-			}
-			pageNo++;
-			if(pageNo > totalPage) {
-				break;
-			}
-		}
-		
-		if(end <= totalPage) {
-			pageNavi += "<a href='/storeList.do?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
-					"            chevron_right\r\n" + 
-					"            </span></a>";
-		}
-		HashMap<String, Object> storeListMap = new HashMap<String, Object>();
-		storeListMap.put("list", list);
-		storeListMap.put("reqPage", reqPage);
-		storeListMap.put("pageNavi", pageNavi);
-		storeListMap.put("total", totalPage);
-		storeListMap.put("pageNo", pageNo);
-		
-		if(list == null) {
-			return null;
-		}else {
-			return storeListMap;
-		}
-	}
-	*/
+	
 	public HashMap<String, Object> selectTag(String category, int reqPage) {
 		// 화면에 보여주는 게시물 수
 		int numPerPage = 9;
@@ -227,7 +169,7 @@ public class StoreService {
 		return tagMap;
 	}
 
-	public ArrayList<Store> searchStoreList(String searchTag, int reqPage, String category) {
+	public HashMap<String, Object> searchStoreList(String search, int reqPage, String category) {
 		// 화면에 보여주는 게시물 수
 		int numPerPage = 9;
 		
@@ -240,11 +182,12 @@ public class StoreService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
-		map.put("category", category);
-		map.put("searchTag", searchTag);
+		map.put("search", search);
+		map.put("category",category);
+		
 		ArrayList<Store> list = dao.searchStoreList(map);
 		
-		int totalPage = dao.countTagList(searchTag);
+		int totalPage = dao.countTagList(search);
 		int pageNaviSize = 2;
 		int pageNo = 1;
 		
@@ -254,7 +197,7 @@ public class StoreService {
 		
 		String pageNavi = "";
 		if(pageNo != 1) {
-			pageNavi += "<a href='/selectTag.do?category="+category+"&reqPage=" +(pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+			pageNavi += "<a href='/storeList.do?reqPage=" +(pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
 					"            chevron_left\r\n" + 
 					"            </span></a>";
 		}
@@ -263,7 +206,7 @@ public class StoreService {
 			if(reqPage == pageNo) {
 				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
 			}else {
-				pageNavi += "<a href='/selectTag.do?category="+category+"&reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+				pageNavi += "<a href='/selectTag.do?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
 			}
 			pageNo++;
 			if(pageNo > totalPage) {
@@ -272,12 +215,19 @@ public class StoreService {
 		}
 		
 		if(end <= totalPage) {
-			pageNavi += "<a href='/selectTag.do?category="+category+"&reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+			pageNavi += "<a href='/selectTag.do?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
 					"            chevron_right\r\n" + 
 					"            </span></a>";
 		}
 		
-		return list;	
+		HashMap<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("list", list);
+		searchMap.put("reqPage", reqPage);
+		searchMap.put("pageNavi", pageNavi);
+		searchMap.put("total", totalPage);
+		searchMap.put("pageNo", pageNo);
+		
+		return searchMap;	
 	}
 	
 	//맛집 상세
@@ -291,11 +241,13 @@ public class StoreService {
 		ArrayList<StoreJoin> list = dao.selectOneStoreAjax(sj);
 		return list;
 	}
-	
+
+
 	//예약하기
 	public int reserve(Reserve r) {
-	    return dao.reserve(r);
+		return dao.reserve(r);
 	}
+	
 	
 	//예약된 시간 버튼 비활성화
 	public ArrayList<Reserve> ajaxCheckReserve(Reserve r) {
@@ -303,7 +255,25 @@ public class StoreService {
 		return list;
 	}
 	
+
+	public ArrayList<Menu> menuList(int storeNo) {
+		return dao.menuList(storeNo);
+
+	}
+
+	public int deleteMenu(int menuNo) {
+		return dao.deleteMenu(menuNo);
+	}
+
+	public Menu readOneMenu(int menuNo) {
+		return dao.readOneMenu(menuNo);
+	}
+
 	
+
+	public int updateMenu(Menu menu) {
+		return dao.updateMenu(menu);
+	}
 	
 
 }

@@ -109,8 +109,8 @@
                   </tr>
                   <tr>
                      <th>
-						가능시간
-	                 </th>
+                  가능시간
+                    </th>
                      <td colspan="3" class="buttonTd">
                      </td>
                   </tr>
@@ -584,29 +584,29 @@
          var selectDate = $("#datePicker").val();
          
          //날짜 input 클릭 시 시간 버튼 삭제
-		$("#datePicker").on("click",function(){
-			$(".timeBtn").remove();
-			selectedTime = new Array();
-			unTime = new Array();
-		});
+      $("#datePicker").on("click",function(){
+         $(".timeBtn").remove();
+         selectedTime = new Array();
+         unTime = new Array();
+      });
          
          //-----------시간확인하기 버튼 (용도: 비활성화)checkTime
          $("#datePicker").on("change",function(){
-        	
-         	 //---------------ajax 
-         	 
+           
+             //---------------ajax 
+             
              $.ajax({
                  url: "/checkReserve.do",
                  type:"post",
                  data: {storeNo:storeNo},
                  success: function(data){
-                	 //삭제하고 생성
-                	 $(".timeBtn").remove();
-            		 //시간 버튼 생성
+                    //삭제하고 생성
+                    $(".timeBtn").remove();
+                   //시간 버튼 생성
                      for(let i=realOpenTime; i<realCloseTime; i++){
                          $(".buttonTd").append("<button class=timeBtn style=margin-right:1%;background-color:white;color:rgb(51,51,51); value="+i+">"+i+":00"+"</button>");
                       }
-                		 
+                       
                      //-----------------버튼 클릭
                      const timeBtns = $(".timeBtn");
                      timeBtns.on("click",function(){
@@ -616,44 +616,44 @@
                         selectTime = $(this).text();
                      });
                      
-					var selectDate = $("#datePicker").val();
-					checkTimeBtn = document.getElementsByClassName('timeBtn');
-					for(let i=0; i<data.length; i++){
-						//선택한 시간과 불러온 날짜가 같으면
-						if(selectDate==data[i].eatDate){
-							//selectedTime 배열에 선택한 날짜의 예약시간을 배열로 저장
-							selectedTime.push(data[i].eatTime);
-						}		
-					}
-					
-					//btnVal 이란 배열에 버튼의 value값 넣기
-					for(let i=0; i<checkTimeBtn.length; i++){
-						btnVal.push(document.getElementsByClassName('timeBtn')[i].value+":00");
-					}
-					
-					
-					for(let i=0; i<selectedTime.length; i++){
-						if(selectedTime[i].toString == btnVal[i].toString){
-							//unTime이란 배열에 비활성화할 값 넣음
-							unTime.push(selectedTime[i]);
-						}
-					}
-					
-					//버튼 비활성화 css
-					for(let i=0; i<btnVal.length; i++){
-						for(let j=0; j<unTime.length; j++){
-							if(btnVal[i]==unTime[j]){
-								checkTimeBtn[i].style.color="red";
-								checkTimeBtn[i].style.background="pink";
-								checkTimeBtn[i].setAttribute("disabled", true);
-							}
-						}
-					}
-					
-				}//--------success문 종료
+               var selectDate = $("#datePicker").val();
+               checkTimeBtn = document.getElementsByClassName('timeBtn');
+               for(let i=0; i<data.length; i++){
+                  //선택한 시간과 불러온 날짜가 같으면
+                  if(selectDate==data[i].eatDate){
+                     //selectedTime 배열에 선택한 날짜의 예약시간을 배열로 저장
+                     selectedTime.push(data[i].eatTime);
+                  }      
+               }
+               
+               //btnVal 이란 배열에 버튼의 value값 넣기
+               for(let i=0; i<checkTimeBtn.length; i++){
+                  btnVal.push(document.getElementsByClassName('timeBtn')[i].value+":00");
+               }
+               
+               
+               for(let i=0; i<selectedTime.length; i++){
+                  if(selectedTime[i].toString == btnVal[i].toString){
+                     //unTime이란 배열에 비활성화할 값 넣음
+                     unTime.push(selectedTime[i]);
+                  }
+               }
+               
+               //버튼 비활성화 css
+               for(let i=0; i<btnVal.length; i++){
+                  for(let j=0; j<unTime.length; j++){
+                     if(btnVal[i]==unTime[j]){
+                        checkTimeBtn[i].style.color="red";
+                        checkTimeBtn[i].style.background="pink";
+                        checkTimeBtn[i].setAttribute("disabled", true);
+                     }
+                  }
+               }
+               
+            }//--------success문 종료
                 
               }); 
-         	 //--------------ajax종료
+             //--------------ajax종료
              
          });
          
@@ -687,9 +687,9 @@
          //---------------------------------- 모달 
 
          const modal = document.querySelector(".modal-wrap");
-       	 var ownerId = "${sessionScope.o.ownerId}";
-       	 var memberId = "${sessionScope.s.memberId}";
-      	 var selectedDate;
+           var ownerId = "${sessionScope.o.ownerId}";
+           var memberId = "${sessionScope.s.memberId}";
+          var selectedDate;
        
          
             //모달 여는 코드
@@ -697,16 +697,16 @@
             
                modal.classList.remove("hidden");
                
-	            if(ownerId != ""){
-	               document.getElementById('ownerModal').style.display='block';
-	            }
-	            selectedDate =$("#datePicker").val();
-	            $(".eatDate").attr("value",selectedDate);
-	            $(".eatTime").attr("value",selectTime);
-	            $(".eatNum").attr("value",count);
-	            $(".dateTd").text(selectedDate);
-	            $(".peopleNumTd").text(count);
-	            $(".timeTd").text(selectTime);
+               if(ownerId != ""){
+                  document.getElementById('ownerModal').style.display='block';
+               }
+               selectedDate =$("#datePicker").val();
+               $(".eatDate").attr("value",selectedDate);
+               $(".eatTime").attr("value",selectTime);
+               $(".eatNum").attr("value",count);
+               $(".dateTd").text(selectedDate);
+               $(".peopleNumTd").text(count);
+               $(".timeTd").text(selectTime);
                //날짜를 선택하지 않았을 때
                if($("#datePicker").val() == "" || selectTime== null){
                   document.getElementById('timeDateModal').style.display='block';

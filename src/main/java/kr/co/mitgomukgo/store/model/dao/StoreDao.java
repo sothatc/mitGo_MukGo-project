@@ -60,20 +60,17 @@ public class StoreDao {
 		return sqlSession.insert("addMenu", me);
 	}
 
-
 	//맛집 상세 
 	public Store selectOneStore(int storeNo) {
 		Store s = sqlSession.selectOne("store.selectOneStore",storeNo);
 		return s;
 	}
 
-
 	//맛집 상세 - 조인
 	public ArrayList<StoreJoin> selectOneStoreAjax(StoreJoin sj) {
 		List list = sqlSession.selectList("store.selectOneStoreAjax",sj);
 		return (ArrayList<StoreJoin>) list;
 	}
-	
 	
 	public ArrayList<Store> selectStore(Owner o) {
 		List s = sqlSession.selectList("store.selectMyStore",o);
@@ -93,12 +90,28 @@ public class StoreDao {
 		List list = sqlSession.selectList("store.searchStoreList",map);
 		return (ArrayList<Store>)list;
 	}
-
 	
 	//예약하기
 	public int reserve(Reserve r) {
 	    int result = sqlSession.insert("store.insertReserve",r);
 	    return result;
+	}
+	
+	public ArrayList<Menu> menuList(int storeNo) {
+		List list = sqlSession.selectList("menuList", storeNo);
+		return (ArrayList<Menu>) list;
+	}
+
+	public int deleteMenu(int menuNo) {
+		return sqlSession.delete("deleteMenu", menuNo);
+	}
+	
+	public Menu readOneMenu(int menuNo) {
+		return sqlSession.selectOne("readOneMenu", menuNo);
+	}
+
+	public int updateMenu(Menu menu) {
+		return sqlSession.update("updateMenu", menu);
 	}
 	
 	//예약된 시간 버튼 비활성화

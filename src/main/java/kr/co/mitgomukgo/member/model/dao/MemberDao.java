@@ -1,11 +1,15 @@
 package kr.co.mitgomukgo.member.model.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.mitgomukgo.member.model.vo.Member;
 import kr.co.mitgomukgo.member.model.vo.Owner;
+import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Store;
 
 @Repository
@@ -47,5 +51,21 @@ public class MemberDao {
 		Store s = sqlSession.selectOne("store.searchStore", ownerNo);
 		return s;
 	}
+
+	public int updateOwner(Owner o) {
+		int result = sqlSession.update("owner.updateOwner", o);
+		return result;
+	}
+
+	public int updateMember(Member m) {
+		int result = sqlSession.update("member.updateMember",m);
+		return result;
+	}
+
+	public ArrayList<Reserve> selectReserveList(Member m) {
+		List rs = sqlSession.selectList("reserve.selectReserveList",m);
+		return (ArrayList<Reserve>)rs;
+	}
+
 	
 }
