@@ -138,4 +138,12 @@ public class StoreDao {
 		return (ArrayList<StoreImg>) list;
 	}
 
+	public int updateStore(Store s) {
+		return sqlSession.update("store.updateStore",s);
+	}
+
+	public int deleteImg(int imgNo) {
+		return sqlSession.delete("store.deleteStoreImg", imgNo);
+	}
+
 }

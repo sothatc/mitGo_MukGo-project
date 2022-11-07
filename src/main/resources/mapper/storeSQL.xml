@@ -372,5 +372,24 @@
 		where rnum between #{start} and #{end}
 	</select>
 
+	<update id="updateStore" parameterType="s">
+		update store
+		set 
+			store_name = #{storeName},
+			
+			address = #{address},
+			phone = #{phone},
+			content = #{content},
+			open_hour = #{openHour},
+			closed_day = #{closedDay},
+			category = #{category},
+			witheat_cate = #{withEatCate},
+			whereeat_cate = #{whereEatCate}
+		where store_no = #{storeNo}
+	</update>
+	<delete id="deleteStoreImg" parameterType="int">
+		delete from store_img
+		where storeimg_no = #{imgNo}
+	</delete>
 
 </mapper>
