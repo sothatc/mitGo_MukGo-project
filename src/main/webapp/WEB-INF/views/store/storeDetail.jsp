@@ -2,6 +2,7 @@
 <%@page import="kr.co.mitgomukgo.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,7 +67,7 @@
             <div class="info-reserve-wrap">
                <table class="w3-table w3-bordered" id="infoTable" style="font-family:Gowun Dodum; width: 550px;">
                   <tr>
-                     <th>주소</th>
+                     <th style="width:120px;">주소</th>
                      <td colspan="3" class="addressTd" >${s.address }</td>
                   </tr>
                   <tr>
@@ -108,9 +109,7 @@
                      </td>
                   </tr>
                   <tr>
-                     <th>
-                  가능시간
-                    </th>
+                     <th>예약가능시간</th>
                      <td colspan="3" class="buttonTd">
                      </td>
                   </tr>
@@ -137,106 +136,69 @@
    <div class="content-wrap4" style="font-family:Gowun Dodum; margin-top:30px; width:1200px;">
       <div class="testDiv">
          <p class="menuTitle" style="margin-top: 10px;">MENU</p>
-         <blockquote class="w3-panel w3-leftbar w3-light-grey" id="menuWrap">
+         <blockquote class="w3-panel w3-leftbar w3-light-grey" id="menuWrap" style="height:100%; padding-bottom:20px;">
             <div class="menuWrap" style="font-family:Gowun Dodum;">
                <p class="menuSubTitle">대표메뉴</p>
                <table class="w3-table w3-bordered" id="menuTable">
+               <c:forEach items="${list }" var="me">
                   <tr>
-                     <td>피자A</td>
+                     <td>${me.menuName }</td>
                      <td>--------------------------------------</td>
-                     <td>18,000</td>
+                     <td><fmt:formatNumber value="${me.menuPrice }" pattern="#,###원"/></td>
                   </tr>
-                  <tr>
-                     <td>피자B</td>
-                     <td>--------------------------------------</td>
-                     <td>18,000</td>
-                  </tr>
-                  <tr>
-                     <td>피자C</td>
-                     <td>--------------------------------------</td>
-                     <td>18,000</td>
-                  </tr>
-                  <tr>
-                     <td>피자D</td>
-                     <td>--------------------------------------</td>
-                     <td>18,000</td>
-                  </tr>
-                  <tr>
-                     <td>피자E</td>
-                     <td>--------------------------------------</td>
-                     <td>18,000</td>
-                  </tr>
+				</c:forEach>
                </table>
             </div>
          </blockquote>
 
          <div class="food-wrap">
-            <div class="w3-card" id="photoWrap">
-               <img src="/resources/img/pizza.PNG" style="width: 100%">
-               <div class="w3-container">
-                  <h4><b>PIZZA-A</b></h4>
-                  <p>18,000원</p>
-               </div>
-            </div>
-
-            <div class="w3-card" id="photoWrap">
-               <img src="/resources/img/pizza.PNG" style="width: 100%">
-               <div class="w3-container">
-                  <h4><b>PIZZA-B</b></h4>
-                  <p>18,000원</p>
-               </div>
-            </div>
-
-            <div class="w3-card" id="photoWrap">
-               <img src="/resources/img/pizza.PNG" style="width: 100%">
-               <div class="w3-container">
-                  <h4><b>PIZZA-C</b></h4>
-                  <p>18,000원</p>
-               </div>
-            </div>
-
-            <div class="w3-card" id="photoWrap">
-               <img src="/resources/img/pizza.PNG" style="width: 100%">
-               <div class="w3-container">
-                  <h4><b>PIZZA-D</b></h4>
-                  <p>18,000원</p>
-               </div>
-            </div>
+	         <c:forEach items="${list }" var="me">
+	            <div class="w3-card" id="photoWrap" style="font-family:Gowun Dodum;">
+	               <img src=/resources/upload/menu/${me.menuImg} style='width: 100%; height:300px;'>
+	               <div class="w3-container" style="font-family:Gowun Dodum;">
+	                  <p style="font-weight: bolder; font-size: 20px; margin-top:10px;">${me.menuName}</p>
+	                  <p><fmt:formatNumber value="${me.menuPrice }" pattern="#,###원"/></p>
+	               </div>
+	            </div>
+			</c:forEach>
          </div>
-
+         
          <!----- LOCATION 부분 ----->
-         <p class="menuTitle">LOCATION</p>
-         <div class="map-wrap">지도 넣을 자리</div>
-
+		 <div class="location-wrap" style="margin-top:10px;">
+	         <div class="menuTitle" style="margin: 0 auto;">LOCATION</div>
+	         <div class="map-wrap">지도 넣을 자리</div>
+		 </div>
+		 
          <!----- 마켓 상품 부분 ----->
-         <p class="menuTitle">MARKET</p>
-         <div class="market-wrap">
-            <div class="w3-card-4" id="marketWrap">
-               <img src="/resources/img/pizza.PNG" style="width: 100%">
-               <div class="w3-container w3-center">
-                  <p>상품 A</p>
-               </div>
-            </div>
-
-            <div class="w3-card-4" id="marketWrap">
-               <img src="/resources/img/pizza.PNG" style="width: 100%">
-               <div class="w3-container w3-center">
-                  <p>상품 A</p>
-               </div>
-            </div>
-
-            <div class="w3-card-4" id="marketWrap">
-               <img src="/resources/img/pizza.PNG" style="width: 100%">
-               <div class="w3-container w3-center">
-                  <p>상품 A</p>
-               </div>
-            </div>
-         </div>
-
+         <div class="market-wrap" style="margin-top:10px;">
+	         <div class="menuTitle" style="margin: 0 auto;">MARKET</div>
+	         <div class="market-wrap">
+	            <div class="w3-card-4" id="marketWrap">
+	               <img src="/resources/img/pizza.PNG" style="width: 100%">
+	               <div class="w3-container w3-center">
+	                  <p>상품 A</p>
+	               </div>
+	            </div>
+	
+	            <div class="w3-card-4" id="marketWrap">
+	               <img src="/resources/img/pizza.PNG" style="width: 100%">
+	               <div class="w3-container w3-center">
+	                  <p>상품 A</p>
+	               </div>
+	            </div>
+	
+	            <div class="w3-card-4" id="marketWrap">
+	               <img src="/resources/img/pizza.PNG" style="width: 100%">
+	               <div class="w3-container w3-center">
+	                  <p>상품 A</p>
+	               </div>
+	            </div>
+	         </div>
+		</div>
          <!----- 후기 부분 ----->
 
-         <div class="review-wrap">
-            <p class="menuTitle" style="display: block;">REVIEW</p>
+         <div class="review-wrap" style="margin-top:10px;">
+            <div class="menuTitle" style="display: block;">REVIEW</div>
             <ul class="w3-ul w3-card-4" id="reviewWrapUl">
                <li class="w3-bar" style="height: 270px;">
                   <div class="w3-bar-1" style="margin:0;">
@@ -297,6 +259,8 @@
             </ul>
          </div>
       </div>
+      
+      
       <!-- 모달 부분 -->
        <div class="modal-wrap hidden">
           <div class="modal-box">
@@ -614,41 +578,54 @@
                         $(this).css("color","white").css("background-color","rgb(51,51,51)");
                         const index = timeBtns.index(this);
                         selectTime = $(this).text();
+                        
+ 		               //버튼 비활성화 css
+ 		               for(let i=0; i<btnVal.length; i++){
+ 		                  for(let j=0; j<unTime.length; j++){
+ 		                     if(btnVal[i]==unTime[j]){
+ 		                        checkTimeBtn[i].style.color="red";
+ 		                        checkTimeBtn[i].style.background="pink";
+ 		                        checkTimeBtn[i].setAttribute("disabled", true);
+ 		                     }
+ 		                  }
+ 		               }
+                        
                      });
                      
-               var selectDate = $("#datePicker").val();
-               checkTimeBtn = document.getElementsByClassName('timeBtn');
-               for(let i=0; i<data.length; i++){
-                  //선택한 시간과 불러온 날짜가 같으면
-                  if(selectDate==data[i].eatDate){
-                     //selectedTime 배열에 선택한 날짜의 예약시간을 배열로 저장
-                     selectedTime.push(data[i].eatTime);
-                  }      
-               }
-               
-               //btnVal 이란 배열에 버튼의 value값 넣기
-               for(let i=0; i<checkTimeBtn.length; i++){
-                  btnVal.push(document.getElementsByClassName('timeBtn')[i].value+":00");
-               }
-               
-               
-               for(let i=0; i<selectedTime.length; i++){
-                  if(selectedTime[i].toString == btnVal[i].toString){
-                     //unTime이란 배열에 비활성화할 값 넣음
-                     unTime.push(selectedTime[i]);
-                  }
-               }
-               
-               //버튼 비활성화 css
-               for(let i=0; i<btnVal.length; i++){
-                  for(let j=0; j<unTime.length; j++){
-                     if(btnVal[i]==unTime[j]){
-                        checkTimeBtn[i].style.color="red";
-                        checkTimeBtn[i].style.background="pink";
-                        checkTimeBtn[i].setAttribute("disabled", true);
-                     }
-                  }
-               }
+		               var selectDate = $("#datePicker").val();
+		               checkTimeBtn = document.getElementsByClassName('timeBtn');
+		               for(let i=0; i<data.length; i++){
+		                  //선택한 시간과 불러온 날짜가 같으면
+		                  if(selectDate==data[i].eatDate){
+		                     //selectedTime 배열에 선택한 날짜의 예약시간을 배열로 저장
+		                     selectedTime.push(data[i].eatTime);
+		                  }      
+		               }
+		               
+		               //btnVal 이란 배열에 버튼의 value값 넣기
+		               for(let i=0; i<checkTimeBtn.length; i++){
+		                  btnVal.push(document.getElementsByClassName('timeBtn')[i].value+":00");
+		               }
+		               
+		               
+		               for(let i=0; i<selectedTime.length; i++){
+		                  if(selectedTime[i].toString == btnVal[i].toString){
+		                     //unTime이란 배열에 비활성화할 값 넣음
+		                     unTime.push(selectedTime[i]);
+		                  }
+		               }
+		               
+		               
+		               //버튼 비활성화 css
+		               for(let i=0; i<btnVal.length; i++){
+		                  for(let j=0; j<unTime.length; j++){
+		                     if(btnVal[i]==unTime[j]){
+		                        checkTimeBtn[i].style.color="red";
+		                        checkTimeBtn[i].style.background="pink";
+		                        checkTimeBtn[i].setAttribute("disabled", true);
+		                     }
+		                  }
+		               }
                
             }//--------success문 종료
                 
@@ -688,7 +665,7 @@
 
          const modal = document.querySelector(".modal-wrap");
            var ownerId = "${sessionScope.o.ownerId}";
-           var memberId = "${sessionScope.s.memberId}";
+           var memberId = "${sessionScope.m.memberId}"
           var selectedDate;
        
          

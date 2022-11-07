@@ -274,6 +274,12 @@ public class StoreService {
 	public int updateMenu(Menu menu) {
 		return dao.updateMenu(menu);
 	}
+
+	//맛집 상세 - 메뉴 조회
+	public ArrayList<Menu> selectMenuList(int storeNo) {
+		ArrayList<Menu> list = dao.selectMenuList(storeNo);
+		return list;
+	}
 	
 
 }
