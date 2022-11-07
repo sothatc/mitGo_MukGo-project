@@ -65,6 +65,7 @@
 		witheat_cate as
 		withEatCate,
 		whereeat_cate as whereEatCate,
+		(select round(avg(rating),1) from review r where r.store_no = s.store_no)as rating, 
 		(select imgpath from store_img si where storeimg_no = (select
 		min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
 		as thumbNail
@@ -92,6 +93,7 @@
 		witheat_cate as
 		withEatCate,
 		whereeat_cate as whereEatCate,
+		(select round(avg(rating),1) from review r where r.store_no = s.store_no)as rating,
 		(select imgpath from store_img si where storeimg_no = (select
 		min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
 		as thumbNail
@@ -118,6 +120,7 @@
 		witheat_cate as
 		withEatCate,
 		whereeat_cate as whereEatCate,
+		(select round(avg(rating),1) from review r where r.store_no = s.store_no)as rating,
 		(select imgpath from store_img si where storeimg_no = (select
 		min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
 		as thumbNail from store s order by storeNo desc)b where category =
@@ -239,6 +242,7 @@
 		witheat_cate as
 		withEatCate,
 		whereeat_cate as whereEatCate,
+		(select round(avg(rating),1) from review r where r.store_no = s.store_no)as rating,
 		(select imgpath from store_img si where storeimg_no = (select
 		min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
 		as thumbNail from store s order by storeNo desc)b
@@ -353,6 +357,7 @@
 		witheat_cate as
 		withEatCate,
 		whereeat_cate as whereEatCate,
+		(select round(avg(rating),1) from review r where r.store_no = s.store_no)as rating,
 		(select imgpath from store_img si where storeimg_no = (select
 		min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
 		as thumbNail from store s order by storeNo desc)b
@@ -370,6 +375,19 @@
 		</choose>
 		)
 		where rnum between #{start} and #{end}
+	</select>
+	
+	<!-- 리뷰리스트 -->
+	<select id="selectReviewList" parameterType="int" resultType="r">
+		select 
+		review_no as reivewNo,
+		writer,
+		rating,
+		content,
+		review_img as reviewImg,
+		enroll_date as enrollDate
+		from review
+		where store_no = #{_parameter}
 	</select>
 
 	<update id="updateStore" parameterType="s">

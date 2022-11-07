@@ -8,8 +8,6 @@
 <head>
    <meta charset="UTF-8">
    <title>맛집상세 페이지</title>
-
-
 </head>
 
 <body>
@@ -19,19 +17,24 @@
    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-   <link rel="stylesheet" href="/resources/css/store/storeDetail.css">
+
    <link rel="stylesheet" href="/resources/demos/store/style.css">
+   <link rel="stylesheet" href="/resources/css/store/storeDetail.css">
    
    
    
    <!---------------------내용----------------------->
    <div class="content-wrap">
       <div class="content-wrap1" style="width:1200px;">
-         <div class="content-wrap1-1">
-            <span class="categorySpan" style="font-family:Gowun Dodum;"></span>
-            <span class="storeNameSpan" style="font-family:Gowun Dodum;">${s.storeName}</span>
-            <span class="material-symbols-rounded star">star</span>
-            <span class="reviewNum" style="font-family:Gowun Dodum;">${s.rating }</span>
+         <div class="content-wrap1-1" style="width:500px; height:50px;">
+         	<div class="div1" style="height: 50px; float:left;">
+	            <span class="categorySpan" style="font-family:Gowun Dodum;"></span>
+	            <span class="storeNameSpan" style="font-family:Gowun Dodum;">${s.storeName}</span>
+            </div>
+            <div class="div2" style="width:50px; float:left; margin-left:10px;">
+	            <span class="material-symbols-rounded star">star</span>
+	            <span class="reviewNum" style="font-family:Gowun Dodum;">${s.rating }</span>
+            </div>
          </div>
 
          <div class="content-wrap1-2">
@@ -41,7 +44,7 @@
                   <span class="material-symbols-rounded favorite pointer" id="favorite" style="display:none;">favorite</span>
                   <span class="material-symbols-outlined unfavorite pointer" id="unfavorite" style="float:right; margin-top:10px; margin-right:20px;">favorite</span>
                </c:when>
-         </c:choose>
+         	</c:choose>
          </div>
       </div>
 
@@ -133,18 +136,18 @@
 
 
    <!--상세 페이지-->
-   <div class="content-wrap4" style="font-family:Gowun Dodum; margin-top:30px; width:1200px;">
+   <div class="content-wrap4" style="font-family:Gowun Dodum; margin-top:30px; height:100%; width:1200px; margin-bottom:100px;">
       <div class="testDiv">
-         <p class="menuTitle" style="margin-top: 10px;">MENU</p>
+         <p class="menuTitle" style="margin-top: 20px;">MENU</p>
          <blockquote class="w3-panel w3-leftbar w3-light-grey" id="menuWrap" style="height:100%; padding-bottom:20px;">
             <div class="menuWrap" style="font-family:Gowun Dodum;">
                <p class="menuSubTitle">대표메뉴</p>
                <table class="w3-table w3-bordered" id="menuTable">
                <c:forEach items="${list }" var="me">
                   <tr>
-                     <td>${me.menuName }</td>
+                     <td style="text-align:left;">${me.menuName }</td>
                      <td>--------------------------------------</td>
-                     <td><fmt:formatNumber value="${me.menuPrice }" pattern="#,###원"/></td>
+                     <td style="text-align:right;"><fmt:formatNumber value="${me.menuPrice }" pattern="#,###원" /></td>
                   </tr>
 				</c:forEach>
                </table>
@@ -164,15 +167,15 @@
          </div>
          
          <!----- LOCATION 부분 ----->
-		 <div class="location-wrap" style="margin-top:10px;">
+		 <div class="location-wrap" style="margin-top:50px;">
 	         <div class="menuTitle" style="margin: 0 auto;">LOCATION</div>
 	         <div class="map-wrap">지도 넣을 자리</div>
 		 </div>
 		 
          <!----- 마켓 상품 부분 ----->
-         <div class="market-wrap" style="margin-top:10px;">
+         <div class="market-wrap" style="margin-top:50px; height:300px;">
 	         <div class="menuTitle" style="margin: 0 auto;">MARKET</div>
-	         <div class="market-wrap">
+	         
 	            <div class="w3-card-4" id="marketWrap">
 	               <img src="/resources/img/pizza.PNG" style="width: 100%">
 	               <div class="w3-container w3-center">
@@ -193,71 +196,43 @@
 	                  <p>상품 A</p>
 	               </div>
 	            </div>
-	         </div>
+
 		</div>
+		
+		
+         <!--------- 후기 시작 ----->
+
          <!----- 후기 부분 ----->
+       
 
-         <div class="review-wrap" style="margin-top:10px;">
-            <div class="menuTitle" style="display: block;">REVIEW</div>
+         <div class="review-wrap" style="margin-top:50px;">
+            <div class="menuTitle" style="width:100px; margin:0 auto;">REVIEW</div>
+
+
             <ul class="w3-ul w3-card-4" id="reviewWrapUl">
-               <li class="w3-bar" style="height: 270px;">
-                  <div class="w3-bar-1" style="margin:0;">
-                     <span class="reviewDelete" style="line-height: 250px;">×</span>
-                     <img src="/resources/img/pizza.PNG" class="w3-hide-small" style="float: left; width:30%; height:100%;">
-                     <div class="w3-bar-item" id="w3-bar-item" style="width:60%;">
-                        <span class="w3-large">홍길동</span>
-                        <span class="material-symbols-rounded">star</span>
-                        <span class="material-symbols-rounded">star</span>
-                        <span>3.0</span>
-                        <br>
-                        <span style="display: inline; float: left;"> 너무 맛있어서 눈물이 다 났어요... 또 올게요 사장님ㅠㅠㅠㅠㅠㅠㅠㅠㅠ ㅠㅠㅠㅠㅠㅠㅠㅠㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ 너무 맛있어서 눈물이 다 났어요... 또 올게요 사장님ㅠㅠㅠㅠㅠㅠㅠㅠㅠ ㅠㅠㅠㅠㅠㅠㅠㅠㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ</span>
-                        <br>
-                        <div class="w3-bar-item-1">
-                           <span class="regDate">2022-10-26</span>
-                        </div>
-                     </div>
-                  </div>
-               </li>
+            <c:forEach items="${rList }" var="r">
 
-               <li class="w3-bar" style="height: 270px;">
-                  <div class="w3-bar-1" style="margin:0;">
-                     <span class="reviewDelete" style="line-height: 250px;">×</span>
-                     <img src="/resources/img/pizza.PNG" class="w3-hide-small" style="float: left; width:30%; height:100%;">
-                     <div class="w3-bar-item" id="w3-bar-item">
-                        <span class="w3-large">홍길동</span>
-                        <span class="material-symbols-rounded">star</span>
-                        <span class="material-symbols-rounded">star</span>
-                        <span>3.0</span>
+				<li class="w3-bar" style="height: 170px;">
+                  <div class="w3-bar-1" style="margin:0; height: 150px;">
+                     <img src="/resources/upload/review/${r.reviewImg }" class="w3-hide-small" style="float: left; width:30%; height:80%;">
+                     <div class="w3-bar-item" id="w3-bar-item" style="width:60%; height: 150px; padding:0;">
+                        <span class="w3-large">${r.writer }</span>
+                        <span style="color: rgb(255, 83, 86);"><c:forEach begin="1" step="1" end="${r.rating }" varStatus="i">★</c:forEach></span>
+                        <span>${r.rating }</span>
                         <br>
-                        <span style="display: inline; float: left;"> 너무 맛있어서 눈물이 다 났어요... 또 올게요 사장님ㅠㅠㅠㅠㅠㅠㅠㅠㅠ ㅠㅠㅠㅠㅠㅠㅠㅠㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ 너무 맛있어서 눈물이 다 났어요... 또 올게요 사장님ㅠㅠㅠㅠㅠㅠㅠㅠㅠ ㅠㅠㅠㅠㅠㅠㅠㅠㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ</span>
+                        <span style="display: inline; float: left;">${r.content}</span>
                         <br>
-                        <div class="w3-bar-item-1">
-                           <span class="regDate">2022-10-26</span>
+                        <div class="w3-bar-item-1" style="padding-top:25px; float:right;">
+                           <span class="regDate">${r.enrollDate }</span>
                         </div>
                      </div>
                   </div>
                </li>
+			</c:forEach>
 
-               <li class="w3-bar" style="height: 270px;">
-                  <div class="w3-bar-1" style="margin:0;">
-                     <span class="reviewDelete" style="line-height: 250px;">×</span>
-                     <img src="/resources/img/pizza.PNG" class="w3-hide-small"  style="float: left; width:30%; height:100%;">
-                     <div class="w3-bar-item" id="w3-bar-item" style="width:70%;">
-                        <span class="w3-large">홍길동</span>
-                        <span class="material-symbols-rounded">star</span>
-                        <span class="material-symbols-rounded">star</span>
-                        <span>3.0</span>
-                        <br>
-                        <span style="display: inline; float: left;"> 너무 맛있어서 눈물이 다 났어요... 또 올게요 사장님ㅠㅠㅠㅠㅠㅠㅠㅠㅠ ㅠㅠㅠㅠㅠㅠㅠㅠㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ 너무 맛있어서 눈물이 다 났어요... 또 올게요 사장님ㅠㅠㅠㅠㅠㅠㅠㅠㅠ ㅠㅠㅠㅠㅠㅠㅠㅠㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ</span>
-                        <br>
-                        <div class="w3-bar-item-1">
-                           <span class="regDate">2022-10-26</span>
-                        </div>
-                     </div>
-                  </div>
-               </li>
             </ul>
          </div>
+         <!--------후기 끝 -->
       </div>
       
       
@@ -453,11 +428,11 @@
             
          }
          
-         
+         var addr;
          //-------------------주소 * 없애기
          function addrSlice() {
-             const addr = $(".addressTd");
-             const splitWord = addr.text().split("*");
+             addr = $(".addressTd");
+             splitWord = addr.text().split("*");
                 addr.text(splitWord[1] + " " +splitWord[2]);
              }
              addrSlice();
@@ -637,15 +612,14 @@
             
          //----------------------------- 공유하기 버튼
          function shareMessage() {
-
             Kakao.Share.sendDefault({
                objectType : 'location',
-               address : "${s.address}",
+               address : $(".addressTd").text(),
                addressTitle : "${s.storeName}",
                content : {
                   title : "${s.storeName}",
                   description : "${s.storeName}"+" 로 지금 먹으러갈까요~~?",
-                  imageUrl : 'http://192.168.10.26/resources/img/logo.pmg',
+                  imageUrl : 'http://192.168.10.26/resources/img/logo.png',
                   link : {
                      mobileWebUrl : 'http://192.168.10.26/storeDetail.do?storeNo='+storeNo,
                      webUrl : 'http://192.168.10.26/storeDetail.do?storeNo='+storeNo

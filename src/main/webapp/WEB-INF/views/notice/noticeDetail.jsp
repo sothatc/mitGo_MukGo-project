@@ -81,7 +81,7 @@
         	<c:choose>
         		<c:when test="${not empty sessionScope.m and sessionScope.m.memberClass == 1}">
         			<button type="button" class="btn btn-secondary" style="margin-right: 10px;" onclick="updateNoticeFrm(${n.noticeNo});">수정</button>
-            		<button type="button" class="btn btn-outline-secondary" style="margin-left: 10px;">삭제</button>
+            		<button type="button" class="btn btn-outline-secondary" style="margin-left: 10px;" onclick="deleteNotice(${n.noticeNo});">삭제</button>
         		</c:when>
         		
         		<c:otherwise>
@@ -97,6 +97,10 @@
     
 
     <script>
+    	function deleteNotice(noticeNo){
+    		location.href="/deleteNotice.do?noticeNo=" + noticeNo;
+    	}
+    
     	function updateNoticeFrm(noticeNo){
     		location.href="/updateNoticeFrm.do?noticeNo=" + noticeNo;
     	}

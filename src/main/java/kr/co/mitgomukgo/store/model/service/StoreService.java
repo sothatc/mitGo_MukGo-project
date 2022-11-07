@@ -52,7 +52,14 @@ public class StoreService {
 		
 		ArrayList<Store> list = dao.storeList(map);
 		//System.out.println(list);
-		int totalPage = dao.countAllList();
+		int totalCnt = dao.countAllList();
+		int totalPage = 0;
+		if(totalCnt % numPerPage == 0) {
+			totalPage = totalCnt / numPerPage;
+		}else {
+			totalPage = totalCnt / numPerPage + 1;
+		}
+		
 		int pageNaviSize = 2;
 		int pageNo = 1;
 		
@@ -126,7 +133,13 @@ public class StoreService {
 		map.put("category", category);
 		ArrayList<Store> list = dao.selectTag(map);
 
-		int totalPage = dao.countTagList(category);
+		int totalCnt = dao.countTagList(category);
+		int totalPage = 0;
+		if(totalCnt % numPerPage == 0) {
+			totalPage = totalCnt / numPerPage;
+		}else {
+			totalPage = totalCnt / numPerPage + 1;
+		}
 		int pageNaviSize = 2;
 		int pageNo = 1;
 		
@@ -186,7 +199,13 @@ public class StoreService {
 		
 		ArrayList<Store> list = dao.searchStoreList(map);
 		
-		int totalPage = dao.countTagList(category);
+		int totalCnt = dao.countTagList(category);
+		int totalPage = 0;
+		if(totalCnt % numPerPage == 0) {
+			totalPage = totalCnt / numPerPage;
+		}else {
+			totalPage = totalCnt / numPerPage + 1;
+		}
 		int pageNaviSize = 2;
 		int pageNo = 1;
 		
@@ -283,64 +302,73 @@ public class StoreService {
 	
 	public HashMap<String, Object> sortStoreList(String storeListSort, int reqPage, String category) {
 		// 화면에 보여주는 게시물 수
-				int numPerPage = 9;
-				
-				// 끝페이지
-				int end = numPerPage * reqPage;
-				
-				// 시작페이지
-				int start = (end-numPerPage) + 1;
-				
-				HashMap<String, Object> map = new HashMap<String, Object>();
-				map.put("start", start);
-				map.put("end", end);
-				map.put("storeListSort", storeListSort);
-				map.put("category",category);
-				
-				ArrayList<Store> list = dao.sortStoreList(map);
-				
-				int totalPage = dao.countTagList(category);
-				int pageNaviSize = 2;
-				int pageNo = 1;
-				
-				if(reqPage > 2) {
-					pageNo = reqPage - 1;
-				}
-				
-				String pageNavi = "";
-				if(pageNo != 1) {
-					pageNavi += "<a href='/searchStoreList.do?category="+category+"&reqPage=" +(pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
-							"            chevron_left\r\n" + 
-							"            </span></a>";
-				}
-				
-				for(int i = 0; i < pageNaviSize; i++) {
-					if(reqPage == pageNo) {
-						pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
-					}else {
-						pageNavi += "<a href='/searchStoreList.do?category="+category+"&reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
-					}
-					pageNo++;
-					if(pageNo > totalPage) {
-						break;
-					}
-				}
-				
-				if(end <= totalPage) {
-					pageNavi += "<a href='/searchStoreList.do?category="+category+"&reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
-							"            chevron_right\r\n" + 
-							"            </span></a>";
-				}
-				
-				HashMap<String, Object> searchMap = new HashMap<String, Object>();
-				searchMap.put("list", list);
-				searchMap.put("reqPage", reqPage);
-				searchMap.put("pageNavi", pageNavi);
-				searchMap.put("total", totalPage);
-				searchMap.put("pageNo", pageNo);
-				
-				return searchMap;
+		int numPerPage = 9;
+		
+		// 끝페이지
+		int end = numPerPage * reqPage;
+		
+		// 시작페이지
+		int start = (end-numPerPage) + 1;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("storeListSort", storeListSort);
+		map.put("category",category);
+		
+		ArrayList<Store> list = dao.sortStoreList(map);
+		
+		int totalCnt = dao.countTagList(category);
+		int totalPage = 0;
+		if(totalCnt % numPerPage == 0) {
+			totalPage = totalCnt / numPerPage;
+		}else {
+			totalPage = totalCnt / numPerPage + 1;
+		}
+		int pageNaviSize = 2;
+		int pageNo = 1;
+		
+		if(reqPage > 2) {
+			pageNo = reqPage - 1;
+		}
+		
+		String pageNavi = "";
+		if(pageNo != 1) {
+			pageNavi += "<a href='/searchStoreList.do?category="+category+"&reqPage=" +(pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_left\r\n" + 
+					"            </span></a>";
+		}
+		
+		for(int i = 0; i < pageNaviSize; i++) {
+			if(reqPage == pageNo) {
+				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
+			}else {
+				pageNavi += "<a href='/searchStoreList.do?category="+category+"&reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		
+		if(end <= totalPage) {
+			pageNavi += "<a href='/searchStoreList.do?category="+category+"&reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_right\r\n" + 
+					"            </span></a>";
+		}
+		
+		HashMap<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("list", list);
+		searchMap.put("reqPage", reqPage);
+		searchMap.put("pageNavi", pageNavi);
+		searchMap.put("total", totalPage);
+		searchMap.put("pageNo", pageNo);
+		
+		return searchMap;
+	}
 
+	public ArrayList<Review> selectReviewList(int storeNo) {
+		return dao.selectReviewList(storeNo);
 	}
 
 	public int updateStore(Store s, int[] imgNoList) {

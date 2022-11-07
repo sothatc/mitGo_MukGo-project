@@ -13,7 +13,8 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<!--헤더-->
 	<div class="storeList-content-wrap">
-	
+		<div class = "tabCategory" style = "display: none;" >${category }</div>
+		<div class = "tabSort" style = "display: none;">${storeListSort }</div>
 		<form action="/searchStoreList.do?category=${category }&reqPage=1" method="post">
 			<div class="storeList-searchinput">
 				<input type="text" name="search">
@@ -79,6 +80,7 @@
 							<div>
 								<div style="display: none">${s.storeNo }</div>
 								<div>가게이름 : ${s.storeName }</div>
+								<div>평점 : ${s.rating }</div>
 							</div>
 						</a>
 					</div>
