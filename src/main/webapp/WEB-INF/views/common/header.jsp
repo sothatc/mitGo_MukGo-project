@@ -27,7 +27,7 @@
 <!-- BOTTOM NAV -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
 	<div class="container">
-		<a class="navbar-brand" href="#">믿GO먹GO<span class="dot">!</span></a>
+		<a class="navbar-brand" href="/index.jsp">믿GO먹GO<span class="dot">!</span></a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>

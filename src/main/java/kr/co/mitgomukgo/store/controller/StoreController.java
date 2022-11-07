@@ -49,7 +49,6 @@ public class StoreController {
 	// 맛집 상세 보기
 	@RequestMapping(value = "/storeDetail.do")
 	public String StoreDetail(int storeNo, Model model) {
-		// ArrayList<Store> list = service.selectOneStore(storeNo);
 		Store s = service.selectOneStore(storeNo);
 		model.addAttribute("s", s);
 		return "store/storeDetail";
@@ -58,24 +57,34 @@ public class StoreController {
 	// 맛집 이미지 배열로 가져오기
 	@ResponseBody
 	@RequestMapping(value = "/ajaxSelectStore.do", produces = "application/json;charset=utf-8")
-	public String ajaxSelectStore(StoreJoin sj) {
-
+	public String ajaxSelectStore(StoreJoin sj, Model model) {
 		ArrayList<StoreJoin> list = service.selectOneStoreAjax(sj);
 		Gson gson = new Gson();
 		String result = gson.toJson(list);
 		return result;
 	}
-
-	// 예약하기
-	@RequestMapping(value = "/reserve.do")
-	public String StoreDetail(int memberNo, Reserve r) {
-		int result = service.reserve(r);
-		if (result > 0) {
-			return "redirect:/";
-		} else {
-			return "redirect:/";
-		}
+	
+	//예약된 시간/날짜 확인하기
+	@ResponseBody
+	@RequestMapping(value = "/checkReserve.do", produces = "application/json;charset=utf-8")
+	public String ajaxCheckReserve(Reserve r) {
+		ArrayList<Reserve> list = service.ajaxCheckReserve(r);
+		Gson gson = new Gson();
+		String result = gson.toJson(list);
+		return result;
 	}
+	
+	   //예약하기
+	   @RequestMapping(value = "/reserve.do")
+	   public String StoreDetail(int memberNo, Reserve r) {
+	      int result = service.reserve(r);
+	      if(result>0) {
+	         return "redirect:/";
+	      }else {
+	         return "redirect:/";
+	      }
+	   }
+
 
 	@RequestMapping(value = "/addStoreFrm.do")
 	public String addStoreFrm() {
@@ -265,31 +274,6 @@ public class StoreController {
 	
 	
 
-	/*
-	 * @ResponseBody
-	 * 
-	 * @RequestMapping(value = "/ajaxClicktag.do", produces =
-	 * "application/json;charset=utf-8") public String ajaxClicktag(int tagValue,
-	 * int reqPage, Model model) { HashMap<String, Object> map =
-	 * service.storeList(tagValue,reqPage); //System.out.println(map); if(map ==
-	 * null) {
-	 * 
-	 * HashMap<String, Object> map = service.storeList(tagValue, reqPage);
-	 * System.out.println(map); if (map == null) { model.addAttribute("msg",
-	 * "아직 등록된 업체 가 없습니다."); return "store/storeListFrm"; } else {
-	 * 
-	 * model.addAttribute("list", map.get("list")); model.addAttribute("reqPage",
-	 * reqPage); model.addAttribute("pageNavi", map.get("pageNavi"));
-	 * model.addAttribute("total", map.get("total")); model.addAttribute("pageNo",
-	 * map.get("pageNo"));
-	 * 
-	 * // 착각하지말것 json은 객체타입이 아닌 문자열임 // 그런고로 String 타입으로 받음 Gson gson = new Gson();
-	 * String result = gson.toJson(map); //System.out.println(result);
-	 * //System.out.println(model);
-	 * 
-	 * return result; } }
-	 */
-
 	@RequestMapping(value = "/selectTag.do")
 	public String selectTag(String category, int reqPage, Model model) {
 		HashMap<String, Object> map = service.selectTag(category, reqPage);
@@ -315,6 +299,20 @@ public class StoreController {
 		model.addAttribute("total", map.get("total"));
 		model.addAttribute("pageNo", map.get("pageNo"));
 
+		return "store/storeListFrm";
+	}
+	
+	@RequestMapping(value = "/sortStoreList.do")
+	public String sortStoreList(String storeListSort, int reqPage, Model model,@RequestParam String category) {
+		System.out.println(storeListSort);
+		HashMap<String, Object> map = service.sortStoreList(storeListSort, reqPage, category);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("category", category);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
+		
 		return "store/storeListFrm";
 	}
 }
