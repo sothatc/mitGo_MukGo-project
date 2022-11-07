@@ -184,7 +184,7 @@
 	cursor: pointer;
 }
 
-.storeList-sort-content>ul {
+.storeList-sort-content>form>ul {
 	list-style-type: none;
 	display: flex;
 	padding: 0;
@@ -192,11 +192,15 @@
 	margin: 0;
 }
 
-.storeList-sort-content>ul>li {
-	width: 70px;
+.storeList-sort-content>form>ul>button {
+	width: 100px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	border: solid 2px black;
+	border-radius: 25px 25px 25px 25px;
+	margin: 5px;
+	background-color: white;
 }
 
 /* =========================================list */

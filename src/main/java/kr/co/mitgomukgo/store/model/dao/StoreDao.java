@@ -114,4 +114,9 @@ public class StoreDao {
 		return sqlSession.update("updateMenu", menu);
 	}
 
+	public ArrayList<Store> sortStoreList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("store.sortStoreList", map);
+		return (ArrayList<Store>) list;
+	}
+
 }
