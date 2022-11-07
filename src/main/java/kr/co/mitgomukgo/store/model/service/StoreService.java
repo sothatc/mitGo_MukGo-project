@@ -274,6 +274,13 @@ public class StoreService {
 		return dao.updateMenu(menu);
 	}
 
+
+	//맛집 상세 - 메뉴 조회
+	public ArrayList<Menu> selectMenuList(int storeNo) {
+		ArrayList<Menu> list = dao.selectMenuList(storeNo);
+		return list;
+	}
+	
 	public HashMap<String, Object> sortStoreList(String storeListSort, int reqPage, String category) {
 		// 화면에 보여주는 게시물 수
 				int numPerPage = 9;
@@ -333,6 +340,7 @@ public class StoreService {
 				searchMap.put("pageNo", pageNo);
 				
 				return searchMap;
+
 	}
 	
 

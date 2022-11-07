@@ -324,6 +324,7 @@
 	</update>
 	
 
+
 	<select id="selectImg" parameterType="int" resultType="si">
 		select
 			storeimg_no as storeImgNo,
@@ -331,6 +332,19 @@
 			imgpath
 		from store_img
 		where store_no = #{storeNo}
+	</select>
+
+	<!-- 맛집 상세 > 메뉴 조회 -->
+	<select id="selectMenuList" parameterType="int" resultType="me">
+		select
+			menu_no as menuNo,
+			store_no as storeNo,
+			name as menuName,
+			price as menuPrice,
+			menu_img as menuImg
+		from menu
+    	where store_no = #{storeNo}
+
 	</select>
 
 	<select id="sortStoreList" parameterType="map" resultType="s">
