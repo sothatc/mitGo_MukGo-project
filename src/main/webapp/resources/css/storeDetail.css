@@ -26,8 +26,7 @@ body{
 }
 
 .content-wrap1-1{
-    width:fit-content;
-    float:left;
+
 }
 
 
@@ -39,7 +38,6 @@ body{
 }
 
 .reviewNum{
-    float: right;
     margin-left: 10px;
 }
 
