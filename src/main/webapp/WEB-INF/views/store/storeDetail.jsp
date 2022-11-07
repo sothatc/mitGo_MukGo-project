@@ -41,7 +41,7 @@
                   <span class="material-symbols-rounded favorite pointer" id="favorite" style="display:none;">favorite</span>
                   <span class="material-symbols-outlined unfavorite pointer" id="unfavorite" style="float:right; margin-top:10px; margin-right:20px;">favorite</span>
                </c:when>
-         </c:choose>
+         	</c:choose>
          </div>
       </div>
 
