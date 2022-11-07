@@ -282,13 +282,6 @@
     </select>
 	
 
-	<insert id="insertReserve" parameterType="r">
-		insert into reserve
-		values(RESERVE_SEQ.NEXTVAL, #{memberNo}, #{storeNo}, #{storeName}, to_char(sysdate,'yyyy-mm-dd'),
-		#{eatDate}, #{eatTime}, #{eatNum})
-	</insert>
-	
-
 	<select id="menuList" parameterType="int" resultType="me">
 		select menu_no as menuNo,
         name as menuName,
