@@ -157,7 +157,8 @@
 		phone,
 		closed_day as closedDay,
 		category,
-		content
+		content,
+        (SELECT ROUND(avg(RATING), 1) from REVIEW where STORE_NO = #{_parameter}) as rating       
 		from store
 		where store_no = #{_parameter}
 	</select>
@@ -198,14 +199,24 @@
 		where owner_no = #{ownerNo}
 	</select>
 
+  
 	<select id="searchStore" parameterType="int" resultType="s">
-		select
-		store_no as storeNo
-		from store
+		select 
+			store_no as storeNo,
+			store_name as storeName,
+			owner_no as ownerNo,
+			address,
+			phone,
+			content,
+			open_hour as openHour,
+			closed_day as closedDay,
+			category,
+			witheat_cate as withEatCate,
+			whereeat_cate as whereEatCate
+		from store 
 		where owner_no = #{ownerNo}
 	</select>
-
-
+	
 	<select id="countTagList" parameterType="string"
 		resultType="_int">
 		select count(*) from store where category = #{category}
@@ -301,6 +312,30 @@
 		#{menuNo}
 	</update>
 	
+
+
+	<select id="selectImg" parameterType="int" resultType="si">
+		select
+			storeimg_no as storeImgNo,
+			store_no as storeNo,
+			imgpath
+		from store_img
+		where store_no = #{storeNo}
+	</select>
+
+	<!-- 맛집 상세 > 메뉴 조회 -->
+	<select id="selectMenuList" parameterType="int" resultType="me">
+		select
+			menu_no as menuNo,
+			store_no as storeNo,
+			name as menuName,
+			price as menuPrice,
+			menu_img as menuImg
+		from menu
+    	where store_no = #{storeNo}
+
+	</select>
+
 	<select id="sortStoreList" parameterType="map" resultType="s">
 		select * from
 		(select row_number() over (order by rnum desc) as rnum1, rb.* from
@@ -336,5 +371,19 @@
 		)
 		where rnum between #{start} and #{end}
 	</select>
+	
+	<!-- 리뷰리스트 -->
+	<select id="selectReviewList" parameterType="int" resultType="r">
+		select 
+		review_no as reivewNo,
+		writer,
+		rating,
+		content,
+		review_img as reviewImg,
+		enroll_date as enrollDate
+		from review
+		where store_no = #{_parameter}
+	</select>
+
 
 </mapper>

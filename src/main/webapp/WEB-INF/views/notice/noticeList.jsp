@@ -66,15 +66,15 @@
         </div>
 
         <div class="notice-search">
-            <form action="#" method="post">
-                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" style="width: 150px; font-size: 18px; height: 60px; text-align: center;">
-                    <option value="1">제목 + 내용</option>
-                    <option value="2">제목</option>
-                    <option value="3">내용</option>
+            <form action="/searchNotice.do?reqPage=1" method="post">
+                <select class="form-select form-select-lg mb-3" name="type" aria-label=".form-select-lg example" style="width: 150px; font-size: 18px; height: 60px; text-align: center;">
+                    <option value="titleContent">제목 + 내용</option>
+                    <option value="title">제목</option>
+                    <option value="content">내용</option>
                 </select>
 
-                <input class="w3-input w3-border w3-round-large" type="text" style="width: 500px; height: 60px; margin-left: 10px;">
-                <button class="w3-button w3-round-large" style="width: 80px; height: 60px; background-color: rgb(33, 33, 33); color: white;margin-left: 10px;">
+                <input class="w3-input w3-border w3-round-large" type="text" name="keyword" style="width: 500px; height: 60px; margin-left: 10px;">
+                <button class="w3-button w3-round-large" id="searchBtn" style="width: 80px; height: 60px; background-color: rgb(33, 33, 33); color: white;margin-left: 10px;">
                     <span class="material-symbols-outlined">
                     search
                     </span></button>
@@ -133,5 +133,38 @@
             </span></a> -->
             ${pageNavi }
     </div>
+    
+    <script type="text/javascript">
+    	$("#searchBtn").on("click", function(){
+    		if($("[name=keyword]").val() == ""){
+    			alert("검색어를 입력하세요");
+    			$("#searchBtn").attr("type", "button");
+    		}else{
+    			$("#searchBtn").attr("type", "submit");
+    		}
+    		console.log(1);
+    	})
+    </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

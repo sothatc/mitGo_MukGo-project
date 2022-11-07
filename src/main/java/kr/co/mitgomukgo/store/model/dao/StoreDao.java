@@ -120,11 +120,27 @@ public class StoreDao {
 		return (ArrayList<Reserve>)list;
 	}
 
+	//맛집 상세 - 메뉴조회
+	public ArrayList<Menu> selectMenuList(int storeNo) {
+		List list = sqlSession.selectList("store.selectMenuList", storeNo);
+		return (ArrayList<Menu>)list;
+	}
+
 
 
 	public ArrayList<Store> sortStoreList(HashMap<String, Object> map) {
 		List list = sqlSession.selectList("store.sortStoreList", map);
 		return (ArrayList<Store>) list;
+	}
+
+	public ArrayList<StoreImg> selectImg(int storeNo) {
+		List list = sqlSession.selectList("store.selectImg",storeNo);
+		return (ArrayList<StoreImg>) list;
+	}
+
+	public ArrayList<Review> selectReviewList(int storeNo) {
+		List list = sqlSession.selectList("selectReviewList", storeNo);
+		return (ArrayList<Review>) list;
 	}
 
 }

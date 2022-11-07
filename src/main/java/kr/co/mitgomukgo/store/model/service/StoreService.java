@@ -113,9 +113,8 @@ public class StoreService {
 	}
 
 
-	public ArrayList<Store> selectStore(Owner o) {
-		ArrayList<Store> s = dao.selectStore(o);
-		return (ArrayList<Store>) s;
+	public ArrayList<StoreImg> selectStoreImg(int storeNo) {
+		return dao.selectImg(storeNo);
 	}
 	
 	public HashMap<String, Object> selectTag(String category, int reqPage) {
@@ -294,6 +293,13 @@ public class StoreService {
 		return dao.updateMenu(menu);
 	}
 
+
+	//맛집 상세 - 메뉴 조회
+	public ArrayList<Menu> selectMenuList(int storeNo) {
+		ArrayList<Menu> list = dao.selectMenuList(storeNo);
+		return list;
+	}
+	
 	public HashMap<String, Object> sortStoreList(String storeListSort, int reqPage, String category) {
 		// 화면에 보여주는 게시물 수
 		int numPerPage = 9;
@@ -359,6 +365,10 @@ public class StoreService {
 		searchMap.put("pageNo", pageNo);
 		
 		return searchMap;
+	}
+
+	public ArrayList<Review> selectReviewList(int storeNo) {
+		return dao.selectReviewList(storeNo);
 	}
 	
 
