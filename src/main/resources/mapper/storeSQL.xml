@@ -48,114 +48,121 @@
 	</insert>
 
 	<select id="storeList" parameterType="map" resultType="s">
-		select * from
-			(select row_number() over (order by rnum desc) as rnum1, rb.* from
-			(select rownum as rnum, b.* from
-			(select
-				store_no as storeNo,
-				store_name as storeName,
-				owner_no as ownerNo,
-				address,
-				phone,
-				content,
-				open_hour as openHour,
-				closed_day as closedDay,
-				category,
-				witheat_cate as
-				withEatCate,
-				whereeat_cate as whereEatCate,
-				(select imgpath from store_img si where storeimg_no = (select
-				min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
-				as thumbNail
-			from store s order by storeNo desc)b)rb order by 3 desc)
-		where rnum between #{start} and #{end} 
+		select *
+		from
+		(select row_number() over (order by rnum desc) as rnum1, rb.* from
+		(select rownum as rnum, b.* from
+		(select
+		store_no as storeNo,
+		store_name as storeName,
+		owner_no as ownerNo,
+		address,
+		phone,
+		content,
+		open_hour as openHour,
+		closed_day as closedDay,
+		category,
+		witheat_cate as
+		withEatCate,
+		whereeat_cate as whereEatCate,
+		(select imgpath from store_img si where storeimg_no = (select
+		min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
+		as thumbNail
+		from store s order by storeNo desc)b)rb order by 3 desc)
+		where rnum between
+		#{start} and #{end}
 	</select>
-	
 
-		<select id="storeTagList" parameterType="map" resultType="s">
-		      select
-		      * from
-		      (select row_number() over (order by rnum desc) as rnum1, rb.* from
-		      (select rownum as rnum, b.* from
-		      (select
-		      store_no as storeNo,
-		      store_name as storeName,
-		      owner_no as ownerNo,
-		      address,
-		      phone,
-		      content,
-		      open_hour as openHour,
-		      closed_day as closedDay,
-		      category,
-		      witheat_cate as
-		      withEatCate,
-		      whereeat_cate as whereEatCate,
-		      (select imgpath from store_img si where storeimg_no = (select
-		      min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
-		      as thumbNail
-		      from store s order by storeNo desc)b)rb order by 3 desc)
-		      where rnum between
-		      #{start} and #{end} and category = ${tagValue}
-		   </select>
+
+	<select id="storeTagList" parameterType="map" resultType="s">
+		select
+		* from
+		(select row_number() over (order by rnum desc) as rnum1, rb.* from
+		(select rownum as rnum, b.* from
+		(select
+		store_no as storeNo,
+		store_name as storeName,
+		owner_no as ownerNo,
+		address,
+		phone,
+		content,
+		open_hour as openHour,
+		closed_day as closedDay,
+		category,
+		witheat_cate as
+		withEatCate,
+		whereeat_cate as whereEatCate,
+		(select imgpath from store_img si where storeimg_no = (select
+		min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
+		as thumbNail
+		from store s order by storeNo desc)b)rb order by 3 desc)
+		where rnum between
+		#{start} and #{end} and category = ${tagValue}
+	</select>
 
 	<select id="selectTag" parameterType="map" resultType="s">
-		select * from
-			(select row_number() over (order by rnum desc) as rnum1, rb.* from
-			(select rownum as rnum, b.* from
-			(select
-				store_no as storeNo,
-				store_name as storeName,
-				owner_no as ownerNo,
-				address,
-				phone,
-				content,
-				open_hour as openHour,
-				closed_day as closedDay,
-				category,
-				witheat_cate as
-				withEatCate,
-				whereeat_cate as whereEatCate,
-				(select imgpath from store_img si where storeimg_no = (select
-				min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
-				as thumbNail from store s order by storeNo desc)b where category = #{category})rb order by 3 desc)
+		select *
+		from
+		(select row_number() over (order by rnum desc) as rnum1, rb.* from
+		(select rownum as rnum, b.* from
+		(select
+		store_no as storeNo,
+		store_name as storeName,
+		owner_no as ownerNo,
+		address,
+		phone,
+		content,
+		open_hour as openHour,
+		closed_day as closedDay,
+		category,
+		witheat_cate as
+		withEatCate,
+		whereeat_cate as whereEatCate,
+		(select imgpath from store_img si where storeimg_no = (select
+		min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
+		as thumbNail from store s order by storeNo desc)b where category =
+		#{category})rb order by 3 desc)
 		where rnum between #{start} and #{end}
 	</select>
 
 
 
-	<select id="selectOneStoreAjax" parameterType="sj" resultType="sj">
+	<select id="selectOneStoreAjax" parameterType="sj"
+		resultType="sj">
 		select
-			store_no as storeNo, 
-			store_name as storeName,
-			open_hour as openHour,
-			address,
-			phone,
-			closed_day as closedDay,
-			category,
-			content,
-			storeimg_no as storeImgNo,
-			imgpath
-		from store 
+		store_no as storeNo,
+		store_name as storeName,
+		open_hour as openHour,
+		address,
+		phone,
+		closed_day as closedDay,
+		category,
+		content,
+		storeimg_no as storeImgNo,
+		imgpath
+		from store
 		join store_img using(store_no)
 		where store_no = #{storeNo}
-		ORDER BY storeimg_no asc
+		ORDER BY
+		storeimg_no asc
 	</select>
 
 
 	<select id="selectOneStore" parameterType="_int" resultType="s">
 		select
-			store_no as storeNo, 
-			store_name as storeName,
-			open_hour as openHour,
-			address,
-			phone,
-			closed_day as closedDay,
-			category,
-			content
-		from store 
+		store_no as storeNo,
+		store_name as storeName,
+		open_hour as openHour,
+		address,
+		phone,
+		closed_day as closedDay,
+		category,
+		content,
+        (SELECT ROUND(avg(RATING), 1) from REVIEW where STORE_NO = #{_parameter}) as rating       
+		from store
 		where store_no = #{_parameter}
 	</select>
-	
+
 
 
 	<select id="countAllList" resultType="_int">
@@ -171,131 +178,199 @@
 		#{menuImg}
 		)
 	</insert>
-	
+
 	<select id="selectMyStore" parameterType="o" resultType="s">
 		select
-			a.store_no as storeNo,
-			store_name as storeName,
-			open_hour as openHour,
-			address,
-			phone,
-			closed_day as closedDay,
-			category,
-			witheat_cate as withEatCate,
-			whereeat_cate as whereEatCate,
-			content,
-			imgpath as storeImgList
+		a.store_no as storeNo,
+		store_name as storeName,
+		open_hour as openHour,
+		address,
+		phone,
+		closed_day as closedDay,
+		category,
+		witheat_cate as withEatCate,
+		whereeat_cate as whereEatCate,
+		content,
+		imgpath as storeImgList
 		from store a
 		left join store_img b
-		on a.store_no = b.store_no
+		on a.store_no =
+		b.store_no
 		where owner_no = #{ownerNo}
 	</select>
+
   
 	<select id="searchStore" parameterType="int" resultType="s">
 		select 
-			store_no as storeNo
+			store_no as storeNo,
+			store_name as storeName,
+			owner_no as ownerNo,
+			address,
+			phone,
+			content,
+			open_hour as openHour,
+			closed_day as closedDay,
+			category,
+			witheat_cate as withEatCate,
+			whereeat_cate as whereEatCate
 		from store 
 		where owner_no = #{ownerNo}
 	</select>
 	
-
-	<select id="countTagList" parameterType="string" resultType="_int">
+	<select id="countTagList" parameterType="string"
+		resultType="_int">
 		select count(*) from store where category = #{category}
 	</select>
-	
+
 	<select id="searchStoreList" parameterType="map" resultType="s">
 		select * from
-			(select row_number() over (order by rnum desc) as rnum1, rb.* from
-			(select rownum as rnum, b.* from
-			(select
-				store_no as storeNo,
-				store_name as storeName,
-				owner_no as ownerNo,
-				address,
-				phone,
-				content,
-				open_hour as openHour,
-				closed_day as closedDay,
-				category,
-				witheat_cate as
-				withEatCate,
-				whereeat_cate as whereEatCate,
-				(select imgpath from store_img si where storeimg_no = (select
-				min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
-				as thumbNail from store s order by storeNo desc)b	
-					<if test="category.equals('')">
-					
-					</if>
-					<if test="category==1">
-						where category = #{category}
-					</if>
-					<if test="category==2">
-						where category = #{category}
-					</if>
-					<if test="category==3">
-						where category = #{category}
-					</if>
-					<if test="category==4">
-						where category = #{category}
-					</if>
-					<if test="category==5">
-						where category = #{category}
-					</if>
-					<if test="category==6">
-						where category = #{category}
-					</if>
-					<if test="category==7">
-						where category = #{category}
-					</if>	
-					<if test="category==8">
-						where category = #{category}
-					</if>
-					<if test="category==9">
-						where category = #{category}
-					</if>
-					
-				)rb order by 3 desc)
-		where rnum between #{start} and #{end} and storeName like '%' || #{search} || '%'
-	</select>
-	
+		(select row_number() over (order by rnum desc) as rnum1, rb.* from
+		(select rownum as rnum, b.* from
+		(select
+		store_no as storeNo,
+		store_name as storeName,
+		owner_no as ownerNo,
+		address,
+		phone,
+		content,
+		open_hour as openHour,
+		closed_day as closedDay,
+		category,
+		witheat_cate as
+		withEatCate,
+		whereeat_cate as whereEatCate,
+		(select imgpath from store_img si where storeimg_no = (select
+		min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
+		as thumbNail from store s order by storeNo desc)b
+		<if test="category != null and category != ''">
+			where category = #{category}
+		</if>
 
+		)rb order by 3 desc)
+		where rnum between #{start} and #{end} and
+		storeName like '%' || #{search} || '%'
+	</select>
+
+
+	<!-- 예약하기 -->
 	<insert id="insertReserve" parameterType="r">
-		insert into reserve
-		values(RESERVE_SEQ.NEXTVAL, #{memberNo}, #{storeNo}, #{storeName}, to_char(sysdate,'yyyy-mm-dd'),
-		#{eatDate}, #{eatTime}, #{eatNum})
-	</insert>
-	
+      insert into reserve
+      values(RESERVE_SEQ.NEXTVAL, #{memberNo}, #{storeNo}, #{storeName}, to_char(sysdate,'yyyy-mm-dd'),
+      #{eatDate}, #{eatTime}, #{eatNum})
+    </insert>
+    
+    <!-- 예약한 건 확인 -->
+    <select id="checkReserve" resultType="rs" parameterType="rs">
+    	select
+    		reserve_no as reserveNo,
+    		member_no as memberNo,
+    		store_no as storeNo,
+    		store_name as storeName,
+    		reserve_date as reserveDate,
+    		eat_date as eatDate,
+    		eat_time as eatTime,
+    		eat_num as eatNum
+    	from reserve
+    	where store_no =  #{storeNo}
+    </select>
 
 	<select id="menuList" parameterType="int" resultType="me">
-		select menu_no as menuNo,
-        name as menuName,
-        price as menuPrice,
-        menu_img as menuImg
+		select
+		menu_no as menuNo,
+		name as menuName,
+		price as menuPrice,
+		menu_img as menuImg
 		from menu
 		where store_no = #{storeNo}
 		order by 1 DESC
 	</select>
-	
+
 	<delete id="deleteMenu" parameterType="int">
 		delete from menu
-		where menu_No = #{menuNo}
+		where
+		menu_No = #{menuNo}
 	</delete>
-	
+
 	<select id="readOneMenu" parameterType="int" resultType="me">
-		select menu_no as menuNo,
-        name as menuName,
-        price as menuPrice,
-        menu_img as menuImg
+		select
+		menu_no as menuNo,
+		name as menuName,
+		price as menuPrice,
+		menu_img as menuImg
 		from menu
 		where menu_No = #{menuNo}
 	</select>
-	
+
 	<update id="updateMenu" parameterType="me">
 		update menu
 		set
-		name = #{menuName},
+		name =
+		#{menuName},
 		price = #{menuPrice},
 		menu_img = #{menuImg}
-		where menu_no = #{menuNo}
+		where menu_no =
+		#{menuNo}
 	</update>
+	
+
+
+	<select id="selectImg" parameterType="int" resultType="si">
+		select
+			storeimg_no as storeImgNo,
+			store_no as storeNo,
+			imgpath
+		from store_img
+		where store_no = #{storeNo}
+	</select>
+
+	<!-- 맛집 상세 > 메뉴 조회 -->
+	<select id="selectMenuList" parameterType="int" resultType="me">
+		select
+			menu_no as menuNo,
+			store_no as storeNo,
+			name as menuName,
+			price as menuPrice,
+			menu_img as menuImg
+		from menu
+    	where store_no = #{storeNo}
+
+	</select>
+
+	<select id="sortStoreList" parameterType="map" resultType="s">
+		select * from
+		(select row_number() over (order by rnum desc) as rnum1, rb.* from
+		(select rownum as rnum, b.* from
+		(select
+		store_no as storeNo,
+		store_name as storeName,
+		owner_no as ownerNo,
+		address,
+		phone,
+		content,
+		open_hour as openHour,
+		closed_day as closedDay,
+		category,
+		witheat_cate as
+		withEatCate,
+		whereeat_cate as whereEatCate,
+		(select imgpath from store_img si where storeimg_no = (select
+		min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
+		as thumbNail from store s order by storeNo desc)b
+		<if test="category != null and category != ''">
+			where category = #{category}
+		</if>
+		)rb order by 3 
+		<choose>
+			<when test="storeListSort.equals('new')">
+				desc
+			</when>
+			<when test="storeListSort == old">
+				asc
+			</when>
+		</choose>
+		)
+		where rnum between #{start} and #{end}
+	</select>
+
+
 </mapper>

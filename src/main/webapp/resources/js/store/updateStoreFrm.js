@@ -71,5 +71,18 @@ function closedDaySlice() {
 closedDaySlice();
 
 
+function deleteImg(obj, storeImgNo, imgpath){
+	const imgNoInput = $("<input>");
+	imgNoInput.attr("name","imgNoList");
+	imgNoInput.val(storeImgNo);
+	imgNoInput.hide();
 	
+	const imgpathInput = $("<input>");
+	imgpathInput.attr("name","imgpathList");
+	imgpathInput.val(imgpath);
+	imgpathInput.hide();
+
+	$("#updateStore").append(imgNoInput).append(imgpathInput);
+	$(obj).parent().remove();
+}
 
