@@ -199,6 +199,28 @@
 		where owner_no = #{ownerNo}
 	</select>
 
+  
+	<select id="searchStore" parameterType="int" resultType="s">
+		select 
+			store_no as storeNo,
+			store_name as storeName,
+			owner_no as ownerNo,
+			address,
+			phone,
+			content,
+			open_hour as openHour,
+			closed_day as closedDay,
+			category,
+			witheat_cate as withEatCate,
+			whereeat_cate as whereEatCate
+		from store 
+		where owner_no = #{ownerNo}
+	</select>
+	
+
+
+
+
 	<select id="searchStore" parameterType="int" resultType="s">
 		select
 		store_no as storeNo
@@ -303,6 +325,16 @@
 	</update>
 	
 
+
+	<select id="selectImg" parameterType="int" resultType="si">
+		select
+			storeimg_no as storeImgNo,
+			store_no as storeNo,
+			imgpath
+		from store_img
+		where store_no = #{storeNo}
+	</select>
+
 	<!-- 맛집 상세 > 메뉴 조회 -->
 	<select id="selectMenuList" parameterType="int" resultType="me">
 		select
@@ -313,6 +345,7 @@
 			menu_img as menuImg
 		from menu
     	where store_no = #{storeNo}
+
 	</select>
 
 	<select id="sortStoreList" parameterType="map" resultType="s">
