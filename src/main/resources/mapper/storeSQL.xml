@@ -157,7 +157,8 @@
 		phone,
 		closed_day as closedDay,
 		category,
-		content
+		content,
+        (SELECT ROUND(avg(RATING), 1) from REVIEW where STORE_NO = #{_parameter}) as rating       
 		from store
 		where store_no = #{_parameter}
 	</select>
