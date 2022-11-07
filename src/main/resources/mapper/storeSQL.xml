@@ -241,13 +241,27 @@
 	</select>
 
 
+	<!-- 예약하기 -->
 	<insert id="insertReserve" parameterType="r">
-		insert into reserve
-		values(RESERVE_SEQ.NEXTVAL, #{memberNo}, #{storeNo}, #{storeName},
-		to_char(sysdate,'yyyy-mm-dd'),
-		#{eatDate}, #{eatTime}, #{eatNum})
-	</insert>
-
+      insert into reserve
+      values(RESERVE_SEQ.NEXTVAL, #{memberNo}, #{storeNo}, #{storeName}, to_char(sysdate,'yyyy-mm-dd'),
+      #{eatDate}, #{eatTime}, #{eatNum})
+    </insert>
+    
+    <!-- 예약한 건 확인 -->
+    <select id="checkReserve" resultType="rs" parameterType="rs">
+    	select
+    		reserve_no as reserveNo,
+    		member_no as memberNo,
+    		store_no as storeNo,
+    		store_name as storeName,
+    		reserve_date as reserveDate,
+    		eat_date as eatDate,
+    		eat_time as eatTime,
+    		eat_num as eatNum
+    	from reserve
+    	where store_no =  #{storeNo}
+    </select>
 
 	<select id="menuList" parameterType="int" resultType="me">
 		select
@@ -322,4 +336,5 @@
 		)
 		where rnum between #{start} and #{end}
 	</select>
+
 </mapper>
