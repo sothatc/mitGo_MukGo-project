@@ -198,30 +198,40 @@
 	            </div>
 	         </div>
 		</div>
+<<<<<<< HEAD
 		
 		
          <!--------- 후기 시작 ----->
+=======
+         <!----- 후기 부분 ----->
+       
+
+>>>>>>> refs/remotes/origin/master
          <div class="review-wrap" style="margin-top:10px;">
             <div class="menuTitle" style="display: block;">REVIEW</div>
             <ul class="w3-ul w3-card-4" id="reviewWrapUl">
-               <li class="w3-bar" style="height: 270px;">
+            <c:forEach items="${rList }" var="r">
+				<li class="w3-bar" style="height: 270px;">
                   <div class="w3-bar-1" style="margin:0;">
                      <span class="reviewDelete" style="line-height: 250px;">×</span>
-                     <img src="/resources/img/pizza.PNG" class="w3-hide-small" style="float: left; width:30%; height:100%;">
+                     <img src="/resources/img/${r.reviewImg }" class="w3-hide-small" style="float: left; width:30%; height:100%;">
                      <div class="w3-bar-item" id="w3-bar-item" style="width:60%;">
-                        <span class="w3-large">홍길동</span>
-                        <span class="material-symbols-rounded">star</span>
-                        <span class="material-symbols-rounded">star</span>
-                        <span>3.0</span>
+                        <span class="w3-large">${r.writer }</span>
+                        <span style="color: rgb(255, 83, 86);"><c:forEach begin="1" step="1" end="${r.rating }" varStatus="i">★</c:forEach></span>
+                        <span>${r.rating }</span>
                         <br>
-                        <span style="display: inline; float: left;"> 너무 맛있어서 눈물이 다 났어요... 또 올게요 사장님ㅠㅠㅠㅠㅠㅠㅠㅠㅠ ㅠㅠㅠㅠㅠㅠㅠㅠㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ 너무 맛있어서 눈물이 다 났어요... 또 올게요 사장님ㅠㅠㅠㅠㅠㅠㅠㅠㅠ ㅠㅠㅠㅠㅠㅠㅠㅠㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ</span>
+                        <span style="display: inline; float: left;">${r.content}</span>
                         <br>
                         <div class="w3-bar-item-1">
-                           <span class="regDate">2022-10-26</span>
+                           <span class="regDate">${r.enrollDate }</span>
                         </div>
                      </div>
                   </div>
                </li>
+<<<<<<< HEAD
+=======
+			</c:forEach>
+>>>>>>> refs/remotes/origin/master
             </ul>
          </div>
          <!--------후기 끝 -->

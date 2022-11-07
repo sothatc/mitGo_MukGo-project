@@ -371,6 +371,19 @@
 		)
 		where rnum between #{start} and #{end}
 	</select>
+	
+	<!-- 리뷰리스트 -->
+	<select id="selectReviewList" parameterType="int" resultType="r">
+		select 
+		review_no as reivewNo,
+		writer,
+		rating,
+		content,
+		review_img as reviewImg,
+		enroll_date as enrollDate
+		from review
+		where store_no = #{_parameter}
+	</select>
 
 
 </mapper>
