@@ -31,7 +31,7 @@
             <span class="categorySpan" style="font-family:Gowun Dodum;"></span>
             <span class="storeNameSpan" style="font-family:Gowun Dodum;">${s.storeName}</span>
             <span class="material-symbols-rounded star">star</span>
-            <span class="reviewNum" style="font-family:Gowun Dodum;"></span>
+            <span class="reviewNum" style="font-family:Gowun Dodum;">${s.rating }</span>
          </div>
 
          <div class="content-wrap1-2">
