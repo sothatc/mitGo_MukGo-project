@@ -133,4 +133,9 @@ public class StoreDao {
 		return (ArrayList<Store>) list;
 	}
 
+	public ArrayList<StoreImg> selectImg(int storeNo) {
+		List list = sqlSession.selectList("store.selectImg",storeNo);
+		return (ArrayList<StoreImg>) list;
+	}
+
 }

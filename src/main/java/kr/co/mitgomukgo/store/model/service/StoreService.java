@@ -106,9 +106,8 @@ public class StoreService {
 	}
 
 
-	public ArrayList<Store> selectStore(Owner o) {
-		ArrayList<Store> s = dao.selectStore(o);
-		return (ArrayList<Store>) s;
+	public ArrayList<StoreImg> selectStoreImg(int storeNo) {
+		return dao.selectImg(storeNo);
 	}
 	
 	public HashMap<String, Object> selectTag(String category, int reqPage) {

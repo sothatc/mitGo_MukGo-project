@@ -267,12 +267,14 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/updateStoreFrm.do")
-	public String updateStoreFrm(HttpSession session, Model model) {
+	public String updateStoreFrm(HttpSession session, @SessionAttribute Store s, Model model) {
 		Owner o = (Owner) session.getAttribute("o");
-		ArrayList<Store> s = service.selectStore(o);
-		model.addAttribute("s", (ArrayList<Store>) s);
+		ArrayList<StoreImg> imgList = service.selectStoreImg(s.getStoreNo());
+		model.addAttribute("imgList", imgList);
 		return "/store/updateStoreFrm";
 	}
+	
+	
 
 	@RequestMapping(value = "/selectTag.do")
 	public String selectTag(String category, int reqPage, Model model) {
