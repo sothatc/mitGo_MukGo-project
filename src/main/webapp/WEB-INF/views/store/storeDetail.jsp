@@ -27,11 +27,15 @@
    <!---------------------내용----------------------->
    <div class="content-wrap">
       <div class="content-wrap1" style="width:1200px;">
-         <div class="content-wrap1-1">
-            <span class="categorySpan" style="font-family:Gowun Dodum;"></span>
-            <span class="storeNameSpan" style="font-family:Gowun Dodum;">${s.storeName}</span>
-            <span class="material-symbols-rounded star">star</span>
-            <span class="reviewNum" style="font-family:Gowun Dodum;">${s.rating }</span>
+         <div class="content-wrap1-1" style="width:500px; height:50px;">
+         	<div class="div1" style="height: 50px; float:left;">
+	            <span class="categorySpan" style="font-family:Gowun Dodum;"></span>
+	            <span class="storeNameSpan" style="font-family:Gowun Dodum;">${s.storeName}</span>
+            </div>
+            <div class="div2" style="width:50px; float:left; margin-left:10px;">
+	            <span class="material-symbols-rounded star">star</span>
+	            <span class="reviewNum" style="font-family:Gowun Dodum;">${s.rating }</span>
+            </div>
          </div>
 
          <div class="content-wrap1-2">
@@ -41,7 +45,7 @@
                   <span class="material-symbols-rounded favorite pointer" id="favorite" style="display:none;">favorite</span>
                   <span class="material-symbols-outlined unfavorite pointer" id="unfavorite" style="float:right; margin-top:10px; margin-right:20px;">favorite</span>
                </c:when>
-         </c:choose>
+         	</c:choose>
          </div>
       </div>
 
