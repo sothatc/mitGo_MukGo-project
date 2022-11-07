@@ -288,7 +288,6 @@ public class StoreController {
 	
 	@RequestMapping(value = "/searchStoreList.do")
 	public String searchStoreList(String search, int reqPage, Model model,@RequestParam String category) {
-		System.out.println(category);
 		HashMap<String, Object> map = service.searchStoreList(search, reqPage, category);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
@@ -302,7 +301,6 @@ public class StoreController {
 	
 	@RequestMapping(value = "/sortStoreList.do")
 	public String sortStoreList(String storeListSort, int reqPage, Model model,@RequestParam String category) {
-		System.out.println(storeListSort);
 		HashMap<String, Object> map = service.sortStoreList(storeListSort, reqPage, category);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
@@ -310,7 +308,7 @@ public class StoreController {
 		model.addAttribute("pageNavi", map.get("pageNavi"));
 		model.addAttribute("total", map.get("total"));
 		model.addAttribute("pageNo", map.get("pageNo"));
-		
+		model.addAttribute("storeListSort", storeListSort);
 		return "store/storeListFrm";
 	}
 }
