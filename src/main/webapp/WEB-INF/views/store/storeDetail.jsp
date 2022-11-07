@@ -138,7 +138,7 @@
    <!--상세 페이지-->
    <div class="content-wrap4" style="font-family:Gowun Dodum; margin-top:30px; height:100%; width:1200px; margin-bottom:100px;">
       <div class="testDiv">
-         <p class="menuTitle" style="margin-top: 10px;">MENU</p>
+         <p class="menuTitle" style="margin-top: 20px;">MENU</p>
          <blockquote class="w3-panel w3-leftbar w3-light-grey" id="menuWrap" style="height:100%; padding-bottom:20px;">
             <div class="menuWrap" style="font-family:Gowun Dodum;">
                <p class="menuSubTitle">대표메뉴</p>
@@ -167,15 +167,15 @@
          </div>
          
          <!----- LOCATION 부분 ----->
-		 <div class="location-wrap" style="margin-top:10px;">
+		 <div class="location-wrap" style="margin-top:50px;">
 	         <div class="menuTitle" style="margin: 0 auto;">LOCATION</div>
 	         <div class="map-wrap">지도 넣을 자리</div>
 		 </div>
 		 
          <!----- 마켓 상품 부분 ----->
-         <div class="market-wrap" style="margin-top:10px;">
+         <div class="market-wrap" style="margin-top:50px; height:300px;">
 	         <div class="menuTitle" style="margin: 0 auto;">MARKET</div>
-	         <div class="market-wrap">
+	         
 	            <div class="w3-card-4" id="marketWrap">
 	               <img src="/resources/img/pizza.PNG" style="width: 100%">
 	               <div class="w3-container w3-center">
@@ -196,42 +196,34 @@
 	                  <p>상품 A</p>
 	               </div>
 	            </div>
-	         </div>
+
 		</div>
-<<<<<<< HEAD
 		
 		
          <!--------- 후기 시작 ----->
-=======
-         <!----- 후기 부분 ----->
-       
 
->>>>>>> refs/remotes/origin/master
-         <div class="review-wrap" style="margin-top:10px;">
-            <div class="menuTitle" style="display: block;">REVIEW</div>
+         <div class="review-wrap" style="margin-top:50px;">
+            <div class="menuTitle" style="width:100px; margin:0 auto;">REVIEW</div>
             <ul class="w3-ul w3-card-4" id="reviewWrapUl">
             <c:forEach items="${rList }" var="r">
-				<li class="w3-bar" style="height: 270px;">
-                  <div class="w3-bar-1" style="margin:0;">
-                     <span class="reviewDelete" style="line-height: 250px;">×</span>
-                     <img src="/resources/img/${r.reviewImg }" class="w3-hide-small" style="float: left; width:30%; height:100%;">
-                     <div class="w3-bar-item" id="w3-bar-item" style="width:60%;">
+				<li class="w3-bar" style="height: 170px;">
+                  <div class="w3-bar-1" style="margin:0; height: 150px;">
+                     <img src="/resources/img/${r.reviewImg }" class="w3-hide-small" style="float: left; width:30%; height:80%;">
+                     <div class="w3-bar-item" id="w3-bar-item" style="width:60%; height: 150px; padding:0;">
                         <span class="w3-large">${r.writer }</span>
                         <span style="color: rgb(255, 83, 86);"><c:forEach begin="1" step="1" end="${r.rating }" varStatus="i">★</c:forEach></span>
                         <span>${r.rating }</span>
                         <br>
                         <span style="display: inline; float: left;">${r.content}</span>
                         <br>
-                        <div class="w3-bar-item-1">
+                        <div class="w3-bar-item-1" style="padding-top:25px; float:right;">
                            <span class="regDate">${r.enrollDate }</span>
                         </div>
                      </div>
                   </div>
                </li>
-<<<<<<< HEAD
-=======
 			</c:forEach>
->>>>>>> refs/remotes/origin/master
+
             </ul>
          </div>
          <!--------후기 끝 -->
