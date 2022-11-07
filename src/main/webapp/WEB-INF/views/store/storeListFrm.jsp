@@ -21,15 +21,6 @@
 			</div>
 		</form>
 		
-		<div class="storeList-map">
-			<div class="storeList-map-content">
-				<div>강북</div>
-				<div>강남</div>
-				<div>
-					<p>oo 지역 맛집 찾기</p>
-				</div>
-			</div>
-		</div>
 		<div class="storeList-tag">
 			<div class="storeList-tag-content">
 				<ul>
@@ -68,11 +59,13 @@
 		</div>
 		<div class="storeList-sort">
 			<div class="storeList-sort-content">
-				<ul>
-					<li>최신순</li>
-					<li>오래된순</li>
-					<li>평점순</li>
-				</ul>
+				<form action="/sortStoreList.do?category=${category }&reqPage=1" method="post">
+					<ul>
+						<button name="storeListSort" value="new"><li>최신순</li></button>
+						<button name="storeListSort" value="old"><li>오래된순</li></button>
+						<button name="storeListSort" value="grade"><li>평점순</li></button>
+					</ul>
+				</form>	
 			</div>
 		</div>
 		<div class="storeList-list">

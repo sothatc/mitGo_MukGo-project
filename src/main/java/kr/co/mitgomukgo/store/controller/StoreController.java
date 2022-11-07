@@ -274,7 +274,6 @@ public class StoreController {
 		return "/store/updateStoreFrm";
 	}
 
-
 	@RequestMapping(value = "/selectTag.do")
 	public String selectTag(String category, int reqPage, Model model) {
 		HashMap<String, Object> map = service.selectTag(category, reqPage);
@@ -300,6 +299,20 @@ public class StoreController {
 		model.addAttribute("total", map.get("total"));
 		model.addAttribute("pageNo", map.get("pageNo"));
 
+		return "store/storeListFrm";
+	}
+	
+	@RequestMapping(value = "/sortStoreList.do")
+	public String sortStoreList(String storeListSort, int reqPage, Model model,@RequestParam String category) {
+		System.out.println(storeListSort);
+		HashMap<String, Object> map = service.sortStoreList(storeListSort, reqPage, category);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("category", category);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
+		
 		return "store/storeListFrm";
 	}
 }

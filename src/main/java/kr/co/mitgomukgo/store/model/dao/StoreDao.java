@@ -128,4 +128,9 @@ public class StoreDao {
 
 
 
+	public ArrayList<Store> sortStoreList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("store.sortStoreList", map);
+		return (ArrayList<Store>) list;
+	}
+
 }
