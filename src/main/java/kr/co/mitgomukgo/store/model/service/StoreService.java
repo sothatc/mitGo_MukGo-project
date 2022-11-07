@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import kr.co.mitgomukgo.member.model.vo.Owner;
 import kr.co.mitgomukgo.store.model.dao.StoreDao;
 import kr.co.mitgomukgo.store.model.vo.Menu;
+import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Review;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import kr.co.mitgomukgo.store.model.vo.StoreImg;
@@ -50,7 +51,7 @@ public class StoreService {
 		map.put("end",end);
 		
 		ArrayList<Store> list = dao.storeList(map);
-		System.out.println(list);
+		//System.out.println(list);
 		int totalPage = dao.countAllList();
 		int pageNaviSize = 2;
 		int pageNo = 1;
@@ -288,6 +289,17 @@ public class StoreService {
 	//맛집 - 조인
 	public ArrayList<StoreJoin> selectOneStoreAjax(StoreJoin sj) {
 		ArrayList<StoreJoin> list = dao.selectOneStoreAjax(sj);
+		return list;
+	}
+	
+	//예약하기
+	public int reserve(Reserve r) {
+	    return dao.reserve(r);
+	}
+	
+	//예약된 시간 버튼 비활성화
+	public ArrayList<Reserve> ajaxCheckReserve(Reserve r) {
+		ArrayList<Reserve> list = dao.checkReserve(r);
 		return list;
 	}
 	

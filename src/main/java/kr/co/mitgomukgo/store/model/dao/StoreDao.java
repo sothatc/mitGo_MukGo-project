@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.mitgomukgo.member.model.vo.Owner;
 import kr.co.mitgomukgo.store.model.vo.Menu;
+import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Review;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import kr.co.mitgomukgo.store.model.vo.StoreImg;
@@ -92,7 +93,19 @@ public class StoreDao {
 		List list = sqlSession.selectList("store.searchStoreList",map);
 		return (ArrayList<Store>)list;
 	}
+
 	
+	//예약하기
+	public int reserve(Reserve r) {
+	    int result = sqlSession.insert("store.insertReserve",r);
+	    return result;
+	}
+	
+	//예약된 시간 버튼 비활성화
+	public ArrayList<Reserve> checkReserve(Reserve r) {
+		List list = sqlSession.selectList("store.checkReserve", r);
+		return (ArrayList<Reserve>)list;
+	}
 
 
 

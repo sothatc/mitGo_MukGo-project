@@ -25,6 +25,7 @@ import common.FileRename;
 import kr.co.mitgomukgo.member.model.vo.Owner;
 import kr.co.mitgomukgo.store.model.service.StoreService;
 import kr.co.mitgomukgo.store.model.vo.Menu;
+import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Review;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import kr.co.mitgomukgo.store.model.vo.StoreImg;
@@ -47,7 +48,6 @@ public class StoreController {
 	// 맛집 상세 보기
 	@RequestMapping(value = "/storeDetail.do")
 	public String StoreDetail(int storeNo, Model model) {
-		// ArrayList<Store> list = service.selectOneStore(storeNo);
 		Store s = service.selectOneStore(storeNo);
 		model.addAttribute("s", s);
 		return "store/storeDetail";
@@ -56,13 +56,35 @@ public class StoreController {
 	// 맛집 이미지 배열로 가져오기
 	@ResponseBody
 	@RequestMapping(value = "/ajaxSelectStore.do", produces = "application/json;charset=utf-8")
-	public String ajaxSelectStore(StoreJoin sj) {
-
+	public String ajaxSelectStore(StoreJoin sj, Model model) {
 		ArrayList<StoreJoin> list = service.selectOneStoreAjax(sj);
 		Gson gson = new Gson();
 		String result = gson.toJson(list);
 		return result;
 	}
+	
+	//예약된 시간/날짜 확인하기
+	@ResponseBody
+	@RequestMapping(value = "/checkReserve.do", produces = "application/json;charset=utf-8")
+	public String ajaxCheckReserve(Reserve r) {
+		ArrayList<Reserve> list = service.ajaxCheckReserve(r);
+		Gson gson = new Gson();
+		String result = gson.toJson(list);
+		return result;
+	}
+	
+	   //예약하기
+	   @RequestMapping(value = "/reserve.do")
+	   public String StoreDetail(int memberNo, Reserve r) {
+	      int result = service.reserve(r);
+	      if(result>0) {
+	         return "redirect:/";
+	      }else {
+	         return "redirect:/";
+	      }
+	   }
+
+	
 
 	@RequestMapping(value = "/addStoreFrm.do")
 	public String addStoreFrm() {
