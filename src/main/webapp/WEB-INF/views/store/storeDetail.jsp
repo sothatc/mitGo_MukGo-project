@@ -202,10 +202,16 @@
 		
          <!--------- 후기 시작 ----->
 
+         <!----- 후기 부분 ----->
+       
+
          <div class="review-wrap" style="margin-top:50px;">
             <div class="menuTitle" style="width:100px; margin:0 auto;">REVIEW</div>
+
+
             <ul class="w3-ul w3-card-4" id="reviewWrapUl">
             <c:forEach items="${rList }" var="r">
+
 				<li class="w3-bar" style="height: 170px;">
                   <div class="w3-bar-1" style="margin:0; height: 150px;">
                      <img src="/resources/img/${r.reviewImg }" class="w3-hide-small" style="float: left; width:30%; height:80%;">
