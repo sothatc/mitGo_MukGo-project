@@ -80,6 +80,62 @@
 		delete from  notice_file_tbl
 		where notice_file_no = #{noticeFileNo}
 	</delete>
+	
+	<delete id="deleteNoticeMan" parameterType="int">
+		delete from notice_tbl
+		where notice_no = #{noticeNo}
+	</delete>
+	
+	<delete id="deleteNoticeFileList" parameterType="int">
+		delete from notice_file_tbl
+		where notice_no = #{noticeNo}
+	</delete>
+	
+	<select id="selectSearchNotice" parameterType="map" resultType="n">
+		select * from
+			(select row_number() over (order by rnum desc) as rnum1, rb.* from
+			(select rownum as rnum, b.* from
+			(select 
+		        notice_no as noticeNo,
+		        notice_title as noticeTitle,
+		        notice_writer as noticeWriter,
+		        notice_content as noticeContent,
+		        read_cnt as readCnt,
+		        notice_date as noticeDate
+        from notice_tbl order by noticeNo desc)b)rb order by 3 desc) where rnum between #{start} and #{end} and
+        <choose>
+        	<when test="type.equals('titleContent')">
+        		noticeTitle like '%' || #{keyword} || '%' or noticeContent like '%' || #{keyword} || '%'
+        	</when>
+        	
+        	<when test="type.equals('title')">
+        		noticeTitle like '%' || #{keyword} || '%'
+        	</when>
+        	
+        	<when test="type.equals('content')">
+        		noticeContent like '%' || #{keyword} || '%'
+        	</when>
+        	
+        </choose>
+        
+	</select>
+	
+	<select id="noticeSearchCount" parameterType="map" resultType="int">
+		select count(*) from notice_tbl
+		<choose>
+			<when test="type.equals('titleContent')">
+        		where notice_Title like '%' || #{keyword} || '%' or notice_Content like '%' || #{keyword} || '%'
+        	</when>
+        	
+        	<when test="type.equals('title')">
+        		where notice_Title like '%' || #{keyword} || '%'
+        	</when>
+        	
+        	<when test="type.equals('content')">
+        		where notice_Content like '%' || #{keyword} || '%'
+        	</when>
+		</choose>
+	</select>
 </mapper>
 
 
