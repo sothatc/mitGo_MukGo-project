@@ -51,11 +51,12 @@ function hourSlice() {
 hourSlice();
 
 
-// //영업시간 합치고 업데이트로 보내기 위한 로직
-// const hour1 = $("[name=hour]").val();
-// const hour2 = $("[name=closedHour]").val();
-// const openHour = hour1+"~"+hour2;
-// $("[name=openHour]").val(openHour);
+
+//영업시간 합치고 업데이트로 보내기 위한 로직
+//const hour1 = $("[name=hour]").val();
+//const hour2 = $("[name=closedHour]").val();
+//const openHour = hour1+"~"+hour2;
+//$("[name=openHour]").val(openHour);
 
 function closedDaySlice() {
 	const closedDay = $(".getClosedDay").val();
@@ -132,6 +133,7 @@ $('.time').timepicker({
 		delBtn.attr("type","button");
 		delBtn.attr("onclick","deleteImg(this,${si.storeImgNo},'${si.imgpath }');");
 		delBtn.text("삭제");
+		delBtn.attr("class","imgDelBtn");
 		p.append(fileInput);
 		p.append(delBtn);
 		$(".input-group").append(p);
