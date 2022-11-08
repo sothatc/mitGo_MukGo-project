@@ -15,7 +15,8 @@
 		#{closedDay},
 		#{category},
 		#{withEatCate},
-		#{whereEatCate}
+		#{whereEatCate},
+		#{maxNum}
 		)
 	</insert>
 
@@ -38,8 +39,9 @@
 		insert into review
 		values
 		(review_seq.nextval,
-		85,
-		'user01',
+		#{storeNo},
+		#{reserveNo},
+		#{writer},
 		#{rating},
 		#{content},
 		#{reviewImg},
@@ -142,7 +144,8 @@
 		category,
 		content,
 		storeimg_no as storeImgNo,
-		imgpath
+		imgpath,
+		max_num as maxNum
 		from store
 		join store_img using(store_no)
 		where store_no = #{storeNo}
@@ -161,6 +164,7 @@
 		closed_day as closedDay,
 		category,
 		content,
+		max_num as maxNum,
         (SELECT ROUND(avg(RATING), 1) from REVIEW where STORE_NO = #{_parameter}) as rating       
 		from store
 		where store_no = #{_parameter}
@@ -276,6 +280,16 @@
     		eat_num as eatNum
     	from reserve
     	where store_no =  #{storeNo}
+    </select>
+    
+
+    <select id="ajaxCheckReserveTime" resultType="rs" parameterType="map">
+		SELECT
+		    EAT_TIME as eatTime
+		FROM RESERVE 
+		WHERE STORE_NO=#{storeNo} AND EAT_DATE=#{selectDate}  
+		GROUP BY EAT_TIME 
+		HAVING SUM(EAT_NUM) >#{maxNum}
     </select>
 
 	<select id="menuList" parameterType="int" resultType="me">
@@ -405,11 +419,24 @@
 			category = #{category},
 			witheat_cate = #{withEatCate},
 			whereeat_cate = #{whereEatCate}
+			max_num = #{maxNum}
 		where store_no = #{storeNo}
 	</update>
 	<delete id="deleteStoreImg" parameterType="int">
 		delete from store_img
 		where storeimg_no = #{imgNo}
 	</delete>
+	
+	<select id="selectOneReivew" parameterType="int" resultType="r">
+		select 
+			review_no as reivewNo,
+			writer,
+			rating,
+			content,
+			review_img as reviewImg,
+			enroll_date as enrollDate
+			from review
+			where reserve_no = #{_parameter}
+	</select>
 
 </mapper>

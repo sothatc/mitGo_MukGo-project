@@ -26,7 +26,8 @@ height: 100%;
     background-color: rgb(246,246,246);
 }
 </style>
-<body>
+<body onload="initTmap()">
+
    <%@ include file="/WEB-INF/views/common/header.jsp" %>
    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,200" />
    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
@@ -36,7 +37,7 @@ height: 100%;
 
    <link rel="stylesheet" href="/resources/demos/store/style.css">
    <link rel="stylesheet" href="/resources/css/store/storeDetail.css">
-   
+   <link rel="stylesheet" href="/resources/css/map.css">
    
    
    <!---------------------내용----------------------->
@@ -187,7 +188,56 @@ height: 100%;
          <!----- LOCATION 부분 ----->
 		 <div class="location-wrap" style="width:1200px;">
 	         <div class="menuTitle" style="margin: 0 auto;">LOCATION</div>
-	         <div class="map-wrap">지도 넣을 자리</div>
+	         <div class="map-content-wrap">
+				<div id="map_wrap" class="map_wrap">
+					<div id="map_div"></div>
+				</div>
+				<div class="map_act_btn_wrap clear_box"></div>
+				<div>
+					<div class="selectCar">자동차</div>
+					<div class="selectFoot">도보</div>
+				</div>
+				<p id="result">예상 정보</p>
+
+				<div class="ft_select_wrap">
+					<div class="ft_select">
+						<!-- 
+					<select id="selectLevel">
+						<option value="0" selected="selected">교통최적+추천</option>
+						<option value="1">교통최적+무료우선</option>
+						<option value="2">교통최적+최소시간</option>
+						<option value="3">교통최적+초보</option>
+						<option value="4">교통최적+고속도로우선</option>
+						<option value="10">최단거리+유/무료</option>
+						<option value="12">이륜차도로우선</option>
+						<option value="19">교통최적+어린이보호구역 회피</option>
+					</select> 
+				 -->
+						<div class="address-wrap">
+
+							<input type="text" class="text_custom" id="fullAddr" name="fullAddr" value="" readonly>
+							<span type="text" class="text_custom addressTd" id="E_fullAddr" name="E_fullAddr" readonly style="display:none;"></span>
+							<button class="startBtn" onclick="searchAddr();">출발지 입력</button>
+							<button id="btn_select" style="display : none;">적용하기</button>
+							<button id="hidden_btn_select" style="display : none;">적용하기</button>					
+						</div>
+
+						<div class="car-content">
+							<select id="year">
+								<option value="N" selected="selected">교통정보 표출 옵션</option>
+								<option value="Y">Y</option>
+								<option value="N">N</option>
+							</select>
+							<button id="btn_select1">적용하기</button>
+						</div>
+						<div class="foot-content">
+							<button id="btn_select2">적용하기</button>
+						</div>
+					</div>
+				</div>
+				<div class="map_act_btn_wrap clear_box"></div>
+				<div class="clear"></div>
+			</div>
 		 </div>
 		 
          <!----- 마켓 상품 부분 ----->
@@ -321,6 +371,10 @@ height: 100%;
       <script>
          Kakao.init('c089c8172def97eb00c07217cae17495');
       </script>
+      <!-- map api ---------------------------- -->
+      <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xx85918c7e8848478d8513312430044e0d"></script>
+      <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+      <script src="/resources/js/store/map.js"></script>
       <script>
        //------------------------------------------------------------------------------------------------------------------------------
       
@@ -470,7 +524,6 @@ height: 100%;
                   storeImgUl.append("<li><img src=/resources/upload/store/"+data[i].imgpath.replace(" ", "%20")+" style='height:460px; width:600px;'></li>");
                   storePhoto.push(data[i].imgpath);
                }
-            
                //---------- 메뉴 사진 슬라이더
                let imgNo = 0;
                const ul = $(".photo-wrap>ul");
@@ -501,8 +554,6 @@ height: 100%;
          var reserveDate = "${rs.reserveDate}"
          var btnVal = new Array();
          var checkTimeBtn = new Array();
-         var selectedTime = new Array();
-         var unTime = new Array();
          
          var hour="${s.openHour}";
          var hourArr = new Array();
@@ -519,10 +570,10 @@ height: 100%;
          //---------- 날짜 input 클릭 시 시간 버튼 삭제
 	      $("#datePicker").on("click",function(){
 	         $(".timeBtn").remove();
-	         selectedTime = new Array();
-	         unTime = new Array();
+	         disabledTime = new Array();
 	      });
          
+	      var disabledTime = new Array();
          //---------- 시간확인하기 버튼 (용도: 비활성화)checkTime
          $("#datePicker").on("change",function(){
              
@@ -538,6 +589,7 @@ height: 100%;
                          $(".buttonTd").append("<button class=timeBtn style=margin-right:1%;background-color:white;color:rgb(51,51,51); value="+i+">"+i+":00"+"</button>");
                       }
                        
+     
                      //버튼 클릭
                      const timeBtns = $(".timeBtn");
                      timeBtns.on("click",function(){
@@ -546,56 +598,64 @@ height: 100%;
                         const index = timeBtns.index(this);
                         selectTime = $(this).text();
                         
- 		               //버튼 비활성화 css
- 		               for(let i=0; i<btnVal.length; i++){
- 		                  for(let j=0; j<unTime.length; j++){
- 		                     if(btnVal[i]==unTime[j]){
- 		                        checkTimeBtn[i].style.color="red";
- 		                        checkTimeBtn[i].style.background="pink";
- 		                        checkTimeBtn[i].setAttribute("disabled", true);
- 		                     }
- 		                  }
- 		               } 
+                        //예약불가 시간의 버튼 비활성화
+			             for(let i=0; i<btnVal.length; i++){
+			                  for(let j=0; j<disabledTime.length; j++){
+			                     if(btnVal[i]==disabledTime[j]){
+			                        checkTimeBtn[i].style.color="red";
+			                        checkTimeBtn[i].style.background="pink";
+			                        checkTimeBtn[i].setAttribute("disabled", true);
+			                     }
+			                  }
+			             }
                      });
                      
 		             var selectDate = $("#datePicker").val();
 		             checkTimeBtn = document.getElementsByClassName('timeBtn');
-		             for(let i=0; i<data.length; i++){
-		                  //선택한 시간과 불러온 날짜가 같으면
-		                  if(selectDate==data[i].eatDate){
-		                    //selectedTime 배열에 선택한 날짜의 예약시간을 배열로 저장
-		                  	selectedTime.push(data[i].eatTime);
-		                  }      
-		             }
-		               
+		       
+		             
 		             //btnVal 이란 배열에 버튼의 value값 넣기
 		             for(let i=0; i<checkTimeBtn.length; i++){
 		             	btnVal.push(document.getElementsByClassName('timeBtn')[i].value+":00");
 		             }
-		               
-		               
-		             for(let i=0; i<selectedTime.length; i++){
-		             		if(selectedTime[i].toString == btnVal[i].toString){
-		                    //unTime이란 배열에 비활성화할 값 넣음
-		                    unTime.push(selectedTime[i]);
-		                  	}
-		             }
-		               
-		             //버튼 비활성화 css
-		             for(let i=0; i<btnVal.length; i++){
-		                  for(let j=0; j<unTime.length; j++){
-		                     if(btnVal[i]==unTime[j]){
-		                        checkTimeBtn[i].style.color="red";
-		                        checkTimeBtn[i].style.background="pink";
-		                        checkTimeBtn[i].setAttribute("disabled", true);
-		                     }
+		             
+		              var maxNum = "${s.maxNum}";
+		              var selectDate = $("#datePicker").val();
+		              var storeNo = "${s.storeNo}";
+		              
+		              $.ajax({
+		                  url: "/checkReserveTime.do",
+		                  type:"post",
+		                  data: {storeNo:storeNo,selectDate:selectDate, maxNum:maxNum},
+		                  success: function(data){
+		                	  for(let i=0; i<data.length; i++){
+		                		  disabledTime.push(data[i].eatTime);
+		                	  }
+		                	  
+					             for(let i=0; i<btnVal.length; i++){
+					            	 
+					                  for(let j=0; j<disabledTime.length; j++){
+					                     if(btnVal[i]==disabledTime[j]){
+					                        checkTimeBtn[i].style.color="red";
+					                        checkTimeBtn[i].style.background="pink";
+					                        checkTimeBtn[i].setAttribute("disabled", true);
+					                     }
+					                  }
+					             }
+		                	  
+		                	  
 		                  }
-		             }
-               
+		              }); //--------------내부 ajax종료
+
+
+			             
+		              
             	}//--------success문 종료
                 
               }); //--------------ajax종료
-             
+              
+              
+
          });//데이트 피커 눌렀을 떄 함수 종료
          
             

@@ -20,4 +20,6 @@ public class Reserve {
 	private String eatTime;
 	private int eatNum;
 	private String reserverName;
+	private int rStatus;
+
 }
