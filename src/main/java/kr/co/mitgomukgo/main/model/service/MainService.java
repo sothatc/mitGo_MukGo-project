@@ -1,4 +1,4 @@
-package kr.or.mitgomukgo.main.model.service;
+package kr.co.mitgomukgo.main.model.service;
 
 import org.springframework.stereotype.Service;
 

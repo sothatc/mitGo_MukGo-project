@@ -1,4 +1,4 @@
-package kr.or.mitgomukgo.main.model.dao;
+package kr.co.mitgomukgo.main.model.dao;
 
 import org.springframework.stereotype.Repository;
 

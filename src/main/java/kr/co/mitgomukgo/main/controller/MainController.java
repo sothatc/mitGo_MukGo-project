@@ -1,4 +1,4 @@
-package kr.or.mitgomukgo.main.controller;
+package kr.co.mitgomukgo.main.controller;
 
 import org.springframework.stereotype.Controller;
 

@@ -207,3 +207,33 @@ input[name=payType]:checked+label {
 	color : red;
 	font-size : 12px;
 }
+
+#cart-option{
+    float: left;
+    margin: 10px;
+    width: 150px;
+    height: 60px;
+    border: none;
+    border-radius: 5px;
+    background-color : #f5d575;
+    text-align: center;
+    
+}
+
+
+
+.cart-option{
+  margin-left: 380px;
+  margin-top: 50px;
+ }
+ .line{
+
+    float: left;
+    margin: 10px;
+   
+    float: left;
+    width: 2px;
+    height: 60px;
+    border-left: 1px solid rgb(136, 136, 136);
+ }
+
