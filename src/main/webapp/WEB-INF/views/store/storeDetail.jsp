@@ -1,12 +1,13 @@
+<%@page import="kr.co.mitgomukgo.member.model.vo.Owner"%>
+<%@page import="kr.co.mitgomukgo.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
    <meta charset="UTF-8">
    <title>맛집상세 페이지</title>
-   
-
 </head>
 
 <body>
@@ -16,31 +17,38 @@
    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-   <link rel="stylesheet" href="/resources/css/store/storeDetail.css">
+
    <link rel="stylesheet" href="/resources/demos/store/style.css">
+   <link rel="stylesheet" href="/resources/css/store/storeDetail.css">
    
    
    
    <!---------------------내용----------------------->
    <div class="content-wrap">
-      <div class="content-wrap1">
-         <div class="content-wrap1-1">
-            <span class="categorySpan" style="font-family:Gowun Dodum;"></span>
-            <span class="storeNameSpan" style="font-family:Gowun Dodum;">${s.storeName}</span>
-            <span class="material-symbols-rounded star">star</span>
-            <span class="reviewNum" style="font-family:Gowun Dodum;"></span>
+      <div class="content-wrap1" style="width:1200px;">
+         <div class="content-wrap1-1" style="width:500px; height:50px;">
+         	<div class="div1" style="height: 50px; float:left;">
+	            <span class="categorySpan" style="font-family:Gowun Dodum;"></span>
+	            <span class="storeNameSpan" style="font-family:Gowun Dodum;">${s.storeName}</span>
+            </div>
+            <div class="div2" style="width:50px; float:left; margin-left:10px;">
+	            <span class="material-symbols-rounded star">star</span>
+	            <span class="reviewNum" style="font-family:Gowun Dodum;">${s.rating }</span>
+            </div>
          </div>
 
          <div class="content-wrap1-2">
-            <a class="material-symbols-rounded share pointer" id="share" href="javascript:shareMessage()">share</a>
-            <span class="material-symbols-rounded favorite pointer" id="favorite" style="display:none;">favorite</span>
-            <span class="material-symbols-outlined unfavorite pointer" id="unfavorite" style="float:right; margin-top:10px; margin-right:20px;">favorite</span>
+            <c:choose>
+              <c:when test="${!empty sessionScope.m }">
+                  <a class="material-symbols-rounded share pointer" id="share" href="javascript:shareMessage()">share</a>
+                  <span class="material-symbols-rounded favorite pointer" id="favorite" style="display:none;">favorite</span>
+                  <span class="material-symbols-outlined unfavorite pointer" id="unfavorite" style="float:right; margin-top:10px; margin-right:20px;">favorite</span>
+               </c:when>
+         	</c:choose>
          </div>
-
       </div>
 
-
-      <div class="content-wrap2">
+      <div class="content-wrap2" style="width:1200px; margin: 0 auto;">
          <div class="content-wrap2-1">
             <!-- 사진 슬라이드 영역 -->
             <div class="photo-wrap">
@@ -60,10 +68,10 @@
             </div>
 
             <div class="info-reserve-wrap">
-               <table class="w3-table w3-bordered" id="infoTable" style="font-family:Gowun Dodum;">
+               <table class="w3-table w3-bordered" id="infoTable" style="font-family:Gowun Dodum; width: 550px;">
                   <tr>
-                     <th>주소</th>
-                     <td colspan="3" class="addressTd">${s.address }</td>
+                     <th style="width:120px;">주소</th>
+                     <td colspan="3" class="addressTd" >${s.address }</td>
                   </tr>
                   <tr>
                      <th>전화번호</th>
@@ -104,198 +112,139 @@
                      </td>
                   </tr>
                   <tr>
-                     <th class="timeTh">시간</th>
-                     <td colspan="3" class="buttonTd"></td>
+                     <th>예약가능시간</th>
+                     <td colspan="3" class="buttonTd">
+                     </td>
                   </tr>
                </table>
-               <button name="reserveBtn" class="reserveBtn2" style="font-family:Gowun Dodum;">예약하기</button>
-               <button name="recommendBtn" style="font-family:Gowun Dodum;">추천글작성</button>
+               <c:choose>
+                  <c:when test="${empty sessionScope.m && empty sessionScope.o}">
+                        <a href="/loginFrm.do">
+                         <button id="loginBtn" style="font-family:Gowun Dodum; border-radius: 15px; width:550px; height:50px; background-color: rgb(51,51,51); color: white;
+                         margin-top: 10px;">로그인</button>
+                      </a>
+                  </c:when> 
+                  <c:otherwise>
+                       <button name="reserveBtn" class="reserveBtn2" style="font-family:Gowun Dodum;  width:550px; height:50px; background-color: rgb(51,51,51); color: white;
+                         margin-top: 10px;">예약하기</button>
+                  </c:otherwise>
+            </c:choose>
             </div>
          </div>
       </div>
    </div>
 
-   <!--조회수 및 후기 수-->
-   <div class="content-wrap3" style="font-family:Gowun Dodum;">
-      <div class="content-wrap3-1">
-         <span class="material-symbols-outlined">visibility</span>
-         <span>100</span>
-         <span class="material-symbols-outlined">rate_review</span>
-         <span>100</span>
-      </div>
-   </div>
 
    <!--상세 페이지-->
-   <div class="content-wrap4" style="font-family:Gowun Dodum;">
+   <div class="content-wrap4" style="font-family:Gowun Dodum; margin-top:30px; height:100%; width:1200px; margin-bottom:100px;">
       <div class="testDiv">
-         <p class="menuTitle">MENU</p>
-         <blockquote class="w3-panel w3-leftbar w3-light-grey" id="menuWrap">
+         <p class="menuTitle" style="margin-top: 20px;">MENU</p>
+         <blockquote class="w3-panel w3-leftbar w3-light-grey" id="menuWrap" style="height:100%; padding-bottom:20px;">
             <div class="menuWrap" style="font-family:Gowun Dodum;">
                <p class="menuSubTitle">대표메뉴</p>
                <table class="w3-table w3-bordered" id="menuTable">
+               <c:forEach items="${list }" var="me">
                   <tr>
-                     <td>피자A</td>
+                     <td style="text-align:left;">${me.menuName }</td>
                      <td>--------------------------------------</td>
-                     <td>18,000</td>
+                     <td style="text-align:right;"><fmt:formatNumber value="${me.menuPrice }" pattern="#,###원" /></td>
                   </tr>
-                  <tr>
-                     <td>피자B</td>
-                     <td>--------------------------------------</td>
-                     <td>18,000</td>
-                  </tr>
-                  <tr>
-                     <td>피자C</td>
-                     <td>--------------------------------------</td>
-                     <td>18,000</td>
-                  </tr>
-                  <tr>
-                     <td>피자D</td>
-                     <td>--------------------------------------</td>
-                     <td>18,000</td>
-                  </tr>
-                  <tr>
-                     <td>피자E</td>
-                     <td>--------------------------------------</td>
-                     <td>18,000</td>
-                  </tr>
+				</c:forEach>
                </table>
             </div>
          </blockquote>
 
          <div class="food-wrap">
-            <div class="w3-card" id="photoWrap">
-               <img src="/resources/img/pizza.PNG" style="width: 100%">
-               <div class="w3-container">
-                  <h4><b>PIZZA-A</b></h4>
-                  <p>18,000원</p>
-               </div>
-            </div>
-
-            <div class="w3-card" id="photoWrap">
-               <img src="/resources/img/pizza.PNG" style="width: 100%">
-               <div class="w3-container">
-                  <h4><b>PIZZA-B</b></h4>
-                  <p>18,000원</p>
-               </div>
-            </div>
-
-            <div class="w3-card" id="photoWrap">
-               <img src="/resources/img/pizza.PNG" style="width: 100%">
-               <div class="w3-container">
-                  <h4><b>PIZZA-C</b></h4>
-                  <p>18,000원</p>
-               </div>
-            </div>
-
-            <div class="w3-card" id="photoWrap">
-               <img src="/resources/img/pizza.PNG" style="width: 100%">
-               <div class="w3-container">
-                  <h4><b>PIZZA-D</b></h4>
-                  <p>18,000원</p>
-               </div>
-            </div>
+	         <c:forEach items="${list }" var="me">
+	            <div class="w3-card" id="photoWrap" style="font-family:Gowun Dodum;">
+	               <img src=/resources/upload/menu/${me.menuImg} style='width: 100%; height:300px;'>
+	               <div class="w3-container" style="font-family:Gowun Dodum;">
+	                  <p style="font-weight: bolder; font-size: 20px; margin-top:10px;">${me.menuName}</p>
+	                  <p><fmt:formatNumber value="${me.menuPrice }" pattern="#,###원"/></p>
+	               </div>
+	            </div>
+			</c:forEach>
          </div>
-
+         
          <!----- LOCATION 부분 ----->
-         <p class="menuTitle">LOCATION</p>
-         <div class="map-wrap">지도 넣을 자리</div>
-
+		 <div class="location-wrap" style="margin-top:50px;">
+	         <div class="menuTitle" style="margin: 0 auto;">LOCATION</div>
+	         <div class="map-wrap">지도 넣을 자리</div>
+		 </div>
+		 
          <!----- 마켓 상품 부분 ----->
-         <p class="menuTitle">MARKET</p>
-         <div class="market-wrap">
-            <div class="w3-card-4" id="marketWrap">
-               <img src="/resources/img/pizza.PNG" style="width: 100%">
-               <div class="w3-container w3-center">
-                  <p>상품 A</p>
-               </div>
-            </div>
+         <div class="market-wrap" style="margin-top:50px; height:300px;">
+	         <div class="menuTitle" style="margin: 0 auto;">MARKET</div>
+	         
+	            <div class="w3-card-4" id="marketWrap">
+	               <img src="/resources/img/pizza.PNG" style="width: 100%">
+	               <div class="w3-container w3-center">
+	                  <p>상품 A</p>
+	               </div>
+	            </div>
+	
+	            <div class="w3-card-4" id="marketWrap">
+	               <img src="/resources/img/pizza.PNG" style="width: 100%">
+	               <div class="w3-container w3-center">
+	                  <p>상품 A</p>
+	               </div>
+	            </div>
+	
+	            <div class="w3-card-4" id="marketWrap">
+	               <img src="/resources/img/pizza.PNG" style="width: 100%">
+	               <div class="w3-container w3-center">
+	                  <p>상품 A</p>
+	               </div>
+	            </div>
 
-            <div class="w3-card-4" id="marketWrap">
-               <img src="/resources/img/pizza.PNG" style="width: 100%">
-               <div class="w3-container w3-center">
-                  <p>상품 A</p>
-               </div>
-            </div>
-
-            <div class="w3-card-4" id="marketWrap">
-               <img src="/resources/img/pizza.PNG" style="width: 100%">
-               <div class="w3-container w3-center">
-                  <p>상품 A</p>
-               </div>
-            </div>
-         </div>
+		</div>
+		
+		
+         <!--------- 후기 시작 ----->
 
          <!----- 후기 부분 ----->
+       
 
-         <div class="review-wrap">
-            <p class="menuTitle" style="display: block;">REVIEW</p>
+         <div class="review-wrap" style="margin-top:50px;">
+            <div class="menuTitle" style="width:100px; margin:0 auto;">REVIEW</div>
+
+
             <ul class="w3-ul w3-card-4" id="reviewWrapUl">
-               <li class="w3-bar" style="height: 270px;">
-                  <div class="w3-bar-1" style="margin:0;">
-                     <span class="reviewDelete" style="line-height: 250px;">×</span>
-                     <img src="/resources/img/pizza.PNG" class="w3-hide-small" style="float: left; width:30%; height:100%;">
-                     <div class="w3-bar-item" id="w3-bar-item" style="width:60%;">
-                        <span class="w3-large">홍길동</span>
-                        <span class="material-symbols-rounded">star</span>
-                        <span class="material-symbols-rounded">star</span>
-                        <span>3.0</span>
-                        <br>
-                        <span style="display: inline; float: left;"> 너무 맛있어서 눈물이 다 났어요... 또 올게요 사장님ㅠㅠㅠㅠㅠㅠㅠㅠㅠ ㅠㅠㅠㅠㅠㅠㅠㅠㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ 너무 맛있어서 눈물이 다 났어요... 또 올게요 사장님ㅠㅠㅠㅠㅠㅠㅠㅠㅠ ㅠㅠㅠㅠㅠㅠㅠㅠㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ</span>
-                        <br>
-                        <div class="w3-bar-item-1">
-                           <span class="regDate">2022-10-26</span>
-                        </div>
-                     </div>
-                  </div>
-               </li>
+            <c:forEach items="${rList }" var="r">
 
-               <li class="w3-bar" style="height: 270px;">
-                  <div class="w3-bar-1" style="margin:0;">
-                     <span class="reviewDelete" style="line-height: 250px;">×</span>
-                     <img src="/resources/img/pizza.PNG" class="w3-hide-small" style="float: left; width:30%; height:100%;">
-                     <div class="w3-bar-item" id="w3-bar-item">
-                        <span class="w3-large">홍길동</span>
-                        <span class="material-symbols-rounded">star</span>
-                        <span class="material-symbols-rounded">star</span>
-                        <span>3.0</span>
+				<li class="w3-bar" style="height: 170px;">
+                  <div class="w3-bar-1" style="margin:0; height: 150px;">
+                     <img src="/resources/upload/review/${r.reviewImg }" class="w3-hide-small" style="float: left; width:30%; height:80%;">
+                     <div class="w3-bar-item" id="w3-bar-item" style="width:60%; height: 150px; padding:0;">
+                        <span class="w3-large">${r.writer }</span>
+                        <span style="color: rgb(255, 83, 86);"><c:forEach begin="1" step="1" end="${r.rating }" varStatus="i">★</c:forEach></span>
+                        <span>${r.rating }</span>
                         <br>
-                        <span style="display: inline; float: left;"> 너무 맛있어서 눈물이 다 났어요... 또 올게요 사장님ㅠㅠㅠㅠㅠㅠㅠㅠㅠ ㅠㅠㅠㅠㅠㅠㅠㅠㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ 너무 맛있어서 눈물이 다 났어요... 또 올게요 사장님ㅠㅠㅠㅠㅠㅠㅠㅠㅠ ㅠㅠㅠㅠㅠㅠㅠㅠㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ</span>
+                        <span style="display: inline; float: left;">${r.content}</span>
                         <br>
-                        <div class="w3-bar-item-1">
-                           <span class="regDate">2022-10-26</span>
+                        <div class="w3-bar-item-1" style="padding-top:25px; float:right;">
+                           <span class="regDate">${r.enrollDate }</span>
                         </div>
                      </div>
                   </div>
                </li>
+			</c:forEach>
 
-               <li class="w3-bar" style="height: 270px;">
-                  <div class="w3-bar-1" style="margin:0;">
-                     <span class="reviewDelete" style="line-height: 250px;">×</span>
-                     <img src="/resources/img/pizza.PNG" class="w3-hide-small"  style="float: left; width:30%; height:100%;">
-                     <div class="w3-bar-item" id="w3-bar-item" style="width:70%;">
-                        <span class="w3-large">홍길동</span>
-                        <span class="material-symbols-rounded">star</span>
-                        <span class="material-symbols-rounded">star</span>
-                        <span>3.0</span>
-                        <br>
-                        <span style="display: inline; float: left;"> 너무 맛있어서 눈물이 다 났어요... 또 올게요 사장님ㅠㅠㅠㅠㅠㅠㅠㅠㅠ ㅠㅠㅠㅠㅠㅠㅠㅠㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ 너무 맛있어서 눈물이 다 났어요... 또 올게요 사장님ㅠㅠㅠㅠㅠㅠㅠㅠㅠ ㅠㅠㅠㅠㅠㅠㅠㅠㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜㅜ ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ</span>
-                        <br>
-                        <div class="w3-bar-item-1">
-                           <span class="regDate">2022-10-26</span>
-                        </div>
-                     </div>
-                  </div>
-               </li>
             </ul>
          </div>
+         <!--------후기 끝 -->
       </div>
+      
+      
       <!-- 모달 부분 -->
        <div class="modal-wrap hidden">
           <div class="modal-box">
               <div class="modal-title">예약 정보</div>
               <div class="modal-contents">
+              <form action="/reserve.do?memberNo=${m.memberNo }">
                   <table class="w3-table w3-bordered" id="reserveCheckTbl">
                       <tr>
+                      
                           <th>상호명</th>
                           <td class="storeNameTd">${s.storeName }</td>
                       </tr>
@@ -312,23 +261,47 @@
                           <td class="peopleNumTd"></td>
                       </tr>
                   </table>
+                   
+                  <input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
+                  <input type="hidden" name="storeNo" value="${s.storeNo }">
+                  <input type="hidden" name="storeName" value="${s.storeName }">
+                  <input type="hidden" name="eatDate" class="eatDate">
+                  <input type="hidden" name="eatTime" class="eatTime">
+                  <input type="hidden" name="eatNum" class="eatNum">
                   <div class="explanation">* 가게에서 최종 확정 시 예약이 확정됩니다.</div>
                   <button class="closeModal pointer">닫기</button>
-                  <button class="reserveBtn pointer">예약하기</button>
+                  <button class="reserveBtn pointer" type="submit">예약하기</button>
+              </form>
               </div>
           </div>
        </div>
        </div>
+       <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+       
+       
        
        <!------------------------ 시간 날짜 미입력 모달 -->
        <div class="w3-container" style="font-family:Gowun Dodum;">
-           <div id="timeDateModal" class="w3-modal">
+           <div id="timeDateModal" class="w3-modal" style="font-family:Gowun Dodum; z-index:2000;">
              <div class="w3-modal-content w3-animate-top w3-card-4" style="width:30%; height: 40%;">
                <header class="w3-container w3-teal" style="height:10%;"> 
                  <span onclick="document.getElementById('timeDateModal').style.display='none'" 
                  class="w3-button w3-display-topright" style="width:5%; height:10%;">&times;</span>
                </header>
                  <p style="width:100%; height:100%;padding:0; margin:0;display:flex; justify-content: center; align-items: center; color:black;">예약하실 날짜와 시간을 선택해주세요.</p>
+             </div>
+           </div>
+      </div>
+      
+      <!-- ----------업주일 때 모달 -->
+       <div class="w3-container" style="font-family:Gowun Dodum;">
+           <div id="ownerModal" class="w3-modal" style="font-family:Gowun Dodum; z-index:2000;">
+             <div class="w3-modal-content w3-animate-top w3-card-4" style="width:30%; height: 40%;">
+               <header class="w3-container w3-teal" style="height:10%;"> 
+                 <span onclick="document.getElementById('ownerModal').style.display='none'" 
+                 class="w3-button w3-display-topright" style="width:5%; height:10%;">&times;</span>
+               </header>
+                 <p style="width:100%; height:100%;padding:0; margin:0;display:flex; justify-content: center; align-items: center; color:black;">업주입니다!!</p>
              </div>
            </div>
       </div>
@@ -350,7 +323,7 @@
          var category;//실카테고리
                
        //카테고리 
-         //1:한식 , 2: 양식, 3: 일식, 4: 중식, 5:분식, 6:육류, 7:기타
+       // 1:한식 , 2: 양식, 3: 일식, 4: 중식, 5:분식, 6:육류, 7:씨푸드,8:디저트,9:기타
                if(categoryNum=="1"){
                   category="한식";
                }else if(categoryNum=="2"){
@@ -364,6 +337,10 @@
                }else if(categoryNum=="6"){
                   category="육류";
                }else if(categoryNum=="7"){
+                  category="씨푸드";
+               }else if(categoryNum=="8"){
+                  category="디저트";
+               }else if(categoryNum=="9"){
                   category="기타";
                }
       
@@ -451,16 +428,16 @@
             
          }
          
-         
+         var addr;
          //-------------------주소 * 없애기
          function addrSlice() {
-             const addr = $(".addressTd");
-             console.log(addr);
-             const splitWord = addr.text().split("*");
+             addr = $(".addressTd");
+             splitWord = addr.text().split("*");
                 addr.text(splitWord[1] + " " +splitWord[2]);
              }
              addrSlice();
 
+             
          //----------------------------- 인원수 늘리기
             let count = 1;
    
@@ -478,90 +455,170 @@
                $(".people").text(count);
             });
             
-            
-            var hour="${s.openHour}";
-            console.log(hour);
-            var hourArr = new Array();
-             hourArr = hour.split("~");
-            var openTime = new Array();
-             openTime = hourArr[0].split(":");
-            var closeTime= new Array();
-             closeTime = hourArr[1].split(":");
-            var realOpenTime = openTime[0]; //실오픈시간
-            var realCloseTime = closeTime[0]; //실폐점시간
-            var selectTime;
-            var selectDate = $("#datePicker").val();
-             //시간 버튼 생성
-             for(let i=realOpenTime; i<realCloseTime; i++){
-                $(".buttonTd").append("<button class=timeBtn style=margin-right:1%;background-color:white;color:rgb(51,51,51);>"+i+":00"+"</button>");
-             }
-            
-            //-----------------버튼 클릭
-            const timeBtns = $(".timeBtn");
-            timeBtns.on("click",function(){
-               timeBtns.css("color","rgb(51,51,51)").css("background-color","white");
-               $(this).css("color","white").css("background-color","rgb(51,51,51)");
-               const index = timeBtns.index(this);
-               selectTime = $(this).text();
-            });
-            
-            
+
+
       
        //-------------------------------------------------------------------@@@@@@@@@@@@@@@@@@@@@       AJAX 
-         var storePhoto;
-       	 var storeNo = "${s.storeNo}";
+       
+    
+           var storePhoto;
+           var storeNo = "${s.storeNo}";
          $.ajax({
             url: "/ajaxSelectStore.do",
             type:"post",
             data: {storeNo:storeNo},
             success: function(data){
-               console.log(storeNo);
                const storeImgUl = $(".storeImgUl");
                storePhoto = new Array();
-            for(let i=0; i<data.length; i++){
-               storeImgUl.append("<li><img src=/resources/upload/store/"+data[i].imgpath+" style='height:460px; width:600px;'></li>");
-               storePhoto.push(data[i].imgpath);
-            }
-            
-              //--------------------------메뉴 사진 슬라이더
-            let imgNo = 0;
-
-            const ul = $(".photo-wrap>ul");
-            const imgCount = ul.children().length;
-            const width = 600;
-            ul.css("width",(imgCount*width)+"px");
-            
-            $(".prev").on("click", function() {
-               if (imgNo != 0) {
-                  imgNo--;
-                  const move = -imgNo * width;
-                  ul.css("transform", "translateX(" + move + "px)").css("transition-duration", "1s");
+               for(let i=0; i<data.length; i++){
+                  storeImgUl.append("<li><img src=/resources/upload/store/"+data[i].imgpath.replace(" ", "%20")+" style='height:460px; width:600px;'></li>");
+                  storePhoto.push(data[i].imgpath);
                }
-            });
-
-            $(".next").on("click", function() {
-               if (imgNo != imgCount - 1) {
-                  imgNo++;
-                  const move = -imgNo * width;
-                  ul.css("transform", "translateX(" + move + "px)").css("transition-duration", "1s");
-               }
-            });
             
+                 //--------------------------메뉴 사진 슬라이더
+               let imgNo = 0;
+   
+               const ul = $(".photo-wrap>ul");
+               const imgCount = ul.children().length;
+               const width = 600;
+               ul.css("width",(imgCount*width)+"px");
+               
+               $(".prev").on("click", function() {
+                  if (imgNo != 0) {
+                     imgNo--;
+                     const move = -imgNo * width;
+                     ul.css("transform", "translateX(" + move + "px)").css("transition-duration", "1s");
+                  }
+               });
+
+               $(".next").on("click", function() {
+                  if (imgNo != imgCount - 1) {
+                     imgNo++;
+                     const move = -imgNo * width;
+                     ul.css("transform", "translateX(" + move + "px)").css("transition-duration", "1s");
+                  }
+               });
             }
          }); //---------------------------------------------------------ajax 종료----------------------------------------------
          
          
+         var reserveNo = "${rs.reserveNo}";
+         var reserveDate = "${rs.reserveDate}"
+         var btnVal = new Array();
+         var checkTimeBtn = new Array();
+         var selectedTime = new Array();
+         var unTime = new Array();
+ 
+         //여기서 시작----------------------------
+         var hour="${s.openHour}";
+         var hourArr = new Array();
+          hourArr = hour.split("~");
+         var openTime = new Array();
+          openTime = hourArr[0].split(":");
+         var closeTime= new Array();
+          closeTime = hourArr[1].split(":");
+         var realOpenTime = openTime[0]; //실오픈시간
+         var realCloseTime = closeTime[0]; //실폐점시간
+         var selectTime;
+         var selectDate = $("#datePicker").val();
+         
+         //날짜 input 클릭 시 시간 버튼 삭제
+      $("#datePicker").on("click",function(){
+         $(".timeBtn").remove();
+         selectedTime = new Array();
+         unTime = new Array();
+      });
+         
+         //-----------시간확인하기 버튼 (용도: 비활성화)checkTime
+         $("#datePicker").on("change",function(){
+           
+             //---------------ajax 
+             
+             $.ajax({
+                 url: "/checkReserve.do",
+                 type:"post",
+                 data: {storeNo:storeNo},
+                 success: function(data){
+                    //삭제하고 생성
+                    $(".timeBtn").remove();
+                   //시간 버튼 생성
+                     for(let i=realOpenTime; i<realCloseTime; i++){
+                         $(".buttonTd").append("<button class=timeBtn style=margin-right:1%;background-color:white;color:rgb(51,51,51); value="+i+">"+i+":00"+"</button>");
+                      }
+                       
+                     //-----------------버튼 클릭
+                     const timeBtns = $(".timeBtn");
+                     timeBtns.on("click",function(){
+                        timeBtns.css("color","rgb(51,51,51)").css("background-color","white");
+                        $(this).css("color","white").css("background-color","rgb(51,51,51)");
+                        const index = timeBtns.index(this);
+                        selectTime = $(this).text();
+                        
+ 		               //버튼 비활성화 css
+ 		               for(let i=0; i<btnVal.length; i++){
+ 		                  for(let j=0; j<unTime.length; j++){
+ 		                     if(btnVal[i]==unTime[j]){
+ 		                        checkTimeBtn[i].style.color="red";
+ 		                        checkTimeBtn[i].style.background="pink";
+ 		                        checkTimeBtn[i].setAttribute("disabled", true);
+ 		                     }
+ 		                  }
+ 		               }
+                        
+                     });
+                     
+		               var selectDate = $("#datePicker").val();
+		               checkTimeBtn = document.getElementsByClassName('timeBtn');
+		               for(let i=0; i<data.length; i++){
+		                  //선택한 시간과 불러온 날짜가 같으면
+		                  if(selectDate==data[i].eatDate){
+		                     //selectedTime 배열에 선택한 날짜의 예약시간을 배열로 저장
+		                     selectedTime.push(data[i].eatTime);
+		                  }      
+		               }
+		               
+		               //btnVal 이란 배열에 버튼의 value값 넣기
+		               for(let i=0; i<checkTimeBtn.length; i++){
+		                  btnVal.push(document.getElementsByClassName('timeBtn')[i].value+":00");
+		               }
+		               
+		               
+		               for(let i=0; i<selectedTime.length; i++){
+		                  if(selectedTime[i].toString == btnVal[i].toString){
+		                     //unTime이란 배열에 비활성화할 값 넣음
+		                     unTime.push(selectedTime[i]);
+		                  }
+		               }
+		               
+		               
+		               //버튼 비활성화 css
+		               for(let i=0; i<btnVal.length; i++){
+		                  for(let j=0; j<unTime.length; j++){
+		                     if(btnVal[i]==unTime[j]){
+		                        checkTimeBtn[i].style.color="red";
+		                        checkTimeBtn[i].style.background="pink";
+		                        checkTimeBtn[i].setAttribute("disabled", true);
+		                     }
+		                  }
+		               }
+               
+            }//--------success문 종료
+                
+              }); 
+             //--------------ajax종료
+             
+         });
+         
             
          //----------------------------- 공유하기 버튼
          function shareMessage() {
-
             Kakao.Share.sendDefault({
                objectType : 'location',
-               address : "${s.address}",
+               address : $(".addressTd").text(),
                addressTitle : "${s.storeName}",
                content : {
                   title : "${s.storeName}",
-                  description : "${s.storeName}"+"먹으러갈까요~~?",
+                  description : "${s.storeName}"+" 로 지금 먹으러갈까요~~?",
                   imageUrl : 'http://192.168.10.26/resources/img/logo.png',
                   link : {
                      mobileWebUrl : 'http://192.168.10.26/storeDetail.do?storeNo='+storeNo,
@@ -579,18 +636,26 @@
          }
          
          //---------------------------------- 모달 
-         const open = document.querySelector(".reserveBtn2");
-         const close = document.querySelector(".closeModal");
+
          const modal = document.querySelector(".modal-wrap");
-
-         function init(){
+           var ownerId = "${sessionScope.o.ownerId}";
+           var memberId = "${sessionScope.m.memberId}"
+          var selectedDate;
+       
+         
             //모달 여는 코드
-
-            open.addEventListener("click",function(){
+            $(".reserveBtn2").on("click",function(){
+            
                modal.classList.remove("hidden");
-
                
-               $(".dateTd").text($("#datePicker").val());
+               if(ownerId != ""){
+                  document.getElementById('ownerModal').style.display='block';
+               }
+               selectedDate =$("#datePicker").val();
+               $(".eatDate").attr("value",selectedDate);
+               $(".eatTime").attr("value",selectTime);
+               $(".eatNum").attr("value",count);
+               $(".dateTd").text(selectedDate);
                $(".peopleNumTd").text(count);
                $(".timeTd").text(selectTime);
                //날짜를 선택하지 않았을 때
@@ -600,12 +665,13 @@
                }
              });
             
+            
+            
             // 모달 닫기 버튼 클릭 시
-            close.addEventListener("click",function(){
+             $(".closeModal").on("click",function(){
                modal.classList.add("hidden");
             });
-         }
-         init();
+
          
       </script>
 

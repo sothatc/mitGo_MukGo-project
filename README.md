@@ -7,4 +7,4 @@
 ![GitHub stats](https://github-readme-stats.vercel.app/api?username=naeyoonyang&show_icons=true&theme=radical)
 ![GitHub stats](https://github-readme-stats.vercel.app/api?username=Leegyugin&show_icons=true&theme=cobalt)
 ![GitHub stats](https://github-readme-stats.vercel.app/api?username=sothatc&show_icons=true&theme=cobalt)
-![GitHub stats](https://github-readme-stats.vercel.app/api?username=kseop0512&show_icons=true&theme=cobalt)
+![GitHub stats](https://github-readme-stats.vercel.app/api?username=aram2ra9&show_icons=true&theme=cobalt)

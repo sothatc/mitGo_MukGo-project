@@ -1,80 +1,24 @@
 /**
  * 
  */
- const tag = $(".storeList-tag-content>ul>li");
- 
+
+const tag = $(".storeList-tag-content>ul>li");
+const tabCategory = $(".tabCategory").text();
+const tabSort = $(".tabSort");
+const tabSortText = $(".tabSort").text();
 tag.on("click",function(){
     const index = tag.index(this);
     if(index < tag.length){
         for(i=0; i<tag.length;i++){
-            $(tag).eq(i).css("color","black");
+            $(tag).eq(i).removeAttr("back-color");
         }
     }
-    $(tag).eq(index).css("color","#FF9F45");
+    $(tag).eq(index).attr("class","back-color");
+    console.log(tabCategory);
 });
-/*
-tag.on("click",function(){
-    const tagValue = tag.index(this);
-    
-    $.ajax({
-        url : "/ajaxClicktag.do?reqPage=1",
-        data : {tagValue : tagValue},
-        success : function(data){
-            const storeList = $(".storeList-list");
-            const storeListListContent = $("<div>");
-            storeListListContent.addClass("storeList-list-content");
-            for(let i=0;i<data.list.length;i++){
-                const div = $("<div>");
-                div.addClass("showList");
-            	const a =  $("<a>");
-                a.append("<div><img src='resources/upload/store/"+data.list[i].thumbNail+"'></img></div>");
-            	a.append("<div><div>가게이름 : "+data.list[i].storeName+"</div></div>");
-            	div.append(a);
-                storeListListContent.append(div)
-            }
-            storeList.html(storeListListContent);
-        }
-    });
-});
+tag.eq(tabCategory).click();
 
-tag.on("click",function(){
-    const tagValue = tag.index(this);
-    const storeListListContent = $(".storeList-list-content");
-    $.ajax({
-        url : "/ajaxClicktag.do?reqPage=1",
-        data : {tagValue : tagValue},
-        success : function(data){
-            
-            for(let i=0;i<data.list.length;i++){
-                const showTagList = $("#showTagList");
-            	const a =  $("<a>");
-                a.append("<div><img src='resources/upload/store/"+data.list[i].thumbNail+"'></img></div>");
-            	a.append("<div><div>가게이름 : "+data.list[i].storeName+"</div></div>");
-            	showTagList.append(a);
-                storeListListContent.append(showTagList);
-            }
-            storeListListContent.html(showTagList)
-        }
-    });
-});
-*/
-/*
-var test = new Array();
-tag.on("click",function(){
-    const index = tag.index(this);
-    if(test[index] == 0){
-        $(tag).eq(index).css("color","#FF9F45");
-        test[index] = 1;
-    }else{
-        $(tag).eq(index).css("color","black");
-        test[index] = 0;
-    }
-});
-for(i=0; i<tag.length;i++){
-    tag.eq(i).click();
-}
-*/
-const sort = $(".storeList-sort-content>ul>li");
+const sort = $(".storeList-sort-content>form>ul>button");
 sort.on("click",function(){
     const sortindex = sort.index(this);
     if(sortindex < sort.length){
@@ -84,6 +28,23 @@ sort.on("click",function(){
     }
     $(sort).eq(sortindex).css("color","#FF9F45");
 });
+
+tabSort.on("click",function(){
+    if(tabSortText == ""){
+        sort.eq(0).css("background-color","aqua");
+    }
+    if(tabSortText == "new"){
+        sort.eq(0).css("background-color","aqua");
+    }
+    if(tabSortText == "old"){
+        sort.eq(1).css("background-color","aqua");
+    }
+    if(tabSortText == "grade"){
+        sort.eq(2).css("background-color","aqua");
+    }
+});
+
+tabSort.click();
 
 const locationTag = $(".storeList-map-content>div");
 locationTag.on("click",function(){

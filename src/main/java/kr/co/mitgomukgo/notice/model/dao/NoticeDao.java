@@ -41,4 +41,93 @@ public class NoticeDao {
 		int result = sqlSession.insert("notice.insertNoticeFile", files);
 		return result;
 	}
+
+	public int selectNoticeCount() {
+		int result = sqlSession.selectOne("notice.selectNoticeCount");
+		return result;
+	}
+
+	public int updateReadCount(int noticeNo) {
+		int result = sqlSession.update("notice.updateReadCount", noticeNo);
+		return result;
+	}
+
+	public int selectReadCnt(int noticeNo) {
+		int readCount = sqlSession.selectOne("notice.selectReadCount", noticeNo);
+		return readCount;
+	}
+
+	public Notice selectOneNotice(int noticeNo) {
+		Notice n = sqlSession.selectOne("notice.selectOneNotice", noticeNo);
+		return n;
+	}
+
+	public ArrayList<NoticeFile> selectALlNoticeFile(int noticeNo) {
+		List list = sqlSession.selectList("notice.selectAllNoticeFile", noticeNo);
+		return (ArrayList<NoticeFile>)list;
+	}
+
+	public NoticeFile selectOneNoticeFile(int noticeFileNo) {
+		NoticeFile notice = sqlSession.selectOne("notice.selectOneNoticeFile", noticeFileNo);
+		return notice;
+	}
+
+	public int updateNotice(Notice n) {
+		int result = sqlSession.update("notice.updateNotice", n);
+		return result;
+	}
+
+	public int deleteNoticeFile(int fileNo) {
+		int result = sqlSession.delete("notice.deleteNotice", fileNo);
+		return result;
+	}
+
+	public int deleteNotice(int noticeNo) {
+		int result = sqlSession.delete("notice.deleteNoticeMan", noticeNo);
+		return result;
+	}
+
+	public int deleteNoticeFileList(int noticeNo) {
+		int result = sqlSession.delete("notice.deleteNoticeFileList", noticeNo);
+		return result;
+	}
+
+	public ArrayList<Notice> selectSearchNotice(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("notice.selectSearchNotice", map);
+		
+		if(list.isEmpty()) {
+			return null;
+		}else {
+			return (ArrayList<Notice>)list;
+		}
+ 		
+	}
+
+	public int noticeSearchCount(HashMap<String, Object> map) {
+		int result = sqlSession.selectOne("notice.noticeSearchCount", map);
+		return result;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
