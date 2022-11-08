@@ -32,7 +32,6 @@ import kr.co.mitgomukgo.store.model.vo.Store;
 import kr.co.mitgomukgo.store.model.vo.StoreImg;
 import kr.co.mitgomukgo.store.model.vo.StoreJoin;
 
-
 @Controller
 public class StoreController {
 
@@ -276,8 +275,10 @@ public class StoreController {
 		model.addAttribute("imgList", imgList);
 		return "/store/updateStoreFrm";
 	}
+
 	@RequestMapping(value="/updateStore.do")
-	public String updateStore(int[] imgNoList, Store s, String[] imgpathList, MultipartFile[] file, HttpServletRequest request) {
+	public String updateStore(int[] imgNoList, Store s, String[] imgpathList, MultipartFile[] file, HttpServletRequest request, String zipCode,
+			String detailAddress, String closedHour) {
 		ArrayList<StoreImg> storeImgList = new ArrayList<StoreImg>();
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/store/");
 		if(!file[0].isEmpty()) {
@@ -304,6 +305,8 @@ public class StoreController {
 			}
 		}
 		s.setStoreImgList(storeImgList);
+		s.setAddress(zipCode + "*" + s.getAddress() + "*" + detailAddress);
+		s.setOpenHour(s.getOpenHour() + "~" + closedHour);
 		int result = service.updateStore(s, imgNoList);
 		if(imgNoList != null && (result == (storeImgList.size()+imgNoList.length+1))) {
 			if(imgpathList != null) {
@@ -315,7 +318,7 @@ public class StoreController {
 		}	
 		if(result > 0) {
 			request.setAttribute("msg", "변경이 완료되었습니다.");
-			request.setAttribute("url", "/updateStoreFrm.do");
+			request.setAttribute("url", "/");
 			return "common/alert";
 		} else {
 			request.setAttribute("msg", "변경 중 문제가 발생했습니다.");
@@ -323,6 +326,8 @@ public class StoreController {
 			return "common/alert";
 		}
 	}
+
+
 	
 	
 
@@ -342,6 +347,7 @@ public class StoreController {
 	
 	@RequestMapping(value = "/searchStoreList.do")
 	public String searchStoreList(String search, int reqPage, Model model,@RequestParam String category) {
+		System.out.println(category);
 		HashMap<String, Object> map = service.searchStoreList(search, reqPage, category);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
@@ -355,6 +361,7 @@ public class StoreController {
 	
 	@RequestMapping(value = "/sortStoreList.do")
 	public String sortStoreList(String storeListSort, int reqPage, Model model,@RequestParam String category) {
+		System.out.println(storeListSort);
 		HashMap<String, Object> map = service.sortStoreList(storeListSort, reqPage, category);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
@@ -362,7 +369,7 @@ public class StoreController {
 		model.addAttribute("pageNavi", map.get("pageNavi"));
 		model.addAttribute("total", map.get("total"));
 		model.addAttribute("pageNo", map.get("pageNo"));
-		model.addAttribute("storeListSort", storeListSort);
+		
 		return "store/storeListFrm";
 	}
 }

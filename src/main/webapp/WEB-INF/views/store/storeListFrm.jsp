@@ -13,6 +13,7 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<!--헤더-->
 	<div class="storeList-content-wrap">
+
 		<!-- 필요한 데이터를 담아두기 위한 더미 -->
 		<div class = "tabCategory" style = "display: none;" >${category }</div>
 		<div class = "tabSort" style = "display: none;">${storeListSort }</div>
@@ -86,7 +87,6 @@
 							<div>
 								<div style="display: none">${s.storeNo }</div>
 								<div>가게이름 : ${s.storeName }</div>
-								<div>평점 : ${s.rating }</div>
 							</div>
 						</a>
 					</div>
