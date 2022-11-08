@@ -96,6 +96,11 @@
 					</div>
 					<br>
 					<div class="form-group">
+						<label for="inputMaxNum">시간 당 최대 인원수를 알려주세요</label>
+						<br>
+						<input type="number" class="form-control" name="maxNum" id="inputMaxNum">
+					</div>
+					<div class="form-group">
 						<label for="inputTime">휴무일을 알려주세요</label>
 						<br>
 						<br>

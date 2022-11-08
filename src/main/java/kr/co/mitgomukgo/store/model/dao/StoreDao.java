@@ -97,6 +97,7 @@ public class StoreDao {
 	    return result;
 	}
 	
+
 	public ArrayList<Menu> menuList(int storeNo) {
 		List list = sqlSession.selectList("menuList", storeNo);
 		return (ArrayList<Menu>) list;
@@ -114,12 +115,19 @@ public class StoreDao {
 		return sqlSession.update("updateMenu", menu);
 	}
 	
-	//예약된 시간 버튼 비활성화
+
 	public ArrayList<Reserve> checkReserve(Reserve r) {
 		List list = sqlSession.selectList("store.checkReserve", r);
 		return (ArrayList<Reserve>)list;
 	}
-
+	
+	//비활성화 시간 확인하기
+	public ArrayList<Reserve> ajaxCheckReserveTime(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("store.ajaxCheckReserveTime", map);
+		return (ArrayList<Reserve>)list;
+	}
+	
+	
 	//맛집 상세 - 메뉴조회
 	public ArrayList<Menu> selectMenuList(int storeNo) {
 		List list = sqlSession.selectList("store.selectMenuList", storeNo);
@@ -151,5 +159,6 @@ public class StoreDao {
 		return (ArrayList<Review>) list;
 
 	}
+
 
 }

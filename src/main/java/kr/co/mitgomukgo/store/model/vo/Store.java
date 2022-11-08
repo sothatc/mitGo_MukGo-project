@@ -25,5 +25,6 @@ public class Store {
 	private double rating;
 	private String thumbNail;
 	private ArrayList<StoreImg> storeImgList;
+	private int maxNum;
 	
 }

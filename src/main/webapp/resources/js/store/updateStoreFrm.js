@@ -43,12 +43,20 @@ if(selWhereVal == 1) {
 
 // 영업시간 짜르는 로직
 function hourSlice() {
-  	const hour = $("[name=openHour]").val();
+  	const hour = $("#time1").val();
   	const splitWord = hour.split("~");
-	$("[name=openHour]").val(splitWord[0]);
-	$("[name=closedHour]").val(splitWord[1]);
+	$("#time1").val(splitWord[0]);
+	$("#time2").val(splitWord[1]);
 }
 hourSlice();
+
+
+
+//영업시간 합치고 업데이트로 보내기 위한 로직
+//const hour1 = $("[name=hour]").val();
+//const hour2 = $("[name=closedHour]").val();
+//const openHour = hour1+"~"+hour2;
+//$("[name=openHour]").val(openHour);
 
 function closedDaySlice() {
 	const closedDay = $(".getClosedDay").val();
@@ -70,7 +78,6 @@ function closedDaySlice() {
 }
 closedDaySlice();
 
-
 function deleteImg(obj, storeImgNo, imgpath){
 	const imgNoInput = $("<input>");
 	imgNoInput.attr("name","imgNoList");
@@ -85,6 +92,7 @@ function deleteImg(obj, storeImgNo, imgpath){
 	$("#updateStore").append(imgNoInput).append(imgpathInput);
 	$(obj).parent().remove();
 }
+
 
 
 // 영업시간 타임피커 API
@@ -125,6 +133,7 @@ $('.time').timepicker({
 		delBtn.attr("type","button");
 		delBtn.attr("onclick","deleteImg(this,${si.storeImgNo},'${si.imgpath }');");
 		delBtn.text("삭제");
+		delBtn.attr("class","imgDelBtn");
 		p.append(fileInput);
 		p.append(delBtn);
 		$(".input-group").append(p);
@@ -143,6 +152,8 @@ function addrSlice() {
   $("#detailAddress").val(splitWord[2]);
 }
 addrSlice();
+
+
 
 function searchPost() {
   new daum.Postcode({
@@ -188,4 +199,5 @@ $(":submit").on("click", function (event) {
     event.preventDefault();
   }
 });
+
 
