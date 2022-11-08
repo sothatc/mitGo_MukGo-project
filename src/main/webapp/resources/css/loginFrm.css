@@ -29,9 +29,7 @@ body{
     margin-top: 60px;
     font-weight: 500;
 }
-.login-wrap-img{
-	background-image: url("https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/201506/28/htm_20150628082637722.jpg");
-}
+
 
 input[type='radio'],
 input[type='radio']:checked {

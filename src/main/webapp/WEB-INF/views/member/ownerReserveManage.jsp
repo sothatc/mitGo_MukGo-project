@@ -62,8 +62,8 @@
 								<td scope="row">${rs.eatNum }</td>
 								<td>
 									<select>
-										<option value="">방문완료</option>
 										<option value="">미방문</option>
+										<option value="">방문완료</option>
 									</select>
 								</td>
 							</tr> 
