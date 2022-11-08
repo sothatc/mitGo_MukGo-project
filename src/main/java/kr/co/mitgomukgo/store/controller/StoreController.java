@@ -277,7 +277,8 @@ public class StoreController {
 		return "/store/updateStoreFrm";
 	}
 	@RequestMapping(value="/updateStore.do")
-	public String updateStore(int[] imgNoList, Store s, String[] imgpathList, MultipartFile[] file, HttpServletRequest request) {
+	public String updateStore(int[] imgNoList, Store s, String[] imgpathList, MultipartFile[] file, HttpServletRequest request, String zipCode,
+			String detailAddress, String closedHour) {
 		ArrayList<StoreImg> storeImgList = new ArrayList<StoreImg>();
 		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/store/");
 		if(!file[0].isEmpty()) {
@@ -304,6 +305,8 @@ public class StoreController {
 			}
 		}
 		s.setStoreImgList(storeImgList);
+		s.setAddress(zipCode + "*" + s.getAddress() + "*" + detailAddress);
+		s.setOpenHour(s.getOpenHour() + "~" + closedHour);
 		int result = service.updateStore(s, imgNoList);
 		if(imgNoList != null && (result == (storeImgList.size()+imgNoList.length+1))) {
 			if(imgpathList != null) {
