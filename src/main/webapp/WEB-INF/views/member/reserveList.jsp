@@ -68,10 +68,10 @@
 									<td>
 										<c:choose>
 											<c:when test="${rs.RStatus } eq 0">
-										<button type="button" onclick="review(this,${rs.reserveNo},${rs.storeNo},'${rs.storeName }')">리뷰쓰기</button>
+										<button type="button" onclick="WirteReview(this,${rs.reserveNo},${rs.storeNo},'${rs.storeName }')">리뷰쓰기</button>
 											</c:when>
 											<c:otherwise>
-										<button type="button" onclick="review(this,${rs.reserveNo},${rs.storeNo},'${rs.storeName }')">리뷰수정</button>
+										<button type="button" onclick="updateReview(this,${rs.reserveNo},${rs.storeNo},'${rs.storeName }')">리뷰수정</button>
 											</c:otherwise>
 										</c:choose>
 									<td>
@@ -90,7 +90,7 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	<script>
 	
-	function review(obj,reserveNo, storeNo, storeName) {
+	function WirteReview(obj,reserveNo, storeNo, storeName) {
 		var win = window.open("/writeReviewFrm.do?storeNo="+storeNo+"&storeName="+storeName+"&reserveNo="+reserveNo, "_blank", "toolbar=yes,scrollbars=yes,top=200,left=600,width=520,height=500");
 	};
 	</script>
