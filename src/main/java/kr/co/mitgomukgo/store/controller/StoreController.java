@@ -78,6 +78,17 @@ public class StoreController {
 		return result;
 	}
 	
+	//비활성화 시간 확인하기
+	@ResponseBody
+	@RequestMapping(value = "/checkReserveTime.do", produces = "application/json;charset=utf-8")
+	public String ajaxCheckReserveTime(String selectDate, int maxNum, int storeNo) {
+		ArrayList<Reserve> list = service.ajaxCheckReserveTime(selectDate, maxNum, storeNo);
+		Gson gson = new Gson();
+		String result = gson.toJson(list);
+		return result;
+	}
+	
+	
 	   //예약하기
 	   @RequestMapping(value = "/reserve.do")
 	   public String StoreDetail(int memberNo, Reserve r) {

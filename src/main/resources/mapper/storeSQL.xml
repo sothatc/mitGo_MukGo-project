@@ -142,7 +142,8 @@
 		category,
 		content,
 		storeimg_no as storeImgNo,
-		imgpath
+		imgpath,
+		max_num as maxNum
 		from store
 		join store_img using(store_no)
 		where store_no = #{storeNo}
@@ -161,6 +162,7 @@
 		closed_day as closedDay,
 		category,
 		content,
+		max_num as maxNum,
         (SELECT ROUND(avg(RATING), 1) from REVIEW where STORE_NO = #{_parameter}) as rating       
 		from store
 		where store_no = #{_parameter}
@@ -276,6 +278,16 @@
     		eat_num as eatNum
     	from reserve
     	where store_no =  #{storeNo}
+    </select>
+    
+
+    <select id="ajaxCheckReserveTime" resultType="rs" parameterType="map">
+		SELECT
+		    EAT_TIME as eatTime
+		FROM RESERVE 
+		WHERE STORE_NO=#{storeNo} AND EAT_DATE=#{selectDate}  
+		GROUP BY EAT_TIME 
+		HAVING SUM(EAT_NUM) >#{maxNum}
     </select>
 
 	<select id="menuList" parameterType="int" resultType="me">

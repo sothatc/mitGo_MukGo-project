@@ -470,7 +470,6 @@ height: 100%;
                   storeImgUl.append("<li><img src=/resources/upload/store/"+data[i].imgpath.replace(" ", "%20")+" style='height:460px; width:600px;'></li>");
                   storePhoto.push(data[i].imgpath);
                }
-            
                //---------- 메뉴 사진 슬라이더
                let imgNo = 0;
                const ul = $(".photo-wrap>ul");
@@ -501,8 +500,6 @@ height: 100%;
          var reserveDate = "${rs.reserveDate}"
          var btnVal = new Array();
          var checkTimeBtn = new Array();
-         var selectedTime = new Array();
-         var unTime = new Array();
          
          var hour="${s.openHour}";
          var hourArr = new Array();
@@ -519,10 +516,10 @@ height: 100%;
          //---------- 날짜 input 클릭 시 시간 버튼 삭제
 	      $("#datePicker").on("click",function(){
 	         $(".timeBtn").remove();
-	         selectedTime = new Array();
-	         unTime = new Array();
+	         disabledTime = new Array();
 	      });
          
+	      var disabledTime = new Array();
          //---------- 시간확인하기 버튼 (용도: 비활성화)checkTime
          $("#datePicker").on("change",function(){
              
@@ -538,6 +535,7 @@ height: 100%;
                          $(".buttonTd").append("<button class=timeBtn style=margin-right:1%;background-color:white;color:rgb(51,51,51); value="+i+">"+i+":00"+"</button>");
                       }
                        
+     
                      //버튼 클릭
                      const timeBtns = $(".timeBtn");
                      timeBtns.on("click",function(){
@@ -546,56 +544,64 @@ height: 100%;
                         const index = timeBtns.index(this);
                         selectTime = $(this).text();
                         
- 		               //버튼 비활성화 css
- 		               for(let i=0; i<btnVal.length; i++){
- 		                  for(let j=0; j<unTime.length; j++){
- 		                     if(btnVal[i]==unTime[j]){
- 		                        checkTimeBtn[i].style.color="red";
- 		                        checkTimeBtn[i].style.background="pink";
- 		                        checkTimeBtn[i].setAttribute("disabled", true);
- 		                     }
- 		                  }
- 		               } 
+                        //예약불가 시간의 버튼 비활성화
+			             for(let i=0; i<btnVal.length; i++){
+			                  for(let j=0; j<disabledTime.length; j++){
+			                     if(btnVal[i]==disabledTime[j]){
+			                        checkTimeBtn[i].style.color="red";
+			                        checkTimeBtn[i].style.background="pink";
+			                        checkTimeBtn[i].setAttribute("disabled", true);
+			                     }
+			                  }
+			             }
                      });
                      
 		             var selectDate = $("#datePicker").val();
 		             checkTimeBtn = document.getElementsByClassName('timeBtn');
-		             for(let i=0; i<data.length; i++){
-		                  //선택한 시간과 불러온 날짜가 같으면
-		                  if(selectDate==data[i].eatDate){
-		                    //selectedTime 배열에 선택한 날짜의 예약시간을 배열로 저장
-		                  	selectedTime.push(data[i].eatTime);
-		                  }      
-		             }
-		               
+		       
+		             
 		             //btnVal 이란 배열에 버튼의 value값 넣기
 		             for(let i=0; i<checkTimeBtn.length; i++){
 		             	btnVal.push(document.getElementsByClassName('timeBtn')[i].value+":00");
 		             }
-		               
-		               
-		             for(let i=0; i<selectedTime.length; i++){
-		             		if(selectedTime[i].toString == btnVal[i].toString){
-		                    //unTime이란 배열에 비활성화할 값 넣음
-		                    unTime.push(selectedTime[i]);
-		                  	}
-		             }
-		               
-		             //버튼 비활성화 css
-		             for(let i=0; i<btnVal.length; i++){
-		                  for(let j=0; j<unTime.length; j++){
-		                     if(btnVal[i]==unTime[j]){
-		                        checkTimeBtn[i].style.color="red";
-		                        checkTimeBtn[i].style.background="pink";
-		                        checkTimeBtn[i].setAttribute("disabled", true);
-		                     }
+		             
+		              var maxNum = "${s.maxNum}";
+		              var selectDate = $("#datePicker").val();
+		              var storeNo = "${s.storeNo}";
+		              
+		              $.ajax({
+		                  url: "/checkReserveTime.do",
+		                  type:"post",
+		                  data: {storeNo:storeNo,selectDate:selectDate, maxNum:maxNum},
+		                  success: function(data){
+		                	  for(let i=0; i<data.length; i++){
+		                		  disabledTime.push(data[i].eatTime);
+		                	  }
+		                	  
+					             for(let i=0; i<btnVal.length; i++){
+					            	 
+					                  for(let j=0; j<disabledTime.length; j++){
+					                     if(btnVal[i]==disabledTime[j]){
+					                        checkTimeBtn[i].style.color="red";
+					                        checkTimeBtn[i].style.background="pink";
+					                        checkTimeBtn[i].setAttribute("disabled", true);
+					                     }
+					                  }
+					             }
+		                	  
+		                	  
 		                  }
-		             }
-               
+		              }); //--------------내부 ajax종료
+
+
+			             
+		              
             	}//--------success문 종료
                 
               }); //--------------ajax종료
-             
+              
+              
+
          });//데이트 피커 눌렀을 떄 함수 종료
          
             
