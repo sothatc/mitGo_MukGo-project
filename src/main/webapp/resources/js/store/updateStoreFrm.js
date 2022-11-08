@@ -49,6 +49,13 @@ function hourSlice() {
 	$("[name=closedHour]").val(splitWord[1]);
 }
 hourSlice();
+<!--
+//영업시간 합치고 업데이트로 보내기 위한 로직
+const hour1 = $("[name=hour]").val();
+const hour2 = $("[name=closedHour]").val();
+const openHour = hour1+"~"+hour2;
+$("[name=openHour]").val(openHour);
+-->
 
 function closedDaySlice() {
 	const closedDay = $(".getClosedDay").val();
@@ -69,7 +76,6 @@ function closedDaySlice() {
 	}
 }
 closedDaySlice();
-
 
 function deleteImg(obj, storeImgNo, imgpath){
 	const imgNoInput = $("<input>");
@@ -143,6 +149,8 @@ function addrSlice() {
   $("#detailAddress").val(splitWord[2]);
 }
 addrSlice();
+
+
 
 function searchPost() {
   new daum.Postcode({

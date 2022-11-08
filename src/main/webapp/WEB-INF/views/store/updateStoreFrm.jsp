@@ -54,7 +54,7 @@
 		               <div class="form-group">
 		              	  <label for="inputName">업체명</label>
 						  <br>
-						  <input type="hidden" value="${s.storeNo }">
+						  <input type="hidden" name="storeNo" value="${s.storeNo }">
 		                  <input type="text" class="form-control" id="inputName" name="storeName" value="${s.storeName }">
 		               </div>
 		               <br>
@@ -108,8 +108,8 @@
 		                  <div class="input-group col-xs-12">
 		                  		<c:forEach var="si" items="${imgList }">
 		                  		<p>
-			                     	<input type="text" class="form-control file-upload-info" value="${si.imgpath}" readonly="readonly">
-			                     	<button type="button" onclick="deleteImg(this,${si.storeImgNo},'${si.imgpath }');">삭제</button>
+			                     	<input type="text" class="form-control file-upload-info" name="imgpath" value="${si.imgpath}" readonly="readonly">
+			                     	<button type="button" class="imgDelBtn" onclick="deleteImg(this,${si.storeImgNo},'${si.imgpath }');">삭제</button>
 		                  		</p>
 		                  		</c:forEach>
 		                  </div>

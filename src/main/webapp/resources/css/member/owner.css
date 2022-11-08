@@ -230,7 +230,11 @@ li{
 }
 
 .imgDelBtn{
-	
+	border: 1px solid #999;
+  border-radius: 5px;
+  background-color: rgb(97, 76, 76);
+  color: #fff;
+  width: 100%;
 }
 
 

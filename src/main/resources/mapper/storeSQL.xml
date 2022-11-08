@@ -394,7 +394,6 @@
 		update store
 		set 
 			store_name = #{storeName},
-			
 			address = #{address},
 			phone = #{phone},
 			content = #{content},
