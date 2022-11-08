@@ -306,6 +306,7 @@ public class StoreController {
 		}
 		s.setStoreImgList(storeImgList);
 		s.setAddress(zipCode + "*" + s.getAddress() + "*" + detailAddress);
+		System.out.println(s.getAddress());
 		s.setOpenHour(s.getOpenHour() + "~" + closedHour);
 		int result = service.updateStore(s, imgNoList);
 		if(imgNoList != null && (result == (storeImgList.size()+imgNoList.length+1))) {
