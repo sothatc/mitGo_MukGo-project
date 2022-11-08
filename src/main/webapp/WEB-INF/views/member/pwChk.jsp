@@ -10,7 +10,7 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<div class="pwChk-wrap">
+	<div class="pwChk-wrap wrap-img">
 		<div class="pwChk-content">
 			<div>비밀번호 확인</div>
 			<form action="/mypage.do" method="post">
