@@ -43,12 +43,13 @@ if(selWhereVal == 1) {
 
 // 영업시간 짜르는 로직
 function hourSlice() {
-  	const hour = $("[name=openHour]").val();
+  	const hour = $("#time1").val();
   	const splitWord = hour.split("~");
-	$("[name=openHour]").val(splitWord[0]);
-	$("[name=closedHour]").val(splitWord[1]);
+	$("#time1").val(splitWord[0]);
+	$("#time2").val(splitWord[1]);
 }
 hourSlice();
+
 
 
 //영업시간 합치고 업데이트로 보내기 위한 로직
