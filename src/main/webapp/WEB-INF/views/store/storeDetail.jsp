@@ -37,7 +37,7 @@ height: 100%;
 
    <link rel="stylesheet" href="/resources/demos/store/style.css">
    <link rel="stylesheet" href="/resources/css/store/storeDetail.css">
-   <link rel="stylesheet" href="/resources/css/store/map.css">
+   <link rel="stylesheet" href="/resources/css/map.css">
    
    
    <!---------------------내용----------------------->
@@ -189,7 +189,6 @@ height: 100%;
 		 <div class="location-wrap" style="width:1200px;">
 	         <div class="menuTitle" style="margin: 0 auto;">LOCATION</div>
 	         <div class="map-content-wrap">
-
 				<div id="map_wrap" class="map_wrap">
 					<div id="map_div"></div>
 				</div>
@@ -216,10 +215,9 @@ height: 100%;
 				 -->
 						<div class="address-wrap">
 
-							<p id="result"></p>
 							<input type="text" class="text_custom" id="fullAddr" name="fullAddr" value="" readonly>
 							<span type="text" class="text_custom addressTd" id="E_fullAddr" name="E_fullAddr" readonly style="display:none;"></span>
-							<button onclick="searchAddr();">출발지 입력</button>
+							<button class="startBtn" onclick="searchAddr();">출발지 입력</button>
 							<button id="btn_select" style="display : none;">적용하기</button>
 							<button id="hidden_btn_select" style="display : none;">적용하기</button>					
 						</div>
