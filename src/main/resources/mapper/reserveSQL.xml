@@ -8,8 +8,9 @@
 			store_name as storeName,
 			reserve_date as reserveDate,
 			eat_date as eatDate,
-			eat_time as eatTime
-		from reserve
+			eat_time as eatTime,
+            (select count(*) from review rv where rv.reserve_no=r.reserve_no) rStatus
+		from reserve r
 		where member_no = #{memberNo}
 	</select>
 </mapper>

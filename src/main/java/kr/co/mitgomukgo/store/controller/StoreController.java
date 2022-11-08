@@ -161,7 +161,8 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/writeReviewFrm.do")
-	public String writeReviewFrm() {
+	public String writeReviewFrm(Reserve r, Model model) {
+		model.addAttribute("r", r);
 		return "store/writeReviewFrm";
 	}
 
@@ -286,6 +287,60 @@ public class StoreController {
 		model.addAttribute("imgList", imgList);
 		return "/store/updateStoreFrm";
 	}
+
+	@RequestMapping(value="/updateStore.do")
+	public String updateStore(int[] imgNoList, Store s, String[] imgpathList, MultipartFile[] file, HttpServletRequest request, String zipCode,
+			String detailAddress, String closedHour) {
+		ArrayList<StoreImg> storeImgList = new ArrayList<StoreImg>();
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/store/");
+		if(!file[0].isEmpty()) {
+			for(MultipartFile File : file) {
+				String filename = File.getOriginalFilename();
+				String imgpath = fileRename.fileRename(savePath, filename);
+				File upFile = new File(savePath+imgpath);
+				try {
+					FileOutputStream fos = new FileOutputStream(upFile);
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					byte[] bytes = File.getBytes();
+					bos.write(bytes);
+					bos.close();
+					StoreImg si = new StoreImg();
+					si.setImgpath(imgpath);
+					storeImgList.add(si);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		s.setStoreImgList(storeImgList);
+		s.setAddress(zipCode + "*" + s.getAddress() + "*" + detailAddress);
+		System.out.println(s.getAddress());
+		s.setOpenHour(s.getOpenHour() + "~" + closedHour);
+		int result = service.updateStore(s, imgNoList);
+		if(imgNoList != null && (result == (storeImgList.size()+imgNoList.length+1))) {
+			if(imgpathList != null) {
+				for(String filepath : imgpathList) {
+					File delFile = new File(savePath+filepath);
+					delFile.delete();
+				}
+			}
+		}	
+		if(result > 0) {
+			request.setAttribute("msg", "변경이 완료되었습니다.");
+			request.setAttribute("url", "/");
+			return "common/alert";
+		} else {
+			request.setAttribute("msg", "변경 중 문제가 발생했습니다.");
+			request.setAttribute("url", "/updateStoreFrm.do");
+			return "common/alert";
+		}
+	}
+
+
 	
 	
 

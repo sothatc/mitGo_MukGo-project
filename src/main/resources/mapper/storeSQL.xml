@@ -15,7 +15,8 @@
 		#{closedDay},
 		#{category},
 		#{withEatCate},
-		#{whereEatCate}
+		#{whereEatCate},
+		#{maxNum}
 		)
 	</insert>
 
@@ -38,8 +39,9 @@
 		insert into review
 		values
 		(review_seq.nextval,
-		85,
-		'user01',
+		#{storeNo},
+		#{reserveNo},
+		#{writer},
 		#{rating},
 		#{content},
 		#{reviewImg},
@@ -417,6 +419,7 @@
 			category = #{category},
 			witheat_cate = #{withEatCate},
 			whereeat_cate = #{whereEatCate}
+			max_num = #{maxNum}
 		where store_no = #{storeNo}
 	</update>
 	<delete id="deleteStoreImg" parameterType="int">
