@@ -6,6 +6,7 @@
 <title>믿GO먹GO</title>
 <link rel="stylesheet" href="/resources/css/index/owl.theme.default.min.css">
 <link rel="stylesheet" href="/resources/css/index/owl.carousel.min.css">
+
 </head>
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />

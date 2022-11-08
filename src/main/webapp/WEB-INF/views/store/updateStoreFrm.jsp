@@ -108,14 +108,19 @@
 		                  <div class="input-group col-xs-12">
 		                  		<c:forEach var="si" items="${imgList }">
 		                  		<p>
+<<<<<<< HEAD
 			                     	<input type="text" class="form-control file-upload-info" name="imgpath" value="${si.imgpath}" readonly="readonly">
 			                     	<button type="button" class="imgDelBtn" onclick="deleteImg(this,${si.storeImgNo},'${si.imgpath }');">삭제</button>
+=======
+			                     	<input type="text" class="form-control file-upload-info" value="${si.imgpath}" disabled>
+			                     	<button type="button" onclick="deleteImg(this,${si.storeImgNo},'${si.imgpath }');">삭제</button>
+>>>>>>> refs/heads/master
 		                  		</p>
 		                  		</c:forEach>
-		                  </div>
 		                     <span class="input-group-append">
 		                        <button class="file-upload-browse btn btn-primary" type="button" id="storeImg">사진추가</button>
 		                     </span>
+		                  </div>
 		               </div>
 		               <br>
 		               <div class="form-group">
@@ -167,7 +172,7 @@
    <!-- script 구역 -->
    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-   <!--  <script type="text/javascript" src="/resources/js/store/addStoreFrm.js"></script>-->
+   <script type="text/javascript" src="/resources/js/store/addStoreFrm.js"></script>
    <script type="text/javascript" src="/resources/js/store/updateStoreFrm.js"></script>
 
 </body>
