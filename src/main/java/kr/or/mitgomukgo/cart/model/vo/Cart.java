@@ -1,4 +1,4 @@
-package kr.co.mitgomukgo.cart.model.vo;
+package kr.or.mitgomukgo.cart.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
