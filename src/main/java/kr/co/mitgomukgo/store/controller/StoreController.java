@@ -150,7 +150,8 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/writeReviewFrm.do")
-	public String writeReviewFrm() {
+	public String writeReviewFrm(Reserve r, Model model) {
+		model.addAttribute("r", r);
 		return "store/writeReviewFrm";
 	}
 
