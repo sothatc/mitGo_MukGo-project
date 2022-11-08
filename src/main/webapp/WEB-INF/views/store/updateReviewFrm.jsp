@@ -173,8 +173,8 @@
 					<input type="hidden" id="reviewImg" name="reviewImg" value="${re.reviewImg }">
 				</div>
 				<div class="btnWrap">
-					<button type="button" id="submitBtn" value="취소" onclick="window.close()">취소</button>
-					<button type="submit" value="등록">등록</button>
+					<button type="button" id="submitBtn" value="취소" onclick="window.close()">삭제</button>
+					<button type="submit" value="등록">수정</button>
 				</div>
 			</form>
 			<script>
