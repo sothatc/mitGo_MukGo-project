@@ -56,7 +56,7 @@
 								<th scope="col">예약일</th>
 								<th scope="col">예약 시간</th>
 								<th scope="col">리뷰</th>
-								<th></th>
+								<th scope="col">예약 취소</th>
 							</tr>
 							<c:forEach items="${rsList }" var="rs">
 								<tr>
@@ -92,6 +92,10 @@
 	
 	function WirteReview(obj,reserveNo, storeNo, storeName) {
 		var win = window.open("/writeReviewFrm.do?storeNo="+storeNo+"&storeName="+storeName+"&reserveNo="+reserveNo, "_blank", "toolbar=yes,scrollbars=yes,top=200,left=600,width=520,height=500");
+	};
+	
+	function updateReview(obj,reserveNo, storeNo, storeName) {
+		var win = window.open("/updateReviewFrm.do?storeNo="+storeNo+"&storeName="+storeName+"&reserveNo="+reserveNo, "_blank", "toolbar=yes,scrollbars=yes,top=200,left=600,width=520,height=500");
 	};
 	</script>
 

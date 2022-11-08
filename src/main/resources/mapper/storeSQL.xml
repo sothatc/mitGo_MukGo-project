@@ -426,5 +426,17 @@
 		delete from store_img
 		where storeimg_no = #{imgNo}
 	</delete>
+	
+	<select id="selectOneReivew" parameterType="int" resultType="r">
+		select 
+			review_no as reivewNo,
+			writer,
+			rating,
+			content,
+			review_img as reviewImg,
+			enroll_date as enrollDate
+			from review
+			where reserve_no = #{_parameter}
+	</select>
 
 </mapper>
