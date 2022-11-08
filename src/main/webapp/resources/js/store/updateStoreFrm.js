@@ -49,6 +49,7 @@ function hourSlice() {
 	$("[name=closedHour]").val(splitWord[1]);
 }
 hourSlice();
+
 <!--
 //영업시간 합치고 업데이트로 보내기 위한 로직
 const hour1 = $("[name=hour]").val();

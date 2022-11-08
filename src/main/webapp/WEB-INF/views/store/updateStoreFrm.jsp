@@ -112,10 +112,10 @@
 			                     	<button type="button" class="imgDelBtn" onclick="deleteImg(this,${si.storeImgNo},'${si.imgpath }');">삭제</button>
 		                  		</p>
 		                  		</c:forEach>
-		                     <span class="input-group-append">
-		                        <button class="file-upload-browse btn btn-primary" type="button" id="storeImg">사진추가</button>
-		                     </span>
 		                  </div>
+	                     <span class="input-group-append">
+	                        <button class="file-upload-browse btn btn-primary" type="button" id="storeImg">사진추가</button>
+	                     </span>
 		               </div>
 		               <br>
 		               <div class="form-group">
