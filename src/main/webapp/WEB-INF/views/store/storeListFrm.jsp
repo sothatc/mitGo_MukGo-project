@@ -13,8 +13,11 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<!--헤더-->
 	<div class="storeList-content-wrap">
+		<!-- 필요한 데이터를 담아두기 위한 더미 -->
 		<div class = "tabCategory" style = "display: none;" >${category }</div>
 		<div class = "tabSort" style = "display: none;">${storeListSort }</div>
+		
+		<!-- 검색기능 -->
 		<form action="/searchStoreList.do?category=${category }&reqPage=1" method="post">
 			<div class="storeList-searchinput">
 				<input type="text" name="search">
@@ -22,6 +25,7 @@
 			</div>
 		</form>
 		
+		<!-- 분류태그 -->
 		<div class="storeList-tag">
 			<div class="storeList-tag-content">
 				<ul>
@@ -58,6 +62,7 @@
 				</ul>
 			</div>
 		</div>
+		<!-- 정렬 기능 -->
 		<div class="storeList-sort">
 			<div class="storeList-sort-content">
 				<form action="/sortStoreList.do?category=${category }&reqPage=1" method="post">
@@ -69,6 +74,7 @@
 				</form>	
 			</div>
 		</div>
+		<!-- 맛집 리스트 생성 -->
 		<div class="storeList-list">
 			<div class="storeList-list-content">
 				<c:forEach items="${list }" var="s">
@@ -87,6 +93,7 @@
 				</c:forEach>
 			</div>
 		</div>
+		<!-- 페이지 네비 -->
 		<div class="page">${pageNavi }</div>
 	</div>
 	</div>

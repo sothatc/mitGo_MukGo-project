@@ -10,7 +10,7 @@
    <title>맛집상세 페이지</title>
 </head>
 
-<body>
+<body onload="initTmap()">
    <%@ include file="/WEB-INF/views/common/header.jsp" %>
    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,200" />
    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
@@ -20,7 +20,7 @@
 
    <link rel="stylesheet" href="/resources/demos/store/style.css">
    <link rel="stylesheet" href="/resources/css/store/storeDetail.css">
-   
+   <link rel="stylesheet" href="/resources/css/store/map.css">
    
    
    <!---------------------내용----------------------->
@@ -169,7 +169,58 @@
          <!----- LOCATION 부분 ----->
 		 <div class="location-wrap" style="margin-top:50px;">
 	         <div class="menuTitle" style="margin: 0 auto;">LOCATION</div>
-	         <div class="map-wrap">지도 넣을 자리</div>
+	         <div class="map-content-wrap">
+
+				<div id="map_wrap" class="map_wrap">
+					<div id="map_div"></div>
+				</div>
+				<div class="map_act_btn_wrap clear_box"></div>
+				<div>
+					<div class="selectCar">자동차</div>
+					<div class="selectFoot">도보</div>
+				</div>
+				<p id="result">예상 정보</p>
+
+				<div class="ft_select_wrap">
+					<div class="ft_select">
+						<!-- 
+					<select id="selectLevel">
+						<option value="0" selected="selected">교통최적+추천</option>
+						<option value="1">교통최적+무료우선</option>
+						<option value="2">교통최적+최소시간</option>
+						<option value="3">교통최적+초보</option>
+						<option value="4">교통최적+고속도로우선</option>
+						<option value="10">최단거리+유/무료</option>
+						<option value="12">이륜차도로우선</option>
+						<option value="19">교통최적+어린이보호구역 회피</option>
+					</select> 
+				 -->
+						<div class="address-wrap">
+
+							<p id="result"></p>
+							<input type="text" class="text_custom" id="fullAddr" name="fullAddr" value="" readonly>
+							<span type="text" class="text_custom addressTd" id="E_fullAddr" name="E_fullAddr" readonly style="display:none;"></span>
+							<button onclick="searchAddr();">출발지 입력</button>
+							<button id="btn_select" style="display : none;">적용하기</button>
+							<button id="hidden_btn_select" style="display : none;">적용하기</button>					
+						</div>
+
+						<div class="car-content">
+							<select id="year">
+								<option value="N" selected="selected">교통정보 표출 옵션</option>
+								<option value="Y">Y</option>
+								<option value="N">N</option>
+							</select>
+							<button id="btn_select1">적용하기</button>
+						</div>
+						<div class="foot-content">
+							<button id="btn_select2">적용하기</button>
+						</div>
+					</div>
+				</div>
+				<div class="map_act_btn_wrap clear_box"></div>
+				<div class="clear"></div>
+			</div>
 		 </div>
 		 
          <!----- 마켓 상품 부분 ----->
@@ -315,6 +366,10 @@
       <script>
          Kakao.init('c089c8172def97eb00c07217cae17495');
       </script>
+      <!-- map api ---------------------------- -->
+      <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xx85918c7e8848478d8513312430044e0d"></script>
+      <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+      <script src="/resources/js/store/map.js"></script>
       <script>
       //------------------------------------------------------------------------------------------------------------------------------
       
