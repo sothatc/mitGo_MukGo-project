@@ -40,6 +40,7 @@
 		values
 		(review_seq.nextval,
 		#{storeNo},
+		#{reserveNo},
 		#{writer},
 		#{rating},
 		#{content},

@@ -161,6 +161,7 @@ hr {
 		<div>
 			<input type="hidden" name="writer" value="${sessionScope.m.memberId }">
 			<input type="hidden" name="storeNo" value="${r.storeNo }">
+			<input type="hidden" name="reserveNo" value="${r.reserveNo }">
 			<input type="file" name="reviewImgName" class="file-upload" id="file" style="visibility: hidden; position: absolute;" accept="image/gif, image/jpg, image/jpeg, image/png">
 			<button class="inputPhoto" type="button" id="inputPhoto">사진 첨부하기</button>
 		</div>
