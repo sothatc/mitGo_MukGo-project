@@ -370,6 +370,23 @@ public class StoreService {
 	public ArrayList<Review> selectReviewList(int storeNo) {
 		return dao.selectReviewList(storeNo);
 	}
+
+	public int updateStore(Store s, int[] imgNoList) {
+		int result = dao.updateStore(s);
+		if(result > 0) {
+			for(StoreImg si : s.getStoreImgList()) {
+				si.setStoreNo(s.getStoreNo());
+				result += dao.insertImg(si);
+			}
+			if(imgNoList != null) {
+				for(int imgNo : imgNoList) {
+					result += dao.deleteImg(imgNo);
+				}
+			}
+		}
+		
+		return result;
+	}
 	
 
 }
