@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class Review {
 	private int reviewNo;
 	private int storeNo;
+	private int reserveNo;
 	private String writer;
 	private double rating;
 	private String content;

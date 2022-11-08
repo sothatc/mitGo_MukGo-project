@@ -55,7 +55,7 @@
 								<th scope="col">예약 접수날짜</th>
 								<th scope="col">예약일</th>
 								<th scope="col">예약 시간</th>
-								<th scope="col">리뷰쓰기</th>
+								<th scope="col">리뷰</th>
 								<th></th>
 							</tr>
 							<c:forEach items="${rsList }" var="rs">
@@ -66,7 +66,14 @@
 									<td>${rs.eatDate }</td>
 									<td>${rs.eatTime }</td>
 									<td>
-										<button type="button" onclick="review(this,${rs.storeNo},'${rs.storeName }')">리뷰쓰기</button>
+										<c:choose>
+											<c:when test="${rs.RStatus } eq 0">
+										<button type="button" onclick="review(this,${rs.reserveNo},${rs.storeNo},'${rs.storeName }')">리뷰쓰기</button>
+											</c:when>
+											<c:otherwise>
+										<button type="button" onclick="review(this,${rs.reserveNo},${rs.storeNo},'${rs.storeName }')">리뷰수정</button>
+											</c:otherwise>
+										</c:choose>
 									<td>
 										<button type="button">취소</button>
 									</td>
@@ -83,8 +90,8 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	<script>
 	
-	function review(obj, storeNo, storeName) {
-		var win = window.open("/writeReviewFrm.do?storeNo="+storeNo+"&storeName="+storeName, "_blank", "toolbar=yes,scrollbars=yes,top=200,left=600,width=520,height=500");
+	function review(obj,reserveNo, storeNo, storeName) {
+		var win = window.open("/writeReviewFrm.do?storeNo="+storeNo+"&storeName="+storeName+"&reserveNo="+reserveNo, "_blank", "toolbar=yes,scrollbars=yes,top=200,left=600,width=520,height=500");
 	};
 	</script>
 
