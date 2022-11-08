@@ -49,7 +49,7 @@ li{
 #content{
     float: right;
     margin-right: 80px;
-	
+    padding-top: 15px;
 }
 
 .table{

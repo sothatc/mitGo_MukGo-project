@@ -29,7 +29,9 @@ body{
     margin-top: 60px;
     font-weight: 500;
 }
-
+.login-wrap-img{
+	background-image: url("https://pds.joongang.co.kr/news/component/htmlphoto_mmdata/201506/28/htm_20150628082637722.jpg");
+}
 
 input[type='radio'],
 input[type='radio']:checked {
@@ -68,8 +70,9 @@ li{
 .login-wrap{
     height: 530px;
     width: 620px;
-    margin: 70px auto;
+    margin: 90px auto;
     border: 1px solid #d7d7d7;
+    border-radius: 10px;
 }
 .login{
     position: relative;
