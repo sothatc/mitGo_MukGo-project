@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -62,8 +61,7 @@
 			<div class="sidebar-2">
 				<ul class="category">
 					<li>
-						<h4>
-							공지사항
+						<h4>공지사항
 							</h3>
 					</li>
 				</ul>
@@ -76,8 +74,7 @@
 						<div class="content-head">
 							<h2>예약 내역</h2>
 						</div>
-						<table class="table"
-							style="text-align: center; vertical-align: middle;">
+						<table class="table" style="text-align: center; vertical-align: middle;">
 							<tr>
 								<th scope="col">예약 번호</th>
 								<th scope="col">가게 이름</th>
@@ -94,14 +91,13 @@
 									<td>${rs.reserveDate }</td>
 									<td>${rs.eatDate }</td>
 									<td>${rs.eatTime }</td>
-									<td><c:choose>
+									<td>
+										<c:choose>
 											<c:when test="${0 eq rs.RStatus }">
-												<button type="button" class="reviewBtn"
-													onclick="WirteReview(this,${rs.reserveNo},${rs.storeNo},'${rs.storeName }')">리뷰쓰기</button>
+												<button type="button" class="reviewBtn" onclick="WirteReview(this,${rs.reserveNo},${rs.storeNo},'${rs.storeName }')">리뷰쓰기</button>
 											</c:when>
 											<c:otherwise>
-												<button type="button" class="reviewBtn"
-													onclick="updateReview(this,${rs.reserveNo},${rs.storeNo},'${rs.storeName }')">리뷰수정</button>
+												<button type="button" class="reviewBtn" onclick="updateReview(this,${rs.reserveNo},${rs.storeNo},'${rs.storeName }')">리뷰수정</button>
 											</c:otherwise>
 										</c:choose>
 									<td>

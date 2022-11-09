@@ -13,37 +13,7 @@
    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
    <link rel="stylesheet" href="/resources/css/member/owner.css">
 	<div class="content-wrap">
-		<h2>사업자 마이페이지</h2>
-		<aside id="aside" class="sidebar">
-			<div class="sidebar-1">
-				<ul class="category">
-					<li>
-						<input type="hidden" class="sendOwnerNo" value="${sessionScope.o.ownerNo }">
-						<div><a href="/ownerMypage.do">내 정보 수정</a></div>
-						<c:choose>
-							<c:when test="${empty s }">
-								<div><a href="/addStoreFrm.do">업체 등록</a></div>
-							</c:when>
-							<c:otherwise>
-								<div><a href="/updateStoreFrm.do">업체 정보 수정</a></div>
-								<div><a href="/addMenuFrm.do">메뉴 추가</a></div>
-								<div><a href="/menuFrm.do">메뉴 관리</a></div>
-								<div><a href="/reserveManage.do">예약관리</a></div>
-							</c:otherwise>
-						</c:choose>
-						<div><a href="/ownerLogout.do">로그아웃</a></div>
-						<div><a href="#">회원 탈퇴</a></div>
-					</li>
-				</ul>
-			</div>
-			<div class="sidebar-2">
-				<ul class="category">
-					<li>
-						<h4>공지사항</h4>
-					</li>
-				</ul>
-			</div>
-		</aside>
+		<jsp:include page="/WEB-INF/views/common/ownerHeader.jsp" />
 		<article id="content" class="content">
 		   <div class="col-12 grid-margin stretch-card">
 		      <div class="card">
