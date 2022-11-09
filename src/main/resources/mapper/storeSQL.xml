@@ -430,7 +430,7 @@
 	
 	<select id="selectOneReivew" parameterType="int" resultType="r">
 		select 
-			review_no as reivewNo,
+			review_no as reviewNo,
 			writer,
 			rating,
 			content,

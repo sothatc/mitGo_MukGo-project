@@ -225,6 +225,7 @@ public class StoreController {
 				e.printStackTrace();
 			}
 		}
+		System.out.println(r);
 		int result = service.updateReview(r);
 		return "store/successReivewFrm";
 	}
