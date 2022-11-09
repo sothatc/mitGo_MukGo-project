@@ -389,8 +389,7 @@
 				order by 14 asc
 			</when>
 		</choose>
-
-		where rnum between #{start} and #{end}
+		)where rnum between #{start} and #{end}
 	</select>
 	
 	<!-- 리뷰리스트 -->
