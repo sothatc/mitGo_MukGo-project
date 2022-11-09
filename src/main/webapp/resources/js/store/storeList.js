@@ -57,8 +57,7 @@ tag.on("click",function(){
         }
     });
 });
-*/
-/*
+
 var test = new Array();
 tag.on("click",function(){
     const index = tag.index(this);
