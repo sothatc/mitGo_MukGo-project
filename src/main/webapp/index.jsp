@@ -16,7 +16,6 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-12 text-center text-white">
-
 						<h1 class="display-3 my-4">믿을수있는 맛집리스트,<br />믿GO<br />먹GO
 						</h1> <a href="/storeList.do?reqPage=1" class="btn btn-brand" id="font">맛집보러가기</a> <a href="/storeList.do?reqPage=1" class="btn btn-outline-light ms-3" id="font">Our work</a>
 					</div>
@@ -55,9 +54,6 @@
 				</div>
 			</div>
 			<div class="dropdown-label2">함께</div>
-
-
-
 			<div class="dropdown2">
 				<button class="dropbtn2">
 					<span class="dropbtn_click2">

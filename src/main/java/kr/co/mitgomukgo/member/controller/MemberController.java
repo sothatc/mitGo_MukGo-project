@@ -254,6 +254,13 @@ public class MemberController {
 		return "member/ownerReserveManage";
 	}
 	
+
+	@RequestMapping(value="/adminMemberManage.do")
+	public String adminMemberManage() {
+		return "member/admin";
+	}
+	
+
 	@RequestMapping(value = "cancleReserve.do")
 	public String cancleReserve(int reserveNo, HttpServletRequest request) {
 		int result = service.cancleReserve(reserveNo);
@@ -269,3 +276,4 @@ public class MemberController {
 	}
 	
 }
+
