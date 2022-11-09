@@ -1103,27 +1103,27 @@ const selectCar = $(".selectCar");
 const selectFoot = $(".selectFoot");
 
 selectCar.on("click", function () {
-	selectCar.css("background-color","black")
-	selectCar.css("color","white")
+	selectCar.css("background-color","black");
+	selectCar.css("color","white");
 
-	selectFoot.css("background-color","white")
-	selectFoot.css("color","black")
+	selectFoot.css("background-color","white");
+	selectFoot.css("color","black");
 
-	$(".car-content").css("display", "block")
-	$(".foot-content").css("display", "none")
+	$(".car-content").css("display", "block");
+	$(".foot-content").css("display", "none");
 
 });
 
 
 selectFoot.on("click", function () {
-	selectCar.css("background-color","white")
-	selectCar.css("color","black")
+	selectCar.css("background-color","white");
+	selectCar.css("color","rgb(51,51,51)");
 
-	selectFoot.css("background-color","black")
-	selectFoot.css("color","white")
+	selectFoot.css("background-color","rgb(51,51,51)");
+	selectFoot.css("color","white");
 
-	$(".foot-content").css("display", "block")
-	$(".car-content").css("display", "none")
+	$(".foot-content").css("display", "block");
+	$(".car-content").css("display", "none");
 
 });
 
