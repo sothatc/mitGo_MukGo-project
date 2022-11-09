@@ -46,22 +46,7 @@
       <script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
       <link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
       
-   <div class="login-join"><a href="#">로그인/회원가입</a></div>
-    <div class="header-wrap">
-        <div class="header-list1">
-            <ul class="ul1">
-                <li>맛집리스트</li>
-                <li>상품리스트</li>
-            </ul>
-
-            <ul class="ul2">
-                <li>공지사항</li>
-                <li>고객센터</li>
-            </ul>
-
-            <a href="#"><img src="image/이미지/믿고먹고로고.png" alt=""></a>
-        </div>
-    </div>
+   <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 
     <div class="notice-write-wrap">
         <div class="notice-write-title">

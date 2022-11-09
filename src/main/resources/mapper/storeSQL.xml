@@ -379,16 +379,16 @@
 		<if test="category != null and category != ''">
 			where category = #{category}
 		</if>
-		)rb order by  
+		)rb   
 		<choose>
 			<when test="storeListSort.equals('new')">
-				3 desc
+				order by 3 desc
 			</when>
 			<when test="storeListSort == old">
-				3 asc
+				order by 3 asc
 			</when>
 			<when test="storeListSort.equals('grade')">
-				14 asc
+				order by 14 asc
 			</when>
 		</choose>
 		)
@@ -430,7 +430,7 @@
 	
 	<select id="selectOneReivew" parameterType="int" resultType="r">
 		select 
-			review_no as reivewNo,
+			review_no as reviewNo,
 			writer,
 			rating,
 			content,
@@ -439,5 +439,13 @@
 			from review
 			where reserve_no = #{_parameter}
 	</select>
+	
+	<update id="updateReview" parameterType="r">
+		update review set
+		rating = #{rating},
+		content = #{content},
+		review_img = #{reviewImg}
+		where review_no = #{reviewNo}
+	</update>
 
 </mapper>
