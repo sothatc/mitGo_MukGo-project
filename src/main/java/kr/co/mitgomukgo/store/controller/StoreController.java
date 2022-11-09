@@ -40,6 +40,10 @@ public class StoreController {
 	@Autowired
 	private FileRename fileRename;
 
+	public StoreController() {
+		super();
+	}
+
 	// 맛집 상세 보기 페이지 이동
 	@RequestMapping(value = "/storeDetailView.do")
 	public String storeDetailView() {
