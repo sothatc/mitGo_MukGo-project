@@ -164,5 +164,9 @@ public class StoreDao {
 		return sqlSession.selectOne("selectOneReivew", reserveNo);
 	}
 
+	public int updateReview(Review r) {
+		return sqlSession.update("updateReview", r);
+	}
+
 
 }

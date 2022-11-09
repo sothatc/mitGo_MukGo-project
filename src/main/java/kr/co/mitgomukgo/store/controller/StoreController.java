@@ -205,8 +205,29 @@ public class StoreController {
 	
 	// 리뷰 수정
 	@RequestMapping(value = "/updateReview.do")
-	public String updateReview(Reserve r, MultipartFile reviewImgName, HttpServletRequest request) {
-		return "redirect:/";
+	public String updateReview(Review r, MultipartFile reviewImgName, HttpServletRequest request) {
+		if (!reviewImgName.isEmpty()) {
+			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/review/");
+			String filename = reviewImgName.getOriginalFilename();
+			String imgpath = fileRename.fileRename(savePath, filename);
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath + imgpath));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				byte[] bytes = reviewImgName.getBytes();
+				bos.write(bytes);
+				bos.close();
+				r.setReviewImg(imgpath);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		System.out.println(r);
+		int result = service.updateReview(r);
+		return "store/successReivewFrm";
 	}
 
 	@RequestMapping(value = "/menuFrm.do")
