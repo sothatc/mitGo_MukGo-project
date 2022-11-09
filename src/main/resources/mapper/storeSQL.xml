@@ -379,16 +379,16 @@
 		<if test="category != null and category != ''">
 			where category = #{category}
 		</if>
-		)rb order by  
+		)rb   
 		<choose>
 			<when test="storeListSort.equals('new')">
-				3 desc
+				order by 3 desc
 			</when>
 			<when test="storeListSort == old">
-				3 asc
+				order by 3 asc
 			</when>
 			<when test="storeListSort.equals('grade')">
-				14 asc
+				order by 14 asc
 			</when>
 		</choose>
 		)
