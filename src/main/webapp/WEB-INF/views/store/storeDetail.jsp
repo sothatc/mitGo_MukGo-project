@@ -25,6 +25,10 @@ height: 100%;
 .reviewContent::-webkit-scrollbar-track{
     background-color: rgb(246,246,246);
 }
+
+.star{
+	color: rgb(255, 83, 86) !important;
+}
 </style>
 <body onload="initTmap()">
 
@@ -172,9 +176,9 @@ height: 100%;
          </blockquote>
          
 		<!----- 메뉴 부분 ----->
-         <div class="food-wrap" style="width:1200px; height:100vh; margin: 0 auto; text-align:center; margin-top:30px;">
+         <div class="food-wrap" style="width:1200px; overflow:hidden; height:100%; margin: 0 auto; text-align:center; margin:50px 0;">
 	         <c:forEach items="${list }" var="me">
-	            <div class="w3-card" id="photoWrap" style="font-family:Gowun Dodum; width:350px; height:300px; margin: 10px 20px;">
+	            <div class="w3-card" id="photoWrap" style="font-family:Gowun Dodum; width:350px; height:300px; margin: 10px 25px;">
 	               <img src=/resources/upload/menu/${me.menuImg} style='width: 100%; height: 200px;'>
 	               <div class="w3-container" style="font-family:Gowun Dodum;">
 	                  <p style="font-weight: bolder; font-size: 20px; margin-top:10px;">${me.menuName}</p>
@@ -231,21 +235,21 @@ height: 100%;
          <div class="market-wrap" style="margin-top:50px; width:1200px; height:300px;">
 	         <div class="menuTitle" style="margin: 0 auto;">MARKET</div>
 	            <div class="w3-card-4" id="marketWrap">
-	               <img src="/resources/img/pizza.PNG" style="width: 100%">
+	               <a href="#"><img src="/resources/img/pizza.PNG" style="width: 100%"></a>
 	               <div class="w3-container w3-center">
 	                  <p>상품 A</p>
 	               </div>
 	            </div>
 	
 	            <div class="w3-card-4" id="marketWrap">
-	               <img src="/resources/img/pizza.PNG" style="width: 100%">
+	               <a href="#"><img src="/resources/img/pizza.PNG" style="width: 100%"></a>
 	               <div class="w3-container w3-center">
 	                  <p>상품 A</p>
 	               </div>
 	            </div>
 	
 	            <div class="w3-card-4" id="marketWrap">
-	               <img src="/resources/img/pizza.PNG" style="width: 100%">
+	               <a href="#"><img src="/resources/img/pizza.PNG" style="width: 100%"></a>
 	               <div class="w3-container w3-center">
 	                  <p>상품 A</p>
 	               </div>
@@ -254,7 +258,7 @@ height: 100%;
 		
 		
         <!--------- 후기 시작 ----->
-        <div class="review-wrap" style="margin-top:50px;">
+        <div class="review-wrap" style="margin:50px 0;">
             <div class="menuTitle" style="width:100px; margin:0 auto;">REVIEW</div>
             <ul class="w3-ul w3-card-4" id="reviewWrapUl" style="height:content-fit;">
             <c:forEach items="${rList }" var="r">
