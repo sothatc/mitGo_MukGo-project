@@ -169,7 +169,7 @@ hr {
 			<input type="hidden" id="reviewImg" name="reviewImg" value="${re.reviewImg }">
 		</div>
 		<div class="btnWrap">
-			<button type="button" value="삭제">삭제</button>
+			<button type="button" class="deleteBtn" value="삭제">삭제</button>
 			<button type="submit" value="등록">수정</button>
 		</div>
 	</form>
@@ -211,8 +211,8 @@ hr {
 
 		$(".deleteBtn").on("click", function() {
 			if (confirm("리뷰를 삭제하시겠습니까?")) {
-				const menuNo = $(this).parent().parent().children().eq(0).text();
-				$(location).attr('href', "/deleteMenu.do?menuNo=" + menuNo);
+				const reviewNo = $(this).parent().prev().children().eq(1).val();
+				$(location).attr('href', "/deleteReview.do?reviewNo=" + reviewNo);
 			}
 		});
 	</script>

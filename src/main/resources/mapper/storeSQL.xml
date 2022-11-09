@@ -447,5 +447,10 @@
 		review_img = #{reviewImg}
 		where review_no = #{reviewNo}
 	</update>
+	
+	<delete id="deleteReview" parameterType="int">
+		delete from review
+		where review_no = #{_parameter}	
+	</delete>
 
 </mapper>
