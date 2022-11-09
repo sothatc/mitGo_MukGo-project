@@ -57,8 +57,11 @@
 					<c:if test="${not empty sessionScope.o }">
 						<a href="/ownerPwChk.do" id="font" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-brand1 ms-lg-3">[사업자] ${sessionScope.o.ownerId }</a>
 					</c:if>
-					<c:if test="${not empty sessionScope.m }">
+					<c:if test="${sessionScope.m.memberClass eq 2}">
 						<a href="/pwChk.do" id="font" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-brand1 ms-lg-3">[일반회원] ${sessionScope.m.memberId }</a>
+					</c:if>
+					<c:if test="${sessionScope.m.memberClass  eq 1}">
+						<a href="/pwChk.do" id="font" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-brand1 ms-lg-3">[최고관리자] ${sessionScope.m.memberId }</a>
 					</c:if>
 				</c:otherwise>
 			</c:choose>

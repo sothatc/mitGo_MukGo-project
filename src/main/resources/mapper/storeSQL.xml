@@ -391,7 +391,7 @@
 				order by 14 asc
 			</when>
 		</choose>
-		)
+
 		where rnum between #{start} and #{end}
 	</select>
 	

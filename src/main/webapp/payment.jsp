@@ -10,7 +10,6 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<link rel="stylesheet" href="/resources/css/index/owl.theme.default.min.css">
 	<link rel="stylesheet" href="/resources/css/index/owl.carousel.min.css">
-	<link rel="stylesheet" href="/resources/css/market/marketmain.css">
 	<link rel="stylesheet" href="/resources/css/payment.css">
 
 
