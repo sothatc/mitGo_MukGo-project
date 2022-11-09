@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.context.annotation.SessionScope;
 
+import com.google.gson.Gson;
+
 import kr.co.mitgomukgo.member.model.service.MemberService;
 import kr.co.mitgomukgo.member.model.vo.Member;
 import kr.co.mitgomukgo.member.model.vo.Owner;
@@ -185,6 +187,11 @@ public class MemberController {
 		return "member/ownerPwChk";
 	}
 	
+	@RequestMapping(value="/superAdminpwChk.do")
+	public String superAdminpwChk(HttpSession session) {
+		return "member/superAdminpwChk";
+	}
+	
 	@RequestMapping(value="/mypage.do")
 	public String mypage() {
 		return "member/mypage";
@@ -254,10 +261,41 @@ public class MemberController {
 		return "member/ownerReserveManage";
 	}
 	
-
+	
+	//최고관리자 > 회원관리
+	@RequestMapping(value="/memberManage.do")
+	public String memberManage(Model model, Member m) {
+		ArrayList<Member> list = service.selectMemberList(m);
+		model.addAttribute("list", list);
+		return "member/memberManage";
+	}
+	
+	//최고관리자 > 업주관리
 	@RequestMapping(value="/adminMemberManage.do")
-	public String adminMemberManage() {
+	public String adminMemberManage(Model model, Owner o) {
+		ArrayList<Owner> list = service.selectOwnerList(o);
+		model.addAttribute("list",list);
 		return "member/admin";
+	}
+	
+	//최고관리자 > 업주관리 > 레벨 탭 
+	public String selectOwnerStatus(Model model, Owner o, int ownerStatus) {
+		ArrayList<Owner> list = service.selectOwnerStatus(o, ownerStatus);
+		model.addAttribute("list",list);
+		Gson gson = new Gson();
+		String result = gson.toJson(list);
+		return result;
+	}
+	
+	//최고관리자 > 업주관리 > 업주레벨 지정
+	@RequestMapping(value="/updateOwnerLevel.do")
+	public String updateOwnerLevel(int ownerNo, Owner o) {
+		int result = service.updateOwnerLevel(ownerNo,o);
+		if(result>0) {
+			return "redirect:/";
+		}else {
+			return "redirect:/";
+		}
 	}
 	
 

@@ -481,21 +481,7 @@ height: 100%;
       addrSlice();
 
              
-      //---------- 인원수 늘리기
-      let count = 1;
-   
-      $("#up").on("click", function(e) {
-      	count++;
-      	$(".people").text(count);
-      });
-            
-      $("#down").on("click", function(e) {
-      	if (count == 1) {
-      		return false;
-        }
-        count--;
-        $(".people").text(count);
-      });
+
             
       
        var storePhoto;
@@ -532,6 +518,25 @@ height: 100%;
                      const move = -imgNo * width;
                      ul.css("transform", "translateX(" + move + "px)").css("transition-duration", "1s");
                   }
+               });
+               
+               //---------- 인원수 늘리기
+               let count = 1;
+               $("#up").on("click", function(e) {
+                 	if(count==${s.maxNum}){
+                   		return false;
+                   	}
+               		count++;
+               		$(".people").text(count);
+ 
+               });
+                     
+               $("#down").on("click", function(e) {
+               		if (count == 1) {
+               			return false;
+                 	}
+                	 count--;
+                 	$(".people").text(count);
                });
             }
        }); //ajax 종료

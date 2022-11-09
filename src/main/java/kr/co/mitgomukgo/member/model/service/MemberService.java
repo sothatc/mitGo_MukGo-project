@@ -138,6 +138,31 @@ public class MemberService {
 		return dao.cancleReserve(reserveNo);
 	}
 
+	//최고관리자 > 업주관리
+	public ArrayList<Owner> selectOwnerList(Owner o) {
+		ArrayList<Owner> list = dao.selectOwnerList(o);
+		return list;
+	}
+
+	//최고관리자 > 업주관리 > 업주레벨 지정
+	public int updateOwnerLevel(int ownerNo, Owner o) {
+		return dao.updateOwnerLevel(ownerNo,o);
+	}
+
+	//최고관리자 > 업주관리 > 레벨 탭 
+	public ArrayList<Owner> selectOwnerStatus(Owner o, int ownerStatus) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("o",o);
+		map.put("ownerStatus",ownerStatus);
+		ArrayList<Owner> list = dao.selectOwnerStatus(map);
+		return list;
+	}
+	
+	//최고관리자 > 회원관리
+	public ArrayList<Member> selectMemberList(Member m) {
+		ArrayList<Member> list = dao.selectMemberList(m);
+		return list;
+	}
 
 
 	
