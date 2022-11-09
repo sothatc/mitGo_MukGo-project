@@ -40,6 +40,10 @@ public class StoreController {
 	@Autowired
 	private FileRename fileRename;
 
+	public StoreController() {
+		super();
+	}
+
 	// 맛집 상세 보기 페이지 이동
 	@RequestMapping(value = "/storeDetailView.do")
 	public String storeDetailView() {
@@ -205,8 +209,41 @@ public class StoreController {
 	
 	// 리뷰 수정
 	@RequestMapping(value = "/updateReview.do")
-	public String updateReview(Reserve r, MultipartFile reviewImgName, HttpServletRequest request) {
-		return "redirect:/";
+	public String updateReview(Review r, MultipartFile reviewImgName, HttpServletRequest request) {
+		if (!reviewImgName.isEmpty()) {
+			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/review/");
+			String filename = reviewImgName.getOriginalFilename();
+			String imgpath = fileRename.fileRename(savePath, filename);
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath + imgpath));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				byte[] bytes = reviewImgName.getBytes();
+				bos.write(bytes);
+				bos.close();
+				r.setReviewImg(imgpath);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		int result = service.updateReview(r);
+		return "store/successReivewFrm";
+	}
+	
+	// 리뷰 삭제
+	@RequestMapping(value = "/deleteReview.do")
+	public String deleteReview(int reviewNo, HttpServletRequest request) {
+		int result = service.deleteReview(reviewNo);
+		if (result > 0) {
+			return "store/successDeleteReivewFrm";
+		} else {
+			request.setAttribute("msg", "삭제시 문제가 발생했습니다.");
+			request.setAttribute("url", "/updateReviewFrm.do");
+			return "common/alert";
+		}
 	}
 
 	@RequestMapping(value = "/menuFrm.do")
@@ -373,7 +410,6 @@ public class StoreController {
 
 	@RequestMapping(value = "/searchStoreList.do")
 	public String searchStoreList(String search, int reqPage, Model model, @RequestParam String category) {
-		System.out.println(category);
 		HashMap<String, Object> map = service.searchStoreList(search, reqPage, category);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
@@ -387,7 +423,6 @@ public class StoreController {
 
 	@RequestMapping(value = "/sortStoreList.do")
 	public String sortStoreList(String storeListSort, int reqPage, Model model, @RequestParam String category) {
-		System.out.println(storeListSort);
 		HashMap<String, Object> map = service.sortStoreList(storeListSort, reqPage, category);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
@@ -395,7 +430,8 @@ public class StoreController {
 		model.addAttribute("pageNavi", map.get("pageNavi"));
 		model.addAttribute("total", map.get("total"));
 		model.addAttribute("pageNo", map.get("pageNo"));
-
+		model.addAttribute("storeListSort", storeListSort);
+		
 		return "store/storeListFrm";
 	}
 }
