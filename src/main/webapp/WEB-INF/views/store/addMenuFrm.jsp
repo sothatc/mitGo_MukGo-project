@@ -131,6 +131,9 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 								<div>
 									<a href="/menuFrm.do">메뉴 관리</a>
 								</div>
+								<div>
+									<a href="/reserveManage.do">예약관리</a>
+								</div>
 							</c:otherwise>
 						</c:choose>
 						<div>

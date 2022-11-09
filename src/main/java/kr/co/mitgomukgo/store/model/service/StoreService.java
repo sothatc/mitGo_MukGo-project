@@ -398,6 +398,10 @@ public class StoreService {
 		return result;
 	}
 
+	public Review selectOneReview(int reserveNo) {
+		return dao.selectOneReview(reserveNo);
+	}
+
 
 	
 

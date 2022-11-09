@@ -28,6 +28,7 @@
 								<div><a href="/updateStoreFrm.do">업체 정보 수정</a></div>
 								<div><a href="/addMenuFrm.do">메뉴 추가</a></div>
 								<div><a href="/menuFrm.do">메뉴 관리</a></div>
+								<div><a href="/reserveManage.do">예약관리</a></div>
 							</c:otherwise>
 						</c:choose>
 						<div><a href="/ownerLogout.do">로그아웃</a></div>
@@ -54,7 +55,7 @@
 		              	  <label for="inputName">업체명</label>
 						  <br>
 						  <input type="hidden" name="storeNo" value="${s.storeNo }">
- 		                  <input type="text" class="form-control" id="inputName" name="storeName" value="${s.storeName }">
+		                  <input type="text" class="form-control" id="inputName" name="storeName" value="${s.storeName }">
 		               </div>
 		               <br>
 		               <div class="form-group">
@@ -135,7 +136,7 @@
 		                  <label for="inputTime">휴무일</label>
 		                  <br>
 		                  <br>
-		                  <input type="hidden" class="getClosedDay" value="${s.closedDay }">
+		                  <input type="hidden" class="getClosedDay" value="${s.closedDay }" name="closedDay">
 		                  <input type="checkbox" class="btn-check" id="btn-check1" name="closedDay" value="월" autocomplete="off">
 		                  <label for="btn-check1" class="btn btnday">월</label>
 		                  <input type="checkbox" class="btn-check" id="btn-check2" name="closedDay" value="화" autocomplete="off">

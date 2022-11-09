@@ -29,7 +29,6 @@
 	<h2><a href="/mapFrm.do">map 길찾기 생성중(이규진)</a></h2>
 	<h2><a href="/selectAllFaq.do?reqPage=1">FAQ List(안형관)</a></h2>
 	<h2><a href="/storeList.do?reqPage=1">맛집 리스트 생성중(이규진)</a></h2>
-	<h2><span class="review">리뷰 작성하기(이정우)</span></h2>
 	<h2><a href="/selectNoticeList.do?reqPage=1">공지사항(안형관)</a></h2>
 	<h2><a href="cart.jsp">카트 생성중(김아람)</a></h2>
 	<h2><a href="payment.jsp">결제화면 생성중(김아람)</a></h2>

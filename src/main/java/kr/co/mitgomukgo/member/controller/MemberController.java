@@ -241,5 +241,12 @@ public class MemberController {
 		model.addAttribute("rsList", rsList);
 		return "member/reserveList";
 	}
+	@RequestMapping(value="/reserveManage.do")
+	public String reserveManage(Model model, @SessionAttribute Store s) {
+		int storeNo = s.getStoreNo();
+		ArrayList<Reserve> rs = service.selectAllReserve(storeNo);
+		model.addAttribute("rs", rs);
+		return "member/ownerReserveManage";
+	}
 	
 }

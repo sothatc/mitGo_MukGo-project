@@ -160,5 +160,9 @@ public class StoreDao {
 
 	}
 
+	public Review selectOneReview(int reserveNo) {
+		return sqlSession.selectOne("selectOneReivew", reserveNo);
+	}
+
 
 }
