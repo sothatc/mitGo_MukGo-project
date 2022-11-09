@@ -95,7 +95,7 @@
 									<td>${rs.eatDate }</td>
 									<td>${rs.eatTime }</td>
 									<td><c:choose>
-											<c:when test="${rs.RStatus } eq 0">
+											<c:when test="${0 eq rs.RStatus }">
 												<button type="button" class="reviewBtn"
 													onclick="WirteReview(this,${rs.reserveNo},${rs.storeNo},'${rs.storeName }')">리뷰쓰기</button>
 											</c:when>

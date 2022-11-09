@@ -406,6 +406,10 @@ public class StoreService {
 		return dao.updateReview(r);
 	}
 
+	public int deleteReview(int reviewNo) {
+		return dao.deleteReview(reviewNo);
+	}
+
 
 	
 
