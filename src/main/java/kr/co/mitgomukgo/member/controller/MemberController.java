@@ -242,10 +242,14 @@ public class MemberController {
 		return "member/reserveList";
 	}
 	@RequestMapping(value="/reserveManage.do")
-	public String reserveManage(Model model, @SessionAttribute Store s) {
+	public String reserveManage(Model model, @SessionAttribute Store s, int reqPage) {
 		int storeNo = s.getStoreNo();
-		ArrayList<Reserve> rs = service.selectAllReserve(storeNo);
-		model.addAttribute("rs", rs);
+		HashMap<String, Object> map = service.selectAllReserve(reqPage, storeNo);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
 		return "member/ownerReserveManage";
 	}
 	
