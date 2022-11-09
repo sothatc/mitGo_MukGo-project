@@ -164,7 +164,6 @@ height: 100%;
                <c:forEach items="${list }" var="me">
                   <tr>
                      <td style="text-align:left;">${me.menuName }</td>
-                     <td>--------------------------------------</td>
                      <td style="text-align:right;"><fmt:formatNumber value="${me.menuPrice }" pattern="#,###원" /></td>
                   </tr>
 				</c:forEach>
@@ -173,9 +172,9 @@ height: 100%;
          </blockquote>
          
 		<!----- 메뉴 부분 ----->
-         <div class="food-wrap" style="width:1200px; height:100%; margin: 0 auto; text-align:center; margin-top:30px; margin-bottom:50px;">
+         <div class="food-wrap" style="width:1200px; height:100vh; margin: 0 auto; text-align:center; margin-top:30px;">
 	         <c:forEach items="${list }" var="me">
-	            <div class="w3-card" id="photoWrap" style="font-family:Gowun Dodum; width:350px; height:300px; margin: 0 20px;">
+	            <div class="w3-card" id="photoWrap" style="font-family:Gowun Dodum; width:350px; height:300px; margin: 10px 20px;">
 	               <img src=/resources/upload/menu/${me.menuImg} style='width: 100%; height: 200px;'>
 	               <div class="w3-container" style="font-family:Gowun Dodum;">
 	                  <p style="font-weight: bolder; font-size: 20px; margin-top:10px;">${me.menuName}</p>
@@ -201,18 +200,6 @@ height: 100%;
 
 				<div class="ft_select_wrap">
 					<div class="ft_select">
-						<!-- 
-					<select id="selectLevel">
-						<option value="0" selected="selected">교통최적+추천</option>
-						<option value="1">교통최적+무료우선</option>
-						<option value="2">교통최적+최소시간</option>
-						<option value="3">교통최적+초보</option>
-						<option value="4">교통최적+고속도로우선</option>
-						<option value="10">최단거리+유/무료</option>
-						<option value="12">이륜차도로우선</option>
-						<option value="19">교통최적+어린이보호구역 회피</option>
-					</select> 
-				 -->
 						<div class="address-wrap">
 
 							<input type="text" class="text_custom" id="fullAddr" name="fullAddr" value="" readonly>
@@ -241,7 +228,7 @@ height: 100%;
 		 </div>
 		 
          <!----- 마켓 상품 부분 ----->
-         <div class="market-wrap" style="margin-top:50px; height:300px;">
+         <div class="market-wrap" style="margin-top:50px; width:1200px; height:300px;">
 	         <div class="menuTitle" style="margin: 0 auto;">MARKET</div>
 	            <div class="w3-card-4" id="marketWrap">
 	               <img src="/resources/img/pizza.PNG" style="width: 100%">

@@ -351,6 +351,7 @@
 			menu_img as menuImg
 		from menu
     	where store_no = #{storeNo}
+    	order by menu_no DESC
 
 	</select>
 
