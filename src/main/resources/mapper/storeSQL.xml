@@ -439,5 +439,13 @@
 			from review
 			where reserve_no = #{_parameter}
 	</select>
+	
+	<update id="updateReview" parameterType="r">
+		update review set
+		rating = #{rating},
+		content = #{content},
+		review_img = #{reviewImg}
+		where review_no = #{reviewNo}
+	</update>
 
 </mapper>
