@@ -20,7 +20,7 @@
 		
 		<!-- 검색기능 -->
 		<form action="/searchStoreList.do?category=${category }&reqPage=1" method="post">
-			<div class="storeList-searchinput">
+			<div class="storeList-searchinput" id="font">
 				<input type="text" name="search">
 				<button>검색</button>
 			</div>
@@ -28,7 +28,7 @@
 		
 		<!-- 분류태그 -->
 		<div class="storeList-tag">
-			<div class="storeList-tag-content">
+			<div class="storeList-tag-content" id="font">
 				<ul>
 					<li>
 						<a href="/storeList.do?reqPage=1">전체</a>
@@ -67,7 +67,7 @@
 		<div class="storeList-sort">
 			<div class="storeList-sort-content">
 				<form action="/sortStoreList.do?category=${category }&reqPage=1" method="post">
-					<ul>
+					<ul id="font">
 						<button name="storeListSort" value="new"><li>최신순</li></button>
 						<button name="storeListSort" value="old"><li>오래된순</li></button>
 						<button name="storeListSort" value="grade"><li>평점순</li></button>
@@ -80,16 +80,19 @@
 			<div class="storeList-list-content">
 				<c:forEach items="${list }" var="s">
 					<div class="showList">
-						<a href="/storeDetail.do?storeNo=${s.storeNo }">
-							<div>
-								<img src="resources/upload/store/${s.thumbNail }">
+						<div>
+							<img src="resources/upload/store/${s.thumbNail }">
+						</div>
+						<div id="font">
+							<div style="display: none">${s.storeNo }</div>
+							<h5 id="font">${s.storeName }</h5>
+							<div>평점 : ${s.rating }</div>
+						</div>
+						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+							<div class="text-center">
+								<a class="btn btn-outline-dark mt-auto" href="/storeDetail.do?storeNo=${s.storeNo }">View options</a>
 							</div>
-							<div>
-								<div style="display: none">${s.storeNo }</div>
-								<div>${s.storeName }</div>
-								<div>평점 : ${s.rating }</div>
-							</div>
-						</a>
+						</div>
 					</div>
 				</c:forEach>
 			</div>

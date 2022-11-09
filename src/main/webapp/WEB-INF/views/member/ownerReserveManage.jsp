@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,8 +22,11 @@
 				<ul class="category">
 					<li>
 						<div><a href="/mypage.do">내 정보 수정</a></div>
-						<div><a href="/reserveList.do">예약 내역</a></div>
-						<div><a href="/logout.do">로그아웃</a></div>
+						<div><a href="/updateStoreFrm.do">업체 정보 수정</a></div>
+						<div><a href="/addMenuFrm.do">메뉴 추가</a></div>
+						<div><a href="/menuFrm.do">메뉴 관리</a></div>
+						<div><a href="/reserveManage.do?reqPage=1">예약관리</a></div>
+						<div><a href="/ownerLogout.do">로그아웃</a></div>
 						<div><a href="#">회원 탈퇴</a></div>
 					</li>
 				</ul>
@@ -71,6 +75,16 @@
 							</tr> 
 							</c:forEach>
 						</table>
+						<form action="/searchReserve.do" method="post">
+						<div class="searchWrap-reserve">
+							<div class="search-area">
+								<input type="text" name="keyword">
+								<input type="hidden" name="storeNo" value="${storeNo }">
+								<input type="hidden" name="reqPage1" value="1">
+								<input type="submit" class="searchBtn" value="이름 조회"></button>
+							</div>
+						</div>
+						</form>
 					</div>
 				</div>
 			<div class="page">${pageNavi }</div>
@@ -80,5 +94,16 @@
 	
 	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />	
+	<script>
+		$(".searchBtn").on("mouseover",function(){
+			$(this).css("background-color","rgb(97, 76, 76)");
+			$(this).css("border","1px solid black");
+			$(".searchBtn").css("color","#ffc107");
+		});
+		$(".searchBtn").on("mouseleave",function(){
+			$(this).css("background-color","");
+			$(".searchBtn").css("color","");
+		});
+	</script>
 </body>
 </html>

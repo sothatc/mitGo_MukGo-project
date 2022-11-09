@@ -264,7 +264,7 @@
 	<insert id="insertReserve" parameterType="r">
       insert into reserve
       values(RESERVE_SEQ.NEXTVAL, #{memberNo}, #{storeNo}, #{storeName}, to_char(sysdate,'yyyy-mm-dd'),
-      #{eatDate}, #{eatTime}, #{eatNum})
+      #{eatDate}, #{eatTime}, #{eatNum}, 1)
     </insert>
     
     <!-- 예약한 건 확인 -->
