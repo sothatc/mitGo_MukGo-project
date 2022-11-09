@@ -395,7 +395,8 @@ public class StoreController {
 		model.addAttribute("pageNavi", map.get("pageNavi"));
 		model.addAttribute("total", map.get("total"));
 		model.addAttribute("pageNo", map.get("pageNo"));
-
+		model.addAttribute("storeListSort", storeListSort);
+		
 		return "store/storeListFrm";
 	}
 }
