@@ -28,4 +28,9 @@
 		where store_no = #{storeNo}
 		order by 5 desc
 	</select>
+	
+	<delete id="cancleReserve" parameterType="int">
+		delete from reserve
+		where reserve_No = #{_parameter}
+	</delete>
 </mapper>

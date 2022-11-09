@@ -72,5 +72,9 @@ public class MemberDao {
 		return (ArrayList<Reserve>) list;
 	}
 
+	public int cancleReserve(int reserveNo) {
+		return sqlSession.delete("cancleReserve", reserveNo);
+	}
+
 	
 }

@@ -74,6 +74,10 @@ public class MemberService {
 		return (ArrayList<Reserve>) rs;
 	}
 
+	public int cancleReserve(int reserveNo) {
+		return dao.cancleReserve(reserveNo);
+	}
+
 
 
 	
