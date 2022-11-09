@@ -48,11 +48,13 @@ public class StoreController {
 
 	// 맛집 상세 보기
 	@RequestMapping(value = "/storeDetail.do")
-	public String StoreDetail(int storeNo, Model model,Menu m, Model model1) {
+	public String StoreDetail(int storeNo, Model model, Menu m) {
 		Store s = service.selectOneStore(storeNo);
 		model.addAttribute("s", s);
 		ArrayList<Menu> list = service.selectMenuList(storeNo);
-		model1.addAttribute("list", list);
+		model.addAttribute("list", list);
+		ArrayList<Review> reviewList = service.selectReviewList(storeNo);
+		model.addAttribute("rList", reviewList);
 		return "store/storeDetail";
 	}
 
@@ -65,8 +67,8 @@ public class StoreController {
 		String result = gson.toJson(list);
 		return result;
 	}
-	
-	//예약된 시간/날짜 확인하기
+
+	// 예약된 시간/날짜 확인하기
 	@ResponseBody
 	@RequestMapping(value = "/checkReserve.do", produces = "application/json;charset=utf-8")
 	public String ajaxCheckReserve(Reserve r) {
@@ -75,24 +77,35 @@ public class StoreController {
 		String result = gson.toJson(list);
 		return result;
 	}
+
+	// 비활성화 시간 확인하기
+	@ResponseBody
+	@RequestMapping(value = "/checkReserveTime.do", produces = "application/json;charset=utf-8")
+	public String ajaxCheckReserveTime(String selectDate, int maxNum, int storeNo) {
+		ArrayList<Reserve> list = service.ajaxCheckReserveTime(selectDate, maxNum, storeNo);
+		Gson gson = new Gson();
+		String result = gson.toJson(list);
+		return result;
+	}
+
+	// 예약하기
+	@RequestMapping(value = "/reserve.do")
+	public String StoreDetail(int memberNo, Reserve r) {
+		int result = service.reserve(r);
+		if (result > 0) {
+			return "redirect:/";
+		} else {
+			return "redirect:/";
+		}
+	}
 	
-	   //예약하기
-	   @RequestMapping(value = "/reserve.do")
-	   public String StoreDetail(int memberNo, Reserve r) {
-	      int result = service.reserve(r);
-	      if(result>0) {
-	         return "redirect:/";
-	      }else {
-	         return "redirect:/";
-	      }
-	   }
-
-
+	// 리뷰작성 폼이동
 	@RequestMapping(value = "/addStoreFrm.do")
 	public String addStoreFrm() {
 		return "store/addStoreFrm";
 	}
-
+	
+	// 리뷰작성
 	@RequestMapping(value = "/addStore.do")
 	public String addStore(Store s, MultipartFile[] file, HttpServletRequest request, String zipCode,
 			String detailAddress, String closedHour) {
@@ -128,7 +141,8 @@ public class StoreController {
 		int result = service.addStore(s);
 		return "redirect:/storeList.do?reqPage=1";
 	}
-
+	
+	// 업체 리스트출력
 	@RequestMapping(value = "/storeList.do")
 	public String storeListFrm(int reqPage, Model model) {
 		HashMap<String, Object> map = service.storeList(reqPage);
@@ -146,12 +160,15 @@ public class StoreController {
 		}
 		// ArrayList<Store> list = service.storeList();
 	}
-
+	
+	// 리뷰쓰기 폼
 	@RequestMapping(value = "/writeReviewFrm.do")
-	public String writeReviewFrm() {
+	public String writeReviewFrm(Reserve r, Model model) {
+		model.addAttribute("r", r);
 		return "store/writeReviewFrm";
 	}
-
+	
+	// 리뷰쓰기
 	@RequestMapping(value = "/writeReview.do")
 	public String writeReview(Review r, MultipartFile reviewImgName, HttpServletRequest request) {
 		if (!reviewImgName.isEmpty()) {
@@ -175,6 +192,21 @@ public class StoreController {
 		}
 		int result = service.writeReview(r);
 		return "store/successReivewFrm";
+	}
+	
+	// 리뷰 수정 폼
+	@RequestMapping(value = "/updateReviewFrm.do")
+	public String updateReviewFrm(Reserve r, Model model) {
+		Review re = service.selectOneReview(r.getReserveNo());
+		model.addAttribute("r", r);
+		model.addAttribute("re", re);
+		return "store/updateReviewFrm";
+	}
+	
+	// 리뷰 수정
+	@RequestMapping(value = "/updateReview.do")
+	public String updateReview(Reserve r, MultipartFile reviewImgName, HttpServletRequest request) {
+		return "redirect:/";
 	}
 
 	@RequestMapping(value = "/menuFrm.do")
@@ -217,7 +249,7 @@ public class StoreController {
 	@RequestMapping(value = "/deleteMenu.do")
 	public String deleteMenu(int menuNo, HttpServletRequest request) {
 		int result = service.deleteMenu(menuNo);
-		if(result > 0) {
+		if (result > 0) {
 			return "redirect:/menuFrm.do";
 		} else {
 			request.setAttribute("msg", "삭제시 문제가 발생했습니다.");
@@ -225,14 +257,14 @@ public class StoreController {
 			return "common/alert";
 		}
 	}
-	
+
 	@RequestMapping(value = "/updateMenuFrm.do")
 	public String updateMenuFrm(int menuNo, Model model) {
 		Menu me = service.readOneMenu(menuNo);
 		model.addAttribute("me", me);
 		return "store/updateMenuFrm";
 	}
-	
+
 	@RequestMapping(value = "/updateMenu.do")
 	public String updateMenu(Menu menu, MultipartFile file, HttpServletRequest request) {
 		if (!file.isEmpty()) {
@@ -255,7 +287,7 @@ public class StoreController {
 			menu.setMenuImg(menuPath);
 		}
 		int result = service.updateMenu(menu);
-		if(result > 0) {
+		if (result > 0) {
 			request.setAttribute("msg", "변경이 완료되었습니다.");
 			request.setAttribute("url", "/menuFrm.do");
 			return "common/alert";
@@ -273,8 +305,57 @@ public class StoreController {
 		model.addAttribute("imgList", imgList);
 		return "/store/updateStoreFrm";
 	}
-	
-	
+
+	@RequestMapping(value = "/updateStore.do")
+	public String updateStore(int[] imgNoList, Store s, String[] imgpathList, MultipartFile[] file,
+			HttpServletRequest request, String zipCode, String detailAddress, String closedHour) {
+		ArrayList<StoreImg> storeImgList = new ArrayList<StoreImg>();
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/store/");
+		if (!file[0].isEmpty()) {
+			for (MultipartFile File : file) {
+				String filename = File.getOriginalFilename();
+				String imgpath = fileRename.fileRename(savePath, filename);
+				File upFile = new File(savePath + imgpath);
+				try {
+					FileOutputStream fos = new FileOutputStream(upFile);
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					byte[] bytes = File.getBytes();
+					bos.write(bytes);
+					bos.close();
+					StoreImg si = new StoreImg();
+					si.setImgpath(imgpath);
+					storeImgList.add(si);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		s.setStoreImgList(storeImgList);
+		s.setAddress(zipCode + "*" + s.getAddress() + "*" + detailAddress);
+		s.setOpenHour(s.getOpenHour() + "~" + closedHour);
+		int result = service.updateStore(s, imgNoList);
+		if (imgNoList != null && (result == (storeImgList.size() + imgNoList.length + 1))) {
+			if (imgpathList != null) {
+				for (String filepath : imgpathList) {
+					File delFile = new File(savePath + filepath);
+					delFile.delete();
+				}
+			}
+		}
+		if (result > 0) {
+			request.setAttribute("msg", "변경이 완료되었습니다.");
+			request.setAttribute("url", "/");
+			return "common/alert";
+		} else {
+			request.setAttribute("msg", "변경 중 문제가 발생했습니다.");
+			request.setAttribute("url", "/updateStoreFrm.do");
+			return "common/alert";
+		}
+	}
 
 	@RequestMapping(value = "/selectTag.do")
 	public String selectTag(String category, int reqPage, Model model) {
@@ -289,9 +370,9 @@ public class StoreController {
 
 		return "store/storeListFrm";
 	}
-	
+
 	@RequestMapping(value = "/searchStoreList.do")
-	public String searchStoreList(String search, int reqPage, Model model,@RequestParam String category) {
+	public String searchStoreList(String search, int reqPage, Model model, @RequestParam String category) {
 		System.out.println(category);
 		HashMap<String, Object> map = service.searchStoreList(search, reqPage, category);
 		model.addAttribute("list", map.get("list"));
@@ -303,9 +384,9 @@ public class StoreController {
 
 		return "store/storeListFrm";
 	}
-	
+
 	@RequestMapping(value = "/sortStoreList.do")
-	public String sortStoreList(String storeListSort, int reqPage, Model model,@RequestParam String category) {
+	public String sortStoreList(String storeListSort, int reqPage, Model model, @RequestParam String category) {
 		System.out.println(storeListSort);
 		HashMap<String, Object> map = service.sortStoreList(storeListSort, reqPage, category);
 		model.addAttribute("list", map.get("list"));
@@ -314,7 +395,7 @@ public class StoreController {
 		model.addAttribute("pageNavi", map.get("pageNavi"));
 		model.addAttribute("total", map.get("total"));
 		model.addAttribute("pageNo", map.get("pageNo"));
-		
+
 		return "store/storeListFrm";
 	}
 }

@@ -67,5 +67,10 @@ public class MemberDao {
 		return (ArrayList<Reserve>)rs;
 	}
 
+	public ArrayList<Reserve> selectAllReserve(int storeNo) {
+		List list = sqlSession.selectList("reserve.selectAllReserve", storeNo);
+		return (ArrayList<Reserve>) list;
+	}
+
 	
 }

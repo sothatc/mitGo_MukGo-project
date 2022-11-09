@@ -135,7 +135,7 @@ hr {
 
 <body>
 	<div class="reviewTitle">
-		<h1>리뷰쓰기 : ${s.storeName }</h1>
+		<h1>리뷰쓰기 : ${r.storeName }</h1>
 	</div>
 	<hr>
 	<br>
@@ -159,8 +159,9 @@ hr {
 			<textarea type="text" id="reviewContents" name="content" placeholder="정성스런 리뷰는 가게와 고객분들께 큰 도움이 됩니다!"></textarea>
 		</div>
 		<div>
-			<input type="hidden" name="write" value="${sessionScope.m.memberId }">
-			<%-- <input type="hidden" name="storeNo" value="${s.storeNo }"> --%>
+			<input type="hidden" name="writer" value="${sessionScope.m.memberId }">
+			<input type="hidden" name="storeNo" value="${r.storeNo }">
+			<input type="hidden" name="reserveNo" value="${r.reserveNo }">
 			<input type="file" name="reviewImgName" class="file-upload" id="file" style="visibility: hidden; position: absolute;" accept="image/gif, image/jpg, image/jpeg, image/png">
 			<button class="inputPhoto" type="button" id="inputPhoto">사진 첨부하기</button>
 		</div>

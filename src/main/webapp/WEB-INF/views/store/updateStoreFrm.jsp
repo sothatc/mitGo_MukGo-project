@@ -11,7 +11,6 @@
 <body>
    <jsp:include page="/WEB-INF/views/common/header.jsp" />
    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-  <!--  <link rel="stylesheet" href="/resources/css/store/addStoreFrm.css"> -->
    <link rel="stylesheet" href="/resources/css/member/owner.css">
 	<div class="content-wrap">
 		<h2>사업자 마이페이지</h2>
@@ -29,6 +28,7 @@
 								<div><a href="/updateStoreFrm.do">업체 정보 수정</a></div>
 								<div><a href="/addMenuFrm.do">메뉴 추가</a></div>
 								<div><a href="/menuFrm.do">메뉴 관리</a></div>
+								<div><a href="/reserveManage.do">예약관리</a></div>
 							</c:otherwise>
 						</c:choose>
 						<div><a href="/ownerLogout.do">로그아웃</a></div>
@@ -54,6 +54,7 @@
 		               <div class="form-group">
 		              	  <label for="inputName">업체명</label>
 						  <br>
+						  <input type="hidden" name="storeNo" value="${s.storeNo }">
 		                  <input type="text" class="form-control" id="inputName" name="storeName" value="${s.storeName }">
 		               </div>
 		               <br>
@@ -107,14 +108,14 @@
 		                  <div class="input-group col-xs-12">
 		                  		<c:forEach var="si" items="${imgList }">
 		                  		<p>
-			                     	<input type="text" class="form-control file-upload-info" value="${si.imgpath}" disabled>
-			                     	<button type="button" onclick="deleteImg(this,${si.storeImgNo},'${si.imgpath }');">삭제</button>
+			                     	<input type="text" class="form-control file-upload-info" name="imgpath" value="${si.imgpath}" readonly="readonly">
+			                     	<button type="button" class="imgDelBtn" onclick="deleteImg(this,${si.storeImgNo},'${si.imgpath }');">삭제</button>
 		                  		</p>
 		                  		</c:forEach>
-		                     <span class="input-group-append">
-		                        <button class="file-upload-browse btn btn-primary" type="button" id="storeImg">사진추가</button>
-		                     </span>
 		                  </div>
+	                     <span class="input-group-append">
+	                        <button class="file-upload-browse btn btn-primary" type="button" id="storeImg">사진추가</button>
+	                     </span>
 		               </div>
 		               <br>
 		               <div class="form-group">
@@ -135,7 +136,7 @@
 		                  <label for="inputTime">휴무일</label>
 		                  <br>
 		                  <br>
-		                  <input type="hidden" class="getClosedDay" value="${s.closedDay }">
+		                  <input type="hidden" class="getClosedDay" value="${s.closedDay }" name="closedDay">
 		                  <input type="checkbox" class="btn-check" id="btn-check1" name="closedDay" value="월" autocomplete="off">
 		                  <label for="btn-check1" class="btn btnday">월</label>
 		                  <input type="checkbox" class="btn-check" id="btn-check2" name="closedDay" value="화" autocomplete="off">
@@ -166,7 +167,6 @@
    <!-- script 구역 -->
    <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-   <script type="text/javascript" src="/resources/js/store/addStoreFrm.js"></script>
    <script type="text/javascript" src="/resources/js/store/updateStoreFrm.js"></script>
 
 </body>

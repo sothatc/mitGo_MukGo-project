@@ -44,3 +44,14 @@ li{
 .content{
 	border-top: 1px solid #eee;
 }
+
+/*일반회원 예약 내역*/
+#content{
+    float: right;
+    margin-right: 80px;
+    padding-top: 15px;
+}
+
+.table{
+	width: 750px;
+}
