@@ -255,13 +255,15 @@ public class MemberController {
 		return "member/ownerReserveManage";
 	}
 	@RequestMapping(value="/searchReserve.do")
-	public String searchReserve(String keyword, int storeNo, Model model, int reqPage) {
+	public String searchReserve(String keyword, int storeNo, Model model, String reqPage1) {
+		int reqPage = Integer.parseInt(reqPage1);
 		HashMap<String, Object> map = service.searchReserve(keyword, storeNo, reqPage);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
 		model.addAttribute("pageNavi", map.get("pageNavi"));
 		model.addAttribute("total", map.get("total"));
 		model.addAttribute("pageNo", map.get("pageNo"));
+		model.addAttribute("storeNo", storeNo);
 		return "member/ownerReserveManage";
 	}
 	
