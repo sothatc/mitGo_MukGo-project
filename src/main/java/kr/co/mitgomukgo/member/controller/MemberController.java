@@ -236,7 +236,7 @@ public class MemberController {
 	public String reserveList(@SessionAttribute Member m, Model model) {
 		ArrayList<Reserve> rsList = service.selectReserveList(m);
 		if(rsList.isEmpty()) {
-			return "redirect:/";
+			return "member/reserveList";
 		}
 		model.addAttribute("rsList", rsList);
 		return "member/reserveList";
@@ -245,6 +245,17 @@ public class MemberController {
 	public String reserveManage(Model model, @SessionAttribute Store s, int reqPage) {
 		int storeNo = s.getStoreNo();
 		HashMap<String, Object> map = service.selectAllReserve(reqPage, storeNo);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
+		model.addAttribute("storeNo", storeNo);
+		return "member/ownerReserveManage";
+	}
+	@RequestMapping(value="/searchReserve.do")
+	public String searchReserve(String keyword, int storeNo, Model model, int reqPage) {
+		HashMap<String, Object> map = service.searchReserve(keyword, storeNo, reqPage);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
 		model.addAttribute("pageNavi", map.get("pageNavi"));

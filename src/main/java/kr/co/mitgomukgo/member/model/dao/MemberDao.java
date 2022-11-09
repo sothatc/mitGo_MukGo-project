@@ -79,5 +79,10 @@ public class MemberDao {
 		return sqlSession.selectOne("reserve.countReserveList",storeNo);
 	}
 
+	public ArrayList<Reserve> searchReserve(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("reserve.searchReserve", map);
+		return (ArrayList<Reserve>) list;
+	}
+
 	
 }

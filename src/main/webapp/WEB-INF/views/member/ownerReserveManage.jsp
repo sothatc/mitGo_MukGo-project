@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,6 +72,15 @@
 							</tr> 
 							</c:forEach>
 						</table>
+						<form action="/searchReserve.do?reqPage=1" method="post">
+						<div class="searchWrap-reserve">
+							<div class="search-area">
+								<input type="text" name="keyword">
+								<input type="hidden" name="storeNo" value="${storeNo }">
+								<input type="submit" class="searchBtn" value="이름 조회"></button>
+							</div>
+						</div>
+						</form>
 					</div>
 				</div>
 			<div class="page">${pageNavi }</div>
@@ -80,5 +90,16 @@
 	
 	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />	
+	<script>
+		$(".searchBtn").on("mouseover",function(){
+			$(this).css("background-color","rgb(97, 76, 76)");
+			$(this).css("border","1px solid black");
+			$(".searchBtn").css("color","#ffc107");
+		});
+		$(".searchBtn").on("mouseleave",function(){
+			$(this).css("background-color","");
+			$(".searchBtn").css("color","");
+		});
+	</script>
 </body>
 </html>

@@ -237,12 +237,25 @@ li{
   width: 100%;
 }
 
+/*검색창*/
+
+.searchWrap-reserve>.search-area .searchBtn{
+	width: 69px;
+	border-style: none;
+	height: 31.2px;
+	background-color: rgb(51,51,51);
+	color: #fff;
+	transition: 0.5s;
+}
 /*========================page*/
 .page{
+	margin-top: 30px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
+
+
 
 
 
