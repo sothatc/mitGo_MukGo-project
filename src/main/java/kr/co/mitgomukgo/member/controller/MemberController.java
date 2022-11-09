@@ -253,4 +253,9 @@ public class MemberController {
 		return "member/ownerReserveManage";
 	}
 	
+	@RequestMapping(value="/adminMemberManage.do")
+	public String adminMemberManage() {
+		return "member/admin";
+	}
+	
 }
