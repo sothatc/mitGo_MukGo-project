@@ -168,5 +168,9 @@ public class StoreDao {
 		return sqlSession.update("updateReview", r);
 	}
 
+	public int deleteReview(int reviewNo) {
+		return sqlSession.delete("deleteReview", reviewNo);
+	}
+
 
 }

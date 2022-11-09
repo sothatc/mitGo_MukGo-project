@@ -78,6 +78,8 @@ public class MemberDao {
 	public int countReserveList(int storeNo) {
 		return sqlSession.selectOne("reserve.countReserveList",storeNo);
 	}
-
 	
+	public int cancleReserve(int reserveNo) {
+		return sqlSession.delete("cancleReserve", reserveNo);
+	}
 }

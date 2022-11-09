@@ -28,7 +28,13 @@
 		where store_no = #{storeNo}
 		order by 5 desc
 	</select>
+	
 	<select id="countReserveList" parameterType="int" resultType="_int">
 		select count(*) as cnt from reserve where store_no = #{storeNo}
 	</select>
+	
+	<delete id="cancleReserve" parameterType="int">
+		delete from reserve
+		where reserve_No = #{_parameter}
+	</delete>
 </mapper>

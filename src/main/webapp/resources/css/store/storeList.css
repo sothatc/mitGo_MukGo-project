@@ -167,7 +167,10 @@
 	width: 50px;
 }
 .back-color{
-	background-color: aqua;
+	background-color: #515151;
+}
+.back-color>a{
+	color: #ffc107;
 }
 /* =====================================sort */
 .storeList-sort {
@@ -226,7 +229,9 @@
 	width: 300px;
 	float: left;
 }
-
+.showList>a{
+	text-decoration: none;
+}
 .showList>a>div:first-child {
 	display: flex;
 	justify-content: center;
@@ -239,6 +244,7 @@
 	margin-bottom : 30px;
 }
 .showList>a>div:nth-child(2)>div{
+	width: 300px;
 	display: flex;
 	justify-content: center;
 	align-items: center;

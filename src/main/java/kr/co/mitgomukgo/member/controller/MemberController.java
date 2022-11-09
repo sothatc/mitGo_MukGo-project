@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -253,9 +254,26 @@ public class MemberController {
 		return "member/ownerReserveManage";
 	}
 	
+
 	@RequestMapping(value="/adminMemberManage.do")
 	public String adminMemberManage() {
 		return "member/admin";
 	}
 	
+
+	@RequestMapping(value = "cancleReserve.do")
+	public String cancleReserve(int reserveNo, HttpServletRequest request) {
+		int result = service.cancleReserve(reserveNo);
+		if(result > 0) {
+			request.setAttribute("msg", "예약이 취소되었습니다.");
+			request.setAttribute("url", "/reserveList.do");
+			return "common/alert";
+		} else {
+			request.setAttribute("msg", "취소 중 문제가 발생했습니다.");
+			request.setAttribute("url", "/reserveList.do");
+			return "common/alert";
+		}
+	}
+	
 }
+
