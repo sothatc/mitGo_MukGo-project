@@ -273,6 +273,16 @@ public class StoreService {
 		return list;
 	}
 	
+	//비활성화 시간 확인하기
+	public ArrayList<Reserve> ajaxCheckReserveTime(String selectDate, int maxNum, int storeNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("selectDate",selectDate);
+		map.put("maxNum",maxNum);
+		map.put("storeNo",storeNo);
+		ArrayList<Reserve> list = dao.ajaxCheckReserveTime(map);
+		return list;
+	}
+	
 
 	public ArrayList<Menu> menuList(int storeNo) {
 		return dao.menuList(storeNo);
@@ -387,6 +397,12 @@ public class StoreService {
 		
 		return result;
 	}
+
+	public Review selectOneReview(int reserveNo) {
+		return dao.selectOneReview(reserveNo);
+	}
+
+
 	
 
 }

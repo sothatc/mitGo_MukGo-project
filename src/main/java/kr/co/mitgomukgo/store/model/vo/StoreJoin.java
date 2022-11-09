@@ -20,4 +20,5 @@ public class StoreJoin {
 	private String content;
 	private int storeImgNo;
 	private String imgpath;
+	private int maxNum;
 }

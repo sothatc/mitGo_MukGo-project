@@ -37,7 +37,7 @@ height: 100%;
 
    <link rel="stylesheet" href="/resources/demos/store/style.css">
    <link rel="stylesheet" href="/resources/css/store/storeDetail.css">
-   <link rel="stylesheet" href="/resources/css/store/map.css">
+   <link rel="stylesheet" href="/resources/css/map.css">
    
    
    <!---------------------내용----------------------->
@@ -164,7 +164,6 @@ height: 100%;
                <c:forEach items="${list }" var="me">
                   <tr>
                      <td style="text-align:left;">${me.menuName }</td>
-                     <td>--------------------------------------</td>
                      <td style="text-align:right;"><fmt:formatNumber value="${me.menuPrice }" pattern="#,###원" /></td>
                   </tr>
 				</c:forEach>
@@ -173,9 +172,9 @@ height: 100%;
          </blockquote>
          
 		<!----- 메뉴 부분 ----->
-         <div class="food-wrap" style="width:1200px; height:100%; margin: 0 auto; text-align:center; margin-top:30px; margin-bottom:50px;">
+         <div class="food-wrap" style="width:1200px; height:100vh; margin: 0 auto; text-align:center; margin-top:30px;">
 	         <c:forEach items="${list }" var="me">
-	            <div class="w3-card" id="photoWrap" style="font-family:Gowun Dodum; width:350px; height:300px; margin: 0 20px;">
+	            <div class="w3-card" id="photoWrap" style="font-family:Gowun Dodum; width:350px; height:300px; margin: 10px 20px;">
 	               <img src=/resources/upload/menu/${me.menuImg} style='width: 100%; height: 200px;'>
 	               <div class="w3-container" style="font-family:Gowun Dodum;">
 	                  <p style="font-weight: bolder; font-size: 20px; margin-top:10px;">${me.menuName}</p>
@@ -189,7 +188,6 @@ height: 100%;
 		 <div class="location-wrap" style="width:1200px;">
 	         <div class="menuTitle" style="margin: 0 auto;">LOCATION</div>
 	         <div class="map-content-wrap">
-
 				<div id="map_wrap" class="map_wrap">
 					<div id="map_div"></div>
 				</div>
@@ -202,24 +200,11 @@ height: 100%;
 
 				<div class="ft_select_wrap">
 					<div class="ft_select">
-						<!-- 
-					<select id="selectLevel">
-						<option value="0" selected="selected">교통최적+추천</option>
-						<option value="1">교통최적+무료우선</option>
-						<option value="2">교통최적+최소시간</option>
-						<option value="3">교통최적+초보</option>
-						<option value="4">교통최적+고속도로우선</option>
-						<option value="10">최단거리+유/무료</option>
-						<option value="12">이륜차도로우선</option>
-						<option value="19">교통최적+어린이보호구역 회피</option>
-					</select> 
-				 -->
 						<div class="address-wrap">
 
-							<p id="result"></p>
 							<input type="text" class="text_custom" id="fullAddr" name="fullAddr" value="" readonly>
 							<span type="text" class="text_custom addressTd" id="E_fullAddr" name="E_fullAddr" readonly style="display:none;"></span>
-							<button onclick="searchAddr();">출발지 입력</button>
+							<button class="startBtn" onclick="searchAddr();">출발지 입력</button>
 							<button id="btn_select" style="display : none;">적용하기</button>
 							<button id="hidden_btn_select" style="display : none;">적용하기</button>					
 						</div>
@@ -243,7 +228,7 @@ height: 100%;
 		 </div>
 		 
          <!----- 마켓 상품 부분 ----->
-         <div class="market-wrap" style="margin-top:50px; height:300px;">
+         <div class="market-wrap" style="margin-top:50px; width:1200px; height:300px;">
 	         <div class="menuTitle" style="margin: 0 auto;">MARKET</div>
 	            <div class="w3-card-4" id="marketWrap">
 	               <img src="/resources/img/pizza.PNG" style="width: 100%">
@@ -526,7 +511,6 @@ height: 100%;
                   storeImgUl.append("<li><img src=/resources/upload/store/"+data[i].imgpath.replace(" ", "%20")+" style='height:460px; width:600px;'></li>");
                   storePhoto.push(data[i].imgpath);
                }
-            
                //---------- 메뉴 사진 슬라이더
                let imgNo = 0;
                const ul = $(".photo-wrap>ul");
@@ -557,8 +541,6 @@ height: 100%;
          var reserveDate = "${rs.reserveDate}"
          var btnVal = new Array();
          var checkTimeBtn = new Array();
-         var selectedTime = new Array();
-         var unTime = new Array();
          
          var hour="${s.openHour}";
          var hourArr = new Array();
@@ -575,10 +557,10 @@ height: 100%;
          //---------- 날짜 input 클릭 시 시간 버튼 삭제
 	      $("#datePicker").on("click",function(){
 	         $(".timeBtn").remove();
-	         selectedTime = new Array();
-	         unTime = new Array();
+	         disabledTime = new Array();
 	      });
          
+	      var disabledTime = new Array();
          //---------- 시간확인하기 버튼 (용도: 비활성화)checkTime
          $("#datePicker").on("change",function(){
              
@@ -594,6 +576,7 @@ height: 100%;
                          $(".buttonTd").append("<button class=timeBtn style=margin-right:1%;background-color:white;color:rgb(51,51,51); value="+i+">"+i+":00"+"</button>");
                       }
                        
+     
                      //버튼 클릭
                      const timeBtns = $(".timeBtn");
                      timeBtns.on("click",function(){
@@ -602,56 +585,64 @@ height: 100%;
                         const index = timeBtns.index(this);
                         selectTime = $(this).text();
                         
- 		               //버튼 비활성화 css
- 		               for(let i=0; i<btnVal.length; i++){
- 		                  for(let j=0; j<unTime.length; j++){
- 		                     if(btnVal[i]==unTime[j]){
- 		                        checkTimeBtn[i].style.color="red";
- 		                        checkTimeBtn[i].style.background="pink";
- 		                        checkTimeBtn[i].setAttribute("disabled", true);
- 		                     }
- 		                  }
- 		               } 
+                        //예약불가 시간의 버튼 비활성화
+			             for(let i=0; i<btnVal.length; i++){
+			                  for(let j=0; j<disabledTime.length; j++){
+			                     if(btnVal[i]==disabledTime[j]){
+			                        checkTimeBtn[i].style.color="red";
+			                        checkTimeBtn[i].style.background="pink";
+			                        checkTimeBtn[i].setAttribute("disabled", true);
+			                     }
+			                  }
+			             }
                      });
                      
 		             var selectDate = $("#datePicker").val();
 		             checkTimeBtn = document.getElementsByClassName('timeBtn');
-		             for(let i=0; i<data.length; i++){
-		                  //선택한 시간과 불러온 날짜가 같으면
-		                  if(selectDate==data[i].eatDate){
-		                    //selectedTime 배열에 선택한 날짜의 예약시간을 배열로 저장
-		                  	selectedTime.push(data[i].eatTime);
-		                  }      
-		             }
-		               
+		       
+		             
 		             //btnVal 이란 배열에 버튼의 value값 넣기
 		             for(let i=0; i<checkTimeBtn.length; i++){
 		             	btnVal.push(document.getElementsByClassName('timeBtn')[i].value+":00");
 		             }
-		               
-		               
-		             for(let i=0; i<selectedTime.length; i++){
-		             		if(selectedTime[i].toString == btnVal[i].toString){
-		                    //unTime이란 배열에 비활성화할 값 넣음
-		                    unTime.push(selectedTime[i]);
-		                  	}
-		             }
-		               
-		             //버튼 비활성화 css
-		             for(let i=0; i<btnVal.length; i++){
-		                  for(let j=0; j<unTime.length; j++){
-		                     if(btnVal[i]==unTime[j]){
-		                        checkTimeBtn[i].style.color="red";
-		                        checkTimeBtn[i].style.background="pink";
-		                        checkTimeBtn[i].setAttribute("disabled", true);
-		                     }
+		             
+		              var maxNum = "${s.maxNum}";
+		              var selectDate = $("#datePicker").val();
+		              var storeNo = "${s.storeNo}";
+		              
+		              $.ajax({
+		                  url: "/checkReserveTime.do",
+		                  type:"post",
+		                  data: {storeNo:storeNo,selectDate:selectDate, maxNum:maxNum},
+		                  success: function(data){
+		                	  for(let i=0; i<data.length; i++){
+		                		  disabledTime.push(data[i].eatTime);
+		                	  }
+		                	  
+					             for(let i=0; i<btnVal.length; i++){
+					            	 
+					                  for(let j=0; j<disabledTime.length; j++){
+					                     if(btnVal[i]==disabledTime[j]){
+					                        checkTimeBtn[i].style.color="red";
+					                        checkTimeBtn[i].style.background="pink";
+					                        checkTimeBtn[i].setAttribute("disabled", true);
+					                     }
+					                  }
+					             }
+		                	  
+		                	  
 		                  }
-		             }
-               
+		              }); //--------------내부 ajax종료
+
+
+			             
+		              
             	}//--------success문 종료
                 
               }); //--------------ajax종료
-             
+              
+              
+
          });//데이트 피커 눌렀을 떄 함수 종료
          
             

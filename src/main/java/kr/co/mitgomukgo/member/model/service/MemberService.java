@@ -69,6 +69,12 @@ public class MemberService {
 		return (ArrayList<Reserve>)rs;
 	}
 
+	public ArrayList<Reserve> selectAllReserve(int storeNo) {
+		ArrayList<Reserve> rs = dao.selectAllReserve(storeNo);
+		return (ArrayList<Reserve>) rs;
+	}
+
+
 
 	
 	

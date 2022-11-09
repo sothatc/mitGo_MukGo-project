@@ -48,7 +48,7 @@ function initTmap() {
 				console.log(resultInfo);
 
 				//기존 마커 삭제
-				marker1.setMap(null);
+				resettingMap();
 				// 3.마커 찍기
 				// 검색 결과 정보가 없을 때 처리
 				if (resultInfo.coordinate.length == 0) {
@@ -85,14 +85,14 @@ function initTmap() {
 					var markerPosition = new Tmapv2.LatLng(Number(S_lat), Number(S_lon));
 					
 					// 마커 올리기
-					marker1 = new Tmapv2.Marker(
+					marker_s = new Tmapv2.Marker(
 						{
 							position: markerPosition,
-							icon: "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_b_m_a.png",
-							iconSize: new Tmapv2.Size(
-								24, 38),
+							icon: "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_s.png",
+							iconSize: new Tmapv2.Size(24, 38),
 							map: map
 						});
+					
 					map.setCenter(markerPosition);
 					// 검색 결과 표출
 					var matchFlag, newMatchFlag;
@@ -320,8 +320,15 @@ function initTmap() {
 					}
 
 					var markerPosition = new Tmapv2.LatLng(Number(E_lat), Number(E_lon));
-
 					// 마커 올리기
+					marker_e = new Tmapv2.Marker(
+						{
+							position: markerPosition,
+							icon: "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_e.png",
+							iconSize: new Tmapv2.Size(24, 38),
+							map: map
+						});
+					/*
 					marker1 = new Tmapv2.Marker(
 						{
 							position: markerPosition,
@@ -330,6 +337,7 @@ function initTmap() {
 								24, 38),
 							map: map
 						});
+					*/
 					map.setCenter(markerPosition);
 
 					// 검색 결과 표출
@@ -864,6 +872,7 @@ function initTmap() {
 					}
 				}//for문 [E]
 				drawLine(drawInfoArr);
+				
 			},
 			error: function (request, status, error) {
 				console.log("code:" + request.status + "\n"
@@ -1094,32 +1103,28 @@ const selectCar = $(".selectCar");
 const selectFoot = $(".selectFoot");
 
 selectCar.on("click", function () {
-	selectCar.css("background-color","black")
-	selectCar.css("color","white")
+	selectCar.css("background-color","black");
+	selectCar.css("color","white");
 
-	selectFoot.css("background-color","white")
-	selectFoot.css("color","black")
+	selectFoot.css("background-color","white");
+	selectFoot.css("color","black");
 
-	$(".car-content").css("display", "block")
-	$(".foot-content").css("display", "none")
+	$(".car-content").css("display", "block");
+	$(".foot-content").css("display", "none");
 
-	$(".map-content-wrap>div:first-child>div:first-child").css("border-bottom", "none");
-	$(".map-content-wrap>div:first-child>div:last-child").css("border-bottom", "solid 2px black");
 });
 
 
 selectFoot.on("click", function () {
-	selectCar.css("background-color","white")
-	selectCar.css("color","black")
+	selectCar.css("background-color","white");
+	selectCar.css("color","rgb(51,51,51)");
 
-	selectFoot.css("background-color","black")
-	selectFoot.css("color","white")
+	selectFoot.css("background-color","rgb(51,51,51)");
+	selectFoot.css("color","white");
 
-	$(".foot-content").css("display", "block")
-	$(".car-content").css("display", "none")
+	$(".foot-content").css("display", "block");
+	$(".car-content").css("display", "none");
 
-	$(".map-content-wrap>div:first-child>div:last-child").css("border-bottom", "none");
-	$(".map-content-wrap>div:first-child>div:first-child").css("border-bottom", "solid 2px black");
 });
 
 selectCar.click();

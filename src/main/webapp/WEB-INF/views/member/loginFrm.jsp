@@ -12,7 +12,7 @@
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-    <div class="login-wrap">
+    <div class="login-wrap login-wrap-img">
         <div class="login-input">
             <div>Login</div>
             <div>가입하신 아이디로 로그인 하세요.</div>

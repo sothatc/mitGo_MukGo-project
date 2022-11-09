@@ -1,6 +1,6 @@
 @charset "UTF-8";
 .map-content-wrap{
-	width: 70vW;
+	width: 100%;
 	margin: 0 auto;
 }
 .map-content-wrap>div:nth-child(3){
@@ -20,6 +20,7 @@
     border: solid 2px black;
     border-radius: 25px;
 }
+
 .selectCar:hover,.selectFoot:hover{
     cursor: pointer;
 }
@@ -27,9 +28,17 @@
 	display: flex;
     justify-content: center;
 }
-
+.address-wrap{
+    display: inline-block;
+    float: left;
+}
+.ft_select{
+    overflow: hidden;
+}
 .car-content,.foot-content{
     display: none;
+    float: left;
+    padding-left: 10px;
 }
 
 #result{
@@ -46,4 +55,10 @@
 #fullAddr{
     border: solid 2px black;
     border-radius: 10px;
+    width: 300px;
+    text-align: center;
 }
+.startBtn, #btn_select1, #btn_select2{
+    border-radius: 10px;
+}
+
