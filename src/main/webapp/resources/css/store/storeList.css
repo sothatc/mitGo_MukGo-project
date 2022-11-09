@@ -242,6 +242,7 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	color: red;
 }
 .showList>a>div>img {
 	width: 200px;
