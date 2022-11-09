@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -51,7 +53,7 @@
 								<th scope="col">인원수</th>
 								<th scope="col">방문상태</th>
 							</tr>
-							<c:forEach items="${rs }" var="rs">
+							<c:forEach items="${list }" var="rs">
 							<tr>
 								<td scope="row">${rs.reserveNo }</td>
 								<td scope="row">${rs.reserverName }</td>
@@ -71,6 +73,7 @@
 						</table>
 					</div>
 				</div>
+			<div class="page">${pageNavi }</div>
 			</div>
 		</article>
 	</div>

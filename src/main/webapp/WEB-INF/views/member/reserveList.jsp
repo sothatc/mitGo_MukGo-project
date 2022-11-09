@@ -95,7 +95,7 @@
 									<td>${rs.eatDate }</td>
 									<td>${rs.eatTime }</td>
 									<td><c:choose>
-											<c:when test="${rs.RStatus } eq 0">
+											<c:when test="${0 eq rs.RStatus }">
 												<button type="button" class="reviewBtn"
 													onclick="WirteReview(this,${rs.reserveNo},${rs.storeNo},'${rs.storeName }')">리뷰쓰기</button>
 											</c:when>
@@ -127,6 +127,13 @@
 	function updateReview(obj,reserveNo, storeNo, storeName) {
 		var win = window.open("/updateReviewFrm.do?storeNo="+storeNo+"&storeName="+storeName+"&reserveNo="+reserveNo, "_blank", "toolbar=yes,scrollbars=yes,top=200,left=600,width=520,height=500");
 	};
+	
+	$(".cancleBtn").on("click", function() {
+		if (confirm("예약을 취소 하시겠습니까?")) {
+			const reserveNo = $(this).parent().parent().children().eq(0).text();
+			$(location).attr('href', "/cancleReserve.do?reserveNo=" + reserveNo);
+		}
+	});
 	</script>
 
 </body>

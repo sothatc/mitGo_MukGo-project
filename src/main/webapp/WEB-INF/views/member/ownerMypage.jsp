@@ -29,13 +29,13 @@
 										<div><a href="/updateStoreFrm.do">업체 정보 수정</a></div>
 										<div><a href="/addMenuFrm.do">메뉴 추가</a></div>
 										<div><a href="/menuFrm.do">메뉴 관리</a></div>
-										<div><a href="/reserveManage.do">예약관리</a></div>
+										<div><a href="/reserveManage.do?reqPage=1">예약관리</a></div>
 									</c:when>
 									<c:otherwise>
 										<div><a href="/updateStoreFrm.do">업체 정보 수정</a></div>
 										<div><a href="/addMenuFrm.do">메뉴 추가</a></div>
 										<div><a href="/menuFrm.do">메뉴 관리</a></div>
-										<div><a href="/reserveManage.do">예약관리</a></div>
+										<div><a href="/reserveManage.do?reqPage=1">예약관리</a></div>
 										<div><a href="#">마켓관리</a></div>
 									</c:otherwise>
 								</c:choose>

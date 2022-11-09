@@ -13,7 +13,7 @@
 		from reserve r
 		where member_no = #{memberNo}
 	</select>
-	<select id="selectAllReserve" resultType="rs" parameterType="int">
+	<select id="selectAllReserve" resultType="rs" parameterType="map">
 		select 
 		    reserve_no as reserveNo,
 		    rs.member_no as memberNo,
@@ -28,4 +28,13 @@
 		where store_no = #{storeNo}
 		order by 5 desc
 	</select>
+	
+	<select id="countReserveList" parameterType="int" resultType="_int">
+		select count(*) as cnt from reserve where store_no = #{storeNo}
+	</select>
+	
+	<delete id="cancleReserve" parameterType="int">
+		delete from reserve
+		where reserve_No = #{_parameter}
+	</delete>
 </mapper>

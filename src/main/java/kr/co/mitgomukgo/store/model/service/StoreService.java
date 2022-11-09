@@ -402,6 +402,14 @@ public class StoreService {
 		return dao.selectOneReview(reserveNo);
 	}
 
+	public int updateReview(Review r) {
+		return dao.updateReview(r);
+	}
+
+	public int deleteReview(int reviewNo) {
+		return dao.deleteReview(reviewNo);
+	}
+
 
 	
 
