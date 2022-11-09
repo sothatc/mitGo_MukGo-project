@@ -34,7 +34,7 @@
 	<h2><a href="payment.jsp">결제화면 생성중(김아람)</a></h2>
 	<h2><a href="index2.jsp">인덱스 </a></h2>
 	<h2><a href="marketMain.jsp">마켓메인</a></h2>
-	
+	<h2><a href="/qnalist.do?reqPage=1">qna(안형관)</a></h2>
 	
 
 
