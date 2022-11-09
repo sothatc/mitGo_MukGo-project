@@ -1,13 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <h2>사업자 마이페이지</h2>
-<aside id="aside" class="sidebar">
+<aside id="aside" class="sidebar" style="padding-top: 0px;">
 	<div class="sidebar-1">
 		<ul class="category">
 			<li>
-				<div>
-					<a href="/ownerMypage.do">내 정보 수정</a>
-				</div>
 				<c:choose>
 					<c:when test="${empty s }">
 						<div>
@@ -17,39 +14,63 @@
 					<c:otherwise>
 						<c:choose>
 							<c:when test="${sessionScope.o.ownerLevel == 1}">
-								<div>
-									<a href="/updateStoreFrm.do">업체 정보 수정</a>
-								</div>
-								<div>
-									<a href="/addMenuFrm.do">메뉴 추가</a>
-								</div>
-								<div>
-									<a href="/menuFrm.do">메뉴 관리</a>
-								</div>
-								<div>
-									<a href="/reserveManage.do?reqPage=1">예약관리</a>
+								<div class="accordion-item">
+									<h2 class="accordion-header" id="flush-headingOne">
+										<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">업체</button>
+									</h2>
+									<div>
+										<a href="/updateStoreFrm.do">업체 정보 수정</a>
+									</div>
+									<div>
+										<a href="/addMenuFrm.do">메뉴 추가</a>
+									</div>
+									<div>
+										<a href="/menuFrm.do">메뉴 관리</a>
+									</div>
+									<div>
+										<a href="/reserveManage.do?reqPage=1">예약관리</a>
+									</div>
 								</div>
 							</c:when>
 							<c:otherwise>
-								<div>
-									<a href="/updateStoreFrm.do">업체 정보 수정</a>
+								<div class="accordion-item">
+									<h2 class="accordion-header" id="flush-headingOne">
+										<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">업체</button>
+									</h2>
+									<div>
+										<a href="/updateStoreFrm.do">업체 정보 수정</a>
+									</div>
+									<div>
+										<a href="/addMenuFrm.do">메뉴 추가</a>
+									</div>
+									<div>
+										<a href="/menuFrm.do">메뉴 관리</a>
+									</div>
+									<div>
+										<a href="/reserveManage.do?reqPage=1">예약관리</a>
+									</div>
 								</div>
-								<div>
-									<a href="/addMenuFrm.do">메뉴 추가</a>
-								</div>
-								<div>
-									<a href="/menuFrm.do">메뉴 관리</a>
-								</div>
-								<div>
-									<a href="/reserveManage.do?reqPage=1">예약관리</a>
-								</div>
-								<div>
-									<a href="#">마켓관리</a>
+								<div class="accordion-item">
+									<h2 class="accordion-header" id="flush-headingOne">
+										<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">마켓</button>
+									</h2>
+									<div>
+										<a href="#">상품추가</a>
+									</div>
+									<div>
+										<a href="#">상품관리</a>
+									</div>
+									<div>
+										<a href="#">주문관리</a>
+									</div>
 								</div>
 							</c:otherwise>
 						</c:choose>
 					</c:otherwise>
 				</c:choose>
+				<div>
+					<a href="/ownerMypage.do">내 정보 수정</a>
+				</div>
 				<div>
 					<a href="/ownerLogout.do">로그아웃</a>
 				</div>
