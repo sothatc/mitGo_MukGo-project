@@ -40,6 +40,10 @@ public class StoreController {
 	@Autowired
 	private FileRename fileRename;
 
+	public StoreController() {
+		super();
+	}
+
 	// 맛집 상세 보기 페이지 이동
 	@RequestMapping(value = "/storeDetailView.do")
 	public String storeDetailView() {
@@ -48,19 +52,41 @@ public class StoreController {
 
 	// 맛집 상세 보기
 	@RequestMapping(value = "/storeDetail.do")
-	public String StoreDetail(int storeNo, Model model) {
-		// ArrayList<Store> list = service.selectOneStore(storeNo);
+	public String StoreDetail(int storeNo, Model model, Menu m) {
 		Store s = service.selectOneStore(storeNo);
 		model.addAttribute("s", s);
+		ArrayList<Menu> list = service.selectMenuList(storeNo);
+		model.addAttribute("list", list);
+		ArrayList<Review> reviewList = service.selectReviewList(storeNo);
+		model.addAttribute("rList", reviewList);
 		return "store/storeDetail";
 	}
 
 	// 맛집 이미지 배열로 가져오기
 	@ResponseBody
 	@RequestMapping(value = "/ajaxSelectStore.do", produces = "application/json;charset=utf-8")
-	public String ajaxSelectStore(StoreJoin sj) {
-
+	public String ajaxSelectStore(StoreJoin sj, Model model) {
 		ArrayList<StoreJoin> list = service.selectOneStoreAjax(sj);
+		Gson gson = new Gson();
+		String result = gson.toJson(list);
+		return result;
+	}
+
+	// 예약된 시간/날짜 확인하기
+	@ResponseBody
+	@RequestMapping(value = "/checkReserve.do", produces = "application/json;charset=utf-8")
+	public String ajaxCheckReserve(Reserve r) {
+		ArrayList<Reserve> list = service.ajaxCheckReserve(r);
+		Gson gson = new Gson();
+		String result = gson.toJson(list);
+		return result;
+	}
+
+	// 비활성화 시간 확인하기
+	@ResponseBody
+	@RequestMapping(value = "/checkReserveTime.do", produces = "application/json;charset=utf-8")
+	public String ajaxCheckReserveTime(String selectDate, int maxNum, int storeNo) {
+		ArrayList<Reserve> list = service.ajaxCheckReserveTime(selectDate, maxNum, storeNo);
 		Gson gson = new Gson();
 		String result = gson.toJson(list);
 		return result;
@@ -76,12 +102,14 @@ public class StoreController {
 			return "redirect:/";
 		}
 	}
-
+	
+	// 리뷰작성 폼이동
 	@RequestMapping(value = "/addStoreFrm.do")
 	public String addStoreFrm() {
 		return "store/addStoreFrm";
 	}
-
+	
+	// 리뷰작성
 	@RequestMapping(value = "/addStore.do")
 	public String addStore(Store s, MultipartFile[] file, HttpServletRequest request, String zipCode,
 			String detailAddress, String closedHour) {
@@ -117,7 +145,8 @@ public class StoreController {
 		int result = service.addStore(s);
 		return "redirect:/storeList.do?reqPage=1";
 	}
-
+	
+	// 업체 리스트출력
 	@RequestMapping(value = "/storeList.do")
 	public String storeListFrm(int reqPage, Model model) {
 		HashMap<String, Object> map = service.storeList(reqPage);
@@ -135,12 +164,15 @@ public class StoreController {
 		}
 		// ArrayList<Store> list = service.storeList();
 	}
-
+	
+	// 리뷰쓰기 폼
 	@RequestMapping(value = "/writeReviewFrm.do")
-	public String writeReviewFrm() {
+	public String writeReviewFrm(Reserve r, Model model) {
+		model.addAttribute("r", r);
 		return "store/writeReviewFrm";
 	}
-
+	
+	// 리뷰쓰기
 	@RequestMapping(value = "/writeReview.do")
 	public String writeReview(Review r, MultipartFile reviewImgName, HttpServletRequest request) {
 		if (!reviewImgName.isEmpty()) {
@@ -164,6 +196,54 @@ public class StoreController {
 		}
 		int result = service.writeReview(r);
 		return "store/successReivewFrm";
+	}
+	
+	// 리뷰 수정 폼
+	@RequestMapping(value = "/updateReviewFrm.do")
+	public String updateReviewFrm(Reserve r, Model model) {
+		Review re = service.selectOneReview(r.getReserveNo());
+		model.addAttribute("r", r);
+		model.addAttribute("re", re);
+		return "store/updateReviewFrm";
+	}
+	
+	// 리뷰 수정
+	@RequestMapping(value = "/updateReview.do")
+	public String updateReview(Review r, MultipartFile reviewImgName, HttpServletRequest request) {
+		if (!reviewImgName.isEmpty()) {
+			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/review/");
+			String filename = reviewImgName.getOriginalFilename();
+			String imgpath = fileRename.fileRename(savePath, filename);
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath + imgpath));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				byte[] bytes = reviewImgName.getBytes();
+				bos.write(bytes);
+				bos.close();
+				r.setReviewImg(imgpath);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		int result = service.updateReview(r);
+		return "store/successReivewFrm";
+	}
+	
+	// 리뷰 삭제
+	@RequestMapping(value = "/deleteReview.do")
+	public String deleteReview(int reviewNo, HttpServletRequest request) {
+		int result = service.deleteReview(reviewNo);
+		if (result > 0) {
+			return "store/successDeleteReivewFrm";
+		} else {
+			request.setAttribute("msg", "삭제시 문제가 발생했습니다.");
+			request.setAttribute("url", "/updateReviewFrm.do");
+			return "common/alert";
+		}
 	}
 
 	@RequestMapping(value = "/menuFrm.do")
@@ -206,7 +286,7 @@ public class StoreController {
 	@RequestMapping(value = "/deleteMenu.do")
 	public String deleteMenu(int menuNo, HttpServletRequest request) {
 		int result = service.deleteMenu(menuNo);
-		if(result > 0) {
+		if (result > 0) {
 			return "redirect:/menuFrm.do";
 		} else {
 			request.setAttribute("msg", "삭제시 문제가 발생했습니다.");
@@ -214,14 +294,14 @@ public class StoreController {
 			return "common/alert";
 		}
 	}
-	
+
 	@RequestMapping(value = "/updateMenuFrm.do")
 	public String updateMenuFrm(int menuNo, Model model) {
 		Menu me = service.readOneMenu(menuNo);
 		model.addAttribute("me", me);
 		return "store/updateMenuFrm";
 	}
-	
+
 	@RequestMapping(value = "/updateMenu.do")
 	public String updateMenu(Menu menu, MultipartFile file, HttpServletRequest request) {
 		if (!file.isEmpty()) {
@@ -244,7 +324,7 @@ public class StoreController {
 			menu.setMenuImg(menuPath);
 		}
 		int result = service.updateMenu(menu);
-		if(result > 0) {
+		if (result > 0) {
 			request.setAttribute("msg", "변경이 완료되었습니다.");
 			request.setAttribute("url", "/menuFrm.do");
 			return "common/alert";
@@ -256,37 +336,63 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/updateStoreFrm.do")
-	public String updateStoreFrm(HttpSession session, Model model) {
+	public String updateStoreFrm(HttpSession session, @SessionAttribute Store s, Model model) {
 		Owner o = (Owner) session.getAttribute("o");
-		ArrayList<Store> s = service.selectStore(o);
-		model.addAttribute("s", (ArrayList<Store>) s);
+		ArrayList<StoreImg> imgList = service.selectStoreImg(s.getStoreNo());
+		model.addAttribute("imgList", imgList);
 		return "/store/updateStoreFrm";
 	}
 
-	/*
-	 * @ResponseBody
-	 * 
-	 * @RequestMapping(value = "/ajaxClicktag.do", produces =
-	 * "application/json;charset=utf-8") public String ajaxClicktag(int tagValue,
-	 * int reqPage, Model model) { HashMap<String, Object> map =
-	 * service.storeList(tagValue,reqPage); //System.out.println(map); if(map ==
-	 * null) {
-	 * 
-	 * HashMap<String, Object> map = service.storeList(tagValue, reqPage);
-	 * System.out.println(map); if (map == null) { model.addAttribute("msg",
-	 * "아직 등록된 업체 가 없습니다."); return "store/storeListFrm"; } else {
-	 * 
-	 * model.addAttribute("list", map.get("list")); model.addAttribute("reqPage",
-	 * reqPage); model.addAttribute("pageNavi", map.get("pageNavi"));
-	 * model.addAttribute("total", map.get("total")); model.addAttribute("pageNo",
-	 * map.get("pageNo"));
-	 * 
-	 * // 착각하지말것 json은 객체타입이 아닌 문자열임 // 그런고로 String 타입으로 받음 Gson gson = new Gson();
-	 * String result = gson.toJson(map); //System.out.println(result);
-	 * //System.out.println(model);
-	 * 
-	 * return result; } }
-	 */
+	@RequestMapping(value = "/updateStore.do")
+	public String updateStore(int[] imgNoList, Store s, String[] imgpathList, MultipartFile[] file,
+			HttpServletRequest request, String zipCode, String detailAddress, String closedHour) {
+		ArrayList<StoreImg> storeImgList = new ArrayList<StoreImg>();
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/store/");
+		if (!file[0].isEmpty()) {
+			for (MultipartFile File : file) {
+				String filename = File.getOriginalFilename();
+				String imgpath = fileRename.fileRename(savePath, filename);
+				File upFile = new File(savePath + imgpath);
+				try {
+					FileOutputStream fos = new FileOutputStream(upFile);
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					byte[] bytes = File.getBytes();
+					bos.write(bytes);
+					bos.close();
+					StoreImg si = new StoreImg();
+					si.setImgpath(imgpath);
+					storeImgList.add(si);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		s.setStoreImgList(storeImgList);
+		s.setAddress(zipCode + "*" + s.getAddress() + "*" + detailAddress);
+		s.setOpenHour(s.getOpenHour() + "~" + closedHour);
+		int result = service.updateStore(s, imgNoList);
+		if (imgNoList != null && (result == (storeImgList.size() + imgNoList.length + 1))) {
+			if (imgpathList != null) {
+				for (String filepath : imgpathList) {
+					File delFile = new File(savePath + filepath);
+					delFile.delete();
+				}
+			}
+		}
+		if (result > 0) {
+			request.setAttribute("msg", "변경이 완료되었습니다.");
+			request.setAttribute("url", "/");
+			return "common/alert";
+		} else {
+			request.setAttribute("msg", "변경 중 문제가 발생했습니다.");
+			request.setAttribute("url", "/updateStoreFrm.do");
+			return "common/alert";
+		}
+	}
 
 	@RequestMapping(value = "/selectTag.do")
 	public String selectTag(String category, int reqPage, Model model) {
@@ -301,10 +407,9 @@ public class StoreController {
 
 		return "store/storeListFrm";
 	}
-	
+
 	@RequestMapping(value = "/searchStoreList.do")
-	public String searchStoreList(String search, int reqPage, Model model,@RequestParam String category) {
-		System.out.println(category);
+	public String searchStoreList(String search, int reqPage, Model model, @RequestParam String category) {
 		HashMap<String, Object> map = service.searchStoreList(search, reqPage, category);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
@@ -313,6 +418,20 @@ public class StoreController {
 		model.addAttribute("total", map.get("total"));
 		model.addAttribute("pageNo", map.get("pageNo"));
 
+		return "store/storeListFrm";
+	}
+
+	@RequestMapping(value = "/sortStoreList.do")
+	public String sortStoreList(String storeListSort, int reqPage, Model model, @RequestParam String category) {
+		HashMap<String, Object> map = service.sortStoreList(storeListSort, reqPage, category);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("category", category);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
+		model.addAttribute("storeListSort", storeListSort);
+		
 		return "store/storeListFrm";
 	}
 }

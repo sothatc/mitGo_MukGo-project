@@ -44,14 +44,14 @@ public class StoreDao {
 	}
 
 	public ArrayList<Store> storeList(HashMap<String, Object> map) {
-		List list = sqlSession.selectList("store.storeList", map);
-		if (list.isEmpty()) {
+		List list = sqlSession.selectList("store.storeList",map);
+		if(list.isEmpty()) {
 			return null;
-		} else {
-			return (ArrayList<Store>) list;
+		}else {
+			return (ArrayList<Store>) list;	
 		}
 	}
-
+	
 	public int countAllList() {
 		return sqlSession.selectOne("store.countAllList");
 	}
@@ -60,42 +60,43 @@ public class StoreDao {
 		return sqlSession.insert("addMenu", me);
 	}
 
-	// 맛집 상세
+	//맛집 상세 
 	public Store selectOneStore(int storeNo) {
-		Store s = sqlSession.selectOne("store.selectOneStore", storeNo);
+		Store s = sqlSession.selectOne("store.selectOneStore",storeNo);
 		return s;
 	}
 
-	// 맛집 상세 - 조인
+	//맛집 상세 - 조인
 	public ArrayList<StoreJoin> selectOneStoreAjax(StoreJoin sj) {
-		List list = sqlSession.selectList("store.selectOneStoreAjax", sj);
+		List list = sqlSession.selectList("store.selectOneStoreAjax",sj);
 		return (ArrayList<StoreJoin>) list;
 	}
-
+	
 	public ArrayList<Store> selectStore(Owner o) {
-		List s = sqlSession.selectList("store.selectMyStore", o);
+		List s = sqlSession.selectList("store.selectMyStore",o);
 		return (ArrayList<Store>) s;
 	}
 
 	public ArrayList<Store> selectTag(HashMap<String, Object> map) {
-		List list = sqlSession.selectList("store.selectTag", map);
-		return (ArrayList<Store>) list;
+		List list = sqlSession.selectList("store.selectTag",map);
+		return (ArrayList<Store>)list;
 	}
-
+	
 	public int countTagList(String category) {
-		return sqlSession.selectOne("store.countTagList", category);
+		return sqlSession.selectOne("store.countTagList",category);
 	}
 
 	public ArrayList<Store> searchStoreList(HashMap<String, Object> map) {
-		List list = sqlSession.selectList("store.searchStoreList", map);
-		return (ArrayList<Store>) list;
+		List list = sqlSession.selectList("store.searchStoreList",map);
+		return (ArrayList<Store>)list;
 	}
-
-	// 예약하기
+	
+	//예약하기
 	public int reserve(Reserve r) {
-		int result = sqlSession.insert("store.insertReserve", r);
-		return result;
+	    int result = sqlSession.insert("store.insertReserve",r);
+	    return result;
 	}
+	
 
 	public ArrayList<Menu> menuList(int storeNo) {
 		List list = sqlSession.selectList("menuList", storeNo);
@@ -105,7 +106,7 @@ public class StoreDao {
 	public int deleteMenu(int menuNo) {
 		return sqlSession.delete("deleteMenu", menuNo);
 	}
-
+	
 	public Menu readOneMenu(int menuNo) {
 		return sqlSession.selectOne("readOneMenu", menuNo);
 	}
@@ -113,5 +114,63 @@ public class StoreDao {
 	public int updateMenu(Menu menu) {
 		return sqlSession.update("updateMenu", menu);
 	}
+	
+
+	public ArrayList<Reserve> checkReserve(Reserve r) {
+		List list = sqlSession.selectList("store.checkReserve", r);
+		return (ArrayList<Reserve>)list;
+	}
+	
+	//비활성화 시간 확인하기
+	public ArrayList<Reserve> ajaxCheckReserveTime(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("store.ajaxCheckReserveTime", map);
+		return (ArrayList<Reserve>)list;
+	}
+	
+	
+	//맛집 상세 - 메뉴조회
+	public ArrayList<Menu> selectMenuList(int storeNo) {
+		List list = sqlSession.selectList("store.selectMenuList", storeNo);
+		return (ArrayList<Menu>)list;
+	}
+
+
+
+	public ArrayList<Store> sortStoreList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("store.sortStoreList", map);
+		return (ArrayList<Store>) list;
+	}
+
+	public ArrayList<StoreImg> selectImg(int storeNo) {
+		List list = sqlSession.selectList("store.selectImg",storeNo);
+		return (ArrayList<StoreImg>) list;
+	}
+
+
+	public int updateStore(Store s) {
+		return sqlSession.update("store.updateStore",s);
+	}
+
+	public int deleteImg(int imgNo) {
+		return sqlSession.delete("store.deleteStoreImg", imgNo);
+	}
+	public ArrayList<Review> selectReviewList(int storeNo) {
+		List list = sqlSession.selectList("selectReviewList", storeNo);
+		return (ArrayList<Review>) list;
+
+	}
+
+	public Review selectOneReview(int reserveNo) {
+		return sqlSession.selectOne("selectOneReivew", reserveNo);
+	}
+
+	public int updateReview(Review r) {
+		return sqlSession.update("updateReview", r);
+	}
+
+	public int deleteReview(int reviewNo) {
+		return sqlSession.delete("deleteReview", reviewNo);
+	}
+
 
 }

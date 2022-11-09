@@ -19,5 +19,8 @@ public class Reserve {
 	private String eatDate;
 	private String eatTime;
 	private int eatNum;
-	
+	private String reserverName;
+	private int rStatus;
+	private int visitStatus;
+
 }

@@ -68,12 +68,14 @@
 
 	<context:component-scan base-package="kr.co.mitgomukgo.member" />
 	<context:component-scan base-package="kr.co.mitgomukgo.store" />
-	<context:component-scan base-package="kr.co.mitgomukgo.faq"></context:component-scan>
+	<context:component-scan base-package="kr.co.mitgomukgo.faq"/>
 	<context:component-scan base-package="common" />
 	<context:component-scan base-package="kr.co.mitgomukgo.map" />
 	<context:component-scan base-package="kr.co.common" />
-	<context:component-scan base-package="kr.co.mitgomukgo.notice"></context:component-scan>
-
+	<context:component-scan base-package="kr.co.mitgomukgo.notice"/>
+	<context:component-scan base-package="kr.co.mitgomukgo.qna"/>
+	<context:component-scan base-package="kr.co.mitgomukgo.market"/>
+	<context:component-scan base-package="kr.co.mitgomukgo.cart"/>
 
 
 </beans:beans>

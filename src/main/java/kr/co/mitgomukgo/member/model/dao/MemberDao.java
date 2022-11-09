@@ -1,6 +1,7 @@
 package kr.co.mitgomukgo.member.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -67,5 +68,24 @@ public class MemberDao {
 		return (ArrayList<Reserve>)rs;
 	}
 
+
+
+	public ArrayList<Reserve> selectAllReserve(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("reserve.selectAllReserve", map);
+		return (ArrayList<Reserve>) list;
+	}
+
+	public int countReserveList(int storeNo) {
+		return sqlSession.selectOne("reserve.countReserveList",storeNo);
+	}
+
+
+	public ArrayList<Reserve> searchReserve(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("reserve.searchReserve", map);
+		return (ArrayList<Reserve>) list;
+	}
 	
+	public int cancleReserve(int reserveNo) {
+		return sqlSession.delete("cancleReserve", reserveNo);
+	}
 }

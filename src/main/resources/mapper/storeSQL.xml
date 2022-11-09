@@ -15,7 +15,8 @@
 		#{closedDay},
 		#{category},
 		#{withEatCate},
-		#{whereEatCate}
+		#{whereEatCate},
+		#{maxNum}
 		)
 	</insert>
 
@@ -38,8 +39,9 @@
 		insert into review
 		values
 		(review_seq.nextval,
-		85,
-		'user01',
+		#{storeNo},
+		#{reserveNo},
+		#{writer},
 		#{rating},
 		#{content},
 		#{reviewImg},
@@ -65,6 +67,7 @@
 		witheat_cate as
 		withEatCate,
 		whereeat_cate as whereEatCate,
+		(select round(avg(rating),1) from review r where r.store_no = s.store_no)as rating, 
 		(select imgpath from store_img si where storeimg_no = (select
 		min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
 		as thumbNail
@@ -92,6 +95,7 @@
 		witheat_cate as
 		withEatCate,
 		whereeat_cate as whereEatCate,
+		(select round(avg(rating),1) from review r where r.store_no = s.store_no)as rating,
 		(select imgpath from store_img si where storeimg_no = (select
 		min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
 		as thumbNail
@@ -118,6 +122,7 @@
 		witheat_cate as
 		withEatCate,
 		whereeat_cate as whereEatCate,
+		(select round(avg(rating),1) from review r where r.store_no = s.store_no)as rating,
 		(select imgpath from store_img si where storeimg_no = (select
 		min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
 		as thumbNail from store s order by storeNo desc)b where category =
@@ -139,7 +144,8 @@
 		category,
 		content,
 		storeimg_no as storeImgNo,
-		imgpath
+		imgpath,
+		max_num as maxNum
 		from store
 		join store_img using(store_no)
 		where store_no = #{storeNo}
@@ -157,7 +163,9 @@
 		phone,
 		closed_day as closedDay,
 		category,
-		content
+		content,
+		max_num as maxNum,
+        (SELECT ROUND(avg(RATING), 1) from REVIEW where STORE_NO = #{_parameter}) as rating       
 		from store
 		where store_no = #{_parameter}
 	</select>
@@ -199,12 +207,21 @@
 	</select>
 
 	<select id="searchStore" parameterType="int" resultType="s">
-		select
-		store_no as storeNo
-		from store
+		select 
+			store_no as storeNo,
+			store_name as storeName,
+			owner_no as ownerNo,
+			address,
+			phone,
+			content,
+			open_hour as openHour,
+			closed_day as closedDay,
+			category,
+			witheat_cate as withEatCate,
+			whereeat_cate as whereEatCate
+		from store 
 		where owner_no = #{ownerNo}
 	</select>
-
 
 	<select id="countTagList" parameterType="string"
 		resultType="_int">
@@ -228,6 +245,7 @@
 		witheat_cate as
 		withEatCate,
 		whereeat_cate as whereEatCate,
+		(select round(avg(rating),1) from review r where r.store_no = s.store_no)as rating,
 		(select imgpath from store_img si where storeimg_no = (select
 		min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
 		as thumbNail from store s order by storeNo desc)b
@@ -240,13 +258,37 @@
 	</select>
 
 
+	<!-- 예약하기 -->
 	<insert id="insertReserve" parameterType="r">
-		insert into reserve
-		values(RESERVE_SEQ.NEXTVAL, #{memberNo}, #{storeNo}, #{storeName},
-		to_char(sysdate,'yyyy-mm-dd'),
-		#{eatDate}, #{eatTime}, #{eatNum})
-	</insert>
+      insert into reserve
+      values(RESERVE_SEQ.NEXTVAL, #{memberNo}, #{storeNo}, #{storeName}, to_char(sysdate,'yyyy-mm-dd'),
+      #{eatDate}, #{eatTime}, #{eatNum}, 1)
+    </insert>
+    
+    <!-- 예약한 건 확인 -->
+    <select id="checkReserve" resultType="rs" parameterType="rs">
+    	select
+    		reserve_no as reserveNo,
+    		member_no as memberNo,
+    		store_no as storeNo,
+    		store_name as storeName,
+    		reserve_date as reserveDate,
+    		eat_date as eatDate,
+    		eat_time as eatTime,
+    		eat_num as eatNum
+    	from reserve
+    	where store_no =  #{storeNo}
+    </select>
+    
 
+    <select id="ajaxCheckReserveTime" resultType="rs" parameterType="map">
+		SELECT
+		    EAT_TIME as eatTime
+		FROM RESERVE 
+		WHERE STORE_NO=#{storeNo} AND EAT_DATE=#{selectDate}  
+		GROUP BY EAT_TIME 
+		HAVING SUM(EAT_NUM) >#{maxNum}
+    </select>
 
 	<select id="menuList" parameterType="int" resultType="me">
 		select
@@ -285,4 +327,128 @@
 		where menu_no =
 		#{menuNo}
 	</update>
+	
+
+
+	<select id="selectImg" parameterType="int" resultType="si">
+		select
+			storeimg_no as storeImgNo,
+			store_no as storeNo,
+			imgpath
+		from store_img
+		where store_no = #{storeNo}
+	</select>
+
+	<!-- 맛집 상세 > 메뉴 조회 -->
+	<select id="selectMenuList" parameterType="int" resultType="me">
+		select
+			menu_no as menuNo,
+			store_no as storeNo,
+			name as menuName,
+			price as menuPrice,
+			menu_img as menuImg
+		from menu
+    	where store_no = #{storeNo}
+    	order by menu_no DESC
+
+	</select>
+
+	<select id="sortStoreList" parameterType="map" resultType="s">
+		select * from
+		(select row_number() over (order by rnum desc) as rnum1, rb.* from
+		(select rownum as rnum, b.* from
+		(select
+		store_no as storeNo,
+		store_name as storeName,
+		owner_no as ownerNo,
+		address,
+		phone,
+		content,
+		open_hour as openHour,
+		closed_day as closedDay,
+		category,
+		witheat_cate as
+		withEatCate,
+		whereeat_cate as whereEatCate,
+		(select round(avg(rating),1) from review r where r.store_no = s.store_no)as rating,
+		(select imgpath from store_img si where storeimg_no = (select
+		min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
+		as thumbNail from store s order by storeNo desc)b
+		<if test="category != null and category != ''">
+			where category = #{category}
+		</if>
+		)rb   
+		<choose>
+			<when test="storeListSort.equals('new')">
+				order by 3 desc
+			</when>
+			<when test="storeListSort == old">
+				order by 3 asc
+			</when>
+			<when test="storeListSort.equals('grade')">
+				order by 14 asc
+			</when>
+		</choose>
+
+		where rnum between #{start} and #{end}
+	</select>
+	
+	<!-- 리뷰리스트 -->
+	<select id="selectReviewList" parameterType="int" resultType="r">
+		select 
+		review_no as reivewNo,
+		writer,
+		rating,
+		content,
+		review_img as reviewImg,
+		enroll_date as enrollDate
+		from review
+		where store_no = #{_parameter}
+	</select>
+
+	<update id="updateStore" parameterType="s">
+		update store
+		set 
+			store_name = #{storeName},
+			address = #{address},
+			phone = #{phone},
+			content = #{content},
+			open_hour = #{openHour},
+			closed_day = #{closedDay},
+			category = #{category},
+			witheat_cate = #{withEatCate},
+			whereeat_cate = #{whereEatCate}
+			max_num = #{maxNum}
+		where store_no = #{storeNo}
+	</update>
+	<delete id="deleteStoreImg" parameterType="int">
+		delete from store_img
+		where storeimg_no = #{imgNo}
+	</delete>
+	
+	<select id="selectOneReivew" parameterType="int" resultType="r">
+		select 
+			review_no as reviewNo,
+			writer,
+			rating,
+			content,
+			review_img as reviewImg,
+			enroll_date as enrollDate
+			from review
+			where reserve_no = #{_parameter}
+	</select>
+	
+	<update id="updateReview" parameterType="r">
+		update review set
+		rating = #{rating},
+		content = #{content},
+		review_img = #{reviewImg}
+		where review_no = #{reviewNo}
+	</update>
+	
+	<delete id="deleteReview" parameterType="int">
+		delete from review
+		where review_no = #{_parameter}	
+	</delete>
+
 </mapper>

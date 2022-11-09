@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>GOGO마켓</title>
+
 </head>
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -981,7 +982,6 @@
 		</div>
 	</section>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
-
 	<script src="/resources/js/index/jquery.min.js"></script>
 	<script src="/resources/js/index/bootstrap.bundle.min.js"></script>
 	<script src="/resources/js/index/owl.carousel.min.js"></script>

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -234,12 +235,58 @@ public class MemberController {
 	}
 	@RequestMapping(value="/reserveList.do")
 	public String reserveList(@SessionAttribute Member m, Model model) {
-		ArrayList<Reserve> rs = service.selectReserveList(m);
-		if(rs.isEmpty()) {
-			return "redirect:/";
+		ArrayList<Reserve> rsList = service.selectReserveList(m);
+		if(rsList.isEmpty()) {
+			return "member/reserveList";
 		}
-		model.addAttribute("rs", (ArrayList<Reserve>)rs);
+		model.addAttribute("rsList", rsList);
 		return "member/reserveList";
+	}
+	@RequestMapping(value="/reserveManage.do")
+	public String reserveManage(Model model, @SessionAttribute Store s, int reqPage) {
+		int storeNo = s.getStoreNo();
+		HashMap<String, Object> map = service.selectAllReserve(reqPage, storeNo);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
+		model.addAttribute("storeNo", storeNo);
+		return "member/ownerReserveManage";
+	}
+	@RequestMapping(value="/searchReserve.do")
+	public String searchReserve(String keyword, int storeNo, Model model, String reqPage1) {
+		int reqPage = Integer.parseInt(reqPage1);
+		HashMap<String, Object> map = service.searchReserve(keyword, storeNo, reqPage);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
+		model.addAttribute("storeNo", storeNo);
+		return "member/ownerReserveManage";
+	}
+	
+
+	@RequestMapping(value="/adminMemberManage.do")
+	public String adminMemberManage() {
+		return "member/admin";
+	}
+	
+
+	@RequestMapping(value = "cancleReserve.do")
+	public String cancleReserve(int reserveNo, HttpServletRequest request) {
+		int result = service.cancleReserve(reserveNo);
+		if(result > 0) {
+			request.setAttribute("msg", "예약이 취소되었습니다.");
+			request.setAttribute("url", "/reserveList.do");
+			return "common/alert";
+		} else {
+			request.setAttribute("msg", "취소 중 문제가 발생했습니다.");
+			request.setAttribute("url", "/reserveList.do");
+			return "common/alert";
+		}
 	}
 	
 }
+

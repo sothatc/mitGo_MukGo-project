@@ -15,22 +15,7 @@
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 </head>
 <body>
-	<div class="login-join"><a href="#">로그인/회원가입</a></div>
-    <div class="header-wrap">
-        <div class="header-list1">
-            <ul class="ul1">
-                <li>맛집리스트</li>
-                <li>상품리스트</li>
-            </ul>
-
-            <ul class="ul2">
-                <li>공지사항</li>
-                <li>고객센터</li>
-            </ul>
-
-            <a href="#"><img src="image/이미지/믿고먹고로고.png" alt=""></a>
-        </div>
-    </div> <!-- hashmap을 다시 가져오기 -->
+	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	
 	<c:choose>
 		<c:when test="${empty n}">
@@ -80,8 +65,8 @@
         <div class="notice-detail-btn">
         	<c:choose>
         		<c:when test="${not empty sessionScope.m and sessionScope.m.memberClass == 1}">
-        			<button type="button" class="btn btn-secondary" style="margin-right: 10px;">수정(관리자)</button>
-            		<button type="button" class="btn btn-outline-secondary" style="margin-left: 10px;">삭제(관리자)</button>
+        			<button type="button" class="btn btn-secondary" style="margin-right: 10px;" onclick="updateNoticeFrm(${n.noticeNo});">수정</button>
+            		<button type="button" class="btn btn-outline-secondary" style="margin-left: 10px;" onclick="deleteNotice(${n.noticeNo});">삭제</button>
         		</c:when>
         		
         		<c:otherwise>
@@ -97,9 +82,28 @@
     
 
     <script>
+    	function deleteNotice(noticeNo){
+    		location.href="/deleteNotice.do?noticeNo=" + noticeNo;
+    	}
+    
+    	function updateNoticeFrm(noticeNo){
+    		location.href="/updateNoticeFrm.do?noticeNo=" + noticeNo;
+    	}
+    
         function goNoticeList(){
             location.href="/selectNoticeList.do?reqPage=1";
         }
+        
+        
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+

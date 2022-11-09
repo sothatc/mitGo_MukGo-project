@@ -6,7 +6,6 @@ body{
     position: relative;
 }
 
-
 /*------------맛집 상세 페이지-----------*/
 
 .content-wrap{
@@ -26,8 +25,7 @@ body{
 }
 
 .content-wrap1-1{
-    width:fit-content;
-    float:left;
+
 }
 
 
@@ -39,7 +37,6 @@ body{
 }
 
 .reviewNum{
-    float: right;
     margin-left: 10px;
 }
 
@@ -258,7 +255,6 @@ button[name=recommendBtn]:hover{
 .content-wrap4{
 	margin-top: 20px;
     width: 80vw;
-    height: 3800px;;
     margin: 0 auto;
     border-top: 1px solid black;
 }

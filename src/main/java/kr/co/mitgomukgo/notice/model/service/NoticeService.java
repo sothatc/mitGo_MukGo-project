@@ -23,7 +23,7 @@ public class NoticeService {
 		int end = numPerPage * reqPage;
 		
 		// 시작
-		int start = (end - numPerPage) - 1;
+		int start = (end - numPerPage) + 1;
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
@@ -120,6 +120,111 @@ public class NoticeService {
 	public NoticeFile selectOneNoticeFile(int noticeFileNo) {
 		NoticeFile notice = dao.selectOneNoticeFile(noticeFileNo);
 		return notice;
+	}
+
+	public int updateNotice(Notice n, int[] fileNoList) {
+		int result = dao.updateNotice(n);
+		
+		if(result > 0) {
+			
+			// 추가한 파일이 있으면
+			for(NoticeFile nf : n.getFileList()) {
+				nf.setNoticeNo(n.getNoticeNo());
+				result += dao.insertNoticeFile(nf);
+			}
+			
+			// 삭제한 파일이 있다면
+			if(fileNoList != null) {
+				for(int fileNo : fileNoList) {
+					result += dao.deleteNoticeFile(fileNo);
+				}
+			}
+		}
+		return result;
+	}
+
+	public ArrayList<NoticeFile> selectNoticeFile(int noticeNo) {
+		ArrayList<NoticeFile> list = dao.selectALlNoticeFile(noticeNo);
+		
+		int result = dao.deleteNoticeFileList(noticeNo);
+		
+		if(result > 0) {
+			result += dao.deleteNotice(noticeNo);
+			return list;
+		}else {
+			return null;
+		}
+		
+	}
+
+	public HashMap<String, Object> selectSearchNotice(String type, String keyword, int reqPage) {
+		
+		// 화면에 보이는 게시물 수
+		int numPerPage = 10;
+		
+		// 끝페이지
+		int end = reqPage * numPerPage;
+		
+		// 시작페이지
+		int start = (end - numPerPage) + 1;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("type", type);
+		map.put("keyword", keyword);
+		map.put("start", start);
+		map.put("end", end);
+		
+		ArrayList<Notice> list = dao.selectSearchNotice(map);
+		
+		int totalCount = dao.noticeSearchCount(map);
+		
+		int totalPage = 0;
+		if(totalCount % numPerPage == 0) {
+			totalPage = totalCount / numPerPage;
+		}else {
+			totalPage = totalCount / numPerPage + 1;
+		}
+		
+		int pageNaviSize = 5;
+		int pageNo = 1;
+		
+		String pageNavi = "";
+		
+		if(pageNo != 1) {
+			pageNavi += "<a href='/searchNotice.do?reqPage=" + (pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_left\r\n" + 
+					"            </span></a>";
+		}
+		
+		for(int i = 0; i < pageNaviSize; i++) {
+			if(reqPage == pageNo) {
+				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
+			}else {
+				pageNavi += "<a href='/searchNotice.do?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+			}
+			
+			pageNo++;
+			
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		
+		if(pageNo <= totalPage) {
+			pageNavi += "<a href='/searchNotice.do?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_right\r\n" + 
+					"            </span></a>";
+		}
+		
+		HashMap<String, Object> pagemap = new HashMap<String, Object>();
+		pagemap.put("list", list);
+		pagemap.put("pageNavi", pageNavi);
+		
+		if(list == null) {
+			return null;
+		}else {
+			return pagemap;
+		}
 	}
 }
 
