@@ -391,7 +391,7 @@
 				order by 14 asc
 			</when>
 		</choose>
-		)
+
 		where rnum between #{start} and #{end}
 	</select>
 	
@@ -447,5 +447,10 @@
 		review_img = #{reviewImg}
 		where review_no = #{reviewNo}
 	</update>
+	
+	<delete id="deleteReview" parameterType="int">
+		delete from review
+		where review_no = #{_parameter}	
+	</delete>
 
 </mapper>

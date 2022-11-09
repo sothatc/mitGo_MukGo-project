@@ -28,9 +28,11 @@
 		where store_no = #{storeNo}
 		order by 5 desc
 	</select>
+	
 	<select id="countReserveList" parameterType="int" resultType="_int">
 		select count(*) as cnt from reserve where store_no = #{storeNo}
 	</select>
+
 	<select id="searchReserve" parameterType="map" resultType="rs">
 		select 
 		    reserve_no as reserveNo,
@@ -46,4 +48,10 @@
 		where store_no = #{storeNo} and (select member_name from member m where member_no = rs.member_no) = #{keyword} 
 		order by 5 desc
 	</select>
+	
+	<delete id="cancleReserve" parameterType="int">
+		delete from reserve
+		where reserve_No = #{_parameter}
+	</delete>
 </mapper>
+

@@ -86,7 +86,7 @@
 							</div>
 							<div>
 								<div style="display: none">${s.storeNo }</div>
-								<div>가게이름 : ${s.storeName }</div>
+								<div>${s.storeName }</div>
 								<div>평점 : ${s.rating }</div>
 							</div>
 						</a>

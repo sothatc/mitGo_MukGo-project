@@ -31,16 +31,16 @@ sort.on("click", function () {
 
 tabSort.on("click", function () {
     if (tabSortText == "") {
-        sort.eq(0).css("background-color", "aqua");
+        sort.eq(0).css("background-color", "#ffc107");
     }
     if (tabSortText == "new") {
-        sort.eq(0).css("background-color", "aqua");
+        sort.eq(0).css("background-color", "#ffc107");
     }
     if (tabSortText == "old") {
-        sort.eq(1).css("background-color", "aqua");
+        sort.eq(1).css("background-color", "#ffc107");
     }
     if (tabSortText == "grade") {
-        sort.eq(2).css("background-color", "aqua");
+        sort.eq(2).css("background-color", "#ffc107");
     }
 });
 

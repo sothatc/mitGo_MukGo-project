@@ -34,19 +34,19 @@
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav ms-auto">
 				<li class="nav-item">
-					<a class="nav-link" href="#home">Home</a>
+					<a class="nav-link" href="/index.jsp">Home</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#recommend">추천받기</a>
+					<a class="nav-link" href="/index2.jsp">인덱스이동(임시)</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#services">GOGO리스트</a>
+					<a class="nav-link" href="/storeList.do?reqPage=1">GOGO리스트</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/marketMain.do">GOGO마켓</a>
+					<a class="nav-link" href="/marketMainFrm.do">GOGO마켓</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#realreview">생생리뷰</a>
+					<a class="nav-link" href="/selectNoticeList.do?reqPage=1">고객센터</a>
 				</li>
 			</ul>
 			<c:choose>
@@ -57,8 +57,11 @@
 					<c:if test="${not empty sessionScope.o }">
 						<a href="/ownerPwChk.do" id="font" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-brand1 ms-lg-3">[사업자] ${sessionScope.o.ownerId }</a>
 					</c:if>
-					<c:if test="${not empty sessionScope.m }">
+					<c:if test="${sessionScope.m.memberClass eq 2}">
 						<a href="/pwChk.do" id="font" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-brand1 ms-lg-3">[일반회원] ${sessionScope.m.memberId }</a>
+					</c:if>
+					<c:if test="${sessionScope.m.memberClass  eq 1}">
+						<a href="/pwChk.do" id="font" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-brand1 ms-lg-3">[최고관리자] ${sessionScope.m.memberId }</a>
 					</c:if>
 				</c:otherwise>
 			</c:choose>

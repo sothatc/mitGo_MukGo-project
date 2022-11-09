@@ -40,6 +40,10 @@ public class StoreController {
 	@Autowired
 	private FileRename fileRename;
 
+	public StoreController() {
+		super();
+	}
+
 	// 맛집 상세 보기 페이지 이동
 	@RequestMapping(value = "/storeDetailView.do")
 	public String storeDetailView() {
@@ -225,9 +229,21 @@ public class StoreController {
 				e.printStackTrace();
 			}
 		}
-		System.out.println(r);
 		int result = service.updateReview(r);
 		return "store/successReivewFrm";
+	}
+	
+	// 리뷰 삭제
+	@RequestMapping(value = "/deleteReview.do")
+	public String deleteReview(int reviewNo, HttpServletRequest request) {
+		int result = service.deleteReview(reviewNo);
+		if (result > 0) {
+			return "store/successDeleteReivewFrm";
+		} else {
+			request.setAttribute("msg", "삭제시 문제가 발생했습니다.");
+			request.setAttribute("url", "/updateReviewFrm.do");
+			return "common/alert";
+		}
 	}
 
 	@RequestMapping(value = "/menuFrm.do")
@@ -394,7 +410,6 @@ public class StoreController {
 
 	@RequestMapping(value = "/searchStoreList.do")
 	public String searchStoreList(String search, int reqPage, Model model, @RequestParam String category) {
-		System.out.println(category);
 		HashMap<String, Object> map = service.searchStoreList(search, reqPage, category);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
@@ -408,7 +423,6 @@ public class StoreController {
 
 	@RequestMapping(value = "/sortStoreList.do")
 	public String sortStoreList(String storeListSort, int reqPage, Model model, @RequestParam String category) {
-		System.out.println(storeListSort);
 		HashMap<String, Object> map = service.sortStoreList(storeListSort, reqPage, category);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);

@@ -198,6 +198,10 @@ public class MemberService {
 		return searchMap;
 	}
 
+	public int cancleReserve(int reserveNo) {
+		return dao.cancleReserve(reserveNo);
+	}
+
 
 
 	
