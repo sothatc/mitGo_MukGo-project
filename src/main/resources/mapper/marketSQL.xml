@@ -52,6 +52,7 @@
 			p_content as pContent,
 			p_img as pImg,
 			store_no as storeNo
-		from market_product where store_no= #{storeNo}
+		from market_product
+		where p_no= 24
 	</select>
 </mapper>

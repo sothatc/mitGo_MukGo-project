@@ -27,8 +27,8 @@ public class MarketDao {
 
 
 	//마켓 상세 보기
-	public Market selectOneMarket(int storeNo) {
-		Market ma = sqlSession.selectOne("market.selectOneMarket",storeNo);
+	public Market selectOneMarket(int pNo) {
+		Market ma = sqlSession.selectOne("market.selectOneMarket",pNo);
 		return ma;
 	}
 	
