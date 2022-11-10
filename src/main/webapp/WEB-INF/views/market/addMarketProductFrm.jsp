@@ -130,14 +130,9 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							<br>
 							<select class="form-control" id="inputCategory" name="pCategory" required oninvalid="this.setCustomValidity('카테고리를 선택하세요')" oninput="this.setCustomValidity('')">
 								<option value="" hidden="" disabled="disabled" selected="selected">상품 카테고리를 선택하세요</option>
-								<option value="1">한식</option>
-								<option value="2">양식</option>
-								<option value="3">일식</option>
-								<option value="4">중식</option>
-								<option value="5">분식</option>
-								<option value="6">육류</option>
-								<option value="7">씨푸드</option>
+								<option value="10">밀키트</option>
 								<option value="8">디저트</option>
+								<option value="11">냉동식품</option>
 								<option value="9">기타</option>
 							</select>
 						</div>
