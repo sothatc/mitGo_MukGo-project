@@ -1,0 +1,145 @@
+.qnaDetail-wrap{
+    width: 800px;
+    margin: 0 auto;
+    margin-top: 200px;
+}
+
+.qna-title>h1{
+    text-align: center;
+}
+
+.qna-title-wrap{
+    padding-bottom: 5px;
+    border-bottom: 1px solid gray;
+}
+
+.name-date-status{
+    display: flex;
+    justify-content: right;
+}
+
+.name-date-status>div:first-child{
+    margin-right: 20px;
+    
+}
+
+.name-date-status>div:first-child>span:first-child{
+    margin-right: 20px;
+}
+
+.name-date-status>div:last-child{
+    width: 70px;
+    height: 20px;
+    background-color: lightgray;
+    text-align: center;
+    line-height: 20px;
+}
+
+.qna-content{
+    margin-top: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid lightgray;
+}
+
+.qna-content>img{
+    border-radius: 0px;
+}
+
+.answer-btn{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: right;
+}
+
+.answer-wrap{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+}
+
+.answer-info-wrap{
+    display: flex;
+}
+
+.answer-info-wrap>div:first-child{
+    margin-right: 20px;
+}
+
+.answer-control-btn{
+    margin-top: 10px;
+    text-align: right;
+}
+
+.answer-control-btn>a{
+    text-decoration: none;
+    display: inline-block;
+    width: 60px;
+    height: 30px;
+    background-color: #6c757d;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 10px;
+    color: white;
+}
+
+.answer-control-btn>a:last-child{
+    background-color: white;
+    border: 1px solid red;
+    color: red;
+}
+
+.answer-control-btn>a:hover{
+    color: white;
+}
+
+.answer-control-btn>a:last-child:hover{
+    background-color: red;
+    color: white;
+}
+
+.user-control-btn{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.user-control-btn>a{
+    text-decoration: none;
+    display: inline-block;
+    width: 100px;
+    height: 40px;
+    background-color: #6c757d;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 10px;
+    color: white;
+}
+
+.user-control-btn>a:hover{
+    color: white;
+}
+
+.user-control-btn>a:nth-child(2){
+    background-color: white;
+    border: 1px solid red;
+    color: red;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.user-control-btn>a:nth-child(2):hover{
+    background-color: red;
+    color: white;
+}
+
+.user-control-btn>a:last-child{
+    background-color: white;
+    border: 1px solid #6c757d;
+    color: #6c757d;
+}
+
+.user-control-btn>a:last-child:hover{
+    background-color: #6c757d;
+    color: white;
+}

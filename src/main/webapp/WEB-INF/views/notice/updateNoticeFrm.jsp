@@ -149,6 +149,8 @@
             </form>
         </div>
     </div>
+    
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
     <script>
 	    function deleteFile2(obj, fileNo, filepath){

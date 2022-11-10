@@ -422,8 +422,8 @@ public class StoreController {
 	}
 
 	@RequestMapping(value = "/sortStoreList.do")
-	public String sortStoreList(String storeListSort, int reqPage, Model model, @RequestParam String category) {
-		HashMap<String, Object> map = service.sortStoreList(storeListSort, reqPage, category);
+	public String sortStoreList(String storeListSort,String sortFilter, int reqPage, Model model, @RequestParam String category) {
+		HashMap<String, Object> map = service.sortStoreList(storeListSort,sortFilter, reqPage, category);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
 		model.addAttribute("category", category);

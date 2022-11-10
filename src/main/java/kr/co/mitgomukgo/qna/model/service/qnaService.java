@@ -54,6 +54,35 @@ public class qnaService {
 		}
 		return result;
 	}
+
+	public Qna qnaDetail(int qnaNo) {
+		int result = dao.upReadCnt(qnaNo);
+		Qna qna = null;
+		if(result > 0) {
+			qna = dao.selectOneQna(qnaNo);
+			ArrayList<QnaFile> qf = dao.selectAllQnaFile(qnaNo);
+			qna.setFileList(qf);
+			return qna;
+		}else {
+			return null;
+		}
+		
+		
+	}
+
+	public Qna selectQnaPassword(int qnaNo, String qnaPassword) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("qnaNo", qnaNo);
+		map.put("qnaPassword", qnaPassword);
+		
+		Qna result = dao.selectQnaPassword(map);
+		return result;
+	}
+
+	public QnaFile selectOneQnaFile(int qnaFileNo) {
+		QnaFile qf = dao.selectOneQnaFile(qnaFileNo);
+		return qf;
+	}
 }
 
 

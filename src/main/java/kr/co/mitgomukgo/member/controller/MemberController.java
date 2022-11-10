@@ -323,7 +323,7 @@ public class MemberController {
 	}
 	
 
-	@RequestMapping(value = "cancleReserve.do")
+	@RequestMapping(value = "/cancleReserve.do")
 	public String cancleReserve(int reserveNo, HttpServletRequest request) {
 		int result = service.cancleReserve(reserveNo);
 		if(result > 0) {
@@ -336,6 +336,7 @@ public class MemberController {
 			return "common/alert";
 		}
 	}
+
 	//업주 예약관리 방문상태변경
 	@RequestMapping(value="/updateReserve.do")
 	public String updateReserve(Reserve rs, Model model) {
@@ -349,5 +350,6 @@ public class MemberController {
 			return "redirect:/";
 		}
 	}
+
 }
 

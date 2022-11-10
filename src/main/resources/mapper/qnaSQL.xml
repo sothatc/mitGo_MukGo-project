@@ -2,11 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="qna">
   	<select id="selectAllQna" parameterType="map" resultType="q">
-  		select rownum as rnum, q.* from
-		    (select 
+  		select * from
+			(select row_number() over (order by rnum desc) as rnum1, rb.* from
+			(select rownum as rnum, b.* from
+			(select 
 		        qna_no as qnaNo,
 		        qna_title as qnaTitle,
 		        substr(qna_writer,1,length(qna_writer)-3) || lpad('*',3,'*') as qnaWriter,
+		        qna_writer as qnaWriter1,
 		        secret_status as secretStatus,
 		        qna_content as qnaContent,
 		        qna_date as qnaDate,
@@ -15,13 +18,14 @@
 		        comment_date as commnetDate,
 		        comment_status as commentStatus,
 		        qna_theme as qnaTheme,
-		        read_cnt as readCnt
-		    from qna_tbl)q where rownum between #{start} and #{end} order by 1 desc
+		        read_cnt as readCnt,
+		        qna_password as qnaPassword
+        from qna_tbl order by qnaNo desc)b)rb order by 3 desc) where rnum between #{start} and #{end}
   	</select>
   	
   	<insert id="insertQna" parameterType="q">
   		insert into
-  		qna_tbl values(qna_seq.nextval, #{qnaTitle}, #{qnaWriter}, #{secretStatus}, #{qnaContent}, to_char(sysdate, 'yyyy-mm-dd'), null, null, null, 0, #{qnaTheme}, 0)
+  		qna_tbl values(qna_seq.nextval, #{qnaTitle}, #{qnaWriter}, #{secretStatus}, #{qnaContent}, to_char(sysdate, 'yyyy-mm-dd'), null, null, null, 0, #{qnaTheme}, 0, #{qnaPassword})
   	</insert>
   	
   	<insert id="insertQnaFile" parameterType="qf">
@@ -32,4 +36,80 @@
   	<select id="selectMaxNo" resultType="int">
   		select max(qna_no) from qna_tbl
   	</select>
+  	
+  	<update id="updateReadCnt" parameterType="int">
+  		update qna_tbl set read_cnt = read_cnt + 1 where qna_no = #{qnaNo}
+  	</update>
+  	
+  	<select id="selectOneQna" parameterType="int" resultType="q">
+  		select
+  			qna_no as qnaNo,
+		    qna_title as qnaTitle,
+		    substr(qna_writer,1,length(qna_writer)-3) || lpad('*',3,'*') as qnaWriter,
+		    qna_writer as qnaWriter1,
+		    secret_status as secretStatus,
+		    qna_content as qnaContent,
+		    qna_date as qnaDate,
+		    qna_comment as qnaComment,
+		    qna_comment_writer as qnaCommentWriter,
+		    comment_date as commnetDate,
+		    comment_status as commentStatus,
+		    qna_theme as qnaTheme,
+		    read_cnt as readCnt,
+		    qna_password as qnaPassword
+		from qna_tbl where qna_no = #{qnaNo}
+  	</select>
+  	
+  	<select id="selectQnaPassword" parameterType="map" resultType="q">
+  		select
+  			qna_no as qnaNo,
+		    qna_title as qnaTitle,
+		    substr(qna_writer,1,length(qna_writer)-3) || lpad('*',3,'*') as qnaWriter,
+		    qna_writer as qnaWriter1,
+		    secret_status as secretStatus,
+		    qna_content as qnaContent,
+		    qna_date as qnaDate,
+		    qna_comment as qnaComment,
+		    qna_comment_writer as qnaCommentWriter,
+		    comment_date as commnetDate,
+		    comment_status as commentStatus,
+		    qna_theme as qnaTheme,
+		    read_cnt as readCnt,
+		    qna_password as qnaPassword
+		from qna_tbl where qna_no = #{qnaNo} and qna_password = #{qnaPassword}
+  	</select>
+  	
+  	<select id="selectQnaFile" parameterType="int" resultType="qf">
+  		select
+  			qna_file_no as qnaFileNo,
+  			qna_no as qnaNo,  
+  			filename,
+  			filepath
+  		from qna_file where qna_no = #{qnaNo}
+  	</select>
+  	
+  	<select id="selectOneQnaFile" parameterType="int" resultType="qf">
+  		select
+  			qna_file_no as qnaFileNo,
+  			qna_no as qnaNo,  
+  			filename,
+  			filepath
+  		from qna_file where qna_file_no = #{qnaFileNo}
+  	</select>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
