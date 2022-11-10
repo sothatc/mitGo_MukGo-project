@@ -15,4 +15,5 @@ public class Owner {
 	private String ownerPhone;
 	private String ownerEnrollDate;
 	private int ownerLevel;
+	private int ownerStatus;
 }

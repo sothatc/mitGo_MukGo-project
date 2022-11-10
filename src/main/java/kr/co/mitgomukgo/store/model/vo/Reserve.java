@@ -21,5 +21,6 @@ public class Reserve {
 	private int eatNum;
 	private String reserverName;
 	private int rStatus;
+	private int visitStatus;
 
 }
