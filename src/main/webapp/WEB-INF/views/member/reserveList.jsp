@@ -38,35 +38,7 @@
 	<link rel="stylesheet" href="/resources/css/member/member.css">
 	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 	<div class="content-wrap">
-		<h2>마이페이지</h2>
-		<aside id="aside" class="sidebar">
-			<div class="sidebar-1">
-				<ul class="category">
-					<li>
-						<div>
-							<a href="/mypage.do">내 정보 수정</a>
-						</div>
-						<div>
-							<a href="/reserveList.do">예약 내역</a>
-						</div>
-						<div>
-							<a href="/logout.do">로그아웃</a>
-						</div>
-						<div>
-							<a href="#">회원 탈퇴</a>
-						</div>
-					</li>
-				</ul>
-			</div>
-			<div class="sidebar-2">
-				<ul class="category">
-					<li>
-						<h4>공지사항
-							</h3>
-					</li>
-				</ul>
-			</div>
-		</aside>
+		<jsp:include page="/WEB-INF/views/common/memberHeader.jsp" />
 		<article id="content" class="content">
 			<div class="page-content">
 				<div class="reserve-wrap">
