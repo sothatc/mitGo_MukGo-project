@@ -129,7 +129,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 						</div>
 						<div>
 							<input type="hidden" name="storeNo" value="${sessionScope.s.storeNo }">
-							<input type="file" name="file" class="file-upload" id="file" style="visibility: hidden; position: absolute;" accept="image/gif, image/jpg, image/jpeg, image/png">
+							<input type="file" name="file" class="file-upload" id="file" style="display: none;" accept="image/gif, image/jpg, image/jpeg, image/png">
 							<button class="inputPhoto" type="button" id="inputPhoto">사진 첨부하기</button>
 						</div>
 						<div class="btnWrap">

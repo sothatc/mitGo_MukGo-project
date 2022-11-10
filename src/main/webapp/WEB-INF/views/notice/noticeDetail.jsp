@@ -64,7 +64,7 @@
 
         <div class="notice-detail-btn">
         	<c:choose>
-        		<c:when test="${not empty sessionScope.m and sessionScope.m.memberClass == 1}">
+        		<c:when test="${not empty sessionScope.m and sessionScope.m.memberClass == 1 and sessionScope.m.memberId == n.noticeWriter}">
         			<button type="button" class="btn btn-secondary" style="margin-right: 10px;" onclick="updateNoticeFrm(${n.noticeNo});">수정</button>
             		<button type="button" class="btn btn-outline-secondary" style="margin-left: 10px;" onclick="deleteNotice(${n.noticeNo});">삭제</button>
         		</c:when>
@@ -79,7 +79,7 @@
 		</c:otherwise>
 	</c:choose>
 	
-    
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
     <script>
     	function deleteNotice(noticeNo){

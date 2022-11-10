@@ -1,22 +1,33 @@
 package kr.co.mitgomukgo.qna.controller;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.swing.plaf.multi.MultiFileChooserUI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
+
 import common.FileRename;
+import kr.co.mitgomukgo.member.model.vo.Member;
 import kr.co.mitgomukgo.qna.model.service.qnaService;
 import kr.co.mitgomukgo.qna.model.vo.Qna;
 import kr.co.mitgomukgo.qna.model.vo.QnaFile;
@@ -38,6 +49,7 @@ public class qnaController {
 			return "qna/qnaList";
 		}else {
 			model.addAttribute("list", map.get("list"));
+			System.out.println(map.get("list"));
 			return "qna/qnaList";
 		}
 	}
@@ -86,7 +98,116 @@ public class qnaController {
 		return "redirect:/qnalist.do?reqPage=1";
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/uploadImgQna.do", produces = "application/json;charset=utf-8")
+	public String uploadImgQna(MultipartFile[] upfile, HttpServletRequest request) {
+		QnaFile qf = null;
+		
+		if(!upfile[0].isEmpty()) {
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/qna/editor/");
+			
+			for(MultipartFile files : upfile) {
+				String filename = files.getOriginalFilename();
+				String filepath = fileRename.fileRename(savePath, filename);
+				
+				try {
+					FileOutputStream fos = new FileOutputStream(savePath + filepath);
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					byte[] bytes = files.getBytes();
+					
+					bos.write(bytes);
+					bos.close();
+					
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				qf = new QnaFile();
+				qf.setFilename(filename);
+				qf.setFilepath(filepath);
+			}
+		}
+		
+		Gson gson = new Gson();
+		String result = gson.toJson("/resources/upload/qna/editor/" + qf.getFilepath());
+		
+		return result;
+	}
 	
+	@RequestMapping(value="/qndDetail.do")
+	public String qnaDetail(int qnaNo, Model model) {
+		Qna qna = service.qnaDetail(qnaNo);
+		model.addAttribute("qna", qna);
+		System.out.println(qna.getFileList());
+		return "qna/qnaDetail";
+	}
+	
+	@RequestMapping(value="/mypageQna.do")
+	public String mypage(int qnaNo, String qnaPassword, Model model) {
+		Qna qnaPw = service.selectQnaPassword(qnaNo, qnaPassword);
+		
+		if(qnaPw != null) {
+			model.addAttribute("qna", qnaPw);
+			System.out.println(qnaPw.getFileList());
+			return "redirect:/qndDetail.do?qnaNo=" + qnaNo;
+		}else {
+			return "redirect:/qnalist.do?reqPage=1";
+		}
+			
+	}
+	
+	@RequestMapping(value="/qnaFileDown.do")
+	public void qnaFileDown(int qnaFileNo, HttpServletRequest request, HttpServletResponse respone) {
+		
+		// 파일번호로 파일하나 가져오기
+		QnaFile qf = service.selectOneQnaFile(qnaFileNo);
+		
+		// 다운로드되는 파일 경로
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/qna/" + qf.getFilepath());
+		
+		// 파일 다운로드 로직
+		try {
+			
+			FileInputStream fis = new FileInputStream(savePath);
+			BufferedInputStream bis = new BufferedInputStream(fis);
+			
+			//
+			ServletOutputStream sos = respone.getOutputStream();
+			BufferedOutputStream bos = new BufferedOutputStream(sos);
+			
+			// 크롬에서 파일 다운로드
+			String downName = new String(qf.getFilename().getBytes("utf-8"), "ISO-8859-1");
+			
+			respone.setContentType("application/octet-stream");
+			respone.setHeader("Content-Disposition", "attachment;filename=" + downName);
+			
+			while(true) {
+				int read = bis.read();
+				if(read != -1) {
+					bos.write(read);
+				}else {
+					break;
+				}
+			}
+			
+			bis.close();
+			bos.close();
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 	
 }
 

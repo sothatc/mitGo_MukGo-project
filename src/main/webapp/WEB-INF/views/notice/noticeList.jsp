@@ -119,6 +119,8 @@
             ${pageNavi }
     </div>
     
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+    
     <script type="text/javascript">
     	$("#searchBtn").on("click", function(){
     		if($("[name=keyword]").val() == ""){
