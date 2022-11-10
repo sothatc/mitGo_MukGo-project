@@ -10,6 +10,11 @@
 		from owner
 		where owner_id = #{ownerCheckId}
 	</select>
+	<select id="pwChkOwner" parameterType="o" resultType="o">
+		select owner_id as ownerId
+		from owner
+		where owner_no = #{ownerNo} and owner_pw = #{ownerPw} 
+	</select>
 	<select id="selectOneOwner" parameterType="o" resultType="o">
 		select 
 			owner_no as ownerNo,

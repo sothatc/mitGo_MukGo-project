@@ -15,8 +15,8 @@
 			<div>비밀번호 확인</div>
 			<form action="/mypage.do" method="post">
 				<input type="hidden" value="${sessionScope.m.memberId }">
-				<input type="hidden" class="myPw" value="${sessionScope.m.memberPw }">
-				<input type="password" id="rePwChk"><br>
+				<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
+				<input type="password" name="memberPw" id="rePwChk"><br>
 				<button type="submit" class="pwChkBtn">확인</button> 
 			</form>
 		</div>
@@ -34,6 +34,7 @@
 		$(this).css("color","");
 	});
 	
+	/*
 	$(".pwChkBtn").on("click", function(event){
 		const inputPw = $("#rePwChk");
 		const inputPwVal = inputPw.val();
@@ -46,5 +47,6 @@
 			event.preventDefault();
 		}
 	});
+	*/
 </script>
 </html>

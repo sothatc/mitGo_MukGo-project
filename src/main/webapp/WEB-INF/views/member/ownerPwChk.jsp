@@ -15,11 +15,18 @@
 			<div>비밀번호 확인</div>
 			<form action="/ownerMypage.do" method="post">
 				<input type="hidden" name="ownerNo" value="${sessionScope.o.ownerNo }">
+				<input type="password" name="ownerPw" id="pwChk"><br>
+				<button type="submit" class="pwChkBtn">확인</button> 
+			</form>
+			<!-- 
+			<form action="/ownerMypage.do" method="post">
+				<input type="hidden" name="ownerNo" value="${sessionScope.o.ownerNo }">
 				<input type="hidden" value="${sessionScope.o.ownerId }">
 				<input type="hidden" class="myPw" value="${sessionScope.o.ownerPw }">
 				<input type="password" id="rePwChk"><br>
 				<button type="submit" class="pwChkBtn">확인</button> 
 			</form>
+			 -->
 		</div>
 	</div>
 </body>
@@ -35,7 +42,7 @@
 		$(this).css("background-color","");
 		$(this).css("color","");
 	});
-	
+	/*
 	$(".pwChkBtn").on("click", function(event){
 		const inputPw = $("#rePwChk");
 		const inputPwVal = inputPw.val();
@@ -48,5 +55,6 @@
 			event.preventDefault();
 		}
 	});
+	*/
 </script>
 </html>

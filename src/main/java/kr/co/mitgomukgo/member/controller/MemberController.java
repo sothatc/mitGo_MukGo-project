@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.context.annotation.SessionScope;
 
 import com.google.gson.Gson;
+import com.sun.xml.internal.bind.v2.runtime.output.Encoded;
 
 import kr.co.mitgomukgo.member.model.service.MemberService;
 import kr.co.mitgomukgo.member.model.vo.Member;
@@ -155,7 +156,6 @@ public class MemberController {
 	}
 	@RequestMapping(value="/join.do")
 	public String join(Member m) {
-		System.out.println(m);
 		int result = service.insertMember(m);
 		if(result > 0) {
 			return "redirect:/";
@@ -194,16 +194,25 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/mypage.do")
-	public String mypage() {
-		return "member/mypage";
+	public String mypage(Member member) {
+		Member m = service.pwChkMember(member);
+		if(m != null) {
+			return "member/mypage";
+		}else {
+			return "member/pwChk";
+		}
 	}
 	@RequestMapping(value="/ownerMypage.do")
-	public String ownerMypage(HttpSession session) {
-		Owner o = (Owner)session.getAttribute("o");
-		int ownerNo = o.getOwnerNo();
+	public String ownerMypage(HttpSession session, Owner owner) {
+		int ownerNo = owner.getOwnerNo();
 		Store s = service.searchStore(ownerNo);
 		session.setAttribute("s", s);
-		return "member/ownerMypage";
+		Owner o = service.pwChkOwner(owner);
+		if(o != null) {
+			return "member/ownerMypage";
+		}else {
+			return "member/ownerPwChk";
+		}
 	}
 	@RequestMapping(value="/selectJoin.do")
 	public String selectJoin() {
