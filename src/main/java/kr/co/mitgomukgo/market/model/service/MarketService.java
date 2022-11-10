@@ -33,4 +33,10 @@ public class MarketService {
 		marketListMap.put("list",list);
 		return marketListMap;
 	}
+
+	//마켓 상세 보기
+	public Market selectOneMarket(int storeNo) {
+		Market ma = dao.selectOneMarket(storeNo);
+		return ma;
+	}
 }

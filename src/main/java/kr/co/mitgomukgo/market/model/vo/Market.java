@@ -9,10 +9,11 @@ import oracle.net.aso.p;
 @NoArgsConstructor
 @Data
 public class Market {
-	private int marketNo;
+	private int pNo;
 	private int ownerNo;
 	private String pName;
 	private int pPrice;
 	private String pContent;
 	private String pImg;
+	private int storeNo;
 }

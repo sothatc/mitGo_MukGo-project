@@ -10,4 +10,17 @@
 			p_img as pImg
 		from market_product where p_no between #{start} and #{end}
 	</select>
+	
+	
+	<select id="selectOneMarket" parameterType="_int" resultType="ma">
+		select
+			p_no as pNo,
+			owner_no as ownerNo,
+			p_name as pName,
+			p_price as pPrice,
+			p_content as pContent,
+			p_img as pImg,
+			store_no as storeNo
+		from market_product where store_no= #{storeNo}
+	</select>
 </mapper>

@@ -24,5 +24,11 @@ public class MarketDao {
 		List list = sqlSession.selectList("market.marketList",map);
 		return (ArrayList<Market>)list;
 	}
+
+	//마켓 상세 보기
+	public Market selectOneMarket(int storeNo) {
+		Market ma = sqlSession.selectOne("market.selectOneMarket",storeNo);
+		return ma;
+	}
 	
 }
