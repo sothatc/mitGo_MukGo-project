@@ -4,19 +4,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메뉴추가</title>
+<title>상품 추가</title>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <style>
-.menu {
+.marketProduct {
 	padding-left: 20px;
 	width: 848px;
 }
 
-.menu-wrap {
+.marketProduct-wrap {
 	width: 100%;
 }
 
-.menuTitle {
+.marketProductTitle {
 	margin-top: 50px;
 }
 
@@ -27,11 +27,11 @@ hr {
 	margin-bottom: 50px;
 }
 
-#menuForm {
+#marketProductForm {
 	margin: 0 auto;
 }
 
-#menuForm input {
+#marketProductForm input {
 	box-sizing: border-box;
 	width: 100%;
 	height: 30px;
@@ -40,7 +40,7 @@ hr {
 	border-bottom: 2px solid gainsboro;
 }
 
-#menuForm input:focus {
+#marketProductForm input:focus {
 	outline: none;
 	border-bottom: 2px solid #000;
 }
@@ -106,31 +106,40 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
+	<script src="/resources/summernote/summernote-lite.js"></script>
+	<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
+	<link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
 	<link rel="stylesheet" href="/resources/css/member/owner.css">
 	<div class="content-wrap">
 		<jsp:include page="/WEB-INF/views/common/ownerHeader.jsp" />
 		<article id="content" class="content">
-			<div class="menu" style="display: flex;">
-				<div class="menu-wrap">
-					<div class="menuTitle">
-						<h1>메뉴 추가</h1>
+			<div class="marketProduct" style="display: flex;">
+				<div class="marketProduct-wrap">
+					<div class="marketProductTitle">
+						<h1>상품 추가</h1>
 					</div>
 					<hr>
 					<br>
-					<form class="mb-3" id="menuForm" method="post" action="/addMenu.do" enctype="multipart/form-data">
+					<form class="mb-3" id="marketProductForm" method="post" action="/addMarketProduct.do" enctype="multipart/form-data">
 						<div>
-							<label for="inputName">메뉴이름을 입력해주세요</label>
-							<input type="text" id="inputName" name="menuName" placeholder="예) 믿고먹고 맛집" required oninvalid="this.setCustomValidity('메뉴명을 입력하세요')" oninput="this.setCustomValidity('')">
+							<label for="inputName">상품 이름을 입력해주세요</label>
+							<input type="text" id="inputName" name="pName" placeholder="예) 믿고먹고 상품" required oninvalid="this.setCustomValidity('상품명을 입력하세요')" oninput="this.setCustomValidity('')">
 						</div>
 						<div>
 							<label for="inputPrice">가격을 입력해주세요</label>
-							<input type="number" id="inputPrice" name="menuPrice" placeholder="예) 1,000원 → 1000" required oninvalid="this.setCustomValidity('가격을 입력하세요')" oninput="this.setCustomValidity('')">
+							<input type="number" id="inputPrice" name="pPrice" placeholder="예) 1,000원 → 1000" required oninvalid="this.setCustomValidity('가격을 입력하세요')" oninput="this.setCustomValidity('')">
 							<span class="comment" style="font-size: 12px; padding-left: 10px;"></span>
 						</div>
 						<div>
+							<label for="textarea">상세설명을 입력해주세요</label>
+							<br>
+							<textarea class="form-control" name="pContent" id="textarea" rows="4" required oninvalid="this.setCustomValidity('상세설명을 입력하세요')" oninput="this.setCustomValidity('')" style="margin: 10px 0;"></textarea>
+						</div>
+						<div>
 							<input type="hidden" name="storeNo" value="${sessionScope.s.storeNo }">
+							<input type="hidden" name="ownerNo" value="${sessionScope.o.ownerNo }">
 							<input type="file" name="file" class="file-upload" id="file" style="display: none;" accept="image/gif, image/jpg, image/jpeg, image/png">
-							<button class="inputPhoto" type="button" id="inputPhoto">사진 첨부하기</button>
+							<button class="inputPhoto" type="button" id="inputPhoto">썸네일 첨부하기</button>
 						</div>
 						<div class="btnWrap">
 							<button type="submit" id="submitBtn" value="등록">등록</button>
@@ -166,6 +175,33 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 				alert("사진을 첨부해주세요.");
 			}
 		});
+
+		$("[name=pContent]").summernote({
+			height : 400,
+			lang : "ko-KR",
+			callbacks : {
+				onImageUpload : function(files) {
+					uploadImage(files[0], this);
+				}
+			}
+		});
+
+		function uploadImage(files, editor) {
+			// <form>태그와 똑같은 기능을 하는 변수
+			const form = new FormData();
+			form.append("files", files);
+
+			$.ajax({
+				url : "/marketEditorUpload.do",
+				type : "post",
+				data : form,
+				processData : false,
+				contentType : false,
+				success : function(data) {
+					$(editor).summernote("insertImage", data);
+				}
+			});
+		}
 	</script>
 </body>
 </html>

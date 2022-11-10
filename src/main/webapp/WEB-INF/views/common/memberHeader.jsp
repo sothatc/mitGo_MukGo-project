@@ -14,10 +14,10 @@
 					<a href="#">장바구니</a>
 				</div>
 				<div>
-					<a href="/reserveList.do">예약내역</a>
+					<a href="/reserveList.do">예약 내역</a>
 				</div>
 				<div>
-					<a href="#">주문내역</a>
+					<a href="#">주문 내역</a>
 				</div>
 				<div>
 					<a href="/mypage.do">내 정보 수정</a>
