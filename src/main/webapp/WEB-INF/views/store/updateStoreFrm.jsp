@@ -93,6 +93,11 @@
 		                  <br>
 		                  <textarea class="form-control" name="content" id="textarea" rows="4" required oninvalid="this.setCustomValidity('상세설명을 입력하세요')" oninput="this.setCustomValidity('')">${sessionScope.s.content}</textarea>
 		               </div>
+		               <div class="form-group">
+		                  <label for="textarea">시간당 예약가능 최대 인원수</label>
+		                  <br>
+		                  <input type="text" class="form-control" id="reservableNum" name="maxNum" value="${s.maxNum }">
+		               </div>
 		               <br>
 		               <div class="form-group">
 		                  <label for="inputTime">영업 시간</label>

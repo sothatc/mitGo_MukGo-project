@@ -63,7 +63,7 @@
 										<fmt:formatNumber value="${ma.PPrice}" pattern="#,###" />
 									</td>
 									<td>
-										${ma.PCategory}
+										${ma.cateName}
 									</td>
 									<td>
 										<button type="button" class="btn updateBtn">수정</button>

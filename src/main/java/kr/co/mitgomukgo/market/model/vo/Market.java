@@ -17,4 +17,5 @@ public class Market {
 	private String pContent;
 	private String pImg;
 	private int pCategory;
+	private String cateName;
 }
