@@ -369,8 +369,9 @@
 		category,
 		witheat_cate as
 		withEatCate,
-		whereeat_cate as whereEatCate,
+		whereeat_cate as whereEatCate,		
 		(select round(avg(rating),1) from review r where r.store_no = s.store_no)as rating,
+		(select count(*) from review r where r.store_no = s.store_no)as reviewCount,
 		(select imgpath from store_img si where storeimg_no = (select
 		min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
 		as thumbNail from store s order by storeNo desc)b
@@ -382,11 +383,11 @@
 			<when test="storeListSort.equals('new')">
 				order by 3 desc
 			</when>
-			<when test="storeListSort == old">
-				order by 3 asc
-			</when>
 			<when test="storeListSort.equals('grade')">
 				order by 14 asc
+			</when>
+			<when test="storeListSort.equals('reviewCount')">
+				order by 15 asc
 			</when>
 		</choose>
 		)where rnum between #{start} and #{end}
