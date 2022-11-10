@@ -26,5 +26,6 @@ public class Store {
 	private String thumbNail;
 	private ArrayList<StoreImg> storeImgList;
 	private int maxNum;
+	private int reviewCount;
 	
 }

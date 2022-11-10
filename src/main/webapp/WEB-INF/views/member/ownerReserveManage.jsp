@@ -25,15 +25,17 @@
 						</div>
 						<table class="table" style="text-align: center; vertical-align: middle;">
 							<tr>
-								<th scope="col">예약 번호</th>
-								<th scope="col">예약자 이름</th>
-								<th scope="col">가게 이름</th>
-								<th scope="col">예약 접수날짜</th>
-								<th scope="col">예약일</th>
-								<th scope="col">예약 시간</th>
-								<th scope="col">인원수</th>
-								<th scope="col">방문상태</th>
+								<th class="th" scope="col">예약 번호</th>
+								<th class="th" scope="col">예약자 이름</th>
+								<th class="th" scope="col">가게 이름</th>
+								<th class="th" scope="col">예약 접수날짜</th>
+								<th class="th" scope="col">예약일</th>
+								<th class="th" scope="col">예약 시간</th>
+								<th class="th" scope="col">인원수</th>
+								<th class="th" scope="col">방문상태</th>
+								<th class="th" scope="col"></th>
 							</tr>
+							
 							<c:forEach items="${list }" var="rs">
 								<tr>
 									<td scope="row">${rs.reserveNo }</td>
@@ -43,12 +45,28 @@
 									<td scope="row">${rs.eatDate }</td>
 									<td scope="row">${rs.eatTime }</td>
 									<td scope="row">${rs.eatNum }</td>
-									<td>
-										<select>
-											<option value="">미방문</option>
-											<option value="">방문완료</option>
-										</select>
-									</td>
+									<form action="/updateReserve.do" method="post">
+										<input type="hidden" name="reserveNo" value="${rs.reserveNo }">
+										<td>
+										<c:choose>
+											<c:when test="${rs.visitStatus eq 1 }">
+												<select name="visitStatus">
+													<option value="1" selected>미방문</option>
+													<option value="2">방문완료</option>
+												</select>
+											</c:when>
+											<c:when test="${rs.visitStatus eq 2 }">
+												<select name="visitStatus">
+													<option value="1">미방문</option>
+													<option value="2" selected>방문완료</option>
+												</select>
+											</c:when>
+										</c:choose>
+										</td>
+										<td scope="row">
+											<button class="updateRsBtn" type="submit">변경</button>
+										</td>
+									</form>
 								</tr>
 							</c:forEach>
 						</table>
@@ -82,6 +100,7 @@
 			$(this).css("background-color", "");
 			$(".searchBtn").css("color", "");
 		});
+		
 	</script>
 </body>
 </html>

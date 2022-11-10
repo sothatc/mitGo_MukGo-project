@@ -237,6 +237,17 @@ public class MemberService {
 		return list;
 	}
 
+	public int updateReserve(Reserve rs) {
+		
+		return dao.updateReserve(rs);
+	}
+
+	public Reserve selectOneReserve(int reserveNo) {
+		
+		return dao.selectOneReserve(reserveNo);
+	}
+
+
 
 	
 	
