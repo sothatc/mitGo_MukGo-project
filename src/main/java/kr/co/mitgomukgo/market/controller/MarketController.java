@@ -108,7 +108,7 @@ public class MarketController {
 			market.setPImg(maProductPath);
 		}
 		int result = service.addMarketProduct(market);
-		return "redirect:/menuFrm.do";
+		return "redirect:/marketProductListFrm.do";
 	}
 	
 	@RequestMapping(value = "/marketProductListFrm.do")
