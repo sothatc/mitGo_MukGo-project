@@ -16,9 +16,8 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-12 text-center text-white">
-
 						<h1 class="display-3 my-4">믿을수있는 맛집리스트,<br />믿GO<br />먹GO
-						</h1> <a href="#" class="btn btn-brand" id="font">맛집보러가기</a> <a href="#" class="btn btn-outline-light ms-3" id="font">Our work</a>
+						</h1> <a href="/storeList.do?reqPage=1" class="btn btn-brand" id="font">맛집보러가기</a> <a href="/storeList.do?reqPage=1" class="btn btn-outline-light ms-3" id="font">Our work</a>
 					</div>
 				</div>
 			</div>
@@ -29,7 +28,7 @@
 					<div class="col-12 col-lg-10 offset-lg-1 text-white">
 						<h6 class="text-white text-uppercase" id="font">맛집리스트를 집에서도</h6>
 						<h1 class="display-3 my-4">GOGO마켓 <br />신선, 간편, 프리미엄 밀키트
-						</h1> <a href="http://127.0.0.1:5501/marketmain.html#mealkit-list" class="btn btn-brand" id="font">상품보러가기</a> <a href="#" class="btn btn-outline-light ms-3" id="font">Our work</a>
+						</h1> <a href="/marketMainFrm.do" class="btn btn-brand" id="font">상품보러가기</a> <a href="#" class="btn btn-outline-light ms-3" id="font">Our work</a>
 					</div>
 				</div>
 			</div>
@@ -55,9 +54,6 @@
 				</div>
 			</div>
 			<div class="dropdown-label2">함께</div>
-
-
-
 			<div class="dropdown2">
 				<button class="dropbtn2">
 					<span class="dropbtn_click2">
@@ -275,55 +271,6 @@
 					<i class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i class="bx bxs-star-half"></i>
 				</div>
 				<i class='bx bxs-quote-alt-left'></i>
-			</div>
-		</div>
-	</section>
-
-	<section id="blog">
-		<div class="container">
-			<div class="row">
-				<div class="col-12">
-					<div class="intro">
-						<h6>Blog</h6>
-						<h1>생생한 맛집 리뷰</h1>
-
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-4">
-					<article class="blog-post">
-						<img class="blog" src="img/KakaoTalk_20221027_140641868_01.jpg" alt=""> <a href="https://blog.naver.com/khj04hee/222898143611" class="tag" id="font">텐동</a>
-						<div class="content">
-							<small>01 Dec, 2022</small>
-							<h5>겉바속촉의 정석, 성수동 텐동 맛집 <br>"온센"
-							</h5>
-							<p id="font">친구랑 같이 서울 올라간김에 같이 만났는데 어디갈지 리스트를 보내주셨는데 거기서 선택한 #러시아가정식 식당 #연남동 연남동에 위치한 #부퓌에트발랴</p>
-						</div>
-					</article>
-				</div>
-				<div class="col-md-4">
-					<article class="blog-post">
-						<img class="blog" src="img/KakaoTalk_20221027_140641868_02.jpg" alt=""> <a href="https://blog.naver.com/kkokko_yum/222666593553" class="tag" id="font">러시아 가정식</a>
-						<div class="content">
-							<small>01 Dec, 2022</small>
-							<h5>내돈 내산! 연남동 러시아 가정식 맛집 <br>[부퓌에트발랴]
-							</h5>
-							<p id="font">친구랑 같이 서울 올라간김에 같이 만났는데 어디갈지 리스트를 보내주셨는데 거기서 선택한 #러시아가정식 식당 #연남동 연남동에 위치한 #부퓌에트발랴</p>
-						</div>
-					</article>
-				</div>
-				<div class="col-md-4">
-					<article class="blog-post">
-						<img class="blog" src="img/KakaoTalk_20221027_140641868_03.jpg" alt=""> <a href="https://blog.naver.com/chxndygks/222879052370" class="tag" id="font">오코노미야끼</a>
-						<div class="content">
-							<small>01 Dec, 2022</small>
-							<h5>노량진 맛집 :: 노량진 오코노미야끼 <br>-오코노미스토리-
-							</h5>
-							<p id="font">친구랑 같이 서울 올라간김에 같이 만났는데 어디갈지 리스트를 보내주셨는데 거기서 선택한 #러시아가정식 식당 #연남동 연남동에 위치한 #부퓌에트발랴</p>
-						</div>
-					</article>
-				</div>
 			</div>
 		</div>
 	</section>

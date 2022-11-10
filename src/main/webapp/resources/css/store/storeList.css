@@ -119,6 +119,7 @@
 	justify-content: center;
 }
 /* ====================================tag */
+/*
 .storeList-tag {
 	display: flex;
 	justify-content: center;
@@ -126,17 +127,36 @@
 	margin-top: 20px;
 	width: 100vw;
 }
-
+*/
+.storeList-tag{
+	background-color: #ffc107;
+    color: #fff;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    width: 1250px;
+    margin: 0 auto;
+	margin-top: 50px;
+}
+/*
 .storeList-tag-content {
 	background-color: white;
 	display: flex;
 	align-items: center;
 }
+*/
 
+.storeList-tag-content{
+	width: 100%;
+    padding-right: var(--bs-gutter-x,.75rem);
+    padding-left: var(--bs-gutter-x,.75rem);
+    margin-right: auto;
+    margin-left: auto;
+}
+/*
 .storeList-tag-content:hover {
 	cursor: pointer;
 }
-
+*/
 .storeList-tag-content>ul {
 	list-style-type: none;
 	display: flex;
@@ -147,8 +167,6 @@
 
 .storeList-tag-content>ul>li {
 	width: 120px;
-	border: solid 2px black;
-	border-radius: 25px 25px 25px 25px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -166,11 +184,11 @@
 .storeList-tag-content>ul>li>a>img {
 	width: 50px;
 }
-.back-color{
-	background-color: #515151;
-}
 .back-color>a{
-	color: #ffc107;
+	color: white;
+}
+.storeList-tag-content>ul>li>a:hover{
+	color: white;
 }
 /* =====================================sort */
 .storeList-sort {
@@ -213,21 +231,25 @@
 
 /* =========================================list */
 .storeList-list {
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	margin-top: 20px;
 	width: 100vw;
 	min-height: 400px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .storeList-list-content {
 	width: 1200px;
 }
-
 .showList {
-	width: 300px;
+	width: 250px;
+	height: 340px;
+	margin-left: 24px;
+	margin-right: 24px;
+	margin-bottom: 40px;
 	float: left;
+	
 }
 .showList>a{
 	text-decoration: none;
@@ -239,24 +261,36 @@
 }
 
 .showList>a>div:nth-child(2) {
-	width: 300px;
-	margin-top : 10px;
-	margin-bottom : 30px;
+	width: 250px;
+	height: 140px;
+	padding: 24px;
 }
+
+.showList>a>div:nth-child(2)>div:nth-child(2) {
+	font-size: 1.5em;
+	color: rgba(255, 83, 86,0.99);
+}
+.showList>a>div:nth-child(2)>div:nth-child(3) {
+	font-size: 1.3em;
+	text-align: center;
+}
+/*
 .showList>a>div:nth-child(2)>div{
-	width: 300px;
+	width: 250px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	color: red;
 }
+*/
 .showList>a>div>img {
-	width: 200px;
+	width: 240px;
 	height: 200px;
+	padding: 5px;
 }
 /*========================page*/
 .page{
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin-top: 50px;
 }

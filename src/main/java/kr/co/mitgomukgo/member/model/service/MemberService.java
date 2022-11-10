@@ -71,73 +71,171 @@ public class MemberService {
 
 	public HashMap<String, Object> selectAllReserve(int reqPage, int storeNo) {
 		// 화면에 보여주는 게시물 수
-				int numPerPage = 10;
-				
-				// 끝페이지
-				int end = numPerPage * reqPage;
-				
-				// 시작페이지
-				int start = (end-numPerPage) + 1;
-				
-				HashMap<String, Object> map = new HashMap<String, Object>();
-				map.put("start", start);
-				map.put("end", end);
-				map.put("storeNo", storeNo);
-				ArrayList<Reserve> list = dao.selectAllReserve(map);
-				
-				int totalCnt = dao.countReserveList(storeNo);
-				int totalPage = 0;
-				if(totalCnt % numPerPage == 0) {
-					totalPage = totalCnt / numPerPage;
-				}else {
-					totalPage = totalCnt / numPerPage + 1;
-				}
-				int pageNaviSize = 2;
-				int pageNo = 1;
-				
-				if(reqPage > 2) {
-					pageNo = reqPage - 1;
-				}
-				
-				String pageNavi = "";
-				if(pageNo != 1) {
-					pageNavi += "<a href='/reserveManage.do?reqPage=" +(pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
-							"            chevron_left\r\n" + 
-							"            </span></a>";
-				}
-				
-				for(int i = 0; i < pageNaviSize; i++) {
-					if(reqPage == pageNo) {
-						pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
-					}else {
-						pageNavi += "<a href='/reserveManage.do?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
-					}
-					pageNo++;
-					if(pageNo > totalPage) {
-						break;
-					}
-				}
-				
-				if(end <= totalPage) {
-					pageNavi += "<a href='/reserveManage.do?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
-							"            chevron_right\r\n" + 
-							"            </span></a>";
-				}
-				
-				HashMap<String, Object> searchMap = new HashMap<String, Object>();
-				searchMap.put("list", list);
-				searchMap.put("reqPage", reqPage);
-				searchMap.put("pageNavi", pageNavi);
-				searchMap.put("total", totalPage);
-				searchMap.put("pageNo", pageNo);
-				
-				return searchMap;
+		int numPerPage = 10;
+		
+		// 끝페이지
+		int end = numPerPage * reqPage;
+		
+		// 시작페이지
+		int start = (end-numPerPage) + 1;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("storeNo", storeNo);
+		ArrayList<Reserve> list = dao.selectAllReserve(map);
+		
+		int totalCnt = dao.countReserveList(storeNo);
+		int totalPage = 0;
+		if(totalCnt % numPerPage == 0) {
+			totalPage = totalCnt / numPerPage;
+		}else {
+			totalPage = totalCnt / numPerPage + 1;
+		}
+		int pageNaviSize = 2;
+		int pageNo = 1;
+		
+		if(reqPage > 2) {
+			pageNo = reqPage - 1;
+		}
+		
+		String pageNavi = "";
+		if(pageNo != 1) {
+			pageNavi += "<a href='/reserveManage.do?reqPage=" +(pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_left\r\n" + 
+					"            </span></a>";
+		}
+		
+		for(int i = 0; i < pageNaviSize; i++) {
+			if(reqPage == pageNo) {
+				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
+			}else {
+				pageNavi += "<a href='/reserveManage.do?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		
+		if(end <= totalPage) {
+			pageNavi += "<a href='/reserveManage.do?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_right\r\n" + 
+					"            </span></a>";
+		}
+		
+		HashMap<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("list", list);
+		searchMap.put("reqPage", reqPage);
+		searchMap.put("pageNavi", pageNavi);
+		searchMap.put("total", totalPage);
+		searchMap.put("pageNo", pageNo);
+		
+		return searchMap;
+	}
+
+	public HashMap<String, Object> searchReserve(String keyword, int storeNo, int reqPage) {
+		// 화면에 보여주는 게시물 수
+		int numPerPage = 10;
+		
+		// 끝페이지
+		int end = numPerPage * reqPage;
+		
+		// 시작페이지
+		int start = (end-numPerPage) + 1;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("keyword", keyword);
+		map.put("storeNo", storeNo);
+		ArrayList<Reserve> list = dao.searchReserve(map);
+		int totalCnt = dao.countReserveList(storeNo);
+		int totalPage = 0;
+		if(totalCnt % numPerPage == 0) {
+			totalPage = totalCnt / numPerPage;
+		}else {
+			totalPage = totalCnt / numPerPage + 1;
+		}
+		int pageNaviSize = 2;
+		int pageNo = 1;
+		
+		if(reqPage > 2) {
+			pageNo = reqPage - 1;
+		}
+		
+		String pageNavi = "";
+		if(pageNo != 1) {
+			pageNavi += "<a href='/ownerReserveManage.do?reqPage=" +(pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_left\r\n" + 
+					"            </span></a>";
+		}
+		
+		for(int i = 0; i < pageNaviSize; i++) {
+			if(reqPage == pageNo) {
+				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
+			}else {
+				pageNavi += "<a href='/ownerReserveManage.do?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		
+		if(end <= totalPage) {
+			pageNavi += "<a href='/ownerReserveManage.do?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_right\r\n" + 
+					"            </span></a>";
+		}
+		
+		HashMap<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("list", list);
+		searchMap.put("reqPage", reqPage);
+		searchMap.put("pageNavi", pageNavi);
+		searchMap.put("total", totalPage);
+		searchMap.put("pageNo", pageNo);
+		
+		return searchMap;
 	}
 
 	public int cancleReserve(int reserveNo) {
 		return dao.cancleReserve(reserveNo);
 	}
 
+	//최고관리자 > 업주관리
+	public ArrayList<Owner> selectOwnerList(Owner o) {
+		ArrayList<Owner> list = dao.selectOwnerList(o);
+		return list;
+	}
+	
+	//최고관리자 > 업주관리 > 검색기능
+	public ArrayList<Owner> searchOwner(String type, String keyword) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("type", type);
+		map.put("keyword", keyword);
+		ArrayList<Owner> list = dao.searchOwner(map);
+		return list;
+	}
+
+	//최고관리자 > 업주관리 > 업주레벨 지정
+	public int updateOwnerLevel(int ownerNo, Owner o) {
+		return dao.updateOwnerLevel(ownerNo,o);
+	}
+	
+	//최고관리자 > 회원관리
+	public ArrayList<Member> selectMemberList(Member m) {
+		ArrayList<Member> list = dao.selectMemberList(m);
+		return list;
+	}
+
+	//최고관리자 > 회원관리 > 검색기능
+	public ArrayList<Member> searchMember(String type, String keyword) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("type", type);
+		map.put("keyword", keyword);
+		ArrayList<Member> list = dao.searchMember(map);
+		return list;
+	}
 
 
 	

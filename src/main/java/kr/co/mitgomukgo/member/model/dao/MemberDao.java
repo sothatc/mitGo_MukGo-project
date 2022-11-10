@@ -78,8 +78,50 @@ public class MemberDao {
 	public int countReserveList(int storeNo) {
 		return sqlSession.selectOne("reserve.countReserveList",storeNo);
 	}
+
+
+	public ArrayList<Reserve> searchReserve(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("reserve.searchReserve", map);
+		return (ArrayList<Reserve>) list;
+	}
 	
 	public int cancleReserve(int reserveNo) {
 		return sqlSession.delete("cancleReserve", reserveNo);
+	}
+
+	//최고관리자>업주관리
+	public ArrayList<Owner> selectOwnerList(Owner o) {
+		List list = sqlSession.selectList("owner.ownerList", o);
+		return (ArrayList<Owner>) list;
+	}
+	
+	//최고관리자 > 업주관리 > 업주레벨 지정
+	public int updateOwnerLevel(int ownerNo, Owner o) {
+		int result = sqlSession.update("updateLevel", o);
+		return result;
+	}
+	
+	//최고관리자 > 업주관리 > 레벨 탭 
+	public ArrayList<Owner> selectOwnerStatus(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("owner.ownerStatusList", map);
+		return (ArrayList<Owner>) list;
+	}
+
+	//최고관리자 > 회원관리
+	public ArrayList<Member> selectMemberList(Member m) {
+		List list = sqlSession.selectList("member.memberList", m);
+		return (ArrayList<Member>) list;
+	}
+
+	//최고관리자 > 회원관리 > 검색기능
+	public ArrayList<Member> searchMember(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("member.searchMember",map);
+		return (ArrayList<Member>) list;
+	}
+
+	//최고관리자 > 업주관리 > 검색기능
+	public ArrayList<Owner> searchOwner(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("owner.searchOwner",map);
+		return (ArrayList<Owner>) list;
 	}
 }

@@ -13,6 +13,25 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<!--헤더-->
 	<div class="storeList-content-wrap">
+		
+		<section id="services" class="text-center">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="intro">
+							<h6>먹킷리스트</h6>
+							<h1>믿고 먹는 믿GO먹GO</h1>
+							<p id="font" class="mx-auto">
+								서울 전 지역 맛집을 담았다!
+								<br>
+								사람들이 추천하는 서울 전 지역 인기 메뉴!
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- ////////////////////////////////////////////////////////////////// -->
 
 		<!-- 필요한 데이터를 담아두기 위한 더미 -->
 		<div class = "tabCategory" style = "display: none;" >${category }</div>
@@ -20,7 +39,7 @@
 		
 		<!-- 검색기능 -->
 		<form action="/searchStoreList.do?category=${category }&reqPage=1" method="post">
-			<div class="storeList-searchinput">
+			<div class="storeList-searchinput" id="font">
 				<input type="text" name="search">
 				<button>검색</button>
 			</div>
@@ -28,7 +47,7 @@
 		
 		<!-- 분류태그 -->
 		<div class="storeList-tag">
-			<div class="storeList-tag-content">
+			<div class="storeList-tag-content" id="font">
 				<ul>
 					<li>
 						<a href="/storeList.do?reqPage=1">전체</a>
@@ -67,7 +86,7 @@
 		<div class="storeList-sort">
 			<div class="storeList-sort-content">
 				<form action="/sortStoreList.do?category=${category }&reqPage=1" method="post">
-					<ul>
+					<ul id="font">
 						<button name="storeListSort" value="new"><li>최신순</li></button>
 						<button name="storeListSort" value="old"><li>오래된순</li></button>
 						<button name="storeListSort" value="grade"><li>평점순</li></button>
@@ -84,10 +103,10 @@
 							<div>
 								<img src="resources/upload/store/${s.thumbNail }">
 							</div>
-							<div>
+							<div id="font">
 								<div style="display: none">${s.storeNo }</div>
-								<div>${s.storeName }</div>
-								<div>평점 : ${s.rating }</div>
+								<div>${s.rating }</div>
+								<div id="font">${s.storeName }</div>
 							</div>
 						</a>
 					</div>

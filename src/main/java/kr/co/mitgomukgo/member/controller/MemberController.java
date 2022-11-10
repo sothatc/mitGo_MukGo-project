@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.context.annotation.SessionScope;
 
+import com.google.gson.Gson;
+
 import kr.co.mitgomukgo.member.model.service.MemberService;
 import kr.co.mitgomukgo.member.model.vo.Member;
 import kr.co.mitgomukgo.member.model.vo.Owner;
@@ -185,6 +187,11 @@ public class MemberController {
 		return "member/ownerPwChk";
 	}
 	
+	@RequestMapping(value="/superAdminpwChk.do")
+	public String superAdminpwChk(HttpSession session) {
+		return "member/superAdminpwChk";
+	}
+	
 	@RequestMapping(value="/mypage.do")
 	public String mypage() {
 		return "member/mypage";
@@ -237,7 +244,7 @@ public class MemberController {
 	public String reserveList(@SessionAttribute Member m, Model model) {
 		ArrayList<Reserve> rsList = service.selectReserveList(m);
 		if(rsList.isEmpty()) {
-			return "redirect:/";
+			return "member/reserveList";
 		}
 		model.addAttribute("rsList", rsList);
 		return "member/reserveList";
@@ -251,9 +258,71 @@ public class MemberController {
 		model.addAttribute("pageNavi", map.get("pageNavi"));
 		model.addAttribute("total", map.get("total"));
 		model.addAttribute("pageNo", map.get("pageNo"));
+		model.addAttribute("storeNo", storeNo);
+		return "member/ownerReserveManage";
+	}
+	@RequestMapping(value="/searchReserve.do")
+	public String searchReserve(String keyword, int storeNo, Model model, String reqPage1) {
+		int reqPage = Integer.parseInt(reqPage1);
+		HashMap<String, Object> map = service.searchReserve(keyword, storeNo, reqPage);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
+		model.addAttribute("storeNo", storeNo);
 		return "member/ownerReserveManage";
 	}
 	
+	
+	//최고관리자 > 회원관리
+	@RequestMapping(value="/memberManage.do")
+	public String memberManage(Model model, Member m) {
+		ArrayList<Member> list = service.selectMemberList(m);
+		model.addAttribute("list", list);
+		
+		return "member/memberManage";
+	}
+	
+	//최고관리자 > 회원관리 > 검색기능
+	@RequestMapping(value="/searchMember.do")
+	public String searchMember(String type, String keyword, Model model){
+		ArrayList<Member> list = service.searchMember(type,keyword);
+		model.addAttribute("list", list);
+		
+		return "member/memberManage";
+	}
+		
+	
+	
+	//최고관리자 > 업주관리
+	@RequestMapping(value="/adminMemberManage.do")
+	public String adminMemberManage(Model model, Owner o) {
+		ArrayList<Owner> list = service.selectOwnerList(o);
+		model.addAttribute("list",list);
+		return "member/admin";
+	}
+	
+	//최고관리자 > 회원관리 > 검색기능
+	@RequestMapping(value="/searchOwner.do")
+	public String searchOwner(String type, String keyword, Model model){
+		ArrayList<Owner> list = service.searchOwner(type,keyword);
+		model.addAttribute("list", list);
+		return "member/admin";
+	}
+	
+	//최고관리자 > 업주관리 > 업주레벨 지정
+	@RequestMapping(value="/updateOwnerLevel.do")
+	public String updateOwnerLevel(int ownerNo, Owner o) {
+		int result = service.updateOwnerLevel(ownerNo,o);
+		if(result>0) {
+			return "redirect:/adminMemberManage.do";
+		}else {
+			return "redirect:/";
+		}
+	}
+	
+
 	@RequestMapping(value = "cancleReserve.do")
 	public String cancleReserve(int reserveNo, HttpServletRequest request) {
 		int result = service.cancleReserve(reserveNo);
@@ -267,5 +336,7 @@ public class MemberController {
 			return "common/alert";
 		}
 	}
+
 	
 }
+
