@@ -144,7 +144,7 @@ hr {
 			<strong>식사는 만족하셨나요?</strong>
 		</div>
 		<fieldset>
-			<input type="radio" name="rating" value="5" id="rate1">
+			<input type="radio" name="rating" value="5" id="rate1" required="required">
 			<label for="rate1">★</label>
 			<input type="radio" name="rating" value="4" id="rate2">
 			<label for="rate2">★</label>
@@ -156,7 +156,7 @@ hr {
 			<label for="rate5">★</label>
 		</fieldset>
 		<div>
-			<textarea type="text" id="reviewContents" name="content" placeholder="정성스런 리뷰는 가게와 고객분들께 큰 도움이 됩니다!"></textarea>
+			<textarea id="reviewContents" name="content" placeholder="정성스런 리뷰는 가게와 고객분들께 큰 도움이 됩니다!"></textarea>
 		</div>
 		<div>
 			<input type="hidden" name="writer" value="${sessionScope.m.memberId }">

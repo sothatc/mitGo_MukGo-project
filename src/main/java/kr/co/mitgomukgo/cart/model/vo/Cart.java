@@ -15,9 +15,12 @@ public class Cart {
 	private String memberId;
 	private int pNo;
 	private int cartQuan;
+	private Date cartDate;
+
+	private int num;
 	private String pImg;
 	private String pName;
 	private int pPrice;
-	private Date cartDate;
+
 	
 }
