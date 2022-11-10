@@ -18,7 +18,7 @@
 				</p>
 			</div>
 			<div class="col-auto social-icons">
-				<a href="#"><i class='bx bxl-facebook'></i></a> <a href="#"><i class='bx bxl-twitter'></i></a> <a href="#"><i class='bx bxl-instagram'></i></a>
+				<a href="#"><i class='bx bxl-facebook'></i></a> <a href="#"><i class='bx bxl-twitter'></i></a> <a href="#"><i class='bx bx-log-out'></i></a>
 			</div>
 		</div>
 	</div>
