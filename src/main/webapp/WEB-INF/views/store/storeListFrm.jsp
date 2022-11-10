@@ -80,19 +80,16 @@
 			<div class="storeList-list-content">
 				<c:forEach items="${list }" var="s">
 					<div class="showList">
-						<div>
-							<img src="resources/upload/store/${s.thumbNail }">
-						</div>
-						<div id="font">
-							<div style="display: none">${s.storeNo }</div>
-							<h5 id="font">${s.storeName }</h5>
-							<div>평점 : ${s.rating }</div>
-						</div>
-						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-							<div class="text-center">
-								<a class="btn btn-outline-dark mt-auto" href="/storeDetail.do?storeNo=${s.storeNo }">View options</a>
+						<a href="/storeDetail.do?storeNo=${s.storeNo }">
+							<div>
+								<img src="resources/upload/store/${s.thumbNail }">
 							</div>
-						</div>
+							<div id="font">
+								<div style="display: none">${s.storeNo }</div>
+								<div>${s.rating }</div>
+								<div id="font">${s.storeName }</div>
+							</div>
+						</a>
 					</div>
 				</c:forEach>
 			</div>

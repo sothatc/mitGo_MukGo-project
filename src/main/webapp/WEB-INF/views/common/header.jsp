@@ -43,7 +43,7 @@
 					<a class="nav-link" href="/storeList.do?reqPage=1">GOGO리스트</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/marketMainFrm.do">GOGO마켓</a>
+					<a class="nav-link" href="/marketMain.do?reqPage=1">GOGO마켓</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/selectNoticeList.do?reqPage=1">고객센터</a>
