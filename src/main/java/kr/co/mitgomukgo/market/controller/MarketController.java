@@ -23,7 +23,6 @@ import com.google.gson.Gson;
 import common.FileRename;
 import kr.co.mitgomukgo.market.model.service.MarketService;
 import kr.co.mitgomukgo.market.model.vo.Market;
-import kr.co.mitgomukgo.notice.model.vo.NoticeFile;
 import kr.co.mitgomukgo.store.model.vo.Store;
 
 @Controller

@@ -10,9 +10,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Qna {
+	private int rNum;
 	private int qnaNo;
-	private String qnaTitle;
+	private String qnaTitle;  
 	private String qnaWriter;
+	private String qnaWriter1;
 	private int secretStatus;
 	private String qnaContent;
 	private String qnaDate;
@@ -22,5 +24,6 @@ public class Qna {
 	private int commentStatus;
 	private String qnaTheme;
 	private int readCnt;
+	private String qnaPassword;
 	private ArrayList<QnaFile> fileList;
 }
