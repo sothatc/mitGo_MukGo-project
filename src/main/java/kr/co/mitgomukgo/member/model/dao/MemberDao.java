@@ -124,4 +124,15 @@ public class MemberDao {
 		List list = sqlSession.selectList("owner.searchOwner",map);
 		return (ArrayList<Owner>) list;
 	}
+
+	public int updateReserve(Reserve rs) {
+		int result = sqlSession.update("reserve.updateReserve", rs);
+		return result;
+	}
+
+	public Reserve selectOneReserve(int reserveNo) {
+		Reserve reserve = sqlSession.selectOne("reserve.selectOneReserve", reserveNo);
+		return reserve;
+	}
+
 }

@@ -218,7 +218,8 @@
 			closed_day as closedDay,
 			category,
 			witheat_cate as withEatCate,
-			whereeat_cate as whereEatCate
+			whereeat_cate as whereEatCate,
+			max_num as maxNum
 		from store 
 		where owner_no = #{ownerNo}
 	</select>
@@ -416,7 +417,7 @@
 			closed_day = #{closedDay},
 			category = #{category},
 			witheat_cate = #{withEatCate},
-			whereeat_cate = #{whereEatCate}
+			whereeat_cate = #{whereEatCate},
 			max_num = #{maxNum}
 		where store_no = #{storeNo}
 	</update>
