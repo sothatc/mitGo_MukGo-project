@@ -11,4 +11,48 @@
 			p_img as pImg
 		from market_product m where p_no between #{start} and #{end}
 	</select>
+	
+	<insert id="addMarketProduct" parameterType="ma">
+		insert into market_product values(mp_seq.nextval,
+			#{ownerNo},
+			#{pName},
+			#{pPrice},
+			#{pContent},
+			#{pImg},
+			#{storeNo},
+			#{pCategory}
+		)
+	</insert>
+	
+	<select id="marketProductList" parameterType="int" resultType="ma">
+        SELECT 
+            p_no as pNo,
+			owner_no as ownerNo,
+			p_name as pName,
+			p_price as pPrice,
+			p_img as pImg,
+			store_no as storeNo,
+			pCategory,
+            cate_name as cateName
+            from Category c, market_product m 
+            where c.cate_no = m.pcategory and store_no = #{storeNo}
+	</select>
+	
+	<select id="deleteMarketProduct" parameterType="int">
+		 delete from market_product 
+		 where p_no = #{_parameter}
+	</select>
+	
+	
+	<select id="selectOneMarket" parameterType="_int" resultType="ma">
+		select
+			p_no as pNo,
+			owner_no as ownerNo,
+			p_name as pName,
+			p_price as pPrice,
+			p_content as pContent,
+			p_img as pImg,
+			store_no as storeNo
+		from market_product where store_no= #{storeNo}
+	</select>
 </mapper>

@@ -309,7 +309,7 @@ public class StoreService {
 		return list;
 	}
 	
-	public HashMap<String, Object> sortStoreList(String storeListSort, int reqPage, String category) {
+	public HashMap<String, Object> sortStoreList(String storeListSort, String sortFilter, int reqPage, String category) {
 		// 화면에 보여주는 게시물 수
 		int numPerPage = 9;
 		
@@ -324,6 +324,7 @@ public class StoreService {
 		map.put("end", end);
 		map.put("storeListSort", storeListSort);
 		map.put("category",category);
+		map.put("sortFilter", sortFilter);
 		
 		ArrayList<Store> list = dao.sortStoreList(map);
 		
