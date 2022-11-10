@@ -18,6 +18,7 @@
 		<typeAlias type="kr.co.mitgomukgo.store.model.vo.Review" alias="r" />
 		<typeAlias type="kr.co.mitgomukgo.store.model.vo.Menu" alias="me" />
 		<typeAlias type="kr.co.mitgomukgo.market.model.vo.Market" alias="ma" />
+        <typeAlias type="kr.co.mitgomukgo.cart.model.vo.Cart" alias="c" />
 
 		<typeAlias type="kr.co.mitgomukgo.store.model.vo.StoreJoin" alias="sj" />
 		<typeAlias type="kr.co.mitgomukgo.store.model.vo.updateRating" alias="rt" />
