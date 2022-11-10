@@ -25,7 +25,7 @@
 	</insert>
 	
 	<select id="marketProductList" parameterType="int" resultType="ma">
-        SELECT 
+        select 
             p_no as pNo,
 			owner_no as ownerNo,
 			p_name as pName,
