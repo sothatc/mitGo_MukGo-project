@@ -78,13 +78,13 @@
 										<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">마켓</button>
 									</h2>
 									<div class="accordion-div">
-										<a href="#">상품추가</a>
+										<a href="/addMarketProductFrm.do">상품 추가</a>
 									</div>
 									<div class="accordion-div">
-										<a href="#">상품관리</a>
+										<a href="/marketProductListFrm.do">상품 관리</a>
 									</div>
 									<div class="accordion-div">
-										<a href="#">주문관리</a>
+										<a href="#">주문 관리</a>
 									</div>
 								</div>
 							</c:otherwise>

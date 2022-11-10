@@ -34,9 +34,23 @@ public class MarketService {
 		return marketListMap;
 	}
 
+
 	//마켓 상세 보기
 	public Market selectOneMarket(int storeNo) {
 		Market ma = dao.selectOneMarket(storeNo);
 		return ma;
 	}
+	
+	public int addMarketProduct(Market market) {
+		return dao.addMarketProduct(market);
+	}
+
+	public ArrayList<Market> marketProductList(int storeNo) {
+		return dao.marketProductList(storeNo);
+	}
+
+	public int deleteMarketProduct(int pNo) {
+		return dao.deleteMarketProduct(pNo);
+	}
+	
 }

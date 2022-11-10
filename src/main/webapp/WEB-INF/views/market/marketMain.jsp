@@ -58,7 +58,7 @@
 
 	<!-- ////////////////////////////////////////////////////////////////// -->
 
-	<section class="py-5">
+	<section class="py-5" >
 		<div class="container px-4 px-lg-5 mt-5">
 			<div class="market1">
 				<h6 id="font" id="meallist1">간단하게 한끼!</h6>
@@ -68,12 +68,12 @@
 					<div class="col mb-5">
 						<div class="card h-100">
 							<!-- Product image-->
-							<%-- <img class="card-img-top" src="resources/upload/market/${ma.thumNail} }" alt="..." /> --%>
+							<img class="card-img-top" src="resources/upload/market/${ma.PImg} }" alt="..." />
 							<!-- Product details-->
 							<div class="card-body p-4">
 								<div class="text-center">
 									<!-- Product name-->
-									<h5 id="font"><%-- ${ma.storeName} --%><br>${ma.PName }
+									<h5 id="font">${ma.storeName }<br>${ma.PName }
 									</h5>
 									<!-- Product price-->
 									${ma.PPrice }

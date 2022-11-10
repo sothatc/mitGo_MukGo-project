@@ -3,7 +3,7 @@
 <mapper namespace="cart">
 <!-- 카트 담기 -->
 <insert id="addCart">
-     insert into cart(cart_no,member_no,p_no,cart_quan) 
-     values(cart_seq.nextval, #{memberNo}, #{pNo}, #{cartQuan})
+     insert into cart(cart_no,member_id,p_no,cart_quan) 
+     values(cart_seq.nextval, #{memberId}, #{pNo}, #{cartQuan})
 </insert>
 </mapper>

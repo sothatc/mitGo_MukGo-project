@@ -23,6 +23,14 @@
 		padding-bottom: 30px;
 		font-size: 30px;
 	}
+	
+	#titleMan:hover{
+		cursor: pointer;
+	}
+	
+	.w3-modal{
+		
+	}
 </style>
 </head>
 <body>
@@ -65,19 +73,30 @@
 	        	</c:when>
 	        	
 	        	<c:otherwise>
-	        		<c:forEach items="${list }" var="q">
+	        		<c:forEach items="${list }" var="q" varStatus="i">
 	        			<table class="qna-tbl">
 			                <tr>
 			                    <th>${q.qnaWriter }</th>
 			                    <td>
 			                        <div style="display: flex; justify-content: center;">
-			                        	<c:if test="${q.secretStatus == 1 }">
-			                        		<span class="material-symbols-outlined">
-			                                lock
-			                                </span>
-			                        	</c:if>
-
-			                            <a href="#">${q.qnaTitle }</a>
+			                        
+			                        	<c:choose>
+			                        		<c:when test="${q.secretStatus == 1 }">
+			                        			<span class="material-symbols-outlined">
+				                                lock
+				                                </span>
+				                                
+				                                <span onclick="modalMan(this)">
+				                                ${q.qnaTitle }
+				                                </span>
+			                        		</c:when>
+			                        		
+			                        		<c:otherwise>
+			                        			<a href="/qndDetail.do?qnaNo=${q.qnaNo }">${q.qnaTitle }</a>
+			                        		</c:otherwise>
+			                        	</c:choose>
+	
+			                            
 			                        </div>
 			                    </td>
 			                    <td>
@@ -108,12 +127,35 @@
 			                    		<c:otherwise>
 			                    			<div style="color:white; background-color:#0dcaf0; ">답변완료</div>
 			                    		</c:otherwise>
+			                    
 			                    	</c:choose>
 			                    	
 			                        
 			                    </td>
 			                </tr>
 		                </table>
+		                
+		                <div id="id01" class="w3-modal w3-animate-opacity">
+						    <div class="w3-modal-content w3-card-4" style="top: 30%; width: 500px;">
+						      <header class="w3-container w3-teal"> 
+						        <span onclick="delModal(this);" 
+						        class="w3-button w3-large w3-display-topright">&times;</span>
+						        <h2 style="margin-top:10px;">비밀번호 확인</h2>
+						      </header>
+						      <div class="w3-container" style="margin-top: 15px; height: 100px;">
+						        <p style="margin-left: 50px;">비밀번호를 입력하세요.</p>
+						        <form action="/mypageQna.do" method="post" class="pwFrm">
+						        	
+						        	<input type="hidden" name="qnaNo" value="${q.qnaNo }">
+							        <input class="w3-input w3-border w3-round-large" type="password" name="qnaPassword" style="width: 300px;"><br>
+							        <button class="w3-button w3-round" style="margin-left: 10px; background-color: gray; color:white;" onclick="pwChk(this)">확인</button>
+						        </form>
+						      </div>
+						      <footer class="w3-container w3-teal">
+						        <p></p>
+						      </footer>
+						    </div>
+						  </div>
 	        		</c:forEach>
 	        		
 	        	</c:otherwise>
@@ -141,5 +183,76 @@
                 </span></a>
         </div>
     </div>
+	
+	  
+	</div>
+	
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+	
+	<script type="text/javascript">
+	
+		function modalMan(obj){
+			$(obj).parents(".qna-tbl").next().css("display", "block");
+			
+			
+		}
+		
+		function delModal(obj){
+			$("[name=qnaPassword]").val('');
+			$(".w3-animate-opacity").css("display", "none");
+			
+			
+		}
+		
+		function pwChk(obj){
+			if($("[name=qnaPassword]").eq(obj).val() == ""){
+				alert("비밀번호를 입력해주세요.");
+				$(obj).attr("type", "button");
+			}else{
+				$(this).attr("type", "submit");
+			}
+		}
+		
+		
+		
+		/*$(".w3-round").on("click", function(){
+			
+			console.log("안녕");
+			const pwChk = $(".w3-input").val();
+			const myPw = $(".myPw").val();
+			
+			if(pwChk != myPw){
+				alert("비밀번호를 다시 입력하세요.");
+				$(this).attr("type", "button");
+			}else if(pwChk == ""){
+				alert("비밀번호를 입력하세요.");
+				$(this).attr("type", "button");
+			}
+		});*/
+	</script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
