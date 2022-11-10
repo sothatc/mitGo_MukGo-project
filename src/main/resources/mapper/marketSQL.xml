@@ -5,9 +5,10 @@
 		select
 			p_no as pNo,
 			owner_no as ownerNo,
+			(select store_Name from store s where s.owner_no = m.owner_no) as storeName,
 			p_name as pName,
 			p_price as pPrice,
 			p_img as pImg
-		from market_product where p_no between #{start} and #{end}
+		from market_product m where p_no between #{start} and #{end}
 	</select>
 </mapper>

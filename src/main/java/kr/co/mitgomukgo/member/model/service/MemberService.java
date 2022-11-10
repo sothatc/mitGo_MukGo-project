@@ -207,24 +207,33 @@ public class MemberService {
 		ArrayList<Owner> list = dao.selectOwnerList(o);
 		return list;
 	}
+	
+	//최고관리자 > 업주관리 > 검색기능
+	public ArrayList<Owner> searchOwner(String type, String keyword) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("type", type);
+		map.put("keyword", keyword);
+		ArrayList<Owner> list = dao.searchOwner(map);
+		return list;
+	}
 
 	//최고관리자 > 업주관리 > 업주레벨 지정
 	public int updateOwnerLevel(int ownerNo, Owner o) {
 		return dao.updateOwnerLevel(ownerNo,o);
 	}
-
-	//최고관리자 > 업주관리 > 레벨 탭 
-	public ArrayList<Owner> selectOwnerStatus(Owner o, int ownerStatus) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("o",o);
-		map.put("ownerStatus",ownerStatus);
-		ArrayList<Owner> list = dao.selectOwnerStatus(map);
-		return list;
-	}
 	
 	//최고관리자 > 회원관리
 	public ArrayList<Member> selectMemberList(Member m) {
 		ArrayList<Member> list = dao.selectMemberList(m);
+		return list;
+	}
+
+	//최고관리자 > 회원관리 > 검색기능
+	public ArrayList<Member> searchMember(String type, String keyword) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("type", type);
+		map.put("keyword", keyword);
+		ArrayList<Member> list = dao.searchMember(map);
 		return list;
 	}
 

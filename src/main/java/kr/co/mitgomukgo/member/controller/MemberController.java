@@ -280,8 +280,20 @@ public class MemberController {
 	public String memberManage(Model model, Member m) {
 		ArrayList<Member> list = service.selectMemberList(m);
 		model.addAttribute("list", list);
+		
 		return "member/memberManage";
 	}
+	
+	//최고관리자 > 회원관리 > 검색기능
+	@RequestMapping(value="/searchMember.do")
+	public String searchMember(String type, String keyword, Model model){
+		ArrayList<Member> list = service.searchMember(type,keyword);
+		model.addAttribute("list", list);
+		
+		return "member/memberManage";
+	}
+		
+	
 	
 	//최고관리자 > 업주관리
 	@RequestMapping(value="/adminMemberManage.do")
@@ -291,13 +303,12 @@ public class MemberController {
 		return "member/admin";
 	}
 	
-	//최고관리자 > 업주관리 > 레벨 탭 
-	public String selectOwnerStatus(Model model, Owner o, int ownerStatus) {
-		ArrayList<Owner> list = service.selectOwnerStatus(o, ownerStatus);
-		model.addAttribute("list",list);
-		Gson gson = new Gson();
-		String result = gson.toJson(list);
-		return result;
+	//최고관리자 > 회원관리 > 검색기능
+	@RequestMapping(value="/searchOwner.do")
+	public String searchOwner(String type, String keyword, Model model){
+		ArrayList<Owner> list = service.searchOwner(type,keyword);
+		model.addAttribute("list", list);
+		return "member/admin";
 	}
 	
 	//최고관리자 > 업주관리 > 업주레벨 지정
@@ -305,7 +316,7 @@ public class MemberController {
 	public String updateOwnerLevel(int ownerNo, Owner o) {
 		int result = service.updateOwnerLevel(ownerNo,o);
 		if(result>0) {
-			return "redirect:/";
+			return "redirect:/adminMemberManage.do";
 		}else {
 			return "redirect:/";
 		}

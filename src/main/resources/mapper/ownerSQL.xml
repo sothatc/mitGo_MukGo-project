@@ -50,9 +50,9 @@
 		where owner_no=#{ownerNo}
 	</update>
 	
-	<!-- 업주 등급에 따른 조회 -->
-	<select id="ownerStatusList" parameterType="map" resultType="o">
-		select 
+	<!-- 업주 검색 -->
+	<select id="searchOwner" parameterType="map" resultType="o">
+		select
 			owner_no as ownerNo,
 			owner_id as ownerId,
 			owner_pw as ownerPw,
@@ -62,6 +62,13 @@
 			owner_level as ownerLevel,
 			owner_status as ownerStatus
 		from owner
-		where owner_status = #{ownerStatus}
+		<choose>
+			<when test="type.equals('id')">
+				where owner_id like '%'||#{keyword}||'%'
+			</when>
+			<when test="type.equals('name')">
+				where owner_name like '%'||#{keyword}||'%'
+			</when>			
+		</choose>
 	</select>
 </mapper>
