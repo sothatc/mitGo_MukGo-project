@@ -384,10 +384,10 @@
 				order by 3 desc
 			</when>
 			<when test="storeListSort.equals('grade')">
-				order by 14 asc
+				order by 14 desc
 			</when>
 			<when test="storeListSort.equals('reviewCount')">
-				order by 15 asc
+				order by 15 desc
 			</when>
 		</choose>
 		)where rnum between #{start} and #{end}
