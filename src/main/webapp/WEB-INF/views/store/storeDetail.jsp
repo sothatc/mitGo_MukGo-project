@@ -196,8 +196,9 @@ height: 100%;
 					<div class="selectCar">자동차</div>
 					<div class="selectFoot">도보</div>
 				</div>
-				<p id="result">예상 정보</p>
-
+				<div id="resultBox">
+					<p id="result">예상 정보</p>
+				</div>
 				<div class="ft_select_wrap">
 					<div class="ft_select">
 						<div class="address-wrap">
@@ -210,11 +211,13 @@ height: 100%;
 						</div>
 
 						<div class="car-content">
-							<select id="year">
+						
+							<!-- <select id="year">
 								<option value="N" selected="selected">교통정보 표출 옵션</option>
 								<option value="Y">Y</option>
 								<option value="N">N</option>
-							</select>
+							</select> -->
+						
 							<button id="btn_select1">적용하기</button>
 						</div>
 						<div class="foot-content">
