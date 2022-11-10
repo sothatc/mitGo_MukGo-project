@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+.contentWrap{
+	background-color: yellow;	
+	width: 1250px;
+	height: 500px;
+	margin: 0 auto;
+	margin-top:70px;
+}
+

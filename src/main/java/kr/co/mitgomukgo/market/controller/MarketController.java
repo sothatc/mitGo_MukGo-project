@@ -1,5 +1,6 @@
 package kr.co.mitgomukgo.market.controller;
 
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -24,6 +25,8 @@ import com.google.gson.Gson;
 import common.FileRename;
 import kr.co.mitgomukgo.market.model.service.MarketService;
 import kr.co.mitgomukgo.market.model.vo.Market;
+import kr.co.mitgomukgo.store.model.vo.Menu;
+import kr.co.mitgomukgo.store.model.vo.Review;
 import kr.co.mitgomukgo.store.model.vo.Store;
 
 @Controller
@@ -47,6 +50,23 @@ public class MarketController {
 
 		return "market/marketMain";
 	}
+	
+	//맛집 상세 이동
+	@RequestMapping(value = "/marketDetailView.do")
+	public String marketDetailView() {
+		return "market/marketDetail";
+	}
+	
+	
+	
+	// 맛집 상세 보기
+	@RequestMapping(value = "/marketDetail.do")
+	public String marketDetail(int storeNo, Model model) {
+		Market ma = service.selectOneMarket(storeNo);
+		model.addAttribute("ma", ma);
+		return "market/marketDetail";
+	}
+	
 
 	@RequestMapping(value = "/addMarketProductFrm.do")
 	public String addMarketProductFrm() {
@@ -129,4 +149,5 @@ public class MarketController {
 			return "common/alert";
 		}
 	}
+
 }

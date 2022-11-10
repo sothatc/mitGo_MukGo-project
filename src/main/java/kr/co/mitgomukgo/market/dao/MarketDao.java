@@ -25,6 +25,14 @@ public class MarketDao {
 		return (ArrayList<Market>) list;
 	}
 
+
+	//마켓 상세 보기
+	public Market selectOneMarket(int storeNo) {
+		Market ma = sqlSession.selectOne("market.selectOneMarket",storeNo);
+		return ma;
+	}
+	
+
 	public int addMarketProduct(Market market) {
 		return sqlSession.insert("addMarketProduct", market);
 	}
@@ -37,5 +45,6 @@ public class MarketDao {
 	public int deleteMarketProduct(int pNo) {
 		return sqlSession.delete("deleteMarketProduct", pNo);
 	}
+
 
 }

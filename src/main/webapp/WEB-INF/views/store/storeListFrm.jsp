@@ -36,6 +36,7 @@
 		<!-- 필요한 데이터를 담아두기 위한 더미 -->
 		<div class = "tabCategory" style = "display: none;" >${category }</div>
 		<div class = "tabSort" style = "display: none;">${storeListSort }</div>
+		<div class = "sortFilter" style = "display: none;">${sortFilter }</div>
 		
 		<!-- 검색기능 -->
 		<form action="/searchStoreList.do?category=${category }&reqPage=1" method="post">
@@ -53,28 +54,28 @@
 						<a href="/storeList.do?reqPage=1">전체</a>
 					</li>
 					<li>
-						<a href="/selectTag.do?category=1&reqPage=1"><img src="/resources/img/bibimpab.png">한식</a>
+						<a href="/selectTag.do?category=1&reqPage=1">한식</a>
 					</li>
 					<li>
-						<a href="/selectTag.do?category=2&reqPage=1"><img src="/resources/img/food.png">양식</a>
+						<a href="/selectTag.do?category=2&reqPage=1">양식</a>
 					</li>
 					<li>
-						<a href="/selectTag.do?category=3&reqPage=1"><img src="/resources/img/salmon.png">일식</a>
+						<a href="/selectTag.do?category=3&reqPage=1">일식</a>
 					</li>
 					<li>
-						<a href="/selectTag.do?category=4&reqPage=1"><img src="/resources/img/dimpling.png">중식</a>
+						<a href="/selectTag.do?category=4&reqPage=1">중식</a>
 					</li>
 					<li>
-						<a href="/selectTag.do?category=5&reqPage=1"><img src="/resources/img/tteokbokki.png">분식</a>
+						<a href="/selectTag.do?category=5&reqPage=1">분식</a>
 					</li>
 					<li>
-						<a href="/selectTag.do?category=6&reqPage=1"><img src="/resources/img/chicken.png">육류</a>
+						<a href="/selectTag.do?category=6&reqPage=1">육류</a>
 					</li>
 					<li>
-						<a href="/selectTag.do?category=7&reqPage=1"><img src="/resources/img/sea-food.png">씨푸드</a>
+						<a href="/selectTag.do?category=7&reqPage=1">씨푸드</a>
 					</li>
 					<li>
-						<a href="/selectTag.do?category=8&reqPage=1"><img src="/resources/img/dessert.png">디저트</a>
+						<a href="/selectTag.do?category=8&reqPage=1">디저트</a>
 					</li>
 					<li>
 						<a href="/selectTag.do?category=9&reqPage=1">기타</a>
@@ -87,9 +88,8 @@
 			<div class="storeList-sort-content">
 				<form action="/sortStoreList.do?category=${category }&reqPage=1" method="post">
 					<ul id="font">
-						<button name="storeListSort" value="new"><li>최신순</li></button>
-						<button name="storeListSort" value="old"><li>오래된순</li></button>
-						<button name="storeListSort" value="grade"><li>평점순</li></button>
+						<button type="submit" name="storeListSort" value="grade"><li>평점순</li></button>
+						<button type="submit" name="storeListSort" value="reviewCount"><li>리뷰순</li></button>
 					</ul>
 				</form>	
 			</div>
@@ -105,7 +105,7 @@
 							</div>
 							<div id="font">
 								<div style="display: none">${s.storeNo }</div>
-								<div>${s.rating }</div>
+								<div>★ ${s.rating }</div>
 								<div id="font">${s.storeName }</div>
 							</div>
 						</a>
