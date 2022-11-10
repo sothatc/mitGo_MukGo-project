@@ -41,4 +41,8 @@ public class MarketService {
 	public ArrayList<Market> marketProductList(int storeNo) {
 		return dao.marketProductList(storeNo);
 	}
+
+	public int deleteMarketProduct(int pNo) {
+		return dao.deleteMarketProduct(pNo);
+	}
 }

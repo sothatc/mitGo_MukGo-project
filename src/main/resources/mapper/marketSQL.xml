@@ -19,7 +19,8 @@
 			#{pPrice},
 			#{pContent},
 			#{pImg},
-			#{storeNo}
+			#{storeNo},
+			#{pCategory}
 		)
 	</insert>
 	
@@ -30,8 +31,14 @@
 			p_name as pName,
 			p_price as pPrice,
 			p_img as pImg,
-			store_no as storeNo
+			store_no as storeNo,
+			pCategory
 		from market_product
 		where store_no = #{storeNo}
+	</select>
+	
+	<select id="deleteMarketProduct" parameterType="int">
+		 delete from market_product 
+		 where p_no = #{_parameter}
 	</select>
 </mapper>

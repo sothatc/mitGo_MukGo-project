@@ -11,6 +11,7 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.support.DaoSupport;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -115,5 +116,17 @@ public class MarketController {
 		ArrayList<Market> list = service.marketProductList(s.getStoreNo());
 		model.addAttribute("list", list);
 		return "market/marketProductList";
+	}
+	
+	@RequestMapping(value = "/deleteMarketProduct.do")
+	public String deleteMarketProduct(int pNo, HttpServletRequest request) {
+		int result = service.deleteMarketProduct(pNo);
+		if (result > 0) {
+			return "redirect:/marketProductListFrm.do";
+		} else {
+			request.setAttribute("msg", "삭제시 문제가 발생했습니다.");
+			request.setAttribute("url", "/marketProductListFrm.do");
+			return "common/alert";
+		}
 	}
 }

@@ -34,4 +34,8 @@ public class MarketDao {
 		return (ArrayList<Market>) list;
 	}
 
+	public int deleteMarketProduct(int pNo) {
+		return sqlSession.delete("deleteMarketProduct", pNo);
+	}
+
 }

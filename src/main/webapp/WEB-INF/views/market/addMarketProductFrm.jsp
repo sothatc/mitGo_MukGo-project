@@ -126,12 +126,29 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							<input type="text" id="inputName" name="pName" placeholder="예) 믿고먹고 상품" required oninvalid="this.setCustomValidity('상품명을 입력하세요')" oninput="this.setCustomValidity('')">
 						</div>
 						<div>
+							<label for="inputCategory">카테고리를 선택해주세요</label>
+							<br>
+							<select class="form-control" id="inputCategory" name="pCategory" required oninvalid="this.setCustomValidity('카테고리를 선택하세요')" oninput="this.setCustomValidity('')">
+								<option value="" hidden="" disabled="disabled" selected="selected">상품 카테고리를 선택하세요</option>
+								<option value="1">한식</option>
+								<option value="2">양식</option>
+								<option value="3">일식</option>
+								<option value="4">중식</option>
+								<option value="5">분식</option>
+								<option value="6">육류</option>
+								<option value="7">씨푸드</option>
+								<option value="8">디저트</option>
+								<option value="9">기타</option>
+							</select>
+						</div>
+						<br>
+						<div>
 							<label for="inputPrice">가격을 입력해주세요</label>
 							<input type="number" id="inputPrice" name="pPrice" placeholder="예) 1,000원 → 1000" required oninvalid="this.setCustomValidity('가격을 입력하세요')" oninput="this.setCustomValidity('')">
 							<span class="comment" style="font-size: 12px; padding-left: 10px;"></span>
 						</div>
 						<div>
-							<label for="textarea">상세설명을 입력해주세요</label>
+							<label for="textarea">상품을 설명해주세요</label>
 							<br>
 							<textarea class="form-control" name="pContent" id="textarea" rows="4" required oninvalid="this.setCustomValidity('상세설명을 입력하세요')" oninput="this.setCustomValidity('')" style="margin: 10px 0;"></textarea>
 						</div>
