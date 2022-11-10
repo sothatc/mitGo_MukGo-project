@@ -3,7 +3,7 @@
 <mapper namespace="owner">
 	<select id="insertOwner" parameterType="o">
 		insert into owner
-		values(owner_seq.nextval, #{ownerId}, #{ownerPw}, #{ownerName}, #{ownerPhone}, to_char(sysdate,'yyyy-mm-dd'),#{ownerLevel})
+		values(owner_seq.nextval, #{ownerId}, #{ownerPw}, #{ownerName}, #{ownerPhone}, to_char(sysdate,'yyyy-mm-dd'),#{ownerLevel},1)
 	</select>
 	<select id="ownerCheckId" parameterType="string" resultType="string">
 		select owner_id as ownerId

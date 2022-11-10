@@ -155,6 +155,7 @@ public class MemberController {
 	}
 	@RequestMapping(value="/join.do")
 	public String join(Member m) {
+		System.out.println(m);
 		int result = service.insertMember(m);
 		if(result > 0) {
 			return "redirect:/";
