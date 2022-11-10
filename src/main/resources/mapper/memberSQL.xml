@@ -39,4 +39,23 @@
 		from member
 		order by 1 DESC
 	</select>
+	
+	<!-- 일반회원 검색 -->
+	<select id="searchMember" parameterType="map" resultType="m">
+		select
+			member_no as memberNo,
+			member_id as memberId,
+			member_name as memberName,
+			member_phone as memberPhone,
+			m_enroll_date as memEnrollDate
+		from member
+		<choose>
+			<when test="type.equals('id')">
+				where member_id like '%'||#{keyword}||'%'
+			</when>
+			<when test="type.equals('name')">
+				where member_name like '%'||#{keyword}||'%'
+			</when>			
+		</choose>
+	</select>
 </mapper>

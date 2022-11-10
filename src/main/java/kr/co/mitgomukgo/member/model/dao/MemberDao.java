@@ -112,4 +112,16 @@ public class MemberDao {
 		List list = sqlSession.selectList("member.memberList", m);
 		return (ArrayList<Member>) list;
 	}
+
+	//최고관리자 > 회원관리 > 검색기능
+	public ArrayList<Member> searchMember(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("member.searchMember",map);
+		return (ArrayList<Member>) list;
+	}
+
+	//최고관리자 > 업주관리 > 검색기능
+	public ArrayList<Owner> searchOwner(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("owner.searchOwner",map);
+		return (ArrayList<Owner>) list;
+	}
 }

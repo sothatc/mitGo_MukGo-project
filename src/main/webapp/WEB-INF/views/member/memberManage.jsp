@@ -44,6 +44,18 @@
     <article id="content" class="content">
 		<div class="contents" style="padding:0;">
             <h4 style="margin: 0;">회원관리</h4>
+            <!---------- 검색조건 ---------->
+            <div class="searchWrap" style="width:800px; margin-top:10px; margin-bottom: 20px;">
+            	<form action="/searchMember.do" method="post">
+					<select name="type" style="width:100px; height:32px;">
+						<option value="id">아이디</option>
+						<option value="name">이름</option>
+					</select>
+					<input type="text" name="keyword" style="height:32px;">
+					<input type="submit" value="검색" style="background-color: rgb(51,51,51); color:white; width:40px; border-radius: 5px;">
+            	</form>
+            </div>
+            <!---------- 목록 테이블 --------->	
 	            <table class="tablewrap" style="text-align: center; vertical-align: middle;">
 	                <tr style="height: 50px; border-bottom: 2px solid black"">
 	                    <th>회원번호</th>
@@ -62,6 +74,7 @@
 	                </tr>
 	                </c:forEach>
 	            </table>
+	            
         </div>
     </article>
 </div>
