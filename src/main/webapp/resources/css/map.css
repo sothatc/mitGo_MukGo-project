@@ -31,6 +31,12 @@
 .address-wrap{
     display: inline-block;
     float: left;
+    width: 542px;
+}
+.ft_select_wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .ft_select{
     overflow: hidden;
@@ -40,13 +46,18 @@
     float: left;
     padding-left: 10px;
 }
-
+#resultBox{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 #result{
     display: flex;
     justify-content: center;
     align-items: center;
     border: solid 2px black;
-    width: 100%;
+    width: 620px;
     height: 25px;
     border-radius: 10px;
     padding-left: 15px;
@@ -55,10 +66,13 @@
 #fullAddr{
     border: solid 2px black;
     border-radius: 10px;
-    width: 300px;
+    width: 440px;
     text-align: center;
 }
 .startBtn, #btn_select1, #btn_select2{
     border-radius: 10px;
+}
+.startBtn{
+    margin-left: 8px;
 }
 

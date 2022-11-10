@@ -12,6 +12,7 @@
 <script type="text/javascript">
 	window.onload = function () {
 		alert('리뷰가 등록되었습니다.');
+		opener.location.reload();
 		window.close();
 	}
 </script>

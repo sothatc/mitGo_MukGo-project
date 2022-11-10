@@ -1,0 +1,84 @@
+package kr.co.mitgomukgo.market.controller;
+
+import java.io.BufferedOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.Gson;
+
+import common.FileRename;
+import kr.co.mitgomukgo.market.model.service.MarketService;
+import kr.co.mitgomukgo.market.model.vo.Market;
+import kr.co.mitgomukgo.notice.model.vo.NoticeFile;
+
+@Controller
+public class MarketController {
+
+	@Autowired
+	private MarketService service;
+
+	@Autowired
+	private FileRename fileRename;
+
+	public MarketController() {
+		super();
+	}
+
+	@RequestMapping(value = "/marketMain.do")
+	public String marketMainFrm(int reqPage, Model model) {
+		HashMap<String, Object> map = service.marketList(reqPage);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+
+		return "market/marketMain";
+	}
+
+	@RequestMapping(value = "/addMarketProductFrm.do")
+	public String addMarketProductFrm() {
+		return "market/addMarketProductFrm";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/marketEditorUpload.do", produces = "application/json;charset=utf-8")
+	public String noticeEditorUpload(MultipartFile[] files, HttpServletRequest request) {
+		String filepath = null;
+		// 파일이 비어있지 않다면
+		if (!files[0].isEmpty()) {
+			// 파일 경로 설정
+			String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/market/editor/");
+			// 파일 중복처리
+			for (MultipartFile fileList : files) {
+				String filename = fileList.getOriginalFilename();
+				filepath = fileRename.fileRename(savePath, filename);
+				try {
+					FileOutputStream fos = new FileOutputStream(savePath + filepath);
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					byte[] bytes = fileList.getBytes();
+
+					bos.write(bytes);
+					bos.close();
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		Gson gson = new Gson();
+		String result = gson.toJson("/resources/upload/market/editor/" + filepath);
+		return result;
+	}
+}

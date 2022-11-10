@@ -28,4 +28,47 @@
 		set owner_pw=#{ownerPw}, owner_level=#{ownerLevel}
 		where owner_no=#{ownerNo}
 	</update>
+	
+	<select id="ownerList" parameterType="o" resultType="o">
+		select 
+			owner_no as ownerNo,
+			owner_id as ownerId,
+			owner_pw as ownerPw,
+			owner_name as ownerName,
+			owner_phone as ownerPhone,
+			o_enroll_date as ownerEnrollDate,
+			owner_level as ownerLevel,
+			owner_status as ownerStatus
+		from owner
+		order by 1 DESC
+	</select>
+	
+	<!-- 업주 등급 지정 -->
+	<update id="updateLevel" parameterType="o">
+		update owner
+		set owner_status=#{ownerStatus}
+		where owner_no=#{ownerNo}
+	</update>
+	
+	<!-- 업주 검색 -->
+	<select id="searchOwner" parameterType="map" resultType="o">
+		select
+			owner_no as ownerNo,
+			owner_id as ownerId,
+			owner_pw as ownerPw,
+			owner_name as ownerName,
+			owner_phone as ownerPhone,
+			o_enroll_date as ownerEnrollDate,
+			owner_level as ownerLevel,
+			owner_status as ownerStatus
+		from owner
+		<choose>
+			<when test="type.equals('id')">
+				where owner_id like '%'||#{keyword}||'%'
+			</when>
+			<when test="type.equals('name')">
+				where owner_name like '%'||#{keyword}||'%'
+			</when>			
+		</choose>
+	</select>
 </mapper>
