@@ -11,6 +11,7 @@ import oracle.net.aso.p;
 public class Market {
 	private int marketNo;
 	private int ownerNo;
+	private String storeName;
 	private String pName;
 	private int pPrice;
 	private String pContent;
