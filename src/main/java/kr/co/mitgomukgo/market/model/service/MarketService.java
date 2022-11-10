@@ -33,4 +33,12 @@ public class MarketService {
 		marketListMap.put("list",list);
 		return marketListMap;
 	}
+
+	public int addMarketProduct(Market market) {
+		return dao.addMarketProduct(market);
+	}
+
+	public ArrayList<Market> marketProductList(int storeNo) {
+		return dao.marketProductList(storeNo);
+	}
 }

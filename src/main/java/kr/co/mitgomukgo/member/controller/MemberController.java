@@ -323,7 +323,7 @@ public class MemberController {
 	}
 	
 
-	@RequestMapping(value = "cancleReserve.do")
+	@RequestMapping(value = "/cancleReserve.do")
 	public String cancleReserve(int reserveNo, HttpServletRequest request) {
 		int result = service.cancleReserve(reserveNo);
 		if(result > 0) {
