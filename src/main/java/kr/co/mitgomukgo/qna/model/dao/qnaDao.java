@@ -40,4 +40,55 @@ public class qnaDao {
 		int result = sqlSession.selectOne("qna.selectMaxNo");
 		return result;
 	}
+
+	public int upReadCnt(int qnaNo) {
+		int result = sqlSession.update("qna.updateReadCnt", qnaNo);
+		return result;
+	}
+
+	public Qna selectOneQna(int qnaNo) {
+		Qna qna = sqlSession.selectOne("qna.selectOneQna", qnaNo);
+		
+		return qna;
+	}
+
+	public Qna selectQnaPassword(HashMap<String, Object> map) {
+		Qna result = sqlSession.selectOne("qna.selectQnaPassword", map);
+		return result;
+	}
+
+	public ArrayList<QnaFile> selectAllQnaFile(int qnaNo) {
+		List list = sqlSession.selectList("qna.selectQnaFile", qnaNo);
+		return (ArrayList<QnaFile>)list;
+	}
+
+	public QnaFile selectOneQnaFile(int qnaFileNo) {
+		QnaFile qf = sqlSession.selectOne("qna.selectOneQnaFile", qnaFileNo);
+		return qf;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

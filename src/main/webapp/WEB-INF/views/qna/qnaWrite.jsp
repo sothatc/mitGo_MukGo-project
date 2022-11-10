@@ -61,7 +61,7 @@
                     <tr style="height: 70px; border-bottom: 1px solid rgba(224, 224, 224, 0.7);">
                         <th>*제목</th>
                         <td style="width: 700px;">
-                            <input class="w3-input w3-border w3-round-large" name="qnaTitle" type="text" style="width: 630px; margin: 0 auto;">
+                            <input class="w3-input w3-border w3-round-large" id="noticeTitle" name="qnaTitle" type="text" style="width: 630px; margin: 0 auto;">
                         </td>
                     </tr>
 
@@ -84,10 +84,17 @@
                         </td>
                     </tr>
 
-                    <tr style="height: 70px; border-bottom: 1px solid rgba(224, 224, 224, 0.7);">
+                    <tr style="height: 70px; border-bottom: 1px solid rgba(224, 224, 224, 0.7);" class="secret">
                         <th>비밀글</th>
                         <td>
                             <input type="checkbox" name="secretStatus" id="secretStatus">
+                        </td>
+                    </tr>
+                    
+                    <tr style="height: 70px; border-bottom: 1px solid rgba(224, 224, 224, 0.7); display: none;" class="secretPw">
+                        <th>비밀번호</th>
+                        <td>
+                            <input class="w3-input w3-border w3-round-large" id="qnaPassword" name="qnaPassword" type="text" style="width: 300px; margin: 0 auto;">
                         </td>
                     </tr>
 
@@ -160,8 +167,12 @@
             </form>
         </div>
     </div>
+    
+    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
     <script>
+    	
+    
     	$(document).ready(function(){
     		$("[name=qnaContent]").summernote({
         		height: 400,
@@ -178,7 +189,7 @@
     	function uploadImage(files, editor){
     		
     		const form = new FormData();
-    		form.append("file", files);
+    		form.append("upfile", files);
     		$.ajax({
     			url : "/uploadImgQna.do",
     			type : "post",
@@ -262,6 +273,17 @@
                 $("#noticeWriteBtn").attr("type", "submit");
             }
         }
+        
+        $("[name=secretStatus]").on("click", function(){
+        	console.log("가보자고");
+        	if($("[name=secretStatus]").prop("checked")){
+            	$(".secretPw").slideDown();
+            }else{
+            	$(".secretPw").slideUp();
+            }
+        });
+        
+        
     </script>
 </body>
 </html>

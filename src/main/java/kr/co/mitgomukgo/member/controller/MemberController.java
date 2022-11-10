@@ -249,4 +249,6 @@ public class MemberController {
 		return "member/ownerReserveManage";
 	}
 	
+	
+	
 }
