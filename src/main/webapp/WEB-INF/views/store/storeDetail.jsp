@@ -30,6 +30,7 @@ height: 100%;
 	color: rgb(255, 83, 86) !important;
 }
 </style>
+
 <body onload="initTmap()">
 
    <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -45,27 +46,22 @@ height: 100%;
    
    
    <!---------------------내용----------------------->
-   <div class="content-wrap">
+   <div class="content-wrap" style="font-family:Gowun Dodum;">
       <div class="content-wrap1" style="width:1200px;">
-         <div class="content-wrap1-1" style="width:500px; height:50px;">
-         	<div class="div1" style="height: 50px; float:left;">
-	            <span class="categorySpan" style="font-family:Gowun Dodum;"></span>
-	            <span class="storeNameSpan" style="font-family:Gowun Dodum;">${s.storeName}</span>
-            </div>
-            <div class="div2" style="width:50px; float:left; margin-left:10px;">
-	            <span class="material-symbols-rounded star">star</span>
-	            <span class="reviewNum" style="font-family:Gowun Dodum;">${s.rating }</span>
-            </div>
-         </div>
-
-         <div class="content-wrap1-2">
+         <div class="content-wrap1-1" style="width:1200px; height:50px; display:inline; color: black;">
+	            <span class="categorySpan" style="float:left;"></span>
+	            <span class="storeNameSpan" style="float:left; margin-left:5px;">${s.storeName}</span>
+	            <span class="reviewNum" style="color:rgba(255, 83, 86, 0.99); margin-left:10px; float:left;" >★ ${s.rating }</span>
+		 	<span style=" margin-left:20px; font-weight: lighter;">${s.content }</span>
+		 	<div style="margin-right:0; float:right;">
             <c:choose>
               <c:when test="${!empty sessionScope.m }">
                   <a class="material-symbols-rounded share pointer" id="share" href="javascript:shareMessage()">share</a>
                   <span class="material-symbols-rounded favorite pointer" id="favorite" style="display:none;">favorite</span>
-                  <span class="material-symbols-outlined unfavorite pointer" id="unfavorite" style="float:right; margin-top:10px; margin-right:20px;">favorite</span>
+                  <span class="material-symbols-outlined unfavorite pointer" id="unfavorite" style="float:right; margin-top:10px; margin-right:15px;">favorite</span>
                </c:when>
          	</c:choose>
+         	</div>
          </div>
       </div>
 
@@ -125,7 +121,7 @@ height: 100%;
                      <td>
                         <button class="w3-button w3-circle w3-teal" id="down" style="width: 35px; height: 35px; padding: 0;">-</button>
                      </td>
-                     <td class="peopleTd">
+                     <td class="peopleTd" style="width:30px; text-align: center;">
                         <span class="people">1</span>
                      </td>
                      <td>
@@ -237,26 +233,15 @@ height: 100%;
          <!----- 마켓 상품 부분 ----->
          <div class="market-wrap" style="margin-top:50px; width:1200px; height:300px;">
 	         <div class="menuTitle" style="margin: 0 auto;">MARKET</div>
+	         
+	         <c:forEach items="${mList }" var="ma">
 	            <div class="w3-card-4" id="marketWrap">
-	               <a href="#"><img src="/resources/img/pizza.PNG" style="width: 100%"></a>
+	               <a href="#"><img src="/resources/upload/market/${ma.PImg }" style="width: 100%"></a>
 	               <div class="w3-container w3-center">
-	                  <p>상품 A</p>
+	                  <p>${ma.PName }</p>
 	               </div>
 	            </div>
-	
-	            <div class="w3-card-4" id="marketWrap">
-	               <a href="#"><img src="/resources/img/pizza.PNG" style="width: 100%"></a>
-	               <div class="w3-container w3-center">
-	                  <p>상품 A</p>
-	               </div>
-	            </div>
-	
-	            <div class="w3-card-4" id="marketWrap">
-	               <a href="#"><img src="/resources/img/pizza.PNG" style="width: 100%"></a>
-	               <div class="w3-container w3-center">
-	                  <p>상품 A</p>
-	               </div>
-	            </div>
+			</c:forEach>
 		</div>
 		
 		
@@ -527,25 +512,7 @@ height: 100%;
                   }
                });
                
-               //---------- 인원수 늘리기
-               let count = 1;
-               var maxNum="${s.maxNum}";
-               $("#up").on("click", function(e) {
-            	   console.log(maxNum);
-                 	if(count== maxNum){
-                   		return false;
-                   	}
-               		count++;
-               		$(".people").text(count);
-               });
-                     
-               $("#down").on("click", function(e) {
-               		if (count == 1) {
-               			return false;
-                 	}
-                	 count--;
-                 	$(".people").text(count);
-               }); 
+
             }
        }); //ajax 종료
          
@@ -685,6 +652,26 @@ height: 100%;
          }
          
          
+         //---------- 인원수 늘리기
+         let count = 1;
+         var maxNum="${s.maxNum}";
+         $("#up").on("click", function(e) {
+      	   console.log(maxNum);
+           	if(count== maxNum){
+             		return false;
+             	}
+         		count++;
+         		$(".people").text(count);
+         });
+               
+         $("#down").on("click", function(e) {
+         		if (count == 1) {
+         			return false;
+           	}
+          	 count--;
+           	$(".people").text(count);
+         }); 
+         
          
          //---------- 모달 
          const modal = document.querySelector(".modal-wrap");
@@ -701,6 +688,7 @@ height: 100%;
                    document.getElementById('ownerModal').style.display='block';
                 }
                 selectedDate =$("#datePicker").val();
+                console.log(selectedDate);
                 $(".eatDate").attr("value",selectedDate);
                 $(".eatTime").attr("value",selectTime);
                 $(".eatNum").attr("value",count);
@@ -718,6 +706,7 @@ height: 100%;
          $(".closeModal").on("click",function(){
          		modal.classList.add("hidden");
          });
+      
 
          
       </script>

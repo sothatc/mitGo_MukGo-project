@@ -46,5 +46,14 @@ public class MarketDao {
 		return sqlSession.delete("deleteMarketProduct", pNo);
 	}
 
+	public Market readOneMarketProduct(int pNo) {
+		return sqlSession.selectOne("readOneMarketProduct", pNo);
+	}
+
+	public int updateMarketProduct(Market market) {
+		return sqlSession.update("updateMarketProduct", market);
+	}
+
+
 
 }

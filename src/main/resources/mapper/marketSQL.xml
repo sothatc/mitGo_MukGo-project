@@ -10,6 +10,7 @@
 			owner_no as ownerNo,
 			(select store_Name from store s where s.owner_no = m.owner_no) as storeName,
 			p_name as pName,
+			pcategory as pCategory,
 			p_price as pPrice,
 			p_img as pImg
 		from market_product m order by pno desc)b)rb order by 3 desc)where rnum between #{start} and #{end}
@@ -58,6 +59,39 @@
 			store_no as storeNo,
 			pcategory as pCategory
 		from market_product
-		where p_no= 24
+		where p_no= #{_parameter}
+	</select>
+	
+	<select id="readOneMarketProduct" parameterType="int" resultType="ma">
+		select
+			p_no as pNo,
+			owner_no as ownerNo,
+			p_name as pName,
+			p_price as pPrice,
+			p_content as pContent,
+			p_img as pImg,
+			store_no as storeNo,
+			pCategory
+		from market_product
+		where p_no = #{_parameter}
+	</select>
+	
+	<update id="updateMarketProduct" parameterType="ma">
+		update market_product
+		set
+			p_name = #{pName},
+			p_price = #{pPrice},
+			p_content = #{pContent},
+			p_img = #{pImg},
+			pcategory = #{pCategory}
+		where p_no = #{pNo}
+	</update>
+	
+	<select id="selectOneMarketProduct" parameterType="_int" resultType="ma">
+	select 
+		p_img as pImg,
+		p_name as pName
+	from market_product
+	where store_no = #{_parameter}
 	</select>
 </mapper>

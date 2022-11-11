@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.mitgomukgo.market.model.vo.Market;
 import kr.co.mitgomukgo.member.model.vo.Owner;
 import kr.co.mitgomukgo.store.model.vo.Menu;
 import kr.co.mitgomukgo.store.model.vo.Reserve;
@@ -170,6 +171,11 @@ public class StoreDao {
 
 	public int deleteReview(int reviewNo) {
 		return sqlSession.delete("deleteReview", reviewNo);
+	}
+	//마켓 제품 조회
+	public ArrayList<Market> selectProductList(int storeNo) {
+		List list = sqlSession.selectList("market.selectOneMarketProduct",storeNo);
+		return (ArrayList<Market>) list; 
 	}
 
 
