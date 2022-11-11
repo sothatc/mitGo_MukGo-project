@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.mitgomukgo.cart.model.dao.CartDao;
 import kr.co.mitgomukgo.cart.model.vo.Cart;
+import kr.co.mitgomukgo.market.model.vo.Market;
 import kr.co.mitgomukgo.member.model.vo.Member;
 
 
@@ -19,4 +20,8 @@ public class CartService {
 		ArrayList<Cart> list = dao.allCartList(m);
 	      return (ArrayList<Cart>) list;
 	   }
+
+	public int insertCart(int pNo, Cart c) {
+		return dao.insertCart(pNo);
+	}
 }
