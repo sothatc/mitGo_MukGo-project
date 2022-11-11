@@ -199,6 +199,7 @@ public class StoreService {
 		ArrayList<Store> list = dao.searchStoreList(map);
 		
 		int totalCnt = dao.countTagList(category);
+		System.out.println(totalCnt);
 		int totalPage = 0;
 		if(totalCnt % numPerPage == 0) {
 			totalPage = totalCnt / numPerPage;
