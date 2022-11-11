@@ -254,6 +254,7 @@ public class NoticeController {
 		return "redirect:/noticeDetail.do?noticeNo=" + n.getNoticeNo();
 	}
 	
+	// 게시물 리스트를 찾아오고 그 리스트를 받아와서 파일을 삭제한다
 	@RequestMapping(value="/deleteNotice.do")
 	public String deleteNotice(int noticeNo, HttpServletRequest request) {
 		

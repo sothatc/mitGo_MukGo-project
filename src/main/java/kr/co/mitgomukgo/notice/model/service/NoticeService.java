@@ -146,13 +146,16 @@ public class NoticeService {
 	public ArrayList<NoticeFile> selectNoticeFile(int noticeNo) {
 		ArrayList<NoticeFile> list = dao.selectALlNoticeFile(noticeNo);
 		
-		int result = dao.deleteNoticeFileList(noticeNo);
-		
-		if(result > 0) {
-			result += dao.deleteNotice(noticeNo);
-			return list;
-		}else {
-			return null;
+		int result = 0;
+		if(list != null) {
+			result = dao.deleteNoticeFileList(noticeNo);
+			if(result > 0) {
+				result += dao.deleteNotice(noticeNo);
+				}
+				return list;
+			}else {
+				result = dao.deleteNotice(noticeNo);
+				return null;
 		}
 		
 	}

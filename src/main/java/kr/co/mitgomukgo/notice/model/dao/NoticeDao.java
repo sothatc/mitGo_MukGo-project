@@ -64,7 +64,12 @@ public class NoticeDao {
 
 	public ArrayList<NoticeFile> selectALlNoticeFile(int noticeNo) {
 		List list = sqlSession.selectList("notice.selectAllNoticeFile", noticeNo);
-		return (ArrayList<NoticeFile>)list;
+		
+		if(list.isEmpty()) {
+			return null;
+		}else {
+			return (ArrayList<NoticeFile>)list;
+		}
 	}
 
 	public NoticeFile selectOneNoticeFile(int noticeFileNo) {
