@@ -75,6 +75,9 @@
     font-weight: bold;
 }
 
+.w3-display-topright:hover{
+	background-color: #ffc107!important;
+}
 
 </style>
 </head>
@@ -204,7 +207,7 @@
 		                
 		                <div id="id01" class="w3-modal w3-animate-opacity">
 						    <div class="w3-modal-content w3-card-4" style="top: 30%; width: 500px;">
-						      <header class="w3-container w3-teal"> 
+						      <header class="w3-container w3-teal" style="background-color: #ffc107!important;"> 
 						        <span onclick="delModal(this);" 
 						        class="w3-button w3-large w3-display-topright">&times;</span>
 						        <h2 style="margin-top:10px;">비밀번호 확인</h2>

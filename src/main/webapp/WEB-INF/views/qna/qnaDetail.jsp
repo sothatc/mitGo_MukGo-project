@@ -34,7 +34,7 @@
 					</c:when>
 					
 					<c:otherwise>
-						<div style="color:white; background-color:#0dcaf0; ">답변대기</div>
+						<div style="color:white; background-color:#0dcaf0; ">답변완료</div>
 					</c:otherwise>
                 </c:choose>
                 
