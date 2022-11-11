@@ -36,6 +36,12 @@
 	    text-decoration: none;
 	    font-size: 20px;
 	}
+	
+	.numberDeco{
+		background-color: gray;
+		color: white;
+		border-radius: 100%;
+	}
 </style>
 </head>
 <body>  
@@ -63,7 +69,7 @@
         </div>
 
         <div class="faq-category">
-            <ul>
+            <ul style="padding: 0px;">
                 <li>
                     <a href="/selectAllFaq.do?reqPage=1" <c:if test="${theme != '예약문의' and theme != '마켓문의' and theme != '기타문의' }">style="color: black;"</c:if>>전체</a>
                 </li>
@@ -135,11 +141,13 @@
 
     </div>
 	
-    <div class="faq-write-btn">
-        <a href="/goFaqFrm.do">글쓰기</a>
-    </div>
+	<c:if test="${not empty sessionScope.m and sessionScope.m.memberClass == 1 }">
+		<div class="faq-write-btn">
+	        <a href="/goFaqFrm.do">글쓰기</a>
+	    </div>
+	</c:if>
 
-    <div class="paging">
+    <div class="paging" style="margin-top: 50px;">
        <!--  <a href="#"><span class="material-symbols-outlined" style="font-size: 30px;">
             chevron_left
             </span>

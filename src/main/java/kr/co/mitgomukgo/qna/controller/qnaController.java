@@ -49,7 +49,7 @@ public class qnaController {
 			return "qna/qnaList";
 		}else {
 			model.addAttribute("list", map.get("list"));
-			System.out.println(map.get("list"));
+			model.addAttribute("pageNavi", map.get("pageNavi"));
 			return "qna/qnaList";
 		}
 	}
@@ -287,6 +287,56 @@ public class qnaController {
 		
 		return "redirect:/qnalist.do?reqPage=1";
 		
+	}
+	
+	@RequestMapping(value="/insertComment.do")
+	public String insertComment(Qna qna) {
+		int result  = service.insertComment(qna);
+		
+		return "redirect:/qndDetail.do?qnaNo=" + qna.getQnaNo();
+	}
+	
+	@RequestMapping(value="/updateComment.do")
+	public String updateComment(Qna qna) {
+		int result = service.updateComment(qna);
+		
+		return "redirect:/qndDetail.do?qnaNo=" + qna.getQnaNo();
+	}
+	
+	@RequestMapping(value="/deleteComment.do")
+	public String deleteComment(int qnaNo) {
+		int result = service.deleteComment(qnaNo);
+		
+		return "redirect:/qndDetail.do?qnaNo=" + qnaNo;
+	}
+	
+	@RequestMapping(value = "/searchQna.do")
+	public String searchQna(int reqPage, String type, String keyword, Model model) {
+		HashMap<String, Object> map = service.searchQna(reqPage, type, keyword);
+		
+		if(map == null) {
+			model.addAttribute("msg", "'" + keyword + "'와(과) 일치하는 결과가 없습니다.");
+			return "qna/qnaList";
+		}else {
+			model.addAttribute("list", map.get("list"));
+			model.addAttribute("pageNavi", map.get("pageNavi"));
+			return "qna/qnaList";
+		}
+	}
+	
+	@RequestMapping(value="/selectThemeqna.do")
+	public String selectThemeQna(String qnaTheme, int reqPage, Model model) {
+		HashMap<String, Object> map = service.selectThemeQna(qnaTheme, reqPage);
+		
+		if(map == null) {
+			model.addAttribute("msg", "'" + qnaTheme + "'과 관련된 QnA가 없습니다.");
+			return "qna/qnaList";
+		}else {
+			model.addAttribute("list", map.get("list"));
+			model.addAttribute("pageNavi", map.get("pageNavi"));
+			model.addAttribute("theme", qnaTheme);
+			return "qna/qnaList";
+		}
 	}
 	
 }
