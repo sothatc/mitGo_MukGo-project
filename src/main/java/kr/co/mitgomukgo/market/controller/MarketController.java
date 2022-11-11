@@ -58,13 +58,11 @@ public class MarketController {
 	}
 	
 	
-	
 	// 맛집 상세 보기
 	@RequestMapping(value = "/marketDetail.do")
 	public String marketDetail(int pNo, Model model) {
 		Market ma = service.selectOneMarket(pNo);
 		model.addAttribute("ma", ma);
-		System.out.println(ma);
 		return "market/marketDetail";
 	}
 	

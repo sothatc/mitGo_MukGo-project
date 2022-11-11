@@ -47,7 +47,7 @@ height: 100%;
    <!---------------------내용----------------------->
    <div class="content-wrap">
       <div class="content-wrap1" style="width:1200px;">
-         <div class="content-wrap1-1" style="width:500px; height:50px;">
+         <div class="content-wrap1-1" style="width:content-fit; height:50px;">
          	<div class="div1" style="height: 50px; float:left;">
 	            <span class="categorySpan" style="font-family:Gowun Dodum;"></span>
 	            <span class="storeNameSpan" style="font-family:Gowun Dodum;">${s.storeName}</span>
@@ -57,8 +57,10 @@ height: 100%;
 	            <span class="reviewNum" style="font-family:Gowun Dodum;">${s.rating }</span>
             </div>
          </div>
-
-         <div class="content-wrap1-2">
+		 <div class="content-wrap1-3" style="font-family:Gowun Dodum; width: 500px; float:left;">
+		 	<span>${s.content }</span>
+		 </div>
+         <div class="content-wrap1-2" style="float:right;">
             <c:choose>
               <c:when test="${!empty sessionScope.m }">
                   <a class="material-symbols-rounded share pointer" id="share" href="javascript:shareMessage()">share</a>
@@ -125,7 +127,7 @@ height: 100%;
                      <td>
                         <button class="w3-button w3-circle w3-teal" id="down" style="width: 35px; height: 35px; padding: 0;">-</button>
                      </td>
-                     <td class="peopleTd">
+                     <td class="peopleTd" style="width:30px; text-align: center;">
                         <span class="people">1</span>
                      </td>
                      <td>
@@ -527,25 +529,7 @@ height: 100%;
                   }
                });
                
-               //---------- 인원수 늘리기
-               let count = 1;
-               var maxNum="${s.maxNum}";
-               $("#up").on("click", function(e) {
-            	   console.log(maxNum);
-                 	if(count== maxNum){
-                   		return false;
-                   	}
-               		count++;
-               		$(".people").text(count);
-               });
-                     
-               $("#down").on("click", function(e) {
-               		if (count == 1) {
-               			return false;
-                 	}
-                	 count--;
-                 	$(".people").text(count);
-               }); 
+
             }
        }); //ajax 종료
          
@@ -685,6 +669,26 @@ height: 100%;
          }
          
          
+         //---------- 인원수 늘리기
+         let count = 1;
+         var maxNum="${s.maxNum}";
+         $("#up").on("click", function(e) {
+      	   console.log(maxNum);
+           	if(count== maxNum){
+             		return false;
+             	}
+         		count++;
+         		$(".people").text(count);
+         });
+               
+         $("#down").on("click", function(e) {
+         		if (count == 1) {
+         			return false;
+           	}
+          	 count--;
+           	$(".people").text(count);
+         }); 
+         
          
          //---------- 모달 
          const modal = document.querySelector(".modal-wrap");
@@ -701,6 +705,7 @@ height: 100%;
                    document.getElementById('ownerModal').style.display='block';
                 }
                 selectedDate =$("#datePicker").val();
+                console.log(selectedDate);
                 $(".eatDate").attr("value",selectedDate);
                 $(".eatTime").attr("value",selectTime);
                 $(".eatNum").attr("value",count);

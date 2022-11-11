@@ -20,7 +20,7 @@
 					<a href="#">주문 내역</a>
 				</div>
 				<div>
-					<a href="/mypage.do">내 정보 수정</a>
+					<a href="/updateMemberFrm.do">내 정보 수정</a>
 				</div>
 				<div>
 					<a href="/logout.do">로그아웃</a>
