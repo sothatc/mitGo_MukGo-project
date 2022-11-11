@@ -89,10 +89,11 @@
 		               </div>
 		               <br>
 		               <div class="form-group">
-		                  <label for="textarea">상세설명</label>
-		                  <br>
-		                  <textarea class="form-control" name="content" id="textarea" rows="4" required oninvalid="this.setCustomValidity('상세설명을 입력하세요')" oninput="this.setCustomValidity('')">${sessionScope.s.content}</textarea>
+		                <label for="textarea">업체를 한줄로 설명해주세요</label>
+						<br>
+						<textarea class="form-control" name="content" id="textarea" rows="4" style="height: 30px;" required oninvalid="this.setCustomValidity('상세설명을 입력하세요')" oninput="this.setCustomValidity('')"></textarea>
 		               </div>
+		               <br>
 		               <div class="form-group">
 		                  <label for="textarea">시간당 예약가능 최대 인원수</label>
 		                  <br>

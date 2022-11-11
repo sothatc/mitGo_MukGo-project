@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>상품 추가</title>
+<title>상품 수정</title>
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <style>
 .marketProduct {
@@ -116,14 +116,14 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 			<div class="marketProduct" style="display: flex;">
 				<div class="marketProduct-wrap">
 					<div class="marketProductTitle">
-						<h1>상품 추가</h1>
+						<h1>상품 수정</h1>
 					</div>
 					<hr>
 					<br>
-					<form class="mb-3" id="marketProductForm" method="post" action="/addMarketProduct.do" enctype="multipart/form-data">
+					<form class="mb-3" id="marketProductForm" method="post" action="/updateMarketProduct.do" enctype="multipart/form-data">
 						<div>
 							<label for="inputName">상품 이름을 입력해주세요</label>
-							<input type="text" id="inputName" name="pName" placeholder="예) 믿고먹고 상품" required oninvalid="this.setCustomValidity('상품명을 입력하세요')" oninput="this.setCustomValidity('')">
+							<input type="text" id="inputName" name="pName" placeholder="예) 믿고먹고 상품" value="${ma.PName }" required oninvalid="this.setCustomValidity('상품명을 입력하세요')" oninput="this.setCustomValidity('')">
 						</div>
 						<div>
 							<label for="inputCategory">카테고리를 선택해주세요</label>
@@ -139,22 +139,25 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 						<br>
 						<div>
 							<label for="inputPrice">가격을 입력해주세요</label>
-							<input type="number" id="inputPrice" name="pPrice" placeholder="예) 1,000원 → 1000" required oninvalid="this.setCustomValidity('가격을 입력하세요')" oninput="this.setCustomValidity('')">
+							<input type="number" id="inputPrice" name="pPrice" value="${ma.PPrice }" placeholder="예) 1,000원 → 1000" required oninvalid="this.setCustomValidity('가격을 입력하세요')" oninput="this.setCustomValidity('')">
 							<span class="comment" style="font-size: 12px; padding-left: 10px;"></span>
 						</div>
 						<div>
 							<label for="textarea">상품을 설명해주세요</label>
 							<br>
-							<textarea class="form-control" name="pContent" id="textarea" rows="4" required oninvalid="this.setCustomValidity('상세설명을 입력하세요')" oninput="this.setCustomValidity('')" style="margin: 10px 0;"></textarea>
+							<textarea class="form-control" name="pContent" id="textarea" rows="4" required oninvalid="this.setCustomValidity('상세설명을 입력하세요')" oninput="this.setCustomValidity('')" style="margin: 10px 0;">${ma.PContent }</textarea>
 						</div>
 						<div>
+							<input type="hidden" id="selectedCategory" value="${ma.PCategory }">
+							<input type="hidden" name="pNo" value="${ma.PNo }">
 							<input type="hidden" name="storeNo" value="${sessionScope.s.storeNo }">
 							<input type="hidden" name="ownerNo" value="${sessionScope.o.ownerNo }">
 							<input type="file" name="file" class="file-upload" id="file" style="display: none;" accept="image/gif, image/jpg, image/jpeg, image/png">
-							<button class="inputPhoto" type="button" id="inputPhoto">썸네일 첨부하기</button>
+							<button class="inputPhoto" type="button" id="inputPhoto" onclick="updatePImg(this)">${ma.PImg }</button>
+							<input type="hidden" id="thumbnail" name="pImg" value="${ma.PImg }">
 						</div>
 						<div class="btnWrap">
-							<button type="submit" id="submitBtn" value="등록">등록</button>
+							<button type="submit" id="submitBtn" value="수정">수정</button>
 						</div>
 					</form>
 				</div>
@@ -163,26 +166,24 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	<script>
-		(function($) {
-			'use strict';
-			$(function() {
-				$('.inputPhoto').on('click', function() {
-					var file = $(this).parent().find('.file-upload');
-					file.trigger('click');
-				});
-				$('.file-upload').on('change', function() {
-					if ($(this).val() == '') {
-						$(this).parent().find('.inputPhoto').text('썸네일 첨부하기');
-					} else {
-						$(this).parent().find('.inputPhoto').text($(this).val().replace(/C:\\fakepath\\/i, ''));
-					}
-				});
-			});
-		})(jQuery);
+	function updatePImg(obj) {
+		var file = $(obj).parent().find('.file-upload');
+		file.trigger('click');
+	}
+	
+	$('.file-upload').on('change', function() {
+		if ($(this).val() == '') {
+			$(this).parent().find('.inputPhoto').text('썸네일을 반드시 올려주세요.');
+		} else {
+			$(this).parent().find('.inputPhoto').text($(this).val().replace(/C:\\fakepath\\/i, ''));
+		}
+		const thumbnail = $("#thumbnail");
+		thumbnail.val($(this).val().replace(/C:\\fakepath\\/i, ''));
+		});
 
 		$("#submitBtn").on('click', function(event) {
 			const fileValue = $('.inputPhoto').text();
-			if (fileValue == '사진 첨부하기') {
+			if (fileValue == '썸네일 첨부하기') {
 				event.preventDefault();
 				alert("사진을 첨부해주세요.");
 			}
@@ -214,6 +215,11 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 				}
 			});
 		}
+		
+		$(function() {
+			const selectedCategory = $("#selectedCategory").val();
+			  $("#inputCategory").val(selectedCategory);
+			});
 	</script>
 </body>
 </html>

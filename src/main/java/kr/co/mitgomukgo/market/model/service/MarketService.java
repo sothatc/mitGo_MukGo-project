@@ -53,5 +53,13 @@ public class MarketService {
 	public int deleteMarketProduct(int pNo) {
 		return dao.deleteMarketProduct(pNo);
 	}
+
+	public Market readOneMarketProduct(int pNo) {
+		return dao.readOneMarketProduct(pNo);
+	}
+
+	public int updateMarketProduct(Market market) {
+		return dao.updateMarketProduct(market);
+	}
 	
 }
