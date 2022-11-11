@@ -88,7 +88,10 @@
                                         <input type="hidden" class="certifyNum2">
                                     </div>
                                     <button type="button" class="phoneChkBtn">확인</button>
+                                    <span id="timeZone"></span>
+									<span id="authMsg"></span>
                                     <p class="text-note"></p>
+                                    <!--<p class="text-note"></p>-->
                                 </div>
                             </div>
                         </li>
@@ -179,20 +182,58 @@
 				data : {phone : phone},
 				success : function(numStr) {
                     $(".certifyNum2").val(numStr);
+                    $("#auth").show();
+					authTime();
 				}
 			});
 		});
-		/*휴대폰 인증 확인*/
-		$(".phoneChkBtn").on("click",function(){
-            const certifyNum = $("#certifyNum").val();
-            const certifyNum2 = $(".certifyNum2").val();
-            if(certifyNum == certifyNum2) {
-                alert("인증 확인되었습니다.");
-                phoneFlag = 1;
-            }else {
-                alert("인증번호를 다시 확인해주세요.");
-            }
-        });
+		//인증번호 시간제한 로직
+		let PhoneNumStr = $(".certifyNum2").val();
+		let intervalId;
+		function authTime(){
+			$("#timeZone").html("<span id='min'>3</span> : <span id='sec'>00</span>");
+			intervalId = window.setInterval(function(){
+				timeCount();
+			},1000);
+		}
+		function timeCount(){
+			const min = Number($("#min").text());
+			const sec = $("#sec").text();
+			if(sec == "00"){
+				if(min == 0){
+						PhoneNumStr = null;
+						clearInterval(intervalId);
+				}else {
+						$("#min").text(min-1);
+						$("#sec").text(59);
+				}
+			}else {
+				const newSec = Number(sec)-1;
+				if(newSec<10){
+					$("#sec").text("0"+newSec);
+				}else {
+					$("#sec").text(newSec);
+				}
+			}
+		}
+			
+			/*휴대폰 인증확인*/
+			 $(".phoneChkBtn").on("click",function(){
+		            const certifyNum = $("#certifyNum").val();
+		            const certifyNum2 = $(".certifyNum2").val();
+		            if(PhoneNumStr != null) {
+			            if(certifyNum == certifyNum2) {
+			                alert("인증 확인되었습니다.");
+			                clearInterval(intervalId);
+			                phoneFlag = 1;
+			            }else {
+			                alert("인증번호를 다시 확인해주세요.");
+			            }
+		            }else {
+		            	$("#authMsg").text("인증시간 만료");
+						$("#authMsg").css("color","red");
+		            }
+		      });
 		
 		
 		/*정규표현식 유효성검사*/

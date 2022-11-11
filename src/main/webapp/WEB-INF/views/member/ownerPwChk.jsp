@@ -18,15 +18,6 @@
 				<input type="password" name="ownerPw" id="pwChk"><br>
 				<button type="submit" class="pwChkBtn">확인</button> 
 			</form>
-			<!-- 
-			<form action="/ownerMypage.do" method="post">
-				<input type="hidden" name="ownerNo" value="${sessionScope.o.ownerNo }">
-				<input type="hidden" value="${sessionScope.o.ownerId }">
-				<input type="hidden" class="myPw" value="${sessionScope.o.ownerPw }">
-				<input type="password" id="rePwChk"><br>
-				<button type="submit" class="pwChkBtn">확인</button> 
-			</form>
-			 -->
 		</div>
 	</div>
 </body>
@@ -42,19 +33,6 @@
 		$(this).css("background-color","");
 		$(this).css("color","");
 	});
-	/*
-	$(".pwChkBtn").on("click", function(event){
-		const inputPw = $("#rePwChk");
-		const inputPwVal = inputPw.val();
-		const myPw = $(".myPw").val();
-		if(myPw != inputPwVal) {
-			alert("비밀번호를 다시 입력해주세요.");
-			event.preventDefault();
-		}else if(inputPw == ""){
-			alert("비밀번호를 입력해주세요.");
-			event.preventDefault();
-		}
-	});
-	*/
+	
 </script>
 </html>
