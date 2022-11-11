@@ -23,6 +23,7 @@
 		    eat_date as eatDate,
 		    eat_time as eatTime,
 		    eat_num as eatNum,
+		    visit_status as visitStatus,
 		    (select member_name from member m where member_no = rs.member_no) as reserverName
 		from reserve rs
 		where store_no = #{storeNo}
@@ -43,6 +44,7 @@
 		    eat_date as eatDate,
 		    eat_time as eatTime,
 		    eat_num as eatNum,
+		    visit_status as visitStatus,
 		    (select member_name from member m where member_no = rs.member_no) as reserverName
 		from reserve rs
 		where store_no = #{storeNo} and (select member_name from member m where member_no = rs.member_no) = #{keyword} 
@@ -53,5 +55,26 @@
 		delete from reserve
 		where reserve_No = #{_parameter}
 	</delete>
+	<update id="updateReserve" parameterType="rs">
+		update reserve
+		set visit_status = #{visitStatus}
+		where reserve_no = #{reserveNo}
+	</update>
+	<select id="selectOneReserve" parameterType="int" resultType="rs">
+		select 
+		    reserve_no as reserveNo,
+		    rs.member_no as memberNo,
+		    store_no as storeNo,
+		    store_name as storeName,
+		    reserve_date as reserveDate,
+		    eat_date as eatDate,
+		    eat_time as eatTime,
+		    eat_num as eatNum,
+		    visit_status as visitStatus,
+		    (select member_name from member m where member_no = rs.member_no) as reserverName
+		from reserve rs
+		where reserve_no = #{reserveNo} 
+	</select>
+	
 </mapper>
 

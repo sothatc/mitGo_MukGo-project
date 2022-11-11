@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.context.annotation.SessionScope;
 
 import com.google.gson.Gson;
+import com.sun.xml.internal.bind.v2.runtime.output.Encoded;
 
 import kr.co.mitgomukgo.member.model.service.MemberService;
 import kr.co.mitgomukgo.member.model.vo.Member;
@@ -193,16 +194,25 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/mypage.do")
-	public String mypage() {
-		return "member/mypage";
+	public String mypage(Member member) {
+		Member m = service.pwChkMember(member);
+		if(m != null) {
+			return "member/mypage";
+		}else {
+			return "member/pwChk";
+		}
 	}
 	@RequestMapping(value="/ownerMypage.do")
-	public String ownerMypage(HttpSession session) {
-		Owner o = (Owner)session.getAttribute("o");
-		int ownerNo = o.getOwnerNo();
+	public String ownerMypage(HttpSession session, Owner owner) {
+		int ownerNo = owner.getOwnerNo();
 		Store s = service.searchStore(ownerNo);
 		session.setAttribute("s", s);
-		return "member/ownerMypage";
+		Owner o = service.pwChkOwner(owner);
+		if(o != null) {
+			return "member/ownerMypage";
+		}else {
+			return "member/ownerPwChk";
+		}
 	}
 	@RequestMapping(value="/selectJoin.do")
 	public String selectJoin() {
@@ -323,7 +333,7 @@ public class MemberController {
 	}
 	
 
-	@RequestMapping(value = "cancleReserve.do")
+	@RequestMapping(value = "/cancleReserve.do")
 	public String cancleReserve(int reserveNo, HttpServletRequest request) {
 		int result = service.cancleReserve(reserveNo);
 		if(result > 0) {
@@ -337,6 +347,19 @@ public class MemberController {
 		}
 	}
 
-	
+	//업주 예약관리 방문상태변경
+	@RequestMapping(value="/updateReserve.do")
+	public String updateReserve(Reserve rs, Model model) {
+		int result  = service.updateReserve(rs);
+		int reserveNo = rs.getReserveNo();
+		Reserve reserve = service.selectOneReserve(reserveNo);
+		if(result>0) {
+			model.addAttribute("reserve", reserve);
+			return "redirect:/reserveManage.do?reqPage=1";
+		}else {
+			return "redirect:/";
+		}
+	}
+
 }
 

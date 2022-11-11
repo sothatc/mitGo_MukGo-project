@@ -237,6 +237,25 @@ public class MemberService {
 		return list;
 	}
 
+	public int updateReserve(Reserve rs) {
+		
+		return dao.updateReserve(rs);
+	}
+
+	public Reserve selectOneReserve(int reserveNo) {
+		
+		return dao.selectOneReserve(reserveNo);
+	}
+
+	public Owner pwChkOwner(Owner owner) {
+		return dao.pwChkOwner(owner);
+	}
+
+	public Member pwChkMember(Member member) {
+		return dao.pwChkMember(member);
+	}
+
+
 
 	
 	
