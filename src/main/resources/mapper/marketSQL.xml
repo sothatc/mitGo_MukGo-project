@@ -52,7 +52,8 @@
 			p_price as pPrice,
 			p_content as pContent,
 			p_img as pImg,
-			store_no as storeNo
+			store_no as storeNo,
+			pcategory as pCategory
 		from market_product
 		where p_no= 24
 	</select>
