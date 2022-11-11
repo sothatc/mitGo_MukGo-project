@@ -17,7 +17,7 @@
 				<input type="hidden" name="ownerNo" value="${sessionScope.o.ownerNo }">
 				<input type="password" name="ownerPw" id="pwChk"><br>
 				<button type="submit" class="pwChkBtn">확인</button> 
-			</form>
+			</form>	
 		</div>
 	</div>
 </body>

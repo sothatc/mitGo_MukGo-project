@@ -30,6 +30,7 @@ height: 100%;
 	color: rgb(255, 83, 86) !important;
 }
 </style>
+
 <body onload="initTmap()">
 
    <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -232,26 +233,15 @@ height: 100%;
          <!----- 마켓 상품 부분 ----->
          <div class="market-wrap" style="margin-top:50px; width:1200px; height:300px;">
 	         <div class="menuTitle" style="margin: 0 auto;">MARKET</div>
+	         
+	         <c:forEach items="${mList }" var="ma">
 	            <div class="w3-card-4" id="marketWrap">
-	               <a href="#"><img src="/resources/img/pizza.PNG" style="width: 100%"></a>
+	               <a href="#"><img src="/resources/upload/market/${ma.PImg }" style="width: 100%"></a>
 	               <div class="w3-container w3-center">
-	                  <p>상품 A</p>
+	                  <p>${ma.PName }</p>
 	               </div>
 	            </div>
-	
-	            <div class="w3-card-4" id="marketWrap">
-	               <a href="#"><img src="/resources/img/pizza.PNG" style="width: 100%"></a>
-	               <div class="w3-container w3-center">
-	                  <p>상품 A</p>
-	               </div>
-	            </div>
-	
-	            <div class="w3-card-4" id="marketWrap">
-	               <a href="#"><img src="/resources/img/pizza.PNG" style="width: 100%"></a>
-	               <div class="w3-container w3-center">
-	                  <p>상품 A</p>
-	               </div>
-	            </div>
+			</c:forEach>
 		</div>
 		
 		
@@ -716,6 +706,7 @@ height: 100%;
          $(".closeModal").on("click",function(){
          		modal.classList.add("hidden");
          });
+      
 
          
       </script>

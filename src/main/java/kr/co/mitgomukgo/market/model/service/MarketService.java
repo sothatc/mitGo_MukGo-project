@@ -61,5 +61,7 @@ public class MarketService {
 	public int updateMarketProduct(Market market) {
 		return dao.updateMarketProduct(market);
 	}
+
+
 	
 }

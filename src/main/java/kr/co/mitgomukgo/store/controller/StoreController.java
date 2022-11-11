@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.gson.Gson;
 
 import common.FileRename;
+import kr.co.mitgomukgo.market.model.vo.Market;
 import kr.co.mitgomukgo.member.model.vo.Owner;
 import kr.co.mitgomukgo.store.model.service.StoreService;
 import kr.co.mitgomukgo.store.model.vo.Menu;
@@ -59,6 +60,8 @@ public class StoreController {
 		model.addAttribute("list", list);
 		ArrayList<Review> reviewList = service.selectReviewList(storeNo);
 		model.addAttribute("rList", reviewList);
+		ArrayList<Market> marketList = service.selectProductList(storeNo);
+		model.addAttribute("mList", marketList);
 		return "store/storeDetail";
 	}
 

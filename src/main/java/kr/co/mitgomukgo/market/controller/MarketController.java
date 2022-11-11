@@ -63,6 +63,7 @@ public class MarketController {
 		model.addAttribute("ma", ma);
 		return "market/marketDetail";
 	}
+	
 
 	@RequestMapping(value = "/addMarketProductFrm.do")
 	public String addMarketProductFrm() {
