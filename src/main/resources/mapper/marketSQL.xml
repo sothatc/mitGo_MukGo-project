@@ -10,6 +10,7 @@
 			owner_no as ownerNo,
 			(select store_Name from store s where s.owner_no = m.owner_no) as storeName,
 			p_name as pName,
+			pcategory as pCategory,
 			p_price as pPrice,
 			p_img as pImg
 		from market_product m order by pno desc)b)rb order by 3 desc)where rnum between #{start} and #{end}
