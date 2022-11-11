@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.co.mitgomukgo.market.model.vo.Market;
 import kr.co.mitgomukgo.store.model.dao.StoreDao;
 import kr.co.mitgomukgo.store.model.vo.Menu;
 import kr.co.mitgomukgo.store.model.vo.Reserve;
@@ -199,6 +200,7 @@ public class StoreService {
 		ArrayList<Store> list = dao.searchStoreList(map);
 		
 		int totalCnt = dao.countTagList(category);
+		System.out.println(totalCnt);
 		int totalPage = 0;
 		if(totalCnt % numPerPage == 0) {
 			totalPage = totalCnt / numPerPage;
@@ -408,6 +410,12 @@ public class StoreService {
 
 	public int deleteReview(int reviewNo) {
 		return dao.deleteReview(reviewNo);
+	}
+
+	//마켓 제품 조회
+	public ArrayList<Market> selectProductList(int storeNo) {
+		ArrayList<Market> list = dao.selectProductList(storeNo);
+		return list;
 	}
 
 

@@ -1,6 +1,5 @@
 package kr.co.mitgomukgo.market.controller;
 
-
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -50,21 +49,18 @@ public class MarketController {
 
 		return "market/marketMain";
 	}
-	
-	//맛집 상세 이동
+
+	// 맛집 상세 이동
 	@RequestMapping(value = "/marketDetailView.do")
 	public String marketDetailView() {
 		return "market/marketDetail";
 	}
-	
-	
 	
 	// 맛집 상세 보기
 	@RequestMapping(value = "/marketDetail.do")
 	public String marketDetail(int pNo, Model model) {
 		Market ma = service.selectOneMarket(pNo);
 		model.addAttribute("ma", ma);
-		System.out.println(ma);
 		return "market/marketDetail";
 	}
 	
@@ -106,7 +102,7 @@ public class MarketController {
 		String result = gson.toJson("/resources/upload/market/editor/" + filepath);
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/addMarketProduct.do")
 	public String addMarketProduct(Market market, MultipartFile file, HttpServletRequest request) {
 		if (!file.isEmpty()) {
@@ -131,14 +127,14 @@ public class MarketController {
 		int result = service.addMarketProduct(market);
 		return "redirect:/marketProductListFrm.do";
 	}
-	
+
 	@RequestMapping(value = "/marketProductListFrm.do")
 	public String marketProductListFrm(Model model, @SessionAttribute Store s) {
 		ArrayList<Market> list = service.marketProductList(s.getStoreNo());
 		model.addAttribute("list", list);
 		return "market/marketProductList";
 	}
-	
+
 	@RequestMapping(value = "/deleteMarketProduct.do")
 	public String deleteMarketProduct(int pNo, HttpServletRequest request) {
 		int result = service.deleteMarketProduct(pNo);
@@ -146,6 +142,46 @@ public class MarketController {
 			return "redirect:/marketProductListFrm.do";
 		} else {
 			request.setAttribute("msg", "삭제시 문제가 발생했습니다.");
+			request.setAttribute("url", "/marketProductListFrm.do");
+			return "common/alert";
+		}
+	}
+
+	@RequestMapping(value = "/updateMarketProductFrm.do")
+	public String updateMarketProductFrm(int pNo, Model model) {
+		Market ma = service.readOneMarketProduct(pNo);
+		model.addAttribute("ma", ma);
+		return "market/updateMarketProductFrm";
+	}
+	
+	@RequestMapping(value = "/updateMarketProduct.do")
+	public String updateMarketProduct(Market market, MultipartFile file, HttpServletRequest request) {
+		if (!file.isEmpty()) {
+			String savePath = request.getSession().getServletContext().getRealPath("resources/upload/market/");
+			String imgName = file.getOriginalFilename();
+			String maProductPath = fileRename.fileRename(savePath, imgName);
+			try {
+				FileOutputStream fos = new FileOutputStream(new File(savePath + maProductPath));
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				byte[] bytes = file.getBytes();
+				bos.write(bytes);
+				bos.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			market.setPImg(maProductPath);
+		}
+		int result = service.updateMarketProduct(market);
+		if (result > 0) {
+			request.setAttribute("msg", "수정이 완료되었습니다.");
+			request.setAttribute("url", "/marketProductListFrm.do");
+			return "common/alert";
+		} else {
+			request.setAttribute("msg", "변경 중 문제가 발생했습니다.");
 			request.setAttribute("url", "/marketProductListFrm.do");
 			return "common/alert";
 		}

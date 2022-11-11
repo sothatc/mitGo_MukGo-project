@@ -30,7 +30,7 @@
 			<li>
 				<c:choose>
 					<c:when test="${empty s }">
-						<div>
+						<div class="etc">
 							<a href="/addStoreFrm.do">업체 등록</a>
 						</div>
 					</c:when>
@@ -92,7 +92,7 @@
 					</c:otherwise>
 				</c:choose>
 				<div class="etc">
-					<a href="/ownerMypage.do">내 정보 수정</a>
+					<a href="/updateOwnerFrm.do">내 정보 수정</a>
 				</div>
 				<div class="etc">
 					<a href="/ownerLogout.do">로그아웃</a>
