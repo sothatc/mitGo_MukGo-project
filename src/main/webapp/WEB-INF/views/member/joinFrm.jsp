@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" href="/resources/css/joinFrm.css">
-	
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>	
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />

@@ -247,6 +247,14 @@ public class MemberService {
 		return dao.selectOneReserve(reserveNo);
 	}
 
+	public Owner pwChkOwner(Owner owner) {
+		return dao.pwChkOwner(owner);
+	}
+
+	public Member pwChkMember(Member member) {
+		return dao.pwChkMember(member);
+	}
+
 
 
 	

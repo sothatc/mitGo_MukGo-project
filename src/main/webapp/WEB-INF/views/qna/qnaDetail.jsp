@@ -19,7 +19,7 @@
 	<div class="qnaDetail-wrap">
         <div class="qna-title-wrap">
             <div class="qna-title">
-                <h1>qna</h1>
+                <h1>${qna.qnaTitle }</h1>
             </div>
 
             <div class="name-date-status">
@@ -85,8 +85,8 @@
 		
 		<c:if test="${sessionScope.m.memberId == qna.qnaWriter1 and not empty sessionScope.m}">
 			<div class="user-control-btn">
-	            <a href="#">수정</a>
-	            <a href="#">삭제</a>
+	            <a href="/updateQnaFrm.do?qnaNo=${qna.qnaNo }">수정</a>
+	            <a href="/deleteQna.do?qnaNo=${qna.qnaNo }">삭제</a>
 	            <a href="/qnalist.do?reqPage=1">목록으로</a>
         	</div>
 		</c:if>
@@ -103,6 +103,8 @@
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
     <script>
+    	
+    
     	function listGo(){
     		location.href="/qnalist.do?reqPage=1";
     	}

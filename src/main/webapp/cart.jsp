@@ -46,7 +46,7 @@
         
         <div class="cart">
             <div class="cart-table">
-                 
+                
                  <table>
                  	
                      <tr id="font">
@@ -128,5 +128,43 @@
                 hrefs="https://themewagon.com">ThemeWagon</a>
         </div>
     </footer>
+    <script>
+    const allCheckbox = document.querySelector("#allCheckbox");
+	const allCheck = document.querySelector(".allCheck");
+	allCheck.addEventListener("click", function(){
+	    allCheckbox.click();
+	    const check = document.querySelectorAll(".cart-check");
+	    const status = allCheckbox.checked; // check되면 true
+	    for(let i=0; i<check.length; i++) {
+	        check[i].checked = status;
+	    }
+	    if(status) {
+			allCheck.innerText = "선택 해제";
+		} else {
+			allCheck.innerText = "전체 선택";
+		}
+	});
+	
+	
+	const chkArr = new Array();
+	const check = document.querySelectorAll(".cart-check");
+	for(let i=0; i<check.length; i++) {
+	    check[i].addEventListener("change", function(){
+	        for(let j=0; j<check.length; j++) {
+	            chkArr.push(check[j].checked);
+	            if(chkArr.length > check.length) {
+	                chkArr.shift();
+	            }
+	        }
+	        if(chkArr.indexOf(false) == -1) { // chkArr에 false가 포함되지 않았다면
+	            allCheckbox.checked = true;
+	            allCheck.innerText = "선택 해제";
+	        } else {
+	            allCheckbox.checked = false;
+	            allCheck.innerText = "전체 선택";
+	        }
+	    });
+	}
+    </script>
 </body>
 </html>

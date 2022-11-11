@@ -26,7 +26,7 @@
 			
 			
 			<div class="ownerWrap">
-			<a href="/joinFrm.do" style="text-decoration: none;">
+			<a href="/ownerJoinFrm.do" style="text-decoration: none;">
 				<img src="/resources/img/index/004.png" style="height:90%;">
 				<h3 style="text-align: center; font-family:Gowun Dodum; font-weight: bolder;">사업자</h3>
 			</a>

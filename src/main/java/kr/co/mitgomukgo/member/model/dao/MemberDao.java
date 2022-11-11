@@ -135,4 +135,12 @@ public class MemberDao {
 		return reserve;
 	}
 
+	public Owner pwChkOwner(Owner owner) {
+		return sqlSession.selectOne("owner.pwChkOwner", owner);
+	}
+
+	public Member pwChkMember(Member member) {
+		return sqlSession.selectOne("member.pwChkMember", member);
+	}
+
 }

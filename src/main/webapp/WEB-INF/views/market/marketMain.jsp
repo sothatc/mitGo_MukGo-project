@@ -39,16 +39,16 @@
 
 				<div id="font">
 					<li class="nav-item">
-						<a class="nav-link" href="#meallist1">간단하게 한끼!</a>
+						<a class="nav-link" href="#meallist1">밀키트</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#meallist2">든든하게 두끼!</a>
+						<a class="nav-link" href="#meallist2">냉동식품</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#meallist3">출출할땐 야식!</a>
+						<a class="nav-link" href="#meallist3">디저트</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#meallist4">우리집 실내포차!</a>
+						<a class="nav-link" href="#meallist4">기타</a>
 					</li>
 
 				</div>
@@ -61,14 +61,14 @@
 	<section class="py-5" >
 		<div class="container px-4 px-lg-5 mt-5">
 			<div class="market1">
-				<h6 id="font" id="meallist1">간단하게 한끼!</h6>
+				<h6 id="font" id="meallist1">밀키트</h6>
 			</div>
 			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 				<c:forEach items="${list }" var="ma">
 					<div class="col mb-5">
 						<div class="card h-100">
 							<!-- Product image-->
-							<img class="card-img-top" src="resources/upload/market/${ma.PImg} }" alt="..." />
+							<img class="card-img-top" src="resources/upload/market/${ma.PImg }" alt="..." />
 							<!-- Product details-->
 							<div class="card-body p-4">
 								<div class="text-center">
@@ -97,7 +97,7 @@
 	<section class="py-5" id="meallist2">
 		<div class="container px-4 px-lg-5 mt-5">
 			<div class="market1">
-				<h6 id="font">든든하게 두끼!</h6>
+				<h6 id="font">냉동식품</h6>
 			</div>
 			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 				<div class="col mb-5">
@@ -329,7 +329,7 @@
 	<section class="py-5" id="meallist3">
 		<div class="container px-4 px-lg-5 mt-5">
 			<div class="market1">
-				<h6 id="font">출출할땐 야식!</h6>
+				<h6 id="font">디저트</h6>
 			</div>
 			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 				<div class="col mb-5">
@@ -561,7 +561,7 @@
 	<section class="py-5" id="meallist4">
 		<div class="container px-4 px-lg-5 mt-5">
 			<div class="market1">
-				<h6 id="font">우리집 실내포차!</h6>
+				<h6 id="font">기타</h6>
 			</div>
 			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 				<div class="col mb-5">

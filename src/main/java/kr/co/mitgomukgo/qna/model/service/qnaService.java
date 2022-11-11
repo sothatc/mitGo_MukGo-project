@@ -83,6 +83,44 @@ public class qnaService {
 		QnaFile qf = dao.selectOneQnaFile(qnaFileNo);
 		return qf;
 	}
+
+	public int updateQna(Qna qna, int[] fileNoList) {
+		int result = dao.updateQna(qna);
+		
+		if(result > 0) {
+			for(QnaFile qf : qna.getFileList()) {
+				qf.setQnaNo(qna.getQnaNo());
+				result += dao.insertQnaFile(qf);
+			}
+			
+			if(fileNoList != null) {
+				for(int fileNo : fileNoList) {
+					result += dao.deleteQnaFile(fileNo);
+				}
+			}
+		}
+		return result;
+	}
+
+	public ArrayList<QnaFile> deleteQna(int qnaNo) {
+		
+		ArrayList<QnaFile> list = dao.selectAllQnaFile(qnaNo);
+		
+		int result = 0;
+		
+		if(list != null) {
+			result = dao.deleteQnaFileMan(qnaNo);
+			if(result > 0) {
+				result += dao.deleteQna(qnaNo);
+			}
+			return list;
+		}else {
+			result = dao.deleteQna(qnaNo);
+			return null;
+		}
+		
+		
+	}
 }
 
 
