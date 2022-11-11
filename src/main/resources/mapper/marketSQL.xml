@@ -86,4 +86,12 @@
 			pcategory = #{pCategory}
 		where p_no = #{pNo}
 	</update>
+	
+	<select id="selectOneMarketProduct" parameterType="_int" resultType="ma">
+	select 
+		p_img as pImg,
+		p_name as pName
+	from market_product
+	where store_no = #{_parameter}
+	</select>
 </mapper>
