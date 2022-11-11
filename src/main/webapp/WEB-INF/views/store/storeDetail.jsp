@@ -45,29 +45,22 @@ height: 100%;
    
    
    <!---------------------내용----------------------->
-   <div class="content-wrap">
+   <div class="content-wrap" style="font-family:Gowun Dodum;">
       <div class="content-wrap1" style="width:1200px;">
-         <div class="content-wrap1-1" style="width:content-fit; height:50px;">
-         	<div class="div1" style="height: 50px; float:left;">
-	            <span class="categorySpan" style="font-family:Gowun Dodum;"></span>
-	            <span class="storeNameSpan" style="font-family:Gowun Dodum;">${s.storeName}</span>
-            </div>
-            <div class="div2" style="width:50px; float:left; margin-left:10px;">
-	            <span class="material-symbols-rounded star">star</span>
-	            <span class="reviewNum" style="font-family:Gowun Dodum;">${s.rating }</span>
-            </div>
-         </div>
-		 <div class="content-wrap1-3" style="font-family:Gowun Dodum; width: 500px; float:left;">
-		 	<span>${s.content }</span>
-		 </div>
-         <div class="content-wrap1-2" style="float:right;">
+         <div class="content-wrap1-1" style="width:1200px; height:50px; display:inline; color: black;">
+	            <span class="categorySpan" style="float:left;"></span>
+	            <span class="storeNameSpan" style="float:left; margin-left:5px;">${s.storeName}</span>
+	            <span class="reviewNum" style="color:rgba(255, 83, 86, 0.99); margin-left:10px; float:left;" >★ ${s.rating }</span>
+		 	<span style=" margin-left:20px; font-weight: lighter;">${s.content }</span>
+		 	<div style="margin-right:0; float:right;">
             <c:choose>
               <c:when test="${!empty sessionScope.m }">
                   <a class="material-symbols-rounded share pointer" id="share" href="javascript:shareMessage()">share</a>
                   <span class="material-symbols-rounded favorite pointer" id="favorite" style="display:none;">favorite</span>
-                  <span class="material-symbols-outlined unfavorite pointer" id="unfavorite" style="float:right; margin-top:10px; margin-right:20px;">favorite</span>
+                  <span class="material-symbols-outlined unfavorite pointer" id="unfavorite" style="float:right; margin-top:10px; margin-right:15px;">favorite</span>
                </c:when>
          	</c:choose>
+         	</div>
          </div>
       </div>
 
