@@ -189,6 +189,9 @@ hr{
     border: none;
     transition: 0.5s;
 }
+#timeZone{
+	margin-left: 15px;
+}
 
 /*selectJoin*/
 

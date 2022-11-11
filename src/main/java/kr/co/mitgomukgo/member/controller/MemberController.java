@@ -233,22 +233,32 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/updateOwner.do")
-	public String updateOwner(Owner o) {
+	public String updateOwner(Owner o, HttpSession session) {
 		int result = service.updateOwner(o);
 		if(result > 0) {
+			session.invalidate();
 			return "redirect:/";
 		}else {
 			return "member/ownerMyPage";
 		}
 	}
+	@RequestMapping(value="/updateOwnerFrm.do")
+	public String updateOwnerFrm() {
+		return "member/ownerMypage";
+	}
 	@RequestMapping(value="/updateMember.do")
-	public String updateMember(Member m) {
+	public String updateMember(Member m, HttpSession session) {
 		int result = service.updateMember(m);
 		if(result > 0) {
+			session.invalidate();
 			return "redirect:/";
 		}else {
 			return "member/mypage";
 		}
+	}
+	@RequestMapping(value="/updateMemberFrm.do")
+	public String updateMemberFrm() {
+		return "member/mypage";
 	}
 	@RequestMapping(value="/reserveList.do")
 	public String reserveList(@SessionAttribute Member m, Model model) {
