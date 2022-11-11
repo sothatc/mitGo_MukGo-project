@@ -30,7 +30,7 @@
 			<li>
 				<c:choose>
 					<c:when test="${empty s }">
-						<div>
+						<div class="etc">
 							<a href="/addStoreFrm.do">업체 등록</a>
 						</div>
 					</c:when>
