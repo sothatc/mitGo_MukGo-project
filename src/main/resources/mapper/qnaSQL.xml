@@ -96,6 +96,26 @@
   			filepath
   		from qna_file where qna_file_no = #{qnaFileNo}
   	</select>
+  	
+  	<update id="updateQna" parameterType="q">
+  		update qna_tbl
+  		set qna_title = #{qnaTitle}, qna_theme = #{qnaTheme}, secret_status = #{secretStatus}, qna_content = #{qnaContent} where qna_no = #{qnaNo}
+  	</update>
+  	
+  	<delete id="deleteQnaFile" parameterType="int">
+  		delete from
+  		qna_file where qna_file_no = #{qnaFileNo}
+  	</delete>
+  	
+  	<delete id="deleteQnaFileMan" parameterType="int">
+  		delete from
+  		qna_file where qna_no = #{qnaNo}
+  	</delete>
+  	
+  	<delete id="deleteQna" parameterType="int">
+  		delete from
+  		qna_tbl where qna_no = #{qnaNo}
+  	</delete>
 </mapper>
 
 

@@ -226,7 +226,10 @@
 
 	<select id="countTagList" parameterType="string"
 		resultType="_int">
-		select count(*) from store where category = #{category}
+		select count(*) from store
+		<if test="_parameter != null and _parameter != ''">
+			where category = #{_parameter}
+		</if>
 	</select>
 
 	<select id="searchStoreList" parameterType="map" resultType="s">

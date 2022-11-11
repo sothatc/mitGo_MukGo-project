@@ -12,26 +12,27 @@
 	<link rel="stylesheet" href="/resources/css/store/storeList.css">
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<!--헤더-->
-	<div class="storeList-content-wrap">
-		
-		<section id="services" class="text-center">
-			<div class="container">
-				<div class="row">
-					<div class="col-12">
-						<div class="intro">
-							<h6>먹킷리스트</h6>
-							<h1>믿고 먹는 믿GO먹GO</h1>
-							<p id="font" class="mx-auto">
-								서울 전 지역 맛집을 담았다!
-								<br>
-								사람들이 추천하는 서울 전 지역 인기 메뉴!
-							</p>
-						</div>
+	<section id="services" class="text-center">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="intro">
+						<h6>먹킷리스트</h6>
+						<h1>믿고 먹는 믿GO먹GO</h1>
+						<p id="font" class="mx-auto">
+							서울 전 지역 맛집을 담았다!
+							<br>
+							사람들이 추천하는 서울 전 지역 인기 메뉴!
+						</p>
 					</div>
 				</div>
 			</div>
-		</section>
-		<!-- ////////////////////////////////////////////////////////////////// -->
+		</div>
+	</section>
+	<!-- ////////////////////////////////////////////////////////////////// -->
+	<div class="storeList-content-wrap">
+		
+		
 
 		<!-- 필요한 데이터를 담아두기 위한 더미 -->
 		<div class = "tabCategory" style = "display: none;" >${category }</div>
