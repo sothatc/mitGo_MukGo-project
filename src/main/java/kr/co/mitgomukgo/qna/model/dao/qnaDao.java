@@ -59,12 +59,37 @@ public class qnaDao {
 
 	public ArrayList<QnaFile> selectAllQnaFile(int qnaNo) {
 		List list = sqlSession.selectList("qna.selectQnaFile", qnaNo);
-		return (ArrayList<QnaFile>)list;
+		
+		if(list.isEmpty()) {
+			return null;
+		}else {
+			return (ArrayList<QnaFile>)list;
+		}
 	}
 
 	public QnaFile selectOneQnaFile(int qnaFileNo) {
 		QnaFile qf = sqlSession.selectOne("qna.selectOneQnaFile", qnaFileNo);
 		return qf;
+	}
+
+	public int updateQna(Qna qna) {
+		int result = sqlSession.update("qna.updateQna", qna);
+		return result;
+	}
+
+	public int deleteQnaFile(int fileNo) {
+		int result = sqlSession.delete("qna.deleteQnaFile", fileNo);
+		return result;
+	}
+
+	public int deleteQnaFileMan(int qnaNo) {
+		int result = sqlSession.delete("qna.deleteQnaFileMan", qnaNo);
+		return result;
+	}
+
+	public int deleteQna(int qnaNo) {
+		int result = sqlSession.delete("qna.deleteQna", qnaNo);
+		return result;
 	}
 }
 
