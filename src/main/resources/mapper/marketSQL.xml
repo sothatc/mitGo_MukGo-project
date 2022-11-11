@@ -58,6 +58,6 @@
 			store_no as storeNo,
 			pcategory as pCategory
 		from market_product
-		where p_no= 24
+		where p_no= #{_parameter}
 	</select>
 </mapper>
