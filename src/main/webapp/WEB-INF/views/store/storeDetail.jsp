@@ -487,7 +487,7 @@ height: 100%;
       }// addrSlice 함수 종료
       addrSlice();
 
-             
+     
 
             
       
@@ -529,13 +529,14 @@ height: 100%;
                
                //---------- 인원수 늘리기
                let count = 1;
+               var maxNum="${s.maxNum}";
                $("#up").on("click", function(e) {
-                 	if(count==${s.maxNum}){
+            	   console.log(maxNum);
+                 	if(count== maxNum){
                    		return false;
                    	}
                		count++;
                		$(".people").text(count);
- 
                });
                      
                $("#down").on("click", function(e) {
@@ -544,7 +545,7 @@ height: 100%;
                  	}
                 	 count--;
                  	$(".people").text(count);
-               });
+               }); 
             }
        }); //ajax 종료
          

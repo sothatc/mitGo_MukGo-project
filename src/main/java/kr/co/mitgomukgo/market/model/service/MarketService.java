@@ -36,8 +36,9 @@ public class MarketService {
 
 
 	//마켓 상세 보기
-	public Market selectOneMarket(int storeNo) {
-		Market ma = dao.selectOneMarket(storeNo);
+	public Market selectOneMarket(int pNo) {
+		Market ma = dao.selectOneMarket(pNo);
+		
 		return ma;
 	}
 	

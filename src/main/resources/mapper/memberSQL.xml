@@ -6,6 +6,11 @@
 		from member
 		where member_id = #{checkId}
 	</select>
+	<select id="pwChkMember" parameterType="m" resultType="m">
+		select member_id as memberId
+		from member
+		where member_no = #{memberNo} and member_pw = #{memberPw}
+	</select>
 	<insert id="insertMember" parameterType="m">
 		insert into member
 		values(member_seq.nextval,2,#{memberId}, #{memberPw}, #{memberName}, #{memberPhone}, to_char(sysdate,'yyyy-mm-dd'))

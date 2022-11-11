@@ -209,6 +209,86 @@ public class qnaController {
 		
 	}
 	
+	@RequestMapping(value="/updateQnaFrm.do")
+	public String updateQnaFrm(int qnaNo, Model model) {
+		Qna qna = service.qnaDetail(qnaNo);
+		model.addAttribute(qna);
+		System.out.println(qna.getFileList());
+		return "qna/updateQnaFrm";
+	}
+	
+	@RequestMapping("/updateQna.do")
+	public String updateQna(int[] fileNoList, String[] filepathList, Qna qna,MultipartFile[] qnaFile, HttpServletRequest request) {
+		ArrayList<QnaFile> list = new ArrayList<QnaFile>();
+		QnaFile qf = null;
+		
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/qna/");
+		if(!qnaFile[0].isEmpty()) {
+			
+			
+			
+			for(MultipartFile files : qnaFile) {
+				String filename = files.getOriginalFilename();
+				String filepath = fileRename.fileRename(savePath, filename);
+				
+				try {
+					FileOutputStream fos = new FileOutputStream(savePath + filepath);
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					byte[] bytes = files.getBytes();
+					
+					bos.write(bytes);
+					bos.close();
+					
+					qf = new QnaFile();
+					qf.setFilename(filename);
+					qf.setFilepath(filepath);
+					list.add(qf);
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			
+		}
+		
+		qna.setFileList(list);
+		
+		int result = service.updateQna(qna, fileNoList);
+		if(fileNoList != null && (result == (list.size() + fileNoList.length + 1))) {
+			if(filepathList != null) {
+				for(String filepath : filepathList) {
+					File delFile = new File(savePath + filepath);
+					delFile.delete();
+				}
+			}
+		}
+		
+		return "redirect:/qnalist.do?reqPage=1";
+	}
+	
+	@RequestMapping(value="/deleteQna.do")
+	public String deleteQna(int qnaNo, HttpServletRequest request) {
+		ArrayList<QnaFile> list = service.deleteQna(qnaNo);
+		
+		String savePath = request.getSession().getServletContext().getRealPath("/resources/upload/qna/");
+		
+		if(list != null) {
+			for(QnaFile qf : list) {
+				File delFile = new File(savePath + qf.getFilepath());
+				delFile.delete();
+			}
+		}
+		
+		System.out.println(qnaNo);
+		
+		return "redirect:/qnalist.do?reqPage=1";
+		
+	}
+	
 }
 
 
