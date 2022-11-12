@@ -434,7 +434,7 @@ public class StoreController {
 		model.addAttribute("total", map.get("total"));
 		model.addAttribute("pageNo", map.get("pageNo"));
 		model.addAttribute("storeListSort", storeListSort);
-		
+		model.addAttribute("search",map.get("search"));
 		return "store/storeListFrm";
 	}
 }
