@@ -260,6 +260,15 @@ public class MemberService {
 		return dao.myPageNcList();
 	}
 
+	public String searchMemberId(Member m) {
+		return dao.searchMemberId(m);
+	}
+
+	public String searchOwnerId(Owner o) {
+		return dao.searchOwnerId(o);
+	}
+
+
 
 
 	

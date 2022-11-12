@@ -375,6 +375,40 @@ public class MemberController {
 			return "redirect:/";
 		}
 	}
-
+	@RequestMapping(value="/searchMemberFrm.do")
+	public String searchMemberFrm() {
+		return "member/searchMemberFrm";
+	}
+	@RequestMapping(value="/searchIdFrm.do")
+	public String searchIdFrm() {
+		return "/member/searchIdFrm";
+	}
+	@RequestMapping(value="/searchNormalId.do")
+	public String searchNormalId(Member m, Model model) {
+		String memberId = service.searchMemberId(m);
+		model.addAttribute("memberId", memberId);
+		if(memberId != null) {
+			model.addAttribute("result", false);
+			model.addAttribute("memberId", memberId);
+		}else {
+			model.addAttribute("result", true);
+			model.addAttribute("memberId", memberId);
+		}
+		return "member/searchIdResult";
+	}
+	@RequestMapping(value="/searchOwnerId.do")
+	public String searchOwnerId(Owner o, Model model) {
+		String ownerId = service.searchOwnerId(o);
+		model.addAttribute("ownerId", ownerId);
+		System.out.println(ownerId);
+		if(ownerId != null) {
+			model.addAttribute("result", false);
+			model.addAttribute("ownerId", ownerId);
+		}else {
+			model.addAttribute("result", true);
+			model.addAttribute("ownerId", ownerId);
+		}
+		return "member/searchIdResult";
+	}
 }
 

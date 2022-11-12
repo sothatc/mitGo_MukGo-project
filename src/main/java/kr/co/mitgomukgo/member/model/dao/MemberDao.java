@@ -149,4 +149,14 @@ public class MemberDao {
 		return (ArrayList<Notice>)list;
 	}
 
+	public String searchMemberId(Member m) {
+		return sqlSession.selectOne("member.searchMemberId",m);
+	}
+
+	public String searchOwnerId(Owner o) {
+		return sqlSession.selectOne("owner.searchOwnerId", o);
+	}
+
+	
+
 }
