@@ -231,7 +231,14 @@
 			where category = #{_parameter}
 		</if>
 	</select>
-
+	
+	<select id="countSearchTagList" parameterType="map"
+		resultType="_int">
+		select count(*) from store
+		<if test="category != null and category != ''">
+			where category = #{category} and store_name like '%' || #{search} || '%'
+		</if>
+	</select>
 	<select id="searchStoreList" parameterType="map" resultType="s">
 		select * from
 		(select row_number() over (order by rnum desc) as rnum1, rb.* from

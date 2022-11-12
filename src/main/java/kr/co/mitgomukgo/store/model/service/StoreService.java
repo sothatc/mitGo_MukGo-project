@@ -183,7 +183,7 @@ public class StoreService {
 
 	public HashMap<String, Object> searchStoreList(String search, int reqPage, String category) {
 		// 화면에 보여주는 게시물 수
-		int numPerPage = 9;
+		int numPerPage = 1;
 		
 		// 끝페이지
 		int end = numPerPage * reqPage;
@@ -199,7 +199,7 @@ public class StoreService {
 		
 		ArrayList<Store> list = dao.searchStoreList(map);
 		
-		int totalCnt = dao.countTagList(category);
+		int totalCnt = dao.countTagList(map);
 		System.out.println(totalCnt);
 		int totalPage = 0;
 		if(totalCnt % numPerPage == 0) {
