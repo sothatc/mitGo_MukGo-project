@@ -211,8 +211,8 @@ public class MemberController {
 		Store s = service.searchStore(ownerNo);
 		session.setAttribute("s", s);
 		Owner o = service.pwChkOwner(owner);
-		ArrayList<Notice> list = service.myPageNcList();
-		model.addAttribute("list", list);
+		ArrayList<Notice> ncList = service.myPageNcList();
+		model.addAttribute("ncList", ncList);
 		if(o != null) {
 			return "member/ownerMypage";
 		}else {
@@ -400,7 +400,6 @@ public class MemberController {
 	public String searchOwnerId(Owner o, Model model) {
 		String ownerId = service.searchOwnerId(o);
 		model.addAttribute("ownerId", ownerId);
-		System.out.println(ownerId);
 		if(ownerId != null) {
 			model.addAttribute("result", false);
 			model.addAttribute("ownerId", ownerId);
