@@ -243,15 +243,12 @@ height: 100%;
 			         
 			         <c:forEach items="${mList }" var="ma">
 			            <div class="w3-card-4" id="marketWrap">
-			               <a href="#"><img src="/resources/upload/market/${ma.PImg }" style="width: 100%"></a>
+			               <a href="/marketDetail.do?pNo=${ma.PNo }"><img src="/resources/upload/market/${ma.PImg }" style="width: 100%"></a>
 			               <div class="w3-container w3-center">
 			                  <p>${ma.PName }</p>
 			               </div>
 			            </div>
 					</c:forEach>
-					<div id="noProduct" class="hidenClass" style="width: 1200px; height: 50px; text-align: center; line-height: 80px;">
-							등록된 제품이 없습니다.
-			        </div>
 				</div>
 		    </c:when>
         </c:choose>	
@@ -281,9 +278,6 @@ height: 100%;
 			               
 						</c:forEach>
 			            </ul>
-			            <div id="noReview" class="hidenClass" style="width: 1200px; height: 50px; text-align: center; line-height: 80px;">
-								등록된 후기가  없습니다.
-				        </div>
 			        </div>
         	</c:when>
         </c:choose>	
@@ -733,28 +727,6 @@ height: 100%;
          		modal.classList.add("hidden");
          });
       
-		
-       
-         //마켓 상품 없으면 마켓 영역 비노출
-         /*
-         if(!${ma.PName}){
-        	 $("#marketWrap").css("display","none");
-        	 $("#noProduct").classList.add("hidenClass");
-         }else{
-        	 $("#marketWrap").css("display","flex");
-        	 $("#noProduct").classList.remove("hidenClass");
-         }
-         
-         
-
-         if(${r.content }==''){
-        	 $("#reviewWrapUl").css("display","none");
-        	 $("#noReview").classList.add("hidenClass");
-         }else{
-        	 $("#reviewWrapUl").css("display","flex");        	 
-        	 $("#noReview").classList.remove("hidenClass");
-         }
-        */
          
       </script>
 
