@@ -15,7 +15,7 @@
 			<a href="/searchIdFrm.do" class="searchBtn">
 				<div>아이디 찾기</div>
 			</a>
-			<a href="#" class="searchBtn">
+			<a href="/searchPwFrm.do" class="searchBtn">
 				<div>비밀번호 찾기</div>
 			</a>
 		</div>

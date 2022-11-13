@@ -157,6 +157,10 @@ public class MemberDao {
 		return sqlSession.selectOne("owner.searchOwnerId", o);
 	}
 
+	public int searchNormalPw(Member member) {
+		return sqlSession.selectOne("member.searchNormalPw", member);
+	}
+
 	
 
 }

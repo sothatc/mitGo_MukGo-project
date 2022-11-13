@@ -268,6 +268,10 @@ public class MemberService {
 		return dao.searchOwnerId(o);
 	}
 
+	public int searchNormalPw(Member member) {
+		return dao.searchNormalPw(member);
+	}
+
 
 
 

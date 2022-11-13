@@ -417,5 +417,22 @@ public class MemberController {
 		}
 		return "member/searchIdResult";
 	}
+	@RequestMapping(value="/searchPwFrm.do")
+	public String searchPwFrm() {
+		return "/member/searchPwFrm";
+	}
+	@RequestMapping(value="/searchNormalPw.do")
+	public String searchNormalPw(Member member, Model model) {
+		int memberNo = service.searchNormalPw(member);
+		if(memberNo != 0) {
+			model.addAttribute("result", false);
+			model.addAttribute("memberNo", memberNo);
+		}else {
+			model.addAttribute("result", true);
+			model.addAttribute("memberNo", memberNo);
+		}
+		
+		return "member/updateMemberPw";
+	}
 }
 
