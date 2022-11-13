@@ -229,8 +229,9 @@ height: 100%;
 				<div class="clear"></div>
 			</div>
 		 </div>
-		 
          <!----- 마켓 상품 부분 ----->
+		<c:choose>
+              <c:when test="${!empty mList }">
          <div class="market-wrap" style="margin-top:50px; width:1200px; height:300px;">
 	         <div class="menuTitle" style="margin: 0 auto;">MARKET</div>
 	         
@@ -243,9 +244,14 @@ height: 100%;
 	            </div>
 			</c:forEach>
 		</div>
+		    </c:when>
+        </c:choose>	
+		
 		
 		
         <!--------- 후기 시작 ----->
+        <c:choose>
+              <c:when test="${!empty rList }">
         <div class="review-wrap" style="margin:50px 0;">
             <div class="menuTitle" style="width:100px; margin:0 auto;">REVIEW</div>
             <ul class="w3-ul w3-card-4" id="reviewWrapUl" style="height:content-fit;">
@@ -267,6 +273,8 @@ height: 100%;
 			</c:forEach>
             </ul>
         </div>
+        	</c:when>
+        </c:choose>	
         <!--------후기 끝 -->
          
       </div><!-- testDiv 끝 -->
