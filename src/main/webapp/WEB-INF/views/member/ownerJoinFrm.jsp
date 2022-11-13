@@ -119,21 +119,21 @@
                         <hr>
                         <div class="chk-box2">
                             <div style="display: inline-block;">
-                                <input type="checkbox" id="allow1" name="allow1">
+                                <input type="checkbox" id="allow1" class="normal" name="allow1">
                                 <label for="allow1">[필수] 이용약관 동의</label>
                             </div>
-                            <a href="#" class="allowContent" style="display: inline-block;">[내용보기]</a>
+                            <a href="javascript:void()" class="allowContent" style="display: inline-block;">[내용보기]</a>
                         </div>
                         <div class="chk-box2">
                             <div style="display: inline-block;">
-                                <input type="checkbox" id="allow1" name="allow1">
+                                <input type="checkbox" id="allow2" class="normal" name="allow1">
                                 <label for="allow1">[필수] 개인 정보 수집 및 이용에 동의</label>
                             </div>
                             <a href="#" class="allowContent" style="display: inline-block;">[내용보기]</a>
                         </div>
                         <div class="chk-box2">
                             <div style="display: inline-block;">
-                                <input type="checkbox" id="allow1" name="allow1">
+                                <input type="checkbox" id="allow3" class="normal" name="allow1">
                                 <label for="allow1">[필수] 만 14세 이상</label>
                             </div>
                             <a href="#" class="allowContent" style="display: inline-block;">[내용보기]</a>
@@ -151,6 +151,14 @@
 	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	<script>
+	/*약관 내용*/
+		$(".allowContent").on("click", function(){
+			const popup = window.open("","allowContent","left=700px, top=300px, width=500px, height=600px, menubar=no, status=no, scrollbars=yes");
+		});
+	
+	
+	
+	
 		var idFlag = 0;
 		var phoneFlag = 0;
 		
@@ -293,7 +301,8 @@
 			var phone = phone1+phone2;
 			$("[name=ownerPhone]").val(phone);
 			
-			if(idFlag == 0 || phoneFlag == 0) {
+			var allowChked = $("#allChk").is(":checked");
+			if(idFlag == 0 || phoneFlag == 0 || allowChked == false) {
 				event.preventDefault();
 			}
 			
@@ -354,6 +363,23 @@
 			$(this).css("color","");
 		})
 		
+		//체크박스 전체선택
+		$("#allChk").on("click",function(){
+			var checked = $(this).is(":checked");
+			if(checked){
+				$(".chkBox").find("input").prop("checked", true);
+			}else {
+				$(".chkBox").find("input").prop("checked", false);
+			}
+		});
+		//체크박스 개별선택
+		$(".chkBox").on("click", ".normal", function(){
+			var is_checked = true;
+			$(".chkBox .normal").each(function(){
+				is_checked = is_checked && $(this).is(":checked");
+			});
+			$("#allChk").prop("checked", is_checked);
+		});
 		
 		
 		
