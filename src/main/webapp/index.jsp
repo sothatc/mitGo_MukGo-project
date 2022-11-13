@@ -18,7 +18,7 @@
 				<div class="row">
 					<div class="col-12 text-center text-white">
 						<h1 class="display-3 my-4">믿을수있는 맛집리스트,<br />믿GO<br />먹GO
-						</h1> <a href="/storeList.do?reqPage=1" class="btn btn-brand" id="font">맛집보러가기</a> <a href="/storeList.do?reqPage=1" class="btn btn-outline-light ms-3" id="font">Our work</a>
+						</h1> <a href="/storeList.do?reqPage=1" class="btn btn-brand" id="font">맛집보러가기</a>
 					</div>
 				</div>
 			</div>
@@ -29,7 +29,7 @@
 					<div class="col-12 col-lg-10 offset-lg-1 text-white">
 						<h6 class="text-white text-uppercase" id="font">맛집리스트를 집에서도</h6>
 						<h1 class="display-3 my-4">GOGO마켓 <br />신선, 간편, 프리미엄 밀키트
-						</h1> <a href="/marketMainFrm.do" class="btn btn-brand" id="font">상품보러가기</a> <a href="#" class="btn btn-outline-light ms-3" id="font">Our work</a>
+						</h1> <a href="/marketMain.do?reqPage=1" class="btn btn-brand" id="font">상품보러가기</a>
 					</div>
 				</div>
 			</div>
