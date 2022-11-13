@@ -49,7 +49,7 @@ a:hover {
 
 section {
     padding-top: 80px;
-    padding-bottom: 80px;
+    padding-bottom: 20px;
 }
 
 .text-brand {
@@ -546,7 +546,6 @@ input.form-control {
 .recommend{
     margin: 0 auto;
     height: 300px;
-    width: 100%;
     margin-left: 200px;
     margin-top: 150px;
   }

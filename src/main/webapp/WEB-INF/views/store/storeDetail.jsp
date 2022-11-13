@@ -29,6 +29,10 @@ height: 100%;
 .star{
 	color: rgb(255, 83, 86) !important;
 }
+
+.hidenClass{
+	visibility:hidden; 
+}
 </style>
 
 <body onload="initTmap()">
@@ -229,21 +233,23 @@ height: 100%;
 				<div class="clear"></div>
 			</div>
 		 </div>
+		 
+		 
          <!----- 마켓 상품 부분 ----->
 		<c:choose>
               <c:when test="${!empty mList }">
-         <div class="market-wrap" style="margin-top:50px; width:1200px; height:300px;">
-	         <div class="menuTitle" style="margin: 0 auto;">MARKET</div>
-	         
-	         <c:forEach items="${mList }" var="ma">
-	            <div class="w3-card-4" id="marketWrap">
-	               <a href="#"><img src="/resources/upload/market/${ma.PImg }" style="width: 100%"></a>
-	               <div class="w3-container w3-center">
-	                  <p>${ma.PName }</p>
-	               </div>
-	            </div>
-			</c:forEach>
-		</div>
+		         <div class="market-wrap" style="margin-top:50px; width:1200px; height:300px;">
+			         <div class="menuTitle" style="margin: 0 auto;">MARKET</div>
+			         
+			         <c:forEach items="${mList }" var="ma">
+			            <div class="w3-card-4" id="marketWrap">
+			               <a href="/marketDetail.do?pNo=${ma.PNo }"><img src="/resources/upload/market/${ma.PImg }" style="width: 100%"></a>
+			               <div class="w3-container w3-center">
+			                  <p>${ma.PName }</p>
+			               </div>
+			            </div>
+					</c:forEach>
+				</div>
 		    </c:when>
         </c:choose>	
 		
@@ -252,27 +258,27 @@ height: 100%;
         <!--------- 후기 시작 ----->
         <c:choose>
               <c:when test="${!empty rList }">
-        <div class="review-wrap" style="margin:50px 0;">
-            <div class="menuTitle" style="width:100px; margin:0 auto;">REVIEW</div>
-            <ul class="w3-ul w3-card-4" id="reviewWrapUl" style="height:content-fit;">
-            <c:forEach items="${rList }" var="r">
-
-				<li class="w3-bar" style="height:content-fit;">
-                  <div class="w3-bar-1" style="margin:0; height: content-fit;">
-                     <img src="/resources/upload/review/${r.reviewImg }" class="w3-hide-small" style="float: left; width:35%; height:100%;">
-                     <div class="w3-bar-item" id="w3-bar-item" style="width:60%; height: content-fit; padding:0; margin-left:5%; position: relative;">
-                        <div style="color: rgb(255, 83, 86); float:left;"><c:forEach begin="1" step="1" end="${r.rating }" varStatus="i">★</c:forEach></div>
-                        <div>${r.rating }</div>
-                        <div class="w3-large" style="font-weight: 700;">${r.writer }</div>
-                        <div class="reviewContent" style="display: inline; float: left; height:150px; overflow: auto;">${r.content}</div>
-                        <div class="regDate" style="position: absolute; bottom: 0px; right: 0px;">${r.enrollDate }</div>
-                     </div>
-                  </div>
-               </li>
-               
-			</c:forEach>
-            </ul>
-        </div>
+			        <div class="review-wrap" style="margin:50px 0;">
+			            <div class="menuTitle" style="width:100px; margin:0 auto;">REVIEW</div>
+			            <ul class="w3-ul w3-card-4" id="reviewWrapUl" style="height:content-fit;">
+			            <c:forEach items="${rList }" var="r">
+			
+							<li class="w3-bar" style="height:content-fit;">
+			                  <div class="w3-bar-1" style="margin:0; height: content-fit;">
+			                     <img src="/resources/upload/review/${r.reviewImg }" class="w3-hide-small" style="float: left; width:35%; height:100%;">
+			                     <div class="w3-bar-item" id="w3-bar-item" style="width:60%; height: content-fit; padding:0; margin-left:5%; position: relative;">
+			                        <div style="color: rgb(255, 83, 86); float:left;"><c:forEach begin="1" step="1" end="${r.rating }" varStatus="i">★</c:forEach></div>
+			                        <div>${r.rating }</div>
+			                        <div class="w3-large" style="font-weight: 700;">${r.writer }</div>
+			                        <div class="reviewContent" style="display: inline; float: left; height:150px; overflow: auto;">${r.content}</div>
+			                        <div class="regDate" style="position: absolute; bottom: 0px; right: 0px;">${r.enrollDate }</div>
+			                     </div>
+			                  </div>
+			               </li>
+			               
+						</c:forEach>
+			            </ul>
+			        </div>
         	</c:when>
         </c:choose>	
         <!--------후기 끝 -->
@@ -319,6 +325,9 @@ height: 100%;
           </div>
        </div>
        </div>
+       
+       
+       <div style="margin-bottom:50px;"></div> <!-- 리뷰/마켓 제품이 없을 시 바로 하단에 푸터 방지 위한 div-->
        <jsp:include page="/WEB-INF/views/common/footer.jsp" />
        
        
@@ -365,6 +374,9 @@ height: 100%;
       <script>
        //------------------------------------------------------------------------------------------------------------------------------
       
+
+               
+               
        //----------카테고리
        // 1:한식 , 2: 양식, 3: 일식, 4: 중식, 5:분식, 6:육류, 7:씨푸드,8:디저트,9:기타
        var categoryNum=${s.category};
@@ -715,7 +727,6 @@ height: 100%;
          		modal.classList.add("hidden");
          });
       
-
          
       </script>
 
