@@ -386,6 +386,9 @@
 		(select imgpath from store_img si where storeimg_no = (select
 		min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
 		as thumbNail from store s order by storeNo desc)b
+		<if test="search != null and search != ''">
+			where storeName like '%'||#{search}||'%'
+		</if>
 		<if test="category != null and category != ''">
 			where category = #{category}
 		</if>
@@ -395,7 +398,7 @@
 				order by 3 desc
 			</when>
 			<when test="storeListSort.equals('grade')">
-				order by 14 desc
+				order by 14 asc
 			</when>
 			<when test="storeListSort.equals('reviewCount')">
 				order by 15 desc
