@@ -29,6 +29,10 @@ height: 100%;
 .star{
 	color: rgb(255, 83, 86) !important;
 }
+
+.hidenClass{
+	visibility:hidden; 
+}
 </style>
 
 <body onload="initTmap()">
@@ -242,8 +246,11 @@ height: 100%;
 	               </div>
 	            </div>
 			</c:forEach>
+			<div id="noProduct" class="hidenClass" style="width: 1200px; height: 50px; text-align: center; line-height: 80px;">
+					등록된 제품이 없습니다.
+	        </div>
 		</div>
-		
+
 		
         <!--------- 후기 시작 ----->
         <div class="review-wrap" style="margin:50px 0;">
@@ -266,6 +273,9 @@ height: 100%;
                
 			</c:forEach>
             </ul>
+            <div id="noReview" class="hidenClass" style="width: 1200px; height: 50px; text-align: center; line-height: 80px;">
+					등록된 후기가  없습니다.
+	        </div>
         </div>
         <!--------후기 끝 -->
          
@@ -311,6 +321,9 @@ height: 100%;
           </div>
        </div>
        </div>
+       
+       
+       <div style="margin-bottom:50px;"></div> <!-- 리뷰/마켓 제품이 없을 시 바로 하단에 푸터 방지 위한 div-->
        <jsp:include page="/WEB-INF/views/common/footer.jsp" />
        
        
@@ -357,6 +370,9 @@ height: 100%;
       <script>
        //------------------------------------------------------------------------------------------------------------------------------
       
+
+               
+               
        //----------카테고리
        // 1:한식 , 2: 양식, 3: 일식, 4: 중식, 5:분식, 6:육류, 7:씨푸드,8:디저트,9:기타
        var categoryNum=${s.category};
@@ -707,7 +723,28 @@ height: 100%;
          		modal.classList.add("hidden");
          });
       
+		
+       
+         //마켓 상품 없으면 마켓 영역 비노출
+         /*
+         if(!${ma.PName}){
+        	 $("#marketWrap").css("display","none");
+        	 $("#noProduct").classList.add("hidenClass");
+         }else{
+        	 $("#marketWrap").css("display","flex");
+        	 $("#noProduct").classList.remove("hidenClass");
+         }
+         
+         
 
+         if(${r.content }==''){
+        	 $("#reviewWrapUl").css("display","none");
+        	 $("#noReview").classList.add("hidenClass");
+         }else{
+        	 $("#reviewWrapUl").css("display","flex");        	 
+        	 $("#noReview").classList.remove("hidenClass");
+         }
+        */
          
       </script>
 
