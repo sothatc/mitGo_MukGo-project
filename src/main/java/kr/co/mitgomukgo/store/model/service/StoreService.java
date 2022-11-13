@@ -42,7 +42,7 @@ public class StoreService {
 	}
 
 	public HashMap<String, Object> storeList(int reqPage) {
-		int numPerPage = 9;
+		int numPerPage = 12;
 		
 		int end = numPerPage * reqPage;
 		int start = (end - numPerPage) + 1;
@@ -119,7 +119,7 @@ public class StoreService {
 	
 	public HashMap<String, Object> selectTag(String category, int reqPage) {
 		// 화면에 보여주는 게시물 수
-		int numPerPage = 9;
+		int numPerPage = 12;
 		
 		// 끝페이지
 		int end = numPerPage * reqPage;
@@ -183,7 +183,7 @@ public class StoreService {
 
 	public HashMap<String, Object> searchStoreList(String search, int reqPage, String category) {
 		// 화면에 보여주는 게시물 수
-		int numPerPage = 2;
+		int numPerPage = 12;
 		
 		// 끝페이지
 		int end = numPerPage * reqPage;
@@ -314,7 +314,7 @@ public class StoreService {
 	
 	public HashMap<String, Object> sortStoreList(String storeListSort, String sortFilter, String search, int reqPage, String category) {
 		// 화면에 보여주는 게시물 수
-		int numPerPage = 9;
+		int numPerPage = 12;
 		
 		// 끝페이지
 		int end = numPerPage * reqPage;
@@ -331,7 +331,7 @@ public class StoreService {
 		map.put("search",search);
 		ArrayList<Store> list = dao.sortStoreList(map);
 		
-		int totalCnt = dao.countTagList(category);
+		int totalCnt = dao.countTagList(map);
 		int totalPage = 0;
 		if(totalCnt % numPerPage == 0) {
 			totalPage = totalCnt / numPerPage;

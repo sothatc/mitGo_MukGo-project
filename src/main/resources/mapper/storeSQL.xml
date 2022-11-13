@@ -235,9 +235,14 @@
 	<select id="countSearchTagList" parameterType="map"
 		resultType="_int">
 		select count(*) from store
-		<if test="category != null and category != ''">
-			where category = #{category} and store_name like '%'||#{search}||'%'
-		</if>
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="category != null and category != ''">
+				category = #{category}
+			</if>
+			<if test="search != null and search != ''">
+				and store_name like '%'||#{search}||'%'
+			</if>
+		</trim>
 	</select>
 	<select id="searchStoreList" parameterType="map" resultType="s">
         select * from
