@@ -97,9 +97,6 @@
 					<a href="/updateOwnerFrm.do">내 정보 수정</a>
 				</div>
 				<div class="etc">
-					<a href="/ownerLogout.do">로그아웃</a>
-				</div>
-				<div class="etc">
 					<a href="#">회원 탈퇴</a>
 				</div>
 			</li>
