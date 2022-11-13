@@ -67,11 +67,11 @@
             </form>
         </div>
         <div class="member-box">
-            <a href="#" class="e">아이디/비밀번호 찾기 |</a>
+            <a href="javascript:void()" class="e">아이디/비밀번호 찾기 |</a>
             <a href="/selectJoin.do">회원가입 하기</a>
         </div>
     </div> 
-
+	<form name="searchMemberFrm" action="/searchMemberFrm.do"></form>
 
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
@@ -111,6 +111,12 @@
 				$("#normalLoginFrm").css("display","none");
 				$("#ownerLoginFrm").css("display","block");
 			}
+		});
+		//아이디/ 비번찾기
+		$(".e").on("click", function(){
+			const popup = window.open("","searchMemberFrm","left=700px, top=300px, width=400px, height=350px, menubar=no, status=no, scrollbars=yes");
+			$("[name=searchMemberFrm]").attr("target","searchMemberFrm");
+			$("[name=searchMemberFrm]").submit();
 		});
 		
     </script>

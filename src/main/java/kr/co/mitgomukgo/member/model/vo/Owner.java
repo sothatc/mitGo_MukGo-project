@@ -12,7 +12,7 @@ public class Owner {
 	private String ownerId;
 	private String ownerPw;
 	private String ownerName;
-	private String ownerPhone;
+	private int ownerPhone;
 	private String ownerEnrollDate;
 	private int ownerLevel;
 	private int ownerStatus;

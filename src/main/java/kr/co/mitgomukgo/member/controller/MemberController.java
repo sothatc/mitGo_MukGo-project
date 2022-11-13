@@ -22,6 +22,7 @@ import com.sun.xml.internal.bind.v2.runtime.output.Encoded;
 import kr.co.mitgomukgo.member.model.service.MemberService;
 import kr.co.mitgomukgo.member.model.vo.Member;
 import kr.co.mitgomukgo.member.model.vo.Owner;
+import kr.co.mitgomukgo.notice.model.vo.Notice;
 import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import net.nurigo.java_sdk.Coolsms;
@@ -194,8 +195,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/mypage.do")
-	public String mypage(Member member) {
+	public String mypage(Member member, Model model) {
 		Member m = service.pwChkMember(member);
+		ArrayList<Notice> list = service.myPageNcList();
+		model.addAttribute("list", list);
 		if(m != null) {
 			return "member/mypage";
 		}else {
@@ -203,11 +206,13 @@ public class MemberController {
 		}
 	}
 	@RequestMapping(value="/ownerMypage.do")
-	public String ownerMypage(HttpSession session, Owner owner) {
+	public String ownerMypage(HttpSession session, Owner owner, Model model) {
 		int ownerNo = owner.getOwnerNo();
 		Store s = service.searchStore(ownerNo);
 		session.setAttribute("s", s);
 		Owner o = service.pwChkOwner(owner);
+		ArrayList<Notice> list = service.myPageNcList();
+		model.addAttribute("list", list);
 		if(o != null) {
 			return "member/ownerMypage";
 		}else {
@@ -370,6 +375,40 @@ public class MemberController {
 			return "redirect:/";
 		}
 	}
-
+	@RequestMapping(value="/searchMemberFrm.do")
+	public String searchMemberFrm() {
+		return "member/searchMemberFrm";
+	}
+	@RequestMapping(value="/searchIdFrm.do")
+	public String searchIdFrm() {
+		return "/member/searchIdFrm";
+	}
+	@RequestMapping(value="/searchNormalId.do")
+	public String searchNormalId(Member m, Model model) {
+		String memberId = service.searchMemberId(m);
+		model.addAttribute("memberId", memberId);
+		if(memberId != null) {
+			model.addAttribute("result", false);
+			model.addAttribute("memberId", memberId);
+		}else {
+			model.addAttribute("result", true);
+			model.addAttribute("memberId", memberId);
+		}
+		return "member/searchIdResult";
+	}
+	@RequestMapping(value="/searchOwnerId.do")
+	public String searchOwnerId(Owner o, Model model) {
+		String ownerId = service.searchOwnerId(o);
+		model.addAttribute("ownerId", ownerId);
+		System.out.println(ownerId);
+		if(ownerId != null) {
+			model.addAttribute("result", false);
+			model.addAttribute("ownerId", ownerId);
+		}else {
+			model.addAttribute("result", true);
+			model.addAttribute("ownerId", ownerId);
+		}
+		return "member/searchIdResult";
+	}
 }
 

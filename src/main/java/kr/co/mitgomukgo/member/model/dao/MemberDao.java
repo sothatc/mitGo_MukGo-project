@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.mitgomukgo.member.model.vo.Member;
 import kr.co.mitgomukgo.member.model.vo.Owner;
+import kr.co.mitgomukgo.notice.model.vo.Notice;
 import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Store;
 
@@ -142,5 +143,20 @@ public class MemberDao {
 	public Member pwChkMember(Member member) {
 		return sqlSession.selectOne("member.pwChkMember", member);
 	}
+
+	public ArrayList<Notice> myPageNcList() {
+		List list = sqlSession.selectList("notice.myPageNcList");
+		return (ArrayList<Notice>)list;
+	}
+
+	public String searchMemberId(Member m) {
+		return sqlSession.selectOne("member.searchMemberId",m);
+	}
+
+	public String searchOwnerId(Owner o) {
+		return sqlSession.selectOne("owner.searchOwnerId", o);
+	}
+
+	
 
 }
