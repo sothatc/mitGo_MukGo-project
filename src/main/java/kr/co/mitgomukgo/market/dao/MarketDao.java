@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.co.mitgomukgo.market.model.vo.Market;
+import kr.co.mitgomukgo.notice.model.vo.Notice;
 
 @Repository
 public class MarketDao {
@@ -52,6 +53,11 @@ public class MarketDao {
 
 	public int updateMarketProduct(Market market) {
 		return sqlSession.update("updateMarketProduct", market);
+	}
+
+	public ArrayList<Notice> myPageNcList() {
+		List list = sqlSession.selectList("notice.myPageNcList");
+		return (ArrayList<Notice>)list;
 	}
 
 

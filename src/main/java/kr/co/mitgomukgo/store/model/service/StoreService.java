@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.mitgomukgo.market.model.vo.Market;
+import kr.co.mitgomukgo.notice.model.vo.Notice;
 import kr.co.mitgomukgo.store.model.dao.StoreDao;
 import kr.co.mitgomukgo.store.model.vo.Menu;
 import kr.co.mitgomukgo.store.model.vo.Reserve;
@@ -417,6 +418,10 @@ public class StoreService {
 	public ArrayList<Market> selectProductList(int storeNo) {
 		ArrayList<Market> list = dao.selectProductList(storeNo);
 		return list;
+	}
+
+	public ArrayList<Notice> myPageNcList() {
+		return dao.myPageNcList();
 	}
 
 
