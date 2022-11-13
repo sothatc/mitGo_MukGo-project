@@ -141,6 +141,21 @@ public class qnaDao {
 		int result = sqlSession.selectOne("qna.selectQnaThemeCnt", qnaTheme);
 		return result;
 	}
+
+	public ArrayList<Qna> selectMyQnaList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("qna.selectMyQnaList", map);
+		
+		if(list.isEmpty()) {
+			return null;
+		}else {
+			return (ArrayList<Qna>)list;
+		}
+	}
+
+	public int qnaWriteCount(String qnaWriter1) {
+		int result = sqlSession.selectOne("qna.qnaWriteCount", qnaWriter1);
+		return result;
+	}
 }
 
 

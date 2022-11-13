@@ -68,8 +68,18 @@
                     <tr style="height: 70px; border-bottom: 1px solid rgba(224, 224, 224, 0.7);">
                         <th>*작성자</th>
                         <td style="width: 700px;">
-                        <input type="hidden" name="qnaWriter" value="${sessionScope.m.memberId }">
-                            ${sessionScope.m.memberName }
+                        <c:choose>
+                        	<c:when test="${not empty sessionScope.m }">
+                        		<input type="hidden" name="qnaWriter" value="${sessionScope.m.memberId }">
+                            	${sessionScope.m.memberId }
+                        	</c:when>
+                        	
+                        	<c:otherwise>
+                        		<input type="hidden" name="qnaWriter" value="${sessionScope.o.ownerId }">
+                            	${sessionScope.o.ownerId }
+                        	</c:otherwise>
+                        </c:choose>
+                        
                         </td>
                     </tr>
 
