@@ -25,6 +25,7 @@ import com.google.gson.Gson;
 import common.FileRename;
 import kr.co.mitgomukgo.market.model.vo.Market;
 import kr.co.mitgomukgo.member.model.vo.Owner;
+import kr.co.mitgomukgo.notice.model.vo.Notice;
 import kr.co.mitgomukgo.store.model.service.StoreService;
 import kr.co.mitgomukgo.store.model.vo.Menu;
 import kr.co.mitgomukgo.store.model.vo.Reserve;
@@ -252,12 +253,16 @@ public class StoreController {
 	@RequestMapping(value = "/menuFrm.do")
 	public String menuFrm(@SessionAttribute Store s, Model model) {
 		ArrayList<Menu> list = service.menuList(s.getStoreNo());
+		ArrayList<Notice> ncList = service.myPageNcList();
+		model.addAttribute("ncList", ncList);
 		model.addAttribute("list", list);
 		return "store/menuFrm";
 	}
 
 	@RequestMapping(value = "/addMenuFrm.do")
-	public String addMenuFrm() {
+	public String addMenuFrm(Model model) {
+		ArrayList<Notice> ncList = service.myPageNcList();
+		model.addAttribute("ncList", ncList);
 		return "store/addMenuFrm";
 	}
 
@@ -342,6 +347,8 @@ public class StoreController {
 	public String updateStoreFrm(HttpSession session, @SessionAttribute Store s, Model model) {
 		Owner o = (Owner) session.getAttribute("o");
 		ArrayList<StoreImg> imgList = service.selectStoreImg(s.getStoreNo());
+		ArrayList<Notice> ncList = service.myPageNcList();
+		model.addAttribute("ncList", ncList);
 		model.addAttribute("imgList", imgList);
 		return "/store/updateStoreFrm";
 	}

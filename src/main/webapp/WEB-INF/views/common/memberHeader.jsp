@@ -38,7 +38,7 @@
 		<ul class="category">
 			<li>
 				<h4>공지사항</h4>
-				<c:forEach items="${list }" var="n">
+				<c:forEach items="${ncList }" var="n">
 				<div class="list-wrap">
 					<a href="/noticeDetail.do?noticeNo=${n.noticeNo }" class="titleShow">${n.noticeTitle }</a>
 				</div>

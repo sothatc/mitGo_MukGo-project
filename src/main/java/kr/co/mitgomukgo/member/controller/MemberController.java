@@ -197,8 +197,8 @@ public class MemberController {
 	@RequestMapping(value="/mypage.do")
 	public String mypage(Member member, Model model) {
 		Member m = service.pwChkMember(member);
-		ArrayList<Notice> list = service.myPageNcList();
-		model.addAttribute("list", list);
+		ArrayList<Notice> ncList = service.myPageNcList();
+		model.addAttribute("ncList", ncList);
 		if(m != null) {
 			return "member/mypage";
 		}else {
@@ -248,7 +248,9 @@ public class MemberController {
 		}
 	}
 	@RequestMapping(value="/updateOwnerFrm.do")
-	public String updateOwnerFrm() {
+	public String updateOwnerFrm(Model model) {
+		ArrayList<Notice> ncList = service.myPageNcList();
+		model.addAttribute("ncList", ncList);
 		return "member/ownerMypage";
 	}
 	@RequestMapping(value="/updateMember.do")
@@ -262,21 +264,27 @@ public class MemberController {
 		}
 	}
 	@RequestMapping(value="/updateMemberFrm.do")
-	public String updateMemberFrm() {
+	public String updateMemberFrm(Model model) {
+		ArrayList<Notice> ncList = service.myPageNcList();
+		model.addAttribute("ncList", ncList);
 		return "member/mypage";
 	}
 	@RequestMapping(value="/reserveList.do")
 	public String reserveList(@SessionAttribute Member m, Model model) {
 		ArrayList<Reserve> rsList = service.selectReserveList(m);
+		ArrayList<Notice> ncList = service.myPageNcList();
 		if(rsList.isEmpty()) {
 			return "member/reserveList";
 		}
+		model.addAttribute("ncList", ncList);
 		model.addAttribute("rsList", rsList);
 		return "member/reserveList";
 	}
 	@RequestMapping(value="/reserveManage.do")
 	public String reserveManage(Model model, @SessionAttribute Store s, int reqPage) {
 		int storeNo = s.getStoreNo();
+		ArrayList<Notice> ncList = service.myPageNcList();
+		model.addAttribute("ncList", ncList);
 		HashMap<String, Object> map = service.selectAllReserve(reqPage, storeNo);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
