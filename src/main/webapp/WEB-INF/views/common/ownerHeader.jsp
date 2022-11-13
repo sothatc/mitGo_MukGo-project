@@ -16,7 +16,6 @@
 .accordion-div {
 	padding: 3px 1.25rem !important;
 	padding-left: 40px !important;
-	display: none;
 }
 
 .on {
