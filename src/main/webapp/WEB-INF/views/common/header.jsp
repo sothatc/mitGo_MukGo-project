@@ -24,10 +24,10 @@
 				</c:when>
 				<c:otherwise>
 					<c:if test="${not empty sessionScope.o}">
-						<a href="/ownerLogout.do"><i class='bx bx-log-out'></i></a>
+						<a href="/ownerLogout.do"><i class='bx bx-log-out' style="color: green;"></i></a>
 					</c:if>
 					<c:if test="${not empty sessionScope.m}">
-						<a href="/logout.do"><i class='bx bx-log-out'></i></a>
+						<a href="/logout.do"><i class='bx bx-log-out' style="color: green;"></i></a>
 					</c:if>
 				</c:otherwise>
 			</c:choose>
