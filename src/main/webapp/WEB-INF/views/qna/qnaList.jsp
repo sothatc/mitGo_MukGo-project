@@ -233,10 +233,20 @@
             
         </div>
 		
-		<c:if test="${not empty sessionScope.m }">
+		<c:if test="${not empty sessionScope.m or not empty sessionScope.o}">
 			<div class="qna-btn">
 	            <a href="/insertQnaFrm.do">글쓰기</a>
-	            <a href="#">내 qna 보기</a>
+	            
+	            <c:choose>
+	            	<c:when test="${not empty sessionScope.m }">
+	            		<a href="/selectMyQnaList.do?reqPage=1&qnaWriter1=${sessionScope.m.memberId }">내 qna 보기</a>
+	            	</c:when>
+	            	
+	            	<c:otherwise>
+	            		<a href="/selectMyQnaList.do?reqPage=1&qnaWriter1=${sessionScope.o.ownerId }">내 qna 보기</a>
+	            	</c:otherwise>
+	            </c:choose>
+
 	        </div>
 		</c:if>
 

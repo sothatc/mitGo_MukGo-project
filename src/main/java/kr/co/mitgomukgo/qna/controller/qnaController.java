@@ -339,6 +339,25 @@ public class qnaController {
 		}
 	}
 	
+	@RequestMapping(value="/selectService.do")
+	public String selectService() {
+		return "qna/select";
+	}
+	
+	@RequestMapping(value="/selectMyQnaList.do")
+	public String selectMyQnaList(int reqPage, String qnaWriter1, Model model) {
+		HashMap<String, Object> map = service.selectMyQnaList(reqPage, qnaWriter1);
+		
+		if(map == null) {
+			model.addAttribute("msg", "아직 QNA가 없습니다.");
+			return "qna/qnaList";
+		}else {
+			model.addAttribute("list", map.get("list"));
+			model.addAttribute("pageNavi", map.get("pageNavi"));
+			return "qna/qnaList";
+		}
+	}
+	
 }
 
 

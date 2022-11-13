@@ -215,6 +215,32 @@
   	<select id="selectQnaThemeCnt" parameterType="string" resultType="int">
   		select count(*) from qna_tbl where qna_theme = #{qnaTheme}
   	</select>
+  	
+  	<select id="selectMyQnaList" parameterType="map" resultType="q">
+  		select * from
+			(select row_number() over (order by rnum desc) as rnum1, rb.* from
+			(select rownum as rnum, b.* from
+			(select 
+		        qna_no as qnaNo,
+		        qna_title as qnaTitle,
+		        substr(qna_writer,1,length(qna_writer)-3) || lpad('*',3,'*') as qnaWriter,
+		        qna_writer as qnaWriter1,
+		        secret_status as secretStatus,
+		        qna_content as qnaContent,
+		        qna_date as qnaDate,
+		        qna_comment as qnaComment,
+		        qna_comment_writer as qnaCommentWriter,
+		        comment_date as commnetDate,
+		        comment_status as commentStatus,
+		        qna_theme as qnaTheme,
+		        read_cnt as readCnt,
+		        qna_password as qnaPassword
+        from qna_tbl order by qnaNo desc)b)rb order by 3 desc) where rnum between #{start} and #{end} and qnaWriter1 = #{qnaWriter1}
+  	</select>
+  	
+  	<select id="qnaWriteCount" parameterType="string" resultType="int">
+  		select count(*) from qna_tbl where qna_writer = #{qnaWriter1}
+  	</select>
 </mapper>
 
 
