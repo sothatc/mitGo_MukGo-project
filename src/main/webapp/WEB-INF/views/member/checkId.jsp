@@ -7,26 +7,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/resources/css/member/member.css">
 </head>
 <body>
-	<style>
-		
-	</style>
-	
 	<div id="check-container">
 		<c:choose>
 			<c:when test="${result}">
-				<div>[ <span>${checkId } </span> ]는 사용 가능합니다.</div>
-				<br><br>
-				<button type="button" onclick="closeWindow('${checkId}');">닫기</button>
+				<div>[ <span>${checkId } </span> ]는 사용 가능한 ID입니다.</div>
+				<br>
+				<button type="button" class="closeBtn" onclick="closeWindow('${checkId}');">닫기</button>
 			</c:when>
 			<c:otherwise>
 				<div>[ <span>${memberId }</span> ]는 이미 사용중입니다.</div>
-				<br><br>
+				<br>
 				<form action="/checkId.do">
 					<div class="id-wrap">
-						<input type="text" name="checkId" class="checkId">
-						<button type="submit">조회</button>
+						<input type="text" name="checkId" class="checkId"><br>
+						<button class="searchIdBtn" type="submit">조회</button>
 					</div>
 				</form>
 			</c:otherwise>
@@ -38,6 +35,25 @@
 			idInput.val(checkId);
 			self.close();
 		}
+
+		$(".closeBtn").on("mouseover",function(){
+			$(this).css("background-color","rgb(97, 76, 76)");
+			$(this).css("border","1px solid black");
+			$(this).css("color","#ffc107");
+		})
+		$(".closeBtn").on("mouseleave",function(){
+			$(this).css("background-color","");
+			$(this).css("color","");
+		})
+		$(".searchIdBtn").on("mouseover",function(){
+			$(this).css("background-color","rgb(97, 76, 76)");
+			$(this).css("border","1px solid black");
+			$(this).css("color","#ffc107");
+		})
+		$(".searchIdBtn").on("mouseleave",function(){
+			$(this).css("background-color","");
+			$(this).css("color","");
+		})
 	</script>
 </body>
 </html>

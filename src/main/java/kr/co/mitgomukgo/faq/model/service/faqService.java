@@ -36,14 +36,21 @@ public class faqService {
 		
 		int totalPage = dao.countAllFaq();
 		
+		int totalMan = 0;
+		if(totalPage % numPerPage == 0) {
+			totalMan = totalPage / numPerPage;
+		}else {
+			totalMan = totalPage / numPerPage + 1;
+		}
+		
 		// 페이지 네비 사이즈
-		int pageNaviSize = 2;
+		int pageNaviSize = 5;
 		
 		// 페이지 시작 번호
 		int pageNo = 1;
 		
-		if(reqPage > 2) {
-			pageNo = reqPage - 1;
+		if(reqPage > 3) {
+			pageNo = reqPage - 2;
 		}
 		
 		// 페이지 내비 시작
@@ -61,13 +68,13 @@ public class faqService {
 				pageNavi += "<a href='/selectAllFaq.do?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
 			}
 			pageNo++;
-			if(pageNo > totalPage) {
+			if(pageNo > totalMan) {
 				break;
 			}
 		}
 		
 		// 다음버튼
-		if(end <= totalPage) {
+		if(pageNo <= totalMan) {
 			pageNavi += "<a href='/selectAllFaq.do?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
 					"            chevron_right\r\n" + 
 					"            </span></a>"; 

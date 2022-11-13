@@ -40,9 +40,11 @@
 		<div class = "sortFilter" style = "display: none;">${sortFilter }</div>
 		
 		<!-- 검색기능 -->
-		<form action="/searchStoreList.do?category=${category }&reqPage=1" method="post">
+		<form action="/searchStoreList.do" method="get">
 			<div class="storeList-searchinput" id="font">
 				<input type="text" name="search">
+				<input type="hidden" name="reqPage" value="1">
+				<input type="hidden" name="category" value="${category }">
 				<button>검색</button>
 			</div>
 		</form>
@@ -89,6 +91,7 @@
 			<div class="storeList-sort-content">
 				<form action="/sortStoreList.do?category=${category }&reqPage=1" method="post">
 					<ul id="font">
+						<input type="hidden" name="search" value="${search }">
 						<button type="submit" name="storeListSort" value="grade"><li>평점순</li></button>
 						<button type="submit" name="storeListSort" value="reviewCount"><li>리뷰순</li></button>
 					</ul>
@@ -116,7 +119,6 @@
 		</div>
 		<!-- 페이지 네비 -->
 		<div class="page">${pageNavi }</div>
-	</div>
 	</div>
 	<!--푸터-->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />

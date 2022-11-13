@@ -12,7 +12,7 @@ public class Member {
 	private String memberId;
 	private String memberPw;
 	private String memberName;
-	private int memberPhone;
+	private String memberPhone;
 	private String MemEnrollDate;
 	private int memberClass;
 }

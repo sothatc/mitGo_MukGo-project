@@ -78,7 +78,7 @@
                                     </div>
                                     <div class="box02">
                                         <label class="label" for="ownerPhone1">전화번호를 입력해주세요.</label>
-                                        <input type="number" id="ownerPhone1" name="ownerPhone1">
+                                        <input type="text" id="ownerPhone1" name="ownerPhone1">
                                         <input type="hidden" id="ownerPhone" name="ownerPhone">
                                     </div>
                                     <button type="button" class="phoneChkSendBtn">인증번호 발송</button>

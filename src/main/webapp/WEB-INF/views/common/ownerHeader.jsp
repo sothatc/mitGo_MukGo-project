@@ -22,6 +22,9 @@
 .on {
 	display: block !important;
 }
+.list-wrap>.titleShow {
+	font-size: 13px;
+}
 </style>
 <h2>사업자 마이페이지</h2>
 <aside id="aside" class="sidebar" style="padding-top: 0px;">
@@ -107,6 +110,11 @@
 		<ul class="category">
 			<li>
 				<h4>공지사항</h4>
+				<c:forEach items="${ncList }" var="n">
+				<div class="list-wrap">
+					<a href="/noticeDetail.do?noticeNo=${n.noticeNo }" class="titleShow">${n.noticeTitle }</a>
+				</div>
+				</c:forEach>
 			</li>
 		</ul>
 	</div>

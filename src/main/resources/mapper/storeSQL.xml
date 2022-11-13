@@ -231,9 +231,21 @@
 			where category = #{_parameter}
 		</if>
 	</select>
-
+	
+	<select id="countSearchTagList" parameterType="map"
+		resultType="_int">
+		select count(*) from store
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="category != null and category != ''">
+				category = #{category}
+			</if>
+			<if test="search != null and search != ''">
+				and store_name like '%'||#{search}||'%'
+			</if>
+		</trim>
+	</select>
 	<select id="searchStoreList" parameterType="map" resultType="s">
-		select * from
+        select * from
 		(select row_number() over (order by rnum desc) as rnum1, rb.* from
 		(select rownum as rnum, b.* from
 		(select
@@ -253,12 +265,12 @@
 		(select imgpath from store_img si where storeimg_no = (select
 		min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
 		as thumbNail from store s order by storeNo desc)b
+        where storeName like '%'||#{search}||'%'
 		<if test="category != null and category != ''">
-			where category = #{category}
+			and category = #{category}
 		</if>
 		)rb order by 3 desc)
-		where rnum between #{start} and #{end} and
-		storeName like '%' || #{search} || '%'
+		where rnum1 between #{start} and #{end}
 	</select>
 
 
@@ -379,6 +391,9 @@
 		(select imgpath from store_img si where storeimg_no = (select
 		min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
 		as thumbNail from store s order by storeNo desc)b
+		<if test="search != null and search != ''">
+			where storeName like '%'||#{search}||'%'
+		</if>
 		<if test="category != null and category != ''">
 			where category = #{category}
 		</if>
@@ -388,7 +403,7 @@
 				order by 3 desc
 			</when>
 			<when test="storeListSort.equals('grade')">
-				order by 14 desc
+				order by 14 asc
 			</when>
 			<when test="storeListSort.equals('reviewCount')">
 				order by 15 desc

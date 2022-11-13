@@ -178,5 +178,9 @@ public class StoreDao {
 		return (ArrayList<Market>) list; 
 	}
 
+	public int countTagList(HashMap<String, Object> map) {
+		return sqlSession.selectOne("store.countSearchTagList",map);
+	}
+
 
 }

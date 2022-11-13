@@ -234,49 +234,59 @@ height: 100%;
 			</div>
 		 </div>
 		 
+		 
          <!----- 마켓 상품 부분 ----->
-         <div class="market-wrap" style="margin-top:50px; width:1200px; height:300px;">
-	         <div class="menuTitle" style="margin: 0 auto;">MARKET</div>
-	         
-	         <c:forEach items="${mList }" var="ma">
-	            <div class="w3-card-4" id="marketWrap">
-	               <a href="#"><img src="/resources/upload/market/${ma.PImg }" style="width: 100%"></a>
-	               <div class="w3-container w3-center">
-	                  <p>${ma.PName }</p>
-	               </div>
-	            </div>
-			</c:forEach>
-			<div id="noProduct" class="hidenClass" style="width: 1200px; height: 50px; text-align: center; line-height: 80px;">
-					등록된 제품이 없습니다.
-	        </div>
-		</div>
-
+		<c:choose>
+              <c:when test="${!empty mList }">
+		         <div class="market-wrap" style="margin-top:50px; width:1200px; height:300px;">
+			         <div class="menuTitle" style="margin: 0 auto;">MARKET</div>
+			         
+			         <c:forEach items="${mList }" var="ma">
+			            <div class="w3-card-4" id="marketWrap">
+			               <a href="#"><img src="/resources/upload/market/${ma.PImg }" style="width: 100%"></a>
+			               <div class="w3-container w3-center">
+			                  <p>${ma.PName }</p>
+			               </div>
+			            </div>
+					</c:forEach>
+					<div id="noProduct" class="hidenClass" style="width: 1200px; height: 50px; text-align: center; line-height: 80px;">
+							등록된 제품이 없습니다.
+			        </div>
+				</div>
+		    </c:when>
+        </c:choose>	
+		
+		
 		
         <!--------- 후기 시작 ----->
-        <div class="review-wrap" style="margin:50px 0;">
-            <div class="menuTitle" style="width:100px; margin:0 auto;">REVIEW</div>
-            <ul class="w3-ul w3-card-4" id="reviewWrapUl" style="height:content-fit;">
-            <c:forEach items="${rList }" var="r">
-
-				<li class="w3-bar" style="height:content-fit;">
-                  <div class="w3-bar-1" style="margin:0; height: content-fit;">
-                     <img src="/resources/upload/review/${r.reviewImg }" class="w3-hide-small" style="float: left; width:35%; height:100%;">
-                     <div class="w3-bar-item" id="w3-bar-item" style="width:60%; height: content-fit; padding:0; margin-left:5%; position: relative;">
-                        <div style="color: rgb(255, 83, 86); float:left;"><c:forEach begin="1" step="1" end="${r.rating }" varStatus="i">★</c:forEach></div>
-                        <div>${r.rating }</div>
-                        <div class="w3-large" style="font-weight: 700;">${r.writer }</div>
-                        <div class="reviewContent" style="display: inline; float: left; height:150px; overflow: auto;">${r.content}</div>
-                        <div class="regDate" style="position: absolute; bottom: 0px; right: 0px;">${r.enrollDate }</div>
-                     </div>
-                  </div>
-               </li>
-               
-			</c:forEach>
-            </ul>
-            <div id="noReview" class="hidenClass" style="width: 1200px; height: 50px; text-align: center; line-height: 80px;">
-					등록된 후기가  없습니다.
-	        </div>
-        </div>
+        <c:choose>
+              <c:when test="${!empty rList }">
+			        <div class="review-wrap" style="margin:50px 0;">
+			            <div class="menuTitle" style="width:100px; margin:0 auto;">REVIEW</div>
+			            <ul class="w3-ul w3-card-4" id="reviewWrapUl" style="height:content-fit;">
+			            <c:forEach items="${rList }" var="r">
+			
+							<li class="w3-bar" style="height:content-fit;">
+			                  <div class="w3-bar-1" style="margin:0; height: content-fit;">
+			                     <img src="/resources/upload/review/${r.reviewImg }" class="w3-hide-small" style="float: left; width:35%; height:100%;">
+			                     <div class="w3-bar-item" id="w3-bar-item" style="width:60%; height: content-fit; padding:0; margin-left:5%; position: relative;">
+			                        <div style="color: rgb(255, 83, 86); float:left;"><c:forEach begin="1" step="1" end="${r.rating }" varStatus="i">★</c:forEach></div>
+			                        <div>${r.rating }</div>
+			                        <div class="w3-large" style="font-weight: 700;">${r.writer }</div>
+			                        <div class="reviewContent" style="display: inline; float: left; height:150px; overflow: auto;">${r.content}</div>
+			                        <div class="regDate" style="position: absolute; bottom: 0px; right: 0px;">${r.enrollDate }</div>
+			                     </div>
+			                  </div>
+			               </li>
+			               
+						</c:forEach>
+			            </ul>
+			            <div id="noReview" class="hidenClass" style="width: 1200px; height: 50px; text-align: center; line-height: 80px;">
+								등록된 후기가  없습니다.
+				        </div>
+			        </div>
+        	</c:when>
+        </c:choose>	
         <!--------후기 끝 -->
          
       </div><!-- testDiv 끝 -->
