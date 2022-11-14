@@ -28,9 +28,57 @@
 		cursor: pointer;
 	}
 	
-	.w3-modal{
-		
+	.pageNo{
+		font-size: 20px;
+		background-color: gray;
+		color: white;
+		width: 30px;
+		border-radius: 100%;
+		line-height: 34px;
 	}
+	
+	.qna-tbl{
+		width: 1200px;
+	}
+	
+	.qna-tbl th{
+		width: 160px;
+	}
+	
+	.qna-tbl td{
+		width: 160px;
+	}
+	
+	.faq-category{
+	
+    margin-top: 80px;
+}
+
+.faq-category>ul{
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    padding: 0px;
+    margin-right: 30px;
+}
+
+.faq-category>ul>li{
+    width: 300px;
+    height: 60px;
+    text-align: center;
+    font-size: 50px;
+}
+
+.faq-category>ul>li>a{
+    text-decoration: none;
+    color: rgb(190, 190, 190);
+    font-weight: bold;
+}
+
+.w3-display-topright:hover{
+	background-color: #ffc107!important;
+}
+
 </style>
 </head>
 <body>
@@ -41,19 +89,36 @@
         </div>
 
         <div class="qna-search">
-            <form action="#" method="post">
-                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" style="width: 150px; font-size: 18px; height: 60px; text-align: center;">
-                    <option value="1">제목 + 내용</option>
-                    <option value="2">제목</option>
-                    <option value="3">내용</option>
+            <form action="/searchQna.do?reqPage=1" method="post">
+                <select class="form-select form-select-lg mb-3" name="type" aria-label=".form-select-lg example" style="width: 150px; font-size: 18px; height: 60px; text-align: center;">
+                    <option value="titleConetent">제목 + 내용</option>
+                    <option value="title">제목</option>
+                    <option value="content">내용</option>
                 </select>
 
-                <input class="w3-input w3-border w3-round-large" type="text" style="width: 500px; height: 60px; margin-left: 10px;">
+                <input class="w3-input w3-border w3-round-large" type="text" name="keyword" style="width: 500px; height: 60px; margin-left: 10px;">
                 <button class="w3-button w3-round-large" style="width: 80px; height: 60px; background-color: rgb(33, 33, 33); color: white;margin-left: 10px;">
                     <span class="material-symbols-outlined">
                     search
                     </span></button>
             </form>
+        </div>
+        
+        <div class="faq-category">
+            <ul>
+                <li>
+                    <a href="/qnalist.do?reqPage=1" <c:if test="${theme != '예약문의' and theme != '마켓문의' and theme != '기타문의' }">style="color: black;"</c:if>>전체</a>
+                </li>
+                <li>
+                    <a href="/selectThemeqna.do?qnaTheme=예약문의&reqPage=1" <c:if test="${theme == '예약문의' }">style="color: black;"</c:if>>예약문의</a>
+                </li>
+                <li>
+                    <a href="/selectThemeqna.do?qnaTheme=마켓문의&reqPage=1" <c:if test="${theme == '마켓문의' }">style="color: black;"</c:if>>마켓문의</a>
+                </li>
+                <li>
+                    <a href="/selectThemeqna.do?qnaTheme=기타문의&reqPage=1" <c:if test="${theme == '기타문의' }">style="color: black;"</c:if>>기타문의</a>
+                </li>
+            </ul>
         </div>
 
         <div class="qna-list">
@@ -81,7 +146,7 @@
 			                        <div style="display: flex; justify-content: center;">
 			                        
 			                        	<c:choose>
-			                        		<c:when test="${q.secretStatus == 1 }">
+			                        		<c:when test="${q.secretStatus == 1 and sessionScope.m.memberClass != 1}">
 			                        			<span class="material-symbols-outlined">
 				                                lock
 				                                </span>
@@ -99,6 +164,11 @@
 			                            
 			                        </div>
 			                    </td>
+			                    
+			                    <td>
+			                    	${q.qnaTheme }
+			                    </td>
+			                    
 			                    <td>
 			                        <div style="display: flex; justify-content: center;">
 			                            <span class="material-symbols-outlined">
@@ -137,7 +207,7 @@
 		                
 		                <div id="id01" class="w3-modal w3-animate-opacity">
 						    <div class="w3-modal-content w3-card-4" style="top: 30%; width: 500px;">
-						      <header class="w3-container w3-teal"> 
+						      <header class="w3-container w3-teal" style="background-color: #ffc107!important;"> 
 						        <span onclick="delModal(this);" 
 						        class="w3-button w3-large w3-display-topright">&times;</span>
 						        <h2 style="margin-top:10px;">비밀번호 확인</h2>
@@ -163,15 +233,25 @@
             
         </div>
 		
-		<c:if test="${not empty sessionScope.m }">
+		<c:if test="${not empty sessionScope.m or not empty sessionScope.o}">
 			<div class="qna-btn">
 	            <a href="/insertQnaFrm.do">글쓰기</a>
-	            <a href="#">내 qna 보기</a>
+	            
+	            <c:choose>
+	            	<c:when test="${not empty sessionScope.m }">
+	            		<a href="/selectMyQnaList.do?reqPage=1&qnaWriter1=${sessionScope.m.memberId }">내 qna 보기</a>
+	            	</c:when>
+	            	
+	            	<c:otherwise>
+	            		<a href="/selectMyQnaList.do?reqPage=1&qnaWriter1=${sessionScope.o.ownerId }">내 qna 보기</a>
+	            	</c:otherwise>
+	            </c:choose>
+
 	        </div>
 		</c:if>
 
         <div class="paging">
-            <a href="#"><span class="material-symbols-outlined" style="font-size: 30px;">
+           <!--  <a href="#"><span class="material-symbols-outlined" style="font-size: 30px;">
                 chevron_left
                 </span>
             </a>
@@ -181,6 +261,8 @@
             <a href="#"><span class="material-symbols-outlined"  style="font-size: 30px;">
                 chevron_right
                 </span></a>
+                 -->
+                 ${pageNavi }
         </div>
     </div>
 	

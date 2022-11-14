@@ -116,6 +116,131 @@
   		delete from
   		qna_tbl where qna_no = #{qnaNo}
   	</delete>
+  	
+  	<update id="insertComment" parameterType="q">
+  		update qna_tbl
+  		set qna_comment_writer = #{qnaCommentWriter}, qna_comment = #{qnaComment}, comment_date = to_char(sysdate,'yyyy-mm-dd'), 
+  		comment_status = 1 where qna_no = #{qnaNo}
+  	</update>
+  	
+  	<update id="updateComment" parameterType="q">
+  		update qna_tbl
+  		set qna_comment = #{qnaComment}, comment_date = to_char(sysdate,'yyyy-mm-dd') where qna_no = #{qnaNo}
+  	</update>
+  	
+  	<update id="deleteComment" parameterType="int">
+  		update qna_tbl
+  		set qna_comment_writer = null, qna_comment = null, comment_date = null, 
+  		comment_status = 0 where qna_no = #{qnaNo}
+  	</update>
+  	
+  	<select id="selectAllQnaCount" resultType="int">
+  		select count(*) from qna_tbl
+  	</select>
+  	
+  	<select id="searchQna" parameterType="map" resultType="q">
+  		select * from
+			(select row_number() over (order by rnum desc) as rnum1, rb.* from
+			(select rownum as rnum, b.* from
+			(select 
+		        qna_no as qnaNo,
+		        qna_title as qnaTitle,
+		        substr(qna_writer,1,length(qna_writer)-3) || lpad('*',3,'*') as qnaWriter,
+		        qna_writer as qnaWriter1,
+		        secret_status as secretStatus,
+		        qna_content as qnaContent,
+		        qna_date as qnaDate,
+		        qna_comment as qnaComment,
+		        qna_comment_writer as qnaCommentWriter,
+		        comment_date as commnetDate,
+		        comment_status as commentStatus,
+		        qna_theme as qnaTheme,
+		        read_cnt as readCnt,
+		        qna_password as qnaPassword
+        from qna_tbl order by qnaNo desc)b)rb order by 3 desc) where rnum between #{start} and #{end}
+        <choose>
+        	<when test="type.equals('titleConetent')">
+        		and qnaTitle like '%' || #{keyword} || '%' or qnaContent like '%' || #{keyword} || '%'
+        	</when>
+        	
+        	<when test="type.equals('title')">
+        		and qnaTitle like '%' || #{keyword} || '%'
+        	</when>
+        	
+        	<when test="type.equals('content')">
+        		and qnaContent like '%' || #{keyword} || '%'
+        	</when>
+        </choose>
+  	</select>
+  	
+  	<select id="searchCount" parameterType="map" resultType="int">
+  		select count(*) from qna_tbl
+  		<choose>
+  			<when test="type.equals('titleConetent')">
+        		where qna_title like '%' || #{keyword} || '%' or qna_content like '%' || #{keyword} || '%'
+        	</when>
+        	
+        	<when test="type.equals('title')">
+        		where qna_title like '%' || #{keyword} || '%'
+        	</when>
+        	
+        	<when test="type.equals('content')">
+        		where qna_content like '%' || #{keyword} || '%'
+        	</when>
+  		</choose>
+  	</select>
+  	
+  	<select id="selectQnaTheme" parameterType="map" resultType="q">
+  		select * from
+			(select row_number() over (order by rnum desc) as rnum1, rb.* from
+			(select rownum as rnum, b.* from
+			(select 
+		        qna_no as qnaNo,
+		        qna_title as qnaTitle,
+		        substr(qna_writer,1,length(qna_writer)-3) || lpad('*',3,'*') as qnaWriter,
+		        qna_writer as qnaWriter1,
+		        secret_status as secretStatus,
+		        qna_content as qnaContent,
+		        qna_date as qnaDate,
+		        qna_comment as qnaComment,
+		        qna_comment_writer as qnaCommentWriter,
+		        comment_date as commnetDate,
+		        comment_status as commentStatus,
+		        qna_theme as qnaTheme,
+		        read_cnt as readCnt,
+		        qna_password as qnaPassword
+        from qna_tbl order by qnaNo desc)b)rb order by 3 desc) where rnum between #{start} and #{end} and qnaTheme = #{qnaTheme}
+  	</select>
+  	
+  	<select id="selectQnaThemeCnt" parameterType="string" resultType="int">
+  		select count(*) from qna_tbl where qna_theme = #{qnaTheme}
+  	</select>
+  	
+  	<select id="selectMyQnaList" parameterType="map" resultType="q">
+  		select * from
+			(select row_number() over (order by rnum desc) as rnum1, rb.* from
+			(select rownum as rnum, b.* from
+			(select 
+		        qna_no as qnaNo,
+		        qna_title as qnaTitle,
+		        substr(qna_writer,1,length(qna_writer)-3) || lpad('*',3,'*') as qnaWriter,
+		        qna_writer as qnaWriter1,
+		        secret_status as secretStatus,
+		        qna_content as qnaContent,
+		        qna_date as qnaDate,
+		        qna_comment as qnaComment,
+		        qna_comment_writer as qnaCommentWriter,
+		        comment_date as commnetDate,
+		        comment_status as commentStatus,
+		        qna_theme as qnaTheme,
+		        read_cnt as readCnt,
+		        qna_password as qnaPassword
+        from qna_tbl order by qnaNo desc)b)rb order by 3 desc) where rnum between #{start} and #{end} and qnaWriter1 = #{qnaWriter1}
+  	</select>
+  	
+  	<select id="qnaWriteCount" parameterType="string" resultType="int">
+  		select count(*) from qna_tbl where qna_writer = #{qnaWriter1}
+  	</select>
 </mapper>
 
 

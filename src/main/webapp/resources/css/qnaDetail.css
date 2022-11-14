@@ -133,11 +133,13 @@
     color: white;
 }
 
+/*
 .user-control-btn>a:last-child{
     background-color: white;
     border: 1px solid #6c757d;
     color: #6c757d;
 }
+*/
 
 .user-control-btn>a:last-child:hover{
     background-color: #6c757d;

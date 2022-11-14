@@ -4,6 +4,9 @@
 .etc {
 	padding: 10px 1.25rem !important;
 }
+.list-wrap>.titleShow {
+	font-size: 13px;
+}
 </style>
 <h2>마이페이지</h2>
 <aside id="aside" class="sidebar" style="padding-top: 0px;">
@@ -23,9 +26,6 @@
 					<a href="/updateMemberFrm.do">내 정보 수정</a>
 				</div>
 				<div>
-					<a href="/logout.do">로그아웃</a>
-				</div>
-				<div>
 					<a href="#">회원 탈퇴</a>
 				</div>
 			</li>
@@ -35,6 +35,11 @@
 		<ul class="category">
 			<li>
 				<h4>공지사항</h4>
+				<c:forEach items="${ncList }" var="n">
+				<div class="list-wrap">
+					<a href="/noticeDetail.do?noticeNo=${n.noticeNo }" class="titleShow">${n.noticeTitle }</a>
+				</div>
+				</c:forEach>
 			</li>
 		</ul>
 	</div>

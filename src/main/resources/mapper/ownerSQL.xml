@@ -76,4 +76,11 @@
 			</when>			
 		</choose>
 	</select>
+	
+	<select id="searchOwnerId" parameterType="o" resultType="string">
+		select 
+			owner_id as ownerId
+		from owner
+		where owner_name = #{ownerName} and owner_phone = ${ownerPhone}
+	</select>
 </mapper>

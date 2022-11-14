@@ -172,7 +172,7 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 				});
 				$('.file-upload').on('change', function() {
 					if ($(this).val() == '') {
-						$(this).parent().find('.inputPhoto').text('사진 첨부하기');
+						$(this).parent().find('.inputPhoto').text('썸네일 첨부하기');
 					} else {
 						$(this).parent().find('.inputPhoto').text($(this).val().replace(/C:\\fakepath\\/i, ''));
 					}

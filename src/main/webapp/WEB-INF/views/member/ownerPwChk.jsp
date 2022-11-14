@@ -11,13 +11,14 @@
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="pwChk-wrap wrap-img">
+		<img class="security-img" src="resources/upload/member/security.png">
 		<div class="pwChk-content">
 			<div>비밀번호 확인</div>
 			<form action="/ownerMypage.do" method="post">
 				<input type="hidden" name="ownerNo" value="${sessionScope.o.ownerNo }">
-				<input type="password" name="ownerPw" id="pwChk"><br>
+				<input type="password" name="ownerPw" id="rePwChk"><br>
 				<button type="submit" class="pwChkBtn">확인</button> 
-			</form>
+			</form>	
 		</div>
 	</div>
 </body>
