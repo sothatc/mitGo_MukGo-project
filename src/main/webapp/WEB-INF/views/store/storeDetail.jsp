@@ -30,9 +30,6 @@ height: 100%;
 	color: rgb(255, 83, 86) !important;
 }
 
-.hidenClass{
-	visibility:hidden; 
-}
 </style>
 
 <body onload="initTmap()">
@@ -287,7 +284,7 @@ height: 100%;
       
       
       <!-- 모달 부분 -->
-      <div class="modal-wrap hidden">
+      <div class="modal-wrap hidden" id="modal">
           <div class="modal-box">
               <div class="modal-title">예약 정보</div>
               <div class="modal-contents">
@@ -318,7 +315,7 @@ height: 100%;
                   <input type="hidden" name="eatTime" class="eatTime">
                   <input type="hidden" name="eatNum" class="eatNum">
                   <div class="explanation">* 가게에서 최종 확정 시 예약이 확정됩니다.</div>
-                  <button class="closeModal pointer">닫기</button>
+                  <button class="closeModal pointer" onclick="hideModal();" type="button" >닫기</button>
                   <button class="reserveBtn pointer" type="submit">예약하기</button>
               </form>
               </div>
@@ -722,12 +719,10 @@ height: 100%;
                }
          });
             
-         //예약하기 모달 닫기 버튼 클릭 시
-         $(".closeModal").on("click",function(){
-         		modal.classList.add("hidden");
-         });
-      
          
+      function hideModal(){
+    	  $(".modal-wrap").hide();
+      }
       </script>
 
 </body>
