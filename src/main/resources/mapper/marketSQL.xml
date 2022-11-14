@@ -108,6 +108,11 @@
 	where store_no = #{_parameter}
 	</select>
 	
+	<select id="marketListCount" parameterType="map" resultType="_int">
+		select count(*) from market_product
+		where pCategory = #{pCategory}
+	</select>
+	
 	<select id="selectRandomMarketList" resultType="ma">
 		select * from(select 
             p_no as pNo,

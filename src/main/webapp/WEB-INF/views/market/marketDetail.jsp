@@ -96,8 +96,8 @@
 	</div> <!-- contentWrap 종료 -->
 	
 	<!-- 상품 상세 내용 div -->
-	<div class="contentWrap2">
-		
+	<div class="contentWrap2" style="font-family:Gowun Dodum;">
+		${ma.PContent}
 	</div>
 	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
