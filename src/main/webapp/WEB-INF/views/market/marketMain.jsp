@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,7 +88,7 @@
 										<h5 id="font">${ma.storeName }<br>${ma.PName }
 										</h5>
 										<!-- Product price-->
-										${ma.PPrice } 원
+										<fmt:formatNumber value="${ma.PPrice }" pattern="#,###"/>원
 									</div>
 								</div>
 								<!-- Product actions-->
