@@ -34,7 +34,8 @@
 		where owner_no=#{ownerNo}
 	</update>
 	
-	<select id="ownerList" parameterType="o" resultType="o">
+	<!-- 업주 목록 -->
+	<select id="ownerList" parameterType="map" resultType="o">
 		select 
 			owner_no as ownerNo,
 			owner_id as ownerId,
@@ -44,8 +45,15 @@
 			o_enroll_date as ownerEnrollDate,
 			owner_level as ownerLevel,
 			owner_status as ownerStatus
+		from(select rownum as rnum, n.* from (select * from owner order by owner_no desc) n) 
+		where rnum between #{start} and #{end}
+	</select>
+	
+	<!-- 업주 목록 전체 개수 -->
+	<select id="countAllOwner" resultType="int">
+		select
+			count(*)
 		from owner
-		order by 1 DESC
 	</select>
 	
 	<!-- 업주 등급 지정 -->
@@ -66,13 +74,27 @@
 			o_enroll_date as ownerEnrollDate,
 			owner_level as ownerLevel,
 			owner_status as ownerStatus
-		from owner
+		from (select rownum as rnum, n.* from (select * from owner order by owner_no desc) n) 
+		where rnum between #{start} and #{end}
 		<choose>
 			<when test="type.equals('id')">
-				where owner_id like '%'||#{keyword}||'%'
+				and owner_id like '%'||#{keyword}||'%'
 			</when>
 			<when test="type.equals('name')">
-				where owner_name like '%'||#{keyword}||'%'
+				and owner_name like '%'||#{keyword}||'%'
+			</when>			
+		</choose>
+	</select>
+	
+	<!-- 업주 검색 검색 전체 카운팅 -->
+	<select id="searchOwnerCount" parameterType="map" resultType="int">
+			select count(*) from owner
+		<choose>
+			<when test="type.equals('id')">
+			 where  owner_id like '%'||#{keyword}||'%' 
+			</when>
+			<when test="type.equals('name')">
+			where owner_name like '%'||#{keyword}||'%' 
 			</when>			
 		</choose>
 	</select>

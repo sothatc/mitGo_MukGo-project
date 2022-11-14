@@ -117,7 +117,7 @@ height: 100%;
                         </div>
                      </td>
                      <td colspan="2">
-                        <input type="text" id="datePicker" style="border:none;">
+                        <input type="text" id="datePicker" style="border:none;" placeholder="예약날짜선택">
                      </td>
                   </tr>
                   <tr style="height: 47px;">
@@ -436,8 +436,8 @@ height: 100%;
       });
          
       $(function() {
-      		//데이트피커 생성 및 오늘날짜 이전 선택 불가
-            $("#datePicker").datepicker({minDate:0});
+      		//데이트피커 생성 및 당일 선택 불가
+            $("#datePicker").datepicker({minDate:1});
       });
          
       //---------- 휴일 데이터피커 비활성화
