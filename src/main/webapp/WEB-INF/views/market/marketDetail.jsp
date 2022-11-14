@@ -44,12 +44,11 @@
          				</tr>
          				<tr>
          					<th>알레르기 정보</th>
-         					<td colspan="4">본 제품은 돼지고기, 닭고기, 우유, 계란을 사용한 제품과
-         					같은 제조시설에서 제조하고 있습니다.</td>
+         					<td colspan="4">${ma.allergyInfo}</td>
          				</tr>
          				<tr>
          					<th>유통기한</th>
-         					<td colspan="4">수령일 포함 최소 3일 남은 제품을 보내드립니다.</td>
+         					<td colspan="4">${ma.expiryDate}</td>
          				</tr>
          				<tr>
          					<th>수량 선택</th>
