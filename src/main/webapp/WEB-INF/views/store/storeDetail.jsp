@@ -66,8 +66,8 @@ height: 100%;
          </div>
       </div>
 
-      <div class="content-wrap2" style="width:1200px; margin: 0 auto;">
-         <div class="content-wrap2-1">
+      <div class="content-wrap2" style="width:1200px; margin: 0 auto; background-color: rgba(255, 255, 255, 0.06);">
+         <div class="content-wrap2-1" >
             <!-- 사진 슬라이드 영역 -->
             <div class="photo-wrap">
                
@@ -89,19 +89,19 @@ height: 100%;
                <table class="w3-table w3-bordered" id="infoTable" style="font-family:Gowun Dodum; width: 550px;">
                   <tr>
                      <th style="width:120px;">주소</th>
-                     <td colspan="3" class="addressTd" >${s.address }</td>
+                     <td colspan="3" class="addressTd" style="color:black;">${s.address }</td>
                   </tr>
                   <tr>
                      <th>전화번호</th>
-                     <td colspan="3" class="phoneTd">${s.phone }</td>
+                     <td colspan="3" class="phoneTd" style="color:black;">${s.phone }</td>
                   </tr>
                   <tr>
                      <th>운영시간</th>
-                     <td colspan="3" class="openHourTd">${s.openHour }</td>
+                     <td colspan="3" class="openHourTd" style="color:black;">${s.openHour }</td>
                   </tr>
                   <tr>
                      <th>휴일</th>
-                     <td colspan="3" class="closedDayTd">${s.closedDay}</td>
+                     <td colspan="3" class="closedDayTd" style="color:black;">${s.closedDay}</td>
                   </tr>
 
                   <tr style="height: 47px;">
