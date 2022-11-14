@@ -45,6 +45,24 @@
 				<li class="nav-item">
 					<a class="nav-link" href="/marketMain.do?reqPage=1">GOGO마켓</a>
 				</li>
+				
+				<li class="nav-item">
+					<c:choose>
+						<c:when test="${not empty sessionScope.m }">
+							<a class="nav-link" href="/myBookmarkList.do?bookMarkId=${sessionScope.m.memberId }&reqPage=1">내 찜목록</a>
+						</c:when>
+						
+						<c:when test="${not empty sessionScope.o }">
+							<a class="nav-link" href="/myBookmarkList.do?bookMarkId=${sessionScope.o.ownerId }&reqPage=1">내 찜목록</a>
+						</c:when>
+						
+						<c:otherwise>
+							
+						</c:otherwise>
+					</c:choose>
+					
+				</li>
+				
 				<li class="nav-item">
 					<a class="nav-link" href="/selectService.do">고객센터</a>
 				</li>

@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.mitgomukgo.market.model.vo.BookMark;
 import kr.co.mitgomukgo.market.model.vo.Market;
 
 @Repository
@@ -52,6 +53,11 @@ public class MarketDao {
 
 	public int updateMarketProduct(Market market) {
 		return sqlSession.update("updateMarketProduct", market);
+	}
+
+	public BookMark selectOneBookmark(HashMap<String, Object> paraMap) {
+		BookMark bm = sqlSession.selectOne("bookmark.selectOneBookmark", paraMap);
+		return bm;
 	}
 
 

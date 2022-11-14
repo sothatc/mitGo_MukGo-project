@@ -86,7 +86,20 @@
 							<!-- Product actions-->
 							<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 								<div class="text-center">
-									<a class="btn btn-outline-dark mt-auto" href="/marketDetail.do?pNo=${ma.PNo }">View options</a>
+									<c:choose>
+										<c:when test="${not empty sessionScope.m }">
+											<a class="btn btn-outline-dark mt-auto" href="/marketDetail.do?pNo=${ma.PNo }&bookMarkId=${sessionScope.m.memberId}">View options</a>
+										</c:when>
+										
+										<c:when test="${not empty sessionScope.o }">
+											<a class="btn btn-outline-dark mt-auto" href="/marketDetail.do?pNo=${ma.PNo }&bookMarkId=${sessionScope.o.ownerId}">View options</a>
+										</c:when>
+										
+										<c:otherwise>
+											<a class="btn btn-outline-dark mt-auto" href="/marketDetail.do?pNo=${ma.PNo }">View options</a>
+										</c:otherwise>
+									</c:choose>
+									
 								</div>
 							</div>
 						</div>

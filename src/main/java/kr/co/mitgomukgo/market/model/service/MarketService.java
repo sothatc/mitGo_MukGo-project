@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.mitgomukgo.market.dao.MarketDao;
+import kr.co.mitgomukgo.market.model.vo.BookMark;
 import kr.co.mitgomukgo.market.model.vo.Market;
 
 @Service
@@ -36,10 +37,21 @@ public class MarketService {
 
 
 	//마켓 상세 보기
-	public Market selectOneMarket(int pNo) {
+	public HashMap<String, Object> selectOneMarket(int pNo, String bookMarkId) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
 		Market ma = dao.selectOneMarket(pNo);
 		
-		return ma;
+		HashMap<String, Object> paraMap = new HashMap<String, Object>();
+		paraMap.put("pNo", pNo);
+		paraMap.put("bookMarkId", bookMarkId);
+		BookMark bm = dao.selectOneBookmark(paraMap);
+		
+		HashMap<String, Object> marketMap = new HashMap<String, Object>();
+		marketMap.put("ma", ma);
+		marketMap.put("bm", bm);
+		
+		return marketMap;
 	}
 	
 	public int addMarketProduct(Market market) {
