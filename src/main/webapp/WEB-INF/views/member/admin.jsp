@@ -8,7 +8,47 @@
 <title>관리자 페이지</title>
 </head>
 <body>
+<style type="text/css">
 
+	#pageNavi{
+		width: 800px;
+	    text-align: center;
+	    margin: 0 auto;
+	    display: flex;
+	    justify-content: center;
+	    margin-top: 50px;
+	    margin-bottom: 50px;
+	    }
+	    
+	#pageNavi>a{
+		display: inline-block;
+		width: 30px;
+		height: 30px;
+		text-decoration: none;
+		font-size: 20px;
+	}
+
+	#pageNavi>a:hover{
+	    color: #212529;
+	}
+	
+	#pageNavi>span{
+		display: inline-block;
+	    width: 30px;
+	    line-height:30px;
+	    text-decoration: none;
+	    font-size: 20px;
+	}
+	
+	.numberDeco{
+		background-color: gray;
+		color: white;
+		border-radius: 100%;
+		text-align: center;
+		padding:0;
+	}
+	
+</style>
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -25,8 +65,8 @@
         <div class="sidebar-1">
             <ul class="category">
                 <li>
-                    <div><a href="/memberManage.do" style="color:black;">회원관리</a></div>
-                    <div><a href="/adminMemberManage.do" style="color:black;">업주관리</a></div>
+                    <div><a href="/memberManage.do?reqPage=1" style="color:black;">회원관리</a></div>
+                    <div><a href="/adminMemberManage.do?reqPage=1" style="color:black;">업주관리</a></div>
                     <div><a href="/logout.do" style="color:black;">로그아웃</a></div>
                 </li>
             </ul>
@@ -43,7 +83,7 @@
         <div class="contents">
             <h4 style="margin: 0;">업주관리</h4>
             <div class="searchWrap" style="width:800px; margin-top:10px; margin-bottom: 20px;">
-            	<form action="/searchOwner.do" method="post">
+            	<form action="/searchOwner.do?reqPage=1" method="post">
 					<select name="type" style="width:100px; height:32px;">
 						<option value="id">아이디</option>
 						<option value="name">이름</option>
@@ -77,7 +117,7 @@
 	                    	</c:choose>
 	                    </td>
 	                    <td class="ownerEnrollDateTd">${o.ownerEnrollDate }</td>
-	                   <form action="/updateOwnerLevel.do?ownerNo=${o.ownerNo}" method="post">
+	                   <form action="/updateOwnerLevel.do?ownerNo=${o.ownerNo}&reqPage=1" method="post">
 	                    <td class="ownerStatusTd">
 	                        <c:choose>
 	                    		<c:when test="${o.ownerStatus eq 1 }">
@@ -99,6 +139,7 @@
 	                     </tr>
 	                     </c:forEach>
 	            </table>
+	            <div id="pageNavi">${pageNavi }</div>
         </div>
         
     </article>

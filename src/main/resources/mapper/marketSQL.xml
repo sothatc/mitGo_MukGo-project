@@ -12,7 +12,9 @@
 			p_name as pName,
 			pcategory as pCategory,
 			p_price as pPrice,
-			p_img as pImg
+			p_img as pImg,
+			allergy_info as	allergyInfo,
+	        expiry_Date as expiryDate
 		from market_product m order by pno desc)b where pcategory = #{pCategory})where rnum between #{start} and #{end}
 	</select>
 	
@@ -24,7 +26,9 @@
 			#{pContent},
 			#{pImg},
 			#{storeNo},
-			#{pCategory}
+			#{pCategory},
+			#{allergyInfo},
+	        #{expiryDate}
 		)
 	</insert>
 	
@@ -37,7 +41,9 @@
 			p_img as pImg,
 			store_no as storeNo,
 			pCategory,
-            cate_name as cateName
+            cate_name as cateName,
+            allergy_info as	allergyInfo,
+	        expiry_Date as expiryDate
             from Category c, market_product m 
             where c.cate_no = m.pcategory and store_no = #{storeNo}
 	</select>
@@ -57,7 +63,9 @@
 			p_content as pContent,
 			p_img as pImg,
 			store_no as storeNo,
-			pcategory as pCategory
+			pcategory as pCategory,
+			allergy_info as	allergyInfo,
+	        expiry_Date as expiryDate
 		from market_product
 		where p_no= #{_parameter}
 	</select>
@@ -71,7 +79,9 @@
 			p_content as pContent,
 			p_img as pImg,
 			store_no as storeNo,
-			pCategory
+			pCategory,
+			allergy_info as	allergyInfo,
+	        expiry_Date as expiryDate
 		from market_product
 		where p_no = #{_parameter}
 	</select>
@@ -83,7 +93,9 @@
 			p_price = #{pPrice},
 			p_content = #{pContent},
 			p_img = #{pImg},
-			pcategory = #{pCategory}
+			pcategory = #{pCategory},
+			allergy_info = #{allergyInfo},
+	        expiry_Date = #{expiryDate}
 		where p_no = #{pNo}
 	</update>
 	
@@ -99,5 +111,19 @@
 	<select id="marketListCount" parameterType="map" resultType="_int">
 		select count(*) from market_product
 		where pCategory = #{pCategory}
+	</select>
+	
+	<select id="selectRandomMarketList" resultType="ma">
+		select * from(select 
+            p_no as pNo,
+			m.owner_no as ownerNo,
+			p_name as pName,
+			p_price as pPrice,
+			p_img as pImg,
+			s.store_no as storeNo,
+			pCategory,
+            s.store_name as storeName
+         from market_product m, store s
+         where m.store_no = s.store_no order by DBMS_RANDOM.RANDOM) where rownum <![CDATA[<]]> 6
 	</select>
 </mapper>

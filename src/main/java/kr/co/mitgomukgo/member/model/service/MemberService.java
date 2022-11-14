@@ -2,6 +2,7 @@ package kr.co.mitgomukgo.member.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,37 +94,45 @@ public class MemberService {
 		}else {
 			totalPage = totalCnt / numPerPage + 1;
 		}
-		int pageNaviSize = 2;
-		int pageNo = 1;
 		
-		if(reqPage > 2) {
-			pageNo = reqPage - 1;
-		}
-		
-		String pageNavi = "";
-		if(pageNo != 1) {
-			pageNavi += "<a href='/reserveManage.do?reqPage=" +(pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
-					"            chevron_left\r\n" + 
-					"            </span></a>";
-		}
-		
-		for(int i = 0; i < pageNaviSize; i++) {
-			if(reqPage == pageNo) {
-				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
-			}else {
-				pageNavi += "<a href='/reserveManage.do?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
+		//페이지 네비게이션 제작 시작
+		String pageNavi = "<ul class='pagination circle-style'>";
+		//이전 버튼
+	      if(pageNo !=1) {
+	          pageNavi += "<li>";
+	          pageNavi += "<a class='page-item' href='/memberManage.do?reqPage="+(pageNo-1)+"'>";
+	          pageNavi += "<span class='material-icons'>chevron_left</span>";
+	          pageNavi +="</a></li>";
+	       }
+			//페이지 숫자
+			for(int i=0; i<pageNaviSize; i++) {
+				if(pageNo == reqPage) {
+					pageNavi += "<li>";
+					pageNavi += "<a class='page-item active-page' href='/memberManage.do?reqPage="+pageNo+"'>";
+					pageNavi += pageNo;
+					pageNavi += "</a></li>";
+				}else {
+					pageNavi += "<li>";
+					pageNavi += "<a class='page-item' href='/memberManage.do?reqPage="+pageNo+"'>";
+					pageNavi += pageNo;
+					pageNavi += "</a></li>";
+				}
+				pageNo++;
+				if(pageNo > totalPage) {
+					break;
+				}
 			}
-			pageNo++;
-			if(pageNo > totalPage) {
-				break;
-			}
-		}
 		
-		if(end <= totalPage) {
-			pageNavi += "<a href='/reserveManage.do?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
-					"            chevron_right\r\n" + 
-					"            </span></a>";
-		}
+			//다음 버튼
+		      if(pageNo<=totalPage) {
+		          pageNavi += "<li>";
+		          pageNavi += "<a class='page-item' href='/memberManage.do?reqPage="+pageNo+"'>";
+		          pageNavi += "<span class='material-icons'>chevron_right</span>";
+		          pageNavi +="</a></li>";
+		       }
+			pageNavi += "</ul>";
 		
 		HashMap<String, Object> searchMap = new HashMap<String, Object>();
 		searchMap.put("list", list);
@@ -204,18 +213,145 @@ public class MemberService {
 	}
 
 	//최고관리자 > 업주관리
-	public ArrayList<Owner> selectOwnerList(Owner o) {
+	public HashMap<String, Object> selectOwnerList(int reqPage) {
+		/*
 		ArrayList<Owner> list = dao.selectOwnerList(o);
 		return list;
+		*/
+		int numPerPage = 7;
+		int end = numPerPage * reqPage;
+		int start = (end-numPerPage)+1;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		
+		ArrayList<Owner> list = dao.selectOwnerList(map);
+		int totalPage = dao.countAllOwner();
+		int totalMan = 0;
+		if(totalPage % numPerPage == 0) {
+			totalMan = totalPage / numPerPage;
+		}else {
+			totalMan = totalPage / numPerPage + 1;
+		}
+		
+		// 페이지 네비 사이즈
+		int pageNaviSize = 5;
+		
+		// 페이지 시작 번호
+		int pageNo = 1;
+	
+		if(reqPage > 3) {
+			pageNo = reqPage - 2;
+		}
+		
+		// 페이지 내비 시작
+		String pageNavi = "";
+		if(pageNo != 1) {
+			pageNavi += "<a href='/adminMemberManage.do?reqPage=" + (pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_left\r\n" + 
+					"            </span></a>";
+		}
+		
+		for(int i = 0; i < pageNaviSize; i++) {
+			if(reqPage == pageNo) {
+				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
+			}else {
+				pageNavi += "<a href='/adminMemberManage.do?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+			}
+			pageNo++;
+			if(pageNo > totalMan) {
+				break;
+			}
+		}
+		
+			// 다음버튼
+			if(pageNo <= totalMan) {
+				pageNavi += "<a href='/adminMemberManage.do?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+						"            chevron_right\r\n" + 
+						"            </span></a>"; 
+			}
+			
+			
+			HashMap<String, Object> ownerMap = new HashMap<String, Object>();
+			ownerMap.put("list", list);
+			ownerMap.put("reqPage", reqPage);
+			ownerMap.put("pageNavi", pageNavi);
+			ownerMap.put("total", totalPage);
+			ownerMap.put("pageNo", pageNo);
+			
+			if(list == null) {
+				return null;
+			}else {
+				return ownerMap;
+			}
+		
 	}
 	
 	//최고관리자 > 업주관리 > 검색기능
-	public ArrayList<Owner> searchOwner(String type, String keyword) {
+	public HashMap<String, Object> searchOwner(String type, String keyword, int reqPage) {
+
+		int numPerPage = 7;
+		int end = numPerPage * reqPage;
+		int start = (end-numPerPage)+1;
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("type", type);
 		map.put("keyword", keyword);
+		map.put("start", start);
+		map.put("end", end);
 		ArrayList<Owner> list = dao.searchOwner(map);
-		return list;
+		int totalPage = dao.searchOwnerCount(map);
+		int totalMan = 0;
+		if(totalPage % numPerPage == 0) {
+			totalMan = totalPage / numPerPage;
+		}else {
+			totalMan = totalPage / numPerPage + 1;
+		}
+		
+		// 페이지 네비 사이즈
+		int pageNaviSize = 5;
+		
+		// 페이지 시작 번호
+		int pageNo = 1;
+		
+		
+		// 페이지 내비 시작
+		String pageNavi = "";
+		if(pageNo != 1) {
+			pageNavi += "<a href='/searchOwner.do?reqPage=" + (pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_left\r\n" + 
+					"            </span></a>";
+		}
+		
+		for(int i = 0; i < pageNaviSize; i++) {
+			if(reqPage == pageNo) {
+				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
+			}else {
+				pageNavi += "<a href='/searchOwner.do?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+			}
+			pageNo++;
+			if(pageNo > totalMan) {
+				break;
+			}
+		}
+			
+			// 다음버튼
+			if(pageNo <= totalMan) {
+				pageNavi += "<a href='/searchOwner.do?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+						"            chevron_right\r\n" + 
+						"            </span></a>"; 
+			}
+			
+			
+			HashMap<String, Object> ownerMap = new HashMap<String, Object>();
+			ownerMap.put("list", list);
+			ownerMap.put("pageNavi", pageNavi);
+
+			
+			if(list == null) {
+				return null;
+			}else {
+				return ownerMap;
+			}
 	}
 
 	//최고관리자 > 업주관리 > 업주레벨 지정
@@ -223,20 +359,146 @@ public class MemberService {
 		return dao.updateOwnerLevel(ownerNo,o);
 	}
 	
-	//최고관리자 > 회원관리
-	public ArrayList<Member> selectMemberList(Member m) {
-		ArrayList<Member> list = dao.selectMemberList(m);
-		return list;
-	}
+	
+	//최고관리자 > 회원관리 
+	public HashMap<String, Object> selectMemberList(int reqPage) {
+		int numPerPage = 7;
+		int end = numPerPage * reqPage;
+		int start = (end-numPerPage)+1;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		
+		ArrayList<Member> list = dao.selectMemberList(map);
+		int totalPage = dao.countAllMember();
+		int totalMan = 0;
+		if(totalPage % numPerPage == 0) {
+			totalMan = totalPage / numPerPage;
+		}else {
+			totalMan = totalPage / numPerPage + 1;
+		}
+		
+		// 페이지 네비 사이즈
+		int pageNaviSize = 5;
+		
+		// 페이지 시작 번호
+		int pageNo = 1;
+		
+		if(reqPage > 3) {
+			pageNo = reqPage - 2;
+		}
+		
+		// 페이지 내비 시작
+		String pageNavi = "";
+		if(pageNo != 1) {
+			pageNavi += "<a href='/memberManage.do?reqPage=" + (pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_left\r\n" + 
+					"            </span></a>";
+		}
+		
+		for(int i = 0; i < pageNaviSize; i++) {
+			if(reqPage == pageNo) {
+				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
+			}else {
+				pageNavi += "<a href='/memberManage.do?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+			}
+			pageNo++;
+			if(pageNo > totalMan) {
+				break;
+			}
+		}
+			
+			// 다음버튼
+			if(pageNo <= totalMan) {
+				pageNavi += "<a href='/memberManage.do?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+						"            chevron_right\r\n" + 
+						"            </span></a>"; 
+			}
+			
+			
+			HashMap<String, Object> memberMap = new HashMap<String, Object>();
+			memberMap.put("list", list);
+			memberMap.put("reqPage", reqPage);
+			memberMap.put("pageNavi", pageNavi);
+			memberMap.put("total", totalPage);
+			memberMap.put("pageNo", pageNo);
+			
+			if(list == null) {
+				return null;
+			}else {
+				return memberMap;
+			}
+		}
+	
 
 	//최고관리자 > 회원관리 > 검색기능
-	public ArrayList<Member> searchMember(String type, String keyword) {
+	public HashMap<String, Object> searchMember(String type, String keyword, int reqPage) {
+	
+		
+		int numPerPage = 7;
+		int end = numPerPage * reqPage;
+		int start = (end-numPerPage)+1;
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("type", type);
 		map.put("keyword", keyword);
+		map.put("start", start);
+		map.put("end", end);
 		ArrayList<Member> list = dao.searchMember(map);
-		return list;
+		int totalPage = dao.searchMemberCount(map);
+		int totalMan = 0;
+		if(totalPage % numPerPage == 0) {
+			totalMan = totalPage / numPerPage;
+		}else {
+			totalMan = totalPage / numPerPage + 1;
+		}
+		
+		// 페이지 네비 사이즈
+		int pageNaviSize = 5;
+		
+		// 페이지 시작 번호
+		int pageNo = 1;
+		
+		
+		// 페이지 내비 시작
+		String pageNavi = "";
+		if(pageNo != 1) {
+			pageNavi += "<a href='/searchMember.do?reqPage=" + (pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_left\r\n" + 
+					"            </span></a>";
+		}
+		
+		for(int i = 0; i < pageNaviSize; i++) {
+			if(reqPage == pageNo) {
+				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
+			}else {
+				pageNavi += "<a href='/searchMember.do?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+			}
+			pageNo++;
+			if(pageNo > totalMan) {
+				break;
+			}
+		}
+			
+			// 다음버튼
+			if(pageNo <= totalMan) {
+				pageNavi += "<a href='/searchMember.do?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+						"            chevron_right\r\n" + 
+						"            </span></a>"; 
+			}
+			
+			
+			HashMap<String, Object> memberMap = new HashMap<String, Object>();
+			memberMap.put("list", list);
+			memberMap.put("pageNavi", pageNavi);
+
+			
+			if(list == null) {
+				return null;
+			}else {
+				return memberMap;
+			}
 	}
+	
 
 	public int updateReserve(Reserve rs) {
 		
@@ -271,6 +533,22 @@ public class MemberService {
 	public int searchNormalPw(Member member) {
 		return dao.searchNormalPw(member);
 	}
+
+	public int updatePwMember(Member m) {
+		return dao.updatePwMember(m);
+	}
+
+	public int searchOwnerPw(Owner owner) {
+		return dao.searchOwnerPw(owner);
+	}
+
+	public int updatePwOwner(Owner o) {
+		return dao.updatePwOwner(o);
+	}
+
+
+
+
 
 
 

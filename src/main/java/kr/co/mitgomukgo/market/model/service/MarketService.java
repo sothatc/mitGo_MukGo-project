@@ -109,6 +109,10 @@ public class MarketService {
 		return dao.myPageNcList();
 	}
 
+	public ArrayList<Market> selectRandomMarketList() {
+		return dao.selectRandomMarketList();
+	}
+
 
 	
 }
