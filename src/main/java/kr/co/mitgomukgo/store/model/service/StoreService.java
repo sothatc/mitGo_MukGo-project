@@ -43,7 +43,8 @@ public class StoreService {
 	}
 
 	public HashMap<String, Object> storeList(int reqPage) {
-		int numPerPage = 1;
+		//한페이지당 게시물 지정
+		int numPerPage = 12;
 		
 		int end = numPerPage * reqPage;
 		int start = (end - numPerPage) + 1;
@@ -53,22 +54,23 @@ public class StoreService {
 		
 		ArrayList<Store> list = dao.storeList(map);
 		//System.out.println(list);
+		//페이징 처리하기 위한 수
 		int totalCnt = dao.countAllList();
+		//전체페이지
 		int totalPage = 0;
 		if(totalCnt % numPerPage == 0) {
 			totalPage = totalCnt / numPerPage;
 		}else {
 			totalPage = totalCnt / numPerPage + 1;
 		}
-		
+		//네비게이션 사이즈
 		int pageNaviSize = 5;
-		int pageNo = 1;
 		
-		if(reqPage > 2) {
-			pageNo = reqPage - 1;
-		}
-		
+		//페이지 네비게이션 시작번호 지정
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize + 1;
+		// 페이지 네비게이션 제작
 		String pageNavi = "";
+		//이전버튼
 		if(pageNo != 1) {
 			pageNavi += "<a href='/storeList.do?reqPage=" +(pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
 					"            chevron_left\r\n" + 
@@ -86,9 +88,9 @@ public class StoreService {
 				break;
 			}
 		}
-		
-		if(end <= totalPage) {
-			pageNavi += "<a href='/storeList.do?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+		//다음버튼
+		if(pageNo <= totalPage) {
+			pageNavi += "<a href='/storeList.do?reqPage=" + pageNo + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
 					"            chevron_right\r\n" + 
 					"            </span></a>";
 		}
@@ -142,11 +144,7 @@ public class StoreService {
 			totalPage = totalCnt / numPerPage + 1;
 		}
 		int pageNaviSize = 5;
-		int pageNo = 1;
-		
-		if(reqPage > 2) {
-			pageNo = reqPage - 1;
-		}
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize + 1;
 		
 		String pageNavi = "";
 		if(pageNo != 1) {
@@ -167,7 +165,7 @@ public class StoreService {
 			}
 		}
 		
-		if(end <= totalPage) {
+		if(pageNo <= totalPage) {
 			pageNavi += "<a href='/selectTag.do?category="+category+"&reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
 					"            chevron_right\r\n" + 
 					"            </span></a>";
@@ -210,11 +208,7 @@ public class StoreService {
 			totalPage = totalCnt / numPerPage + 1;
 		}
 		int pageNaviSize = 5;
-		int pageNo = 1;
-		
-		if(reqPage > 2) {
-			pageNo = reqPage - 1;
-		}
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize + 1;
 		
 		String pageNavi = "";
 		if(pageNo != 1) {
@@ -235,7 +229,7 @@ public class StoreService {
 			}
 		}
 		
-		if(end <= totalPage) {
+		if(pageNo <= totalPage) {
 			pageNavi += "<a href='/searchStoreList.do?category="+category+"&reqPage=" + (pageNo) +"&search="+search+ "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
 					"            chevron_right\r\n" + 
 					"            </span></a>";
@@ -340,11 +334,7 @@ public class StoreService {
 			totalPage = totalCnt / numPerPage + 1;
 		}
 		int pageNaviSize = 5;
-		int pageNo = 1;
-		
-		if(reqPage > 2) {
-			pageNo = reqPage - 1;
-		}
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize + 1;
 		
 		String pageNavi = "";
 		if(pageNo != 1) {
@@ -365,7 +355,7 @@ public class StoreService {
 			}
 		}
 		
-		if(end <= totalPage) {
+		if(pageNo <= totalPage) {
 			pageNavi += "<a href='/searchStoreList.do?category="+category+"&reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
 					"            chevron_right\r\n" + 
 					"            </span></a>";

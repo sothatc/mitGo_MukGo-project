@@ -314,11 +314,15 @@
 	color: #212529;
 }
 .page>span {
-	display: inline-block;
+	display: flex;
+	justify-content: center;
 	width: 30px;
 	text-decoration: none;
 	font-size: 20px;
+	color: #ffc107;
+	font-size: 1.7em;
 }
 .page>a>span{
 	display: flex;
+	justify-content: center;
 }

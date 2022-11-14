@@ -39,11 +39,8 @@ public class MarketService {
 			totalPage = totalCnt / numPerPage + 1;
 		}
 		int pageNaviSize = 5;
-		int pageNo = 1;
-		
-		if(reqPage > 2) {
-			pageNo = reqPage - 1;
-		}
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize + 1;
+
 		String pageNavi = "";
 		if(pageNo != 1) {
 			pageNavi += "<a href='/marketMain.do?reqPage=" +(pageNo - 1)+"&pCategory="+pCategory+"'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
@@ -62,7 +59,7 @@ public class MarketService {
 			}
 		}
 		
-		if(end <= totalPage) {
+		if(pageNo <= totalPage) {
 			pageNavi += "<a href='/marketMain.do?reqPage=" +(pageNo - 1)+"&pCategory="+pCategory+"'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
 					"            chevron_right\r\n" + 
 					"            </span></a>";
