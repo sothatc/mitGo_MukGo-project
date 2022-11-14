@@ -32,6 +32,10 @@
 		set member_pw=#{memberPw}
 		where member_no=#{memberNo}
 	</update>
+	<delete id="deleteMember" parameterType="int">
+		delete member
+		where member_no = #{memberNo}
+	</delete>
 	
 	<!-- 일반회원 목록 조회 -->
 	<select id="memberList" parameterType="map" resultType="m">

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <style>
 .etc {
 	padding: 10px 1.25rem !important;
@@ -20,13 +21,13 @@
 					<a href="/reserveList.do">예약 내역</a>
 				</div>
 				<div>
-					<a href="#">주문 내역</a>
+					<a href="/orderList.do">주문 내역</a>
 				</div>
 				<div>
 					<a href="/updateMemberFrm.do">내 정보 수정</a>
 				</div>
 				<div>
-					<a href="#">회원 탈퇴</a>
+					<a href="/deleteMember.do?memberNo=${sessionScope.m.memberNo }" class="delMember">회원 탈퇴</a>
 				</div>
 			</li>
 		</ul>
@@ -44,3 +45,15 @@
 		</ul>
 	</div>
 </aside>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+
+<script>
+	$(".delMember").on("click",function(e){
+		if(confirm("탈퇴 하시겠습니까?") == true) {
+			alert("탈퇴되었습니다.");
+		}else {
+			e.preventDefault();
+			return;
+		}
+	});
+</script>

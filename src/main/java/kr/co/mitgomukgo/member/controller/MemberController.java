@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.context.annotation.SessionScope;
@@ -167,6 +168,7 @@ public class MemberController {
 	@RequestMapping(value="/login.do")
 	public String login(Member member, HttpSession session) {
 		Member m = service.selectOneMember(member);
+		System.out.println(m.getMemberPhone());
 		if(m != null) {
 			session.setAttribute("m", m);
 		}
@@ -482,6 +484,24 @@ public class MemberController {
 	public String contentModal2() {
 		return "member/contentModal2";
 	}
+	@RequestMapping(value="/deleteMember.do")
+	public String deleteMember(@RequestParam int memberNo) {
+		int result = service.deleteMember(memberNo);
+		if(result > 0) {
+			return "redirect:/logout.do";
+		}else {
+			return "/";
+		}
+	}
 	
+	/*
+	주문 테이블 만들어지면 진행
+	@RequestMapping(value="/orderList.do")
+	public String orderList(HttpSession session) {
+		Member m = (Member)session.getAttribute("m");
+		int memberNo = m.getMemberNo();
+		
+	}
+	*/
 }
 

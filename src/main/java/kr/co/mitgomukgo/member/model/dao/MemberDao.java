@@ -197,6 +197,10 @@ public class MemberDao {
 		return sqlSession.update("owner.updatePwOwner",o);
 	}
 
+	public int deleteMember(int memberNo) {
+		return sqlSession.delete("member.deleteMember", memberNo);
+	}
+
 
 	
 
