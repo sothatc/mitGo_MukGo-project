@@ -719,9 +719,9 @@ height: 100%;
                }
          });
             
-         
+
       function hideModal(){
-    	  $(".modal-wrap").hide();
+    	  modal.classList.add("hidden");
       }
       </script>
 
