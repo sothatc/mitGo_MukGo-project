@@ -35,10 +35,12 @@ tabSort.on("click", function () {
     }
     if (tabSortText == "grade") {
         sort.eq(0).css("background-color", "#ffc107");
+        sort.eq(0).css("border", "1px solid #ffc107");
         $("[name=storeListSort]").eq(0).val('new');
     }
     if (tabSortText == "reviewCount") {
         sort.eq(1).css("background-color", "#ffc107");
+        sort.eq(1).css("border", "1px solid #ffc107");
         $("[name=storeListSort]").eq(1).val('new');
     }
 });

@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/resources/css/member/member.css">
 </head>
 <body>
 	<style>
@@ -18,15 +19,15 @@
 			<c:when test="${result}">
 				<div>[ <span>${ownerCheckId } </span> ]는 사용 가능합니다.</div>
 				<br><br>
-				<button type="button" onclick="closeWindow('${ownerCheckId}');">닫기</button>
+				<button type="button" class="closeBtn" onclick="closeWindow('${ownerCheckId}');">닫기</button>
 			</c:when>
 			<c:otherwise>
 				<div>[ <span>${ownerId }</span> ]는 이미 사용중입니다.</div>
-				<br><br>
+				<br>
 				<form action="/ownerCheckId.do">
 					<div class="id-wrap">
-						<input type="text" name="ownerCheckId" class="ownerCheckId">
-						<button type="submit">조회</button>
+						<input type="text" name="ownerCheckId" class="ownerCheckId"><br>
+						<button class="searchIdBtn" type="submit">조회</button>
 					</div>
 				</form>
 			</c:otherwise>
@@ -38,6 +39,24 @@
 			idInput.val(checkId);
 			self.close();
 		}
+		$(".closeBtn").on("mouseover",function(){
+			$(this).css("background-color","rgb(97, 76, 76)");
+			$(this).css("border","1px solid black");
+			$(this).css("color","#ffc107");
+		})
+		$(".closeBtn").on("mouseleave",function(){
+			$(this).css("background-color","");
+			$(this).css("color","");
+		})
+		$(".searchIdBtn").on("mouseover",function(){
+			$(this).css("background-color","rgb(97, 76, 76)");
+			$(this).css("border","1px solid black");
+			$(this).css("color","#ffc107");
+		})
+		$(".searchIdBtn").on("mouseleave",function(){
+			$(this).css("background-color","");
+			$(this).css("color","");
+		})
 	</script>
 </body>
 </html>

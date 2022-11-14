@@ -22,6 +22,7 @@ import com.sun.xml.internal.bind.v2.runtime.output.Encoded;
 import kr.co.mitgomukgo.member.model.service.MemberService;
 import kr.co.mitgomukgo.member.model.vo.Member;
 import kr.co.mitgomukgo.member.model.vo.Owner;
+import kr.co.mitgomukgo.notice.model.vo.Notice;
 import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import net.nurigo.java_sdk.Coolsms;
@@ -194,8 +195,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/mypage.do")
-	public String mypage(Member member) {
+	public String mypage(Member member, Model model) {
 		Member m = service.pwChkMember(member);
+		ArrayList<Notice> ncList = service.myPageNcList();
+		model.addAttribute("ncList", ncList);
 		if(m != null) {
 			return "member/mypage";
 		}else {
@@ -203,11 +206,13 @@ public class MemberController {
 		}
 	}
 	@RequestMapping(value="/ownerMypage.do")
-	public String ownerMypage(HttpSession session, Owner owner) {
+	public String ownerMypage(HttpSession session, Owner owner, Model model) {
 		int ownerNo = owner.getOwnerNo();
 		Store s = service.searchStore(ownerNo);
 		session.setAttribute("s", s);
 		Owner o = service.pwChkOwner(owner);
+		ArrayList<Notice> ncList = service.myPageNcList();
+		model.addAttribute("ncList", ncList);
 		if(o != null) {
 			return "member/ownerMypage";
 		}else {
@@ -233,35 +238,53 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/updateOwner.do")
-	public String updateOwner(Owner o) {
+	public String updateOwner(Owner o, HttpSession session) {
 		int result = service.updateOwner(o);
 		if(result > 0) {
+			session.invalidate();
 			return "redirect:/";
 		}else {
 			return "member/ownerMyPage";
 		}
 	}
+	@RequestMapping(value="/updateOwnerFrm.do")
+	public String updateOwnerFrm(Model model) {
+		ArrayList<Notice> ncList = service.myPageNcList();
+		model.addAttribute("ncList", ncList);
+		return "member/ownerMypage";
+	}
 	@RequestMapping(value="/updateMember.do")
-	public String updateMember(Member m) {
+	public String updateMember(Member m, HttpSession session) {
 		int result = service.updateMember(m);
 		if(result > 0) {
+			session.invalidate();
 			return "redirect:/";
 		}else {
 			return "member/mypage";
 		}
 	}
+	@RequestMapping(value="/updateMemberFrm.do")
+	public String updateMemberFrm(Model model) {
+		ArrayList<Notice> ncList = service.myPageNcList();
+		model.addAttribute("ncList", ncList);
+		return "member/mypage";
+	}
 	@RequestMapping(value="/reserveList.do")
 	public String reserveList(@SessionAttribute Member m, Model model) {
 		ArrayList<Reserve> rsList = service.selectReserveList(m);
+		ArrayList<Notice> ncList = service.myPageNcList();
 		if(rsList.isEmpty()) {
 			return "member/reserveList";
 		}
+		model.addAttribute("ncList", ncList);
 		model.addAttribute("rsList", rsList);
 		return "member/reserveList";
 	}
 	@RequestMapping(value="/reserveManage.do")
 	public String reserveManage(Model model, @SessionAttribute Store s, int reqPage) {
 		int storeNo = s.getStoreNo();
+		ArrayList<Notice> ncList = service.myPageNcList();
+		model.addAttribute("ncList", ncList);
 		HashMap<String, Object> map = service.selectAllReserve(reqPage, storeNo);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
@@ -360,6 +383,56 @@ public class MemberController {
 			return "redirect:/";
 		}
 	}
-
+	@RequestMapping(value="/searchMemberFrm.do")
+	public String searchMemberFrm() {
+		return "member/searchMemberFrm";
+	}
+	@RequestMapping(value="/searchIdFrm.do")
+	public String searchIdFrm() {
+		return "/member/searchIdFrm";
+	}
+	@RequestMapping(value="/searchNormalId.do")
+	public String searchNormalId(Member m, Model model) {
+		String memberId = service.searchMemberId(m);
+		model.addAttribute("memberId", memberId);
+		if(memberId != null) {
+			model.addAttribute("result", false);
+			model.addAttribute("memberId", memberId);
+		}else {
+			model.addAttribute("result", true);
+			model.addAttribute("memberId", memberId);
+		}
+		return "member/searchIdResult";
+	}
+	@RequestMapping(value="/searchOwnerId.do")
+	public String searchOwnerId(Owner o, Model model) {
+		String ownerId = service.searchOwnerId(o);
+		model.addAttribute("ownerId", ownerId);
+		if(ownerId != null) {
+			model.addAttribute("result", false);
+			model.addAttribute("ownerId", ownerId);
+		}else {
+			model.addAttribute("result", true);
+			model.addAttribute("ownerId", ownerId);
+		}
+		return "member/searchIdResult";
+	}
+	@RequestMapping(value="/searchPwFrm.do")
+	public String searchPwFrm() {
+		return "/member/searchPwFrm";
+	}
+	@RequestMapping(value="/searchNormalPw.do")
+	public String searchNormalPw(Member member, Model model) {
+		int memberNo = service.searchNormalPw(member);
+		if(memberNo != 0) {
+			model.addAttribute("result", false);
+			model.addAttribute("memberNo", memberNo);
+		}else {
+			model.addAttribute("result", true);
+			model.addAttribute("memberNo", memberNo);
+		}
+		
+		return "member/updateMemberPw";
+	}
 }
 

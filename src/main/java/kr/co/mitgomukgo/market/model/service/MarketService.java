@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.mitgomukgo.market.dao.MarketDao;
 import kr.co.mitgomukgo.market.model.vo.Market;
+import kr.co.mitgomukgo.notice.model.vo.Notice;
 
 @Service
 public class MarketService {
@@ -53,5 +54,19 @@ public class MarketService {
 	public int deleteMarketProduct(int pNo) {
 		return dao.deleteMarketProduct(pNo);
 	}
+
+	public Market readOneMarketProduct(int pNo) {
+		return dao.readOneMarketProduct(pNo);
+	}
+
+	public int updateMarketProduct(Market market) {
+		return dao.updateMarketProduct(market);
+	}
+
+	public ArrayList<Notice> myPageNcList() {
+		return dao.myPageNcList();
+	}
+
+
 	
 }

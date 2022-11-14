@@ -91,6 +91,71 @@ public class qnaDao {
 		int result = sqlSession.delete("qna.deleteQna", qnaNo);
 		return result;
 	}
+
+	public int inserComment(Qna qna) {
+		int result = sqlSession.update("qna.insertComment", qna);
+		return result;
+	}
+
+	public int updateComment(Qna qna) {
+		int result = sqlSession.update("qna.updateComment", qna);
+		return result;
+	}
+
+	public int deleteComment(int qnaNo) {
+		int result = sqlSession.update("qna.deleteComment", qnaNo);
+		return result;
+	}
+
+	public int selectAllQnaCount() {
+		int result = sqlSession.selectOne("qna.selectAllQnaCount");
+		return result;
+	}
+
+	public ArrayList<Qna> searchQna(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("qna.searchQna", map);
+		
+		if(list.isEmpty()) {
+			return null;
+		}else {
+			return (ArrayList<Qna>)list;
+		}
+	}
+
+	public int searchCnt(HashMap<String, Object> map) {
+		int result = sqlSession.selectOne("qna.searchCount", map);
+		return result;
+	}
+
+	public ArrayList<Qna> selectQnaTheme(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("qna.selectQnaTheme", map);
+ 		
+		if(list.isEmpty()) {
+			return null;
+		}else {
+			return (ArrayList<Qna>)list;
+		}
+	}
+
+	public int selectQnaThemeCnt(String qnaTheme) {
+		int result = sqlSession.selectOne("qna.selectQnaThemeCnt", qnaTheme);
+		return result;
+	}
+
+	public ArrayList<Qna> selectMyQnaList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("qna.selectMyQnaList", map);
+		
+		if(list.isEmpty()) {
+			return null;
+		}else {
+			return (ArrayList<Qna>)list;
+		}
+	}
+
+	public int qnaWriteCount(String qnaWriter1) {
+		int result = sqlSession.selectOne("qna.qnaWriteCount", qnaWriter1);
+		return result;
+	}
 }
 
 

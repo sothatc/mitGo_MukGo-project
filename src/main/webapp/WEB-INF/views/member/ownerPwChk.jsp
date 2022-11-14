@@ -11,22 +11,14 @@
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="pwChk-wrap wrap-img">
+		<img class="security-img" src="resources/upload/member/security.png">
 		<div class="pwChk-content">
 			<div>비밀번호 확인</div>
 			<form action="/ownerMypage.do" method="post">
 				<input type="hidden" name="ownerNo" value="${sessionScope.o.ownerNo }">
-				<input type="password" name="ownerPw" id="pwChk"><br>
+				<input type="password" name="ownerPw" id="rePwChk"><br>
 				<button type="submit" class="pwChkBtn">확인</button> 
-			</form>
-			<!-- 
-			<form action="/ownerMypage.do" method="post">
-				<input type="hidden" name="ownerNo" value="${sessionScope.o.ownerNo }">
-				<input type="hidden" value="${sessionScope.o.ownerId }">
-				<input type="hidden" class="myPw" value="${sessionScope.o.ownerPw }">
-				<input type="password" id="rePwChk"><br>
-				<button type="submit" class="pwChkBtn">확인</button> 
-			</form>
-			 -->
+			</form>	
 		</div>
 	</div>
 </body>
@@ -42,19 +34,6 @@
 		$(this).css("background-color","");
 		$(this).css("color","");
 	});
-	/*
-	$(".pwChkBtn").on("click", function(event){
-		const inputPw = $("#rePwChk");
-		const inputPwVal = inputPw.val();
-		const myPw = $(".myPw").val();
-		if(myPw != inputPwVal) {
-			alert("비밀번호를 다시 입력해주세요.");
-			event.preventDefault();
-		}else if(inputPw == ""){
-			alert("비밀번호를 입력해주세요.");
-			event.preventDefault();
-		}
-	});
-	*/
+	
 </script>
 </html>

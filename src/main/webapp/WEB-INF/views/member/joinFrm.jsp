@@ -79,7 +79,7 @@
                                     </div>
                                     <div class="box02">
                                         <label class="label" for="memberPhone1">전화번호를 입력해주세요.</label>
-                                        <input type="number" id="memberPhone1" name="memberPhone1">
+                                        <input type="text" id="memberPhone1" name="memberPhone1">
                                         <input type="hidden" id="memberPhone" name="memberPhone">
                                     </div>
                                     <button type="button" class="phoneChkSendBtn">인증번호 발송</button>
@@ -89,6 +89,8 @@
                                         <input type="hidden" class="certifyNum2">
                                     </div>
                                     <button type="button" class="phoneChkBtn">확인</button>
+                                    <span id="timeZone"></span>
+									<span id="authMsg"></span>
                                     <p class="text-note"></p>
                                 </div>
                             </div>
@@ -106,22 +108,22 @@
                         <hr>
                         <div class="chk-box2">
                             <div style="display: inline-block;">
-                                <input type="checkbox" id="allow1" name="allow1">
+                                <input type="checkbox" id="allow1" class="normal" name="allow1">
                                 <label for="allow1">[필수] 이용약관 동의</label>
                             </div>
-                            <a href="#" class="allowContent" style="display: inline-block;">[내용보기]</a>
+                            <a href="javascript:void()" class="allowContent" style="display: inline-block;">[내용보기]</a>
                         </div>
                         <div class="chk-box2">
                             <div style="display: inline-block;">
-                                <input type="checkbox" id="allow1" name="allow1">
-                                <label for="allow1">[필수] 개인 정보 수집 및 이용에 동의</label>
+                                <input type="checkbox" id="allow2" class="normal" name="allow1">
+                                <label for="allow2">[필수] 개인 정보 수집 및 이용에 동의</label>
                             </div>
                             <a href="#" class="allowContent" style="display: inline-block;">[내용보기]</a>
                         </div>
                         <div class="chk-box2">
                             <div style="display: inline-block;">
-                                <input type="checkbox" id="allow1" name="allow1">
-                                <label for="allow1">[필수] 만 14세 이상</label>
+                                <input type="checkbox" id="allow3" class="normal" name="allow1">
+                                <label for="allow3">[필수] 만 14세 이상</label>
                             </div>
                             <a href="#" class="allowContent" style="display: inline-block;">[내용보기]</a>
                         </div>
@@ -136,6 +138,13 @@
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	
 	<script>
+		/*약관 내용*/
+		$(".allowContent").on("click", function(){
+			const popup = window.open("","allowContent","left=700px, top=300px, width=500px, height=600px, menubar=no, status=no, scrollbars=yes");
+		});
+		
+		
+	
 		var idFlag = 0;
 		var phoneFlag = 0;
 		
@@ -167,22 +176,59 @@
 				data : {phone : phone},
 				success : function(numStr) {
                     $(".certifyNum2").val(numStr);
+                    $("#auth").show();
+					authTime();
 				}
 			});
 		});
-		/*휴대폰 인증확인*/
-		 $(".phoneChkBtn").on("click",function(){
-	            const certifyNum = $("#certifyNum").val();
-	            const certifyNum2 = $(".certifyNum2").val();
-	            if(certifyNum == certifyNum2) {
-	                alert("인증 확인되었습니다.");
-	                phoneFlag = 1;
-	            }else {
-	                alert("인증번호를 다시 확인해주세요.");
-	            }
-	      });
+		//인증번호 시간제한 로직
+		let PhoneNumStr = $(".certifyNum2").val();
 		
-		
+		let intervalId;
+		function authTime(){
+			$("#timeZone").html("<span id='min'>3</span> : <span id='sec'>00</span>");
+			intervalId = window.setInterval(function(){
+				timeCount();
+			},1000);
+		}
+		function timeCount(){
+			const min = Number($("#min").text());
+			const sec = $("#sec").text();
+			if(sec == "00"){
+				if(min == 0){
+						PhoneNumStr = null;
+						clearInterval(intervalId);
+				}else {
+						$("#min").text(min-1);
+						$("#sec").text(59);
+				}
+			}else {
+				const newSec = Number(sec)-1;
+				if(newSec<10){
+					$("#sec").text("0"+newSec);
+				}else {
+					$("#sec").text(newSec);
+				}
+			}
+		}
+			
+			/*휴대폰 인증확인*/
+			 $(".phoneChkBtn").on("click",function(){
+		            const certifyNum = $("#certifyNum").val();
+		            const certifyNum2 = $(".certifyNum2").val();
+		            if(PhoneNumStr != null) {
+			            if(certifyNum == certifyNum2) {
+			                alert("인증 확인되었습니다.");
+			                clearInterval(intervalId);
+			                phoneFlag = 1;
+			            }else {
+			                alert("인증번호를 다시 확인해주세요.");
+			            }
+		            }else {
+		            	$("#authMsg").text("인증시간 만료");
+						$("#authMsg").css("color","red");
+		            }
+		      });
 		
 		/*정규표현식 유효성검사*/
 		$("#joinBtn").on("click",function(event){
@@ -241,10 +287,10 @@
 			var phone = phone1+phone2;
 			$("[name=memberPhone]").val(phone);
 			
-			if(idFlag == 0 || phoneFlag == 0) {
+			var allowChked = $("#allChk").is(":checked");
+			if(idFlag == 0 || phoneFlag == 0 || allowChked == false) {
 				event.preventDefault();
 			}
-			
 			
 			
 		});
@@ -302,7 +348,23 @@
 			$(this).css("color","");
 		})
 		
-		
+		//체크박스 전체선택
+		$("#allChk").on("click",function(){
+			var checked = $(this).is(":checked");
+			if(checked){
+				$(".chkBox").find("input").prop("checked", true);
+			}else {
+				$(".chkBox").find("input").prop("checked", false);
+			}
+		});
+		//체크박스 개별선택
+		$(".chkBox").on("click", ".normal", function(){
+			var is_checked = true;
+			$(".chkBox .normal").each(function(){
+				is_checked = is_checked && $(this).is(":checked");
+			});
+			$("#allChk").prop("checked", is_checked);
+		});
 		
 		
 		

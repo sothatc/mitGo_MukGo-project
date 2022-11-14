@@ -132,6 +132,7 @@ input {
 .box03>label{
     line-height: 35px;
     color: #999;
+    margin-left: 10px;
 }
 .phoneChkBtn{
     margin-left: 11px;
@@ -188,6 +189,12 @@ hr{
     color: #fff;
     border: none;
     transition: 0.5s;
+}
+#timeZone{
+	margin-left: 15px;
+}
+#certifyNum{
+    padding-left: 10px;
 }
 
 /*selectJoin*/

@@ -6,6 +6,8 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.co.mitgomukgo.market.model.vo.Market;
+import kr.co.mitgomukgo.notice.model.vo.Notice;
 import kr.co.mitgomukgo.store.model.dao.StoreDao;
 import kr.co.mitgomukgo.store.model.vo.Menu;
 import kr.co.mitgomukgo.store.model.vo.Reserve;
@@ -41,7 +43,7 @@ public class StoreService {
 	}
 
 	public HashMap<String, Object> storeList(int reqPage) {
-		int numPerPage = 9;
+		int numPerPage = 12;
 		
 		int end = numPerPage * reqPage;
 		int start = (end - numPerPage) + 1;
@@ -118,7 +120,7 @@ public class StoreService {
 	
 	public HashMap<String, Object> selectTag(String category, int reqPage) {
 		// 화면에 보여주는 게시물 수
-		int numPerPage = 9;
+		int numPerPage = 12;
 		
 		// 끝페이지
 		int end = numPerPage * reqPage;
@@ -182,7 +184,7 @@ public class StoreService {
 
 	public HashMap<String, Object> searchStoreList(String search, int reqPage, String category) {
 		// 화면에 보여주는 게시물 수
-		int numPerPage = 9;
+		int numPerPage = 12;
 		
 		// 끝페이지
 		int end = numPerPage * reqPage;
@@ -195,10 +197,12 @@ public class StoreService {
 		map.put("end", end);
 		map.put("search", search);
 		map.put("category",category);
+		System.out.println(map);
 		
 		ArrayList<Store> list = dao.searchStoreList(map);
 		
-		int totalCnt = dao.countTagList(category);
+		int totalCnt = dao.countTagList(map);
+		System.out.println(totalCnt);
 		int totalPage = 0;
 		if(totalCnt % numPerPage == 0) {
 			totalPage = totalCnt / numPerPage;
@@ -214,7 +218,7 @@ public class StoreService {
 		
 		String pageNavi = "";
 		if(pageNo != 1) {
-			pageNavi += "<a href='/searchStoreList.do?category="+category+"&reqPage=" +(pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+			pageNavi += "<a href='/searchStoreList.do?category="+category+"&reqPage=" +(pageNo - 1)+"&search="+search+ "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
 					"            chevron_left\r\n" + 
 					"            </span></a>";
 		}
@@ -223,7 +227,7 @@ public class StoreService {
 			if(reqPage == pageNo) {
 				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
 			}else {
-				pageNavi += "<a href='/searchStoreList.do?category="+category+"&reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+				pageNavi += "<a href='/searchStoreList.do?category="+category+"&reqPage=" + pageNo +"&search="+search+ "'><span>" + (pageNo) + "</span></a>";
 			}
 			pageNo++;
 			if(pageNo > totalPage) {
@@ -232,7 +236,7 @@ public class StoreService {
 		}
 		
 		if(end <= totalPage) {
-			pageNavi += "<a href='/searchStoreList.do?category="+category+"&reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+			pageNavi += "<a href='/searchStoreList.do?category="+category+"&reqPage=" + (pageNo) +"&search="+search+ "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
 					"            chevron_right\r\n" + 
 					"            </span></a>";
 		}
@@ -243,7 +247,7 @@ public class StoreService {
 		searchMap.put("pageNavi", pageNavi);
 		searchMap.put("total", totalPage);
 		searchMap.put("pageNo", pageNo);
-		
+		searchMap.put("search", search);
 		return searchMap;	
 	}
 	
@@ -309,9 +313,9 @@ public class StoreService {
 		return list;
 	}
 	
-	public HashMap<String, Object> sortStoreList(String storeListSort, String sortFilter, int reqPage, String category) {
+	public HashMap<String, Object> sortStoreList(String storeListSort, String sortFilter, String search, int reqPage, String category) {
 		// 화면에 보여주는 게시물 수
-		int numPerPage = 9;
+		int numPerPage = 12;
 		
 		// 끝페이지
 		int end = numPerPage * reqPage;
@@ -325,10 +329,10 @@ public class StoreService {
 		map.put("storeListSort", storeListSort);
 		map.put("category",category);
 		map.put("sortFilter", sortFilter);
-		
+		map.put("search",search);
 		ArrayList<Store> list = dao.sortStoreList(map);
 		
-		int totalCnt = dao.countTagList(category);
+		int totalCnt = dao.countTagList(map);
 		int totalPage = 0;
 		if(totalCnt % numPerPage == 0) {
 			totalPage = totalCnt / numPerPage;
@@ -408,6 +412,16 @@ public class StoreService {
 
 	public int deleteReview(int reviewNo) {
 		return dao.deleteReview(reviewNo);
+	}
+
+	//마켓 제품 조회
+	public ArrayList<Market> selectProductList(int storeNo) {
+		ArrayList<Market> list = dao.selectProductList(storeNo);
+		return list;
+	}
+
+	public ArrayList<Notice> myPageNcList() {
+		return dao.myPageNcList();
 	}
 
 

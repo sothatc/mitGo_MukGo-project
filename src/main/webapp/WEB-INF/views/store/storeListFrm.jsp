@@ -12,26 +12,27 @@
 	<link rel="stylesheet" href="/resources/css/store/storeList.css">
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	<!--헤더-->
-	<div class="storeList-content-wrap">
-		
-		<section id="services" class="text-center">
-			<div class="container">
-				<div class="row">
-					<div class="col-12">
-						<div class="intro">
-							<h6>먹킷리스트</h6>
-							<h1>믿고 먹는 믿GO먹GO</h1>
-							<p id="font" class="mx-auto">
-								서울 전 지역 맛집을 담았다!
-								<br>
-								사람들이 추천하는 서울 전 지역 인기 메뉴!
-							</p>
-						</div>
+	<section id="services" class="text-center">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="intro">
+						<h6>먹킷리스트</h6>
+						<h1>믿고 먹는 믿GO먹GO</h1>
+						<p id="font" class="mx-auto">
+							서울 전 지역 맛집을 담았다!
+							<br>
+							사람들이 추천하는 서울 전 지역 인기 메뉴!
+						</p>
 					</div>
 				</div>
 			</div>
-		</section>
-		<!-- ////////////////////////////////////////////////////////////////// -->
+		</div>
+	</section>
+	<!-- ////////////////////////////////////////////////////////////////// -->
+	<div class="storeList-content-wrap">
+		
+		
 
 		<!-- 필요한 데이터를 담아두기 위한 더미 -->
 		<div class = "tabCategory" style = "display: none;" >${category }</div>
@@ -39,9 +40,11 @@
 		<div class = "sortFilter" style = "display: none;">${sortFilter }</div>
 		
 		<!-- 검색기능 -->
-		<form action="/searchStoreList.do?category=${category }&reqPage=1" method="post">
+		<form action="/searchStoreList.do" method="get">
 			<div class="storeList-searchinput" id="font">
 				<input type="text" name="search">
+				<input type="hidden" name="reqPage" value="1">
+				<input type="hidden" name="category" value="${category }">
 				<button>검색</button>
 			</div>
 		</form>
@@ -88,6 +91,7 @@
 			<div class="storeList-sort-content">
 				<form action="/sortStoreList.do?category=${category }&reqPage=1" method="post">
 					<ul id="font">
+						<input type="hidden" name="search" value="${search }">
 						<button type="submit" name="storeListSort" value="grade"><li>평점순</li></button>
 						<button type="submit" name="storeListSort" value="reviewCount"><li>리뷰순</li></button>
 					</ul>
@@ -115,7 +119,6 @@
 		</div>
 		<!-- 페이지 네비 -->
 		<div class="page">${pageNavi }</div>
-	</div>
 	</div>
 	<!--푸터-->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />

@@ -29,7 +29,12 @@ height: 100%;
 .star{
 	color: rgb(255, 83, 86) !important;
 }
+
+.hidenClass{
+	visibility:hidden; 
+}
 </style>
+
 <body onload="initTmap()">
 
    <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -45,27 +50,22 @@ height: 100%;
    
    
    <!---------------------내용----------------------->
-   <div class="content-wrap">
+   <div class="content-wrap" style="font-family:Gowun Dodum;">
       <div class="content-wrap1" style="width:1200px;">
-         <div class="content-wrap1-1" style="width:500px; height:50px;">
-         	<div class="div1" style="height: 50px; float:left;">
-	            <span class="categorySpan" style="font-family:Gowun Dodum;"></span>
-	            <span class="storeNameSpan" style="font-family:Gowun Dodum;">${s.storeName}</span>
-            </div>
-            <div class="div2" style="width:50px; float:left; margin-left:10px;">
-	            <span class="material-symbols-rounded star">star</span>
-	            <span class="reviewNum" style="font-family:Gowun Dodum;">${s.rating }</span>
-            </div>
-         </div>
-
-         <div class="content-wrap1-2">
+         <div class="content-wrap1-1" style="width:1200px; height:50px; display:inline; color: black;">
+	            <span class="categorySpan" style="float:left;"></span>
+	            <span class="storeNameSpan" style="float:left; margin-left:5px;">${s.storeName}</span>
+	            <span class="reviewNum" style="color:rgba(255, 83, 86, 0.99); margin-left:10px; float:left;" >★ ${s.rating }</span>
+		 	<span style=" margin-left:20px; font-weight: lighter;">${s.content }</span>
+		 	<div style="margin-right:0; float:right;">
             <c:choose>
               <c:when test="${!empty sessionScope.m }">
                   <a class="material-symbols-rounded share pointer" id="share" href="javascript:shareMessage()">share</a>
                   <span class="material-symbols-rounded favorite pointer" id="favorite" style="display:none;">favorite</span>
-                  <span class="material-symbols-outlined unfavorite pointer" id="unfavorite" style="float:right; margin-top:10px; margin-right:20px;">favorite</span>
+                  <span class="material-symbols-outlined unfavorite pointer" id="unfavorite" style="float:right; margin-top:10px; margin-right:15px;">favorite</span>
                </c:when>
          	</c:choose>
+         	</div>
          </div>
       </div>
 
@@ -125,7 +125,7 @@ height: 100%;
                      <td>
                         <button class="w3-button w3-circle w3-teal" id="down" style="width: 35px; height: 35px; padding: 0;">-</button>
                      </td>
-                     <td class="peopleTd">
+                     <td class="peopleTd" style="width:30px; text-align: center;">
                         <span class="people">1</span>
                      </td>
                      <td>
@@ -234,54 +234,53 @@ height: 100%;
 			</div>
 		 </div>
 		 
+		 
          <!----- 마켓 상품 부분 ----->
-         <div class="market-wrap" style="margin-top:50px; width:1200px; height:300px;">
-	         <div class="menuTitle" style="margin: 0 auto;">MARKET</div>
-	            <div class="w3-card-4" id="marketWrap">
-	               <a href="#"><img src="/resources/img/pizza.PNG" style="width: 100%"></a>
-	               <div class="w3-container w3-center">
-	                  <p>상품 A</p>
-	               </div>
-	            </div>
-	
-	            <div class="w3-card-4" id="marketWrap">
-	               <a href="#"><img src="/resources/img/pizza.PNG" style="width: 100%"></a>
-	               <div class="w3-container w3-center">
-	                  <p>상품 A</p>
-	               </div>
-	            </div>
-	
-	            <div class="w3-card-4" id="marketWrap">
-	               <a href="#"><img src="/resources/img/pizza.PNG" style="width: 100%"></a>
-	               <div class="w3-container w3-center">
-	                  <p>상품 A</p>
-	               </div>
-	            </div>
-		</div>
+		<c:choose>
+              <c:when test="${!empty mList }">
+		         <div class="market-wrap" style="margin-top:50px; width:1200px; height:300px;">
+			         <div class="menuTitle" style="margin: 0 auto;">MARKET</div>
+			         
+			         <c:forEach items="${mList }" var="ma">
+			            <div class="w3-card-4" id="marketWrap">
+			               <a href="/marketDetail.do?pNo=${ma.PNo }"><img src="/resources/upload/market/${ma.PImg }" style="width: 100%"></a>
+			               <div class="w3-container w3-center">
+			                  <p>${ma.PName }</p>
+			               </div>
+			            </div>
+					</c:forEach>
+				</div>
+		    </c:when>
+        </c:choose>	
+		
 		
 		
         <!--------- 후기 시작 ----->
-        <div class="review-wrap" style="margin:50px 0;">
-            <div class="menuTitle" style="width:100px; margin:0 auto;">REVIEW</div>
-            <ul class="w3-ul w3-card-4" id="reviewWrapUl" style="height:content-fit;">
-            <c:forEach items="${rList }" var="r">
-
-				<li class="w3-bar" style="height:content-fit;">
-                  <div class="w3-bar-1" style="margin:0; height: content-fit;">
-                     <img src="/resources/upload/review/${r.reviewImg }" class="w3-hide-small" style="float: left; width:35%; height:100%;">
-                     <div class="w3-bar-item" id="w3-bar-item" style="width:60%; height: content-fit; padding:0; margin-left:5%; position: relative;">
-                        <div style="color: rgb(255, 83, 86); float:left;"><c:forEach begin="1" step="1" end="${r.rating }" varStatus="i">★</c:forEach></div>
-                        <div>${r.rating }</div>
-                        <div class="w3-large" style="font-weight: 700;">${r.writer }</div>
-                        <div class="reviewContent" style="display: inline; float: left; height:150px; overflow: auto;">${r.content}</div>
-                        <div class="regDate" style="position: absolute; bottom: 0px; right: 0px;">${r.enrollDate }</div>
-                     </div>
-                  </div>
-               </li>
-               
-			</c:forEach>
-            </ul>
-        </div>
+        <c:choose>
+              <c:when test="${!empty rList }">
+			        <div class="review-wrap" style="margin:50px 0;">
+			            <div class="menuTitle" style="width:100px; margin:0 auto;">REVIEW</div>
+			            <ul class="w3-ul w3-card-4" id="reviewWrapUl" style="height:content-fit;">
+			            <c:forEach items="${rList }" var="r">
+			
+							<li class="w3-bar" style="height:content-fit;">
+			                  <div class="w3-bar-1" style="margin:0; height: content-fit;">
+			                     <img src="/resources/upload/review/${r.reviewImg }" class="w3-hide-small" style="float: left; width:35%; height:100%;">
+			                     <div class="w3-bar-item" id="w3-bar-item" style="width:60%; height: content-fit; padding:0; margin-left:5%; position: relative;">
+			                        <div style="color: rgb(255, 83, 86); float:left;"><c:forEach begin="1" step="1" end="${r.rating }" varStatus="i">★</c:forEach></div>
+			                        <div>${r.rating }</div>
+			                        <div class="w3-large" style="font-weight: 700;">${r.writer }</div>
+			                        <div class="reviewContent" style="display: inline; float: left; height:150px; overflow: auto;">${r.content}</div>
+			                        <div class="regDate" style="position: absolute; bottom: 0px; right: 0px;">${r.enrollDate }</div>
+			                     </div>
+			                  </div>
+			               </li>
+			               
+						</c:forEach>
+			            </ul>
+			        </div>
+        	</c:when>
+        </c:choose>	
         <!--------후기 끝 -->
          
       </div><!-- testDiv 끝 -->
@@ -326,6 +325,9 @@ height: 100%;
           </div>
        </div>
        </div>
+       
+       
+       <div style="margin-bottom:50px;"></div> <!-- 리뷰/마켓 제품이 없을 시 바로 하단에 푸터 방지 위한 div-->
        <jsp:include page="/WEB-INF/views/common/footer.jsp" />
        
        
@@ -372,6 +374,9 @@ height: 100%;
       <script>
        //------------------------------------------------------------------------------------------------------------------------------
       
+
+               
+               
        //----------카테고리
        // 1:한식 , 2: 양식, 3: 일식, 4: 중식, 5:분식, 6:육류, 7:씨푸드,8:디저트,9:기타
        var categoryNum=${s.category};
@@ -527,25 +532,7 @@ height: 100%;
                   }
                });
                
-               //---------- 인원수 늘리기
-               let count = 1;
-               var maxNum="${s.maxNum}";
-               $("#up").on("click", function(e) {
-            	   console.log(maxNum);
-                 	if(count== maxNum){
-                   		return false;
-                   	}
-               		count++;
-               		$(".people").text(count);
-               });
-                     
-               $("#down").on("click", function(e) {
-               		if (count == 1) {
-               			return false;
-                 	}
-                	 count--;
-                 	$(".people").text(count);
-               }); 
+
             }
        }); //ajax 종료
          
@@ -685,6 +672,26 @@ height: 100%;
          }
          
          
+         //---------- 인원수 늘리기
+         let count = 1;
+         var maxNum="${s.maxNum}";
+         $("#up").on("click", function(e) {
+      	   console.log(maxNum);
+           	if(count== maxNum){
+             		return false;
+             	}
+         		count++;
+         		$(".people").text(count);
+         });
+               
+         $("#down").on("click", function(e) {
+         		if (count == 1) {
+         			return false;
+           	}
+          	 count--;
+           	$(".people").text(count);
+         }); 
+         
          
          //---------- 모달 
          const modal = document.querySelector(".modal-wrap");
@@ -701,6 +708,7 @@ height: 100%;
                    document.getElementById('ownerModal').style.display='block';
                 }
                 selectedDate =$("#datePicker").val();
+                console.log(selectedDate);
                 $(".eatDate").attr("value",selectedDate);
                 $(".eatTime").attr("value",selectTime);
                 $(".eatNum").attr("value",count);
@@ -718,7 +726,7 @@ height: 100%;
          $(".closeModal").on("click",function(){
          		modal.classList.add("hidden");
          });
-
+      
          
       </script>
 

@@ -40,7 +40,7 @@
 				<div class="content-wrap">
 					<div id="productList">
 						<div class="content-head">
-							<h2>메뉴 관리</h2>
+							<h2>상품 관리</h2>
 						</div>
 						<table class="table" style="text-align: center; vertical-align: middle;">
 							<tr>

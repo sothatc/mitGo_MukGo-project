@@ -16,16 +16,16 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <style type="text/css">
-	.noMsg{
-		width : 800px;
-		margin : 0 auto;
+	.noMsg {
+		width: 800px;
+		margin: 0 auto;
 		text-align: center;
 		font-size: 35px;
-		padding-bottom : 50px;
+		padding-bottom: 50px;
 		border-bottom: 1px solid gray;
 	}
 	
-	.warningMark{
+	.warningMark {
 		width: 800px;
 		margin: 0 auto;
 		text-align: center;
@@ -34,11 +34,17 @@
 		padding-top: 50px;
 	}
 	
-	.paging>span{
+	.paging>span {
 		display: inline-block;
-	    width: 30px;
-	    text-decoration: none;
-	    font-size: 20px;
+		width: 30px;
+		text-decoration: none;
+		font-size: 20px;
+	}
+	
+	.numberDeco {
+		background-color: gray;
+		color: white;
+		border-radius: 100%;
 	}
 </style>
 </head>

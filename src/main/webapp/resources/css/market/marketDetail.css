@@ -1,26 +1,201 @@
 @charset "UTF-8";
 
 .contentWrap{
-	background-color: yellow;	
 	width: 1250px;
-	height: 500px;
+	height: 550px;
 	margin: 0 auto;
 	margin-top:70px;
 }
 
-.pPhoto{
-	width: 500px;
+.directoryDiv{
+	width: 1250px;
+	height: 30px;
+	line-height: 30px;
+	font-size: 15px;
+	padding-left: 1%;
+	margin-bottom: 10px;
+}
+
+
+
+/*----- 공유하기 버튼*/
+#share{
+	text-decoration: none;
+	line-height: 50px;
+	float: right;
+	margin-right: 2%;
+}
+
+#share:hover{
+	cursor: pointer;
+}
+
+/*--- 상품 중간 타이틀 ---*/
+.infoDiv{
+	width: 1250px;
 	height: 500px;
 }
 
-.content-wrap1-1{
-	background-color: red;
-	width:1250px;
+.infoDiv1{
+	width: 1250px;
+	height: 500px;
+	display:inline;
+	float:left;
+}
+
+.infoDiv1>img{
+	width:50%;
+	height: 100%;
+	display:inline;
+	float:left;
+}
+
+/*--- 상품 타이틀 ---*/
+.titleDiv{	
+	width: 605px;
 	height:50px;
-	margin: 0 auto;
+	display:inline;
+	float:left;
+	margin-left: 20px;
+	border-bottom: 0.5px solid black;
 }
 
 .categorySpan{
+	height:50px;
+	line-height: 50px;
+	font-size: 18px;
+	font-weight: bolder;
+	margin-left: 2%;
+	color:black;
+}
+
+.storeNameSpan{
+	height:50px;
+	line-height: 50px;
+	font-size: 18px;
+	font-weight: bolder;
+	color:black;
+}
+
+/*--- 테이블 디브 ---*/
+.tableDiv{
+	display:inline;
+	float:left;
+	width: 625px;
+	margin-top: 20px;
+	vertical-align: middle;
+	padding-left:20px;
+	padding-right:10px;
+}
+
+.productTable>tbody>tr{
+	height:50px;
+	color:black;
+}
+
+.productTable>tbody>tr>th{
 	width: 100px;
-	text-align: 50px;
+	text-align: left;
+	color:black;
+}
+
+.productTable>tbody>tr>td{
+	padding-left: 15px;
+	color:black;
+}
+
+.priceDiv{
+	width: 605px;
+	height:50px;
+	display:inline;
+	float:left;
+	line-height: 50px;
+	margin-left: 20px;
+	margin-top:20px;
+	border-top: 0.5px solid black;
+}
+
+.priceDiv1{
+	width: 170px;
+	float:right;
+}
+
+.priceSpan{
+	font-weight: bolder;
+	font-size:25px;
+	color:red;
+}
+
+.btnWrap{
+	width: 620px;
+	height:50px;
+	display:inline;
+	float:left;
+}
+
+.cartBtn{
+	width: 550px;
+	height:44px;
+	line-height: 40px;
+	margin-left: 7%;
+	margin-top:10px;
+	background-color: rgb(51,51,51);
+	color:white;
+	border-radius: 15px;
+	display:inline;
+	float:left;
+	padding:0;
+}
+
+#loginMarketBtn{
+	width: 550px;
+	height:44px;
+	line-height: 40px;
+	margin-left: 4%;
+	margin-top:10px;
+	background-color: rgb(51,51,51);
+	color:white;
+	border-radius: 15px;
+	display:inline;
+	float:left;
+	padding:0;
+}
+
+.cartBtn:hover{
+	width: 550px;
+	height:44px;
+	line-height: 40px;
+	margin-left: 7%;
+	margin-top:10px;
+	background-color:white;
+	color:rgb(51,51,51);
+	border-radius: 15px;
+	display:inline;
+	float:left;
+	padding:0;
+}
+
+#loginMarketBtn:hover{
+	width: 550px;
+	height:44px;
+	line-height: 40px;
+	margin-left: 4%;
+	margin-top:10px;
+	background-color:white;
+	color:rgb(51,51,51);
+	border-radius: 15px;
+	display:inline;
+	float:left;
+	padding:0;
+}
+
+
+.contentWrap2{
+	background-color: red;
+	width: 1250px;
+	height: 2000px;
+	margin: 0 auto;
+	display:block;
+	border-top: 1px solid black;
+	margin-bottom: 50px;
 }
