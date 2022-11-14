@@ -424,6 +424,10 @@ public class StoreService {
 		return dao.myPageNcList();
 	}
 
+	public ArrayList<Review> selectRandomReviewList() {
+		return dao.selectRandomReviewList();
+	}
+
 
 	
 
