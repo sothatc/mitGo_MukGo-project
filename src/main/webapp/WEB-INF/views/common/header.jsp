@@ -54,7 +54,7 @@
 					<a class="nav-link" href="/storeList.do?reqPage=1">GOGO리스트</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/marketMain.do?reqPage=1">GOGO마켓</a>
+					<a class="nav-link" href="/marketMain.do?reqPage=1&pCategory=10">GOGO마켓</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/selectService.do">고객센터</a>

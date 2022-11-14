@@ -43,11 +43,11 @@ public class MarketController {
 	}
 
 	@RequestMapping(value = "/marketMain.do")
-	public String marketMainFrm(int reqPage, Model model) {
-		HashMap<String, Object> map = service.marketList(reqPage);
+	public String marketMainFrm(int reqPage, int pCategory, Model model) {
+		HashMap<String, Object> map = service.marketList(reqPage, pCategory);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
-
+		model.addAttribute("pCategory", pCategory);
 		return "market/marketMain";
 	}
 
