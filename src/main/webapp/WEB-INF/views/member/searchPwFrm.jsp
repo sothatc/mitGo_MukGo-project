@@ -25,10 +25,10 @@
 						<br><br>
 						<label class="label" for="memberPhone">ex)01012345678 (- 생략)</label>
 						전화번호 : <input type="text" id="memberPhone" class="inputPhone" name="memberPhone">
-		            	<button type="button" class="phoneChkSendBtn">발송</button>
+		            	<button type="button" class="phoneChkSendBtn1">발송</button>
 		            	<br>
 		            	 인증번호 : <input type="text" id="certifyNum" name="certifyNum">
-                        <button type="button" class="phoneChkBtn">확인</button>
+                        <button type="button" class="phoneChkBtn1">확인</button>
                         <br>
                         <span id="timeZone"></span>
 						<span id="authMsg"></span>
@@ -44,16 +44,16 @@
 		            	<br><br>
 		            	<label class="label" for="ownerPhone">ex)01012345678 (- 생략)</label>
 		            	전화번호 : <input type="text" id="ownerPhone" class="inputPhone" name="ownerPhone">
-			            <button type="button" class="phoneChkSendBtn">발송</button>
+			            <button type="button" class="phoneChkSendBtn2">발송</button>
 			            <br>
-			                           인증번호 : <input type="text" id="certifyNum" name="certifyNum">
-                        <button type="button" class="phoneChkBtn">확인</button>
+			                           인증번호 : <input type="text" id="certifyNum2" name="certifyNum">
+                        <button type="button" class="phoneChkBtn2">확인</button>
                         <br>
-                        <span id="timeZone"></span>
-						<span id="authMsg"></span>
+                        <span id="timeZone2"></span>
+						<span id="authMsg2"></span>
                         <input type="hidden" class="certifyNum2">
 			            <div>
-			            	<button type="submit" id="searchMemberBtn">찾기</button>
+			            	<button type="submit" id="searchMemberBtn2">찾기</button>
 			            </div>
 		            </form>
 		            </div>
@@ -98,8 +98,44 @@
 			$(this).css("background-color","");
 			$(this).css("color","");
 		})
+		$("#searchMemberBtn2").on("mouseover",function(){
+			$(this).css("background-color","rgb(97, 76, 76)");
+			$(this).css("border","1px solid black");
+			$(this).css("color","#ffc107");
+		})
+		$("#searchMemberBtn2").on("mouseleave",function(){
+			$(this).css("background-color","");
+			$(this).css("color","");
+		})
+		$(".phoneChkSendBtn1").on("mouseover",function(){
+			$(this).css("background-color","rgb(97, 76, 76)");
+			$(this).css("border","1px solid black");
+			$(this).css("color","#ffc107");
+		})
+		$(".phoneChkSendBtn1").on("mouseleave",function(){
+			$(this).css("background-color","");
+			$(this).css("color","");
+		})
+		$(".phoneChkSendBtn2").on("mouseover",function(){
+			$(this).css("background-color","rgb(97, 76, 76)");
+			$(this).css("border","1px solid black");
+			$(this).css("color","#ffc107");
+		})
+		$(".phoneChkSendBtn2").on("mouseleave",function(){
+			$(this).css("background-color","");
+			$(this).css("color","");
+		})
+		$(".phoneChkBtn").on("mouseover",function(){
+			$(this).css("background-color","rgb(97, 76, 76)");
+			$(this).css("border","1px solid black");
+			$(this).css("color","#ffc107");
+		})
+		$(".phoneChkBtn").on("mouseleave",function(){
+			$(this).css("background-color","");
+			$(this).css("color","");
+		})
 		//인증번호 발송
-		$(".phoneChkSendBtn").click(function(){
+		$(".phoneChkSendBtn1").click(function(){
 			alert("인증번호가 발송되었습니다.");
 			var phone = $("[name=memberPhone]").val();
 			$.ajax({
@@ -113,6 +149,20 @@
 				}
 			});
 		});
+		$(".phoneChkSendBtn2").click(function(){
+			alert("인증번호가 발송되었습니다.");
+			var phone = $("[name=ownerPhone]").val();
+			$.ajax({
+				type : "POST",
+				url : "/memberPhoneCheck.do",
+				data : {phone : phone},
+				success : function(numStr) {
+                    $(".certifyNum2").val(numStr);
+                    $("#auth").show();
+					authTime2();
+				}
+			});
+		});
 		//인증번호 시간제한 로직
 		let PhoneNumStr = $(".certifyNum2").val();
 		
@@ -123,6 +173,13 @@
 				timeCount();
 			},1000);
 		}
+		function authTime2(){
+			$("#timeZone2").html("<span id='min2'>3</span> : <span id='sec2'>00</span>");
+			intervalId = window.setInterval(function(){
+				timeCount2();
+			},1000);
+		}
+		
 		function timeCount(){
 			const min = Number($("#min").text());
 			const sec = $("#sec").text();
@@ -143,8 +200,28 @@
 				}
 			}
 		}
+		function timeCount2(){
+			const min = Number($("#min2").text());
+			const sec = $("#sec2").text();
+			if(sec == "00"){
+				if(min == 0){
+						PhoneNumStr = null;
+						clearInterval(intervalId);
+				}else {
+						$("#min2").text(min-1);
+						$("#sec2").text(59);
+				}
+			}else {
+				const newSec = Number(sec)-1;
+				if(newSec<10){
+					$("#sec2").text("0"+newSec);
+				}else {
+					$("#sec2").text(newSec);
+				}
+			}
+		}
 		/*휴대폰 인증확인*/
-		 $(".phoneChkBtn").on("click",function(){
+		 $(".phoneChkBtn1").on("click",function(){
 	            const certifyNum = $("#certifyNum").val();
 	            const certifyNum2 = $(".certifyNum2").val();
 	            if(PhoneNumStr != null) {
@@ -160,8 +237,32 @@
 					$("#authMsg").css("color","red");
 	            }
 	      });
+		 $(".phoneChkBtn2").on("click",function(){
+	            const certifyNum = $("#certifyNum2").val();
+	            const certifyNum2 = $(".certifyNum2").val();
+	            if(PhoneNumStr != null) {
+		            if(certifyNum == certifyNum2) {
+		                alert("인증 확인되었습니다.");
+		                clearInterval(intervalId);
+		                phoneFlag = 1;
+		            }else {
+		                alert("인증번호를 다시 확인해주세요.");
+		            }
+	            }else {
+	            	$("#authMsg2").text("인증시간 만료");
+					$("#authMsg2").css("color","red");
+	            }
+	      });
 		
 		$("#searchMemberBtn").on("click",function(e){
+			if(phoneFlag != 1){
+				e.preventDefault();
+			}else if($("input") == "") {
+				alert("정보를 입력해주세요.");
+				e.preventDefault();
+			}
+		});
+		$("#searchMemberBtn2").on("click",function(e){
 			if(phoneFlag != 1){
 				e.preventDefault();
 			}else if($("input") == "") {

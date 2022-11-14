@@ -161,6 +161,18 @@ public class MemberDao {
 		return sqlSession.selectOne("member.searchNormalPw", member);
 	}
 
+	public int updatePwMember(Member m) {
+		return sqlSession.update("member.updateMember", m);
+	}
+
+	public int searchOwnerPw(Owner owner) {
+		return sqlSession.selectOne("owner.searchOwnerPw",owner);
+	}
+
+	public int updatePwOwner(Owner o) {
+		return sqlSession.update("owner.updatePwOwner",o);
+	}
+
 	
 
 }

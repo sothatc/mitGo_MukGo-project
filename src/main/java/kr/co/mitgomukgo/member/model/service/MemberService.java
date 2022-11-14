@@ -272,6 +272,18 @@ public class MemberService {
 		return dao.searchNormalPw(member);
 	}
 
+	public int updatePwMember(Member m) {
+		return dao.updatePwMember(m);
+	}
+
+	public int searchOwnerPw(Owner owner) {
+		return dao.searchOwnerPw(owner);
+	}
+
+	public int updatePwOwner(Owner o) {
+		return dao.updatePwOwner(o);
+	}
+
 
 
 

@@ -434,5 +434,37 @@ public class MemberController {
 		
 		return "member/updateMemberPw";
 	}
+	@RequestMapping(value="/updateNormalPw.do")
+	public String updateNormalPw(Member m) {
+		int result = service.updatePwMember(m);
+		if(result > 0) {
+			return "member/updatePwSuccess";
+		}else {
+			return "/";
+		}
+	}
+	@RequestMapping(value="/searchOwnerPw.do")
+	public String searchOwnerPw(Owner owner, Model model) {
+		int ownerNo = service.searchOwnerPw(owner);
+		System.out.println(ownerNo);
+		if(ownerNo != 0) {
+			model.addAttribute("result", false);
+			model.addAttribute("ownerNo", ownerNo);
+		}else {
+			model.addAttribute("result", true);
+			model.addAttribute("ownerNo", ownerNo);
+			
+		}
+		return "member/updateOwnerPw";
+	}
+	@RequestMapping(value="/updateOwnerPw.do")
+	public String updateOwnerPw(Owner o) {
+		int result = service.updatePwOwner(o);
+		if(result > 0) {
+			return"/member/updatePwSuccess";
+		}else {
+			return "/";
+		}
+	}
 }
 
