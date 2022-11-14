@@ -36,7 +36,6 @@
 	<div class="mid-nav" id="home">
 		<div class="container">
 			<div class="row justify-content-between">
-
 				<div id="font">
 					<li class="nav-item">
 						<a class="nav-link" href="/marketMain.do?reqPage=1&pCategory=10">밀키트</a>
@@ -75,7 +74,7 @@
 					</c:if>		
 				</h6>		
 			</div>
-			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">				
+			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center minHeight">				
 				<c:forEach items="${list }" var="ma">
 					<!-- 일단 전체 메뉴 부르라고 !=로 해놓음 나중에 받을 카테고리 넘버 == 로 수정하면됨  -->
 						<div class="col mb-5">
