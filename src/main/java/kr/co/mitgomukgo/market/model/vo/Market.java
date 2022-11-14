@@ -18,4 +18,6 @@ public class Market {
 	private String pImg;
 	private int pCategory;
 	private String cateName;
+	private String allergyInfo;
+	private String expiryDate;
 }
