@@ -43,7 +43,7 @@ public class StoreService {
 	}
 
 	public HashMap<String, Object> storeList(int reqPage) {
-		int numPerPage = 12;
+		int numPerPage = 1;
 		
 		int end = numPerPage * reqPage;
 		int start = (end - numPerPage) + 1;
@@ -61,7 +61,7 @@ public class StoreService {
 			totalPage = totalCnt / numPerPage + 1;
 		}
 		
-		int pageNaviSize = 2;
+		int pageNaviSize = 5;
 		int pageNo = 1;
 		
 		if(reqPage > 2) {
@@ -141,7 +141,7 @@ public class StoreService {
 		}else {
 			totalPage = totalCnt / numPerPage + 1;
 		}
-		int pageNaviSize = 2;
+		int pageNaviSize = 5;
 		int pageNo = 1;
 		
 		if(reqPage > 2) {
@@ -209,7 +209,7 @@ public class StoreService {
 		}else {
 			totalPage = totalCnt / numPerPage + 1;
 		}
-		int pageNaviSize = 2;
+		int pageNaviSize = 5;
 		int pageNo = 1;
 		
 		if(reqPage > 2) {
@@ -339,7 +339,7 @@ public class StoreService {
 		}else {
 			totalPage = totalCnt / numPerPage + 1;
 		}
-		int pageNaviSize = 2;
+		int pageNaviSize = 5;
 		int pageNo = 1;
 		
 		if(reqPage > 2) {

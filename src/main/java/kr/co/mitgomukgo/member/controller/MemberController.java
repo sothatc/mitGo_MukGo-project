@@ -474,5 +474,14 @@ public class MemberController {
 			return "/";
 		}
 	}
+	@RequestMapping(value="/contentModal1.do")
+	public String contentModal1() {
+		return "member/contentModal1";
+	}
+	@RequestMapping(value="/contentModal2.do")
+	public String contentModal2() {
+		return "member/contentModal2";
+	}
+	
 }
 

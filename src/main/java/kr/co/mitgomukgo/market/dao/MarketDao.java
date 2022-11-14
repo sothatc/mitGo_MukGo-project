@@ -60,9 +60,15 @@ public class MarketDao {
 		return (ArrayList<Notice>)list;
 	}
 
+
+	public int countMarketList(HashMap<String, Object> map) {
+		return sqlSession.selectOne("market.marketListCount",map);
+	}
+	
 	public ArrayList<Market> selectRandomMarketList() {
 		List list = sqlSession.selectList("selectRandomMarketList");
 		return (ArrayList<Market>) list;
+
 	}
 
 
