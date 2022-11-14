@@ -22,7 +22,6 @@ public class MainController {
 	public String mainFrm(Model model) {
 		ArrayList<Review> rList = storeService.selectRandomReviewList();
 		model.addAttribute("rList", rList);
-		System.out.println(rList);
 		return "main/main";
 	}
 }
