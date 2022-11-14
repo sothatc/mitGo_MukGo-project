@@ -76,7 +76,6 @@
 			</div>
 			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center minHeight">				
 				<c:forEach items="${list }" var="ma">
-					<!-- 일단 전체 메뉴 부르라고 !=로 해놓음 나중에 받을 카테고리 넘버 == 로 수정하면됨  -->
 						<div class="col mb-5">
 							<div class="card h-100">
 								<!-- Product image-->
@@ -88,7 +87,7 @@
 										<h5 id="font">${ma.storeName }<br>${ma.PName }
 										</h5>
 										<!-- Product price-->
-										${ma.PPrice }
+										${ma.PPrice } 원
 									</div>
 								</div>
 								<!-- Product actions-->
