@@ -425,5 +425,54 @@ public class MemberController {
 		}
 		return "member/searchIdResult";
 	}
+	@RequestMapping(value="/searchPwFrm.do")
+	public String searchPwFrm() {
+		return "/member/searchPwFrm";
+	}
+	@RequestMapping(value="/searchNormalPw.do")
+	public String searchNormalPw(Member member, Model model) {
+		int memberNo = service.searchNormalPw(member);
+		if(memberNo != 0) {
+			model.addAttribute("result", false);
+			model.addAttribute("memberNo", memberNo);
+		}else {
+			model.addAttribute("result", true);
+			model.addAttribute("memberNo", memberNo);
+		}
+		
+		return "member/updateMemberPw";
+	}
+	@RequestMapping(value="/updateNormalPw.do")
+	public String updateNormalPw(Member m) {
+		int result = service.updatePwMember(m);
+		if(result > 0) {
+			return "member/updatePwSuccess";
+		}else {
+			return "/";
+		}
+	}
+	@RequestMapping(value="/searchOwnerPw.do")
+	public String searchOwnerPw(Owner owner, Model model) {
+		int ownerNo = service.searchOwnerPw(owner);
+		System.out.println(ownerNo);
+		if(ownerNo != 0) {
+			model.addAttribute("result", false);
+			model.addAttribute("ownerNo", ownerNo);
+		}else {
+			model.addAttribute("result", true);
+			model.addAttribute("ownerNo", ownerNo);
+			
+		}
+		return "member/updateOwnerPw";
+	}
+	@RequestMapping(value="/updateOwnerPw.do")
+	public String updateOwnerPw(Owner o) {
+		int result = service.updatePwOwner(o);
+		if(result > 0) {
+			return"/member/updatePwSuccess";
+		}else {
+			return "/";
+		}
+	}
 }
 

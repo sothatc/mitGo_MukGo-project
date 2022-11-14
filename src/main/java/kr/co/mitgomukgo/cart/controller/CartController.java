@@ -21,9 +21,9 @@ public class CartController {
 	private CartService service;
 	
 	   @RequestMapping(value="/insertCart.do")
-	   public String insertCart(Cart c,int pNo) {
+	   public String insertCart(Cart c,int pNo, int cartQuan,Model model) {
 	      int result = service.insertCart(pNo, c);
-	      return "redirect:/cart.do?memberId="+c.getMemberId();
+	      return "redirect:/cart.do?memberNo="+c.getMemberNo();
 	   }
 	
 	   
@@ -35,5 +35,6 @@ public class CartController {
 	   }
 	
 }
+
 
 

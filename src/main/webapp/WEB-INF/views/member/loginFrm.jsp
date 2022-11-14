@@ -114,7 +114,7 @@
 		});
 		//아이디/ 비번찾기
 		$(".e").on("click", function(){
-			const popup = window.open("","searchMemberFrm","left=600px, top=300px, width=400px, height=350px, menubar=no, status=no, scrollbars=yes");
+			const popup = window.open("","searchMemberFrm","left=600px, top=300px, width=490px, height=350px, menubar=no, status=no, scrollbars=yes");
 			$("[name=searchMemberFrm]").attr("target","searchMemberFrm");
 			$("[name=searchMemberFrm]").submit();
 		});

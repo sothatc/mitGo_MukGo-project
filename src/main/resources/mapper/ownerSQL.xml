@@ -105,4 +105,14 @@
 		from owner
 		where owner_name = #{ownerName} and owner_phone = ${ownerPhone}
 	</select>
+	<select id="searchOwnerPw" parameterType="o" resultType="int">
+		select owner_no as ownerNo
+		from owner
+		where owner_id = #{ownerId} and owner_phone = ${ownerPhone}
+	</select>
+	<update id="updatePwOwner" parameterType="o">
+		update owner
+		set owner_pw = #{ownerPw}
+		where owner_no = #{ownerNo}
+	</update>
 </mapper>

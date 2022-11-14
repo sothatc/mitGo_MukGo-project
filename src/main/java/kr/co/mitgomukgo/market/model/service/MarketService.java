@@ -20,7 +20,7 @@ public class MarketService {
 		super();
 	}
 
-	public HashMap<String, Object> marketList(int reqPage) {
+	public HashMap<String, Object> marketList(int reqPage, int pCategory) {
 		int numPerPage = 9;
 		
 		int end = numPerPage * reqPage;
@@ -28,6 +28,7 @@ public class MarketService {
 		HashMap<String, Object> map = new HashMap<String,Object>();
 		map.put("start",start);
 		map.put("end",end);
+		map.put("pCategory",pCategory);
 		ArrayList<Market> list = dao.marketList(map);
 		
 		HashMap<String, Object> marketListMap = new HashMap<String, Object>();
@@ -65,6 +66,10 @@ public class MarketService {
 
 	public ArrayList<Notice> myPageNcList() {
 		return dao.myPageNcList();
+	}
+
+	public ArrayList<Market> selectRandomMarketList() {
+		return dao.selectRandomMarketList();
 	}
 
 

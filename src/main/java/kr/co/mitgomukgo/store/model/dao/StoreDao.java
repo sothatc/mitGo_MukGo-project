@@ -188,5 +188,10 @@ public class StoreDao {
 		return (ArrayList<Notice>)list;
 	}
 
+	public ArrayList<Review> selectRandomReviewList() {
+		List list = sqlSession.selectList("selectRandomReviewList");
+		return (ArrayList<Review>) list;
+	}
+
 
 }

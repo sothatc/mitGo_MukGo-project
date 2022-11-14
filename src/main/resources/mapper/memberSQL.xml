@@ -91,4 +91,10 @@
 		from member
 		where member_name = #{memberName} and member_phone = ${memberPhone}
 	</select>
+	<select id="searchNormalPw" parameterType="m" resultType="int">
+		select 
+			member_no as memberNo
+		from member
+		where member_id = #{memberId} and member_phone = ${memberPhone}
+	</select>
 </mapper>

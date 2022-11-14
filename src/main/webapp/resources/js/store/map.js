@@ -719,8 +719,8 @@ function initTmap() {
 		resettingMap();
 		marker_s = new Tmapv2.Marker(
 			{
-				position: new Tmapv2.LatLng(37.666567545861645,
-					126.9850380932383),
+				position: new Tmapv2.LatLng(S_lat,
+					S_lon),
 				icon: "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_s.png",
 				iconSize: new Tmapv2.Size(24, 38),
 				map: map
@@ -728,8 +728,8 @@ function initTmap() {
 
 		marker_e = new Tmapv2.Marker(
 			{
-				position: new Tmapv2.LatLng(37.403049076341794,
-					127.10331814639885),
+				position: new Tmapv2.LatLng(E_lat,
+					E_lon),
 				icon: "http://tmapapi.sktelecom.com/upload/tmap/marker/pin_r_m_e.png",
 				iconSize: new Tmapv2.Size(24, 38),
 				map: map
@@ -741,10 +741,10 @@ function initTmap() {
 			async: false,
 			data: {
 				"appKey": "l7xx85918c7e8848478d8513312430044e0d",
-				"startX": lon,
-				"startY": lat,
-				"endX": "127.10331814639885",
-				"endY": "37.403049076341794",
+				"startX": S_lon,
+				"startY": S_lat,
+				"endX": E_lon,
+				"endY": E_lat,
 				"reqCoordType": "WGS84GEO",
 				"resCoordType": "EPSG3857",
 				"startName": "출발지",

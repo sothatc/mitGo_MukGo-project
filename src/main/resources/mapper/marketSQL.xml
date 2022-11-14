@@ -2,18 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="market">
 	<select id="marketList" parameterType="map" resultType="ma">
-		select * from
-            (select row_number() over (order by rnum desc) as rnum1, rb.* from
+		select * from 
             (select rownum as rnum, b.* from
             (select
 			p_no as pNo,
 			owner_no as ownerNo,
 			(select store_Name from store s where s.owner_no = m.owner_no) as storeName,
+			(select cate_name from category c where c.cate_no = m.pcategory) as cateName,
 			p_name as pName,
 			pcategory as pCategory,
 			p_price as pPrice,
 			p_img as pImg
-		from market_product m order by pno desc)b)rb order by 3 desc)where rnum between #{start} and #{end}
+		from market_product m order by pno desc)b where pcategory = #{pCategory})where rnum between #{start} and #{end}
 	</select>
 	
 	<insert id="addMarketProduct" parameterType="ma">
@@ -94,5 +94,19 @@
 		p_name as pName
 	from market_product
 	where store_no = #{_parameter}
+	</select>
+	
+	<select id="selectRandomMarketList" resultType="ma">
+		select * from(select 
+            p_no as pNo,
+			m.owner_no as ownerNo,
+			p_name as pName,
+			p_price as pPrice,
+			p_img as pImg,
+			s.store_no as storeNo,
+			pCategory,
+            s.store_name as storeName
+         from market_product m, store s 
+         where m.store_no = s.store_no order by DBMS_RANDOM.RANDOM) where rownum <![CDATA[<]]> 6
 	</select>
 </mapper>

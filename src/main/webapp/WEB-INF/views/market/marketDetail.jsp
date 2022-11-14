@@ -113,14 +113,15 @@
     //---------- 인원수 늘리기
     var countNumVal = $(".peopleTd").text();
     var price = "${ma.PPrice}";
-    $(".priceSpan").text(countNumVal*price);
+    $(".priceSpan").text((countNumVal*price).toLocaleString('ko-KR'));
     let count = 1;
 	
     $("#up").on("click", function(e) {
     	count++;
     	$(".countNum").text(count);
     	var countNumVal = $(".peopleTd").text();
-        $(".priceSpan").text(countNumVal*price);
+        const sumPrice = (countNumVal*price).toLocaleString('ko-KR');
+        $(".priceSpan").text(sumPrice);
     });
           
     $("#down").on("click", function(e) {
@@ -130,7 +131,9 @@
    	 	count--;
     	$(".countNum").text(count);
     	var countNumVal = $(".peopleTd").text();
-        $(".priceSpan").text(countNumVal*price);
+        const sumPrice = (countNumVal*price).toLocaleString('ko-KR');
+        $(".priceSpan").text(sumPrice);
+        
     }); 
     
 

@@ -26,9 +26,6 @@
 					<a href="/updateMemberFrm.do">내 정보 수정</a>
 				</div>
 				<div>
-					<a href="/logout.do">로그아웃</a>
-				</div>
-				<div>
 					<a href="#">회원 탈퇴</a>
 				</div>
 			</li>
