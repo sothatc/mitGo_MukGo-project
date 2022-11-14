@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,16 +17,16 @@
 			</c:when>
 			<c:otherwise>
 				<div class="updatePwTitle">비밀번호 변경</div>
-				<form action="/updateNormalPw.do" method="post">
-					<input type="hidden" class="memberNo" name="memberNo" value="${memberNo }">
+				<form action="/updateOwnerPw.do" method="post">
+					<input type="hidden" class="ownerNo" name="ownerNo" value="${ownerNo }">
 					<div class="updatePwBox">
-						<label class="label" for="memberPw">대/소문자/숫자 포함 최소 8자리(특수기호 제외)</label>
-						<input type="password" name="memberPw" id="memberPw">
+						<label class="label" for="ownerPw">대/소문자/숫자 포함 최소 8자리(특수기호 제외)</label>
+						<input type="password" name="ownerPw" id="ownerPw">
 					</div>
 					<p class="text-note"></p>
 					<div class="updatePwBox">
-						<label class="label" for="reMemberPw">한번 더 입력해 주세요.</label>
-					<input type="password" name="reMemberPw" id="reMemberPw">
+						<label class="label" for="reOwnerPw">한번 더 입력해 주세요.</label>
+					<input type="password" name="reOwnerPw" id="reOwnerPw">
 					</div>
 					<p class="text-note"></p>
 					<br>
@@ -39,7 +38,7 @@
 		</c:choose>
 	</div>
 </body>
-
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
 	$(".updatePwBtn").on("mouseover",function(){
 		$(this).css("background-color","rgb(97, 76, 76)");
@@ -61,7 +60,7 @@
 		*/
 		//비밀번호 유효성 검사
 		const pwReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-		const pw = $("#memberPw");
+		const pw = $("#ownerPw");
 		const pwValue = pw.val();
 		const pwComment = pw.parent().next();
 		if(pwReg.test(pwValue)){
@@ -73,7 +72,7 @@
 		}
 		// 비밀번호 확인 검사
 		const pwVal = pw.val();
-		const pwChk = $("#reMemberPw");
+		const pwChk = $("#reOwnerPw");
 		const pwChkVal = pwChk.val();
 		const pwChkComment = pwChk.parent().next();
 		if(pwChkVal == pwVal) {
