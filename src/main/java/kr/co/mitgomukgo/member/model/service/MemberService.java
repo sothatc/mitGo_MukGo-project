@@ -546,6 +546,10 @@ public class MemberService {
 		return dao.updatePwOwner(o);
 	}
 
+	public int deleteMember(int memberNo) {
+		return dao.deleteMember(memberNo);
+	}
+
 
 
 

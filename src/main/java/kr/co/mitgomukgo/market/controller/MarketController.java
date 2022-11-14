@@ -63,9 +63,10 @@ public class MarketController {
 	
 	// 맛집 상세 보기
 	@RequestMapping(value = "/marketDetail.do")
-	public String marketDetail(int pNo, Model model) {
-		Market ma = service.selectOneMarket(pNo);
-		model.addAttribute("ma", ma);
+	public String marketDetail(int pNo, String bookMarkId, Model model) {
+		HashMap<String, Object> map = service.selectOneMarket(pNo, bookMarkId); // 해쉬맵으로 담아서 한꺼번에 가져오기
+		model.addAttribute("ma", map.get("ma"));
+		model.addAttribute("bm", map.get("bm"));
 		return "market/marketDetail";
 	}
 	
@@ -197,3 +198,4 @@ public class MarketController {
 	}
 
 }
+
