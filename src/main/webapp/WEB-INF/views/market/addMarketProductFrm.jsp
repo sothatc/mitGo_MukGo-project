@@ -143,6 +143,14 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 							<span class="comment" style="font-size: 12px; padding-left: 10px;"></span>
 						</div>
 						<div>
+							<label for="inputName">알러지 정보를 입력해주세요</label>
+							<input type="text" id="inputallergyInfo" name="allergyInfo" placeholder="본 제품은 돼지고기, 닭고기, 우유, 계란을 사용한 제품과 같은 제조시설에서 제조하고 있습니다." value="본 제품은 돼지고기, 닭고기, 우유, 계란을 사용한 제품과 같은 제조시설에서 제조하고 있습니다." required oninvalid="this.setCustomValidity('알러지 정보를 입력하세요')" oninput="this.setCustomValidity('')">
+						</div>
+						<div>
+							<label for="inputName">유통기한 정보를 입력해주세요</label>
+							<input type="text" id="expiryDate" name="expiryDate" placeholder="수령일 포함 최소 3일 남은 제품을 보내드립니다." value="수령일 포함 최소 3일 남은 제품을 보내드립니다." required oninvalid="this.setCustomValidity('유통기한 정보를 입력하세요')" oninput="this.setCustomValidity('')">
+						</div>
+						<div>
 							<label for="textarea">상품을 설명해주세요</label>
 							<br>
 							<textarea class="form-control" name="pContent" id="textarea" rows="4" required oninvalid="this.setCustomValidity('상세설명을 입력하세요')" oninput="this.setCustomValidity('')" style="margin: 10px 0;"></textarea>
