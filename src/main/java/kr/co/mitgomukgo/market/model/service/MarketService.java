@@ -21,7 +21,7 @@ public class MarketService {
 	}
 
 	public HashMap<String, Object> marketList(int reqPage, int pCategory) {
-		int numPerPage = 9;
+		int numPerPage = 8;
 		
 		int end = numPerPage * reqPage;
 		int start = (end - numPerPage) + 1;
@@ -31,8 +31,49 @@ public class MarketService {
 		map.put("pCategory",pCategory);
 		ArrayList<Market> list = dao.marketList(map);
 		
+		int totalCnt = dao.countMarketList(map);
+		int totalPage = 0;
+		if(totalCnt % numPerPage == 0) {
+			totalPage = totalCnt / numPerPage;
+		}else {
+			totalPage = totalCnt / numPerPage + 1;
+		}
+		int pageNaviSize = 5;
+		int pageNo = 1;
+		
+		if(reqPage > 2) {
+			pageNo = reqPage - 1;
+		}
+		String pageNavi = "";
+		if(pageNo != 1) {
+			pageNavi += "<a href='/marketMain.do?reqPage=" +(pageNo - 1)+"&pCategory="+pCategory+"'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_left\r\n" + 
+					"            </span></a>";
+		}
+		for(int i = 0; i < pageNaviSize; i++) {
+			if(reqPage == pageNo) {
+				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
+			}else {
+				pageNavi += "<a href='/marketMain.do?reqPage=" +(pageNo - 1)+"&pCategory="+pCategory+"'><span>" + (pageNo) + "</span></a>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		
+		if(end <= totalPage) {
+			pageNavi += "<a href='/marketMain.do?reqPage=" +(pageNo - 1)+"&pCategory="+pCategory+"'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_right\r\n" + 
+					"            </span></a>";
+		}
 		HashMap<String, Object> marketListMap = new HashMap<String, Object>();
 		marketListMap.put("list",list);
+		marketListMap.put("reqPage",reqPage);
+		marketListMap.put("pageNavi",pageNavi);
+		marketListMap.put("totalPage",totalPage);
+		marketListMap.put("pageNo",pageNo);
+		
 		return marketListMap;
 	}
 
