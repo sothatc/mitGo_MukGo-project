@@ -116,7 +116,7 @@
 }
 
 .priceDiv1{
-	width: 150px;
+	width: 200px;
 	float:right;
 }
 
@@ -147,6 +147,20 @@
 	padding:0;
 }
 
+#loginMarketBtn{
+	width: 550px;
+	height:44px;
+	line-height: 40px;
+	margin-left: 4%;
+	margin-top:10px;
+	background-color: rgb(51,51,51);
+	color:white;
+	border-radius: 15px;
+	display:inline;
+	float:left;
+	padding:0;
+}
+
 .cartBtn:hover{
 	width: 550px;
 	height:44px;
@@ -161,9 +175,23 @@
 	padding:0;
 }
 
+#loginMarketBtn:hover{
+	width: 550px;
+	height:44px;
+	line-height: 40px;
+	margin-left: 4%;
+	margin-top:10px;
+	background-color:white;
+	color:rgb(51,51,51);
+	border-radius: 15px;
+	display:inline;
+	float:left;
+	padding:0;
+}
+
 
 .contentWrap2{
-	background-color: red;
+	background-color: lightgray;
 	width: 1250px;
 	height: 2000px;
 	margin: 0 auto;

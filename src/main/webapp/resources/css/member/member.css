@@ -47,13 +47,14 @@ li{
 
 /*일반회원 예약 내역*/
 #content{
-    float: right;
+    float: left;
     margin-right: 80px;
     padding-top: 15px;
+    padding-left: 20px;
 }
 
 .table{
-	width: 750px;
+	width: 120%;
 }
 
 
@@ -61,6 +62,10 @@ li{
 #check-container{
 	text-align: center;
 	margin-top: 50px;
+	border: 2px solid #ffc107;
+	margin-left: 8px;
+	margin-right: 8px;
+	border-radius: 8px;
 }
 #check-container>div>span{
 	font-size: 20px;
@@ -74,11 +79,17 @@ li{
 	color: #fff;
 	transition: 0.5s;
 	cursor:pointer;
+	border-radius: 7px;
+	margin-bottom: 5px;
 }
+
 .id-wrap>.checkId{
 	height: 30px;
 }
-.id-wrap>.checkId+br+button{
+.id-wrap>.ownerCheckId{
+	height: 30px;
+}
+.searchIdBtn{
 	width: 60px;
 	height: 35px;
 	margin-top: 10px;
@@ -87,4 +98,6 @@ li{
 	color: #fff;
 	transition: 0.5s;
 	cursor:pointer;
+	border-radius: 7px;
+	margin-bottom: 5px;
 }

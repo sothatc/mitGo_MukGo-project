@@ -8,7 +8,48 @@
 <title>관리자 마이페이지</title>
 </head>
 <body>
+<style type="text/css">
 
+	#pageNavi{
+		width: 800px;
+	    text-align: center;
+	    margin: 0 auto;
+	    display: flex;
+	    justify-content: center;
+	    margin-top: 50px;
+	    margin-bottom: 50px;
+	    }
+	    
+	#pageNavi>a{
+		display: inline-block;
+		width: 30px;
+		height: 30px;
+		text-decoration: none;
+		font-size: 20px;
+	}
+
+	#pageNavi>a:hover{
+	    color: #212529;
+	}
+	
+	#pageNavi>span{
+		display: inline-block;
+	    width: 30px;
+	    line-height:30px;
+	    text-decoration: none;
+	    font-size: 20px;
+	}
+	
+	.numberDeco{
+		background-color: gray;
+		color: white;
+		border-radius: 100%;
+		text-align: center;
+		padding:0;
+	}
+	
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -27,8 +68,8 @@
         <div class="sidebar-1">
             <ul class="category">
                 <li>
-                    <div><a href="/memberManage.do" style="color:black;">회원관리</a></div>
-                    <div><a href="/adminMemberManage.do" style="color:black;">업주관리</a></div>
+                    <div><a href="/memberManage.do?reqPage=1" style="color:black;">회원관리</a></div>
+                    <div><a href="/adminMemberManage.do?reqPage=1" style="color:black;">업주관리</a></div>
                     <div><a href="/logout.do" style="color:black;">로그아웃</a></div>
                 </li>
             </ul>
@@ -46,18 +87,18 @@
             <h4 style="margin: 0;">회원관리</h4>
             <!---------- 검색조건 ---------->
             <div class="searchWrap" style="width:800px; margin-top:10px; margin-bottom: 20px;">
-            	<form action="/searchMember.do" method="post">
+            	<form action="/searchMember.do?reqPage=1" method="post">
 					<select name="type" style="width:100px; height:32px;">
 						<option value="id">아이디</option>
 						<option value="name">이름</option>
 					</select>
-					<input type="text" name="keyword" style="height:32px;">
-					<input type="submit" value="검색" style="background-color: rgb(51,51,51); color:white; width:40px; border-radius: 5px;">
+					<input type="text" name="keyword" id="keywordInput" style="height:32px;">
+					<input type="submit" value="검색" id="searchBtn" style="background-color: rgb(51,51,51); color:white; width:40px; border-radius: 5px;">
             	</form>
             </div>
             <!---------- 목록 테이블 --------->	
 	            <table class="tablewrap" style="text-align: center; vertical-align: middle;">
-	                <tr style="height: 50px; border-bottom: 2px solid black"">
+	                <tr style="height: 50px; border-bottom: 2px solid black">
 	                    <th>회원번호</th>
 	                    <th>이름</th>
 	                    <th>아이디</th>
@@ -74,11 +115,14 @@
 	                </tr>
 	                </c:forEach>
 	            </table>
-	            
+	            <div id="pageNavi">${pageNavi }</div>
         </div>
     </article>
 </div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script>		
+	
+</script>
 </body>
 </html>

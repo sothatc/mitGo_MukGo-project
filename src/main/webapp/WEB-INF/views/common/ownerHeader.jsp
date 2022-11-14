@@ -16,7 +16,6 @@
 .accordion-div {
 	padding: 3px 1.25rem !important;
 	padding-left: 40px !important;
-	display: none;
 }
 
 .on {
@@ -98,9 +97,6 @@
 					<a href="/updateOwnerFrm.do">내 정보 수정</a>
 				</div>
 				<div class="etc">
-					<a href="/ownerLogout.do">로그아웃</a>
-				</div>
-				<div class="etc">
 					<a href="#">회원 탈퇴</a>
 				</div>
 			</li>
@@ -110,7 +106,7 @@
 		<ul class="category">
 			<li>
 				<h4>공지사항</h4>
-				<c:forEach items="${list }" var="n">
+				<c:forEach items="${ncList }" var="n">
 				<div class="list-wrap">
 					<a href="/noticeDetail.do?noticeNo=${n.noticeNo }" class="titleShow">${n.noticeTitle }</a>
 				</div>

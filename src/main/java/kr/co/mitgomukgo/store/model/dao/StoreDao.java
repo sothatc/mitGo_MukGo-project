@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.mitgomukgo.market.model.vo.Market;
 import kr.co.mitgomukgo.member.model.vo.Owner;
+import kr.co.mitgomukgo.notice.model.vo.Notice;
 import kr.co.mitgomukgo.store.model.vo.Menu;
 import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Review;
@@ -180,6 +181,16 @@ public class StoreDao {
 
 	public int countTagList(HashMap<String, Object> map) {
 		return sqlSession.selectOne("store.countSearchTagList",map);
+	}
+
+	public ArrayList<Notice> myPageNcList() {
+		List list = sqlSession.selectList("notice.myPageNcList");
+		return (ArrayList<Notice>)list;
+	}
+
+	public ArrayList<Review> selectRandomReviewList() {
+		List list = sqlSession.selectList("selectRandomReviewList");
+		return (ArrayList<Review>) list;
 	}
 
 

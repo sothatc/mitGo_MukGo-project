@@ -24,6 +24,7 @@ import com.google.gson.Gson;
 import common.FileRename;
 import kr.co.mitgomukgo.market.model.service.MarketService;
 import kr.co.mitgomukgo.market.model.vo.Market;
+import kr.co.mitgomukgo.notice.model.vo.Notice;
 import kr.co.mitgomukgo.store.model.vo.Menu;
 import kr.co.mitgomukgo.store.model.vo.Review;
 import kr.co.mitgomukgo.store.model.vo.Store;
@@ -42,11 +43,15 @@ public class MarketController {
 	}
 
 	@RequestMapping(value = "/marketMain.do")
-	public String marketMainFrm(int reqPage, Model model) {
-		HashMap<String, Object> map = service.marketList(reqPage);
+	public String marketMainFrm(int reqPage, int pCategory, Model model) {
+		HashMap<String, Object> map = service.marketList(reqPage, pCategory);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
-
+		model.addAttribute("pCategory", pCategory);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
+		
 		return "market/marketMain";
 	}
 
@@ -67,7 +72,9 @@ public class MarketController {
 	
 
 	@RequestMapping(value = "/addMarketProductFrm.do")
-	public String addMarketProductFrm() {
+	public String addMarketProductFrm(Model model) {
+		ArrayList<Notice> ncList = service.myPageNcList();
+		model.addAttribute("ncList", ncList);
 		return "market/addMarketProductFrm";
 	}
 
@@ -131,6 +138,8 @@ public class MarketController {
 
 	@RequestMapping(value = "/marketProductListFrm.do")
 	public String marketProductListFrm(Model model, @SessionAttribute Store s) {
+		ArrayList<Notice> ncList = service.myPageNcList();
+		model.addAttribute("ncList", ncList);
 		ArrayList<Market> list = service.marketProductList(s.getStoreNo());
 		model.addAttribute("list", list);
 		return "market/marketProductList";

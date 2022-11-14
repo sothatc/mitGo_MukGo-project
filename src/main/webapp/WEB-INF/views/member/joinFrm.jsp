@@ -48,7 +48,7 @@
                             <span class="tit">비밀번호</span>
                             <div class="cnt">
                                 <div class="input01">
-                                    <label class="label" for="memberPw">대/소문자와 숫자를 포함한 최소 8자리를 입력해주세요.</label>
+                                    <label class="label" for="memberPw">대/소문자와 숫자를 포함한 최소 8자리를 입력해주세요.(특수기호x)</label>
                                     <input type="password" id="memberPw" name="memberPw">
                                 </div>
                                 <p class="text-note"></p>
@@ -111,21 +111,20 @@
                                 <input type="checkbox" id="allow1" class="normal" name="allow1">
                                 <label for="allow1">[필수] 이용약관 동의</label>
                             </div>
-                            <a href="javascript:void()" class="allowContent" style="display: inline-block;">[내용보기]</a>
+                            <a href="javascript:void()" class="allowContent contentModal1" style="display: inline-block;">[내용보기]</a>
                         </div>
                         <div class="chk-box2">
                             <div style="display: inline-block;">
                                 <input type="checkbox" id="allow2" class="normal" name="allow1">
                                 <label for="allow2">[필수] 개인 정보 수집 및 이용에 동의</label>
                             </div>
-                            <a href="#" class="allowContent" style="display: inline-block;">[내용보기]</a>
+                            <a href="javascript:void()" class="allowContent contentModal2" style="display: inline-block;">[내용보기]</a>
                         </div>
                         <div class="chk-box2">
                             <div style="display: inline-block;">
                                 <input type="checkbox" id="allow3" class="normal" name="allow1">
                                 <label for="allow3">[필수] 만 14세 이상</label>
                             </div>
-                            <a href="#" class="allowContent" style="display: inline-block;">[내용보기]</a>
                         </div>
                     </div>
                 </div>
@@ -134,13 +133,22 @@
                 <input type="submit" id="joinBtn" value="회원가입">
             </div>
         </form>
+        <form name="contentModal1" action="/contentModal1.do"></form>
+        <form name="contentModal2" action="/contentModal2.do"></form>
     </div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	
 	<script>
 		/*약관 내용*/
-		$(".allowContent").on("click", function(){
-			const popup = window.open("","allowContent","left=700px, top=300px, width=500px, height=600px, menubar=no, status=no, scrollbars=yes");
+		$(".contentModal1").on("click", function(){
+			const popup = window.open("","contentModal1","left=500px, top=300px, width=550px, height=600px, menubar=no, status=no, scrollbars=yes");
+			$("[name=contentModal1]").attr("target","contentModal1");
+			$("[name=contentModal1]").submit();
+		});
+		$(".contentModal2").on("click", function(){
+			const popup = window.open("","contentModal2","left=500px, top=300px, width=550px, height=600px, menubar=no, status=no, scrollbars=yes");
+			$("[name=contentModal2]").attr("target","contentModal2");
+			$("[name=contentModal2]").submit();
 		});
 		
 		
@@ -260,7 +268,7 @@
 			//비밀번호 유효성 검사
 			const pwReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 			const pw = $("#memberPw");
-			pwValue = pw.val();
+			const pwValue = pw.val();
 			const pwComment = pw.parent().next();
 			if(pwReg.test(pwValue)){
 				pwComment.text("");

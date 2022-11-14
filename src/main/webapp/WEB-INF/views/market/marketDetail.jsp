@@ -45,6 +45,7 @@
 		            <span class="categorySpan"></span>
 		            <span class="storeNameSpan">${ma.PName}</span>
 		            
+
 		            <c:choose>
 		            	<c:when test="${empty bm }">
 		            		<c:choose> 
@@ -93,8 +94,11 @@
 		            
 		            
 		            <a class="material-symbols-rounded share pointer" id="share">share</a>
+		            <a class="material-symbols-rounded share pointer" id="share" href="javascript:shareMessage()">share</a>
+
          		</div>
          		<div class="tableDiv" >
+         		
          			<table class="productTable">
          				<tr>
          					<th>카테고리</th>
@@ -139,18 +143,40 @@
 	         			<span>원</span>
          			</div>
          		</div>
-         		<div class="btnWrap">
-         			<button type="submit" class="cartBtn">장바구니</button>
-         		</div>
+         		<c:choose>
+         			<c:when test="${empty sessionScope.m && empty sessionScope.o}">
+                        <a href="/loginFrm.do">
+	                         <button id="loginMarketBtn">로그인</button>
+                      	</a>
+         			</c:when>
+         			<c:otherwise>
+         			<form action="">
+         				<div class="btnWrap">
+		         			<button type="submit" class="cartBtn">장바구니</button>
+		         			<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
+		         			<input type="hidden" name="allPrice" class="allPrice">
+		         			<input type="hidden" name="pNumber" class="pNumber">
+		         			<input type="hidden" name="count" class="count">
+		         		</div>
+		         	</form>
+         			</c:otherwise>
+         		</c:choose>
          	</div>
+         	
 	</div> <!-- contentWrap 종료 -->
 	
 	<!-- 상품 상세 내용 div -->
-	<div class="contentWrap2">
-		
+	<div class="contentWrap2" style="font-family:Gowun Dodum;">
+		${ma.PContent}
 	</div>
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+	
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
+
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.0/kakao.min.js" integrity="sha384-PFHeU/4gvSH8kpvhrigAPfZGBDPs372JceJq3jAXce11bVA6rMvGWzvP4fMQuBGL" crossorigin="anonymous"></script>
+    <script>
+    	Kakao.init('c089c8172def97eb00c07217cae17495');
+    </script>
 
 
 	<script>
@@ -184,14 +210,15 @@
     //---------- 인원수 늘리기
     var countNumVal = $(".peopleTd").text();
     var price = "${ma.PPrice}";
-    $(".priceSpan").text(countNumVal*price);
+    $(".priceSpan").text((countNumVal*price).toLocaleString('ko-KR'));
     let count = 1;
 	
     $("#up").on("click", function(e) {
     	count++;
     	$(".countNum").text(count);
     	var countNumVal = $(".peopleTd").text();
-        $(".priceSpan").text(countNumVal*price);
+        const sumPrice = (countNumVal*price).toLocaleString('ko-KR');
+        $(".priceSpan").text(sumPrice);
     });
           
     $("#down").on("click", function(e) {
@@ -201,7 +228,9 @@
    	 	count--;
     	$(".countNum").text(count);
     	var countNumVal = $(".peopleTd").text();
-        $(".priceSpan").text(countNumVal*price);
+        const sumPrice = (countNumVal*price).toLocaleString('ko-KR');
+        $(".priceSpan").text(sumPrice);
+        
     }); 
     
 
@@ -221,6 +250,27 @@
 		$(".categoryTd").text("냉동식품");
 	}
 	
-	</script>
+	
+	var pNo = "${ma.PNo}";
+	//---------- 공유하기 버튼
+	Kakao.Share.createDefaultButton({
+	  container: '#share',
+	  objectType: 'text',
+	  text:
+	    '우리집도 맛집이라고? 이제는 집에서도 즐기자!',
+	  link: {
+	    mobileWebUrl: 'http://192.168.10.26/marketDetail.do?pNo='+pNo,
+	    webUrl: 'http://192.168.10.26/marketDetail.do?pNo='+pNo
+	  },
+	});
+	
+	
+	//장바구니 클릭 시 hidden으로 넘겨주는 값
+	$(".cartBtn").on("click", function(){
+	 	$(".allPrice").attr("value",count*price);
+	 	$(".pNumber").attr("value",pNo);
+	 	$(".count").attr("value",count);
+	});
+		</script>
 </body>
 </html>

@@ -29,6 +29,7 @@ height: 100%;
 .star{
 	color: rgb(255, 83, 86) !important;
 }
+
 </style>
 
 <body onload="initTmap()">
@@ -65,8 +66,8 @@ height: 100%;
          </div>
       </div>
 
-      <div class="content-wrap2" style="width:1200px; margin: 0 auto;">
-         <div class="content-wrap2-1">
+      <div class="content-wrap2" style="width:1200px; margin: 0 auto; background-color: rgba(255, 255, 255, 0.06);">
+         <div class="content-wrap2-1" >
             <!-- 사진 슬라이드 영역 -->
             <div class="photo-wrap">
                
@@ -88,19 +89,19 @@ height: 100%;
                <table class="w3-table w3-bordered" id="infoTable" style="font-family:Gowun Dodum; width: 550px;">
                   <tr>
                      <th style="width:120px;">주소</th>
-                     <td colspan="3" class="addressTd" >${s.address }</td>
+                     <td colspan="3" class="addressTd" style="color:black;">${s.address }</td>
                   </tr>
                   <tr>
                      <th>전화번호</th>
-                     <td colspan="3" class="phoneTd">${s.phone }</td>
+                     <td colspan="3" class="phoneTd" style="color:black;">${s.phone }</td>
                   </tr>
                   <tr>
                      <th>운영시간</th>
-                     <td colspan="3" class="openHourTd">${s.openHour }</td>
+                     <td colspan="3" class="openHourTd" style="color:black;">${s.openHour }</td>
                   </tr>
                   <tr>
                      <th>휴일</th>
-                     <td colspan="3" class="closedDayTd">${s.closedDay}</td>
+                     <td colspan="3" class="closedDayTd" style="color:black;">${s.closedDay}</td>
                   </tr>
 
                   <tr style="height: 47px;">
@@ -113,7 +114,7 @@ height: 100%;
                         </div>
                      </td>
                      <td colspan="2">
-                        <input type="text" id="datePicker" style="border:none;">
+                        <input type="text" id="datePicker" style="border:none;" placeholder="예약날짜선택">
                      </td>
                   </tr>
                   <tr style="height: 47px;">
@@ -230,50 +231,60 @@ height: 100%;
 			</div>
 		 </div>
 		 
+		 
          <!----- 마켓 상품 부분 ----->
-         <div class="market-wrap" style="margin-top:50px; width:1200px; height:300px;">
-	         <div class="menuTitle" style="margin: 0 auto;">MARKET</div>
-	         
-	         <c:forEach items="${mList }" var="ma">
-	            <div class="w3-card-4" id="marketWrap">
-	               <a href="#"><img src="/resources/upload/market/${ma.PImg }" style="width: 100%"></a>
-	               <div class="w3-container w3-center">
-	                  <p>${ma.PName }</p>
-	               </div>
-	            </div>
-			</c:forEach>
-		</div>
+		<c:choose>
+              <c:when test="${!empty mList }">
+		         <div class="market-wrap" style="margin-top:50px; width:1200px; height:300px;">
+			         <div class="menuTitle" style="margin: 0 auto;">MARKET</div>
+			         
+			         <c:forEach items="${mList }" var="ma">
+			            <div class="w3-card-4" id="marketWrap">
+			               <a href="/marketDetail.do?pNo=${ma.PNo }"><img src="/resources/upload/market/${ma.PImg }" style="width: 100%"></a>
+			               <div class="w3-container w3-center">
+			                  <p>${ma.PName }</p>
+			               </div>
+			            </div>
+					</c:forEach>
+				</div>
+		    </c:when>
+        </c:choose>	
+		
 		
 		
         <!--------- 후기 시작 ----->
-        <div class="review-wrap" style="margin:50px 0;">
-            <div class="menuTitle" style="width:100px; margin:0 auto;">REVIEW</div>
-            <ul class="w3-ul w3-card-4" id="reviewWrapUl" style="height:content-fit;">
-            <c:forEach items="${rList }" var="r">
-
-				<li class="w3-bar" style="height:content-fit;">
-                  <div class="w3-bar-1" style="margin:0; height: content-fit;">
-                     <img src="/resources/upload/review/${r.reviewImg }" class="w3-hide-small" style="float: left; width:35%; height:100%;">
-                     <div class="w3-bar-item" id="w3-bar-item" style="width:60%; height: content-fit; padding:0; margin-left:5%; position: relative;">
-                        <div style="color: rgb(255, 83, 86); float:left;"><c:forEach begin="1" step="1" end="${r.rating }" varStatus="i">★</c:forEach></div>
-                        <div>${r.rating }</div>
-                        <div class="w3-large" style="font-weight: 700;">${r.writer }</div>
-                        <div class="reviewContent" style="display: inline; float: left; height:150px; overflow: auto;">${r.content}</div>
-                        <div class="regDate" style="position: absolute; bottom: 0px; right: 0px;">${r.enrollDate }</div>
-                     </div>
-                  </div>
-               </li>
-               
-			</c:forEach>
-            </ul>
-        </div>
+        <c:choose>
+              <c:when test="${!empty rList }">
+			        <div class="review-wrap" style="margin:50px 0;">
+			            <div class="menuTitle" style="width:100px; margin:0 auto;">REVIEW</div>
+			            <ul class="w3-ul w3-card-4" id="reviewWrapUl" style="height:content-fit;">
+			            <c:forEach items="${rList }" var="r">
+			
+							<li class="w3-bar" style="height:content-fit;">
+			                  <div class="w3-bar-1" style="margin:0; height: content-fit;">
+			                     <img src="/resources/upload/review/${r.reviewImg }" class="w3-hide-small" style="float: left; width:35%; height:100%;">
+			                     <div class="w3-bar-item" id="w3-bar-item" style="width:60%; height: content-fit; padding:0; margin-left:5%; position: relative;">
+			                        <div style="color: rgb(255, 83, 86); float:left;"><c:forEach begin="1" step="1" end="${r.rating }" varStatus="i">★</c:forEach></div>
+			                        <div>${r.rating }</div>
+			                        <div class="w3-large" style="font-weight: 700;">${r.writer }</div>
+			                        <div class="reviewContent" style="display: inline; float: left; height:150px; overflow: auto;">${r.content}</div>
+			                        <div class="regDate" style="position: absolute; bottom: 0px; right: 0px;">${r.enrollDate }</div>
+			                     </div>
+			                  </div>
+			               </li>
+			               
+						</c:forEach>
+			            </ul>
+			        </div>
+        	</c:when>
+        </c:choose>	
         <!--------후기 끝 -->
          
       </div><!-- testDiv 끝 -->
       
       
       <!-- 모달 부분 -->
-      <div class="modal-wrap hidden">
+      <div class="modal-wrap hidden" id="modal">
           <div class="modal-box">
               <div class="modal-title">예약 정보</div>
               <div class="modal-contents">
@@ -304,13 +315,16 @@ height: 100%;
                   <input type="hidden" name="eatTime" class="eatTime">
                   <input type="hidden" name="eatNum" class="eatNum">
                   <div class="explanation">* 가게에서 최종 확정 시 예약이 확정됩니다.</div>
-                  <button class="closeModal pointer">닫기</button>
+                  <button class="closeModal pointer" onclick="hideModal();" type="button" >닫기</button>
                   <button class="reserveBtn pointer" type="submit">예약하기</button>
               </form>
               </div>
           </div>
        </div>
        </div>
+       
+       
+       <div style="margin-bottom:50px;"></div> <!-- 리뷰/마켓 제품이 없을 시 바로 하단에 푸터 방지 위한 div-->
        <jsp:include page="/WEB-INF/views/common/footer.jsp" />
        
        
@@ -357,6 +371,9 @@ height: 100%;
       <script>
        //------------------------------------------------------------------------------------------------------------------------------
       
+
+               
+               
        //----------카테고리
        // 1:한식 , 2: 양식, 3: 일식, 4: 중식, 5:분식, 6:육류, 7:씨푸드,8:디저트,9:기타
        var categoryNum=${s.category};
@@ -416,8 +433,8 @@ height: 100%;
       });
          
       $(function() {
-      		//데이트피커 생성 및 오늘날짜 이전 선택 불가
-            $("#datePicker").datepicker({minDate:0});
+      		//데이트피커 생성 및 당일 선택 불가
+            $("#datePicker").datepicker({minDate:1});
       });
          
       //---------- 휴일 데이터피커 비활성화
@@ -702,13 +719,10 @@ height: 100%;
                }
          });
             
-         //예약하기 모달 닫기 버튼 클릭 시
-         $(".closeModal").on("click",function(){
-         		modal.classList.add("hidden");
-         });
-      
-
          
+      function hideModal(){
+    	  $(".modal-wrap").hide();
+      }
       </script>
 
 </body>

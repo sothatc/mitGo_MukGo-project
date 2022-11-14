@@ -119,24 +119,23 @@
                         <hr>
                         <div class="chk-box2">
                             <div style="display: inline-block;">
-                                <input type="checkbox" id="allow1" name="allow1">
+                                <input type="checkbox" id="allow1" class="normal" name="allow1">
                                 <label for="allow1">[필수] 이용약관 동의</label>
                             </div>
-                            <a href="#" class="allowContent" style="display: inline-block;">[내용보기]</a>
+                            <a href="javascript:void()" class="allowContent contentModal1" style="display: inline-block;">[내용보기]</a>
                         </div>
                         <div class="chk-box2">
                             <div style="display: inline-block;">
-                                <input type="checkbox" id="allow1" name="allow1">
-                                <label for="allow1">[필수] 개인 정보 수집 및 이용에 동의</label>
+                                <input type="checkbox" id="allow2" class="normal" name="allow1">
+                                <label for="allow2">[필수] 개인 정보 수집 및 이용에 동의</label>
                             </div>
-                            <a href="#" class="allowContent" style="display: inline-block;">[내용보기]</a>
+                            <a href="javascript:void()" class="allowContent contentModal2" style="display: inline-block;">[내용보기]</a>
                         </div>
                         <div class="chk-box2">
                             <div style="display: inline-block;">
-                                <input type="checkbox" id="allow1" name="allow1">
-                                <label for="allow1">[필수] 만 14세 이상</label>
+                                <input type="checkbox" id="allow3" class="normal" name="allow1">
+                                <label for="allow3">[필수] 만 14세 이상</label>
                             </div>
-                            <a href="#" class="allowContent" style="display: inline-block;">[내용보기]</a>
                         </div>
                     </div>
                 </div>
@@ -145,12 +144,25 @@
                 <input type="submit" id="joinBtn" value="회원가입">
             </div>
         </form>
+        <form name="contentModal1" action="/contentModal1.do"></form>
+        <form name="contentModal2" action="/contentModal2.do"></form>
     </div>
-	
-	
-	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	<script>
+	/*약관 내용*/
+		$(".contentModal1").on("click", function(){
+			const popup = window.open("","contentModal1","left=500px, top=300px, width=550px, height=600px, menubar=no, status=no, scrollbars=yes");
+			$("[name=contentModal1]").attr("target","contentModal1");
+			$("[name=contentModal1]").submit();
+		});
+		$(".contentModal2").on("click", function(){
+			const popup = window.open("","contentModal2","left=500px, top=300px, width=550px, height=600px, menubar=no, status=no, scrollbars=yes");
+			$("[name=contentModal2]").attr("target","contentModal2");
+			$("[name=contentModal2]").submit();
+		});
+	
+	
+	
 		var idFlag = 0;
 		var phoneFlag = 0;
 		
@@ -293,7 +305,8 @@
 			var phone = phone1+phone2;
 			$("[name=ownerPhone]").val(phone);
 			
-			if(idFlag == 0 || phoneFlag == 0) {
+			var allowChked = $("#allChk").is(":checked");
+			if(idFlag == 0 || phoneFlag == 0 || allowChked == false) {
 				event.preventDefault();
 			}
 			
@@ -354,6 +367,23 @@
 			$(this).css("color","");
 		})
 		
+		//체크박스 전체선택
+		$("#allChk").on("click",function(){
+			var checked = $(this).is(":checked");
+			if(checked){
+				$(".chkBox").find("input").prop("checked", true);
+			}else {
+				$(".chkBox").find("input").prop("checked", false);
+			}
+		});
+		//체크박스 개별선택
+		$(".chkBox").on("click", ".normal", function(){
+			var is_checked = true;
+			$(".chkBox .normal").each(function(){
+				is_checked = is_checked && $(this).is(":checked");
+			});
+			$("#allChk").prop("checked", is_checked);
+		});
 		
 		
 		

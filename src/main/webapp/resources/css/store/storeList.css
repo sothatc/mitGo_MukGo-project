@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+@media (min-width: 1200px){
+	body{
+		overflow-x:hidden
+	}
+}
 .storeList-content-wrap {
 	width: 100vw;
 	
@@ -298,4 +303,26 @@
 	justify-content: center;
 	align-items: center;
 	margin-top: 50px;
+
+}
+.page>a{
+	width: 30px;
+	text-decoration: none;
+	font-size: 20px;
+}
+.page>a:hover{
+	color: #212529;
+}
+.page>span {
+	display: flex;
+	justify-content: center;
+	width: 30px;
+	text-decoration: none;
+	font-size: 20px;
+	color: #ffc107;
+	font-size: 1.7em;
+}
+.page>a>span{
+	display: flex;
+	justify-content: center;
 }

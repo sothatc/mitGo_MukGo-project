@@ -91,6 +91,7 @@
 			<div class="storeList-sort-content">
 				<form action="/sortStoreList.do?category=${category }&reqPage=1" method="post">
 					<ul id="font">
+						<input type="hidden" name="search" value="${search }">
 						<button type="submit" name="storeListSort" value="grade"><li>평점순</li></button>
 						<button type="submit" name="storeListSort" value="reviewCount"><li>리뷰순</li></button>
 					</ul>

@@ -18,12 +18,23 @@
 				</p>
 			</div>
 			<div class="col-auto social-icons">
-				<a href="#"><i class='bx bxl-facebook'></i></a> <a href="#"><i class='bx bxl-twitter'></i></a> <a href="#"><i class='bx bx-log-out'></i></a>
+				<a href="#"><i class='bx bxl-facebook'></i></a> <a href="#"><i class='bx bxl-twitter'></i></a> 			
+			<c:choose>
+				<c:when test="${empty sessionScope.m && empty sessionScope.o}">
+				</c:when>
+				<c:otherwise>
+					<c:if test="${not empty sessionScope.o}">
+						<a href="/ownerLogout.do"><i class='bx bx-log-out' style="color: green;"></i></a>
+					</c:if>
+					<c:if test="${not empty sessionScope.m}">
+						<a href="/logout.do"><i class='bx bx-log-out' style="color: green;"></i></a>
+					</c:if>
+				</c:otherwise>
+			</c:choose>
 			</div>
 		</div>
 	</div>
 </div>
-
 <!-- BOTTOM NAV -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
 	<div class="container">
@@ -43,7 +54,7 @@
 					<a class="nav-link" href="/storeList.do?reqPage=1">GOGO리스트</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/marketMain.do?reqPage=1">GOGO마켓</a>
+					<a class="nav-link" href="/marketMain.do?reqPage=1&pCategory=10">GOGO마켓</a>
 				</li>
 				
 				<li class="nav-item">

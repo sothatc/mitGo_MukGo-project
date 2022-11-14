@@ -16,4 +16,5 @@ public class Review {
 	private String content;
 	private String reviewImg;
 	private String enrollDate;
+	private String storeName;
 }

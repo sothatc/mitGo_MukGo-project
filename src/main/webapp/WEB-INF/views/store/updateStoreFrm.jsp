@@ -91,7 +91,7 @@
 		               <div class="form-group">
 		                <label for="textarea">업체를 한줄로 설명해주세요</label>
 						<br>
-						<textarea class="form-control" name="content" id="textarea" rows="4" style="height: 30px;" required oninvalid="this.setCustomValidity('상세설명을 입력하세요')" oninput="this.setCustomValidity('')"></textarea>
+						<textarea class="form-control" name="content" id="textarea" rows="4" style="height: 30px;" required oninvalid="this.setCustomValidity('상세설명을 입력하세요')" oninput="this.setCustomValidity('')">${s.content }</textarea>
 		               </div>
 		               <br>
 		               <div class="form-group">
@@ -112,7 +112,7 @@
 		                  <label for="inputTime">휴무일</label>
 		                  <br>
 		                  <br>
-		                  <input type="hidden" class="getClosedDay" value="${s.closedDay }" name="closedDay">
+		                  <input type="hidden" class="getClosedDay" value="${s.closedDay }">
 		                  <input type="checkbox" class="btn-check" id="btn-check1" name="closedDay" value="월" autocomplete="off">
 		                  <label for="btn-check1" class="btn btnday">월</label>
 		                  <input type="checkbox" class="btn-check" id="btn-check2" name="closedDay" value="화" autocomplete="off">

@@ -91,11 +91,26 @@ public class MemberDao {
 	}
 
 	//최고관리자>업주관리
-	public ArrayList<Owner> selectOwnerList(Owner o) {
-		List list = sqlSession.selectList("owner.ownerList", o);
+	public ArrayList<Owner> selectOwnerList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("owner.ownerList", map);
 		return (ArrayList<Owner>) list;
 	}
 	
+	//최고관리자 > 업주관리 (전체 업주수 조회)
+	public int countAllOwner() {
+		return sqlSession.selectOne("owner.countAllOwner");
+	}
+	
+	//최고관리자 > 업주관리 > 검색기능
+	public ArrayList<Owner> searchOwner(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("owner.searchOwner",map);
+		return (ArrayList<Owner>) list;
+	}
+	//최고관리자 > 업주관리  > 검색기능 (글 개수 조회)
+	public int searchOwnerCount(HashMap<String, Object> map) {
+		int result = sqlSession.selectOne("owner.searchOwnerCount", map);
+		return result;
+	}
 	//최고관리자 > 업주관리 > 업주레벨 지정
 	public int updateOwnerLevel(int ownerNo, Owner o) {
 		int result = sqlSession.update("updateLevel", o);
@@ -108,23 +123,32 @@ public class MemberDao {
 		return (ArrayList<Owner>) list;
 	}
 
+	
 	//최고관리자 > 회원관리
-	public ArrayList<Member> selectMemberList(Member m) {
-		List list = sqlSession.selectList("member.memberList", m);
+	public ArrayList<Member> selectMemberList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("member.memberList", map);
 		return (ArrayList<Member>) list;
 	}
-
+	
+	//최고관리자 > 회원관리 (전체회원수 조회)
+	public int countAllMember() {
+		return sqlSession.selectOne("member.countAllMember");
+	}
+	
 	//최고관리자 > 회원관리 > 검색기능
 	public ArrayList<Member> searchMember(HashMap<String, Object> map) {
 		List list = sqlSession.selectList("member.searchMember",map);
 		return (ArrayList<Member>) list;
 	}
-
-	//최고관리자 > 업주관리 > 검색기능
-	public ArrayList<Owner> searchOwner(HashMap<String, Object> map) {
-		List list = sqlSession.selectList("owner.searchOwner",map);
-		return (ArrayList<Owner>) list;
+	
+	//최고관리자 > 회원관리 > 검색기능 (글 개수 조회)
+	public int searchMemberCount(HashMap<String, Object> map) {
+		int result = sqlSession.selectOne("member.searchMemberCount", map);
+		return result;
 	}
+
+
+
 
 	public int updateReserve(Reserve rs) {
 		int result = sqlSession.update("reserve.updateReserve", rs);
@@ -156,6 +180,27 @@ public class MemberDao {
 	public String searchOwnerId(Owner o) {
 		return sqlSession.selectOne("owner.searchOwnerId", o);
 	}
+
+	public int searchNormalPw(Member member) {
+		return sqlSession.selectOne("member.searchNormalPw", member);
+	}
+
+	public int updatePwMember(Member m) {
+		return sqlSession.update("member.updateMember", m);
+	}
+
+	public int searchOwnerPw(Owner owner) {
+		return sqlSession.selectOne("owner.searchOwnerPw",owner);
+	}
+
+	public int updatePwOwner(Owner o) {
+		return sqlSession.update("owner.updatePwOwner",o);
+	}
+
+	public int deleteMember(int memberNo) {
+		return sqlSession.delete("member.deleteMember", memberNo);
+	}
+
 
 	
 
