@@ -469,5 +469,15 @@
 		delete from review
 		where review_no = #{_parameter}	
 	</delete>
+	
+	<select id="selectRandomReviewList" resultType="r">
+		select * from(select review_no as reivewNo,
+		writer,
+		rating,
+		r.content as content,
+		review_img as reviewImg,
+        store_name as storeName
+        from review r, store s where r.store_no = s.store_no order by DBMS_RANDOM.RANDOM) where rownum <![CDATA[<]]> 4
+	</select>
 
 </mapper>
