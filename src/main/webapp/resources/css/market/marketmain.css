@@ -56,8 +56,8 @@
 .mid-nav li {
   vertical-align: middle;
   float: left;
-  margin-right: 75px;
-  margin-left: 75px;
+  margin-right: 85px;
+  margin-left: 85px;
   list-style: none;
  text-align: center;
  
@@ -65,4 +65,12 @@
 
 .nav-link{
   color: #fff;
+}
+.minHeight{
+  height: 500px;
+}
+#font{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+@media (min-width: 1200px){
+	body{
+		overflow-x:hidden
+	}
+}
 .storeList-content-wrap {
 	width: 100vw;
 	
