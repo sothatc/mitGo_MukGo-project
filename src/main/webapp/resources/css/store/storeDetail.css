@@ -162,6 +162,7 @@ body{
     width: 1400px;
     height:500px;
     margin: 0 auto;
+    background-color: (255, 255, 255, 0.06);
 }
 
 .photo-wrap{
