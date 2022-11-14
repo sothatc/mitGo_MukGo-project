@@ -191,52 +191,21 @@
 			</div>
 		</div>
 		<div id="projects-slider" class="owl-theme owl-carousel">
-			<div class="project">
-				<div class="overlay"></div>
-				<img class="mealkit" src="img/칼국수밀ㅋ트.jpg" alt="">
-				<div class="content">
-					<h2>Consulting Marketing</h2>
-					<h6>Website Design</h6>
+			<c:forEach items="${mList }" var="ms">
+				<div class="project">
+					<div class="overlay"></div>
+					<a href="/marketDetail.do?pNo=${ms.PNo }"><img class="mealkit" src="resources/upload/market/${ms.PImg }" alt=""></a>
+					<div class="content">
+						<h2>${ms.PName }</h2>
+						<h6>${ms.storeName }</h6>
+					</div>
 				</div>
-			</div>
-			<div class="project">
-				<div class="overlay"></div>
-				<img class="mealkit" src="img/제육밀키트.png" alt="">
-				<div class="content">
-					<h2>Consulting Marketing</h2>
-					<h6>Website Design</h6>
-				</div>
-			</div>
-			<div class="project">
-				<div class="overlay"></div>
-				<img class="mealkit" src="img/샤브밀키트.jpg" alt="">
-				<div class="content">
-					<h2>Consulting Marketing</h2>
-					<h6>Website Design</h6>
-				</div>
-			</div>
-			<div class="project">
-				<div class="overlay"></div>
-				<img class="mealkit" src="img/마라탕밀키트.jpg" alt="">
-				<div class="content">
-					<h2>Consulting Marketing</h2>
-					<h6>Website Design</h6>
-				</div>
-			</div>
-			<div class="project">
-				<div class="overlay"></div>
-				<img class="mealkit" src="img/밀키트떡볶이.jpg" alt="">
-				<div class="content">
-					<h2>Consulting Marketing</h2>
-					<h6>Website Design</h6>
-				</div>
-			</div>
+			</c:forEach>
 		</div>
 	</section>
 
 
 	<section class="bg-light" id="realreview">
-
 		<div class="owl-theme owl-carousel reviews-slider container">
 			<c:forEach items="${rList }" var="rs">
 				<div class="review">

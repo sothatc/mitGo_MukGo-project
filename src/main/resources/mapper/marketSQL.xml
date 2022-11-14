@@ -95,4 +95,18 @@
 	from market_product
 	where store_no = #{_parameter}
 	</select>
+	
+	<select id="selectRandomMarketList" resultType="ma">
+		select * from(select 
+            p_no as pNo,
+			m.owner_no as ownerNo,
+			p_name as pName,
+			p_price as pPrice,
+			p_img as pImg,
+			s.store_no as storeNo,
+			pCategory,
+            s.store_name as storeName
+         from market_product m, store s 
+         where m.store_no = s.store_no order by DBMS_RANDOM.RANDOM) where rownum <![CDATA[<]]> 6
+	</select>
 </mapper>

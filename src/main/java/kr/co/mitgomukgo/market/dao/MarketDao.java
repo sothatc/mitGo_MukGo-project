@@ -60,6 +60,11 @@ public class MarketDao {
 		return (ArrayList<Notice>)list;
 	}
 
+	public ArrayList<Market> selectRandomMarketList() {
+		List list = sqlSession.selectList("selectRandomMarketList");
+		return (ArrayList<Market>) list;
+	}
+
 
 
 }

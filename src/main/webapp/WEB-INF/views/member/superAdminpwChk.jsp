@@ -13,7 +13,7 @@
 	<div class="pwChk-wrap wrap-img">
 		<div class="pwChk-content">
 			<div>비밀번호 확인</div>
-			<form action="/memberManage.do" method="post">
+			<form action="/memberManage.do?reqPage=1" method="post">
 				<input type="hidden" value="${sessionScope.m.memberId }">
 				<input type="hidden" class="myPw" value="${sessionScope.m.memberPw }">
 				<input type="password" id="rePwChk"><br>

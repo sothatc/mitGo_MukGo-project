@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.mitgomukgo.market.model.service.MarketService;
+import kr.co.mitgomukgo.market.model.vo.Market;
 import kr.co.mitgomukgo.store.model.service.StoreService;
 import kr.co.mitgomukgo.store.model.vo.Review;
 
@@ -21,7 +22,9 @@ public class MainController {
 	@RequestMapping(value = "/mainFrm.do")
 	public String mainFrm(Model model) {
 		ArrayList<Review> rList = storeService.selectRandomReviewList();
+		ArrayList<Market> mList = marketService.selectRandomMarketList();
 		model.addAttribute("rList", rList);
+		model.addAttribute("mList", mList);
 		return "main/main";
 	}
 }
