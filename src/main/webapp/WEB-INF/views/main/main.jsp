@@ -241,7 +241,7 @@
 			<c:forEach items="${rList }" var="rs">
 				<div class="review">
 					<div class="person">
-						<img id="reviewrestaurant" src="/resources/upload/review/${rs.reviewImg }" alt="">
+						<a href="/storeDetail.do?storeNo=${rs.storeNo }"><img id="reviewrestaurant" src="/resources/upload/review/${rs.reviewImg }" alt=""></a>
 						<h5 id="font" style="color: rgb(51, 51, 51); font-size: 15px;">${rs.writer }</h5> <small>${rs.storeName }</small>
 					</div>
 					<h3 id="font">${rs.content }</h3>

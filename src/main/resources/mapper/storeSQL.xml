@@ -472,6 +472,7 @@
 	
 	<select id="selectRandomReviewList" resultType="r">
 		select * from(select review_no as reivewNo,
+		r.store_no as storeNo,
 		writer,
 		rating,
 		r.content as content,
