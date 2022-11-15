@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.mitgomukgo.market.model.vo.BookMark;
 import kr.co.mitgomukgo.market.model.vo.Market;
 import kr.co.mitgomukgo.notice.model.vo.Notice;
 
@@ -60,6 +61,22 @@ public class MarketDao {
 		return (ArrayList<Notice>)list;
 	}
 
+
+	public int countMarketList(HashMap<String, Object> map) {
+		return sqlSession.selectOne("market.marketListCount",map);
+	}
+	
+	public ArrayList<Market> selectRandomMarketList() {
+		List list = sqlSession.selectList("selectRandomMarketList");
+		return (ArrayList<Market>) list;
+
+
+	}
+	
+	public BookMark selectOneBookmark(HashMap<String, Object> paraMap) {
+		BookMark bm = sqlSession.selectOne("bookmark.selectOneBookmark", paraMap);
+		return bm;
+	}
 
 
 }

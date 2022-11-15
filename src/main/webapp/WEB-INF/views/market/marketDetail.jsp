@@ -6,6 +6,26 @@
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>GOGO마켓 상세</title>
+<style type="text/css">
+	.titleDiv>#bookMark{
+		margin-left: 330px;
+		font-size: 33px;
+		height: 50px;
+		line-height: 50px;
+	}
+	
+	.titleDiv>#bookMark:hover{
+		cursor: pointer;
+		color: gold;
+		transition-duration : 0.4s;
+	}
+	
+	.titleDiv>span:first-child, .titleDiv>span:nth-child(2) {
+		padding-bottom: 10px;
+	}
+	
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -25,7 +45,57 @@
 		            <span class="categorySpan"></span>
 		            <span class="storeNameSpan">${ma.PName}</span>
 		            
+
+		            <c:choose>
+		            	<c:when test="${empty bm }">
+		            		<c:choose> 
+				            	<c:when test="${not empty sessionScope.m }">
+				            		<span class="material-icons" id="bookMark" onclick="addBookmark(${ma.PNo}, '${sessionScope.m.memberId }','${ma.PName}', ${ma.PPrice} )">
+										bookmark
+									</span>
+				            	</c:when>
+				            	
+				            	<c:when test="${not empty sessionScope.o }">
+				            		<span class="material-icons" id="bookMark" onclick="addBookmark(${ma.PNo}, '${sessionScope.o.ownerId }','${ma.PName}', ${ma.PPrice})">
+										bookmark
+									</span>
+				            	</c:when>
+				            	
+				            	<c:otherwise>
+				            		
+				            	</c:otherwise>
+				            </c:choose>
+		            	</c:when>
+		            	
+		            	<c:when test="${not empty bm }">
+		            		<c:choose> 
+				            	<c:when test="${not empty sessionScope.m }">
+				            		<span class="material-icons" id="bookMark" style="color:gold;" onclick="deleteBookmark(${ma.PNo}, '${sessionScope.m.memberId }' )">
+										bookmark
+									</span>
+				            	</c:when>
+				            	
+				            	<c:when test="${not empty sessionScope.o }">
+				            		<span class="material-icons" id="bookMark" style="color:gold;" onclick="deleteBookmark(${ma.PNo}, '${sessionScope.o.ownerId }')">
+										bookmark
+									</span>
+				            	</c:when>
+				            	
+				            	<c:otherwise>
+				            		
+				            	</c:otherwise>
+				            </c:choose>
+		            	</c:when>
+		            	
+		            	<c:otherwise>
+		            		
+		            	</c:otherwise>
+		            </c:choose>
+		            
+		            
+		            <a class="material-symbols-rounded share pointer" id="share">share</a>
 		            <a class="material-symbols-rounded share pointer" id="share" href="javascript:shareMessage()">share</a>
+
          		</div>
          		<div class="tableDiv" >
          		
@@ -44,12 +114,11 @@
          				</tr>
          				<tr>
          					<th>알레르기 정보</th>
-         					<td colspan="4">본 제품은 돼지고기, 닭고기, 우유, 계란을 사용한 제품과
-         					같은 제조시설에서 제조하고 있습니다.</td>
+         					<td colspan="4">${ma.allergyInfo}</td>
          				</tr>
          				<tr>
          					<th>유통기한</th>
-         					<td colspan="4">수령일 포함 최소 3일 남은 제품을 보내드립니다.</td>
+         					<td colspan="4">${ma.expiryDate}</td>
          				</tr>
          				<tr>
          					<th>수량 선택</th>
@@ -96,8 +165,8 @@
 	</div> <!-- contentWrap 종료 -->
 	
 	<!-- 상품 상세 내용 div -->
-	<div class="contentWrap2">
-		
+	<div class="contentWrap2" style="font-family:Gowun Dodum;">
+		${ma.PContent}
 	</div>
 	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
@@ -110,6 +179,33 @@
 
 
 	<script>
+	
+		function deleteBookmark(pNo, id){
+			$("#bookMark").css("color", "#516171");
+			
+			$.ajax({
+				url : "/deleteBookmark.do",
+				type : "post",
+				data : {pNo : pNo, bookMarkId : id},
+				success : function(data){
+					console.log(data);
+				}
+			})
+		}	
+	
+	function addBookmark(pNo, id, pName, pPrice){
+		$("#bookMark").css("color", "gold");
+		
+		$.ajax({
+			url : "/insertBookMark.do",
+			type : "post",
+			data : {pNo : pNo, bookMarkId : id, pName : pName, pPrice : pPrice},
+			success : function(data){
+				console.log(data)
+			}
+		})
+	}
+	
     //---------- 인원수 늘리기
     var countNumVal = $(".peopleTd").text();
     var price = "${ma.PPrice}";

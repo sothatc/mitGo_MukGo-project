@@ -62,7 +62,7 @@
 
 .categorySpan{
 	height:50px;
-	line-height: 50px;
+	
 	font-size: 18px;
 	font-weight: bolder;
 	margin-left: 2%;
@@ -116,7 +116,7 @@
 }
 
 .priceDiv1{
-	width: 170px;
+	width: 200px;
 	float:right;
 }
 
@@ -191,7 +191,7 @@
 
 
 .contentWrap2{
-	background-color: red;
+	background-color: lightgray;
 	width: 1250px;
 	height: 2000px;
 	margin: 0 auto;

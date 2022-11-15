@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.mitgomukgo.market.dao.MarketDao;
+import kr.co.mitgomukgo.market.model.vo.BookMark;
 import kr.co.mitgomukgo.market.model.vo.Market;
 import kr.co.mitgomukgo.notice.model.vo.Notice;
 
@@ -21,7 +22,7 @@ public class MarketService {
 	}
 
 	public HashMap<String, Object> marketList(int reqPage, int pCategory) {
-		int numPerPage = 9;
+		int numPerPage = 8;
 		
 		int end = numPerPage * reqPage;
 		int start = (end - numPerPage) + 1;
@@ -31,17 +32,66 @@ public class MarketService {
 		map.put("pCategory",pCategory);
 		ArrayList<Market> list = dao.marketList(map);
 		
+		int totalCnt = dao.countMarketList(map);
+		int totalPage = 0;
+		if(totalCnt % numPerPage == 0) {
+			totalPage = totalCnt / numPerPage;
+		}else {
+			totalPage = totalCnt / numPerPage + 1;
+		}
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize + 1;
+
+		String pageNavi = "";
+		if(pageNo != 1) {
+			pageNavi += "<a href='/marketMain.do?reqPage=" +(pageNo - 1)+"&pCategory="+pCategory+"'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_left\r\n" + 
+					"            </span></a>";
+		}
+		for(int i = 0; i < pageNaviSize; i++) {
+			if(reqPage == pageNo) {
+				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
+			}else {
+				pageNavi += "<a href='/marketMain.do?reqPage=" +(pageNo - 1)+"&pCategory="+pCategory+"'><span>" + (pageNo) + "</span></a>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		
+		if(pageNo <= totalPage) {
+			pageNavi += "<a href='/marketMain.do?reqPage=" +(pageNo - 1)+"&pCategory="+pCategory+"'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_right\r\n" + 
+					"            </span></a>";
+		}
 		HashMap<String, Object> marketListMap = new HashMap<String, Object>();
 		marketListMap.put("list",list);
+		marketListMap.put("reqPage",reqPage);
+		marketListMap.put("pageNavi",pageNavi);
+		marketListMap.put("totalPage",totalPage);
+		marketListMap.put("pageNo",pageNo);
+		
 		return marketListMap;
 	}
 
 
 	//마켓 상세 보기
-	public Market selectOneMarket(int pNo) {
+	public HashMap<String, Object> selectOneMarket(int pNo, String bookMarkId) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
 		Market ma = dao.selectOneMarket(pNo);
 		
-		return ma;
+		HashMap<String, Object> paraMap = new HashMap<String, Object>();
+		paraMap.put("pNo", pNo);
+		paraMap.put("bookMarkId", bookMarkId);
+		BookMark bm = dao.selectOneBookmark(paraMap);
+		
+		HashMap<String, Object> marketMap = new HashMap<String, Object>();
+		marketMap.put("ma", ma);
+		marketMap.put("bm", bm);
+		
+		return marketMap;
 	}
 	
 	public int addMarketProduct(Market market) {
@@ -66,6 +116,10 @@ public class MarketService {
 
 	public ArrayList<Notice> myPageNcList() {
 		return dao.myPageNcList();
+	}
+
+	public ArrayList<Market> selectRandomMarketList() {
+		return dao.selectRandomMarketList();
 	}
 
 

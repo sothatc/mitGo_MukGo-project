@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.context.annotation.SessionScope;
@@ -167,6 +168,7 @@ public class MemberController {
 	@RequestMapping(value="/login.do")
 	public String login(Member member, HttpSession session) {
 		Member m = service.selectOneMember(member);
+		System.out.println(m.getMemberPhone());
 		if(m != null) {
 			session.setAttribute("m", m);
 		}
@@ -310,19 +312,22 @@ public class MemberController {
 	
 	//최고관리자 > 회원관리
 	@RequestMapping(value="/memberManage.do")
-	public String memberManage(Model model, Member m) {
-		ArrayList<Member> list = service.selectMemberList(m);
-		model.addAttribute("list", list);
-		
+	public String memberManage(Model model, Member m, int reqPage) {
+		HashMap<String, Object> map = service.selectMemberList(reqPage);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
 		return "member/memberManage";
 	}
 	
 	//최고관리자 > 회원관리 > 검색기능
 	@RequestMapping(value="/searchMember.do")
-	public String searchMember(String type, String keyword, Model model){
-		ArrayList<Member> list = service.searchMember(type,keyword);
-		model.addAttribute("list", list);
-		
+	public String searchMember(String type, String keyword,int reqPage, Model model){
+		HashMap<String, Object> list = service.searchMember(type,keyword,reqPage);
+		model.addAttribute("list", list.get("list"));
+		model.addAttribute("pageNavi", list.get("pageNavi"));
 		return "member/memberManage";
 	}
 		
@@ -330,17 +335,22 @@ public class MemberController {
 	
 	//최고관리자 > 업주관리
 	@RequestMapping(value="/adminMemberManage.do")
-	public String adminMemberManage(Model model, Owner o) {
-		ArrayList<Owner> list = service.selectOwnerList(o);
-		model.addAttribute("list",list);
+	public String adminMemberManage(Model model, Owner o, int reqPage) {
+		HashMap<String, Object> map = service.selectOwnerList(reqPage);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
 		return "member/admin";
 	}
 	
-	//최고관리자 > 회원관리 > 검색기능
+	//최고관리자 > 업주관리 > 업주검색기능
 	@RequestMapping(value="/searchOwner.do")
-	public String searchOwner(String type, String keyword, Model model){
-		ArrayList<Owner> list = service.searchOwner(type,keyword);
-		model.addAttribute("list", list);
+	public String searchOwner(String type, String keyword,int reqPage, Model model){
+		HashMap<String, Object> list = service.searchOwner(type,keyword, reqPage);
+		model.addAttribute("list", list.get("list"));
+		model.addAttribute("pageNavi", list.get("pageNavi"));
 		return "member/admin";
 	}
 	
@@ -349,7 +359,7 @@ public class MemberController {
 	public String updateOwnerLevel(int ownerNo, Owner o) {
 		int result = service.updateOwnerLevel(ownerNo,o);
 		if(result>0) {
-			return "redirect:/adminMemberManage.do";
+			return "redirect:/adminMemberManage.do?reqPage=1";
 		}else {
 			return "redirect:/";
 		}
@@ -434,5 +444,64 @@ public class MemberController {
 		
 		return "member/updateMemberPw";
 	}
+	@RequestMapping(value="/updateNormalPw.do")
+	public String updateNormalPw(Member m) {
+		int result = service.updatePwMember(m);
+		if(result > 0) {
+			return "member/updatePwSuccess";
+		}else {
+			return "/";
+		}
+	}
+	@RequestMapping(value="/searchOwnerPw.do")
+	public String searchOwnerPw(Owner owner, Model model) {
+		int ownerNo = service.searchOwnerPw(owner);
+		System.out.println(ownerNo);
+		if(ownerNo != 0) {
+			model.addAttribute("result", false);
+			model.addAttribute("ownerNo", ownerNo);
+		}else {
+			model.addAttribute("result", true);
+			model.addAttribute("ownerNo", ownerNo);
+			
+		}
+		return "member/updateOwnerPw";
+	}
+	@RequestMapping(value="/updateOwnerPw.do")
+	public String updateOwnerPw(Owner o) {
+		int result = service.updatePwOwner(o);
+		if(result > 0) {
+			return"/member/updatePwSuccess";
+		}else {
+			return "/";
+		}
+	}
+	@RequestMapping(value="/contentModal1.do")
+	public String contentModal1() {
+		return "member/contentModal1";
+	}
+	@RequestMapping(value="/contentModal2.do")
+	public String contentModal2() {
+		return "member/contentModal2";
+	}
+	@RequestMapping(value="/deleteMember.do")
+	public String deleteMember(@RequestParam int memberNo) {
+		int result = service.deleteMember(memberNo);
+		if(result > 0) {
+			return "redirect:/logout.do";
+		}else {
+			return "/";
+		}
+	}
+	
+	/*
+	주문 테이블 만들어지면 진행
+	@RequestMapping(value="/orderList.do")
+	public String orderList(HttpSession session) {
+		Member m = (Member)session.getAttribute("m");
+		int memberNo = m.getMemberNo();
+		
+	}
+	*/
 }
 
