@@ -16,12 +16,16 @@ public class CartService {
 	@Autowired
 	private CartDao dao;
 
-	public ArrayList<Cart> allCartList(Member m) {
-		ArrayList<Cart> list = dao.allCartList(m);
-	      return (ArrayList<Cart>) list;
-	   }
+	
 
 	public int insertCart(int pNo, Cart c) {
-		return dao.insertCart(pNo);
+		return dao.insertCart(c);
+	}
+
+
+
+	public ArrayList<Cart> cartList() {
+		ArrayList<Cart> list = dao.cartList();
+		return (ArrayList<Cart>) list;
 	}
 }

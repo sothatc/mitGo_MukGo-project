@@ -126,4 +126,6 @@
          from market_product m, store s
          where m.store_no = s.store_no order by DBMS_RANDOM.RANDOM) where rownum <![CDATA[<]]> 6
 	</select>
+	
+
 </mapper>

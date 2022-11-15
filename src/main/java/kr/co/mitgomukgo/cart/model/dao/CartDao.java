@@ -18,13 +18,17 @@ public class CartDao {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession; 
-	public ArrayList<Cart> allCartList(Member m) {
-		 List list = sqlSession.selectList("cart.allCartList", m);
-	      return (ArrayList<Cart>) list;
-	   }
 	
-	public int insertCart(int pNo) {
-		int result = sqlSession.insert("cart.insertCart", pNo);
+	
+	public int insertCart(Cart c) {
+		int result = sqlSession.insert("cart.insertCart", c);
 		return result;
+	}
+
+
+
+	public ArrayList<Cart> cartList() {
+		List list = sqlSession.selectList("cart.cartList");
+		return (ArrayList<Cart>) list;
 	}
 }
