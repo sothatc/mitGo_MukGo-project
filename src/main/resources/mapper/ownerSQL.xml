@@ -23,8 +23,7 @@
 			owner_name as ownerName,
 			owner_phone as ownerPhone,
 			o_enroll_date as ownerEnrollDate,
-			owner_level as ownerLevel,
-			owner_status as ownerStatus
+			owner_level as ownerLevel
 		from owner
 		where owner_id=#{ownerId} and owner_pw=#{ownerPw}
 	</select>

@@ -98,10 +98,12 @@ public class StoreController {
 
 	// 예약하기
 	@RequestMapping(value = "/reserve.do")
-	public String StoreDetail(int memberNo, Reserve r) {
+	public String StoreDetail(int memberNo,int storeNo, Reserve r,HttpServletRequest request) {
 		int result = service.reserve(r);
 		if (result > 0) {
-			return "redirect:/";
+			request.setAttribute("msg", "예약이 완료되었습니다.");
+			request.setAttribute("url", "/storeDetail.do?storeNo="+storeNo);
+			return "common/alert";
 		} else {
 			return "redirect:/";
 		}
