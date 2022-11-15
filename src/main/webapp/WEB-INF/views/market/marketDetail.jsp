@@ -38,7 +38,7 @@
 	<link rel="stylesheet" href="/resources/css/market/marketDetail.css">
 	
 	<div class="contentWrap" style="font-family:Gowun Dodum;">
-		<div class="directoryDiv">홈 > 마켓GOGO > 밀키트</div>
+		<div class="directoryDiv">홈 > GOGO마켓 > 밀키트</div>
          	<div class="infoDiv1">
          		<img src="/resources/upload/market/${ma.PImg }" class="pImg">
          		<div class="titleDiv">
@@ -107,10 +107,6 @@
          					<td colspan="4">무료배송</td>
          				</tr>
          				<tr>
-         					<th>판매단위</th>
-         					<td colspan="4">1개</td>
-         				</tr>
-         				<tr>
          					<th>알레르기 정보</th>
          					<td colspan="4">${ma.allergyInfo}</td>
          				</tr>
@@ -150,6 +146,7 @@
          			<form action="/insertCart.do">
          				<div class="btnWrap">
 		         			<button type="submit" class="cartBtn">장바구니</button>
+		         			<button type="submit" class="buyBtn">구매하기</button>
 		         			<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 		         			<input type="hidden" name="pPrice" class="allPrice">
 		         			<input type="hidden" name="pNo" class="pNumber">
@@ -179,10 +176,10 @@
                	 <h5 style="font-family:Gowun Dodum; text-align: center; font-weight: bolder; margin-top:40px;">공유하기</h5>
                  <div style="width:100%; height:30%;padding:0; margin-top:20px;;display:flex; justify-content: center; align-items: center; color:black;">
 		                 <button style="height:30px; background-color: rgb(51,51,51); border-radius: 15px; color: white;" class="pointer">
-		                 	<a href="javascript:shareMessage()" style="text-decoration: none;">카카오톡 공유하기</a>
+		                 	<a href="javascript:shareMessage()" id="share2" style="text-decoration: none;">카카오톡 공유하기</a>
 		                 </button>
 		                 <input type="text" id="currentUrl"  style="width:400px; margin-left: 20px;"readonly>
-		                 <button type="button" class="btn" name="btnClick"  style="padding:2px; margin-left:10px;background-color: rgb(51,51,51); border-radius: 15px; color: white;" class="pointer">
+		                 <button type="button" class="urlBtn" name="btnClick"  style="padding:2px; margin-left:10px;background-color: rgb(51,51,51); border-radius: 15px; color: white;" class="pointer">
 		                 	<a style="text-decoration: none;width:120px;data-clipboard-target="#currentUrl">url 복사</a>
 		                 </button>
                  </div>
@@ -195,7 +192,7 @@
 
     <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.0/kakao.min.js" integrity="sha384-PFHeU/4gvSH8kpvhrigAPfZGBDPs372JceJq3jAXce11bVA6rMvGWzvP4fMQuBGL" crossorigin="anonymous"></script>
     <script>
-    Kakao.init('b9d4c91a07666b464ce95d2ffa8d018c');
+    	Kakao.init('b9d4c91a07666b464ce95d2ffa8d018c');
     </script>
       
     <!-- 클립보드 복사하기 API -->
@@ -278,14 +275,14 @@
 	 function shareMessage(){
 		
 		Kakao.Share.createDefaultButton({
-		  container: '#share',
+		  container: '#share2',
 		  objectType: 'text',
 		  text:
 		    '우리집도 맛집이라고? 이제는 집에서도 즐기자!',
 		  link: {
 		    mobileWebUrl: 'http://192.168.10.26/marketDetail.do?pNo='+pNo,
 		    webUrl: 'http://192.168.10.26/marketDetail.do?pNo='+pNo
-		  },
+		  }
 		});
 	}
 	
@@ -305,9 +302,9 @@
     //---- 클립보드 복사 기능
     var url = window.location.href;
     $("#currentUrl").attr("value",url);
-    $(".btn").attr("data-clipboard-text",url);
+    $(".urlBtn").attr("data-clipboard-text",url);
     
-    var clipboard = new ClipboardJS('.btn');
+    var clipboard = new ClipboardJS('.urlBtn');
 		clipboard.on('success', function(e) {
 		    console.info('Action:', e.action);
 		    console.info('Text:', e.text);

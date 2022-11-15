@@ -370,7 +370,7 @@ height: 100%;
 		                 	<a href="javascript:shareMessage()" style="text-decoration: none;">카카오톡 공유하기</a>
 		                 </button>
 		                 <input type="text" id="currentUrl"  style="width:400px; margin-left: 20px;"readonly>
-		                 <button type="button" class="btn" name="btnClick"  style="padding:2px; margin-left:10px;background-color: rgb(51,51,51); border-radius: 15px; color: white;" class="pointer">
+		                 <button type="button" class="urlBtn" name="btnClick"  style="padding:2px; margin-left:10px;background-color: rgb(51,51,51); border-radius: 15px; color: white;" class="pointer">
 		                 	<a style="text-decoration: none;width:120px;data-clipboard-target="#currentUrl">url 복사</a>
 		                 </button>
                  </div>
@@ -763,9 +763,9 @@ height: 100%;
       //---- 클립보드 복사 기능
       var url = window.location.href;
       $("#currentUrl").attr("value",url);
-      $(".btn").attr("data-clipboard-text",url);
+      $(".urlBtn").attr("data-clipboard-text",url);
       
-      var clipboard = new ClipboardJS('.btn');
+      var clipboard = new ClipboardJS('.urlBtn');
 		clipboard.on('success', function(e) {
 		    console.info('Action:', e.action);
 		    console.info('Text:', e.text);
