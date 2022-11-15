@@ -41,7 +41,7 @@
 									<span class="tit">비밀번호</span>
 									<div class="cnt">
 										<div class="input01">
-											<label class="label" for="ownerPw">대/소문자와 숫자를 포함한 최소 8자리를 입력해주세요.(특수문자x)</label>
+											<label class="label" for="ownerPw">대/소문자와 숫자를 포함한 최소 8자리를 입력해주세요.(특수문자 제외)</label>
 											<input type="password" id="ownerPw" name="ownerPw" style="outline: none;">
 										</div>
 										<p class="text-note"></p>
@@ -61,7 +61,7 @@
 									<span class="tit">휴대폰</span>
 									<div class="cnt">
 										<div class="input02">
-											<input type="text" id="memberPhone1" name="memberPhone1" value="${sessionScope.o.ownerPhone }" readonly>
+											<input type="text" id="memberPhone1" name="memberPhone1" value="${sessionScope.o.ownerPhone }" disabled>
 										</div>
 									</div>
 								</li>
