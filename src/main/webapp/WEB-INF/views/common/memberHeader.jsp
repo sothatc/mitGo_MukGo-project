@@ -21,7 +21,7 @@
 					<a href="/reserveList.do">예약 내역</a>
 				</div>
 				<div>
-					<a href="/orderList.do">주문 내역</a>
+					<a href="/orderList.do?reqPage=1">주문 내역</a>
 				</div>
 				<div>
 					<a href="/updateMemberFrm.do">내 정보 수정</a>

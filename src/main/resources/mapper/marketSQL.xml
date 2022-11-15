@@ -126,7 +126,7 @@
          from market_product m, store s
          where m.store_no = s.store_no order by DBMS_RANDOM.RANDOM) where rownum <![CDATA[<]]> 6
 	</select>
-	
+
 	<select id="searchMarket" parameterType="map" resultType="ma">
 		select * from 
             (select rownum as rnum, b.* from

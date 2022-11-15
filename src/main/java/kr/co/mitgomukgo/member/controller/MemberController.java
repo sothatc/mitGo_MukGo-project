@@ -11,6 +11,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,6 +25,7 @@ import kr.co.mitgomukgo.member.model.service.MemberService;
 import kr.co.mitgomukgo.member.model.vo.Member;
 import kr.co.mitgomukgo.member.model.vo.Owner;
 import kr.co.mitgomukgo.notice.model.vo.Notice;
+import kr.co.mitgomukgo.store.model.vo.Order;
 import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import net.nurigo.java_sdk.Coolsms;
@@ -166,21 +168,35 @@ public class MemberController {
 		}
 	}
 	@RequestMapping(value="/login.do")
-	public String login(Member member, HttpSession session) {
+	public String login(Member member, HttpSession session, HttpServletRequest request) {
 		Member m = service.selectOneMember(member);
-		System.out.println(m.getMemberPhone());
 		if(m != null) {
 			session.setAttribute("m", m);
+			return "redirect:/";
+		}else {
+			request.setAttribute("msg", "가입된 회원이 아닙니다.");
+			request.setAttribute("url", "/loginFrm.do");
+			return "common/alert";
 		}
-		return "redirect:/";
 	}
 	@RequestMapping(value="/ownerLogin.do")
-	public String ownerLogin(Owner owner, HttpSession session) {
+	public String ownerLogin(Owner owner, HttpSession session, HttpServletRequest request) {
 		Owner o = service.selectOneOwner(owner);
 		if(o != null) {
-			session.setAttribute("o", o);
+			if(o.getOwnerStatus() == 1) {
+				session.setAttribute("o", o);
+				request.setAttribute("msg", "가입승인 대기 상태입니다.");
+				request.setAttribute("url", "/mainFrm.do");
+				return "common/alert";
+			}else {
+				session.setAttribute("o", o);
+				return "redirect:/";
+			}
+		}else {
+			request.setAttribute("msg", "가입된 회원이 아닙니다.");
+			request.setAttribute("url", "/loginFrm.do");
+			return "common/alert";
 		}
-		return "redirect:/";
 	}
 	@RequestMapping(value="/pwChk.do")
 	public String pwChk(HttpSession session) {
@@ -240,13 +256,17 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/updateOwner.do")
-	public String updateOwner(Owner o, HttpSession session) {
+	public String updateOwner(Owner o, HttpSession session, HttpServletRequest request) {
 		int result = service.updateOwner(o);
 		if(result > 0) {
+			request.setAttribute("msg", "수정 되었습니다.");
+			request.setAttribute("url", "/mainFrm.do");
 			session.invalidate();
-			return "redirect:/";
+			return "common/alert";
 		}else {
-			return "member/ownerMyPage";
+			request.setAttribute("msg", "error");
+			request.setAttribute("url", "member/ownerMyPage");
+			return "common/alert";
 		}
 	}
 	@RequestMapping(value="/updateOwnerFrm.do")
@@ -256,13 +276,17 @@ public class MemberController {
 		return "member/ownerMypage";
 	}
 	@RequestMapping(value="/updateMember.do")
-	public String updateMember(Member m, HttpSession session) {
+	public String updateMember(Member m, HttpSession session, HttpServletRequest request) {
 		int result = service.updateMember(m);
 		if(result > 0) {
+			request.setAttribute("msg", "수정 되었습니다.");
+			request.setAttribute("url", "/mainFrm.do");
 			session.invalidate();
-			return "redirect:/";
+			return "common/alert";
 		}else {
-			return "member/mypage";
+			request.setAttribute("msg", "error");
+			request.setAttribute("url", "member/mypage");
+			return "common/alert";
 		}
 	}
 	@RequestMapping(value="/updateMemberFrm.do")
@@ -485,23 +509,41 @@ public class MemberController {
 		return "member/contentModal2";
 	}
 	@RequestMapping(value="/deleteMember.do")
-	public String deleteMember(@RequestParam int memberNo) {
+	public String deleteMember(@RequestParam int memberNo, HttpServletRequest request) {
 		int result = service.deleteMember(memberNo);
 		if(result > 0) {
 			return "redirect:/logout.do";
 		}else {
-			return "/";
+			request.setAttribute("msg", "오류가 발생했습니다. 관리자에게 문의해주세요.");
+			request.setAttribute("url", "/mainFrm.do");
+			return "common/alert";
+		}
+	}
+	@RequestMapping(value="/deleteOwner.do")
+	public String deleteOwner(@RequestParam int ownerNo, HttpServletRequest request) {
+		int result = service.deleteOwner(ownerNo);
+		if(result > 0) {
+			return "redirect:/logout.do";
+		}else {
+			request.setAttribute("msg", "오류가 발생했습니다. 관리자에게 문의해주세요.");
+			request.setAttribute("url", "/mainFrm.do");
+			return "common/alert";
 		}
 	}
 	
-	/*
-	주문 테이블 만들어지면 진행
 	@RequestMapping(value="/orderList.do")
-	public String orderList(HttpSession session) {
+	public String orderList(HttpSession session, int reqPage, Model model) {
 		Member m = (Member)session.getAttribute("m");
 		int memberNo = m.getMemberNo();
-		
+		HashMap<String, Object> map = service.selectAllOrderList(reqPage, memberNo);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
+		model.addAttribute("memberNo", memberNo);
+		return "member/orderList";
 	}
-	*/
+	
 }
 
