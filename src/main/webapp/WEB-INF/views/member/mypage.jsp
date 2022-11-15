@@ -62,7 +62,7 @@
 		                            <span class="tit">휴대폰</span>
 		                            <div class="cnt">
 		                                <div class="input02">
-	                                        <input type="number" id="memberPhone1" name="memberPhone1" value="${sessionScope.m.memberPhone }" readonly>
+	                                        <input type="number" id="memberPhone1" name="memberPhone1" value="${sessionScope.m.memberPhone }" disabled>
 		                                </div>
 		                            </div>
 		                        </li>

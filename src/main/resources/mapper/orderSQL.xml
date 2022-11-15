@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="order">
-	
+	<select id="selectAllOrderList" parameterType="map" resultType="or">
+		select
+		    order_no as orderNo,
+		    member_no as memberNo,
+		    order_date as orderDate,
+		    order_quan as orderQuan,
+		    order_status as orderStatus,
+		    shipping_name as shippingName,
+		    shipping_addr as shippingAddr,
+		    shipping_phone as shippingPhone,
+		    (select member_name from member m where m.member_no = o.member_no) as ordererName
+		from order_tbl o
+		where member_no = #{memberNo}
+		order by 3 desc
+	</select>
 </mapper>
