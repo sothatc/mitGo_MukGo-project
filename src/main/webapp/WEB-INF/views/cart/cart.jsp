@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,8 +51,8 @@
                  <table>
                  	
                      <tr id="font">
-                         <th style=" width: 5%;">체크박스</th>
-                         <th style=" width: 5%;">카트번호</th>
+                         <th style=" width: 5%;">v</th>
+                         <th style=" width: 5%;">No.</th>
                          <th style=" width: 20%;">이미지</th>
                          <th style=" width: 20%;" class="cart-product-title">상품명</th>
                          <th style=" width: 20%;">가격</th>
@@ -67,51 +68,28 @@
 		                        
 		                        	 <td style="text-align:center"><input type="checkbox" name="productCheck" class="deleteBtn">
 					           		 	<input type="hidden" value="${sessionScope.m.memberNo }">
-					           		 	<input class="proNo" type="hidden" value="${Cart.pNo }">
+					           		 	<input class="pNo" type="hidden" value="${Cart.pNo }">
 					            	 </td>
-					            	
 					                <td style="text-align:center">${Cart.cartNo }</td>
-		                        	
-		                        	<c:choose>
-						           		<c:when test="${Cart.pImg != null}">
-						           			<td style="text-align:center"><img style="width:70px; height:70px;" src="/resources/upload/market/${Cart.pImg}"></td>
-						          	 	</c:when>
-						           		<c:when test="${Cart.pName != null}">
-						           			<td style="text-align:center">${Cart.pName }</td>
-						           		</c:when>
-						           	</c:choose>
-		                        	
-		                        	<c:choose>
-						           		<c:when test="${Cart.pPrice != 0}">
-						           			<td class="pPrice" style="text-align:center"><fmt:formatNumber value="${Cart.pPrice }" pattern="#,###"/></td>
-						           		</c:when>	
-						           	</c:choose>
-					            
-					               
-					            	 <td style="text-align:center"> <fmt:formatNumber value="${Cart.cartQuan }" />
+						          	<td style="text-align:center">${Cart.pName }</td>
+						           	<td class="pPrice" style="text-align:center">${Cart.pPrice }</td>
+						           	<td style="text-align:center">${Cart.cartQuan }
 		                          		  <button type="button" class="cart-quantity-down">-</button>
 		                            		<input type="text" class="cart-quantity" value="" readonly>
 		                            	  <button type="button" class="cart-quantity-up">+</button>
 		                        	 </td>
-		                       
 					            	<td class="shipping">무료</td>
-					            
-		                        	
-									
-		                           
-					         
-		                       
 		                    </tr>
 		                </c:forEach>    
-                 		
-                 		
-                 		
                  		<tr>
-                         <td colspan="6" id="font">
-                             <p>총 <span class="cart-quantity-sum"></span>개</p>
-                             총 상품가격 <span class="cart-price-sum"></span>원 + 배송비 <span>0</span>원 = 총 결제 예상 금액 <span class="cart-price-sum"></span>원
-                         </td>
-                     	</tr>
+		                      	<td colspan="5"></td>
+		                      	<td id="font">합계 :</td>
+		                      	<td>
+		                      		<input type="hidden" style="border:none;" class="hiddenPayPrice payPrice" name="productsPrice" readonly>
+		                      		<p class="lastPrice"></p>
+		                      		
+		                     	</td>
+	                      	</tr>
                      	</tbody>
                  </table>
                  <div class="cart-checks-btn">
@@ -120,8 +98,9 @@
                     <button type="button" class="deleteCheck"id="font">선택 삭제</button>
                 </div>
                 
-                 <div class="cart-btn" id="font">
-                     <button type="button" onclick="goToPage();">계속 쇼핑하기</button>
+             <div class="cart-btn">
+                     <button type="button" id="font">계속 쇼핑하기</button>
+	                 <button type="button" id="font">주문하러 가기</button>
                     
                  </div>
             </div>
@@ -155,11 +134,11 @@
         </div>
     </footer>
     <script>
-    const allCheckbox = document.querySelector("#allCheckbox");
+    const allCheckbox = document.querySelector("#productCheck");
 	const allCheck = document.querySelector(".allCheck");
 	allCheck.addEventListener("click", function(){
 	    allCheckbox.click();
-	    const check = document.querySelectorAll(".cart-check");
+	    const check = document.querySelectorAll(".allCheck");
 	    const status = allCheckbox.checked; // check되면 true
 	    for(let i=0; i<check.length; i++) {
 	        check[i].checked = status;
@@ -191,6 +170,8 @@
 	        }
 	    });
 	}
-    </script>
+	
+    
+	</script>
 </body>
 </html>
