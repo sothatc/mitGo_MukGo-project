@@ -1,21 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cart">
-<!-- 카트 담기 -->
-<!-- <insert id="addCart">
-     insert into cart(cart_no,member_id,p_no,cart_quan) 
-     values(cart_seq.nextval, #{memberId}, #{pNo}, #{cartQuan})
-</insert> -->
-
-<!-- 카트 리스트 -->
-<!-- <select id="cartList" resultType="kr.co.mitgomukgo.cart.model.vo">
- select
-     row_number() over(order by c.cartNo desc) as num,
-     c.cartNo, c.memberId, c.pNo, c.cartQuan, c.cartDate,
-     p.pName, p.pPrice, p.pImg
- from cart c
-     inner join market_product p
-         on c.pNo = p.pNo   
-     where c.memberId = #{memberId}
-</select> -->
+<insert parameterType="C" id="insertCart"> 
+insert into cart values
+(cart_seq.nextval,#{memberId},#{cartNo},#{cartDate} ) 
+</insert>
 </mapper>

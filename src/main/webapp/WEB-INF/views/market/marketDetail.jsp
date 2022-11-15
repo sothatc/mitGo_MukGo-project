@@ -149,7 +149,7 @@
                       	</a>
          			</c:when>
          			<c:otherwise>
-         			<form action="">
+         			<form action="/insertCart.do">
          				<div class="btnWrap">
 		         			<button type="submit" class="cartBtn">장바구니</button>
 		         			<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">

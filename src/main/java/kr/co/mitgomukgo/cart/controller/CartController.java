@@ -21,8 +21,8 @@ public class CartController {
 	private CartService service;
 	
 	   @RequestMapping(value="/insertCart.do")
-	   public String insertCart(Cart c,int pNo, int cartQuan,Model model) {
-	      int result = service.insertCart(pNo, c);
+	   public String insertCart(Cart c,int memberNo,Model model) {
+	      int result = service.insertCart(memberNo, c);
 	      return "redirect:/cart.do?memberNo="+c.getMemberNo();
 	   }
 	
