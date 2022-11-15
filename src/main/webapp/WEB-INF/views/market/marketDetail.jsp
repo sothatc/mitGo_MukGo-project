@@ -153,9 +153,10 @@
          				<div class="btnWrap">
 		         			<button type="submit" class="cartBtn">장바구니</button>
 		         			<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
-		         			<input type="hidden" name="allPrice" class="allPrice">
-		         			<input type="hidden" name="pNumber" class="pNumber">
-		         			<input type="hidden" name="count" class="count">
+		         			<input type="hidden" name="pPrice" class="allPrice">
+		         			<input type="hidden" name="pNo" class="pNumber">
+		         			<input type="hidden" name="cartQuan" class="count">
+		         			<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 		         		</div>
 		         	</form>
          			</c:otherwise>

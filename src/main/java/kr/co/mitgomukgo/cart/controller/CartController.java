@@ -28,12 +28,11 @@ public class CartController {
 	
 	   
 	   @RequestMapping(value="/cart.do")
-	   public String cart(Model model, Member m) {
-		  ArrayList<Cart> list = service.allCartList(m);
-	      model.addAttribute("list",list);
-	      return "market/cart";
-	   }
-	
+		public String cart(Model model) {
+			ArrayList<Cart> list = service.cartList();
+			model.addAttribute("list",list);
+			return "cart/cart";
+		}
 }
 
 
