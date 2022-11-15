@@ -288,7 +288,7 @@ height: 100%;
           <div class="modal-box">
               <div class="modal-title">예약 정보</div>
               <div class="modal-contents">
-              <form action="/reserve.do?memberNo=${m.memberNo }">
+              <form action="/reserve.do?memberNo=${m.memberNo }&storeNo=${s.storeNo}">
                   <table class="w3-table w3-bordered" id="reserveCheckTbl">
                       <tr>
                           <th>상호명</th>
