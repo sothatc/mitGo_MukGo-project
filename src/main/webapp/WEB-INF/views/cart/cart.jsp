@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>GOGO마켓</title>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <style>
     input[type="checkbox"] {
         -webkit-appearance: none;
@@ -117,22 +118,21 @@
 		                          		  
 		                        	 </td>
 					            	<td class="shipping">무료</td>
-					            	<td style="text-align:center;" class="cartTotalPrice">${Cart.PPrice*Cart.cartQuan }원</td>
-								 		
+					            	<td style="text-align:center;" class="cartTotalPrice">${Cart.PPrice*Cart.cartQuan }</td>
 					            	
 		                    </tr>
 		             
 		             
 		             
+								 
 		                 </c:forEach>    
                  		
                  		   <tr>
 		                      	<td colspan="6"></td>
-		                      	<td id="font">합계 : ${Cart.PPrice*Cart.cartQuan }원</td>
+		                      	<td id="font">합계 :</td>
 		                      	<td>
 		                      		<input type="hidden" style="border:none;" class="hiddenPayPrice payPrice" name="productsPrice" readonly>
 		                      		<p class="lastPrice"></p>
-		                      		
 		                    </td>
 	                      	</tr>
                      	</tbody>
@@ -186,42 +186,24 @@
 		    checkbox.checked = selectAll.checked;
 		  })
 		}
-    
-    $(".deleteCheck").on("click", function(){
-	
-		    const check = $(".deleteBtn:checked");
-		    if(check.length == 0) {
-		        alert("선택된 상품이 없습니다.")
-				return;
-		    }
-			const memberId = ${sessionScope.m.memberId};
-			const productNoArr = new Array();
-			check.each(function(index,item){
-			
-				const productNo = $(check).next().next().val();
-				
-				productNoArr.push(productNo);
-			
-			});
-			console.log(productNoArr);
-			console.log(memberId);
-			location.href="/deleteCart.do?memberId="+memberId+"&productNoArr="+productNoArr.join("/");
-		});
-	
-	
-	function sum(){
-		const sumPrice = $(".sumPrice");
-		let result = 0;
-		for(let i=0; i<sumPrice.length; i++){
-			result += Number(sumPrice.eq(i).val());
-		}
+      
+    function sum(){
+        const cartTotalPrice = $(".cartTotalPrice");
+        let result = 0;
+        for(let i=0; i<cartTotalPrice.length; i++){
+           result += Number(cartTotalPrice.eq(i).text());
+        }        
+        $(".payPrice").val(result);
+        const lastPrice = $(".lastPrice");
+        const ViewPrice = result.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+        lastPrice.text(ViewPrice);
+     }
+    sum();
+
 		
-		const realPrice = $(".realPrice").text()
-		const numPrice = $(".numPrice").val()
+	
 		
-		const lastPrice = result.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-		$(".lastPrice").text(lastPrice);
-	}
+		
 	
     
 	</script>

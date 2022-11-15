@@ -1,8 +1,10 @@
+
 .cart-table > table {
-    width: 1200px;
+    width: 1300px;
     margin: 30px auto;
     border-spacing: 0;
 }
+
 
 .cart-table > table tr {
     height: 55px;
@@ -208,32 +210,9 @@ input[name=payType]:checked+label {
 	font-size : 12px;
 }
 
-<!--주문,결제,완료 박스-->
-
-#cart-option{
-    float: left;
-    margin: 10px;
-    width: 150px;
-    height: 60px;
-    border: none;
+.pImg >img{
+	 width: 150px;
+    height: 120px;
     border-radius: 5px;
-    background-color : #f5d575;
-    text-align: center;
-    
+    margin: 5px;
 }
-
-.cart-option{
-  margin-left: 380px;
-  margin-top: 50px;
- }
- 
- .line{
-
-    float: left;
-    margin: 10px;
-   
-    float: left;
-    width: 2px;
-    height: 60px;
-    border-left: 1px solid rgb(136, 136, 136);
- }

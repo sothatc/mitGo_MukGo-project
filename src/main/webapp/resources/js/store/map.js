@@ -1103,7 +1103,7 @@ const selectCar = $(".selectCar");
 const selectFoot = $(".selectFoot");
 
 selectCar.on("click", function () {
-	selectCar.css("background-color","black");
+	selectCar.css("background-color","rgb(51,51,51)");
 	selectCar.css("color","white");
 
 	selectFoot.css("background-color","white");

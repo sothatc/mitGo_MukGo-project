@@ -37,6 +37,7 @@ height: 100%;
    <%@ include file="/WEB-INF/views/common/header.jsp" %>
    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,200" />
    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -194,38 +195,33 @@ height: 100%;
 				</div>
 				<div class="map_act_btn_wrap clear_box"></div>
 				<div>
-					<div class="selectCar">자동차</div>
-					<div class="selectFoot">도보</div>
+					<!-- 자동차 -->
+					<div class="selectCar" style="background-color:rgb(51,51,51);"><span class="material-symbols-outlined">directions_car</span>자동차</div>
+					<div class="selectFoot"style="background-color:rgb(51,51,51);"><span class="material-symbols-outlined">footprint</span>도보</div>
 				</div>
-				<div id="resultBox">
-					<p id="result">예상 정보</p>
-				</div>
+
 				<div class="ft_select_wrap">
 					<div class="ft_select">
 						<div class="address-wrap">
 
-							<input type="text" class="text_custom" id="fullAddr" name="fullAddr" value="" readonly>
+							<input type="text" class="text_custom" id="fullAddr" name="fullAddr" value="" onclick="searchAddr();" placeholder="클릭하여 출발지를 입력하세요" readonly>
 							<span type="text" class="text_custom addressTd" id="E_fullAddr" name="E_fullAddr" readonly style="display:none;"></span>
-							<button class="startBtn" onclick="searchAddr();">출발지 입력</button>
-							<button id="btn_select" style="display : none;">적용하기</button>
-							<button id="hidden_btn_select" style="display : none;">적용하기</button>					
+							<button id="btn_select" style="display : none;">검색하기</button>
+							<button id="hidden_btn_select" style="display : none;">검색하기</button>					
 						</div>
 
 						<div class="car-content">
-						
-							<!-- <select id="year">
-								<option value="N" selected="selected">교통정보 표출 옵션</option>
-								<option value="Y">Y</option>
-								<option value="N">N</option>
-							</select> -->
-						
-							<button id="btn_select1">적용하기</button>
+							<button id="btn_select1">길찾기</button>
 						</div>
 						<div class="foot-content">
-							<button id="btn_select2">적용하기</button>
+							<button id="btn_select2">길찾기</button>
 						</div>
 					</div>
 				</div>
+				<div id="resultBox">
+					<p id="result">예상 정보</p>
+				</div>
+				
 				<div class="map_act_btn_wrap clear_box"></div>
 				<div class="clear"></div>
 			</div>
@@ -601,8 +597,6 @@ height: 100%;
                      for(let i=realOpenTime; i<realCloseTime; i++){
                          $(".buttonTd").append("<button class=timeBtn style=margin-right:1%;background-color:white;color:rgb(51,51,51); value="+i+">"+i+":00"+"</button>");
                       }
-                       
-     
                      //버튼 클릭
                      const timeBtns = $(".timeBtn");
                      timeBtns.on("click",function(){
@@ -655,20 +649,10 @@ height: 100%;
 					                     }
 					                  }
 					             }
-		                	  
-		                	  
 		                  }
 		              }); //--------------내부 ajax종료
-
-
-			             
-		              
             	}//--------success문 종료
-                
-              }); //--------------ajax종료
-              
-              
-
+              }); //--------------ajax종료 
          });//데이트 피커 눌렀을 떄 함수 종료
          
             
