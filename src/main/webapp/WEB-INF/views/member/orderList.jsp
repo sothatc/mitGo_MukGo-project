@@ -25,6 +25,7 @@
 							<tr>
 								<th class="th" scope="col">주문번호</th>
 								<th class="th" scope="col">주문자 ID</th>
+								<th class="th" scope="col">주문 상품</th>
 								<th class="th" scope="col">주문 개수</th>
 								<th class="th" scope="col">주문 가격</th>
 								<th class="th" scope="col">주문 날짜</th>
@@ -35,8 +36,9 @@
 								<tr>
 									<td scope="row">${orList.orderNo }</td>
 									<td scope="row">${orList.memberId }</td>
+									<td scope="row">${orList.pName }</td>
 									<td scope="row">${orList.orderQuan }</td>
-									<td scope="row">${orList.orderPrice }</td>
+									<td scope="row">${orList.pPrice }</td>
 									<td scope="row">${orList.orderDate }</td>
 									<td scope="row">${orList.orderStatus }</td>
 									<td scope="row">

@@ -25,7 +25,7 @@ import kr.co.mitgomukgo.member.model.service.MemberService;
 import kr.co.mitgomukgo.member.model.vo.Member;
 import kr.co.mitgomukgo.member.model.vo.Owner;
 import kr.co.mitgomukgo.notice.model.vo.Notice;
-import kr.co.mitgomukgo.store.model.vo.Order;
+
 import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import net.nurigo.java_sdk.Coolsms;
@@ -296,15 +296,22 @@ public class MemberController {
 		return "member/mypage";
 	}
 	@RequestMapping(value="/reserveList.do")
-	public String reserveList(@SessionAttribute Member m, Model model) {
+	public String reserveList(@SessionAttribute Member m, Model model, HttpServletRequest request) {
+		System.out.println(m.getMemberId());
 		ArrayList<Reserve> rsList = service.selectReserveList(m);
 		ArrayList<Notice> ncList = service.myPageNcList();
 		if(rsList.isEmpty()) {
+			model.addAttribute("ncList", ncList);
+			model.addAttribute("rsList", rsList);
+			request.setAttribute("msg", "예약 내역이 존재하지 않습니다.");
+			request.setAttribute("url", "mypage.do");
+			return "common/alert";
+		}else {
+			model.addAttribute("ncList", ncList);
+			model.addAttribute("rsList", rsList);
 			return "member/reserveList";
+			
 		}
-		model.addAttribute("ncList", ncList);
-		model.addAttribute("rsList", rsList);
-		return "member/reserveList";
 	}
 	@RequestMapping(value="/reserveManage.do")
 	public String reserveManage(Model model, @SessionAttribute Store s, int reqPage) {
@@ -532,17 +539,25 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/orderList.do")
-	public String orderList(HttpSession session, int reqPage, Model model) {
+	public String orderList(HttpSession session, int reqPage, Model model, HttpServletRequest request) {
 		Member m = (Member)session.getAttribute("m");
 		String memberId = m.getMemberId();
 		HashMap<String, Object> map = service.selectAllOrderList(reqPage, memberId);
+		ArrayList<Notice> ncList = service.myPageNcList();
+		model.addAttribute("ncList", ncList);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
 		model.addAttribute("pageNavi", map.get("pageNavi"));
 		model.addAttribute("total", map.get("total"));
 		model.addAttribute("pageNo", map.get("pageNo"));
 		model.addAttribute("memberId", memberId);
-		return "member/orderList";
+		if(map.isEmpty()) {
+			request.setAttribute("msg", "주문 내역이 존재하지 않습니다.");
+			request.setAttribute("url", "mypage.do");
+			return "common/alert";
+		}else {
+			return "member/orderList";
+		}
 	}
 	
 }

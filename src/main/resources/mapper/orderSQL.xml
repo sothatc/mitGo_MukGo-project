@@ -11,11 +11,11 @@
 		    member_id as memberId,
 		    order_date as orderDate,
 		    order_quan as orderQuan,
-		    order_price as orderPrice,
 		    order_status as orderStatus,
 		    shipping_phone as shippingPhone,
 		    shipping_addr as shippingAddr,
-		    (select p_name from market_product mp where ot.p_no = mp.p_no) as pName
+		    (select p_name from market_product mp where ot.p_no = mp.p_no) as pName,
+		    (select p_price from market_product mp where ot.p_no = mp.p_no) as pPrice
 		from order_tbl ot
 		where member_id = #{memberId}
 		order by 4 desc
