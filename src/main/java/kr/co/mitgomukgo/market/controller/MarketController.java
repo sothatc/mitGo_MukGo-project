@@ -55,19 +55,25 @@ public class MarketController {
 		return "market/marketMain";
 	}
 
-	// 맛집 상세 이동
+	// 마켓 상세 이동
 	@RequestMapping(value = "/marketDetailView.do")
 	public String marketDetailView() {
 		return "market/marketDetail";
 	}
 	
-	// 맛집 상세 보기
+	// 마켓 상세 보기
 	@RequestMapping(value = "/marketDetail.do")
 	public String marketDetail(int pNo, String bookMarkId, Model model) {
 		HashMap<String, Object> map = service.selectOneMarket(pNo, bookMarkId); // 해쉬맵으로 담아서 한꺼번에 가져오기
 		model.addAttribute("ma", map.get("ma"));
 		model.addAttribute("bm", map.get("bm"));
 		return "market/marketDetail";
+	}
+	
+	//주문 관리 이동
+	@RequestMapping(value = "/ownerOrderManageFrm.do")
+	public String ownerOrderManageFrm(int reqPage) {
+		return "member/ownerOrderManageFrm";
 	}
 	
 
