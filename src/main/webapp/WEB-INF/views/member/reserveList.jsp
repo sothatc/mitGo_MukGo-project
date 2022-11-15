@@ -58,6 +58,7 @@
 							</tr>
 							<c:forEach items="${rsList }" var="rs">
 								<tr>
+									<input type="hidden" class="nullChk" value="${rs.reserveNo }">
 									<td>${rs.reserveNo }</td>
 									<td>${rs.storeName }</td>
 									<td>${rs.reserveDate }</td>
@@ -102,6 +103,10 @@
 			$(location).attr('href', "/cancleReserve.do?reserveNo=" + reserveNo);
 		}
 	});
+	
+	if($(".nullChk").val() == null) {
+		alert("예약 내역이 존재하지 않습니다.");
+	}
 	</script>
 
 </body>

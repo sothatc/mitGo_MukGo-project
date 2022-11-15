@@ -34,6 +34,7 @@
 							</tr>
 							<c:forEach items="${list }" var="orList">
 								<tr>
+									<input type="hidden" class="nullChk" value="${orList.orderNo }">
 									<td scope="row">${orList.orderNo }</td>
 									<td scope="row">${orList.memberId }</td>
 									<td scope="row">${orList.pName }</td>
@@ -56,5 +57,10 @@
 
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+	<script>
+		if($(".nullChk").val() == null) {
+			alert("주문 내역이 존재하지 않습니다.");
+		}
+	</script>
 </body>
 </html>

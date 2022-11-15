@@ -296,22 +296,14 @@ public class MemberController {
 		return "member/mypage";
 	}
 	@RequestMapping(value="/reserveList.do")
-	public String reserveList(@SessionAttribute Member m, Model model, HttpServletRequest request) {
+	public String reserveList(@SessionAttribute Member m, Model model) {
 		System.out.println(m.getMemberId());
 		ArrayList<Reserve> rsList = service.selectReserveList(m);
 		ArrayList<Notice> ncList = service.myPageNcList();
-		if(rsList.isEmpty()) {
-			model.addAttribute("ncList", ncList);
-			model.addAttribute("rsList", rsList);
-			request.setAttribute("msg", "예약 내역이 존재하지 않습니다.");
-			request.setAttribute("url", "mypage.do");
-			return "common/alert";
-		}else {
-			model.addAttribute("ncList", ncList);
-			model.addAttribute("rsList", rsList);
-			return "member/reserveList";
-			
-		}
+		
+		model.addAttribute("ncList", ncList);
+		model.addAttribute("rsList", rsList);
+		return "member/reserveList";
 	}
 	@RequestMapping(value="/reserveManage.do")
 	public String reserveManage(Model model, @SessionAttribute Store s, int reqPage) {
@@ -539,7 +531,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value="/orderList.do")
-	public String orderList(HttpSession session, int reqPage, Model model, HttpServletRequest request) {
+	public String orderList(HttpSession session, int reqPage, Model model) {
 		Member m = (Member)session.getAttribute("m");
 		String memberId = m.getMemberId();
 		HashMap<String, Object> map = service.selectAllOrderList(reqPage, memberId);
@@ -551,13 +543,9 @@ public class MemberController {
 		model.addAttribute("total", map.get("total"));
 		model.addAttribute("pageNo", map.get("pageNo"));
 		model.addAttribute("memberId", memberId);
-		if(map.isEmpty()) {
-			request.setAttribute("msg", "주문 내역이 존재하지 않습니다.");
-			request.setAttribute("url", "mypage.do");
-			return "common/alert";
-		}else {
-			return "member/orderList";
-		}
+		
+		return "member/orderList";
+		
 	}
 	
 }
