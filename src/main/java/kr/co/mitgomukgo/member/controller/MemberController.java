@@ -11,6 +11,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -175,10 +176,18 @@ public class MemberController {
 		return "redirect:/";
 	}
 	@RequestMapping(value="/ownerLogin.do")
-	public String ownerLogin(Owner owner, HttpSession session) {
+	public String ownerLogin(Owner owner, HttpSession session, HttpServletRequest request) {
 		Owner o = service.selectOneOwner(owner);
 		if(o != null) {
-			session.setAttribute("o", o);
+			if(o.getOwnerStatus() == 1) {
+				session.setAttribute("o", o);
+				request.setAttribute("msg", "가입승인 대기 상태입니다.");
+				request.setAttribute("url", "/mainFrm.do");
+				return "common/alert";
+			}else {
+				session.setAttribute("o", o);
+				return "redirect:/";
+			}
 		}
 		return "redirect:/";
 	}
