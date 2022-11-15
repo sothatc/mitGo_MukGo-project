@@ -57,7 +57,7 @@ height: 100%;
 		 	<div style="margin-right:0; float:right;">
             <c:choose>
               <c:when test="${!empty sessionScope.m }">
-                  <a class="material-symbols-rounded share pointer" id="share" href="javascript:shareMessage()">share</a>
+                  <a class="material-symbols-rounded share pointer" id="share">share</a>
                   <span class="material-symbols-rounded favorite pointer" id="favorite" style="display:none;">favorite</span>
                   <span class="material-symbols-outlined unfavorite pointer" id="unfavorite" style="float:right; margin-top:10px; margin-right:15px;">favorite</span>
                </c:when>
@@ -354,25 +354,54 @@ height: 100%;
              </div>
            </div>
       </div>
+      
+      
+       <!-- 공유하기 모달 -->
+       <div class="w3-container" style="font-family:Gowun Dodum;">
+           <div id="shareModal" class="w3-modal" style="font-family:Gowun Dodum; z-index:2000;">
+             <div class="w3-modal-content w3-animate-top w3-card-4" style="width:50%; height: 30%;">
+               <header class="w3-container w3-teal" style="height:15%;"> 
+                 <span onclick="document.getElementById('shareModal').style.display='none'" 
+                 class="w3-button w3-display-topright" style="width:5%; height:15%;">&times;</span>
+               </header>
+               	 <h5 style="font-family:Gowun Dodum; text-align: center; font-weight: bolder; margin-top:40px;">공유하기</h5>
+                 <div style="width:100%; height:30%;padding:0; margin-top:20px;;display:flex; justify-content: center; align-items: center; color:black;">
+		                 <button style="height:30px; background-color: rgb(51,51,51); border-radius: 15px; color: white;" class="pointer">
+		                 	<a href="javascript:shareMessage()" style="text-decoration: none;">카카오톡 공유하기</a>
+		                 </button>
+		                 <input type="text" id="currentUrl"  style="width:400px; margin-left: 20px;"readonly>
+		                 <button type="button" class="btn" name="btnClick"  style="padding:2px; margin-left:10px;background-color: rgb(51,51,51); border-radius: 15px; color: white;" class="pointer">
+		                 	<a style="text-decoration: none;width:120px;data-clipboard-target="#currentUrl">url 복사</a>
+		                 </button>
+                 </div>
+             </div>
+           </div>
+      </div>
        
        
        
        
       <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
       <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+      
+      <!-- 카카오톡 공유하기 API -->
       <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.0/kakao.min.js" integrity="sha384-PFHeU/4gvSH8kpvhrigAPfZGBDPs372JceJq3jAXce11bVA6rMvGWzvP4fMQuBGL" crossorigin="anonymous"></script>
       <script>
-         Kakao.init('c089c8172def97eb00c07217cae17495');
+         Kakao.init('b9d4c91a07666b464ce95d2ffa8d018c');
       </script>
-      <!-- map api ---------------------------- -->
+      
+      <!-- map api ------------------------------->
       <script src="https://apis.openapi.sk.com/tmap/jsv2?version=1&appKey=l7xx85918c7e8848478d8513312430044e0d"></script>
       <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
       <script src="/resources/js/store/map.js"></script>
-      <script>
-       //------------------------------------------------------------------------------------------------------------------------------
       
-
-               
+      <!-- 클립보드 복사하기 API -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+      
+      
+      
+      
+      <script>
                
        //----------카테고리
        // 1:한식 , 2: 양식, 3: 일식, 4: 중식, 5:분식, 6:육류, 7:씨푸드,8:디저트,9:기타
@@ -669,6 +698,7 @@ height: 100%;
          }
          
          
+         
          //---------- 인원수 늘리기
          let count = 1;
          var maxNum="${s.maxNum}";
@@ -723,6 +753,31 @@ height: 100%;
       function hideModal(){
     	  modal.classList.add("hidden");
       }
+      
+      //------ 공유하기 모달
+      $("#share").on("click",function(){
+    	  document.getElementById('shareModal').style.display='block';
+      });
+      
+      
+      //---- 클립보드 복사 기능
+      var url = window.location.href;
+      $("#currentUrl").attr("value",url);
+      $(".btn").attr("data-clipboard-text",url);
+      
+      var clipboard = new ClipboardJS('.btn');
+		clipboard.on('success', function(e) {
+		    console.info('Action:', e.action);
+		    console.info('Text:', e.text);
+		    console.info('Trigger:', e.trigger);
+		    alert("클립보드에 복사되었습니다.");
+		});
+
+		clipboard.on('error', function(e) {
+		    console.error('Action:', e.action);
+		    console.error('Trigger:', e.trigger);
+		});
+      
       </script>
 
 </body>
