@@ -86,6 +86,15 @@
 										</div>
 									</div>
 								</li>
+								<li>
+									<span class="tit">승인 여부</span>
+									<div class="cnt">
+										<div class="input01">
+											<input type="hidden" id="ownerStatus1" name="ownerStatus1" value="${sessionScope.o.ownerStatus }" disabled>
+											<input type="text" id="ownerStatus" name="ownerStatus" disabled>
+										</div>
+									</div>
+								</li>
 							</ul>
 						</div>
 					</div>
@@ -157,6 +166,18 @@
 			$(this).css("background-color", "");
 			$(this).css("color", "");
 		})
+		
+		
+		//업주 승인여부 텍스트 변환
+		const status = $("#ownerStatus1").val();
+		const statusText = $("#ownerStatus");
+		if(status == 1) {
+			statusText.val("승인 대기중");
+		}else {
+			statusText.val("승인 완료");
+		}
+		
+		
 		<!--
 		function callFunction() {
 			var storeInfo = $(".storeInfo").val();
@@ -173,6 +194,8 @@
 			});
 		}
 		-->
+		
+		
 	</script>
 </body>
 </html>
