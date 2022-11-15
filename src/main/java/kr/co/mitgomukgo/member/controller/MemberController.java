@@ -178,6 +178,7 @@ public class MemberController {
 	@RequestMapping(value="/ownerLogin.do")
 	public String ownerLogin(Owner owner, HttpSession session, HttpServletRequest request) {
 		Owner o = service.selectOneOwner(owner);
+		System.out.println(o.getOwnerStatus());
 		if(o != null) {
 			if(o.getOwnerStatus() == 1) {
 				session.setAttribute("o", o);
