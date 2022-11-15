@@ -97,13 +97,12 @@
 			$(this).css("background-color","");
 			$(".login-btn").css("color","");
 		});
-		
+		var selLogin = 1;
 		/*일반, 사업자 로그인 구분*/
 		$("#normal").click();
 		$("#ownerLoginFrm").css("display","none");
 		$("[name=selLogin]").on("click",function(){
-			var selLogin = $("input[name=selLogin]:checked").val();
-			console.log(selLogin);
+			selLogin = $("input[name=selLogin]:checked").val();
 			if(selLogin == 1) {
 				$("#ownerLoginFrm").css("display","none");
 				$("#normalLoginFrm").css("display","block");
@@ -117,6 +116,26 @@
 			const popup = window.open("","searchMemberFrm","left=600px, top=300px, width=490px, height=350px, menubar=no, status=no, scrollbars=yes");
 			$("[name=searchMemberFrm]").attr("target","searchMemberFrm");
 			$("[name=searchMemberFrm]").submit();
+		});
+		
+		
+		$(".login-btn").on("click",function(e){
+			if(selLogin == 1) {
+				var memberId = $("#memberId").val();
+				var memberPw = $("#memberPw").val();
+				if(memberId == "" || memberPw == "") {
+					alert("정보를 입력해주세요.");
+					e.preventDefault();
+				}
+				
+			}else if(selLogin == 2){
+				var ownerId = $("#ownerId").val();
+				var ownerPw = $("#ownerPw").val();
+				if(ownerId == "" || ownerPw == "") {
+					alert("정보를 입력해주세요.");
+					e.preventDefault();
+				}
+			}
 		});
 		
     </script>
