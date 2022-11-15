@@ -32,7 +32,22 @@
 		</div>
 	</section>
 	<!-- ////////////////////////////////////////////////////////////////// -->
-
+	
+	<!-- 검색기능 -->
+	<div class="searchMarketContatainer">
+		<form action="/searchMarket.do" method="get">
+			<select name="type">
+				<option value="storeName">가게명</option>
+				<option value="productName">제품명</option>
+			</select>
+			<div class="storeList-searchinput" id="font">
+				<input type="text" name="search" value="${search }">
+				<input type="hidden" name="reqPage" value="1">
+				<input type="hidden" name="pCategory" value="${pCategory }">
+				<button type="submit">검색</button>
+			</div>
+		</form>
+	</div>
 	<div class="mid-nav" id="home">
 		<div class="container">
 			<div class="row justify-content-between">
@@ -57,7 +72,7 @@
 	<!-- ////////////////////////////////////////////////////////////////// -->
 
 	<section class="py-5" >
-		<div class="container px-4 px-lg-5 mt-5">
+		<div class="tag px-4 px-lg-5 mt-5">
 			<div class="market1">
 				<h6 id="font">
 					<c:if test="${pCategory == 10}">
@@ -74,9 +89,9 @@
 					</c:if>		
 				</h6>		
 			</div>
-			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center minHeight">				
+			<div class="row gx-4 gx-lg-5  row-cols-md-3 row-cols-xl-4 justify-content-center minHeight">				
 				<c:forEach items="${list }" var="ma">
-					<div class="col mb-5">
+					<div class="col mb-5 contentLeft">
 						<div class="card h-100">
 							<!-- Product image-->
 							<img class="card-img-top" src="resources/upload/market/${ma.PImg }"/>

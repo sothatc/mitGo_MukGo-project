@@ -5,7 +5,46 @@
 <head>
 <meta charset="UTF-8">
 <title>GOGO마켓</title>
-
+<style>
+    input[type="checkbox"] {
+        -webkit-appearance: none;
+        position: relative;
+        width: 16px;
+        height: 16px;
+        cursor: pointer;
+        outline: none !important;
+        border: 1px solid #ffe9a4;
+        border-radius: 2px;
+        background: #fbfbfb;
+    }
+ 
+    input[type="checkbox"]::before {
+        content: "\2713";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        overflow: hidden;
+        transform: scale(0) translate(-50%, -50%);
+        line-height: 1;
+    }
+ 
+    input[type="checkbox"]:hover {
+        border-color: #ffe9a4;
+    }
+ 
+    input[type="checkbox"]:checked {
+        background-color: #ffc107;
+        border-color: rgba(255, 255, 255, 0.3);
+        color: white;
+    }
+ 
+    input[type="checkbox"]:checked::before {
+        border-radius: 2px;
+        transform: scale(1) translate(-50%, -50%)
+    }
+</style>
+ 
+<input type="checkbox"/>
 </head>
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -51,56 +90,61 @@
                  <table>
                  	
                      <tr id="font">
-                         <th style=" width: 5%;">v</th>
-                         <th style=" width: 5%;">No.</th>
+                         <th style=" width: 5%;"><label></label><input type="checkbox" name="productCheck" onclick="selectAll(this)" style="width: 15px; height: 15px; "></th>
                          <th style=" width: 20%;">이미지</th>
                          <th style=" width: 20%;" class="cart-product-title">상품명</th>
-                         <th style=" width: 20%;">가격</th>
+                         <th style=" width: 15%;">가격</th>
                          <th style=" width: 10%;">수량</th>
-                         <th style=" width: 20%;">배송비</th>
+                         <th style=" width: 15%;">배송비</th>
+                         <th style=" width: 15%;">총 금액</th>
                      </tr>
                			
 		                	
 		                	<tbody>
+		                	
 		                	<c:forEach items="${list }" var="Cart">
 		                	
 		                	<tr class="showCartList" id="font">
 		                        
 		                        	 <td style="text-align:center"><input type="checkbox" name="productCheck" class="deleteBtn">
-					           		 	<input type="hidden" value="${sessionScope.m.memberNo }">
-					           		 	<input class="pNo" type="hidden" value="${Cart.pNo }">
+					           		 	<input type="hidden" value="${sessionScope.m.memberId }">
+					           		 	<input class="pNo" type="hidden" value="${Cart.PNo }">
 					            	 </td>
-					                <td style="text-align:center">${Cart.cartNo }</td>
-						          	<td style="text-align:center">${Cart.pName }</td>
-						           	<td class="pPrice" style="text-align:center">${Cart.pPrice }</td>
+					            	<td class="pImg" style="text-align:center"><img src="/resources/upload/market/${Cart.PImg }"></td>
+						          	<td style="text-align:center">${Cart.PName }</td>
+						           	<td class="pPrice" style="text-align:center">${Cart.PPrice }</td>
 						           	<td style="text-align:center">${Cart.cartQuan }
-		                          		  <button type="button" class="cart-quantity-down">-</button>
-		                            		<input type="text" class="cart-quantity" value="" readonly>
-		                            	  <button type="button" class="cart-quantity-up">+</button>
+		                          		  
 		                        	 </td>
 					            	<td class="shipping">무료</td>
+					            	<td style="text-align:center;" class="cartTotalPrice">${Cart.PPrice*Cart.cartQuan }원</td>
+								 		
+					            	
 		                    </tr>
-		                </c:forEach>    
-                 		<tr>
-		                      	<td colspan="5"></td>
-		                      	<td id="font">합계 :</td>
+		             
+		             
+		             
+		                 </c:forEach>    
+                 		
+                 		   <tr>
+		                      	<td colspan="6"></td>
+		                      	<td id="font">합계 : ${Cart.PPrice*Cart.cartQuan }원</td>
 		                      	<td>
 		                      		<input type="hidden" style="border:none;" class="hiddenPayPrice payPrice" name="productsPrice" readonly>
 		                      		<p class="lastPrice"></p>
 		                      		
-		                     	</td>
+		                    </td>
 	                      	</tr>
                      	</tbody>
                  </table>
                  <div class="cart-checks-btn">
-                    <button type="button" class="allCheck" id="font">전체 선택</button>
-                    <input type="checkbox" id="allCheckbox">
+                   
                     <button type="button" class="deleteCheck"id="font">선택 삭제</button>
                 </div>
                 
              <div class="cart-btn">
                      <button type="button" id="font">계속 쇼핑하기</button>
-	                 <button type="button" id="font">주문하러 가기</button>
+	                 <button type="button" id="font" class="payBtn">주문하러 가기</button>
                     
                  </div>
             </div>
@@ -134,41 +178,49 @@
         </div>
     </footer>
     <script>
-    const allCheckbox = document.querySelector("#productCheck");
-	const allCheck = document.querySelector(".allCheck");
-	allCheck.addEventListener("click", function(){
-	    allCheckbox.click();
-	    const check = document.querySelectorAll(".allCheck");
-	    const status = allCheckbox.checked; // check되면 true
-	    for(let i=0; i<check.length; i++) {
-	        check[i].checked = status;
-	    }
-	    if(status) {
-			allCheck.innerText = "선택 해제";
-		} else {
-			allCheck.innerText = "전체 선택";
+    function selectAll(selectAll)  { // 전체선택
+		  const checkboxes 
+		       = document.getElementsByName("productCheck");
+		  
+		  checkboxes.forEach((checkbox) => {
+		    checkbox.checked = selectAll.checked;
+		  })
 		}
-	});
+    
+    $(".deleteCheck").on("click", function(){
+	
+		    const check = $(".deleteBtn:checked");
+		    if(check.length == 0) {
+		        alert("선택된 상품이 없습니다.")
+				return;
+		    }
+			const memberId = ${sessionScope.m.memberId};
+			const productNoArr = new Array();
+			check.each(function(index,item){
+			
+				const productNo = $(check).next().next().val();
+				
+				productNoArr.push(productNo);
+			
+			});
+			console.log(productNoArr);
+			console.log(memberId);
+			location.href="/deleteCart.do?memberId="+memberId+"&productNoArr="+productNoArr.join("/");
+		});
 	
 	
-	const chkArr = new Array();
-	const check = document.querySelectorAll(".cart-check");
-	for(let i=0; i<check.length; i++) {
-	    check[i].addEventListener("change", function(){
-	        for(let j=0; j<check.length; j++) {
-	            chkArr.push(check[j].checked);
-	            if(chkArr.length > check.length) {
-	                chkArr.shift();
-	            }
-	        }
-	        if(chkArr.indexOf(false) == -1) { // chkArr에 false가 포함되지 않았다면
-	            allCheckbox.checked = true;
-	            allCheck.innerText = "선택 해제";
-	        } else {
-	            allCheckbox.checked = false;
-	            allCheck.innerText = "전체 선택";
-	        }
-	    });
+	function sum(){
+		const sumPrice = $(".sumPrice");
+		let result = 0;
+		for(let i=0; i<sumPrice.length; i++){
+			result += Number(sumPrice.eq(i).val());
+		}
+		
+		const realPrice = $(".realPrice").text()
+		const numPrice = $(".numPrice").val()
+		
+		const lastPrice = result.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+		$(".lastPrice").text(lastPrice);
 	}
 	
     

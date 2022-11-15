@@ -197,5 +197,26 @@ public class MarketController {
 		}
 	}
 
+	@RequestMapping(value="/searchMarket.do")
+	public String searchMarket(int reqPage ,String search ,String type ,String pCategory ,Model model ,HttpServletRequest request) {
+		HashMap<String, Object> map = service.searchMarket(reqPage,search,type,pCategory);
+		//System.out.println("list :" + map.get("list"));
+		if(map.get("list") != null) {
+			model.addAttribute("list",map.get("list"));
+			model.addAttribute("reqPage",reqPage);
+			model.addAttribute("pCategory",pCategory);
+			model.addAttribute("pageNavi", map.get("pageNavi"));
+			model.addAttribute("total", map.get("total"));
+			model.addAttribute("pageNo", map.get("pageNo"));
+			model.addAttribute("search", search);
+			model.addAttribute("type", type);
+			return "market/marketMain";
+		} else{
+			request.setAttribute("msg", "검색 결과가 존재하지 않습니다.");
+			request.setAttribute("url", "/marketMain.do?reqPage=1&pCategory="+pCategory);
+			return "common/alert";
+		}
+		
+	}
 }
 
