@@ -167,18 +167,20 @@ public class MemberController {
 		}
 	}
 	@RequestMapping(value="/login.do")
-	public String login(Member member, HttpSession session) {
+	public String login(Member member, HttpSession session, HttpServletRequest request) {
 		Member m = service.selectOneMember(member);
-		System.out.println(m.getMemberPhone());
 		if(m != null) {
 			session.setAttribute("m", m);
+			return "redirect:/";
+		}else {
+			request.setAttribute("msg", "가입된 회원이 아닙니다.");
+			request.setAttribute("url", "/loginFrm.do");
+			return "common/alert";
 		}
-		return "redirect:/";
 	}
 	@RequestMapping(value="/ownerLogin.do")
 	public String ownerLogin(Owner owner, HttpSession session, HttpServletRequest request) {
 		Owner o = service.selectOneOwner(owner);
-		System.out.println(o.getOwnerStatus());
 		if(o != null) {
 			if(o.getOwnerStatus() == 1) {
 				session.setAttribute("o", o);
@@ -189,8 +191,11 @@ public class MemberController {
 				session.setAttribute("o", o);
 				return "redirect:/";
 			}
+		}else {
+			request.setAttribute("msg", "가입된 회원이 아닙니다.");
+			request.setAttribute("url", "/loginFrm.do");
+			return "common/alert";
 		}
-		return "redirect:/";
 	}
 	@RequestMapping(value="/pwChk.do")
 	public String pwChk(HttpSession session) {
