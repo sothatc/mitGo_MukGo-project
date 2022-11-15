@@ -146,7 +146,6 @@
          			<form action="/insertCart.do">
          				<div class="btnWrap">
 		         			<button type="submit" class="cartBtn">장바구니</button>
-		         			<button type="submit" class="buyBtn">구매하기</button>
 		         			<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 		         			<input type="hidden" name="pPrice" class="allPrice">
 		         			<input type="hidden" name="pNo" class="pNumber">
@@ -154,6 +153,22 @@
 		         			<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 		         		</div>
 		         	</form>
+		         	
+		         	
+		         	<form action="/insertOrder.do">
+		         	<div class="btnWrap">
+		         			<button type="submit" class="buyBtn">구매</button>
+		         			<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
+		         			<input type="hidden" name="pPrice" class="allPrice">
+		         			<input type="hidden" name="pNo" class="pNumber">
+		         			<input type="hidden" name="cartQuan" class="count">
+		         			<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
+		         			<input type="hidden" name="pImg" value="${ma.PImg }">
+		         			<input type="hidden" name="pName" value="${ma.PName}">
+		         		</div>
+		         	
+		         	</form>
+		         	
          			</c:otherwise>
          		</c:choose>
          	</div>
@@ -292,6 +307,13 @@
 	 	$(".pNumber").attr("value",pNo);
 	 	$(".count").attr("value",count);
 	});
+	
+	$(".buyBtn").on("click", function(){
+	 	$(".allPrice").attr("value",count*price);
+	 	$(".pNumber").attr("value",pNo);
+	 	$(".count").attr("value",count);
+	});
+
 	
     //------ 공유하기 모달
     $("#share").on("click",function(){
