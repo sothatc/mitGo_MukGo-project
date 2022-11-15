@@ -211,6 +211,10 @@ public class MemberDao {
 		return sqlSession.delete("owner.deleteOwner", ownerNo);
 	}
 
+	public int countOrderList(String memberId) {
+		return sqlSession.selectOne("order.countOrderList",memberId);
+	}
+
 	
 
 
