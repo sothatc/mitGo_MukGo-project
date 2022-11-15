@@ -23,13 +23,15 @@ public class CartController {
 	   @RequestMapping(value="/insertCart.do")
 	   public String insertCart(Cart c,int memberNo,Model model) {
 	      int result = service.insertCart(memberNo, c);
-	      return "redirect:/cart.do?memberNo="+c.getMemberNo();
+	      return "redirect:/cart.do?memberId="+c.getMemberId();
 	   }
 	
 	   
 	   @RequestMapping(value="/cart.do")
-		public String cart(Model model) {
-			ArrayList<Cart> list = service.cartList();
+		public String cart(Model model, Cart c) {
+		   System.out.println(c);
+			ArrayList<Cart> list = service.cartList(c);
+			System.out.println(list);
 			model.addAttribute("list",list);
 			return "cart/cart";
 		}

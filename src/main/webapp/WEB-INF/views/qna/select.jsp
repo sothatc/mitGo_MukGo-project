@@ -15,15 +15,15 @@
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 	
-	<div class="select-wrap" style="margin-bottom: 100px; margin-top: 100px;">
+	<div class="select-wrap" style="margin-bottom: 100px; margin-top: 100px; font-family:Gowun Dodum; font-weight: bolder; color:black">
         <a href="/selectAllFaq.do?reqPage=1">
             <div class="img-box">
                 <div>
                     <img src="/resources/img/faq.png" alt="">
                 </div>
-                <div>
+                <h3 style="width:344px; height:51px; margin-top:20px; text-align:center;">
                    FAQ
-                </div>
+                </h3>
             </div>
         </a>
 
@@ -32,9 +32,9 @@
                 <div>
                     <img src="/resources/img/공지사항2.png" alt="">
                 </div>
-                <div>
-                    공지사항
-                </div>
+                <h3 style="width:344px; height:51px; margin-top:20px; text-align:center;">
+                   	공지사항
+                </h3>
             </div>
         </a>
 
@@ -43,9 +43,9 @@
                 <div>
                     <img src="/resources/img/qna.png" alt="">
                 </div>
-                <div style="margin-top: 20px;">
-                    QNA
-                </div>
+                <h3 style="width:344px; height:51px; margin-top:20px; text-align:center;">
+                   QnA
+                </h3>
             </div>
         </a>
     </div>

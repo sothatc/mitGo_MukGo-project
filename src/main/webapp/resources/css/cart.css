@@ -4,11 +4,11 @@
 
 
 .cart-table{
-    width: 1200px;
+    width: 1300px;
     margin: 0 auto;
 }
 .cart-table > table {
-    width: 1200px;
+    width: 1300px;
     margin: 30px auto;
     border-spacing: 0;
 }
@@ -40,8 +40,8 @@
 }
 
 .cart-table > table tr > td:nth-child(2) > img {
-    width: 250px;
-    height: 200px;
+    width: 150px;
+    height: 120px;
     margin: 10px;
     border: 1px solid #eee;
     border-radius: 10px;
@@ -189,4 +189,5 @@
     width: 2px;
     height: 60px;
     border-left: 1px solid rgb(136, 136, 136);
-
+ }
+ 
