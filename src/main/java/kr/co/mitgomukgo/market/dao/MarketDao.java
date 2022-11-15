@@ -78,5 +78,18 @@ public class MarketDao {
 		return bm;
 	}
 
+	public ArrayList<Market> searchMarket(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("market.searchMarket", map);
+		if(!list.isEmpty()) {
+			return (ArrayList<Market>) list;
+		}else {
+			return null;
+		}
+	}
+
+	public int countSearchMarket(HashMap<String, Object> map) {
+		return sqlSession.selectOne("market.countSearchMarket",map);
+	}
+
 
 }

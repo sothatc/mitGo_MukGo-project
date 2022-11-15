@@ -69,10 +69,38 @@
 .minHeight{
   height: 500px;
 }
+
 #font{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+[name=type]{
+  border-radius: 20px;
+}
+[name=type]>*{
+  border-radius: 20px;
+}
+.searchMarketContatainer>form{
+  display: flex;
+  justify-content: center;
+  padding-bottom: 50px;
+}
+.storeList-searchinput>input {
+	width: 350px;
+	height: 35px;
+	margin-right: 20px;
+  margin-left: 20px;
+	border: solid 2px black;
+	border-radius: 20px;
+	padding-left: 20px;
+}
+.storeList-searchinput>button {
+	width: 75px;
+	border: solid 2px black;
+	border-radius: 15px;
+	font-weight: 800;
 }
 .page{
 	display: flex;
@@ -101,4 +129,22 @@
 .page>a>span{
 	display: flex;
 	justify-content: center;
+}
+#font>.nav-item>.nav-link{
+  width: 100px;
+}
+.tag{
+  overflow: hidden;
+  max-width: 1320px;
+  min-width: 993px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.contentLeft{
+  display: block;
+  float: left;
+}
+.tag>.row{
+  display: block;
+
 }

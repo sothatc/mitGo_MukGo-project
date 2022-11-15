@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <script>
 	var msg ="<c:out value='${msg}'/>";
-	var url ="<c:out value='${url}'/>";
+	var url ="${url}";
 	alert(msg);
 	location.href = url;
 </script>
