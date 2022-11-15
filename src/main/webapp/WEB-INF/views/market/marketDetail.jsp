@@ -38,7 +38,7 @@
 	<link rel="stylesheet" href="/resources/css/market/marketDetail.css">
 	
 	<div class="contentWrap" style="font-family:Gowun Dodum;">
-		<div class="directoryDiv">홈 > 마켓GOGO > 밀키트</div>
+		<div class="directoryDiv">홈 > GOGO마켓 > 밀키트</div>
          	<div class="infoDiv1">
          		<img src="/resources/upload/market/${ma.PImg }" class="pImg">
          		<div class="titleDiv">
@@ -91,11 +91,9 @@
 		            		
 		            	</c:otherwise>
 		            </c:choose>
-		            
-		            
+		           
 		            <a class="material-symbols-rounded share pointer" id="share">share</a>
-		            <a class="material-symbols-rounded share pointer" id="share" href="javascript:shareMessage()">share</a>
-
+					
          		</div>
          		<div class="tableDiv" >
          		
@@ -107,10 +105,6 @@
          				<tr>
          					<th>배송</th>
          					<td colspan="4">무료배송</td>
-         				</tr>
-         				<tr>
-         					<th>판매단위</th>
-         					<td colspan="4">1개</td>
          				</tr>
          				<tr>
          					<th>알레르기 정보</th>
@@ -152,6 +146,7 @@
          			<form action="/insertCart.do">
          				<div class="btnWrap">
 		         			<button type="submit" class="cartBtn">장바구니</button>
+		         			<button type="submit" class="buyBtn">구매하기</button>
 		         			<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 		         			<input type="hidden" name="pPrice" class="allPrice">
 		         			<input type="hidden" name="pNo" class="pNumber">
@@ -170,14 +165,38 @@
 		${ma.PContent}
 	</div>
 	
+	<!-- 공유하기 모달 -->
+    <div class="w3-container" style="font-family:Gowun Dodum;">
+           <div id="shareModal" class="w3-modal" style="font-family:Gowun Dodum; z-index:2000;">
+             <div class="w3-modal-content w3-animate-top w3-card-4" style="width:50%; height: 30%;">
+               <header class="w3-container w3-teal" style="height:15%;"> 
+                 <span onclick="document.getElementById('shareModal').style.display='none'" 
+                 class="w3-button w3-display-topright" style="width:5%; height:15%;">&times;</span>
+               </header>
+               	 <h5 style="font-family:Gowun Dodum; text-align: center; font-weight: bolder; margin-top:40px;">공유하기</h5>
+                 <div style="width:100%; height:30%;padding:0; margin-top:20px;;display:flex; justify-content: center; align-items: center; color:black;">
+		                 <button style="height:30px; background-color: rgb(51,51,51); border-radius: 15px; color: white;" class="pointer">
+		                 	<a href="javascript:shareMessage()" id="share2" style="text-decoration: none;">카카오톡 공유하기</a>
+		                 </button>
+		                 <input type="text" id="currentUrl"  style="width:400px; margin-left: 20px;"readonly>
+		                 <button type="button" class="urlBtn" name="btnClick"  style="padding:2px; margin-left:10px;background-color: rgb(51,51,51); border-radius: 15px; color: white;" class="pointer">
+		                 	<a style="text-decoration: none;width:120px;data-clipboard-target="#currentUrl">url 복사</a>
+		                 </button>
+                 </div>
+             </div>
+           </div>
+      </div>
+	
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 
     <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.0.0/kakao.min.js" integrity="sha384-PFHeU/4gvSH8kpvhrigAPfZGBDPs372JceJq3jAXce11bVA6rMvGWzvP4fMQuBGL" crossorigin="anonymous"></script>
     <script>
-    	Kakao.init('c089c8172def97eb00c07217cae17495');
+    	Kakao.init('b9d4c91a07666b464ce95d2ffa8d018c');
     </script>
-
+      
+    <!-- 클립보드 복사하기 API -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
 
 	<script>
 	
@@ -253,17 +272,19 @@
 	
 	var pNo = "${ma.PNo}";
 	//---------- 공유하기 버튼
-	Kakao.Share.createDefaultButton({
-	  container: '#share',
-	  objectType: 'text',
-	  text:
-	    '우리집도 맛집이라고? 이제는 집에서도 즐기자!',
-	  link: {
-	    mobileWebUrl: 'http://192.168.10.26/marketDetail.do?pNo='+pNo,
-	    webUrl: 'http://192.168.10.26/marketDetail.do?pNo='+pNo
-	  },
-	});
-	
+	 function shareMessage(){
+		
+		Kakao.Share.createDefaultButton({
+		  container: '#share2',
+		  objectType: 'text',
+		  text:
+		    '우리집도 맛집이라고? 이제는 집에서도 즐기자!',
+		  link: {
+		    mobileWebUrl: 'http://192.168.10.26/marketDetail.do?pNo='+pNo,
+		    webUrl: 'http://192.168.10.26/marketDetail.do?pNo='+pNo
+		  }
+		});
+	}
 	
 	//장바구니 클릭 시 hidden으로 넘겨주는 값
 	$(".cartBtn").on("click", function(){
@@ -271,6 +292,31 @@
 	 	$(".pNumber").attr("value",pNo);
 	 	$(".count").attr("value",count);
 	});
+	
+    //------ 공유하기 모달
+    $("#share").on("click",function(){
+  	  document.getElementById('shareModal').style.display='block';
+    });
+    
+    
+    //---- 클립보드 복사 기능
+    var url = window.location.href;
+    $("#currentUrl").attr("value",url);
+    $(".urlBtn").attr("data-clipboard-text",url);
+    
+    var clipboard = new ClipboardJS('.urlBtn');
+		clipboard.on('success', function(e) {
+		    console.info('Action:', e.action);
+		    console.info('Text:', e.text);
+		    console.info('Trigger:', e.trigger);
+		    alert("클립보드에 복사되었습니다.");
+		});
+
+		clipboard.on('error', function(e) {
+		    console.error('Action:', e.action);
+		    console.error('Trigger:', e.trigger);
+		});
+		
 		</script>
 </body>
 </html>
