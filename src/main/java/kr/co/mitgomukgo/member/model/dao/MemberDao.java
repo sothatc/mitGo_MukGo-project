@@ -65,11 +65,16 @@ public class MemberDao {
 		return result;
 	}
 
-	public ArrayList<Reserve> selectReserveList(Member m) {
-		List rs = sqlSession.selectList("reserve.selectReserveList",m);
-		return (ArrayList<Reserve>)rs;
+	//예약관리
+	public ArrayList<Reserve> selectReserveList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("reserve.selectReserveList",map);
+		return (ArrayList<Reserve>) list;
 	}
 
+	//예약관리 총 개수
+	public int countAllReserveList(int memberNo) {
+		return sqlSession.selectOne("reserve.countAllReserveList",memberNo);
+	}
 
 
 	public ArrayList<Reserve> selectAllReserve(HashMap<String, Object> map) {
@@ -211,9 +216,8 @@ public class MemberDao {
 		return sqlSession.delete("owner.deleteOwner", ownerNo);
 	}
 
-	public int countOrderList(String memberId) {
-		return sqlSession.selectOne("order.countOrderList",memberId);
-	}
+	
+
 
 	
 

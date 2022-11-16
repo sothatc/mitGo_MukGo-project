@@ -67,9 +67,75 @@ public class MemberService {
 		return dao.updateMember(m);
 	}
 
-	public ArrayList<Reserve> selectReserveList(Member m) {
-		ArrayList<Reserve> rs = dao.selectReserveList(m);
-		return (ArrayList<Reserve>)rs;
+	//내윤: 예약관리
+	public HashMap<String, Object> selectReserveList(int reqPage, int memberNo) {
+		//ArrayList<Reserve> rs = dao.selectReserveList(m);
+		//return (ArrayList<Reserve>)rs;
+		int numPerPage = 7;
+		int end = numPerPage * reqPage;
+		int start = (end-numPerPage)+1;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("memberNo", memberNo);
+		ArrayList<Reserve> list = dao.selectReserveList(map);
+		int totalPage = dao.countAllReserveList(memberNo);
+		int totalMan = 0;
+		if(totalPage % numPerPage == 0) {
+			totalMan = totalPage / numPerPage;
+		}else {
+			totalMan = totalPage / numPerPage + 1;
+		}
+		// 페이지 네비 사이즈
+				int pageNaviSize = 5;
+				
+				// 페이지 시작 번호
+				int pageNo = 1;
+			
+				if(reqPage > 3) {
+					pageNo = reqPage - 2;
+				}
+				
+				// 페이지 내비 시작
+				String pageNavi = "";
+				if(pageNo != 1) {
+					pageNavi += "<a href='/reserveList.do?reqPage=" + (pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+							"            chevron_left\r\n" + 
+							"            </span></a>";
+				}
+				
+				for(int i = 0; i < pageNaviSize; i++) {
+					if(reqPage == pageNo) {
+						pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
+					}else {
+						pageNavi += "<a href='/reserveList.do?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+					}
+					pageNo++;
+					if(pageNo > totalMan) {
+						break;
+					}
+				}
+				
+					// 다음버튼
+					if(pageNo <= totalMan) {
+						pageNavi += "<a href='/reserveList.do?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+								"            chevron_right\r\n" + 
+								"            </span></a>"; 
+					}
+					
+					
+					HashMap<String, Object> reserveMap = new HashMap<String, Object>();
+					reserveMap.put("list", list);
+					reserveMap.put("reqPage", reqPage);
+					reserveMap.put("pageNavi", pageNavi);
+					reserveMap.put("total", totalPage);
+					reserveMap.put("pageNo", pageNo);
+					
+					if(list == null) {
+						return reserveMap;
+					}else {
+						return reserveMap;
+					}
 	}
 
 	public HashMap<String, Object> selectAllReserve(int reqPage, int storeNo) {
@@ -551,7 +617,7 @@ public class MemberService {
 		return dao.deleteMember(memberNo);
 	}
 
-	public HashMap<String, Object> selectAllOrderList(int reqPage, String memberId) {
+	public HashMap<String, Object> selectAllOrderList(int reqPage, int memberNo) {
 		// 화면에 보여주는 게시물 수
 		int numPerPage = 10;
 		
@@ -564,9 +630,9 @@ public class MemberService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
-		map.put("memberId", memberId);
+		map.put("memberNo", memberNo);
 		ArrayList<Order> list = dao.selectAllOrderList(map);
-		int totalCnt = dao.countOrderList(memberId);
+		int totalCnt = dao.countReserveList(memberNo);
 		int totalPage = 0;
 		if(totalCnt % numPerPage == 0) {
 			totalPage = totalCnt / numPerPage;
@@ -581,7 +647,7 @@ public class MemberService {
 		//이전 버튼
 	      if(pageNo !=1) {
 	          pageNavi += "<li>";
-	          pageNavi += "<a class='page-item' href='/orderList.do?reqPage="+(pageNo-1)+"'>";
+	          pageNavi += "<a class='page-item' href='/memberManage.do?reqPage="+(pageNo-1)+"'>";
 	          pageNavi += "<span class='material-icons'>chevron_left</span>";
 	          pageNavi +="</a></li>";
 	       }

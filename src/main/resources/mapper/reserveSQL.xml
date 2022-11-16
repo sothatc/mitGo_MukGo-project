@@ -1,80 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="reserve">
-	<select id="selectReserveList" parameterType="m" resultType="rs">
-		select 
-			reserve_no as reserveNo,
-			store_no as storeNo,
-			store_name as storeName,
-			reserve_date as reserveDate,
-			eat_date as eatDate,
-			eat_time as eatTime,
-            (select count(*) from review rv where rv.reserve_no=r.reserve_no) rStatus
-		from reserve r
+
+   <select id="selectReserveList" parameterType="map" resultType="rs">
+      select 
+         reserve_no as reserveNo,
+         store_no as storeNo,
+         store_name as storeName,
+         reserve_date as reserveDate,
+         eat_date as eatDate,
+         eat_time as eatTime,
+         (select count(*) from review rv where rv.reserve_no=r.reserve_no) as rStatus
+      from(select rownum as rnum, n.* from (select * from reserve order by reserve_no desc) n) r
+      where member_no = #{memberNo} and rnum between #{start} and #{end}
+   </select>
+   
+   <!-- 예약관리 총 개수 -->
+   <select id="countAllReserveList" parameterType="int" resultType="_int">
+   		select
+			count(*)
+		from reserve
 		where member_no = #{memberNo}
-	</select>
-	<select id="selectAllReserve" resultType="rs" parameterType="map">
-		select 
-		    reserve_no as reserveNo,
-		    rs.member_no as memberNo,
-		    store_no as storeNo,
-		    store_name as storeName,
-		    reserve_date as reserveDate,
-		    eat_date as eatDate,
-		    eat_time as eatTime,
-		    eat_num as eatNum,
-		    visit_status as visitStatus,
-		    (select member_name from member m where member_no = rs.member_no) as reserverName
-		from reserve rs
-		where store_no = #{storeNo}
-		order by 5 desc
-	</select>
-	
-	<select id="countReserveList" parameterType="int" resultType="_int">
-		select count(*) as cnt from reserve where store_no = #{storeNo}
-	</select>
+   </select>
+   <select id="selectAllReserve" resultType="rs" parameterType="map">
+      select 
+          reserve_no as reserveNo,
+          rs.member_no as memberNo,
+          store_no as storeNo,
+          store_name as storeName,
+          reserve_date as reserveDate,
+          eat_date as eatDate,
+          eat_time as eatTime,
+          eat_num as eatNum,
+          visit_status as visitStatus,
+          (select member_name from member m where member_no = rs.member_no) as reserverName
+      from reserve rs
+      where store_no = #{storeNo}
+      order by 5 desc
+   </select>
+   <select id="selectReserveManege" parameterType="map" resultType="rs">
+      select * from
+          (select rownum as rnum, r.* from (select reserve_no as reserveNo,
+          rs.member_no as memberNo,
+          store_no as storeNo,
+          store_name as storeName,
+          reserve_date as reserveDate,
+          eat_date as eatDate,
+          eat_time as eatTime,
+          eat_num as eatNum,
+          visit_status as visitStatus,
+          (select member_name from member m where member_no = rs.member_no) as reserverName   
+      from reserve rs
+      where store_no = #{storeNo}
+      order by 5 desc) r) 
+      where rnum between #{start} and #{end}
+   </select>
+   
+   <select id="countReserveList" parameterType="int" resultType="_int">
+      select count(*) as cnt from reserve where store_no = #{storeNo}
+   </select>
 
-	<select id="searchReserve" parameterType="map" resultType="rs">
-		select 
-		    reserve_no as reserveNo,
-		    rs.member_no as memberNo,
-		    store_no as storeNo,
-		    store_name as storeName,
-		    reserve_date as reserveDate,
-		    eat_date as eatDate,
-		    eat_time as eatTime,
-		    eat_num as eatNum,
-		    visit_status as visitStatus,
-		    (select member_name from member m where member_no = rs.member_no) as reserverName
-		from reserve rs
-		where store_no = #{storeNo} and (select member_name from member m where member_no = rs.member_no) = #{keyword} 
-		order by 5 desc
-	</select>
-	
-	<delete id="cancleReserve" parameterType="int">
-		delete from reserve
-		where reserve_No = #{_parameter}
-	</delete>
-	<update id="updateReserve" parameterType="rs">
-		update reserve
-		set visit_status = #{visitStatus}
-		where reserve_no = #{reserveNo}
-	</update>
-	<select id="selectOneReserve" parameterType="int" resultType="rs">
-		select 
-		    reserve_no as reserveNo,
-		    rs.member_no as memberNo,
-		    store_no as storeNo,
-		    store_name as storeName,
-		    reserve_date as reserveDate,
-		    eat_date as eatDate,
-		    eat_time as eatTime,
-		    eat_num as eatNum,
-		    visit_status as visitStatus,
-		    (select member_name from member m where member_no = rs.member_no) as reserverName
-		from reserve rs
-		where reserve_no = #{reserveNo} 
-	</select>
-	
+   <select id="searchReserve" parameterType="map" resultType="rs">
+      select * from 
+          (select rownum as rnum, r.* from 
+              (select 
+                  reserve_no as reserveNo,
+                  rs.member_no as memberNo,
+                  store_no as storeNo,
+                  store_name as storeName,
+                  reserve_date as reserveDate,
+                  eat_date as eatDate,
+                  eat_time as eatTime,
+                  eat_num as eatNum,
+                  visit_status as visitStatus,
+                  (select member_name from member m where member_no = rs.member_no) as reserverName
+              from reserve rs
+              where store_no = #{storeNo} and (select member_name from member m where member_no = rs.member_no) = #{keyword} 
+              order by 5 desc) r)
+        where rnum between #{start} and #{end}
+   </select>
+   
+   <delete id="cancleReserve" parameterType="int">
+      delete from reserve
+      where reserve_No = #{_parameter}
+   </delete>
+   <update id="updateReserve" parameterType="rs">
+      update reserve
+      set visit_status = #{visitStatus}
+      where reserve_no = #{reserveNo}
+   </update>
+   <select id="selectOneReserve" parameterType="int" resultType="rs">
+      select 
+          reserve_no as reserveNo,
+          rs.member_no as memberNo,
+          store_no as storeNo,
+          store_name as storeName,
+          reserve_date as reserveDate,
+          eat_date as eatDate,
+          eat_time as eatTime,
+          eat_num as eatNum,
+          visit_status as visitStatus,
+          (select member_name from member m where member_no = rs.member_no) as reserverName
+      from reserve rs
+      where reserve_no = #{reserveNo} 
+   </select>
+   
 </mapper>
-
