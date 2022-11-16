@@ -25,7 +25,6 @@ import kr.co.mitgomukgo.member.model.service.MemberService;
 import kr.co.mitgomukgo.member.model.vo.Member;
 import kr.co.mitgomukgo.member.model.vo.Owner;
 import kr.co.mitgomukgo.notice.model.vo.Notice;
-
 import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import net.nurigo.java_sdk.Coolsms;
@@ -307,16 +306,23 @@ public class MemberController {
 		model.addAttribute("ncList", ncList);
 		return "member/mypage";
 	}
+	
+	//예약관리
 	@RequestMapping(value="/reserveList.do")
-	public String reserveList(@SessionAttribute Member m, Model model) {
-		System.out.println(m.getMemberId());
-		ArrayList<Reserve> rsList = service.selectReserveList(m);
+	public String reserveList(@SessionAttribute Member m, Model model, int reqPage) {
+		int memberNo = m.getMemberNo();
+		HashMap<String, Object> map = service.selectReserveList(reqPage, memberNo);
 		ArrayList<Notice> ncList = service.myPageNcList();
-		
 		model.addAttribute("ncList", ncList);
-		model.addAttribute("rsList", rsList);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", map.get("reqPage"));
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
 		return "member/reserveList";
 	}
+	
+	
 	@RequestMapping(value="/reserveManage.do")
 	public String reserveManage(Model model, @SessionAttribute Store s, int reqPage) {
 		int storeNo = s.getStoreNo();
@@ -350,11 +356,13 @@ public class MemberController {
 	@RequestMapping(value="/memberManage.do")
 	public String memberManage(Model model, Member m, int reqPage) {
 		HashMap<String, Object> map = service.selectMemberList(reqPage);
+		ArrayList<Notice> ncList = service.myPageNcList();
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
 		model.addAttribute("pageNavi", map.get("pageNavi"));
 		model.addAttribute("total", map.get("total"));
 		model.addAttribute("pageNo", map.get("pageNo"));
+		model.addAttribute("ncList", ncList);
 		return "member/memberManage";
 	}
 	
@@ -373,6 +381,8 @@ public class MemberController {
 	@RequestMapping(value="/adminMemberManage.do")
 	public String adminMemberManage(Model model, Owner o, int reqPage) {
 		HashMap<String, Object> map = service.selectOwnerList(reqPage);
+		ArrayList<Notice> ncList = service.myPageNcList();
+		model.addAttribute("ncList", ncList);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
 		model.addAttribute("pageNavi", map.get("pageNavi"));
@@ -407,11 +417,11 @@ public class MemberController {
 		int result = service.cancleReserve(reserveNo);
 		if(result > 0) {
 			request.setAttribute("msg", "예약이 취소되었습니다.");
-			request.setAttribute("url", "/reserveList.do");
+			request.setAttribute("url", "/reserveList.do?reqPage=1");
 			return "common/alert";
 		} else {
 			request.setAttribute("msg", "취소 중 문제가 발생했습니다.");
-			request.setAttribute("url", "/reserveList.do");
+			request.setAttribute("url", "/reserveList.do?reqPage=1");
 			return "common/alert";
 		}
 	}
@@ -546,19 +556,15 @@ public class MemberController {
 	@RequestMapping(value="/orderList.do")
 	public String orderList(HttpSession session, int reqPage, Model model) {
 		Member m = (Member)session.getAttribute("m");
-		String memberId = m.getMemberId();
-		HashMap<String, Object> map = service.selectAllOrderList(reqPage, memberId);
-		ArrayList<Notice> ncList = service.myPageNcList();
-		model.addAttribute("ncList", ncList);
+		int memberNo = m.getMemberNo();
+		HashMap<String, Object> map = service.selectAllOrderList(reqPage, memberNo);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
 		model.addAttribute("pageNavi", map.get("pageNavi"));
 		model.addAttribute("total", map.get("total"));
 		model.addAttribute("pageNo", map.get("pageNo"));
-		model.addAttribute("memberId", memberId);
-		
+		model.addAttribute("memberNo", memberNo);
 		return "member/orderList";
-		
 	}
 	
 }

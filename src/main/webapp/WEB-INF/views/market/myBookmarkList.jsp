@@ -32,6 +32,25 @@
 		padding-top: 50px;
 	}
 	
+	.noMsg1 {
+		width: 800px;
+		margin: 0 auto;
+		text-align: center;
+		font-size: 35px;
+		padding-bottom: 50px;
+		border-bottom: 1px solid gray;
+		margin-bottom: 100px;
+	}
+	
+	.warningMark1 {
+		width: 800px;
+		margin: 0 auto;
+		text-align: center;
+		border-top: 1px solid gray;
+		margin-top: 30px;
+		padding-top: 50px;
+	}
+	
 	.paging>span {
 		display: inline-block;
 		width: 30px;
@@ -45,6 +64,14 @@
 		border-radius: 100%;
 	}
 	
+	.pageNo{
+		font-size: 20px;
+		background-color: gray;
+		color: white;
+		width: 30px;
+		border-radius: 100%;
+		line-height: 34px;
+	}
 	
 </style>
 </head>
@@ -71,25 +98,53 @@
         		<div class="bookmark-content-list">
             <ul>
             	<c:forEach items="${list }" var="bm">
-            		<li>
-	                    <a href="#">
-	                        <div class="bookmark-content">
-	                            <div class="img-box">
-	                                <img src="/resources/img/${bm.PImg }" alt="">
-	                            </div>
-	    
-	                            <div class="bookmark-man">
-	                                <ul>
-	                                    <li>${bm.PName }</li>
-	                                    <li>${bm.PPrice }</li>
-	                                </ul>
-	                            </div>
-	                        </div>
-	                    </a>
-	                    <div class="delBtn">
-	                        <button type="button" class="btn btn-danger">삭제</button>
-	                    </div>
-	                </li>
+            	
+            		<c:choose>
+            			<c:when test="${not empty sessionScope.m }">
+            				<li>
+			                    <a href="/marketDetail.do?pNo=${bm.PNo }&bookMarkId=${sessionScope.m.memberId}">
+			                        <div class="bookmark-content">
+			                            <div class="img-box">
+			                                <img src="/resources/img/${bm.PImg }" alt="">
+			                            </div>
+			    
+			                            <div class="bookmark-man">
+			                                <ul>
+			                                    <li>${bm.PName }</li>
+			                                    <li>${bm.PPrice }</li>
+			                                </ul>
+			                            </div>
+			                        </div>
+			                    </a>
+			                    <div class="delBtn">
+			                        <button type="button" class="btn btn-danger" onclick="deleteBookmark(this,${bm.bmNo})">삭제</button>
+			                    </div>
+			                </li>
+            			</c:when>
+            			
+            			<c:otherwise>
+            				<li>
+			                    <a href="/marketDetail.do?pNo=${bm.PNo }&bookMarkId=${sessionScope.o.ownerId}">
+			                        <div class="bookmark-content">
+			                            <div class="img-box">
+			                                <img src="/resources/img/${bm.PImg }" alt="">
+			                            </div>
+			    
+			                            <div class="bookmark-man">
+			                                <ul>
+			                                    <li>${bm.PName }</li>
+			                                    <li>${bm.PPrice }</li>
+			                                </ul>
+			                            </div>
+			                        </div>
+			                    </a>
+			                    <div class="delBtn">
+			                        <button type="button" class="btn btn-danger" onclick="deleteBookmark(this,${bm.bmNo})">삭제</button>
+			                    </div>
+			                </li>
+            			</c:otherwise>
+            		</c:choose>
+            		
             	</c:forEach>
                 
             </ul>
@@ -97,10 +152,15 @@
         	</c:otherwise>
         </c:choose>
 
-        
+        <div class="warningMark1" style="display: none;">
+        	<span class="material-symbols-outlined" style="font-size: 70px;">
+				error
+			</span>
+        </div>
+        <div class="noMsg1" style="display: none;">아직 찜한 목록이 없습니다.</div>
 
         <div class="paging">
-            <a href="#"><span class="material-symbols-outlined" style="font-size: 30px;">
+            <!-- <a href="#"><span class="material-symbols-outlined" style="font-size: 30px;">
                 chevron_left
                 </span>
             </a>
@@ -109,11 +169,62 @@
             <a href="#"><span>3</span></a>
             <a href="#"><span class="material-symbols-outlined"  style="font-size: 30px;">
                 chevron_right
-                </span></a>
+                </span></a>  -->
+               ${pageNavi }
         </div>
     </div>
     </div>
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
+    
+    <script type="text/javascript">
+    	function deleteBookmark(obj, bmNo){
+    		console.log("야임마!!");
+    		if(confirm("삭제하시겠습니까?")){
+    			$.ajax({
+    				url : "/deleteBookMarkNo.do",
+    				type : "post",
+    				data : {bmNo : bmNo},
+    				success : function(data){
+    					console.log(data);
+    					$(obj).parent().parent().remove();
+    					
+    					if($(obj).parent().parent().parent().children().length == 0){
+    						$(".bookmark-content-list").hide();
+    						$(".warningMark1").css("display", "block");
+    						$(".noMsg1").css("display", "block");
+    						$(".noMsg1").show();
+    						console.log($(".noMsg1").text());
+    						$(".paging").hide();
+    						
+    					}
+    				}
+    			})
+    		}else{
+    			console.log($(obj).text());
+    		}
+    		
+    	}
+    </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

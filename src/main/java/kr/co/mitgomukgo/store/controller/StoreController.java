@@ -65,6 +65,7 @@ public class StoreController {
 		model.addAttribute("mList", marketList);
 		return "store/storeDetail";
 	}
+	
 
 	// 맛집 이미지 배열로 가져오기
 	@ResponseBody

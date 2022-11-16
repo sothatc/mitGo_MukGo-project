@@ -16,7 +16,10 @@
 		<ul class="category">
 			<li>
 				<div>
-					<a href="/reserveList.do">예약 내역</a>
+					<a href="#">장바구니</a>
+				</div>
+				<div>
+					<a href="/reserveList.do?reqPage=1">예약 내역</a>
 				</div>
 				<div>
 					<a href="/orderList.do?reqPage=1">주문 내역</a>

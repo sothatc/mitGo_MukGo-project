@@ -27,7 +27,7 @@ height: 100%;
 }
 
 .star{
-	color: rgb(255, 83, 86) !important;
+   color: rgb(255, 83, 86) !important;
 }
 
 </style>
@@ -51,19 +51,19 @@ height: 100%;
    <div class="content-wrap" style="font-family:Gowun Dodum;">
       <div class="content-wrap1" style="width:1200px;">
          <div class="content-wrap1-1" style="width:1200px; height:50px; display:inline; color: black;">
-	            <span class="categorySpan" style="float:left;"></span>
-	            <span class="storeNameSpan" style="float:left; margin-left:5px;">${s.storeName}</span>
-	            <span class="reviewNum" style="color:rgba(255, 83, 86, 0.99); margin-left:10px; float:left;" >★ ${s.rating }</span>
-		 	<span style=" margin-left:20px; font-weight: lighter;">${s.content }</span>
-		 	<div style="margin-right:0; float:right;">
+               <span class="categorySpan" style="float:left;"></span>
+               <span class="storeNameSpan" style="float:left; margin-left:5px;">${s.storeName}</span>
+               <span class="reviewNum" style="color:rgba(255, 83, 86, 0.99); margin-left:10px; float:left;" >★ ${s.rating }</span>
+          <span style=" margin-left:20px; font-weight: lighter;">${s.content }</span>
+          <div style="margin-right:0; float:right;">
             <c:choose>
               <c:when test="${!empty sessionScope.m }">
                   <a class="material-symbols-rounded share pointer" id="share">share</a>
                   <span class="material-symbols-rounded favorite pointer" id="favorite" style="display:none;">favorite</span>
                   <span class="material-symbols-outlined unfavorite pointer" id="unfavorite" style="float:right; margin-top:10px; margin-right:15px;">favorite</span>
                </c:when>
-         	</c:choose>
-         	</div>
+            </c:choose>
+            </div>
          </div>
       </div>
 
@@ -157,7 +157,7 @@ height: 100%;
    <!--상세 페이지-->
    <div class="content-wrap4" style="font-family:Gowun Dodum; margin-top:30px; height:100%; width:1200px; margin-bottom:100px; margin:0 auto;">
       <div class="testDiv" style="width: 1200px; margin:0 auto;">
-     	 <!----- 메뉴판 부분 ----->
+         <!----- 메뉴판 부분 ----->
          <p class="menuTitle" style="margin-top: 20px;">MENU</p>
          <blockquote class="w3-panel w3-leftbar w3-light-grey" id="menuWrap" style="width: 1200px; height:100%; padding-bottom:20px;">
             <div class="menuWrap" style="font-family:Gowun Dodum;">
@@ -168,112 +168,112 @@ height: 100%;
                      <td style="text-align:left;">${me.menuName }</td>
                      <td style="text-align:right;"><fmt:formatNumber value="${me.menuPrice }" pattern="#,###원" /></td>
                   </tr>
-				</c:forEach>
+            </c:forEach>
                </table>
             </div>
          </blockquote>
          
-		<!----- 메뉴 부분 ----->
+      <!----- 메뉴 부분 ----->
          <div class="food-wrap" style="width:1200px; overflow:hidden; height:100%; margin: 0 auto; text-align:center; margin:50px 0;">
-	         <c:forEach items="${list }" var="me">
-	            <div class="w3-card" id="photoWrap" style="font-family:Gowun Dodum; width:350px; height:300px; margin: 10px 25px;">
-	               <img src=/resources/upload/menu/${me.menuImg} style='width: 100%; height: 200px;'>
-	               <div class="w3-container" style="font-family:Gowun Dodum;">
-	                  <p style="font-weight: bolder; font-size: 20px; margin-top:10px;">${me.menuName}</p>
-	                  <p><fmt:formatNumber value="${me.menuPrice }" pattern="#,###원"/></p>
-	               </div>
-	            </div>
-			</c:forEach>
+            <c:forEach items="${list }" var="me">
+               <div class="w3-card" id="photoWrap" style="font-family:Gowun Dodum; width:350px; height:300px; margin: 10px 25px;">
+                  <img src=/resources/upload/menu/${me.menuImg} style='width: 100%; height: 200px;'>
+                  <div class="w3-container" style="font-family:Gowun Dodum;">
+                     <p style="font-weight: bolder; font-size: 20px; margin-top:10px;">${me.menuName}</p>
+                     <p><fmt:formatNumber value="${me.menuPrice }" pattern="#,###원"/></p>
+                  </div>
+               </div>
+         </c:forEach>
          </div>
          
          <!----- LOCATION 부분 ----->
-		 <div class="location-wrap" style="width:1200px;">
-	         <div class="menuTitle" style="margin: 0 auto;">LOCATION</div>
-	         <div class="map-content-wrap">
-				<div id="map_wrap" class="map_wrap">
-					<div id="map_div"></div>
-				</div>
-				<div class="map_act_btn_wrap clear_box"></div>
-				<div>
-					<!-- 자동차 -->
-					<div class="selectCar" style="background-color:rgb(51,51,51);"><span class="material-symbols-outlined">directions_car</span>자동차</div>
-					<div class="selectFoot"style="background-color:rgb(51,51,51);"><span class="material-symbols-outlined">footprint</span>도보</div>
-				</div>
+       <div class="location-wrap" style="width:1200px;">
+            <div class="menuTitle" style="margin: 0 auto;">LOCATION</div>
+            <div class="map-content-wrap">
+            <div id="map_wrap" class="map_wrap">
+               <div id="map_div"></div>
+            </div>
+            <div class="map_act_btn_wrap clear_box"></div>
+            <div>
+               <!-- 자동차 -->
+               <div class="selectCar" style="background-color:rgb(51,51,51);"><span class="material-symbols-outlined">directions_car</span>자동차</div>
+               <div class="selectFoot"style="background-color:rgb(51,51,51);"><span class="material-symbols-outlined">footprint</span>도보</div>
+            </div>
 
-				<div class="ft_select_wrap">
-					<div class="ft_select">
-						<div class="address-wrap">
+            <div class="ft_select_wrap">
+               <div class="ft_select">
+                  <div class="address-wrap">
 
-							<input type="text" class="text_custom" id="fullAddr" name="fullAddr" value="" onclick="searchAddr();" placeholder="클릭하여 출발지를 입력하세요" readonly>
-							<span type="text" class="text_custom addressTd" id="E_fullAddr" name="E_fullAddr" readonly style="display:none;"></span>
-							<button id="btn_select" style="display : none;">검색하기</button>
-							<button id="hidden_btn_select" style="display : none;">검색하기</button>					
-						</div>
+                     <input type="text" class="text_custom" id="fullAddr" name="fullAddr" value="" onclick="searchAddr();" placeholder="클릭하여 출발지를 입력하세요" readonly>
+                     <span type="text" class="text_custom addressTd" id="E_fullAddr" name="E_fullAddr" readonly style="display:none;"></span>
+                     <button id="btn_select" style="display : none;">검색하기</button>
+                     <button id="hidden_btn_select" style="display : none;">검색하기</button>               
+                  </div>
 
-						<div class="car-content">
-							<button id="btn_select1">길찾기</button>
-						</div>
-						<div class="foot-content">
-							<button id="btn_select2">길찾기</button>
-						</div>
-					</div>
-				</div>
-				<div id="resultBox">
-					<p id="result">예상 정보</p>
-				</div>
-				
-				<div class="map_act_btn_wrap clear_box"></div>
-				<div class="clear"></div>
-			</div>
-		 </div>
-		 
-		 
+                  <div class="car-content">
+                     <button id="btn_select1">길찾기</button>
+                  </div>
+                  <div class="foot-content">
+                     <button id="btn_select2">길찾기</button>
+                  </div>
+               </div>
+            </div>
+            <div id="resultBox">
+               <p id="result">예상 정보</p>
+            </div>
+            
+            <div class="map_act_btn_wrap clear_box"></div>
+            <div class="clear"></div>
+         </div>
+       </div>
+       
+       
          <!----- 마켓 상품 부분 ----->
-		<c:choose>
+      <c:choose>
               <c:when test="${!empty mList }">
-		         <div class="market-wrap" style="margin-top:50px; width:1200px; height:300px;">
-			         <div class="menuTitle" style="margin: 0 auto;">MARKET</div>
-			         
-			         <c:forEach items="${mList }" var="ma">
-			            <div class="w3-card-4" id="marketWrap">
-			               <a href="/marketDetail.do?pNo=${ma.PNo }"><img src="/resources/upload/market/${ma.PImg }" style="width: 100%; height: 250px;"></a>
-			               <div class="w3-container w3-center">
-			                  <p>${ma.PName }</p>
-			               </div>
-			            </div>
-					</c:forEach>
-				</div>
-		    </c:when>
-        </c:choose>	
-		
-		
-		
+               <div class="market-wrap" style="margin-top:50px; width:1200px; height:300px;">
+                  <div class="menuTitle" style="margin: 0 auto;">MARKET</div>
+                  
+                  <c:forEach items="${mList }" var="ma">
+                     <div class="w3-card-4" id="marketWrap">
+                        <a href="/marketDetail.do?pNo=${ma.PNo }"><img src="/resources/upload/market/${ma.PImg }" style="width: 100%"></a>
+                        <div class="w3-container w3-center">
+                           <p>${ma.PName }</p>
+                        </div>
+                     </div>
+               </c:forEach>
+            </div>
+          </c:when>
+        </c:choose>   
+      
+      
+
         <!--------- 후기 시작 ----->
         <c:choose>
               <c:when test="${!empty rList }">
-			        <div class="review-wrap" style="margin:50px 0;">
-			            <div class="menuTitle" style="width:100px; margin:0 auto;">REVIEW</div>
-			            <ul class="w3-ul w3-card-4" id="reviewWrapUl" style="height:content-fit;">
-			            <c:forEach items="${rList }" var="r">
-			
-							<li class="w3-bar" style="height:content-fit;">
-			                  <div class="w3-bar-1" style="margin:0; height: content-fit;">
-			                     <img src="/resources/upload/review/${r.reviewImg }" class="w3-hide-small" style="float: left; width:35%; height:100%;">
-			                     <div class="w3-bar-item" id="w3-bar-item" style="width:60%; height: content-fit; padding:0; margin-left:5%; position: relative;">
-			                        <div style="color: rgb(255, 83, 86); float:left;"><c:forEach begin="1" step="1" end="${r.rating }" varStatus="i">★</c:forEach></div>
-			                        <div>${r.rating }</div>
-			                        <div class="w3-large" style="font-weight: 700;">${r.writer }</div>
-			                        <div class="reviewContent" style="display: inline; float: left; height:150px; overflow: auto;">${r.content}</div>
-			                        <div class="regDate" style="position: absolute; bottom: 0px; right: 0px;">${r.enrollDate }</div>
-			                     </div>
-			                  </div>
-			               </li>
-			               
-						</c:forEach>
-			            </ul>
-			        </div>
-        	</c:when>
-        </c:choose>	
+                 <div class="review-wrap" style="margin:50px 0;">
+                     <div class="menuTitle" style="width:100px; margin:0 auto;">REVIEW</div>
+                     <ul class="w3-ul w3-card-4" id="reviewWrapUl" style="height:content-fit;">
+                     <c:forEach items="${rList }" var="r">
+         
+                     <li class="w3-bar" style="height:content-fit;">
+                           <div class="w3-bar-1" style="margin:0; height: content-fit;">
+                              <img src="/resources/upload/review/${r.reviewImg }" class="w3-hide-small" style="float: left; width:35%; height:100%;">
+                              <div class="w3-bar-item" id="w3-bar-item" style="width:60%; height: content-fit; padding:0; margin-left:5%; position: relative;">
+                                 <div style="color: rgb(255, 83, 86); float:left;"><c:forEach begin="1" step="1" end="${r.rating }" varStatus="i">★</c:forEach></div>
+                                 <div>${r.rating }</div>
+                                 <div class="w3-large" style="font-weight: 700;">${r.writer }</div>
+                                 <div class="reviewContent" style="display: inline; float: left; height:150px; overflow: auto;">${r.content}</div>
+                                 <div class="regDate" style="position: absolute; bottom: 0px; right: 0px;">${r.enrollDate }</div>
+                              </div>
+                           </div>
+                        </li>
+                        
+                  </c:forEach>
+                     </ul>
+                 </div>
+           </c:when>
+        </c:choose>   
         <!--------후기 끝 -->
          
       </div><!-- testDiv 끝 -->
@@ -329,7 +329,7 @@ height: 100%;
        <div class="w3-container" style="font-family:Gowun Dodum;">
            <div id="timeDateModal" class="w3-modal" style="font-family:Gowun Dodum; z-index:2000;">
              <div class="w3-modal-content w3-animate-top w3-card-4" style="width:30%; height: 40%;">
-               <header class="w3-container w3-teal" style="height:10%;"> 
+               <header class="w3-container" style="height:10%; background-color: #ffc107;"> 
                  <span onclick="document.getElementById('timeDateModal').style.display='none'" 
                  class="w3-button w3-display-topright" style="width:5%; height:10%;">&times;</span>
                </header>
@@ -342,7 +342,7 @@ height: 100%;
        <div class="w3-container" style="font-family:Gowun Dodum;">
            <div id="ownerModal" class="w3-modal" style="font-family:Gowun Dodum; z-index:2000;">
              <div class="w3-modal-content w3-animate-top w3-card-4" style="width:30%; height: 40%;">
-               <header class="w3-container w3-teal" style="height:10%;"> 
+               <header class="w3-container" style="height:10%; background-color: #ffc107;"> 
                  <span onclick="document.getElementById('ownerModal').style.display='none'" 
                  class="w3-button w3-display-topright" style="width:5%; height:10%;">&times;</span>
                </header>
@@ -355,12 +355,12 @@ height: 100%;
        <div class="w3-container" style="font-family:Gowun Dodum;">
            <div id="noReserveModal" class="w3-modal" style="font-family:Gowun Dodum; z-index:2000;">
              <div class="w3-modal-content w3-animate-top w3-card-4" style="width:30%; height: 40%;">
-               <header class="w3-container w3-teal" style="height:10%;"> 
+               <header class="w3-container" style="height:10%;background-color: #ffc107;"> 
                  <span onclick="document.getElementById('noReserveModal').style.display='none'" 
                  class="w3-button w3-display-topright" style="width:5%; height:10%;">&times;</span>
                </header>
                  <p style="width:100%; height:100%;padding:0; margin:0;display:flex; justify-content: center; align-items: center; color:black;">
-                	 시간당 정원이 초과되었습니다.잔여 좌석 수: <span class="minusNum" style="color:red; margin-left:10px;"></</span> 좌석
+                    시간당 정원이 초과되었습니다.잔여 좌석 수: <span class="minusNum" style="color:red; margin-left:10px;"></</span> 좌석
                  </p>
              </div>
            </div>
@@ -375,15 +375,15 @@ height: 100%;
                  <span onclick="document.getElementById('shareModal').style.display='none'" 
                  class="w3-button w3-display-topright" style="width:5%; height:15%;">&times;</span>
                </header>
-               	 <h5 style="font-family:Gowun Dodum; text-align: center; font-weight: bolder; margin-top:40px;">공유하기</h5>
+                   <h5 style="font-family:Gowun Dodum; text-align: center; font-weight: bolder; margin-top:40px;">공유하기</h5>
                  <div style="width:100%; height:30%;padding:0; margin-top:20px;;display:flex; justify-content: center; align-items: center; color:black;">
-		                 <button style="height:30px; background-color: rgb(51,51,51); border-radius: 15px; color: white;" class="pointer">
-		                 	<a href="javascript:shareMessage()" style="text-decoration: none;">카카오톡 공유하기</a>
-		                 </button>
-		                 <input type="text" id="currentUrl"  style="width:400px; margin-left: 20px;"readonly>
-		                 <button type="button" class="urlBtn" name="btnClick"  style="padding:2px; margin-left:10px;background-color: rgb(51,51,51); border-radius: 15px; color: white;" class="pointer">
-		                 	<a style="text-decoration: none;width:120px;data-clipboard-target="#currentUrl">url 복사</a>
-		                 </button>
+                       <button style="height:30px; background-color: rgb(51,51,51); border-radius: 15px; color: white;" class="pointer">
+                          <a href="javascript:shareMessage()" style="text-decoration: none;">카카오톡 공유하기</a>
+                       </button>
+                       <input type="text" id="currentUrl"  style="width:400px; margin-left: 20px;"readonly>
+                       <button type="button" class="urlBtn" name="btnClick"  style="padding:2px; margin-left:10px;background-color: rgb(51,51,51); border-radius: 15px; color: white;" class="pointer">
+                          <a style="text-decoration: none;width:120px;data-clipboard-target="#currentUrl">url 복사</a>
+                       </button>
                  </div>
              </div>
            </div>
@@ -420,23 +420,23 @@ height: 100%;
        var category;//실카테고리
                
        if(categoryNum=="1"){
-       		category="한식";
+             category="한식";
        }else if(categoryNum=="2"){
-       		category="양식";
+             category="양식";
        }else if(categoryNum=="3"){
-       		category="일식";
+             category="일식";
        }else if(categoryNum=="4"){
-       		category="중식";
+             category="중식";
        }else if(categoryNum=="5"){
-       		category="분식";
+             category="분식";
        }else if(categoryNum=="6"){
-       		category="육류";
+             category="육류";
        }else if(categoryNum=="7"){
-       		category="씨푸드";
+             category="씨푸드";
        }else if(categoryNum=="8"){
-       		category="디저트";
+             category="디저트";
        }else if(categoryNum=="9"){
-       		category="기타";
+             category="기타";
        }
       
       $(".categorySpan").append("["+category+"]");
@@ -459,7 +459,7 @@ height: 100%;
       var closedDay= "${s.closedDay}";
       //---------- datePicker
       $.datepicker.setDefaults({
-      		dateFormat : 'yy-mm-dd',
+            dateFormat : 'yy-mm-dd',
             prevText : '이전 달',
             nextText : '다음 달',
             monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월' ],
@@ -473,7 +473,7 @@ height: 100%;
       });
          
       $(function() {
-      		//데이트피커 생성 및 당일 선택 불가
+            //데이트피커 생성 및 당일 선택 불가
             $("#datePicker").datepicker({minDate:1});
       });
          
@@ -483,39 +483,39 @@ height: 100%;
       
       function disabledDays(date){
             
-	      var day = date.getDay();
-	      dayArr = closedDay.split(",");
-	
-	      for(let i= 0; i<dayArr.length; i++){   
-	           if(dayArr[i]=="월"){
-	           		daysArr.push("1");
-	           }
-	           if(dayArr[i]=="화"){
-	           		daysArr.push("2");
-	           }
-	           if(dayArr[i]=="수"){
-	           		daysArr.push("3");
-	           }
-	           if(dayArr[i]=="목"){
-	           		daysArr.push("4");
-	           }
-	           if(dayArr[i]=="금"){
-	           		daysArr.push("5");
-	          }
-	          if(dayArr[i]=="토"){
-	          		daysArr.push("6");
-	          }
-	          if(dayArr[i]=="일"){
-	          		daysArr.push("0");
-	          }
-	      }//for문 종료
+         var day = date.getDay();
+         dayArr = closedDay.split(",");
+   
+         for(let i= 0; i<dayArr.length; i++){   
+              if(dayArr[i]=="월"){
+                    daysArr.push("1");
+              }
+              if(dayArr[i]=="화"){
+                    daysArr.push("2");
+              }
+              if(dayArr[i]=="수"){
+                    daysArr.push("3");
+              }
+              if(dayArr[i]=="목"){
+                    daysArr.push("4");
+              }
+              if(dayArr[i]=="금"){
+                    daysArr.push("5");
+             }
+             if(dayArr[i]=="토"){
+                   daysArr.push("6");
+             }
+             if(dayArr[i]=="일"){
+                   daysArr.push("0");
+             }
+         }//for문 종료
             
-	      //데이트피커 휴일 비활성화 코드
-	      let result = true;
-	      for(let i=0;i<daysArr.length;i++){
-	      	result = result && (day != Number(daysArr[i]));
-	      }
-	      return [result];
+         //데이트피커 휴일 비활성화 코드
+         let result = true;
+         for(let i=0;i<daysArr.length;i++){
+            result = result && (day != Number(daysArr[i]));
+         }
+         return [result];
             
       }//함수 disabledDays종료
          
@@ -592,12 +592,12 @@ height: 100%;
          var selectDate = $("#datePicker").val();
          
          //---------- 날짜 input 클릭 시 시간 버튼 삭제
-	      $("#datePicker").on("click",function(){
-	         $(".timeBtn").remove();
-	         disabledTime = new Array();
-	      });
+         $("#datePicker").on("click",function(){
+            $(".timeBtn").remove();
+            disabledTime = new Array();
+         });
          
-	      var disabledTime = new Array();
+         var disabledTime = new Array();
          //---------- 시간확인하기 버튼 (용도: 비활성화)checkTime
          $("#datePicker").on("change",function(){
              
@@ -608,7 +608,7 @@ height: 100%;
                  success: function(data){
                      //삭제하고 생성
                      $(".timeBtn").remove();
-                   	 //시간 버튼 생성
+                       //시간 버튼 생성
                      for(let i=realOpenTime; i<realCloseTime; i++){
                          $(".buttonTd").append("<button class=timeBtn style=margin-right:1%;background-color:white;color:rgb(51,51,51); value="+i+">"+i+":00"+"</button>");
                       }
@@ -621,51 +621,51 @@ height: 100%;
                         selectTime = $(this).text();
                         
                         //예약불가 시간의 버튼 비활성화
-			             for(let i=0; i<btnVal.length; i++){
-			                  for(let j=0; j<disabledTime.length; j++){
-			                     if(btnVal[i]==disabledTime[j]){
-			                        checkTimeBtn[i].style.color="red";
-			                        checkTimeBtn[i].style.background="pink";
-			                        checkTimeBtn[i].setAttribute("disabled", true);
-			                     }
-			                  }
-			             }
+                      for(let i=0; i<btnVal.length; i++){
+                           for(let j=0; j<disabledTime.length; j++){
+                              if(btnVal[i]==disabledTime[j]){
+                                 checkTimeBtn[i].style.color="red";
+                                 checkTimeBtn[i].style.background="pink";
+                                 checkTimeBtn[i].setAttribute("disabled", true);
+                              }
+                           }
+                      }
                      });
                      
-		             var selectDate = $("#datePicker").val();
-		             checkTimeBtn = document.getElementsByClassName('timeBtn');
-		       
-		             
-		             //btnVal 이란 배열에 버튼의 value값 넣기
-		             for(let i=0; i<checkTimeBtn.length; i++){
-		             	btnVal.push(document.getElementsByClassName('timeBtn')[i].value+":00");
-		             }
-		             
-		              var maxNum = "${s.maxNum}";
-		              var selectDate = $("#datePicker").val();
-		              var storeNo = "${s.storeNo}";
-		              
-		              $.ajax({
-		                  url: "/checkReserveTime.do",
-		                  type:"post",
-		                  data: {storeNo:storeNo,selectDate:selectDate, maxNum:maxNum},
-		                  success: function(data){
-		                	  for(let i=0; i<data.length; i++){
-		                		  disabledTime.push(data[i].eatTime);
-		                	  }
-		                	  
-					             for(let i=0; i<btnVal.length; i++){
-					                  for(let j=0; j<disabledTime.length; j++){
-					                     if(btnVal[i]==disabledTime[j]){
-					                        checkTimeBtn[i].style.color="red";
-					                        checkTimeBtn[i].style.background="pink";
-					                        checkTimeBtn[i].setAttribute("disabled", true);
-					                     }
-					                  }
-					             }
-		                  }
-		              }); //--------------내부 ajax종료
-            	}//--------success문 종료
+                   var selectDate = $("#datePicker").val();
+                   checkTimeBtn = document.getElementsByClassName('timeBtn');
+             
+                   
+                   //btnVal 이란 배열에 버튼의 value값 넣기
+                   for(let i=0; i<checkTimeBtn.length; i++){
+                      btnVal.push(document.getElementsByClassName('timeBtn')[i].value+":00");
+                   }
+                   
+                    var maxNum = "${s.maxNum}";
+                    var selectDate = $("#datePicker").val();
+                    var storeNo = "${s.storeNo}";
+                    
+                    $.ajax({
+                        url: "/checkReserveTime.do",
+                        type:"post",
+                        data: {storeNo:storeNo,selectDate:selectDate, maxNum:maxNum},
+                        success: function(data){
+                           for(let i=0; i<data.length; i++){
+                              disabledTime.push(data[i].eatTime);
+                           }
+                           
+                            for(let i=0; i<btnVal.length; i++){
+                                 for(let j=0; j<disabledTime.length; j++){
+                                    if(btnVal[i]==disabledTime[j]){
+                                       checkTimeBtn[i].style.color="red";
+                                       checkTimeBtn[i].style.background="pink";
+                                       checkTimeBtn[i].setAttribute("disabled", true);
+                                    }
+                                 }
+                            }
+                        }
+                    }); //--------------내부 ajax종료
+               }//--------success문 종료
               }); //--------------ajax종료 
          });//데이트 피커 눌렀을 떄 함수 종료
          
@@ -701,20 +701,20 @@ height: 100%;
          let count = 1;
          var maxNum="${s.maxNum}";
          $("#up").on("click", function(e) {
-      	   console.log(maxNum);
-           	if(count== maxNum){
-             		return false;
-             	}
-         		count++;
-         		$(".people").text(count);
+            console.log(maxNum);
+              if(count== maxNum){
+                   return false;
+                }
+               count++;
+               $(".people").text(count);
          });
                
          $("#down").on("click", function(e) {
-         		if (count == 1) {
-         			return false;
-           	}
-          	 count--;
-           	$(".people").text(count);
+               if (count == 1) {
+                  return false;
+              }
+              count--;
+              $(".people").text(count);
          }); 
          
          
@@ -741,8 +741,8 @@ height: 100%;
                 $(".timeTd").text(selectTime);
                 //날짜를 선택하지 않았을 때
                 if($("#datePicker").val() == "" || selectTime== null){
-                	document.getElementById('timeDateModal').style.display='block';
-                	modal.classList.add("hidden");
+                   document.getElementById('timeDateModal').style.display='block';
+                   modal.classList.add("hidden");
                }
                 //잔여 좌석 수 확인
                 $.ajax({
@@ -750,15 +750,15 @@ height: 100%;
                     type:"post",
                     data: {storeNo:storeNo,selectedDate:selectedDate, selectTime:selectTime},
                     success: function(data){
-                    	//선택한 날짜 시간에 이미 예약된 좌석 수
-                    	var reservedNum = data; 
-                    	if(reservedNum+count>maxNum){
-                        	document.getElementById('noReserveModal').style.display='block';
-                        	modal.classList.add("hidden");
-                        	//남은 좌석 수
-                        	var minusNum = maxNum-reservedNum;
-                        	$(".minusNum").text(minusNum);
-                    	}
+                       //선택한 날짜 시간에 이미 예약된 좌석 수
+                       var reservedNum = data; 
+                       if(reservedNum+count>maxNum){
+                           document.getElementById('noReserveModal').style.display='block';
+                           modal.classList.add("hidden");
+                           //남은 좌석 수
+                           var minusNum = maxNum-reservedNum;
+                           $(".minusNum").text(minusNum);
+                       }
                     }
                 }); 
 
@@ -767,12 +767,12 @@ height: 100%;
             
 
       function hideModal(){
-    	  modal.classList.add("hidden");
+         modal.classList.add("hidden");
       }
       
       //------ 공유하기 모달
       $("#share").on("click",function(){
-    	  document.getElementById('shareModal').style.display='block';
+         document.getElementById('shareModal').style.display='block';
       });
       
       
@@ -782,20 +782,20 @@ height: 100%;
       $(".urlBtn").attr("data-clipboard-text",url);
       
       var clipboard = new ClipboardJS('.urlBtn');
-		clipboard.on('success', function(e) {
-		    console.info('Action:', e.action);
-		    console.info('Text:', e.text);
-		    console.info('Trigger:', e.trigger);
-		    alert("클립보드에 복사되었습니다.");
-		});
+      clipboard.on('success', function(e) {
+          console.info('Action:', e.action);
+          console.info('Text:', e.text);
+          console.info('Trigger:', e.trigger);
+          alert("클립보드에 복사되었습니다.");
+      });
 
-		clipboard.on('error', function(e) {
-		    console.error('Action:', e.action);
-		    console.error('Trigger:', e.trigger);
-		});
+      clipboard.on('error', function(e) {
+          console.error('Action:', e.action);
+          console.error('Trigger:', e.trigger);
+      });
       
-		
-		
+      
+      
       </script>
 
 </body>

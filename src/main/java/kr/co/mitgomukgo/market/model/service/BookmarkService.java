@@ -42,8 +42,53 @@ public class BookmarkService {
 		
 		ArrayList<BookMark> list = dao.myBookmarkList(map);
 		
+		int totalCount = dao.toalBookmark(bookMarkId);
+		
+		int totalPage = 0;
+		if(totalCount % numPerPage == 0) {
+			totalPage = totalCount / numPerPage;
+		}else {
+			totalPage = totalCount / numPerPage + 1;
+		}
+		
+		int pageNaviSize = 5;
+		int pageNo = 1;
+		
+		if(reqPage > 3) {
+			pageNo = reqPage - 2;
+		}
+		
+		String pageNavi = "";
+		
+		if(pageNo != 1) {
+			pageNavi += "<a href='/myBookmarkList.do?bookMarkId=" + bookMarkId + "&reqPage=" + (pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_left\r\n" + 
+					"            </span></a>";
+		}
+		
+		for(int i = 0; i < pageNaviSize; i++) {
+			if(reqPage == pageNo) {
+				pageNavi += "<span class='pageNo'>" + pageNo + "</span>";
+			}else {
+				pageNavi += "<a href='/myBookmarkList.do?bookMarkId=" + bookMarkId + "&reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+			}
+			
+			pageNo++;
+			
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		
+		if(pageNo <= totalPage) {
+			pageNavi += "<a href='/myBookmarkList.do?bookMarkId=" + bookMarkId + "&reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_right\r\n" + 
+					"            </span></a>";
+		}
+		
 		HashMap<String, Object> pageMap = new HashMap<String, Object>();
 		pageMap.put("list", list);
+		pageMap.put("pageNavi", pageNavi);
 		
 		if(list == null) {
 			return null;
@@ -51,4 +96,31 @@ public class BookmarkService {
 			return pageMap;
 		}
 	}
+
+	public int deleteBookMarkNo(int bmNo) {
+		int result = dao.deleteBookMarkNo(bmNo);
+		return result;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
