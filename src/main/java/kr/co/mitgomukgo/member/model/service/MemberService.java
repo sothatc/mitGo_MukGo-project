@@ -124,13 +124,13 @@ public class MemberService {
 					
 					HashMap<String, Object> reserveMap = new HashMap<String, Object>();
 					reserveMap.put("list", list);
-					reserveMap.put("reqPage", reqPage);
+					//reserveMap.put("reqPage", reqPage);
 					reserveMap.put("pageNavi", pageNavi);
-					reserveMap.put("total", totalPage);
-					reserveMap.put("pageNo", pageNo);
+					//reserveMap.put("total", totalPage);
+					//reserveMap.put("pageNo", pageNo);
 					
 					if(list == null) {
-						return reserveMap;
+						return null;
 					}else {
 						return reserveMap;
 					}

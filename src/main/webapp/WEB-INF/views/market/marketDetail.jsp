@@ -223,9 +223,9 @@
     <div class="w3-container" style="font-family:Gowun Dodum;">
            <div id="shareModal" class="w3-modal" style="font-family:Gowun Dodum; z-index:2000;">
              <div class="w3-modal-content w3-animate-top w3-card-4" style="width:50%; height: 30%;">
-               <header class="w3-container w3-teal" style="height:15%;"> 
+               <header class="w3-container" style="height:30px; background-color: #ffc107;"> 
                  <span onclick="document.getElementById('shareModal').style.display='none'" 
-                 class="w3-button w3-display-topright" style="width:5%; height:15%;">&times;</span>
+                 class="w3-button w3-display-topright" style="width:30px; padding:0; height:30px; line-height:30px;">&times;</span>
                </header>
                	 <h5 style="font-family:Gowun Dodum; text-align: center; font-weight: bolder; margin-top:40px;">공유하기</h5>
                  <div style="width:100%; height:30%;padding:0; margin-top:20px;;display:flex; justify-content: center; align-items: center; color:black;">
