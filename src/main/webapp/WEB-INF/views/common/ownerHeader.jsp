@@ -88,7 +88,7 @@
 												<a href="/marketProductListFrm.do">상품 관리</a>
 											</div>
 											<div class="accordion-div">
-												<a href="#">주문 관리</a>
+												<a href="/ownerOrderManageFrm.do?reqPage=1">주문 관리</a>
 											</div>
 										</div>
 									</c:otherwise>

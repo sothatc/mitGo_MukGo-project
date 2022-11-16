@@ -14,7 +14,7 @@ import kr.co.mitgomukgo.member.model.dao.MemberDao;
 import kr.co.mitgomukgo.member.model.vo.Member;
 import kr.co.mitgomukgo.member.model.vo.Owner;
 import kr.co.mitgomukgo.notice.model.vo.Notice;
-import kr.co.mitgomukgo.store.model.vo.Order;
+import kr.co.mitgomukgo.order.model.vo.Order;
 import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import net.nurigo.java_sdk.api.Message;
@@ -551,7 +551,7 @@ public class MemberService {
 		return dao.deleteMember(memberNo);
 	}
 
-	public HashMap<String, Object> selectAllOrderList(int reqPage, int memberNo) {
+	public HashMap<String, Object> selectAllOrderList(int reqPage, String memberId) {
 		// 화면에 보여주는 게시물 수
 		int numPerPage = 10;
 		
@@ -564,9 +564,9 @@ public class MemberService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
-		map.put("memberNo", memberNo);
+		map.put("memberId", memberId);
 		ArrayList<Order> list = dao.selectAllOrderList(map);
-		int totalCnt = dao.countReserveList(memberNo);
+		int totalCnt = dao.countOrderList(memberId);
 		int totalPage = 0;
 		if(totalCnt % numPerPage == 0) {
 			totalPage = totalCnt / numPerPage;
@@ -581,7 +581,7 @@ public class MemberService {
 		//이전 버튼
 	      if(pageNo !=1) {
 	          pageNavi += "<li>";
-	          pageNavi += "<a class='page-item' href='/memberManage.do?reqPage="+(pageNo-1)+"'>";
+	          pageNavi += "<a class='page-item' href='/orderList.do?reqPage="+(pageNo-1)+"'>";
 	          pageNavi += "<span class='material-icons'>chevron_left</span>";
 	          pageNavi +="</a></li>";
 	       }

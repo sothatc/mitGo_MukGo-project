@@ -25,7 +25,7 @@ import kr.co.mitgomukgo.member.model.service.MemberService;
 import kr.co.mitgomukgo.member.model.vo.Member;
 import kr.co.mitgomukgo.member.model.vo.Owner;
 import kr.co.mitgomukgo.notice.model.vo.Notice;
-import kr.co.mitgomukgo.store.model.vo.Order;
+
 import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import net.nurigo.java_sdk.Coolsms;
@@ -297,11 +297,10 @@ public class MemberController {
 	}
 	@RequestMapping(value="/reserveList.do")
 	public String reserveList(@SessionAttribute Member m, Model model) {
+		System.out.println(m.getMemberId());
 		ArrayList<Reserve> rsList = service.selectReserveList(m);
 		ArrayList<Notice> ncList = service.myPageNcList();
-		if(rsList.isEmpty()) {
-			return "member/reserveList";
-		}
+		
 		model.addAttribute("ncList", ncList);
 		model.addAttribute("rsList", rsList);
 		return "member/reserveList";
@@ -534,15 +533,19 @@ public class MemberController {
 	@RequestMapping(value="/orderList.do")
 	public String orderList(HttpSession session, int reqPage, Model model) {
 		Member m = (Member)session.getAttribute("m");
-		int memberNo = m.getMemberNo();
-		HashMap<String, Object> map = service.selectAllOrderList(reqPage, memberNo);
+		String memberId = m.getMemberId();
+		HashMap<String, Object> map = service.selectAllOrderList(reqPage, memberId);
+		ArrayList<Notice> ncList = service.myPageNcList();
+		model.addAttribute("ncList", ncList);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
 		model.addAttribute("pageNavi", map.get("pageNavi"));
 		model.addAttribute("total", map.get("total"));
 		model.addAttribute("pageNo", map.get("pageNo"));
-		model.addAttribute("memberNo", memberNo);
+		model.addAttribute("memberId", memberId);
+		
 		return "member/orderList";
+		
 	}
 	
 }
