@@ -230,6 +230,8 @@
 			location.href="/deleteCart.do?memberId="+memberId+"&productNoArr="+productNoArr.join("/");
 		});
 	
+	
+	
 		
 	
     

@@ -19,7 +19,7 @@ public class CartService {
 
 	
 
-	public int insertCart(int pNo, Cart c) {
+	public int insertCart(Cart c) {
 		return dao.insertCart(c);
 	}
 
@@ -35,6 +35,18 @@ public class CartService {
 	public ArrayList<Cart> ordercart(Cart c, String memberId) {
 		ArrayList<Cart> list = dao.ordercart(c, memberId);
 		return (ArrayList<Cart>) list;
+	}
+
+
+
+	public Cart searchCart(Cart c) {
+		return dao.searchCart(c);
+	}
+
+
+
+	public int updateCart(Cart c) {
+		return dao.updateCart(c);
 	}
 
 
