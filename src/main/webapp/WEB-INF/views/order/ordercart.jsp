@@ -19,7 +19,6 @@
     border-radius: 5px;
     background-color : #f5d575;
     text-align: center;
-    color: white;
     
 }
 
@@ -59,11 +58,11 @@
                     <h2 id="font">주문/결제</h2>
                     <div class="cart-option">
                     <div >
-                        <button type="button" id="cart-option">장바구니</button>
+                        <button type="button" id="cart-option" style=" background-color : #fdbe02;  color: black; font-weight: 600;">장바구니</button>
                     </div>
                     <div class="line"></div>
                     <div>
-                        <button type="button" id="cart-option" style=" background-color : #fdbe02;  color: black; font-weight: 600;">결제</button>
+                        <button type="button" id="cart-option" >결제</button>
                     </div>
                     <div class="line"></div>
                     <div>

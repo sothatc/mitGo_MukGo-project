@@ -320,8 +320,8 @@ public class MemberController {
 		return "member/ownerReserveManage";
 	}
 	@RequestMapping(value="/searchReserve.do")
-	public String searchReserve(String keyword, int storeNo, Model model, String reqPage1) {
-		int reqPage = Integer.parseInt(reqPage1);
+	public String searchReserve(String keyword, int storeNo, Model model, int reqPage) {
+		ArrayList<Notice> ncList = service.myPageNcList();
 		HashMap<String, Object> map = service.searchReserve(keyword, storeNo, reqPage);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
@@ -329,6 +329,7 @@ public class MemberController {
 		model.addAttribute("total", map.get("total"));
 		model.addAttribute("pageNo", map.get("pageNo"));
 		model.addAttribute("storeNo", storeNo);
+		model.addAttribute("ncList", ncList);
 		return "member/ownerReserveManage";
 	}
 	

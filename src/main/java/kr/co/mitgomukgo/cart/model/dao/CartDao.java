@@ -31,4 +31,11 @@ public class CartDao {
 		List list = sqlSession.selectList("cart.cartList", c);
 		return (ArrayList<Cart>) list;
 	}
+
+
+
+	public ArrayList<Cart> ordercart(Cart c, String memberId) {
+		List list = sqlSession.selectList("order.ordercart", c);
+		return (ArrayList<Cart>) list;
+	}
 }

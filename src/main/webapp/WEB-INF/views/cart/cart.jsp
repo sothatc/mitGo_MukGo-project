@@ -144,8 +144,8 @@
                 
              <div class="cart-btn">
                      <button type="button" id="font">계속 쇼핑하기</button>
-	                 <button type="button" id="font" class="payBtn">주문하러 가기</button>
-                    
+	                 
+                    <button type="button" class="payBtn" onclick="goToOrder(${sessionScope.m.memberId });">주문하러 가기</button>
                  </div>
             </div>
         </div>
@@ -201,8 +201,31 @@
     sum();
 
 		
+	function goToOrder(memberId){
+		location.href = "/ordercart.do?memberId="+memberId;
+	}
 	
-		
+	
+	$(".deleteCheck").on("click", function(){
+	    $(".allCheck").text("전체 선택");
+	    const check = $(".cart-check:checked");
+	    if(check.length == 0) {
+	        alert("선택된 도서가 없습니다.")
+			return;
+	    }
+		// 체크된 카트 번호를 저장할 배열
+		const delCartArr = new Array();
+	    // 유저 번호
+	    const userNo = check.prev().val();
+
+		for(let i=0; i<check.length; i++) {
+		    // 체크된 카트 번호
+		    const cartNo = check.eq(i).prev().prev().val();
+			delCartArr.push(cartNo);		
+		}
+		location.href="/deleteCart.do?userNo="+userNo+"&delCartArr="+delCartArr.join("/");
+	});
+	
 		
 	
     

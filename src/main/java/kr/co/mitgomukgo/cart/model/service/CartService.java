@@ -28,4 +28,11 @@ public class CartService {
 		ArrayList<Cart> list = dao.cartList(c);
 		return (ArrayList<Cart>) list;
 	}
+
+
+
+	public ArrayList<Cart> ordercart(Cart c, String memberId) {
+		ArrayList<Cart> list = dao.ordercart(c, memberId);
+		return (ArrayList<Cart>) list;
+	}
 }
