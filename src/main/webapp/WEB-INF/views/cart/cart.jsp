@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -113,12 +114,13 @@
 					            	 </td>
 					            	<td class="pImg" style="text-align:center"><img src="/resources/upload/market/${Cart.PImg }"></td>
 						          	<td style="text-align:center">${Cart.PName }</td>
-						           	<td class="pPrice" style="text-align:center">${Cart.PPrice }</td>
+						           	<td class="pPrice" style="text-align:center"><fmt:formatNumber value="${Cart.PPrice }" pattern="#,###" /></td>
 						           	<td style="text-align:center">${Cart.cartQuan }
 		                          		  
 		                        	 </td>
 					            	<td class="shipping">무료</td>
-					            	<td style="text-align:center;" class="cartTotalPrice">${Cart.PPrice*Cart.cartQuan }</td>
+					            	<td style="text-align:center; display: none;" class="cartTotalPrice">${Cart.PPrice*Cart.cartQuan }</td>
+					            	<td style="text-align:center;"><fmt:formatNumber value="${Cart.PPrice*Cart.cartQuan }" pattern="#,###" /></td>
 					            	
 		                    </tr>
 		             
