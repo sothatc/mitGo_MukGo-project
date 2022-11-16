@@ -69,8 +69,6 @@ public class MemberService {
 
 	//내윤: 예약관리
 	public HashMap<String, Object> selectReserveList(int reqPage, int memberNo) {
-		//ArrayList<Reserve> rs = dao.selectReserveList(m);
-		//return (ArrayList<Reserve>)rs;
 		int numPerPage = 7;
 		int end = numPerPage * reqPage;
 		int start = (end-numPerPage)+1;
