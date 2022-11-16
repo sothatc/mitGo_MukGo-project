@@ -47,7 +47,9 @@
 		text-align: center;
 		padding:0;
 	}
-	
+	.list-wrap>.titleShow {
+		font-size: 13px;
+	}
 </style>
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
@@ -67,7 +69,6 @@
                 <li>
                     <div><a href="/memberManage.do?reqPage=1" style="color:black;">회원관리</a></div>
                     <div><a href="/adminMemberManage.do?reqPage=1" style="color:black;">업주관리</a></div>
-                    <div><a href="/logout.do" style="color:black;">로그아웃</a></div>
                 </li>
             </ul>
         </div>
@@ -75,6 +76,11 @@
             <ul class="category">
                 <li>
                     <h4>공지사항</h4>
+                    <c:forEach items="${ncList }" var="n">
+						<div class="list-wrap">
+							<a href="/noticeDetail.do?noticeNo=${n.noticeNo }" class="titleShow">${n.noticeTitle }</a>
+						</div>
+					</c:forEach>
                 </li>
             </ul>
         </div>
