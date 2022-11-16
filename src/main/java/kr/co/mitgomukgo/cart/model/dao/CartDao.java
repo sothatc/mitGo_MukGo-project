@@ -53,6 +53,15 @@ public class CartDao {
 	 * sqlSession.insert("cart.deleteCart", pNo); return result; }
 	 */
 	
+	public Cart searchCart(Cart c) {
+		return sqlSession.selectOne("searchCart", c);
+	}
+
+
+
+	public int updateCart(Cart c) {
+		return sqlSession.update("updateCart", c);
+	}
 
 
 

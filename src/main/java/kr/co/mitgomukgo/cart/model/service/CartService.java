@@ -19,7 +19,7 @@ public class CartService {
 
 	
 
-	public int insertCart(int pNo, Cart c) {
+	public int insertCart(Cart c) {
 		return dao.insertCart(c);
 	}
 
@@ -68,6 +68,16 @@ public class CartService {
 	 * public int deleteCart(int pNo) { // TODO Auto-generated method stub return
 	 * dao.deleteCart(pNo); }
 	 */
+	public Cart searchCart(Cart c) {
+		return dao.searchCart(c);
+	}
+
+
+
+	public int updateCart(Cart c) {
+		return dao.updateCart(c);
+	}
+
 
 
 //	public boolean deleteCart(String productNoArr, String memberId) {

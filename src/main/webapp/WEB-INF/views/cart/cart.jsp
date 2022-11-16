@@ -45,7 +45,6 @@
     }
 </style>
  
-<input type="checkbox"/>
 </head>
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -231,6 +230,9 @@
 			
 		
 	 
+	
+	
+	
 		
 	
     
