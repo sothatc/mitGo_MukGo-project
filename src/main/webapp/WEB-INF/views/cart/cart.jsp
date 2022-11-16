@@ -65,7 +65,7 @@
                     <h2 id="font">주문/결제</h2>
                     <div class="cart-option">
                     <div>
-                        <button type="button" id="cart-option">장바구니</button>
+                        <button type="button" id="cart-option" style=" background-color : #fdbe02;  color: black; font-weight: 600;">장바구니</button>
                     </div>
                     <div class="line"></div>
                     <div>
@@ -87,7 +87,7 @@
         
         <div class="cart">
             <div class="cart-table">
-                
+                <form id="order-form" action="/goOrderHistory.do?memberNo=${sessionScope.m.memberId}" method="post" autocomplete="off">
                  <table>
                  	
                      <tr id="font">
@@ -147,6 +147,7 @@
 	                 
                     <button type="button" class="payBtn" onclick="goToOrder(${sessionScope.m.memberId });">주문하러 가기</button>
                  </div>
+                 </form>
             </div>
         </div>
     </div>
@@ -205,8 +206,10 @@
 		location.href = "/ordercart.do?memberId="+memberId;
 	}
 	
+
 	
-	$(".deleteCheck").on("click", function(){
+	
+ 	$(".deleteCheck").on("click", function(){
 		// 체크한것 삭제
 			
 		    const check = $(".deleteBtn:checked");
@@ -214,22 +217,20 @@
 		        alert("선택된 상품이 없습니다.")
 				return;
 		    }
-		
-			const memberId= ${sessionScope.m.memberId};
-			
-			const productNoArr = new Array();
-			
-			check.each(function(index,item){
-			const productNo = $(check).next().next().val();
-				
-				productNoArr.push(productNo);
-			
-			});
-			console.log(productNoArr);
-			console.log(memberId);
-			location.href="/deleteCart.do?memberId="+memberId+"&productNoArr="+productNoArr.join("/");
+		    
+		    const delCartArr = new Array();
+		    const memberId = check.prev().val();
+		    for(let i=0; i<check.length; i++) {
+			    // 체크된 카트 번호
+			    const cartNo = check.eq(i).prev().prev().val();
+				delCartArr.push(cartNo);		
+			}
+			location.href="/deleteCart.do?memberId="+memberId+"&delCartArr="+delCartArr.join("/");
 		});
-	
+			
+			
+		
+	 
 		
 	
     

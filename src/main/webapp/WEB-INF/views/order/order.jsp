@@ -128,8 +128,8 @@
                             
                </table>
             </div>
-        
-            <form id="order-form" action="/insertOrder.do" method="post" autocomplete="off">
+        </div>
+            <form id="order-form" action="/insertOrder.do?memberId=${sessionScope.m.memberId}" method="post" autocomplete="off">
                 <div class="page-title order-title" id="font">주문정보</div>
                 <div class="order-info" id="font">
                     <div class="order-box">
@@ -200,7 +200,7 @@
                         <button type="button" id="payBtn">결제하기</button>
                     </div>
                 </div>               
-              </div>
+              
               
               
                 

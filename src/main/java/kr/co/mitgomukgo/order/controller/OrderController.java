@@ -2,6 +2,8 @@ package kr.co.mitgomukgo.order.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,10 +18,9 @@ public class OrderController {
  @Autowired
  private OrderService service;
  
-  @RequestMapping(value="/insertOrder.do")
-  public String insertOrder(Cart c ,Model model) {
-	  model.addAttribute("Order", c);
-		return "order/order";
-   }
-
+ @RequestMapping(value="/insertOrder.do")
+ public String insertOrder(Cart c ,Model model) {
+    model.addAttribute("Order", c);
+     return "order/order";
+  }
 }

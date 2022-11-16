@@ -21,6 +21,8 @@ public class Order {
 	private String orderStatus;
 	private String shippingName;
 	private String shippingAddr;
+	private String shippingAddr1;
+	private String shippingAddr2;
 	private String shippingPhone;
 	private String impUid;
 }

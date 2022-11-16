@@ -41,6 +41,21 @@ public class CartDao {
 
 
 
+	public int deleteCart(Cart c) {
+		return sqlSession.delete("cart.deleteCart", c);
+	
+	}
+
+
+
+	/*
+	 * public int deleteCart(int pNo) { int result =
+	 * sqlSession.insert("cart.deleteCart", pNo); return result; }
+	 */
+	
+
+
+
 
 
 }

@@ -16,12 +16,14 @@ public class OrderDao {
 	private SqlSessionTemplate sqlSession;
 	
 	
-	public int insertCart(Order or) {
+	public int insertOrder(Order or) {
 		int result = sqlSession.insert("order.insertOrder", or);
 		return result;
 	}
 
 
+
+	
 
 
 

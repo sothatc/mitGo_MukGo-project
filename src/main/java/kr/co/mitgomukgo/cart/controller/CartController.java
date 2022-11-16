@@ -45,14 +45,19 @@ public class CartController {
 			return "order/ordercart";
 		}
 	   
-		/*
-		 * @RequestMapping(value="/deleteCart.do") public String deleteCart(String
-		 * productNoArr, String memberId) { boolean result =
-		 * service.deleteCart(productNoArr,memberId); return
-		 * "redirect:/cart.do?memberId="+memberId;
-		 * 
-		 * }
-		 */
+		
+		
+	   @RequestMapping(value="/deleteCart.do") public String deleteCart(String delCartArr,String memberId) {
+		   boolean result = service.deleteCart(delCartArr, memberId);
+			return "redirect:/cart.do?memberId="+memberId;
+					
+		}
+		  
+		 
+		 
+		  
+		
+		
 }
 
 
