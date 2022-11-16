@@ -23,7 +23,7 @@ public class CartController {
 	   public String insertCart(Cart c, Model model) {
 		  Cart cart = service.searchCart(c);
 		  if(cart == null) {
-			  int result = service.insertCart(cart);
+			  int result = service.insertCart(c);
 		  } else {
 			  cart.setCartQuan(c.getCartQuan());
 			  int result = service.updateCart(cart);
