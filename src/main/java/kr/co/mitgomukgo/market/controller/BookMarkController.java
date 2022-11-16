@@ -46,10 +46,25 @@ public class BookMarkController {
 		
 		if(map == null) {
 			model.addAttribute("msg", "아직 찜한 목록이 없습니다.");
+			System.out.println("null");
 			return "market/myBookmarkList";
 		}else {
 			model.addAttribute("list", map.get("list"));
+			model.addAttribute("pageNavi",map.get("pageNavi"));
+			System.out.println(map.get("list"));
 			return "market/myBookmarkList";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/deleteBookMarkNo.do", produces = "application/json;charset=utf-8")
+	public String deleteBookMarkNo(int bmNo) {
+		int result = service.deleteBookMarkNo(bmNo);
+		
+		if(result > 0) {
+			return "0";
+		}else {
+			return "1";
 		}
 	}
 }
