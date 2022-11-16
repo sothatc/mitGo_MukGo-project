@@ -123,7 +123,7 @@
 	                    	</c:choose>
 	                    </td>
 	                    <td class="ownerEnrollDateTd">${o.ownerEnrollDate }</td>
-	                   <form action="/updateOwnerLevel.do?ownerNo=${o.ownerNo}&reqPage=1" method="post">
+	                    <form action="/updateOwnerLevel.do?ownerNo=${o.ownerNo}&reqPage=1" method="post">
 	                    <td class="ownerStatusTd">
 	                        <c:choose>
 	                    		<c:when test="${o.ownerStatus eq 1 }">
