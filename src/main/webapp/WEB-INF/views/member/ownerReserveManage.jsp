@@ -23,6 +23,18 @@
 						<div class="content-head">
 							<h2>예약 관리</h2>
 						</div>
+						<form action="/searchReserve.do" method="post">
+							<div class="searchWrap-reserve">
+								<div class="search-area">
+									<span class="searchName">이름</span>
+									<input type="text" name="keyword">
+									<input type="hidden" name="storeNo" value="${storeNo }">
+									<input type="hidden" name="reqPage1" value="1">
+									<input type="submit" class="searchBtn" value="조회">
+									</button>
+								</div>
+							</div>
+						</form>
 						<table class="table" style="text-align: center; vertical-align: middle;">
 							<tr>
 								<th class="th" scope="col">예약 번호</th>
@@ -70,17 +82,7 @@
 								</tr>
 							</c:forEach>
 						</table>
-						<form action="/searchReserve.do" method="post">
-							<div class="searchWrap-reserve">
-								<div class="search-area">
-									<input type="text" name="keyword">
-									<input type="hidden" name="storeNo" value="${storeNo }">
-									<input type="hidden" name="reqPage1" value="1">
-									<input type="submit" class="searchBtn" value="이름 조회">
-									</button>
-								</div>
-							</div>
-						</form>
+
 					</div>
 				</div>
 				<div class="page">${pageNavi }</div>

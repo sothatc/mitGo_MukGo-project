@@ -37,6 +37,7 @@ height: 100%;
    <%@ include file="/WEB-INF/views/common/header.jsp" %>
    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,200" />
    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -120,13 +121,13 @@ height: 100%;
                   <tr style="height: 47px;">
                      <th>인원</th>
                      <td>
-                        <button class="w3-button w3-circle w3-teal" id="down" style="width: 35px; height: 35px; padding: 0;">-</button>
+                        <button class="w3-button w3-circle" id="down" style="width: 35px; height: 35px; padding: 0; background-color: #ffc107; color:white;">-</button>
                      </td>
                      <td class="peopleTd" style="width:30px; text-align: center;">
                         <span class="people">1</span>
                      </td>
                      <td>
-                        <button class="w3-button w3-circle w3-teal" id="up" style="width: 35px; height: 35px; padding: 0;">+</button>
+                        <button class="w3-button w3-circle" id="up" style="width: 35px; height: 35px; padding: 0; background-color: #ffc107; color:white;">+</button>
                      </td>
                   </tr>
                   <tr>
@@ -194,38 +195,33 @@ height: 100%;
 				</div>
 				<div class="map_act_btn_wrap clear_box"></div>
 				<div>
-					<div class="selectCar">자동차</div>
-					<div class="selectFoot">도보</div>
+					<!-- 자동차 -->
+					<div class="selectCar" style="background-color:rgb(51,51,51);"><span class="material-symbols-outlined">directions_car</span>자동차</div>
+					<div class="selectFoot"style="background-color:rgb(51,51,51);"><span class="material-symbols-outlined">footprint</span>도보</div>
 				</div>
-				<div id="resultBox">
-					<p id="result">예상 정보</p>
-				</div>
+
 				<div class="ft_select_wrap">
 					<div class="ft_select">
 						<div class="address-wrap">
 
-							<input type="text" class="text_custom" id="fullAddr" name="fullAddr" value="" readonly>
+							<input type="text" class="text_custom" id="fullAddr" name="fullAddr" value="" onclick="searchAddr();" placeholder="클릭하여 출발지를 입력하세요" readonly>
 							<span type="text" class="text_custom addressTd" id="E_fullAddr" name="E_fullAddr" readonly style="display:none;"></span>
-							<button class="startBtn" onclick="searchAddr();">출발지 입력</button>
-							<button id="btn_select" style="display : none;">적용하기</button>
-							<button id="hidden_btn_select" style="display : none;">적용하기</button>					
+							<button id="btn_select" style="display : none;">검색하기</button>
+							<button id="hidden_btn_select" style="display : none;">검색하기</button>					
 						</div>
 
 						<div class="car-content">
-						
-							<!-- <select id="year">
-								<option value="N" selected="selected">교통정보 표출 옵션</option>
-								<option value="Y">Y</option>
-								<option value="N">N</option>
-							</select> -->
-						
-							<button id="btn_select1">적용하기</button>
+							<button id="btn_select1">길찾기</button>
 						</div>
 						<div class="foot-content">
-							<button id="btn_select2">적용하기</button>
+							<button id="btn_select2">길찾기</button>
 						</div>
 					</div>
 				</div>
+				<div id="resultBox">
+					<p id="result">예상 정보</p>
+				</div>
+				
 				<div class="map_act_btn_wrap clear_box"></div>
 				<div class="clear"></div>
 			</div>
@@ -351,6 +347,21 @@ height: 100%;
                  class="w3-button w3-display-topright" style="width:5%; height:10%;">&times;</span>
                </header>
                  <p style="width:100%; height:100%;padding:0; margin:0;display:flex; justify-content: center; align-items: center; color:black;">업주입니다!!</p>
+             </div>
+           </div>
+      </div>
+      
+       <!-- 정원 초과 모달 -->
+       <div class="w3-container" style="font-family:Gowun Dodum;">
+           <div id="noReserveModal" class="w3-modal" style="font-family:Gowun Dodum; z-index:2000;">
+             <div class="w3-modal-content w3-animate-top w3-card-4" style="width:30%; height: 40%;">
+               <header class="w3-container w3-teal" style="height:10%;"> 
+                 <span onclick="document.getElementById('noReserveModal').style.display='none'" 
+                 class="w3-button w3-display-topright" style="width:5%; height:10%;">&times;</span>
+               </header>
+                 <p style="width:100%; height:100%;padding:0; margin:0;display:flex; justify-content: center; align-items: center; color:black;">
+                	 시간당 정원이 초과되었습니다.잔여 좌석 수: <span class="minusNum" style="color:red; margin-left:10px;"></</span> 좌석
+                 </p>
              </div>
            </div>
       </div>
@@ -601,8 +612,6 @@ height: 100%;
                      for(let i=realOpenTime; i<realCloseTime; i++){
                          $(".buttonTd").append("<button class=timeBtn style=margin-right:1%;background-color:white;color:rgb(51,51,51); value="+i+">"+i+":00"+"</button>");
                       }
-                       
-     
                      //버튼 클릭
                      const timeBtns = $(".timeBtn");
                      timeBtns.on("click",function(){
@@ -646,7 +655,6 @@ height: 100%;
 		                	  }
 		                	  
 					             for(let i=0; i<btnVal.length; i++){
-					            	 
 					                  for(let j=0; j<disabledTime.length; j++){
 					                     if(btnVal[i]==disabledTime[j]){
 					                        checkTimeBtn[i].style.color="red";
@@ -655,20 +663,10 @@ height: 100%;
 					                     }
 					                  }
 					             }
-		                	  
-		                	  
 		                  }
 		              }); //--------------내부 ajax종료
-
-
-			             
-		              
             	}//--------success문 종료
-                
-              }); //--------------ajax종료
-              
-              
-
+              }); //--------------ajax종료 
          });//데이트 피커 눌렀을 떄 함수 종료
          
             
@@ -729,13 +727,12 @@ height: 100%;
          
          //예약하기 모달 열기
          $(".reserveBtn2").on("click",function(){
-         		modal.classList.remove("hidden");
-               
+
+                modal.classList.remove("hidden");
                 if(ownerId != ""){
                    document.getElementById('ownerModal').style.display='block';
                 }
                 selectedDate =$("#datePicker").val();
-                console.log(selectedDate);
                 $(".eatDate").attr("value",selectedDate);
                 $(".eatTime").attr("value",selectTime);
                 $(".eatNum").attr("value",count);
@@ -747,6 +744,25 @@ height: 100%;
                 	document.getElementById('timeDateModal').style.display='block';
                 	modal.classList.add("hidden");
                }
+                //잔여 좌석 수 확인
+                $.ajax({
+                    url: "/checkCountNum.do",
+                    type:"post",
+                    data: {storeNo:storeNo,selectedDate:selectedDate, selectTime:selectTime},
+                    success: function(data){
+                    	//선택한 날짜 시간에 이미 예약된 좌석 수
+                    	var reservedNum = data; 
+                    	if(reservedNum+count>maxNum){
+                        	document.getElementById('noReserveModal').style.display='block';
+                        	modal.classList.add("hidden");
+                        	//남은 좌석 수
+                        	var minusNum = maxNum-reservedNum;
+                        	$(".minusNum").text(minusNum);
+                    	}
+                    }
+                }); 
+
+                
          });
             
 
@@ -778,6 +794,8 @@ height: 100%;
 		    console.error('Trigger:', e.trigger);
 		});
       
+		
+		
       </script>
 
 </body>

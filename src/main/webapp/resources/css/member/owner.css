@@ -249,6 +249,14 @@ li{
 
 /*검색창*/
 
+.searchName{
+	margin-right: 10px;
+	font-weight: bold;
+}
+.searchWrap-reserve{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
 .searchWrap-reserve>.search-area .searchBtn{
 	width: 69px;
 	border-style: none;

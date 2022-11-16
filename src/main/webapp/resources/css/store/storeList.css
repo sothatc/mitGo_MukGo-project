@@ -26,10 +26,14 @@
 }
 
 .storeList-searchinput>button {
-	width: 75px;
+	width: 35px;
+	height: 35px;
 	border: solid 2px black;
 	border-radius: 15px;
-	font-weight: 800;
+	background-color: #ffc107;
+}
+.storeList-searchinput>button>span{
+	line-height: 30px;
 }
 /* ==============================map */
 .storeList-map {
@@ -137,8 +141,8 @@
 .storeList-tag{
 	background-color: #ffc107;
     color: #fff;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    padding-top: 1.6px;
+    padding-bottom: 1.6px;
     width: 1250px;
     margin: 0 auto;
 	margin-top: 50px;
@@ -213,7 +217,7 @@
 	background-color: white;
 }
 
-.storeList-sort-content:hover {
+.storeList-sort-content>form>ul:hover {
 	cursor: pointer;
 }
 

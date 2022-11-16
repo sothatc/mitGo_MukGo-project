@@ -88,7 +88,7 @@
 												<a href="/marketProductListFrm.do">상품 관리</a>
 											</div>
 											<div class="accordion-div">
-												<a href="#">주문 관리</a>
+												<a href="/ownerOrderManageFrm.do?reqPage=1">주문 관리</a>
 											</div>
 										</div>
 									</c:otherwise>
@@ -99,7 +99,7 @@
 							<a href="/updateOwnerFrm.do">내 정보 수정</a>
 						</div>
 						<div class="etc">
-							<a href="#">회원 탈퇴</a>
+							<a href="/deleteOwner.do?ownerNo=${sessionScope.o.ownerNo }" class="delOwner">회원 탈퇴</a>
 						</div>
 					</c:when>
 					<c:otherwise>
@@ -107,7 +107,7 @@
 							<a href="/updateOwnerFrm.do">내 정보 수정</a>
 						</div>
 						<div class="etc">
-							<a href="#">회원 탈퇴</a>
+							<a href="/deleteOwner.do?ownerNo=${sessionScope.o.ownerNo }" class="delOwner">회원 탈퇴</a>
 						</div>
 					</c:otherwise>
 				</c:choose>
@@ -127,9 +127,18 @@
 		</ul>
 	</div>
 </aside>
-
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
 	$(".accordion-button").click(function() {
 		$(this).parent().nextAll().toggle();
+	});
+	
+	$(".delOwner").on("click",function(e){
+		if(confirm("탈퇴 하시겠습니까?") == true) {
+			alert("탈퇴되었습니다.");
+		}else {
+			e.preventDefault();
+			return;
+		}
 	});
 </script>

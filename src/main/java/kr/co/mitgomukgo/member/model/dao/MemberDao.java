@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kr.co.mitgomukgo.member.model.vo.Member;
 import kr.co.mitgomukgo.member.model.vo.Owner;
 import kr.co.mitgomukgo.notice.model.vo.Notice;
+import kr.co.mitgomukgo.order.model.vo.Order;
 import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Store;
 
@@ -200,6 +201,21 @@ public class MemberDao {
 	public int deleteMember(int memberNo) {
 		return sqlSession.delete("member.deleteMember", memberNo);
 	}
+
+	public ArrayList<Order> selectAllOrderList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("order.selectAllOrderList", map);
+		return (ArrayList<Order>) list;
+	}
+
+	public int deleteOwner(int ownerNo) {
+		return sqlSession.delete("owner.deleteOwner", ownerNo);
+	}
+
+	public int countOrderList(String memberId) {
+		return sqlSession.selectOne("order.countOrderList",memberId);
+	}
+
+	
 
 
 	
