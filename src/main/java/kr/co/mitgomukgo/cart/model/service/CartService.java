@@ -1,6 +1,7 @@
 package kr.co.mitgomukgo.cart.model.service;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,4 +36,29 @@ public class CartService {
 		ArrayList<Cart> list = dao.ordercart(c, memberId);
 		return (ArrayList<Cart>) list;
 	}
+
+
+
+//	public boolean deleteCart(String productNoArr, String memberId) {
+//		StringTokenizer token = new StringTokenizer(productNoArr, "/");
+//		boolean result = true;
+//
+//		while (token.hasMoreTokens()) {
+//			int proNo = Integer.parseInt(token.nextToken());
+//			Cart c = new Cart();
+//			
+//			c.setMemberId(memberId);
+//			int changeResult = dao.deleteCart(c);
+//			System.out.println(c);
+//			if (changeResult == 0) {
+//				result = false;
+//				break;
+//			}
+//		}
+//		return result;
+//	}
+	
+	
+	
+
 }

@@ -132,48 +132,15 @@
 				</div>
 			</div>
 			<div class="row g-4">
+				<c:forEach items="${sList }" var="ss">
 				<div class="col-lg-4 col-md-6">
-					<div class="service">
-						<a href="#"><img src="img/꼬치구이.jpg" alt=""></a>
-						<h5>강남역 맛집 Best 20</h5>
-						<p id="font">"강남역 주변의 맛집을 한눈에!"</p>
+					<div class="service" style="height: 500px;">
+						<a href="/storeDetail.do?storeNo=${ss.storeNo }"><img src="resources/upload/store/${ss.thumbNail }" alt=""></a>
+						<h5>${ss.storeName }</h5>
+						<p id="font">"${ss.content }"</p>
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="service">
-						<a href="#"><img src="img/마라.jfif" alt=""></a>
-						<h5>추운 겨울 화끈한 메뉴! 마라탕 TOP 7!</h5>
-						<p id="font">"수많은 마라탕집, 어디로 가야할지 고민된다면?"</p>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="service">
-						<a href="#"><img src="img/카이센동.jpeg" alt=""></a>
-						<h5>떠오르는 인기메뉴, 카이센동! TOP 5!</h5>
-						<p id="font">"싱싱한 해물이 올라간 카이센동이 먹고싶다면?"</p>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="service">
-						<a href="#"><img src="img/치킨.jpg" alt=""></a>
-						<h5>불금엔 치킨! 우리동네 치킨집 Best 5!</h5>
-						<p id="font">"트렌디한 분위기 속에서 치킨과 맥주 한 잔?!"</p>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="service">
-						<a href="#"><img src="img/다이닝.png" alt=""></a>
-						<h5>연인과 가기좋은 데이트 맛집 10곳</h5>
-						<p id="font">"뷰 맛집! 분위기 한 번 제대로 타고 싶은 날엔"</p>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6">
-					<div class="service">
-						<a href="#"><img src="img/안주.jpg" alt=""></a>
-						<h5>안주가 맛있는 맛집 Best 10</h5>
-						<p id="font">치맥! 삼쏘! 오늘의 안주는?!</p>
-					</div>
-				</div>
+				</c:forEach>
 			</div>
 		</div>
 	</section>
@@ -226,50 +193,6 @@
 	</section>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
-	<!-- Modal -->
-	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered modal-xl">
-			<div class="modal-content">
-				<div class="modal-body p-0">
-					<div class="container-fluid">
-						<div class="row gy-4">
-							<div class="col-lg-4 col-sm-12 bg-cover" style="background-image: url(img/KakaoTalk_20221027_140641868_03.jpg); min-height: 300px;">
-								<div></div>
-							</div>
-							<div class="col-lg-8">
-								<form class="p-lg-5 col-12 row g-3">
-									<div>
-										<h1>Get in touch</h1>
-										<p>Fell free to contact us and we will get back to you as soon as possible</p>
-									</div>
-									<div class="col-lg-6">
-										<label for="userName" class="form-label">First name</label>
-										<input type="text" class="form-control" placeholder="Jon" id="userName" aria-describedby="emailHelp">
-									</div>
-									<div class="col-lg-6">
-										<label for="userName" class="form-label">Last name</label>
-										<input type="text" class="form-control" placeholder="Doe" id="userName" aria-describedby="emailHelp">
-									</div>
-									<div class="col-12">
-										<label for="userName" class="form-label">Email address</label>
-										<input type="email" class="form-control" placeholder="Johndoe@example.com" id="userName" aria-describedby="emailHelp">
-									</div>
-									<div class="col-12">
-										<label for="exampleInputEmail1" class="form-label">Enter Message</label>
-										<textarea name="" placeholder="This is looking great and nice." class="form-control" id="" rows="4"></textarea>
-									</div>
-
-									<div class="col-12">
-										<button type="submit" class="btn btn-brand">Send Message</button>
-									</div>
-								</form>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
 	<script src="/resources/js/index/jquery.min.js"></script>
 	<script src="/resources/js/index/owl.carousel.min.js"></script>
 	<script src="/resources/js/index/app.js"></script>
