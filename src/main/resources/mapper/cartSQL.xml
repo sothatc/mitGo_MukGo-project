@@ -20,4 +20,22 @@
 		from cart join market_product using(p_no) 
 		where member_id= #{memberId}
 </select>
+
+<select id="searchCart" parameterType="c" resultType="c">
+	select 
+		cart_no as cartNo,
+		p_no as pNo, 
+		cart_quan as cartQuan, 
+		p_name as pName, 
+		p_price as pPrice, 
+		p_img as pImg  
+	from cart join market_product using(p_no)
+	where member_id = #{memberId} and p_no = #{pNo}
+</select>
+
+<update id="updateCart" parameterType="c">
+	update cart set
+	cart_Quan = cart_Quan + #{cartQuan}
+	where cart_no = #{cartNo}
+</update>
 </mapper>
