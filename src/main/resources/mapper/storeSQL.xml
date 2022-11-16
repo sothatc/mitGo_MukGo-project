@@ -390,26 +390,28 @@
 		(select count(*) from review r where r.store_no = s.store_no)as reviewCount,
 		(select imgpath from store_img si where storeimg_no = (select
 		min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
-		as thumbNail from store s order by storeNo desc)b
+		as thumbNail from store s order by
+		 <choose>
+			<when test="storeListSort.equals('new')">
+				storeNo asc
+			</when>
+			<when test="storeListSort.equals('grade')">
+				rating asc
+			</when>
+			<when test="storeListSort.equals('reviewCount')">
+				reviewCount asc
+			</when>
+		</choose>
+		 )b
+		 
 		<if test="search != null and search != ''">
 			where storeName like '%'||#{search}||'%'
 		</if>
 		<if test="category != null and category != ''">
 			where category = #{category}
 		</if>
-		)rb   
-		<choose>
-			<when test="storeListSort.equals('new')">
-				order by 3 desc
-			</when>
-			<when test="storeListSort.equals('grade')">
-				order by 14 desc
-			</when>
-			<when test="storeListSort.equals('reviewCount')">
-				order by 15 desc
-			</when>
-		</choose>
-		)where rnum between #{start} and #{end}
+		
+		)rb)where rnum1 between #{start} and #{end}
 	</select>
 	
 	<!-- 리뷰리스트 -->
