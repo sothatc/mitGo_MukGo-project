@@ -47,7 +47,7 @@
                             <span class="tit">비밀번호</span>
                             <div class="cnt">
                                 <div class="input01">
-                                    <label class="label" for="ownerPw">대/소문자와 숫자를 포함한 최소 8자리를 입력해주세요.</label>
+                                    <label class="label" for="ownerPw">대/소문자와 숫자를 포함한 최소 8자리를 입력해주세요.(특수문자 제외)</label>
                                     <input type="password" id="ownerPw" name="ownerPw">
                                 </div>
                                 <p class="text-note"></p>
