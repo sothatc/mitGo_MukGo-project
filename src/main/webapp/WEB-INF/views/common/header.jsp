@@ -18,7 +18,7 @@
 				</p>
 			</div>
 			<div class="col-auto social-icons">
-				<a href="#"><i class='bx bxl-facebook'></i></a> <a href="#"><i class='bx bxl-twitter'></i></a> 			
+				<a href="#"><i class='bx bxl-facebook'></i></a> <a href="#"><i class='bx bx-bookmark-heart'></i></a> 			
 			<c:choose>
 				<c:when test="${empty sessionScope.m && empty sessionScope.o}">
 				</c:when>
@@ -46,9 +46,6 @@
 			<ul class="navbar-nav ms-auto">
 				<li class="nav-item">
 					<a class="nav-link" href="/index.jsp">Home</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="/index2.jsp">인덱스이동(임시)</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/storeList.do?reqPage=1">GOGO리스트</a>

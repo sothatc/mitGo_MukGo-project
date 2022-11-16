@@ -95,6 +95,16 @@ public class StoreController {
 		String result = gson.toJson(list);
 		return result;
 	}
+	
+	//예약된 좌석 수 확인하기
+	@ResponseBody
+	@RequestMapping(value = "/checkCountNum.do", produces = "application/json;charset=utf-8")
+	public String checkCountNum(int storeNo, String selectedDate, String selectTime) {
+		int countNum = service.checkCountNum(storeNo, selectedDate, selectTime);
+		Gson gson = new Gson();
+		String result = gson.toJson(countNum);
+		return result;
+	}
 
 	// 예약하기
 	@RequestMapping(value = "/reserve.do")
@@ -405,11 +415,10 @@ public class StoreController {
 			return "common/alert";
 		}
 	}
-
+	//카테고리 분류기능
 	@RequestMapping(value = "/selectTag.do")
 	public String selectTag(String category, int reqPage, Model model) {
 		HashMap<String, Object> map = service.selectTag(category, reqPage);
-
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
 		model.addAttribute("category", category);
@@ -419,22 +428,33 @@ public class StoreController {
 
 		return "store/storeListFrm";
 	}
-
+	//검색기능
 	@RequestMapping(value = "/searchStoreList.do")
-	public String searchStoreList(String search, int reqPage, Model model, String category) {
+	public String searchStoreList(String search, int reqPage, Model model, String category ,HttpServletRequest request) {
 		HashMap<String, Object> map = service.searchStoreList(search, reqPage, category);
-		model.addAttribute("list", map.get("list"));
-		model.addAttribute("reqPage", reqPage);
-		model.addAttribute("category", category);
-		model.addAttribute("pageNavi", map.get("pageNavi"));
-		model.addAttribute("total", map.get("total"));
-		model.addAttribute("pageNo", map.get("pageNo"));
-		model.addAttribute("search", search);
-		return "store/storeListFrm";
+		if(map.get("list") != null) {
+			model.addAttribute("list", map.get("list"));
+			model.addAttribute("reqPage", reqPage);
+			model.addAttribute("category", category);
+			model.addAttribute("pageNavi", map.get("pageNavi"));
+			model.addAttribute("total", map.get("total"));
+			model.addAttribute("pageNo", map.get("pageNo"));
+			model.addAttribute("search", search);
+			return "store/storeListFrm";
+		}else if(category.isEmpty()){
+			request.setAttribute("msg", "검색 결과가 존재하지 않습니다.");
+			request.setAttribute("url", "/storeList.do?reqPage=1");
+			return "common/alert";
+		}else {
+			request.setAttribute("msg", "검색 결과가 존재하지 않습니다.");
+			request.setAttribute("url", "/selectTag.do?category="+category+"&reqPage=1");
+			return "common/alert";
+		}
+		
 	}
-
+	//정렬기능
 	@RequestMapping(value = "/sortStoreList.do")
-	public String sortStoreList(String storeListSort,String sortFilter,String search, int reqPage, Model model, @RequestParam String category) {
+	public String sortStoreList(String storeListSort,String sortFilter,String search, int reqPage, Model model, @RequestParam String category ) {
 		HashMap<String, Object> map = service.sortStoreList(storeListSort,sortFilter,search, reqPage, category);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);

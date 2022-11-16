@@ -117,13 +117,13 @@
          				<tr>
          					<th>수량 선택</th>
 		                     <td style="width:30px;">
-		                        <button class="w3-button w3-circle w3-teal" id="down" style="width: 35px; height: 35px; padding: 0;">-</button>
+		                        <button class="w3-button w3-circle" id="down" style="width: 35px; height: 35px; padding: 0; background-color: #ffc107; color:white;">-</button>
 		                     </td>
 		                     <td class="peopleTd" style="width:30px;">
 		                        <span class="countNum" style="width:30px;">1</span>
 		                     </td>
 		                     <td style="width:30px;">
-		                        <button class="w3-button w3-circle w3-teal" id="up" style="width: 35px; height: 35px; padding: 0;">+</button>
+		                        <button class="w3-button w3-circle" id="up" style="width: 35px; height: 35px; padding: 0; background-color: #ffc107; color:white;">+</button>
 		                     </td>
 		                     <td><td>
          				</tr>
@@ -143,20 +143,18 @@
                       	</a>
          			</c:when>
          			<c:otherwise>
+         			<div class="btnWrap">
          			<form action="/insertCart.do">
-         				<div class="btnWrap">
 		         			<button type="submit" class="cartBtn">장바구니</button>
 		         			<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 		         			<input type="hidden" name="pPrice" class="allPrice">
 		         			<input type="hidden" name="pNo" class="pNumber">
 		         			<input type="hidden" name="cartQuan" class="count">
 		         			<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
-		         		</div>
 		         	</form>
 		         	
 		         	
 		         	<form action="/insertOrder.do">
-		         	<div class="btnWrap">
 		         			<button type="submit" class="buyBtn">구매</button>
 		         			<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 		         			<input type="hidden" name="pPrice" class="allPrice">
@@ -165,10 +163,8 @@
 		         			<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
 		         			<input type="hidden" name="pImg" value="${ma.PImg }">
 		         			<input type="hidden" name="pName" value="${ma.PName}">
-		         		</div>
-		         	
 		         	</form>
-		         	
+		         	</div>
          			</c:otherwise>
          		</c:choose>
          	</div>

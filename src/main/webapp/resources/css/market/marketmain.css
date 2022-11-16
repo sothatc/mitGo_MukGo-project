@@ -77,15 +77,19 @@
 }
 
 [name=type]{
-  border-radius: 20px;
-}
-[name=type]>*{
-  border-radius: 20px;
+  border-radius: 5px;
 }
 .searchMarketContatainer>form{
   display: flex;
   justify-content: center;
   padding-bottom: 50px;
+}
+.searchMarketContatainer>form>select{
+  border: solid 2px black;
+}
+option{
+  border: solid 2px black;
+  background-color: #212529;
 }
 .storeList-searchinput>input {
 	width: 350px;
@@ -96,11 +100,18 @@
 	border-radius: 20px;
 	padding-left: 20px;
 }
+.storeList-searchinput>input::placeholder{
+  text-align: center;
+}
 .storeList-searchinput>button {
-	width: 75px;
+	width: 35px;
+  height: 35px;
 	border: solid 2px black;
 	border-radius: 15px;
-	font-weight: 800;
+  background-color:#ffc107;
+}
+.searchMarketContatainer>form>.storeList-searchinput>button>span{
+  line-height: 30px;
 }
 .page{
 	display: flex;
