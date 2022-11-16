@@ -236,7 +236,7 @@ height: 100%;
 			         
 			         <c:forEach items="${mList }" var="ma">
 			            <div class="w3-card-4" id="marketWrap">
-			               <a href="/marketDetail.do?pNo=${ma.PNo }"><img src="/resources/upload/market/${ma.PImg }" style="width: 100%"></a>
+			               <a href="/marketDetail.do?pNo=${ma.PNo }"><img src="/resources/upload/market/${ma.PImg }" style="width: 100%; height: 250px;"></a>
 			               <div class="w3-container w3-center">
 			                  <p>${ma.PName }</p>
 			               </div>

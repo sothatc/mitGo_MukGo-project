@@ -40,7 +40,7 @@
 		<!-- 검색기능 -->
 		<form action="/searchStoreList.do" method="get">
 			<div class="storeList-searchinput" id="font">
-				<input type="text" name="search"> <input type="hidden"
+				<input type="text" name="search" placeholder="가게명을 입력해 주세요"> <input type="hidden"
 					name="reqPage" value="1"> <input type="hidden"
 					name="category" value="${category }">
 				<button>

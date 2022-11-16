@@ -42,7 +42,7 @@
 				<option value="productName">제품명</option>
 			</select>
 			<div class="storeList-searchinput" id="font">
-				<input type="text" name="search" value="${search }">
+				<input type="text" name="search" value="${search }" placeholder="검색어를 입력해 주세요">
 				<input type="hidden" name="reqPage" value="1">
 				<input type="hidden" name="pCategory" value="${pCategory }">
 				<button type="submit">
