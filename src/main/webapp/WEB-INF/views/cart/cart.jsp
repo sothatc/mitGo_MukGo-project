@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +46,6 @@
     }
 </style>
  
-<input type="checkbox"/>
 </head>
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -65,15 +65,15 @@
                     <h2 id="font">주문/결제</h2>
                     <div class="cart-option">
                     <div>
-                        <button type="button" id="cart-option">장바구니</button>
+                        <button type="button" id="cart-option" style=" background-color : #fdbe02;  color: black; font-weight: 600;">장바구니</button>
                     </div>
                     <div class="line"></div>
                     <div>
-                        <button type="button"  id="cart-option">결제</button>
+                        <button type="button"  id="cart-option" style="color: white;">결제</button>
                     </div>
                     <div class="line"></div>
                     <div>
-                        <button type="button"  id="cart-option">주문완료</button>
+                        <button type="button"  id="cart-option" style="color: white;">주문완료</button>
                     </div>
                 </div>
                 </div>
@@ -113,12 +113,13 @@
 					            	 </td>
 					            	<td class="pImg" style="text-align:center"><img src="/resources/upload/market/${Cart.PImg }"></td>
 						          	<td style="text-align:center">${Cart.PName }</td>
-						           	<td class="pPrice" style="text-align:center">${Cart.PPrice }</td>
+						           	<td class="pPrice" style="text-align:center"><fmt:formatNumber value="${Cart.PPrice }" pattern="#,###" /></td>
 						           	<td style="text-align:center">${Cart.cartQuan }
 		                          		  
 		                        	 </td>
 					            	<td class="shipping">무료</td>
-					            	<td style="text-align:center;" class="cartTotalPrice">${Cart.PPrice*Cart.cartQuan }</td>
+					            	<td style="text-align:center; display: none;" class="cartTotalPrice">${Cart.PPrice*Cart.cartQuan }</td>
+					            	<td style="text-align:center;"><fmt:formatNumber value="${Cart.PPrice*Cart.cartQuan }" pattern="#,###" /></td>
 					            	
 		                    </tr>
 		             
@@ -129,11 +130,14 @@
                  		
                  		   <tr>
 		                      	<td colspan="6"></td>
-		                      	<td id="font">합계 :</td>
+		                      	
 		                      	<td>
 		                      		<input type="hidden" style="border:none;" class="hiddenPayPrice payPrice" name="productsPrice" readonly>
-		                      		<p class="lastPrice"></p>
+		                      		<p id="font" class="lastPrice" style="float:left;"></p>
+		                      		<p id="font" style="float:left;">원</p>
 		                    </td>
+		                    
+		                    
 	                      	</tr>
                      	</tbody>
                  </table>
@@ -144,9 +148,10 @@
                 
              <div class="cart-btn">
                      <button type="button" id="font">계속 쇼핑하기</button>
-	                 <button type="button" id="font" class="payBtn">주문하러 가기</button>
-                    
+	                 
+                    <button type="button" class="payBtn" onclick="goToOrder(${sessionScope.m.memberId });">주문하러 가기</button>
                  </div>
+                 
             </div>
         </div>
     </div>
@@ -201,8 +206,38 @@
     sum();
 
 		
+	function goToOrder(memberId){
+		location.href = "/ordercart.do?memberId="+memberId;
+	}
 	
+
+	
+	
+ 	$(".deleteCheck").on("click", function(){
+		// 체크한것 삭제
+			
+		    const check = $(".deleteBtn:checked");
+		    if(check.length == 0) {
+		        alert("선택된 상품이 없습니다.")
+				return;
+		    }
+		    
+		    const delCartArr = new Array();
+		    const memberId = check.prev().val();
+		    for(let i=0; i<check.length; i++) {
+			    // 체크된 카트 번호
+			    const cartNo = check.eq(i).prev().prev().val();
+				delCartArr.push(cartNo);		
+			}
+			location.href="/deleteCart.do?memberId="+memberId+"&delCartArr="+delCartArr.join("/");
+		});
+			
+			
 		
+	 
+	
+	
+	
 		
 	
     

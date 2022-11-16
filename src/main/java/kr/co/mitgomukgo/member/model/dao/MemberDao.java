@@ -78,7 +78,7 @@ public class MemberDao {
 
 
 	public ArrayList<Reserve> selectAllReserve(HashMap<String, Object> map) {
-		List list = sqlSession.selectList("reserve.selectAllReserve", map);
+		List list = sqlSession.selectList("reserve.selectReserveManege", map);
 		return (ArrayList<Reserve>) list;
 	}
 
@@ -218,6 +218,14 @@ public class MemberDao {
 
 	
 
+
+	public String selectJoinedMember(Member member) {
+		return sqlSession.selectOne("member.selectJoinedMember", member);
+	}
+
+	public String selectJoinedOwner(Owner owner) {
+		return sqlSession.selectOne("owner.selectJoinedOwner", owner);
+	}
 
 	
 

@@ -84,6 +84,9 @@
   justify-content: center;
   padding-bottom: 50px;
 }
+.searchMarketContatainer>form>select{
+  border: solid 2px black;
+}
 .storeList-searchinput>input {
 	width: 350px;
 	height: 35px;
@@ -92,6 +95,9 @@
 	border: solid 2px black;
 	border-radius: 20px;
 	padding-left: 20px;
+}
+.storeList-searchinput>input::placeholder{
+  text-align: center;
 }
 .storeList-searchinput>button {
 	width: 35px;

@@ -380,3 +380,4 @@
 	<script src="/resources/js/join.js"/>
 </body>
 </html>
+

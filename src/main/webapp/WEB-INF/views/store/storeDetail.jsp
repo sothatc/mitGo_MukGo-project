@@ -247,7 +247,7 @@ height: 100%;
         </c:choose>   
       
       
-      
+
         <!--------- 후기 시작 ----->
         <c:choose>
               <c:when test="${!empty rList }">

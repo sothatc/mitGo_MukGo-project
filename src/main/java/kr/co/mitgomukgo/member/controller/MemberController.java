@@ -173,8 +173,14 @@ public class MemberController {
 			session.setAttribute("m", m);
 			return "redirect:/";
 		}else {
-			request.setAttribute("msg", "가입된 회원이 아닙니다.");
-			request.setAttribute("url", "/loginFrm.do");
+			String memberId = service.selectJoinedMember(member);
+			if(memberId == null) {
+				request.setAttribute("msg", "가입된 회원이 아닙니다.");
+				request.setAttribute("url", "/loginFrm.do");
+			}else {
+				request.setAttribute("msg", "비밀번호가 일치하지 않습니다. 다시 입력해주세요.");
+				request.setAttribute("url", "/loginFrm.do");
+			}
 			return "common/alert";
 		}
 	}
@@ -192,8 +198,14 @@ public class MemberController {
 				return "redirect:/";
 			}
 		}else {
-			request.setAttribute("msg", "가입된 회원이 아닙니다.");
-			request.setAttribute("url", "/loginFrm.do");
+			String ownerId = service.selectJoinedOwner(owner);
+			if(ownerId == null) {
+				request.setAttribute("msg", "가입된 회원이 아닙니다.");
+				request.setAttribute("url", "/loginFrm.do");
+			}else {
+				request.setAttribute("msg", "비밀번호가 일치하지 않습니다. 다시 입력해주세요.");
+				request.setAttribute("url", "/loginFrm.do");
+			}
 			return "common/alert";
 		}
 	}
@@ -264,7 +276,7 @@ public class MemberController {
 			return "common/alert";
 		}else {
 			request.setAttribute("msg", "error");
-			request.setAttribute("url", "member/ownerMyPage");
+			request.setAttribute("url", "/updateOwnerFrm.do");
 			return "common/alert";
 		}
 	}
@@ -326,8 +338,8 @@ public class MemberController {
 		return "member/ownerReserveManage";
 	}
 	@RequestMapping(value="/searchReserve.do")
-	public String searchReserve(String keyword, int storeNo, Model model, String reqPage1) {
-		int reqPage = Integer.parseInt(reqPage1);
+	public String searchReserve(String keyword, int storeNo, Model model, int reqPage) {
+		ArrayList<Notice> ncList = service.myPageNcList();
 		HashMap<String, Object> map = service.searchReserve(keyword, storeNo, reqPage);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
@@ -335,6 +347,7 @@ public class MemberController {
 		model.addAttribute("total", map.get("total"));
 		model.addAttribute("pageNo", map.get("pageNo"));
 		model.addAttribute("storeNo", storeNo);
+		model.addAttribute("ncList", ncList);
 		return "member/ownerReserveManage";
 	}
 	

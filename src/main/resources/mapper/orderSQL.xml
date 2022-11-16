@@ -20,6 +20,23 @@
 		where member_id = #{memberId}
 		order by 4 desc
 	</select>
+	
+	<insert id="nextOrder" parameterType="or">
+	insert into order_tbl values(
+	order_seq.nextval,
+	#{memberId},
+	null,
+	sysdate,
+	#{orderQuan},
+	#{orderPrice},
+	'배송준비중',
+	#{shippingName},
+	#{shippingAddr1},
+	#{shippingPhone},
+	'ㅇㅇ'
+	
+	)
+</insert>
 
 </mapper>
 

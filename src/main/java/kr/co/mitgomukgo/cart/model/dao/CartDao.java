@@ -31,4 +31,40 @@ public class CartDao {
 		List list = sqlSession.selectList("cart.cartList", c);
 		return (ArrayList<Cart>) list;
 	}
+
+
+
+	public ArrayList<Cart> ordercart(Cart c, String memberId) {
+		List list = sqlSession.selectList("order.ordercart", c);
+		return (ArrayList<Cart>) list;
+	}
+
+
+
+	public int deleteCart(Cart c) {
+		return sqlSession.delete("cart.deleteCart", c);
+	
+	}
+
+
+
+	/*
+	 * public int deleteCart(int pNo) { int result =
+	 * sqlSession.insert("cart.deleteCart", pNo); return result; }
+	 */
+	
+	public Cart searchCart(Cart c) {
+		return sqlSession.selectOne("searchCart", c);
+	}
+
+
+
+	public int updateCart(Cart c) {
+		return sqlSession.update("updateCart", c);
+	}
+
+
+
+
+
 }

@@ -5,6 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>GOGO마켓</title>
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
+<script src ="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js" type="text/javascript"></script>
+
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
 	#cart-option{
     float: left;
@@ -15,6 +19,7 @@
     border-radius: 5px;
     background-color : #f5d575;
     text-align: center;
+    color: white;
     
 }
 
@@ -35,6 +40,7 @@
  }
 </style>
 </head>
+
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<link rel="stylesheet" href="/resources/css/index/owl.theme.default.min.css">
@@ -57,7 +63,7 @@
                     </div>
                     <div class="line"></div>
                     <div>
-                        <button type="button" id="cart-option" style=" background-color : #fdbe02;">결제</button>
+                        <button type="button" id="cart-option" style=" background-color : #fdbe02;  color: black; font-weight: 600;">결제</button>
                     </div>
                     <div class="line"></div>
                     <div>
@@ -99,7 +105,7 @@
 						           	<td style="text-align:center">${Order.cartQuan }</td>
 					            	<td class="shipping">무료</td>
 					            	<td style="text-align:center;" class="cartTotalPrice">${Order.PPrice*Order.cartQuan }</td>
-								 		
+								 		 
 					            	
 		                    </tr>
 		             
@@ -113,32 +119,36 @@
 		                      		<input type="hidden" style="border:none;" class="hiddenPayPrice payPrice" name="productsPrice" readonly>
 		                      		<p class="lastPrice"></p>
 		                        </td>
-		                        <td id="font">총 합계 : ${Order.PPrice*Order.cartQuan }원</td>
+		                        <td id="font" >총 합계 : ${Order.PPrice*Order.cartQuan }원</td>
+		                        <input type="hidden" class="totalp" value=" ${Order.PPrice*Order.cartQuan }">
 	                      	</tr>
                      	</tbody>
                         
+		                        
                             
                </table>
             </div>
-
-            <form id="order-form" action="/insertOrder.do" method="post" autocomplete="off">
-                <div class="page-title order-title">주문정보</div>
-                <div class="order-info">
+        </div>
+            
+            
+            <form id="order-form" action="/orderNext.do" method="post" autocomplete="off">
+                
+                <div class="page-title order-title" id="font">주문정보</div>
+                <div class="order-info" id="font">
                     <div class="order-box">
                         <label for="name" class="order-label">주문자명</label>
-                        <input type="text" name="name" id="orderName" class="order-input medium" >
+                        <input type="text" id="orderName" class="order-input medium" value="${sessionScope.m.memberName }">
                     </div>
                     <div class="order-box">
                         <label for="phone" class="order-label">전화번호</label>
-                        <input type="text" name="phone" id="orderPhone" class="order-input medium" >
+                        <input type="text"  id="orderPhone" class="order-input medium" value="${sessionScope.m.memberPhone }">
                     </div>
                    
                 </div>
-				<input type="hidden" name="memberNo" value="">
 				<input type="hidden" id="cart-quantity-sum" name="orderQuan">
 				<input type="hidden" id="cart-price-sum" name="orderPrice">
 				
-                <div class="page-title order-title">배송정보</div>
+               <div class="page-title order-title">배송정보</div>
                 <div class="order-info shipping">
                     <div id="same-check">
                         <input type="checkbox" id="order-same" class="order-agree">
@@ -148,55 +158,50 @@
                     <div class="order-box">
                         <label for="shippingName" class="order-label">수령인명</label>
                         <input type="text" name="shippingName" id="shippingName" class="order-input medium view-order-info" required>
-                        <input type="text" class="order-input medium hidden-order-info" style="display:none;">
+                        <input type="text" class="order-input medium hidden-order-info" value="${sessionScope.m.memberName }" style="display:none;">
                         <span class="comment"></span>
                     </div>
                     <div class="order-box">
                         <label for="shippingPhone" class="order-label">전화번호</label>
-                        <input type="text" name="shippingPhone" id="shippingPhone" class="order-input medium view-order-info" required>
-                        <input type="text" class="order-input medium hidden-order-info" style="display:none;">
+                        <input type="text" name="shippingPhone" id="shippingPhone" class="order-input medium view-order-info" placeholder="010-0000-0000"required>
+                        <input type="text" class="order-input medium hidden-order-info" value="${sessionScope.m.memberPhone }" style="display:none;">
                         <span class="comment"></span>
                     </div>
                     <div class="order-box">
                         <label for="shippingAddr1" class="order-label">주소</label>
-                        <!-- <input type="text" name="postcode" id="postcode" class="order-input short" required readonly> -->
-                        <input type="text" name="shippingAddr1" id="shippingAddr1" class="order-input long view-order-info" required readonly>
-                        <input type="text" class="order-input long hidden-order-info" style="display:none;" readonly>
+                        <input type="text" name="shippingAddr1" id="shippingAddr1" class="order-input long" readonly="readonly">
+                        <input type="text"  style="display:none;" readonly>
                         <button type="button" id="addr-btn" onclick="searchAddr();">주소찾기</button>
                         <span class="comment"></span>
                     </div>
                     <div class="order-box">
                         <label for="shippingAddr2" class="order-label">상세 주소<span class="comment"></span></label>
-                        <input type="text" name="shippingAddr2" id="shippingAddr2" class="order-input llong view-order-info" required>
-                        <input type="text"  class="order-input llong hidden-order-info" value="" style="display:none;">
+                        <input type="text" name="shippingAddr2" id="shippingAddr2" class="order-input llong">
+                        <input type="text"  style="display:none;">
                         <span class="comment"></span>
                     </div>
                 </div>
+               
+                 
 
-                <div class="page-title order-title">결제정보</div>
-                <div class="order-info">
-                    <div class="order-box">
-                        <input type="radio" name="payType" id="order-card" value="card" checked>
-                        <label for="order-card">카드 결제</label>
-                        <input type="radio" name="payType" id="order-cash" value="cash">
-                        <label for="order-cash">무통장입금</label>
-                    </div>
-                </div>
-
-                <div class="order-info">
-                    <div id="agree-box">
+                <div class="order-info" style="padding-top: 80px;">
+                    <div id="agree-box" >
                         <input type="checkbox" id="info-agree" class="order-agree">
                         <label for="info-agree"><i class="fa-solid fa-check"></i></label>
-                        <label for="info-agree">주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.</label>
+                        <label for="info-agree" id="font">주문 내용을 확인하였으며, 정보 제공 등에 동의합니다.</label>
                     </div>
-                    <div class="order-btn">
+                    <div class="order-btn" id="font">
                         <button type="button" id="payBtn">결제하기</button>
                     </div>
-                </div>
+                </div>               
+              
+              
+              
+                
             </form>
         </div>
     
-    </div>
+    
     
 	<footer>
         <div class="footer-top text-center">
@@ -227,6 +232,73 @@
     </footer>
     
 
-	
+
+<script>
+function searchAddr() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+           
+           console.log(data);
+            
+            
+          
+           $("#shippingAddr1").val(data.zonecode + " " + data.roadAddress);
+           $("#shippingAddr2").focus();
+            
+            
+        }
+    }).open();
+}
+
+$("#order-same").on("change", function(){
+    if($(this).prop("checked")) {
+        $(".view-order-info").hide();
+        $(".view-order-info").attr("name", "");
+        $(".hidden-order-info").show();
+        $(".hidden-order-info").eq(0).attr("name", "shippingName");
+        $(".hidden-order-info").eq(1).attr("name", "shippingPhone");
+        
+    } else {
+        $(".hidden-order-info").hide();
+        $(".hidden-order-info").attr("name", "");
+        $(".view-order-info").show();
+        $(".view-order-info").eq(0).attr("name", "shippingName");
+        $(".view-order-info").eq(1).attr("name", "shippingPhone");
+        $(".view-order-info").eq(2).attr("name", "shippingAddr1");
+        $(".view-order-info").eq(3).attr("name", "shippingAddr2");
+    }
+});
+
+$("#payBtn").on("click",function(){
+const price = $(".totalp").val();
+console.log(price);
+const name = $("#orderName").val();
+const d = new Date();
+const date = d.getFullYear() +""+ (d.getMonth()+1) +""+ d.getDate() +""+ d.getHours() +""+ d.getMinutes() +""+ d.getSeconds(); // 문자열덧셈을 위해 빈 문자열 넣음
+IMP.init("imp47242167");
+IMP.request_pay({
+    pg: "html5_inicis",
+    merchat_uid : "mgmg"+date, 			// 거래ID
+    name : "믿고먹고",						// 결제 이름
+    amount : price,							// 결제 금액
+    
+    buyer_name : name					// 구매자 이름
+    // buyer_tel : "010-1234-1234", 			// 구매자 전화번호
+    // buyer_addr : "서울시 영등포구 당산동",			// 구매자 주소
+    // buyer_postcode : "12345"				// 구매자 우편번호
+}, function(rsp){
+    if(rsp.success) {
+    	const input = $("<input type='hidden' name='impUid' value='"+rsp.imp_uid+"'>");
+		$("#order-form").append(input);	
+        $("#order-form").submit();
+    } else { 
+        alert("결제 실패");						
+    }
+
+})
+
+});
+</script>
+
 </body>
 </html>
