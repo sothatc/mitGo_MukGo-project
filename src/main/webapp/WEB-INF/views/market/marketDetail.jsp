@@ -145,7 +145,11 @@
          			<c:otherwise>
          			<div class="btnWrap">
          			<form action="/insertCart.do">
+         				<c:choose>
+         					<c:when test="${empty sessionScope.o }">
 		         			<button type="submit" class="cartBtn">장바구니</button>
+         					</c:when>
+         				</c:choose>
 		         			<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 		         			<input type="hidden" name="pPrice" class="allPrice">
 		         			<input type="hidden" name="pNo" class="pNumber">
@@ -155,7 +159,11 @@
 		         	
 		         	
 		         	<form action="/insertOrder.do">
+		         		<c:choose>
+		         			<c:when test="${empty sessionScope.o }">
 		         			<button type="submit" class="buyBtn">구매</button>
+		         			</c:when>
+		         		</c:choose>
 		         			<input type="hidden" name="memberNo" value="${sessionScope.m.memberNo }">
 		         			<input type="hidden" name="pPrice" class="allPrice">
 		         			<input type="hidden" name="pNo" class="pNumber">

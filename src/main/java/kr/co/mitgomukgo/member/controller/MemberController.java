@@ -174,8 +174,14 @@ public class MemberController {
 			session.setAttribute("m", m);
 			return "redirect:/";
 		}else {
-			request.setAttribute("msg", "가입된 회원이 아닙니다.");
-			request.setAttribute("url", "/loginFrm.do");
+			String memberId = service.selectJoinedMember(member);
+			if(memberId == null) {
+				request.setAttribute("msg", "가입된 회원이 아닙니다.");
+				request.setAttribute("url", "/loginFrm.do");
+			}else {
+				request.setAttribute("msg", "비밀번호가 일치하지 않습니다. 다시 입력해주세요.");
+				request.setAttribute("url", "/loginFrm.do");
+			}
 			return "common/alert";
 		}
 	}
@@ -193,8 +199,14 @@ public class MemberController {
 				return "redirect:/";
 			}
 		}else {
-			request.setAttribute("msg", "가입된 회원이 아닙니다.");
-			request.setAttribute("url", "/loginFrm.do");
+			String ownerId = service.selectJoinedOwner(owner);
+			if(ownerId == null) {
+				request.setAttribute("msg", "가입된 회원이 아닙니다.");
+				request.setAttribute("url", "/loginFrm.do");
+			}else {
+				request.setAttribute("msg", "비밀번호가 일치하지 않습니다. 다시 입력해주세요.");
+				request.setAttribute("url", "/loginFrm.do");
+			}
 			return "common/alert";
 		}
 	}
