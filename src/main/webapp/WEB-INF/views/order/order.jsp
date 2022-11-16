@@ -129,20 +129,22 @@
                </table>
             </div>
         </div>
-            <form id="order-form" action="/insertOrder.do?memberId=${sessionScope.m.memberId}" method="post" autocomplete="off">
+            
+            
+            <form id="order-form" action="/orderNext.do" method="post" autocomplete="off">
+                
                 <div class="page-title order-title" id="font">주문정보</div>
                 <div class="order-info" id="font">
                     <div class="order-box">
                         <label for="name" class="order-label">주문자명</label>
-                        <input type="text" name="name" id="orderName" class="order-input medium" value="${sessionScope.m.memberName }">
+                        <input type="text" id="orderName" class="order-input medium" value="${sessionScope.m.memberName }">
                     </div>
                     <div class="order-box">
                         <label for="phone" class="order-label">전화번호</label>
-                        <input type="text" name="phone" id="orderPhone" class="order-input medium" value="${sessionScope.m.memberPhone }">
+                        <input type="text"  id="orderPhone" class="order-input medium" value="${sessionScope.m.memberPhone }">
                     </div>
                    
                 </div>
-				<input type="hidden" name="memberNo" value="">
 				<input type="hidden" id="cart-quantity-sum" name="orderQuan">
 				<input type="hidden" id="cart-price-sum" name="orderPrice">
 				
@@ -180,17 +182,9 @@
                     </div>
                 </div>
                
-                 <div class="page-title order-title" id="font">결제정보</div>
-                <div class="order-info">
-                    <div class="order-box" id="font">
-                        <input type="radio" name="payType" id="order-card" value="card" checked>
-                        <label for="order-card">카드 결제</label>
-                        <input type="radio" name="payType" id="order-cash" value="cash">
-                        <label for="order-cash">무통장입금</label>
-                    </div>
-                </div>
+                 
 
-                <div class="order-info">
+                <div class="order-info" style="padding-top: 80px;">
                     <div id="agree-box" >
                         <input type="checkbox" id="info-agree" class="order-agree">
                         <label for="info-agree"><i class="fa-solid fa-check"></i></label>

@@ -21,7 +21,7 @@
 		order by 4 desc
 	</select>
 	
-	<insert id="insertOrder" parameterType="or">
+	<insert id="nextOrder" parameterType="or">
 	insert into order_tbl values(
 	order_seq.nextval,
 	#{memberId},

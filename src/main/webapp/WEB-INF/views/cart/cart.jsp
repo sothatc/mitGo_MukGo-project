@@ -68,11 +68,11 @@
                     </div>
                     <div class="line"></div>
                     <div>
-                        <button type="button"  id="cart-option">결제</button>
+                        <button type="button"  id="cart-option" style="color: white;">결제</button>
                     </div>
                     <div class="line"></div>
                     <div>
-                        <button type="button"  id="cart-option">주문완료</button>
+                        <button type="button"  id="cart-option" style="color: white;">주문완료</button>
                     </div>
                 </div>
                 </div>
@@ -86,7 +86,7 @@
         
         <div class="cart">
             <div class="cart-table">
-                <form id="order-form" action="/goOrderHistory.do?memberNo=${sessionScope.m.memberId}" method="post" autocomplete="off">
+                
                  <table>
                  	
                      <tr id="font">
@@ -128,11 +128,14 @@
                  		
                  		   <tr>
 		                      	<td colspan="6"></td>
-		                      	<td id="font">합계 :</td>
+		                      	
 		                      	<td>
 		                      		<input type="hidden" style="border:none;" class="hiddenPayPrice payPrice" name="productsPrice" readonly>
-		                      		<p class="lastPrice"></p>
+		                      		<p id="font" class="lastPrice" style="float:left;"></p>
+		                      		<p id="font" style="float:left;">원</p>
 		                    </td>
+		                    
+		                    
 	                      	</tr>
                      	</tbody>
                  </table>
@@ -146,7 +149,7 @@
 	                 
                     <button type="button" class="payBtn" onclick="goToOrder(${sessionScope.m.memberId });">주문하러 가기</button>
                  </div>
-                 </form>
+                 
             </div>
         </div>
     </div>

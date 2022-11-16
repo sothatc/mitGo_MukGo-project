@@ -23,4 +23,10 @@ public class OrderController {
     model.addAttribute("Order", c);
      return "order/order";
   }
+ 
+ @RequestMapping(value = "/orderNext.do")
+ public String orderNext(Order r) {
+	 System.out.println(r);
+	 return"redirect:/";
+ }
 }

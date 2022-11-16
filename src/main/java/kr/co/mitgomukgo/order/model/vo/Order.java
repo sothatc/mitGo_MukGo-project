@@ -14,8 +14,9 @@ public class Order {
 	private String pImg;
 	private String pName;
 	private int pPrice;
+	private int orderPrice;
 	private int orderNo;
-	private int memberId;
+	private String memberId;
 	private String orderDate;
 	private int orderQuan;
 	private String orderStatus;
