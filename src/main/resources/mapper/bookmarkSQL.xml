@@ -8,6 +8,7 @@
   	
   	<select id="selectOneBookmark" parameterType="map" resultType="bm">
   		select
+  			bm_no as bmNo,
   			pNo,
   			member_id as bookMarkId,
   			p_name as pName,
@@ -21,7 +22,8 @@
   	</delete>
   	
   	<select id="myBookmarkList" parameterType="map" resultType="bm">
-  		select rownum as rnum, b.* from
+  		select * from
+  		(select rownum as rnum, b.* from
 		(select
 		    bm_No as bmNo,
 		    pNo,
@@ -29,6 +31,41 @@
 		    product_bookmark.p_name as pName,
 		    product_bookmark.p_price as pPrice,
 		    p_img as pImg
-		    from product_bookmark join market_product on(p_no = pNo))b where bmNo between #{start} and #{end} and bookMarkId = #{bookMarkId} order by 1 desc
+		    from product_bookmark join market_product on(p_no = pNo) where member_id = #{bookMarkId})b) where rnum between #{start} and #{end} order by 1 desc
   	</select>
+  	
+  	<select id="totalCount" parameterType="string" resultType="int">
+  		select count(*) from product_bookmark where member_id = #{bookMarkId}
+  	</select>
+  	
+  	<delete id="deleteBookMarkNo" parameterType="int">
+  		delete from product_bookmark where bm_no = #{bmNo}
+  	</delete>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

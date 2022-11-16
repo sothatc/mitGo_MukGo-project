@@ -34,4 +34,14 @@ public class BookmarkDao {
 			return (ArrayList<BookMark>)list;
 		}
 	}
+
+	public int toalBookmark(String bookMarkId) {
+		int result = sqlSession.selectOne("bookmark.totalCount", bookMarkId);
+		return result;
+	}
+
+	public int deleteBookMarkNo(int bmNo) {
+		int result = sqlSession.delete("bookmark.deleteBookMarkNo", bmNo);
+		return result;
+	}
 }

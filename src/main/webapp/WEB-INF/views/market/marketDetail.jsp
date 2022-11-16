@@ -7,8 +7,22 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>GOGO마켓 상세</title>
 <style type="text/css">
+
+	.titleDiv{
+		position: relative;
+	}
+	
 	.titleDiv>#bookMark{
-		margin-left: 330px;
+		position: absolute;
+		right : 40px;
+		font-size: 33px;
+		height: 50px;
+		line-height: 50px;
+	}
+	
+	.titleDiv>#bookMark1{
+		position: absolute;
+		right : 40px;
 		font-size: 33px;
 		height: 50px;
 		line-height: 50px;
@@ -22,6 +36,10 @@
 	
 	.titleDiv>span:first-child, .titleDiv>span:nth-child(2) {
 		padding-bottom: 10px;
+	}
+	
+	.toggleMan{
+		color : rgb(255, 215, 0);
 	}
 	
 </style>
@@ -50,13 +68,21 @@
 		            	<c:when test="${empty bm }">
 		            		<c:choose> 
 				            	<c:when test="${not empty sessionScope.m }">
-				            		<span class="material-icons" id="bookMark" onclick="addBookmark(${ma.PNo}, '${sessionScope.m.memberId }','${ma.PName}', ${ma.PPrice} )">
+				            		<span class="material-icons" id="bookMark" onclick="addBookmark(${ma.PNo}, '${sessionScope.m.memberId }','${ma.PName}', ${ma.PPrice})">
+										bookmark
+									</span>
+									
+									<span class="material-icons" id="bookMark1" style="color:gold; display: none;" onclick="deleteBookmark(${ma.PNo}, '${sessionScope.m.memberId }')">
 										bookmark
 									</span>
 				            	</c:when>
 				            	
 				            	<c:when test="${not empty sessionScope.o }">
 				            		<span class="material-icons" id="bookMark" onclick="addBookmark(${ma.PNo}, '${sessionScope.o.ownerId }','${ma.PName}', ${ma.PPrice})">
+										bookmark
+									</span>
+									
+									<span class="material-icons" id="bookMark1" style="color:gold; display: none;" onclick="deleteBookmark(${ma.PNo}, '${sessionScope.o.ownerId }')">
 										bookmark
 									</span>
 				            	</c:when>
@@ -70,13 +96,27 @@
 		            	<c:when test="${not empty bm }">
 		            		<c:choose> 
 				            	<c:when test="${not empty sessionScope.m }">
-				            		<span class="material-icons" id="bookMark" style="color:gold;" onclick="deleteBookmark(${ma.PNo}, '${sessionScope.m.memberId }' )">
+				            		<input type="hidden" name="pNo" value="${ma.PNo }">
+				            		<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
+				            		<span class="material-icons" id="bookMark1" style="color:gold;" onclick="deleteBookmark(${ma.PNo}, '${sessionScope.m.memberId }')">
+										bookmark
+									</span>
+									
+									<span class="material-icons" id="bookMark" onclick="addBookmark(${ma.PNo}, '${sessionScope.m.memberId }','${ma.PName}', ${ma.PPrice})">
+										bookmark
+									</span>
+									
+									<span class="material-icons" id="bookMark" style="display: none;" onclick="addBookmark(${ma.PNo}, '${sessionScope.o.ownerId }','${ma.PName}', ${ma.PPrice})">
 										bookmark
 									</span>
 				            	</c:when>
 				            	
 				            	<c:when test="${not empty sessionScope.o }">
-				            		<span class="material-icons" id="bookMark" style="color:gold;" onclick="deleteBookmark(${ma.PNo}, '${sessionScope.o.ownerId }')">
+				            		<span class="material-icons" id="bookMark1" style="color:gold;" onclick="deleteBookmark(${ma.PNo}, '${sessionScope.o.ownerId }')">
+										bookmark
+									</span>
+									
+									<span class="material-icons" id="bookMark" style="display: none;" onclick="addBookmark(${ma.PNo}, '${sessionScope.o.ownerId }','${ma.PName}', ${ma.PPrice})">
 										bookmark
 									</span>
 				            	</c:when>
@@ -94,7 +134,6 @@
 		            
 		            
 		            <a class="material-symbols-rounded share pointer" id="share">share</a>
-		            <a class="material-symbols-rounded share pointer" id="share" href="javascript:shareMessage()">share</a>
 
          		</div>
          		<div class="tableDiv" >
@@ -180,32 +219,37 @@
 
 
 	<script>
-	
-		function deleteBookmark(pNo, id){
-			$("#bookMark").css("color", "#516171");
-			
-			$.ajax({
-				url : "/deleteBookmark.do",
-				type : "post",
-				data : {pNo : pNo, bookMarkId : id},
-				success : function(data){
-					console.log(data);
-				}
-			})
-		}	
-	
-	function addBookmark(pNo, id, pName, pPrice){
-		$("#bookMark").css("color", "gold");
 		
-		$.ajax({
-			url : "/insertBookMark.do",
-			type : "post",
-			data : {pNo : pNo, bookMarkId : id, pName : pName, pPrice : pPrice},
-			success : function(data){
-				console.log(data)
+			function addBookmark(pNo, id, pName, pPrice){
+				$("#bookMark1").show();
+				$("#bookMark").hide();
+				
+				$.ajax({
+					url : "/insertBookMark.do",
+					type : "post",
+					data : {pNo : pNo, bookMarkId : id, pName : pName, pPrice : pPrice},
+					success : function(data){
+						console.log(data);
+					}
+				});
+				
 			}
-		})
-	}
+			
+			function deleteBookmark(pNo, id){
+				$("#bookMark").show();
+				$("#bookMark1").hide();
+				$.ajax({
+					url : "/deleteBookmark.do",
+					type : "post",
+					data : {pNo : pNo, bookMarkId : id},
+					success : function(data){
+						console.log(data);
+						
+					}
+				})
+			}	
+		
+		
 	
     //---------- 인원수 늘리기
     var countNumVal = $(".peopleTd").text();
