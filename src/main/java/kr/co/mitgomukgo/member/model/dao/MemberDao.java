@@ -215,6 +215,14 @@ public class MemberDao {
 		return sqlSession.selectOne("order.countOrderList",memberId);
 	}
 
+	public String selectJoinedMember(Member member) {
+		return sqlSession.selectOne("member.selectJoinedMember", member);
+	}
+
+	public String selectJoinedOwner(Owner owner) {
+		return sqlSession.selectOne("owner.selectJoinedOwner", owner);
+	}
+
 	
 
 

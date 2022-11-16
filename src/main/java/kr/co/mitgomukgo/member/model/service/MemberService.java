@@ -627,6 +627,14 @@ public class MemberService {
 		return dao.deleteOwner(ownerNo);
 	}
 
+	public String selectJoinedMember(Member member) {
+		return dao.selectJoinedMember(member);
+	}
+
+	public String selectJoinedOwner(Owner owner) {
+		return dao.selectJoinedOwner(owner);
+	}
+
 
 
 
