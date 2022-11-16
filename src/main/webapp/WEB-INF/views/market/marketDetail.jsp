@@ -96,13 +96,8 @@
 		            	<c:when test="${not empty bm }">
 		            		<c:choose> 
 				            	<c:when test="${not empty sessionScope.m }">
-				            		<input type="hidden" name="pNo" value="${ma.PNo }">
-				            		<input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
+				            		
 				            		<span class="material-icons" id="bookMark1" style="color:gold;" onclick="deleteBookmark(${ma.PNo}, '${sessionScope.m.memberId }')">
-										bookmark
-									</span>
-									
-									<span class="material-icons" id="bookMark" onclick="addBookmark(${ma.PNo}, '${sessionScope.m.memberId }','${ma.PName}', ${ma.PPrice})">
 										bookmark
 									</span>
 									
