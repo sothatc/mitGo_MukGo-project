@@ -428,6 +428,10 @@ public class StoreService {
 		return dao.selectRandomReviewList();
 	}
 
+	public ArrayList<Store> selectRandomStoreList() {
+		return dao.selectRandomStoreList();
+	}
+
 
 
 

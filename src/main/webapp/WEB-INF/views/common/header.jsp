@@ -18,7 +18,7 @@
 				</p>
 			</div>
 			<div class="col-auto social-icons">
-				<a href="#"><i class='bx bxl-facebook'></i></a> <a href="#"><i class='bx bx-bookmark-heart'></i></a> 			
+				<a href="#"><i class='bx bx-cart'></i></a> <a href="#"><i class='bx bx-bookmark-heart'></i></a> 			
 			<c:choose>
 				<c:when test="${empty sessionScope.m && empty sessionScope.o}">
 				</c:when>
