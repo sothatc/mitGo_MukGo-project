@@ -103,7 +103,7 @@ public class MemberService {
 		//이전 버튼
 	      if(pageNo !=1) {
 	          pageNavi += "<li>";
-	          pageNavi += "<a class='page-item' href='/memberManage.do?reqPage="+(pageNo-1)+"'>";
+	          pageNavi += "<a class='page-item' href='/reserveManage.do?reqPage="+(pageNo-1)+"'>";
 	          pageNavi += "<span class='material-icons'>chevron_left</span>";
 	          pageNavi +="</a></li>";
 	       }
@@ -111,12 +111,12 @@ public class MemberService {
 			for(int i=0; i<pageNaviSize; i++) {
 				if(pageNo == reqPage) {
 					pageNavi += "<li>";
-					pageNavi += "<a class='page-item active-page' href='/memberManage.do?reqPage="+pageNo+"'>";
+					pageNavi += "<a class='page-item active-page' href='/reserveManage.do?reqPage="+pageNo+"'>";
 					pageNavi += pageNo;
 					pageNavi += "</a></li>";
 				}else {
 					pageNavi += "<li>";
-					pageNavi += "<a class='page-item' href='/memberManage.do?reqPage="+pageNo+"'>";
+					pageNavi += "<a class='page-item' href='/reserveManage.do?reqPage="+pageNo+"'>";
 					pageNavi += pageNo;
 					pageNavi += "</a></li>";
 				}
@@ -129,7 +129,7 @@ public class MemberService {
 			//다음 버튼
 		      if(pageNo<=totalPage) {
 		          pageNavi += "<li>";
-		          pageNavi += "<a class='page-item' href='/memberManage.do?reqPage="+pageNo+"'>";
+		          pageNavi += "<a class='page-item' href='/reserveManage.do?reqPage="+pageNo+"'>";
 		          pageNavi += "<span class='material-icons'>chevron_right</span>";
 		          pageNavi +="</a></li>";
 		       }
@@ -146,12 +146,11 @@ public class MemberService {
 	}
 
 	public HashMap<String, Object> searchReserve(String keyword, int storeNo, int reqPage) {
+	
 		// 화면에 보여주는 게시물 수
 		int numPerPage = 10;
-		
 		// 끝페이지
 		int end = numPerPage * reqPage;
-		
 		// 시작페이지
 		int start = (end-numPerPage) + 1;
 		HashMap<String, Object> map = new HashMap<String, Object>();
@@ -167,7 +166,7 @@ public class MemberService {
 		}else {
 			totalPage = totalCnt / numPerPage + 1;
 		}
-		int pageNaviSize = 2;
+		int pageNaviSize = 5;
 		int pageNo = 1;
 		
 		if(reqPage > 2) {
@@ -176,25 +175,25 @@ public class MemberService {
 		
 		String pageNavi = "";
 		if(pageNo != 1) {
-			pageNavi += "<a href='/ownerReserveManage.do?reqPage=" +(pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+			pageNavi += "<a href='/searchReserve.do?reqPage="+(pageNo - 1)+"&storeNo="+storeNo+"&keyword="+keyword+"'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
 					"            chevron_left\r\n" + 
 					"            </span></a>";
 		}
 		
 		for(int i = 0; i < pageNaviSize; i++) {
 			if(reqPage == pageNo) {
-				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
+				pageNavi += "<span class='numberDeco'>"+pageNo+"</span>";
 			}else {
-				pageNavi += "<a href='/ownerReserveManage.do?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+				pageNavi += "<a href='/searchReserve.do?reqPage="+pageNo+"&storeNo="+storeNo+"&keyword="+keyword+"'><span>"+(pageNo)+"</span></a>";
 			}
 			pageNo++;
-			if(pageNo > totalPage) {
+			if(pageNo >= totalPage) {
 				break;
 			}
 		}
 		
 		if(end <= totalPage) {
-			pageNavi += "<a href='/ownerReserveManage.do?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+			pageNavi += "<a href='/searchReserve.do?reqPage="+(pageNo)+"&storeNo="+storeNo+"&keyword="+keyword+"'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
 					"            chevron_right\r\n" + 
 					"            </span></a>";
 		}

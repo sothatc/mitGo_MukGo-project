@@ -73,7 +73,7 @@ public class MemberDao {
 
 
 	public ArrayList<Reserve> selectAllReserve(HashMap<String, Object> map) {
-		List list = sqlSession.selectList("reserve.selectAllReserve", map);
+		List list = sqlSession.selectList("reserve.selectReserveManege", map);
 		return (ArrayList<Reserve>) list;
 	}
 

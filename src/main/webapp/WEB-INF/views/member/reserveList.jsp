@@ -55,10 +55,10 @@
 								<th scope="col">예약 시간</th>
 								<th scope="col">리뷰</th>
 								<th scope="col">예약 취소</th>
+								<input type="hidden" class="nullChk" value="${rs.reserveNo }">
 							</tr>
 							<c:forEach items="${rsList }" var="rs">
 								<tr>
-									<input type="hidden" class="nullChk" value="${rs.reserveNo }">
 									<td>${rs.reserveNo }</td>
 									<td>${rs.storeName }</td>
 									<td>${rs.reserveDate }</td>
