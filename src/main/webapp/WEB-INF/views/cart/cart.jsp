@@ -107,7 +107,8 @@
 		                	
 		                	<tr class="showCartList" id="font">
 		                        
-		                        	 <td style="text-align:center"><input type="checkbox" name="productCheck" class="deleteBtn">
+		                        	 <td style="text-align:center">
+		                        	 	<input type="checkbox" name="productCheck" class="deleteBtn">
 					           		 	<input type="hidden" value="${sessionScope.m.memberId }">
 					           		 	<input class="pNo" type="hidden" value="${Cart.PNo }">
 					            	 </td>
@@ -149,7 +150,7 @@
              <div class="cart-btn">
                      <button type="button" id="font">계속 쇼핑하기</button>
 	                 
-                    <button type="button" class="payBtn" onclick="goToOrder(${sessionScope.m.memberId });">주문하러 가기</button>
+                    <button type="button" class="payBtn" onclick="goToOrder('${sessionScope.m.memberId }');">주문하러 가기</button>
                  </div>
                  
             </div>
@@ -207,6 +208,7 @@
 
 		
 	function goToOrder(memberId){
+		console.log(memberId);
 		location.href = "/ordercart.do?memberId="+memberId;
 	}
 	
@@ -223,12 +225,16 @@
 		    }
 		    
 		    const delCartArr = new Array();
-		    const memberId = check.prev().val();
+		    const memberId = check.next().val();
+		    console.log(memberId);
+		    
 		    for(let i=0; i<check.length; i++) {
 			    // 체크된 카트 번호
-			    const cartNo = check.eq(i).prev().prev().val();
-				delCartArr.push(cartNo);		
+			    const cartNo = check.eq(i).next().next().val();
+				console.log(cartNo);
+				delCartArr.push(cartNo);	
 			}
+			console.log(delCartArr);	    
 			location.href="/deleteCart.do?memberId="+memberId+"&delCartArr="+delCartArr.join("/");
 		});
 			

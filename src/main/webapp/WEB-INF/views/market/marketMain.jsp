@@ -37,11 +37,11 @@
 	<!-- 검색기능 -->
 	<div class="searchMarketContatainer">
 		<form action="/searchMarket.do" method="get">
-			<select name="type">
+			<select name="type" id="font">
 				<option value="storeName">가게명</option>
 				<option value="productName">제품명</option>
 			</select>
-			<div class="storeList-searchinput" id="font">
+			<div  class="storeList-searchinput" id="font">
 				<input type="text" name="search" value="${search }" placeholder="검색어를 입력해 주세요">
 				<input type="hidden" name="reqPage" value="1">
 				<input type="hidden" name="pCategory" value="${pCategory }">

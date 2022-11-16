@@ -77,7 +77,11 @@
 }
 
 [name=type]{
+  border:none;
   border-radius: 5px;
+  background-color:#fff2ca;
+  color: #8f8f8f;
+  
 }
 .searchMarketContatainer>form{
   display: flex;
@@ -85,15 +89,19 @@
   padding-bottom: 50px;
 }
 .searchMarketContatainer>form>select{
-  border: solid 2px black;
+     border : none;
+     border-radius: 5px;
+	 background-color:#fff2ca;
+	 
 }
 .storeList-searchinput>input {
 	width: 350px;
 	height: 35px;
 	margin-right: 20px;
-  margin-left: 20px;
-	border: solid 2px black;
-	border-radius: 20px;
+    margin-left: 20px;
+    border : none;
+	border-bottom: dotted 2px #ffc107;
+	
 	padding-left: 20px;
 }
 .storeList-searchinput>input::placeholder{
@@ -102,9 +110,9 @@
 .storeList-searchinput>button {
 	width: 35px;
   height: 35px;
-	border: solid 2px black;
-	border-radius: 15px;
-  background-color:#ffc107;
+	border : none;
+	 border-radius: 5px;
+  background-color:#fff2ca;
 }
 .searchMarketContatainer>form>.storeList-searchinput>button>span{
   line-height: 30px;

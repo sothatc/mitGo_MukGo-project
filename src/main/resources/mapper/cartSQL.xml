@@ -21,6 +21,19 @@
 		where member_id= #{memberId}
 </select>
 
+<select id="orderCart" parameterType="string" resultType="c">
+		select 
+		cart_no as cartNo,
+		member_id as memberId,
+		p_no as pNo, 
+		cart_quan as cartQuan, 
+		p_name as pName, 
+		p_price as pPrice, 
+		p_img as pImg 
+		from cart join market_product using(p_no) 
+		where member_id= #{_parameter}
+</select>
+
 <select id="searchCart" parameterType="c" resultType="c">
 	select 
 		cart_no as cartNo,
