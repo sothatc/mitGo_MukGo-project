@@ -256,5 +256,26 @@ hr{
 	border-radius: 15px;
 }
 
+.icon1{
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	right: 35px;
+	top: 7px;
+}
+.icon2{
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	right: 35px;
+	top: 7px;
+}
+.icon3{
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	right: 35px;
+	top: 7px;
+}
 
 
