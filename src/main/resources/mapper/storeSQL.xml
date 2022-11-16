@@ -379,7 +379,6 @@
 
 	<select id="sortStoreList" parameterType="map" resultType="s">
 		select * from
-		(select row_number() over (order by rnum desc) as rnum1, rb.* from
 		(select rownum as rnum, b.* from
 		(select
 		store_no as storeNo,
@@ -401,15 +400,16 @@
 		as thumbNail from store s order by
 		 <choose>
 			<when test="storeListSort.equals('new')">
-				storeNo asc
+				storeNo desc
 			</when>
 			<when test="storeListSort.equals('grade')">
-				rating asc
+				rating desc
 			</when>
 			<when test="storeListSort.equals('reviewCount')">
-				reviewCount asc
+				reviewCount desc
 			</when>
 		</choose>
+		nulls last
 		 )b
 		 
 		<if test="search != null and search != ''">
@@ -419,7 +419,7 @@
 			where category = #{category}
 		</if>
 		
-		)rb)where rnum1 between #{start} and #{end}
+		)where rnum between #{start} and #{end}
 	</select>
 	
 	<!-- 리뷰리스트 -->
