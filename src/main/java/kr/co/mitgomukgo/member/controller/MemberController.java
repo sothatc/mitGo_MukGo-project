@@ -265,7 +265,7 @@ public class MemberController {
 			return "common/alert";
 		}else {
 			request.setAttribute("msg", "error");
-			request.setAttribute("url", "member/ownerMyPage");
+			request.setAttribute("url", "/updateOwnerFrm.do");
 			return "common/alert";
 		}
 	}

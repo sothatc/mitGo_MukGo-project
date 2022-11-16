@@ -11,6 +11,7 @@
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 	<div class="pwChk-wrap wrap-img">
+		<img class="security-img" src="resources/upload/member/security.png">
 		<div class="pwChk-content">
 			<div>비밀번호 확인</div>
 			<form action="/memberManage.do?reqPage=1" method="post">
@@ -22,4 +23,16 @@
 		</div>
 	</div>
 </body>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+<script>
+	$(".pwChkBtn").on("mouseover",function(){
+		$(this).css("background-color","rgb(97, 76, 76)");
+		$(this).css("border","1px solid black");
+		$(this).css("color","#ffc107");
+	});
+	$(".pwChkBtn").on("mouseleave",function(){
+		$(this).css("background-color","");
+		$(this).css("color","");
+	});
+</script>
 </html>
