@@ -280,6 +280,16 @@ public class StoreService {
 		return list;
 	}
 	
+	//예약된 좌석 수 확인하기
+	public int checkCountNum(int storeNo, String selectedDate, String selectTime) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("storeNo",storeNo);
+		map.put("selectedDate",selectedDate);
+		map.put("selectTime",selectTime);
+		int result = dao.checkCountNum(map);
+		return result;
+	}
+	
 
 	public ArrayList<Menu> menuList(int storeNo) {
 		return dao.menuList(storeNo);
@@ -417,6 +427,8 @@ public class StoreService {
 	public ArrayList<Review> selectRandomReviewList() {
 		return dao.selectRandomReviewList();
 	}
+
+
 
 
 	

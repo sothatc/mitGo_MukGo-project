@@ -14,7 +14,7 @@ import kr.co.mitgomukgo.member.model.dao.MemberDao;
 import kr.co.mitgomukgo.member.model.vo.Member;
 import kr.co.mitgomukgo.member.model.vo.Owner;
 import kr.co.mitgomukgo.notice.model.vo.Notice;
-import kr.co.mitgomukgo.store.model.vo.Order;
+import kr.co.mitgomukgo.order.model.vo.Order;
 import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import net.nurigo.java_sdk.api.Message;

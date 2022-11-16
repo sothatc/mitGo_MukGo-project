@@ -121,13 +121,13 @@ height: 100%;
                   <tr style="height: 47px;">
                      <th>인원</th>
                      <td>
-                        <button class="w3-button w3-circle w3-teal" id="down" style="width: 35px; height: 35px; padding: 0;">-</button>
+                        <button class="w3-button w3-circle" id="down" style="width: 35px; height: 35px; padding: 0; background-color: #ffc107; color:white;">-</button>
                      </td>
                      <td class="peopleTd" style="width:30px; text-align: center;">
                         <span class="people">1</span>
                      </td>
                      <td>
-                        <button class="w3-button w3-circle w3-teal" id="up" style="width: 35px; height: 35px; padding: 0;">+</button>
+                        <button class="w3-button w3-circle" id="up" style="width: 35px; height: 35px; padding: 0; background-color: #ffc107; color:white;">+</button>
                      </td>
                   </tr>
                   <tr>
@@ -347,6 +347,21 @@ height: 100%;
                  class="w3-button w3-display-topright" style="width:5%; height:10%;">&times;</span>
                </header>
                  <p style="width:100%; height:100%;padding:0; margin:0;display:flex; justify-content: center; align-items: center; color:black;">업주입니다!!</p>
+             </div>
+           </div>
+      </div>
+      
+       <!-- 정원 초과 모달 -->
+       <div class="w3-container" style="font-family:Gowun Dodum;">
+           <div id="noReserveModal" class="w3-modal" style="font-family:Gowun Dodum; z-index:2000;">
+             <div class="w3-modal-content w3-animate-top w3-card-4" style="width:30%; height: 40%;">
+               <header class="w3-container w3-teal" style="height:10%;"> 
+                 <span onclick="document.getElementById('noReserveModal').style.display='none'" 
+                 class="w3-button w3-display-topright" style="width:5%; height:10%;">&times;</span>
+               </header>
+                 <p style="width:100%; height:100%;padding:0; margin:0;display:flex; justify-content: center; align-items: center; color:black;">
+                	 시간당 정원이 초과되었습니다.잔여 좌석 수: <span class="minusNum" style="color:red; margin-left:10px;"></</span> 좌석
+                 </p>
              </div>
            </div>
       </div>
@@ -640,7 +655,6 @@ height: 100%;
 		                	  }
 		                	  
 					             for(let i=0; i<btnVal.length; i++){
-					            	 
 					                  for(let j=0; j<disabledTime.length; j++){
 					                     if(btnVal[i]==disabledTime[j]){
 					                        checkTimeBtn[i].style.color="red";
@@ -713,13 +727,12 @@ height: 100%;
          
          //예약하기 모달 열기
          $(".reserveBtn2").on("click",function(){
-         		modal.classList.remove("hidden");
-               
+
+                modal.classList.remove("hidden");
                 if(ownerId != ""){
                    document.getElementById('ownerModal').style.display='block';
                 }
                 selectedDate =$("#datePicker").val();
-                console.log(selectedDate);
                 $(".eatDate").attr("value",selectedDate);
                 $(".eatTime").attr("value",selectTime);
                 $(".eatNum").attr("value",count);
@@ -731,6 +744,25 @@ height: 100%;
                 	document.getElementById('timeDateModal').style.display='block';
                 	modal.classList.add("hidden");
                }
+                //잔여 좌석 수 확인
+                $.ajax({
+                    url: "/checkCountNum.do",
+                    type:"post",
+                    data: {storeNo:storeNo,selectedDate:selectedDate, selectTime:selectTime},
+                    success: function(data){
+                    	//선택한 날짜 시간에 이미 예약된 좌석 수
+                    	var reservedNum = data; 
+                    	if(reservedNum+count>maxNum){
+                        	document.getElementById('noReserveModal').style.display='block';
+                        	modal.classList.add("hidden");
+                        	//남은 좌석 수
+                        	var minusNum = maxNum-reservedNum;
+                        	$(".minusNum").text(minusNum);
+                    	}
+                    }
+                }); 
+
+                
          });
             
 
@@ -762,6 +794,8 @@ height: 100%;
 		    console.error('Trigger:', e.trigger);
 		});
       
+		
+		
       </script>
 
 </body>

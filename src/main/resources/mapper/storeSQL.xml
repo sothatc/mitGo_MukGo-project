@@ -303,7 +303,15 @@
 		FROM RESERVE 
 		WHERE STORE_NO=#{storeNo} AND EAT_DATE=#{selectDate}  
 		GROUP BY EAT_TIME 
-		HAVING SUM(EAT_NUM) >#{maxNum}
+		HAVING SUM(EAT_NUM) <![CDATA[>=]]> #{maxNum}
+    </select>
+    
+    <!-- 예약된 좌석 수 확인 -->
+    <select id="checkCountNum" resultType="int" parameterType="map">
+    	SELECT
+    		  SUM(EAT_NUM) AS eatNum
+     	FROM RESERVE
+     	WHERE STORE_NO=#{storeNo} AND EAT_DATE=#{selectedDate} AND EAT_TIME=#{selectTime}
     </select>
 
 	<select id="menuList" parameterType="int" resultType="me">

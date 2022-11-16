@@ -95,6 +95,16 @@ public class StoreController {
 		String result = gson.toJson(list);
 		return result;
 	}
+	
+	//예약된 좌석 수 확인하기
+	@ResponseBody
+	@RequestMapping(value = "/checkCountNum.do", produces = "application/json;charset=utf-8")
+	public String checkCountNum(int storeNo, String selectedDate, String selectTime) {
+		int countNum = service.checkCountNum(storeNo, selectedDate, selectTime);
+		Gson gson = new Gson();
+		String result = gson.toJson(countNum);
+		return result;
+	}
 
 	// 예약하기
 	@RequestMapping(value = "/reserve.do")
