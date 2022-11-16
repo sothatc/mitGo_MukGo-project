@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="/resources/css/index/owl.theme.default.min.css">
 	<link rel="stylesheet" href="/resources/css/index/owl.carousel.min.css">
 	<link rel="stylesheet" href="/resources/css/market/marketmain.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 	<section id="services" class="text-center">
 		<div class="container">
 			<div class="row">
@@ -44,7 +45,9 @@
 				<input type="text" name="search" value="${search }">
 				<input type="hidden" name="reqPage" value="1">
 				<input type="hidden" name="pCategory" value="${pCategory }">
-				<button type="submit">검색</button>
+				<button type="submit">
+					<span class="material-symbols-outlined"> search </span>
+				</button>
 			</div>
 		</form>
 	</div>
