@@ -431,6 +431,10 @@ public class StoreController {
 			model.addAttribute("pageNo", map.get("pageNo"));
 			model.addAttribute("search", search);
 			return "store/storeListFrm";
+		}else if(category.isEmpty()){
+			request.setAttribute("msg", "검색 결과가 존재하지 않습니다.");
+			request.setAttribute("url", "/storeList.do?reqPage=1");
+			return "common/alert";
 		}else {
 			request.setAttribute("msg", "검색 결과가 존재하지 않습니다.");
 			request.setAttribute("url", "/selectTag.do?category="+category+"&reqPage=1");
