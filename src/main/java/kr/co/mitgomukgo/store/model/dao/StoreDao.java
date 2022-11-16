@@ -90,7 +90,11 @@ public class StoreDao {
 
 	public ArrayList<Store> searchStoreList(HashMap<String, Object> map) {
 		List list = sqlSession.selectList("store.searchStoreList",map);
-		return (ArrayList<Store>)list;
+		if(!list.isEmpty()) {
+			return (ArrayList<Store>)list;
+		}else {
+			return null;
+		}
 	}
 	
 	//예약하기
