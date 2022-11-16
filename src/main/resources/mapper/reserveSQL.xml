@@ -107,23 +107,6 @@
       where reserve_no = #{reserveNo} 
    </select>
    
-	<select id="selectReserveManege" parameterType="map" resultType="rs">
-		select * from
-		    (select rownum as rnum, r.* from (select reserve_no as reserveNo,
-		    rs.member_no as memberNo,
-		    store_no as storeNo,
-		    store_name as storeName,
-		    reserve_date as reserveDate,
-		    eat_date as eatDate,
-		    eat_time as eatTime,
-		    eat_num as eatNum,
-		    visit_status as visitStatus,
-		    (select member_name from member m where member_no = rs.member_no) as reserverName   
-		from reserve rs
-		where store_no = #{storeNo}
-		order by 5 desc) r) 
-		where rnum between #{start} and #{end}
-	</select>
 	
 	<select id="countReserveList" parameterType="int" resultType="_int">
 		select count(*) as cnt from reserve where store_no = #{storeNo}
