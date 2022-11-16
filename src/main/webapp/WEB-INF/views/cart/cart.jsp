@@ -207,24 +207,28 @@
 	
 	
 	$(".deleteCheck").on("click", function(){
-	    $(".allCheck").text("전체 선택");
-	    const check = $(".cart-check:checked");
-	    if(check.length == 0) {
-	        alert("선택된 도서가 없습니다.")
-			return;
-	    }
-		// 체크된 카트 번호를 저장할 배열
-		const delCartArr = new Array();
-	    // 유저 번호
-	    const userNo = check.prev().val();
-
-		for(let i=0; i<check.length; i++) {
-		    // 체크된 카트 번호
-		    const cartNo = check.eq(i).prev().prev().val();
-			delCartArr.push(cartNo);		
-		}
-		location.href="/deleteCart.do?userNo="+userNo+"&delCartArr="+delCartArr.join("/");
-	});
+		// 체크한것 삭제
+			
+		    const check = $(".deleteBtn:checked");
+		    if(check.length == 0) {
+		        alert("선택된 상품이 없습니다.")
+				return;
+		    }
+		
+			const memberId= ${sessionScope.m.memberId};
+			
+			const productNoArr = new Array();
+			
+			check.each(function(index,item){
+			const productNo = $(check).next().next().val();
+				
+				productNoArr.push(productNo);
+			
+			});
+			console.log(productNoArr);
+			console.log(memberId);
+			location.href="/deleteCart.do?memberId="+memberId+"&productNoArr="+productNoArr.join("/");
+		});
 	
 		
 	

@@ -44,6 +44,15 @@ public class CartController {
 			model.addAttribute("list",list);
 			return "order/ordercart";
 		}
+	   
+		/*
+		 * @RequestMapping(value="/deleteCart.do") public String deleteCart(String
+		 * productNoArr, String memberId) { boolean result =
+		 * service.deleteCart(productNoArr,memberId); return
+		 * "redirect:/cart.do?memberId="+memberId;
+		 * 
+		 * }
+		 */
 }
 
 
