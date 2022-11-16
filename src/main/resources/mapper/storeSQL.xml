@@ -490,5 +490,30 @@
         store_name as storeName
         from review r, store s where r.store_no = s.store_no order by DBMS_RANDOM.RANDOM) where rownum <![CDATA[<]]> 4
 	</select>
-
+	
+	
+	<select id="selectRandomStoreList" resultType="s">
+		select *
+		from
+		(select row_number() over (order by rnum desc) as rnum1, rb.* from
+		(select rownum as rnum, b.* from
+		(select
+		store_no as storeNo,
+		store_name as storeName,
+		owner_no as ownerNo,
+		address,
+		phone,
+		content,
+		open_hour as openHour,
+		closed_day as closedDay,
+		category,
+		witheat_cate as
+		withEatCate,
+		whereeat_cate as whereEatCate,
+		(select round(avg(rating),1) from review r where r.store_no = s.store_no)as rating, 
+		(select imgpath from store_img si where storeimg_no = (select
+		min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
+		as thumbNail
+		from store s order by storeNo desc)b)rb order by DBMS_RANDOM.RANDOM) where rownum <![CDATA[<]]> 7
+	</select>
 </mapper>

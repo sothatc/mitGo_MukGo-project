@@ -200,6 +200,11 @@ public class StoreDao {
 		List list = sqlSession.selectList("selectRandomReviewList");
 		return (ArrayList<Review>) list;
 	}
+
+	public ArrayList<Store> selectRandomStoreList() {
+		List list = sqlSession.selectList("selectRandomStoreList");
+		return (ArrayList<Store>) list;
+	}
 	
 
 
