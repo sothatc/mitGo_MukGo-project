@@ -41,7 +41,7 @@
 									<span class="tit">비밀번호</span>
 									<div class="cnt">
 										<div class="input01">
-											<label class="label" for="ownerPw">대/소문자와 숫자를 포함한 최소 8자리를 입력해주세요.(특수문자x)</label>
+											<label class="label" for="ownerPw">대/소문자와 숫자를 포함한 최소 8자리를 입력해주세요.(특수문자 제외)</label>
 											<input type="password" id="ownerPw" name="ownerPw" style="outline: none;">
 										</div>
 										<p class="text-note"></p>
@@ -61,7 +61,7 @@
 									<span class="tit">휴대폰</span>
 									<div class="cnt">
 										<div class="input02">
-											<input type="text" id="memberPhone1" name="memberPhone1" value="${sessionScope.o.ownerPhone }" readonly>
+											<input type="text" id="memberPhone1" name="memberPhone1" value="${sessionScope.o.ownerPhone }" disabled>
 										</div>
 									</div>
 								</li>
@@ -83,6 +83,15 @@
 									<div class="cnt">
 										<div class="input01">
 											<input type="text" id="ownerEnrollDate" name="ownerEnrollDate" value="${sessionScope.o.ownerEnrollDate }" disabled>
+										</div>
+									</div>
+								</li>
+								<li>
+									<span class="tit">승인 여부</span>
+									<div class="cnt">
+										<div class="input01">
+											<input type="hidden" id="ownerStatus1" name="ownerStatus1" value="${sessionScope.o.ownerStatus }" disabled>
+											<input type="text" id="ownerStatus" name="ownerStatus" disabled>
 										</div>
 									</div>
 								</li>
@@ -157,6 +166,18 @@
 			$(this).css("background-color", "");
 			$(this).css("color", "");
 		})
+		
+		
+		//업주 승인여부 텍스트 변환
+		const status = $("#ownerStatus1").val();
+		const statusText = $("#ownerStatus");
+		if(status == 1) {
+			statusText.val("승인 대기중");
+		}else {
+			statusText.val("승인 완료");
+		}
+		
+		
 		<!--
 		function callFunction() {
 			var storeInfo = $(".storeInfo").val();
@@ -173,6 +194,8 @@
 			});
 		}
 		-->
+		
+		
 	</script>
 </body>
 </html>

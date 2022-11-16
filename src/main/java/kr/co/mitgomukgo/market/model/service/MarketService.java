@@ -122,6 +122,64 @@ public class MarketService {
 		return dao.selectRandomMarketList();
 	}
 
+	public HashMap<String, Object> searchMarket(int reqPage, String search, String type, String pCategory) {
+		int numPerPage = 8;
+		
+		int end = numPerPage * reqPage;
+		int start = (end - numPerPage) + 1;
+		HashMap<String, Object> map = new HashMap<String,Object>();
+		map.put("start",start);
+		map.put("end",end);
+		map.put("pCategory",pCategory);
+		map.put("search",search);
+		map.put("type",type);
+		ArrayList<Market> list = dao.searchMarket(map);
+		
+		int totalCnt = dao.countSearchMarket(map);
+		//System.out.println(totalCnt);
+		int totalPage = 0;
+		if(totalCnt % numPerPage == 0) {
+			totalPage = totalCnt / numPerPage;
+		}else {
+			totalPage = totalCnt / numPerPage + 1;
+		}
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize + 1;
+
+		String pageNavi = "";
+		if(pageNo != 1) {
+			pageNavi += "<a href='/searchMarket.do?type="+type+"&reqPage=" +(pageNo - 1)+"&pCategory="+pCategory+"&search="+search+"'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_left\r\n" + 
+					"            </span></a>";
+		}
+		for(int i = 0; i < pageNaviSize; i++) {
+			if(reqPage == pageNo) {
+				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
+			}else {
+				pageNavi += "<a href='/searchMarket.do?type="+type+"&reqPage=" +(pageNo)+"&pCategory="+pCategory+"&search="+search+"'><span>" + (pageNo) + "</span></a>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		
+		if(pageNo <= totalPage) {
+			pageNavi += "<a href='/searchMarket.do?type="+type+"&reqPage=" +(pageNo)+"&pCategory="+pCategory+"&search="+search+"'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_right\r\n" + 
+					"            </span></a>";
+		}
+		HashMap<String, Object> marketListMap = new HashMap<String, Object>();
+		marketListMap.put("list",list);
+		marketListMap.put("reqPage",reqPage);
+		marketListMap.put("pageNavi",pageNavi);
+		marketListMap.put("totalPage",totalPage);
+		marketListMap.put("pageNo",pageNo);
+		marketListMap.put("search", search);
+		
+		return marketListMap;
+	}
+
 
 	
 }

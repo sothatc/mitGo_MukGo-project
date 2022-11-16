@@ -55,19 +55,25 @@ public class MarketController {
 		return "market/marketMain";
 	}
 
-	// 맛집 상세 이동
+	// 마켓 상세 이동
 	@RequestMapping(value = "/marketDetailView.do")
 	public String marketDetailView() {
 		return "market/marketDetail";
 	}
 	
-	// 맛집 상세 보기
+	// 마켓 상세 보기
 	@RequestMapping(value = "/marketDetail.do")
 	public String marketDetail(int pNo, String bookMarkId, Model model) {
 		HashMap<String, Object> map = service.selectOneMarket(pNo, bookMarkId); // 해쉬맵으로 담아서 한꺼번에 가져오기
 		model.addAttribute("ma", map.get("ma"));
 		model.addAttribute("bm", map.get("bm"));
 		return "market/marketDetail";
+	}
+	
+	//주문 관리 이동
+	@RequestMapping(value = "/ownerOrderManageFrm.do")
+	public String ownerOrderManageFrm(int reqPage) {
+		return "member/ownerOrderManageFrm";
 	}
 	
 
@@ -197,5 +203,26 @@ public class MarketController {
 		}
 	}
 
+	@RequestMapping(value="/searchMarket.do")
+	public String searchMarket(int reqPage ,String search ,String type ,String pCategory ,Model model ,HttpServletRequest request) {
+		HashMap<String, Object> map = service.searchMarket(reqPage,search,type,pCategory);
+		//System.out.println("list :" + map.get("list"));
+		if(map.get("list") != null) {
+			model.addAttribute("list",map.get("list"));
+			model.addAttribute("reqPage",reqPage);
+			model.addAttribute("pCategory",pCategory);
+			model.addAttribute("pageNavi", map.get("pageNavi"));
+			model.addAttribute("total", map.get("total"));
+			model.addAttribute("pageNo", map.get("pageNo"));
+			model.addAttribute("search", search);
+			model.addAttribute("type", type);
+			return "market/marketMain";
+		} else{
+			request.setAttribute("msg", "검색 결과가 존재하지 않습니다.");
+			request.setAttribute("url", "/marketMain.do?reqPage=1&pCategory="+pCategory);
+			return "common/alert";
+		}
+		
+	}
 }
 

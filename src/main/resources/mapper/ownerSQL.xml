@@ -23,7 +23,8 @@
 			owner_name as ownerName,
 			owner_phone as ownerPhone,
 			o_enroll_date as ownerEnrollDate,
-			owner_level as ownerLevel
+			owner_level as ownerLevel,
+			owner_status as ownerStatus
 		from owner
 		where owner_id=#{ownerId} and owner_pw=#{ownerPw}
 	</select>
@@ -115,4 +116,13 @@
 		set owner_pw = #{ownerPw}
 		where owner_no = #{ownerNo}
 	</update>
+	<delete id="deleteOwner" parameterType="int">
+		delete owner
+		where owner_no = #{ownerNo}
+	</delete>
+	<select id="selectJoinedOwner" parameterType="o" resultType="string">
+		select owner_id as ownerId
+		from owner
+		where owner_id = #{ownerId}
+	</select>
 </mapper>

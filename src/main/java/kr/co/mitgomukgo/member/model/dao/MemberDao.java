@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import kr.co.mitgomukgo.member.model.vo.Member;
 import kr.co.mitgomukgo.member.model.vo.Owner;
 import kr.co.mitgomukgo.notice.model.vo.Notice;
+import kr.co.mitgomukgo.order.model.vo.Order;
 import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Store;
 
@@ -64,15 +65,20 @@ public class MemberDao {
 		return result;
 	}
 
-	public ArrayList<Reserve> selectReserveList(Member m) {
-		List rs = sqlSession.selectList("reserve.selectReserveList",m);
-		return (ArrayList<Reserve>)rs;
+	//예약관리
+	public ArrayList<Reserve> selectReserveList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("reserve.selectReserveList",map);
+		return (ArrayList<Reserve>) list;
+	}
+
+	//예약관리 총 개수
+	public int countAllReserveList(int memberNo) {
+		return sqlSession.selectOne("reserve.countAllReserveList",memberNo);
 	}
 
 
-
 	public ArrayList<Reserve> selectAllReserve(HashMap<String, Object> map) {
-		List list = sqlSession.selectList("reserve.selectAllReserve", map);
+		List list = sqlSession.selectList("reserve.selectReserveManege", map);
 		return (ArrayList<Reserve>) list;
 	}
 
@@ -200,6 +206,28 @@ public class MemberDao {
 	public int deleteMember(int memberNo) {
 		return sqlSession.delete("member.deleteMember", memberNo);
 	}
+
+	public ArrayList<Order> selectAllOrderList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("order.selectAllOrderList", map);
+		return (ArrayList<Order>) list;
+	}
+
+	public int deleteOwner(int ownerNo) {
+		return sqlSession.delete("owner.deleteOwner", ownerNo);
+	}
+
+	
+
+
+	public String selectJoinedMember(Member member) {
+		return sqlSession.selectOne("member.selectJoinedMember", member);
+	}
+
+	public String selectJoinedOwner(Owner owner) {
+		return sqlSession.selectOne("owner.selectJoinedOwner", owner);
+	}
+
+	
 
 
 	

@@ -280,6 +280,16 @@ public class StoreService {
 		return list;
 	}
 	
+	//예약된 좌석 수 확인하기
+	public int checkCountNum(int storeNo, String selectedDate, String selectTime) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("storeNo",storeNo);
+		map.put("selectedDate",selectedDate);
+		map.put("selectTime",selectTime);
+		int result = dao.checkCountNum(map);
+		return result;
+	}
+	
 
 	public ArrayList<Menu> menuList(int storeNo) {
 		return dao.menuList(storeNo);
@@ -338,7 +348,7 @@ public class StoreService {
 		
 		String pageNavi = "";
 		if(pageNo != 1) {
-			pageNavi += "<a href='/searchStoreList.do?category="+category+"&reqPage=" +(pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+			pageNavi += "<a href='/sortStoreList.do?category="+category+"&reqPage=" +(pageNo - 1) + "&storeListSort="+storeListSort+"'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
 					"            chevron_left\r\n" + 
 					"            </span></a>";
 		}
@@ -347,7 +357,7 @@ public class StoreService {
 			if(reqPage == pageNo) {
 				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
 			}else {
-				pageNavi += "<a href='/searchStoreList.do?category="+category+"&reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+				pageNavi += "<a href='/sortStoreList.do?category="+category+"&reqPage=" + pageNo + "&storeListSort="+storeListSort+"'><span>" + (pageNo) + "</span></a>";
 			}
 			pageNo++;
 			if(pageNo > totalPage) {
@@ -356,7 +366,7 @@ public class StoreService {
 		}
 		
 		if(pageNo <= totalPage) {
-			pageNavi += "<a href='/searchStoreList.do?category="+category+"&reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+			pageNavi += "<a href='/sortStoreList.do?category="+category+"&reqPage=" + (pageNo) + "&storeListSort="+storeListSort+"'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
 					"            chevron_right\r\n" + 
 					"            </span></a>";
 		}
@@ -417,6 +427,12 @@ public class StoreService {
 	public ArrayList<Review> selectRandomReviewList() {
 		return dao.selectRandomReviewList();
 	}
+
+	public ArrayList<Store> selectRandomStoreList() {
+		return dao.selectRandomStoreList();
+	}
+
+
 
 
 	

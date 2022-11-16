@@ -31,74 +31,86 @@
 		<ul class="category">
 			<li>
 				<c:choose>
-					<c:when test="${empty s }">
-						<div class="etc">
-							<a href="/addStoreFrm.do">업체 등록</a>
-						</div>
-					</c:when>
-					<c:otherwise>
+					<c:when test="${sessionScope.o.ownerStatus == 2}">
 						<c:choose>
-							<c:when test="${sessionScope.o.ownerLevel == 1}">
-								<div class="accordion-item">
-									<h2 class="accordion-header" id="flush-headingOne">
-										<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">업체</button>
-									</h2>
-									<div class="accordion-div">
-										<a href="/updateStoreFrm.do">업체 정보 수정</a>
-									</div>
-									<div class="accordion-div">
-										<a href="/addMenuFrm.do">메뉴 추가</a>
-									</div>
-									<div class="accordion-div">
-										<a href="/menuFrm.do">메뉴 관리</a>
-									</div>
-									<div class="accordion-div">
-										<a href="/reserveManage.do?reqPage=1">예약관리</a>
-									</div>
+							<c:when test="${empty s }">
+								<div class="etc">
+									<a href="/addStoreFrm.do">업체 등록</a>
 								</div>
 							</c:when>
 							<c:otherwise>
-								<div class="accordion-item">
-									<h2 class="accordion-header" id="flush-headingOne">
-										<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">업체</button>
-									</h2>
-									<div class="accordion-div">
-										<a href="/updateStoreFrm.do">업체 정보 수정</a>
-									</div>
-									<div class="accordion-div">
-										<a href="/addMenuFrm.do">메뉴 추가</a>
-									</div>
-									<div class="accordion-div">
-										<a href="/menuFrm.do">메뉴 관리</a>
-									</div>
-									<div class="accordion-div">
-										<a href="/reserveManage.do?reqPage=1">예약관리</a>
-									</div>
-								</div>
-								<div class="accordion-item">
-									<h2 class="accordion-header" id="flush-headingOne">
-										<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">마켓</button>
-									</h2>
-									<div class="accordion-div">
-										<a href="/addMarketProductFrm.do">상품 추가</a>
-									</div>
-									<div class="accordion-div">
-										<a href="/marketProductListFrm.do">상품 관리</a>
-									</div>
-									<div class="accordion-div">
-										<a href="#">주문 관리</a>
-									</div>
-								</div>
+								<c:choose>
+									<c:when test="${sessionScope.o.ownerLevel == 1}">
+										<div class="accordion-item">
+											<h2 class="accordion-header" id="flush-headingOne">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">업체</button>
+											</h2>
+											<div class="accordion-div">
+												<a href="/updateStoreFrm.do">업체 정보 수정</a>
+											</div>
+											<div class="accordion-div">
+												<a href="/addMenuFrm.do">메뉴 추가</a>
+											</div>
+											<div class="accordion-div">
+												<a href="/menuFrm.do">메뉴 관리</a>
+											</div>
+											<div class="accordion-div">
+												<a href="/reserveManage.do?reqPage=1">예약관리</a>
+											</div>
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div class="accordion-item">
+											<h2 class="accordion-header" id="flush-headingOne">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">업체</button>
+											</h2>
+											<div class="accordion-div">
+												<a href="/updateStoreFrm.do">업체 정보 수정</a>
+											</div>
+											<div class="accordion-div">
+												<a href="/addMenuFrm.do">메뉴 추가</a>
+											</div>
+											<div class="accordion-div">
+												<a href="/menuFrm.do">메뉴 관리</a>
+											</div>
+											<div class="accordion-div">
+												<a href="/reserveManage.do?reqPage=1">예약관리</a>
+											</div>
+										</div>
+										<div class="accordion-item">
+											<h2 class="accordion-header" id="flush-headingOne">
+												<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">마켓</button>
+											</h2>
+											<div class="accordion-div">
+												<a href="/addMarketProductFrm.do">상품 추가</a>
+											</div>
+											<div class="accordion-div">
+												<a href="/marketProductListFrm.do">상품 관리</a>
+											</div>
+											<div class="accordion-div">
+												<a href="/ownerOrderManageFrm.do?reqPage=1">주문 관리</a>
+											</div>
+										</div>
+									</c:otherwise>
+								</c:choose>
 							</c:otherwise>
 						</c:choose>
+						<div class="etc">
+							<a href="/updateOwnerFrm.do">내 정보 수정</a>
+						</div>
+						<div class="etc">
+							<a href="/deleteOwner.do?ownerNo=${sessionScope.o.ownerNo }" class="delOwner">회원 탈퇴</a>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="etc">
+							<a href="/updateOwnerFrm.do">내 정보 수정</a>
+						</div>
+						<div class="etc">
+							<a href="/deleteOwner.do?ownerNo=${sessionScope.o.ownerNo }" class="delOwner">회원 탈퇴</a>
+						</div>
 					</c:otherwise>
 				</c:choose>
-				<div class="etc">
-					<a href="/updateOwnerFrm.do">내 정보 수정</a>
-				</div>
-				<div class="etc">
-					<a href="#">회원 탈퇴</a>
-				</div>
 			</li>
 		</ul>
 	</div>
@@ -115,9 +127,18 @@
 		</ul>
 	</div>
 </aside>
-
+<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 <script>
 	$(".accordion-button").click(function() {
 		$(this).parent().nextAll().toggle();
+	});
+	
+	$(".delOwner").on("click",function(e){
+		if(confirm("탈퇴 하시겠습니까?") == true) {
+			alert("탈퇴되었습니다.");
+		}else {
+			e.preventDefault();
+			return;
+		}
 	});
 </script>

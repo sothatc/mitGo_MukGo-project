@@ -14,6 +14,7 @@
 	<link rel="stylesheet" href="/resources/css/index/owl.theme.default.min.css">
 	<link rel="stylesheet" href="/resources/css/index/owl.carousel.min.css">
 	<link rel="stylesheet" href="/resources/css/market/marketmain.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 	<section id="services" class="text-center">
 		<div class="container">
 			<div class="row">
@@ -32,7 +33,24 @@
 		</div>
 	</section>
 	<!-- ////////////////////////////////////////////////////////////////// -->
-
+	
+	<!-- 검색기능 -->
+	<div class="searchMarketContatainer">
+		<form action="/searchMarket.do" method="get">
+			<select name="type">
+				<option value="storeName">가게명</option>
+				<option value="productName">제품명</option>
+			</select>
+			<div class="storeList-searchinput" id="font">
+				<input type="text" name="search" value="${search }" placeholder="검색어를 입력해 주세요">
+				<input type="hidden" name="reqPage" value="1">
+				<input type="hidden" name="pCategory" value="${pCategory }">
+				<button type="submit">
+					<span class="material-symbols-outlined"> search </span>
+				</button>
+			</div>
+		</form>
+	</div>
 	<div class="mid-nav" id="home">
 		<div class="container">
 			<div class="row justify-content-between">
@@ -57,7 +75,7 @@
 	<!-- ////////////////////////////////////////////////////////////////// -->
 
 	<section class="py-5" >
-		<div class="container px-4 px-lg-5 mt-5">
+		<div class="tag px-4 px-lg-5 mt-5">
 			<div class="market1">
 				<h6 id="font">
 					<c:if test="${pCategory == 10}">
@@ -74,9 +92,9 @@
 					</c:if>		
 				</h6>		
 			</div>
-			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center minHeight">				
+			<div class="row gx-4 gx-lg-5  row-cols-md-3 row-cols-xl-4 justify-content-center minHeight">				
 				<c:forEach items="${list }" var="ma">
-					<div class="col mb-5">
+					<div class="col mb-5 contentLeft">
 						<div class="card h-100">
 							<!-- Product image-->
 							<img class="card-img-top" src="resources/upload/market/${ma.PImg }"/>

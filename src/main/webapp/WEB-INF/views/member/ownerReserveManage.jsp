@@ -8,11 +8,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="stylesheet" href="/resources/css/member/owner.css">
+<link rel="stylesheet" href="/resources/css/member/member.css">
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<link rel="stylesheet" href="/resources/css/member/owner.css">
-	<link rel="stylesheet" href="/resources/css/member/member.css">
 	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 	<div class="content-wrap">
 		<jsp:include page="/WEB-INF/views/common/ownerHeader.jsp" />
@@ -23,6 +24,18 @@
 						<div class="content-head">
 							<h2>예약 관리</h2>
 						</div>
+						<form action="/searchReserve.do" method="post">
+							<div class="searchWrap-reserve">
+								<div class="search-area">
+									<span class="searchName">이름</span>
+									<input type="text" name="keyword">
+									<input type="hidden" name="storeNo" value="${storeNo }">
+									<input type="hidden" name="reqPage" value="1">
+									<input type="submit" class="searchBtn" value="조회">
+									</button>
+								</div>
+							</div>
+						</form>
 						<table class="table" style="text-align: center; vertical-align: middle;">
 							<tr>
 								<th class="th" scope="col">예약 번호</th>
@@ -70,17 +83,7 @@
 								</tr>
 							</c:forEach>
 						</table>
-						<form action="/searchReserve.do" method="post">
-							<div class="searchWrap-reserve">
-								<div class="search-area">
-									<input type="text" name="keyword">
-									<input type="hidden" name="storeNo" value="${storeNo }">
-									<input type="hidden" name="reqPage1" value="1">
-									<input type="submit" class="searchBtn" value="이름 조회">
-									</button>
-								</div>
-							</div>
-						</form>
+
 					</div>
 				</div>
 				<div class="page">${pageNavi }</div>

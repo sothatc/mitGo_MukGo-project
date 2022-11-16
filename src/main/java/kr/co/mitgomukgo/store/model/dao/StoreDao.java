@@ -90,7 +90,11 @@ public class StoreDao {
 
 	public ArrayList<Store> searchStoreList(HashMap<String, Object> map) {
 		List list = sqlSession.selectList("store.searchStoreList",map);
-		return (ArrayList<Store>)list;
+		if(!list.isEmpty()) {
+			return (ArrayList<Store>)list;
+		}else {
+			return null;
+		}
 	}
 	
 	//예약하기
@@ -129,6 +133,10 @@ public class StoreDao {
 		return (ArrayList<Reserve>)list;
 	}
 	
+	//예약된 좌석 수 확인하기
+	public int checkCountNum(HashMap<String, Object> map) {
+		return sqlSession.selectOne("store.checkCountNum",map);
+	}
 	
 	//맛집 상세 - 메뉴조회
 	public ArrayList<Menu> selectMenuList(int storeNo) {
@@ -192,6 +200,13 @@ public class StoreDao {
 		List list = sqlSession.selectList("selectRandomReviewList");
 		return (ArrayList<Review>) list;
 	}
+
+	public ArrayList<Store> selectRandomStoreList() {
+		List list = sqlSession.selectList("selectRandomStoreList");
+		return (ArrayList<Store>) list;
+	}
+	
+
 
 
 }

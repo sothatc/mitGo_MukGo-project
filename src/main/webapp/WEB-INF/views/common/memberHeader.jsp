@@ -5,6 +5,7 @@
 .etc {
 	padding: 10px 1.25rem !important;
 }
+
 .list-wrap>.titleShow {
 	font-size: 13px;
 }
@@ -18,10 +19,10 @@
 					<a href="#">장바구니</a>
 				</div>
 				<div>
-					<a href="/reserveList.do">예약 내역</a>
+					<a href="/reserveList.do?reqPage=1">예약 내역</a>
 				</div>
 				<div>
-					<a href="/orderList.do">주문 내역</a>
+					<a href="/orderList.do?reqPage=1">주문 내역</a>
 				</div>
 				<div>
 					<a href="/updateMemberFrm.do">내 정보 수정</a>
@@ -37,9 +38,9 @@
 			<li>
 				<h4>공지사항</h4>
 				<c:forEach items="${ncList }" var="n">
-				<div class="list-wrap">
-					<a href="/noticeDetail.do?noticeNo=${n.noticeNo }" class="titleShow">${n.noticeTitle }</a>
-				</div>
+					<div class="list-wrap">
+						<a href="/noticeDetail.do?noticeNo=${n.noticeNo }" class="titleShow">${n.noticeTitle }</a>
+					</div>
 				</c:forEach>
 			</li>
 		</ul>
@@ -48,10 +49,10 @@
 <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
 
 <script>
-	$(".delMember").on("click",function(e){
-		if(confirm("탈퇴 하시겠습니까?") == true) {
+	$(".delMember").on("click", function(e) {
+		if (confirm("탈퇴 하시겠습니까?") == true) {
 			alert("탈퇴되었습니다.");
-		}else {
+		} else {
 			e.preventDefault();
 			return;
 		}
