@@ -48,9 +48,6 @@
 					<a class="nav-link" href="/index.jsp">Home</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="/index2.jsp">인덱스이동(임시)</a>
-				</li>
-				<li class="nav-item">
 					<a class="nav-link" href="/storeList.do?reqPage=1">GOGO리스트</a>
 				</li>
 				<li class="nav-item">
