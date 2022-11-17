@@ -21,7 +21,7 @@
 		where member_id= #{memberId}
 </select>
 
-<select id="orderCart" parameterType="string" resultType="c">
+<select id="cartOrder" parameterType="string" resultType="c">
 		select 
 		cart_no as cartNo,
 		member_id as memberId,
