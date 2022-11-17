@@ -177,7 +177,7 @@
 				return;
 			}
 			$("[name=ownerCheckId]").val(ownerId);
-			const popup = window.open("","ownerCheckId","left=700px, top=300px, width=300px, height=200px, menubar=no, status=no, scrollbars=yes");
+			const popup = window.open("","ownerCheckId","left=700px, top=300px, width=500px, height=200px, menubar=no, status=no, scrollbars=yes");
 			//새창에서 form을 전송하기 위한 연결작업
 			$("[name=ownerCheckIdFrm]").attr("target","ownerCheckId");
 			$("[name=ownerCheckIdFrm]").submit();
@@ -296,6 +296,7 @@
 			}else {
 				nameComment.text("* 한글로 2~5자리 이내로 입력해주세요.");
 				nameComment.css("color","red");
+				alert("이름을 입력해주세요.");
 				event.preventDefault();
 			}
 			//아아디 유효성검사
@@ -309,6 +310,7 @@
 			}else {
 				idComment.text("* 4~20자리 이내로 입력해주세요.");
 				idComment.css("color","red");
+				alert("아이디를 입력해주세요.");
 				event.preventDefault();
 			}
 			//비밀번호 유효성 검사
@@ -321,6 +323,7 @@
 			}else {
 				pwComment.text("* 대/소문자와 숫자를 포함한 최소 8자리를 입력해주세요.(특수문자x)");
 				pwComment.css("color","red");
+				alert("비밀번호를 입력해주세요.");
 				event.preventDefault();
 			}
 			// 비밀번호 확인 검사

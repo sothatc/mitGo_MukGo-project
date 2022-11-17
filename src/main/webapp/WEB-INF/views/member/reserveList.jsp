@@ -148,8 +148,8 @@
          $(location).attr('href', "/cancleReserve.do?reserveNo=" + reserveNo);
       }
    });
-   
-   if($(".nullChk").val() == null) {
+   const nullChk = $(".nullChk").val();
+   if(nullChk == "") {
       alert("예약 내역이 존재하지 않습니다.");
    }
    </script>
