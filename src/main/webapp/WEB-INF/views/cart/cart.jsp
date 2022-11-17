@@ -156,7 +156,7 @@
                 </div>
                 
              <div class="cart-btn">
-                     <button type="button" id="font">계속 쇼핑하기</button>
+                     <button type="button" id="font" onclick="location.href='/marketMain.do?reqPage=1&pCategory=10'">계속 쇼핑하기</button>
 	                 
                     <button type="button" class="payBtn" onclick="goToOrder('${sessionScope.m.memberId }');">주문하러 가기</button>
                  </div>
