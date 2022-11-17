@@ -27,8 +27,8 @@ public class CartDao {
 
 
 
-	public ArrayList<Cart> cartList(Cart c) {
-		List list = sqlSession.selectList("cart.cartList", c);
+	public ArrayList<Cart> cartList(String memberId) {
+		List list = sqlSession.selectList("cart.cartList", memberId);
 		return (ArrayList<Cart>) list;
 	}
 

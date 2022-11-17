@@ -18,7 +18,6 @@
 				</p>
 			</div>
 			<div class="col-auto social-icons">
-				<a href="#"><i class='bx bx-cart'></i></a> <a href="#"><i class='bx bx-bookmark-heart'></i></a> 			
 			<c:choose>
 				<c:when test="${empty sessionScope.m && empty sessionScope.o}">
 				</c:when>
@@ -27,6 +26,8 @@
 						<a href="/ownerLogout.do"><i class='bx bx-log-out' style="color: green;"></i></a>
 					</c:if>
 					<c:if test="${not empty sessionScope.m}">
+						<a href="/cart.do"><i class='bx bx-cart'></i></a>
+						<a href="#"><i class='bx bx-bookmark-heart'></i></a> 	
 						<a href="/logout.do"><i class='bx bx-log-out' style="color: green;"></i></a>
 					</c:if>
 				</c:otherwise>
