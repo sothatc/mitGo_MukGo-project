@@ -140,8 +140,9 @@
                  		   <tr>
 		                      	<td colspan="6"></td>
 		                      	
-		                      	<td>
+		                      	<td style="font-weight: 600;">
 		                      		<input type="hidden" style="border:none;" class="hiddenPayPrice payPrice" name="productsPrice" readonly>
+		                      		<p style="float: left; margin-right: 5px;">총 합계 : </p>
 		                      		<p id="font" class="lastPrice" style="float:left;"></p>
 		                      		<p id="font" style="float:left;">원</p>
 		                    </td>
