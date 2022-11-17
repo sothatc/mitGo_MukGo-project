@@ -105,14 +105,18 @@
                            <td>${rs.eatDate }</td>
                            <td>${rs.eatTime }</td>
                            <td>
-                              <c:choose>
-                                 <c:when test="${0 eq rs.RStatus }">
-                                    <button type="button" class="reviewBtn" onclick="WirteReview(this,${rs.reserveNo},${rs.storeNo},'${rs.storeName }')">리뷰쓰기</button>
-                                 </c:when>
-                                 <c:otherwise>
-                                    <button type="button" class="reviewBtn" onclick="updateReview(this,${rs.reserveNo},${rs.storeNo},'${rs.storeName }')">리뷰수정</button>
-                                 </c:otherwise>
-                              </c:choose>
+                           <c:choose>
+                           	<c:when test="${rs.visitStatus == 2}">
+	                              <c:choose>
+	                                 <c:when test="${0 eq rs.RStatus }">
+	                                    <button type="button" class="reviewBtn" onclick="WirteReview(this,${rs.reserveNo},${rs.storeNo},'${rs.storeName }')">리뷰쓰기</button>
+	                                 </c:when>
+	                                 <c:otherwise>
+	                                    <button type="button" class="reviewBtn" onclick="updateReview(this,${rs.reserveNo},${rs.storeNo},'${rs.storeName }')">리뷰수정</button>
+	                                 </c:otherwise>
+	                              </c:choose>
+                           	</c:when>
+	                       </c:choose>
                            <td>
                               <button type="button" class="cancleBtn">취소</button>
                            </td>

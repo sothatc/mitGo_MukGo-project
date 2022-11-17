@@ -19,6 +19,11 @@ public class OrderService {
 	      // TODO Auto-generated method stub
 	      return dao.insertOrder(or);
 	   }
+
+	public int orderNext(Order r) {
+		return dao.orderNext(r);
+		
+	}
 	
 
 //	@Transactional

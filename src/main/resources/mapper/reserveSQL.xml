@@ -12,7 +12,8 @@
          reserve_date as reserveDate,
          eat_date as eatDate,
          eat_time as eatTime,
-         (select count(*) from review rv where rv.reserve_no=r.reserve_no) as rStatus
+         (select count(*) from review rv where rv.reserve_no=r.reserve_no) as rStatus,
+         visit_status as visitStatus
        from reserve r
       where member_no = #{memberNo}
       order by reserve_no desc)n)

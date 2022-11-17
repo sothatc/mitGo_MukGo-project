@@ -25,13 +25,15 @@
 	insert into order_tbl values(
 	order_seq.nextval,
 	#{memberId},
-	null,
-	to_char(sysydate,'yyyy-mm-dd'),
+	#{pNo},
+	to_char(sysdate,'yyyy-mm-dd'),
 	#{orderQuan},
 	#{orderPrice},
 	'배송준비중',
 	#{shippingName},
-	'ㅇㅇ'
+	#{shippingPhone},
+	#{shippingAddr},
+	#{impUid}
 	
 	)
     </insert>
@@ -108,6 +110,11 @@
 			</when>		
 		</choose>
 	</select>
+
+	<delete id="cancleOrder" parameterType="int">
+		delete from order_tbl where order_no = #{orderNo}
+	</delete>
+
 
 </mapper>
 

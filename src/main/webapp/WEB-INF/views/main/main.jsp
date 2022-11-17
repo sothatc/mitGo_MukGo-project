@@ -29,68 +29,12 @@
 					<div class="col-12 col-lg-10 offset-lg-1 text-white">
 						<h6 class="text-white text-uppercase" id="font">맛집리스트를 집에서도</h6>
 						<h1 class="display-3 my-4">GOGO마켓 <br />신선, 간편, 프리미엄 밀키트
-						</h1> <a href="/marketMain.do?reqPage=1" class="btn btn-brand" id="font">상품보러가기</a>
+						</h1> <a href="/marketMain.do?reqPage=1&pCategory=10" class="btn btn-brand" id="font">상품보러가기</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<!-- ABOUT -->
-	<section id="recommend" class="text-center">
-		<div class="recommend">
-			<div class="dropdown-label">나는</div>
-			<div class="dropdown">
-				<button class="dropbtn">
-					<span class="dropbtn_click">
-						<img class="mini" src="/resources/img/index/who친구.svg">친구와
-					</span>
-				</button>
-				<div class="dropdown-content">
-					<option value="withwho">친구와</option>
-					<option value="withwho">가족과</option>
-					<option value="withwho">연인과</option>
-				</div>
-			</div>
-			<div class="dropdown-label2">함께</div>
-			<div class="dropdown2">
-				<button class="dropbtn2">
-					<span class="dropbtn_click2">
-						<img class="mini" src="/resources/img/index/where분위기.svg">분위기 좋은 곳
-					</span>
-				</button>
-				<div class="dropdown-content2">
-					<option value="where">분위기 좋은 곳</option>
-					<option value="where">트렌디한 곳</option>
-					<option value="where">조용한 곳</option>
-				</div>
-			</div>
-			<div class="dropdown-label3">에서</div>
-
-
-
-
-
-
-			<div class="dropdown3">
-				<button class="dropbtn3">
-					<span class="dropbtn_click3">
-						<img class="mini" src="/resources/img/index/what일식.png">일식을
-					</span>
-				</button>
-
-				<div class="dropdown-content3">
-					<option value="which">일식을</option>
-					<option value="which">양식을</option>
-					<option value="which">한식을</option>
-				</div>
-			</div>
-			<div class="dropdown-label4">먹고싶어요</div>
-			<div class="dropdown-label5">
-				<img src="/resources/img/index/싶어요!.png">
-			</div>
-		</div>
-	</section>
 
 	<!-- MILESTONE -->
 	<section id="milestone">

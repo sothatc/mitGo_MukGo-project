@@ -755,7 +755,7 @@ public class MemberService {
 		return dao.deleteMember(memberNo);
 	}
 
-	public HashMap<String, Object> selectAllOrderList(int reqPage, int memberNo) {
+	public HashMap<String, Object> selectAllOrderList(int reqPage, String memberId) {
 		// 화면에 보여주는 게시물 수
 		int numPerPage = 10;
 		
@@ -768,9 +768,9 @@ public class MemberService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
-		map.put("memberNo", memberNo);
+		map.put("memberId", memberId);
 		ArrayList<Order> list = dao.selectAllOrderList(map);
-		int totalCnt = dao.countReserveList(memberNo);
+		int totalCnt = dao.countOrderList(memberId);
 		int totalPage = 0;
 		if(totalCnt % numPerPage == 0) {
 			totalPage = totalCnt / numPerPage;
@@ -843,6 +843,10 @@ public class MemberService {
 
 
 
+
+	public int cancleOrder(int orderNo) {
+		return dao.cancleOrder(orderNo);
+	}
 
 
 

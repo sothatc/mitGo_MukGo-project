@@ -587,16 +587,28 @@ public class MemberController {
 	@RequestMapping(value="/orderList.do")
 	public String orderList(HttpSession session, int reqPage, Model model) {
 		Member m = (Member)session.getAttribute("m");
-		int memberNo = m.getMemberNo();
-		HashMap<String, Object> map = service.selectAllOrderList(reqPage, memberNo);
+		String memberId = m.getMemberId();
+		HashMap<String, Object> map = service.selectAllOrderList(reqPage, memberId);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
 		model.addAttribute("pageNavi", map.get("pageNavi"));
 		model.addAttribute("total", map.get("total"));
 		model.addAttribute("pageNo", map.get("pageNo"));
-		model.addAttribute("memberNo", memberNo);
+		model.addAttribute("memberId", memberId);
 		return "member/orderList";
 	}
-	
+	@RequestMapping(value="/cancleOrder.do")
+	public String cancleOrder(int orderNo, HttpServletRequest request) {
+		int result = service.cancleOrder(orderNo);
+		if(result > 0) {
+			request.setAttribute("msg", "주문이 취소되었습니다.");
+			request.setAttribute("url", "/orderList.do?reqPage=1");
+			return "common/alert";
+		} else {
+			request.setAttribute("msg", "취소 중 문제가 발생했습니다.");
+			request.setAttribute("url", "/orderList.do?reqPage=1");
+			return "common/alert";
+		}
+	}
 }
 
