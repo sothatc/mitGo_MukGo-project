@@ -73,6 +73,30 @@
 		line-height: 34px;
 	}
 	
+	.category{
+		width: 1000px;
+		margin: 0 auto;
+		text-align: center;
+		margin-top: 50px;
+		margin-bottom: 50px;
+		font-size: 50px;
+	}
+	
+	.category>a{
+		display: inline-block;	
+		text-decoration: none;
+		color : lightgray;
+		font-weight: bold;
+	}
+	
+	.category>a:first-child {
+		margin-right: 30px;
+	}
+	
+	.category>a:last-child{
+		margin-left: 30px;
+	}
+	
 </style>
 </head>
 <body>
@@ -81,6 +105,16 @@
 	<div class="bookmarkList-wrap">
         <div class="bookmark-title">
             <h1>내 찜목록</h1>
+        </div>
+        
+        <div class="category">
+        	<a href="/selectAllStoreBookmark.do?reqPage=1">
+        		맛집
+        	</a>
+        	
+        	<a href="/myBookmarkList.do?bookMarkId=${sessionScope.o.ownerId }&reqPage=1" style="color: gold;">
+        		마켓
+        	</a>
         </div>
         
         <c:choose>

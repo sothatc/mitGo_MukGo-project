@@ -73,7 +73,6 @@ public class MemberController {
 		  		String ran = Integer.toString(rand.nextInt(10)); 
 				numStr += ran;
 			}
-		  
 		  HashMap<String, String> set = new HashMap<String, String>();
 		  set.put("to", phone); // 수신번호
 
@@ -161,12 +160,14 @@ public class MemberController {
 	}
 	@RequestMapping(value="/join.do")
 	public String join(Member m) {
+		String memberPhone = m.getMemberPhone();
 		int result = service.insertMember(m);
 		if(result > 0) {
 			return "redirect:/";
 		}else {
 			return "member/joinFrm";
 		}
+		
 	}
 	@RequestMapping(value="/login.do")
 	public String login(Member member, HttpSession session, HttpServletRequest request) {
@@ -610,6 +611,9 @@ public class MemberController {
 		model.addAttribute("total", map.get("total"));
 		model.addAttribute("pageNo", map.get("pageNo"));
 		model.addAttribute("memberId", memberId);
+		model.addAttribute("uidCntList", map.get("uidCnt"));
+		System.out.println(map.get("list"));
+		System.out.println(map.get("uidCnt"));
 		return "member/orderList";
 	}
 	@RequestMapping(value="/cancleOrder.do")

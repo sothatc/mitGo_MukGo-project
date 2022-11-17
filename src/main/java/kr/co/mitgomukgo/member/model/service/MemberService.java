@@ -823,14 +823,14 @@ public class MemberService {
 		          pageNavi +="</a></li>";
 		       }
 			pageNavi += "</ul>";
-		
+		ArrayList<Order> uidCnt = dao.uidCnt(memberId);
 		HashMap<String, Object> searchMap = new HashMap<String, Object>();
 		searchMap.put("list", list);
 		searchMap.put("reqPage", reqPage);
 		searchMap.put("pageNavi", pageNavi);
 		searchMap.put("total", totalPage);
 		searchMap.put("pageNo", pageNo);
-		
+		searchMap.put("uidCnt", uidCnt);
 		return searchMap;
 		
 	}
@@ -849,11 +849,11 @@ public class MemberService {
 	
 
 
-
-
 	public int cancleOrder(int orderNo) {
 		return dao.cancleOrder(orderNo);
 	}
+
+
 
 
 

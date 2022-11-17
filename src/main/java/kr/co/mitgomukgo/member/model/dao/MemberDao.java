@@ -263,6 +263,14 @@ public class MemberDao {
 		return sqlSession.delete("order.cancleOrder",orderNo);
 	}
 
+	public ArrayList<Order> uidCnt(String memberId) {
+		List list = sqlSession.selectList("order.uidCnt", memberId);
+		return (ArrayList<Order>) list;
+	}
+
+
+
+
 
 	
 
