@@ -15,6 +15,7 @@ import kr.co.mitgomukgo.member.model.vo.Member;
 import kr.co.mitgomukgo.member.model.vo.Owner;
 import kr.co.mitgomukgo.notice.model.vo.Notice;
 import kr.co.mitgomukgo.order.model.vo.Order;
+import kr.co.mitgomukgo.order.model.vo.OrderList;
 import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import net.nurigo.java_sdk.api.Message;
@@ -67,7 +68,7 @@ public class MemberService {
 		return dao.updateMember(m);
 	}
 
-	//내윤: 예약관리
+	//예약관리
 	public HashMap<String, Object> selectReserveList(int reqPage, int memberNo) {
 		int numPerPage = 7;
 		int end = numPerPage * reqPage;
@@ -498,7 +499,7 @@ public class MemberService {
 	//최고관리자 > 회원관리 > 검색기능
 	public HashMap<String, Object> searchMember(String type, String keyword, int reqPage) {
 	
-		
+	
 		int numPerPage = 7;
 		int end = numPerPage * reqPage;
 		int start = (end-numPerPage)+1;
@@ -563,6 +564,146 @@ public class MemberService {
 			}
 	}
 	
+	
+	//업주관리> 주문관리
+	public HashMap<String, Object> selectAllOrderListOwner(int reqPage, int ownerNo) {
+		int numPerPage = 7;
+		int end = numPerPage * reqPage;
+		int start = (end-numPerPage)+1;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("ownerNo", ownerNo);
+		ArrayList<OrderList> list = dao.selectAllOrderListOwner(map);
+		int totalPage = dao.countAllOrder(ownerNo);
+		int totalMan = 0;
+		if(totalPage % numPerPage == 0) {
+			totalMan = totalPage / numPerPage;
+		}else {
+			totalMan = totalPage / numPerPage + 1;
+		}
+		
+		// 페이지 네비 사이즈
+		int pageNaviSize = 5;
+		
+		// 페이지 시작 번호
+		int pageNo = 1;
+		
+		if(reqPage > 3) {
+			pageNo = reqPage - 2;
+		}
+		
+		// 페이지 내비 시작
+		String pageNavi = "";
+		if(pageNo != 1) {
+			pageNavi += "<a href='/ownerOrderManageFrm.do?reqPage=" + (pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+					"            chevron_left\r\n" + 
+					"            </span></a>";
+		}
+		
+		for(int i = 0; i < pageNaviSize; i++) {
+			if(reqPage == pageNo) {
+				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
+			}else {
+				pageNavi += "<a href='/ownerOrderManageFrm.do?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+			}
+			pageNo++;
+			if(pageNo > totalMan) {
+				break;
+			}
+		}
+			
+			// 다음버튼
+			if(pageNo <= totalMan) {
+				pageNavi += "<a href='/ownerOrderManageFrm.do?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+						"            chevron_right\r\n" + 
+						"            </span></a>"; 
+			}
+			
+			
+			HashMap<String, Object> orderMap = new HashMap<String, Object>();
+			orderMap.put("list", list);
+			orderMap.put("reqPage", reqPage);
+			orderMap.put("pageNavi", pageNavi);
+			orderMap.put("total", totalPage);
+			orderMap.put("pageNo", pageNo);
+			
+			
+			if(list == null) {
+				return null;
+			}else {
+				return orderMap;
+			}
+		
+	}
+	
+	//업주관리> 주문관리> 검색기능
+	public HashMap<String, Object> searchOrderOwnerList(int reqPage, int ownerNo, String type, String keyword) {
+		int numPerPage = 7;
+		int end = numPerPage * reqPage;
+		int start = (end-numPerPage)+1;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("type", type);
+		map.put("keyword", keyword);
+		map.put("start", start);
+		map.put("end", end);
+		map.put("ownerNo", ownerNo);
+		
+		ArrayList<OrderList> list = dao.searchOrderOwnerList(map);
+		int totalPage = dao.searchOrderOwnerListCount(map);
+		int totalMan = 0;
+		if(totalPage % numPerPage == 0) {
+			totalMan = totalPage / numPerPage;
+		}else {
+			totalMan = totalPage / numPerPage + 1;
+		}
+		// 페이지 네비 사이즈
+		int pageNaviSize = 5;
+		
+		// 페이지 시작 번호
+		int pageNo = 1;
+		
+		// 페이지 내비 시작
+				String pageNavi = "";
+				if(pageNo != 1) {
+					pageNavi += "<a href='/searchOrderOwnerList.do?reqPage=" + (pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+							"            chevron_left\r\n" + 
+							"            </span></a>";
+				}
+				
+				for(int i = 0; i < pageNaviSize; i++) {
+					if(reqPage == pageNo) {
+						pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
+					}else {
+						pageNavi += "<a href='/searchOrderOwnerList.do?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+					}
+					pageNo++;
+					if(pageNo > totalMan) {
+						break;
+					}
+				}
+					
+					// 다음버튼
+					if(pageNo <= totalMan) {
+						pageNavi += "<a href='/searchOrderOwnerList.do?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+								"            chevron_right\r\n" + 
+								"            </span></a>"; 
+					}
+					
+					
+					HashMap<String, Object> orderMap = new HashMap<String, Object>();
+					orderMap.put("list", list);
+					orderMap.put("pageNavi", pageNavi);
+
+					
+					if(list == null) {
+						return null;
+					}else {
+						return orderMap;
+					}
+	}
+	
 
 	public int updateReserve(Reserve rs) {
 		
@@ -614,7 +755,7 @@ public class MemberService {
 		return dao.deleteMember(memberNo);
 	}
 
-	public HashMap<String, Object> selectAllOrderList(int reqPage, int memberNo) {
+	public HashMap<String, Object> selectAllOrderList(int reqPage, String memberId) {
 		// 화면에 보여주는 게시물 수
 		int numPerPage = 10;
 		
@@ -627,9 +768,9 @@ public class MemberService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
-		map.put("memberNo", memberNo);
+		map.put("memberId", memberId);
 		ArrayList<Order> list = dao.selectAllOrderList(map);
-		int totalCnt = dao.countReserveList(memberNo);
+		int totalCnt = dao.countOrderList(memberId);
 		int totalPage = 0;
 		if(totalCnt % numPerPage == 0) {
 			totalPage = totalCnt / numPerPage;
@@ -697,6 +838,14 @@ public class MemberService {
 
 	public String selectJoinedOwner(Owner owner) {
 		return dao.selectJoinedOwner(owner);
+	}
+	
+
+
+
+
+	public int cancleOrder(int orderNo) {
+		return dao.cancleOrder(orderNo);
 	}
 
 

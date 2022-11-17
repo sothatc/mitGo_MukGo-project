@@ -135,9 +135,11 @@
                 
                 <div class="page-title order-title" id="font">주문정보</div>
                 <div class="order-info" id="font">
+                <input type="hidden" id="cart-price-sum" name="orderPrice">
                     <div class="order-box">
                         <label for="name" class="order-label">주문자명</label>
                         <input type="text" id="orderName" class="order-input medium" value="${sessionScope.m.memberName }">
+                        <input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
                     </div>
                     <div class="order-box">
                         <label for="phone" class="order-label">전화번호</label>
@@ -147,8 +149,7 @@
                 </div>
                 <c:forEach items="${list }" var="Order">
 				<input type="hidden" id="cart-quantity-sum" name="orderQuan" value="${Order.cartQuan }">
-				<input type="hidden" id="cart-price-sum" name="orderPrice" value="${Order.PPrice }">
-				<input type="hidden" id="cart-price-sum" name="pNo" value="${Order.PNo }">
+				<input type="hidden" name="pNo" value="${Order.PNo }">
 				</c:forEach>
 				
                <div class="page-title order-title">배송정보</div>
@@ -345,7 +346,8 @@ function sum(){
     let result = 0;
     for(let i=0; i<cartTotalPrice.length; i++){
        result += Number(cartTotalPrice.eq(i).text());
-    }        
+    }
+    $("#cart-price-sum").val(result)
     $(".payPrice").val(result);
     const lastPrice = $(".lastPrice");
     const ViewPrice = result.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
