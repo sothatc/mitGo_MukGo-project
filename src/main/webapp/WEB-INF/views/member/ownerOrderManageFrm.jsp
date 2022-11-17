@@ -81,7 +81,8 @@
 								<th scope="col">주문일자</th>
 								<th scope="col">수량</th>
 								<th scope="col">주문금액</th>
-								<th scope="col">주문상태</th>								
+								<th scope="col">주문상태</th>
+								<th scope="col">처리</th>							
 							</tr>
 							<c:forEach items="${list }" var="ol">
 							<tr>
@@ -91,7 +92,35 @@
 								<td>${ol.orderDate}</td>
 								<td>${ol.orderQuan}</td>
 								<td>${ol.PPrice}</td>
-								<td>${ol.orderStatus}</td>
+								
+								<form action="/updateOrderLevel.do?orderNo=${ol.orderNo}&reqPage=1" method="post">
+								<td class="orderStatusTd">
+									<c:choose>
+					                    <c:when test="${ol.orderStatus eq '배송준비중'}">
+					                    	<select name="orderStatus" class="selectbox">
+					                            <option value="배송준비중" selected>배송준비중</option>
+					                            <option value="배송중">배송중</option>
+					                            <option value="배송완료">배송완료</option>
+					                        </select>
+			                    		</c:when>
+			                    		<c:when test="${ol.orderStatus eq  '배송중'}">
+					                    	<select name="orderStatus" class="selectbox">
+					                            <option value="배송준비중">배송준비중</option>
+					                            <option value="배송중" selected>배송중</option>
+					                            <option value="배송완료">배송완료</option>
+					                        </select>
+			                    		</c:when>
+			                    		<c:when test="${ol.orderStatus eq '배송완료'}">
+					                    	<select name="orderStatus" class="selectbox">
+					                            <option value="배송준비중">배송준비중</option>
+					                            <option value="배송중">배송중</option>
+					                            <option value="배송완료" selected>배송완료</option>
+					                        </select>
+			                    		</c:when>
+			                    	</c:choose>		
+								</td>
+								<td><button class="saveBtn" type="submit">확정</button></td>
+								</form>
 							</tr>
 							</c:forEach>
 						</table>
@@ -102,5 +131,12 @@
 		</article>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+	<script>
+		$(".saveBtn").on("click",function(){
+			var selectValue= $(".selectbox").val();
+			
+			
+		});
+	</script>
 </body>
 </html>

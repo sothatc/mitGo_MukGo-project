@@ -442,6 +442,19 @@ public class MemberController {
 		}
 	}
 	
+	//업주 > 주문관리> 배송상태 지정
+	@RequestMapping(value="/updateOrderLevel.do")
+	public String updateOrderLevel(OrderList ol) {
+		System.out.println("주문번호"+ol);
+		int result = service.updateOrderLevel(ol);
+		if(result>0) {
+			return "redirect:/ownerOrderManageFrm.do?reqPage=1";
+		}else {
+			return "redirect:/";
+		}
+	}
+	
+	
 
 	@RequestMapping(value = "/cancleReserve.do")
 	public String cancleReserve(int reserveNo, HttpServletRequest request) {
