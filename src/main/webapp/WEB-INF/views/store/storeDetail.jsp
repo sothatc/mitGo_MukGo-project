@@ -73,9 +73,49 @@ height: 100%;
           <span style=" margin-left:20px; font-weight: lighter;">${s.content }</span>
           <div style="margin-right:0; float:right;">
             <a class="material-symbols-rounded share pointer" id="share">share</a>
-           
-            
-            
+
+            <c:choose>
+            	<c:when test="${empty sbm }">
+            		<c:choose>
+            			<c:when test="${!empty sessionScope.m }">
+		                  
+		                  <span class="material-icons" id="bookMark" onclick="addBookmark(this, ${s.storeNo}, '${sessionScope.m.memberId }')">
+												bookmark
+											</span>
+											
+							<span class="material-icons" id="bookMark1" style="color: gold; display: none;" onclick="deleteBookmark(this, ${s.storeNo}, '${sessionScope.m.memberId }')">
+												bookmark
+											</span>
+		               </c:when>
+		               
+		               <c:otherwise>
+		               		
+		               </c:otherwise>
+            		</c:choose>
+            		
+            	</c:when>
+            	
+            	<c:otherwise>
+            		<c:choose>
+            			<c:when test="${!empty sessionScope.m }">
+		                  <span class="material-icons" id="bookMark1" style="color: gold;" onclick="deleteBookmark(this, ${s.storeNo}, '${sessionScope.m.memberId }')">
+												bookmark
+											</span>
+							
+							<span class="material-icons" id="bookMark" style="display: none;" onclick="addBookmark(this, ${s.storeNo}, '${sessionScope.m.memberId }')">
+												bookmark
+											</span>
+		               </c:when>
+		               
+		               <c:otherwise>
+		               		
+		               </c:otherwise>
+            		</c:choose>
+            		
+            	</c:otherwise>
+            	
+            </c:choose>
+
             </div>
          </div>
       </div>

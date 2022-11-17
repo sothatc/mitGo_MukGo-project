@@ -18,4 +18,27 @@
   	delete from
   	store_bookmark where store_no = #{storeNo} and bookmark_id = #{bookmarkId}
   </delete>
+  
+  <select id="selectBookmarkCnt" parameterType="string" resultType="int">
+  	select count(*) from store_bookmark where bookmark_id = #{bookmarkId}
+  </select>
+  
+  <select id="selectAllBookmark" parameterType="map" resultType="sbm">
+  	 select * from
+(select rownum as rnum, b.* from
+(select 
+    bm_no as bmNo,
+    store_no as storeNo,
+    bookmark_id as bookmarkId,
+     (select imgpath from store_img si where storeimg_no = (select
+      min(storeimg_no) from store_img si2 where si2.store_no = s.store_no))
+      as thumbNail,
+     (select store_name from store s1 where s1.store_no = s.store_no) as storeName
+    from store_bookmark s where bookmark_id = #{bookmarkId})b) where rnum between #{start} and #{end} order by 1 desc
+  </select>
+  
+  <delete id="deleteStoreBookMarkNo" parameterType="int">
+  	delete from
+  	store_bookmark where bm_no = #{bmNo}
+  </delete>
 </mapper>

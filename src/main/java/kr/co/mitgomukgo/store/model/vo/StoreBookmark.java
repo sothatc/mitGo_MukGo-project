@@ -11,6 +11,7 @@ public class StoreBookmark {
 	private int bmNo;
 	private int storeNo;
 	private String bookmarkId;
-	private String imgPath;
+	private String thumbNail;
+	private String storeName;
 
 }
