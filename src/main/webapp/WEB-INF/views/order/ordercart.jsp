@@ -151,8 +151,8 @@
                    
                 </div>
                 <c:forEach items="${list }" var="Order">
-				<input type="hidden" id="cart-quantity-sum" name="orderQuan" value="${Order.cartQuan }">
-				<input type="hidden" name="pNo" value="${Order.PNo }">
+				<input type="hidden" id="cart-quantity-sum" name="orderQuan1" value="${Order.cartQuan }">
+				<input type="hidden" name="pNo1" value="${Order.PNo }">
 				</c:forEach>
 				
                <div class="page-title order-title">배송정보</div>
