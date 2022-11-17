@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -101,10 +102,11 @@
 		                        
 		                        	<td style="text-align:center">${Cart.PName }</td>
 					            	<td class="pImg" style="text-align:center"><img src="/resources/upload/market/${Cart.PImg }"></td>
-						           	<td class="pPrice" style="text-align:center">${Cart.PPrice }</td>
+						           	<td class="pPrice" style="text-align:center"><fmt:formatNumber value="${Cart.PPrice}" pattern="#,###" /></td>
 						           	<td style="text-align:center">${Cart.cartQuan }</td>
 					            	<td class="shipping">무료</td>
-					            	<td style="text-align:center;" class="cartTotalPrice">${Cart.PPrice*Cart.cartQuan }</td>
+					            	<td style="text-align:center; display: none;" class="cartTotalPrice">${Cart.PPrice*Cart.cartQuan }</td>
+					            	<td style="text-align:center;"><fmt:formatNumber value="${Cart.PPrice*Cart.cartQuan }" pattern="#,###" /></td>
 								 		 
 					            	
 		                    </tr>
@@ -117,7 +119,8 @@
 		                      	
 		                      	<td>
 		                      		<input type="hidden" style="border:none;" class="hiddenPayPrice payPrice" name="productsPrice" readonly>
-		                      		<p id="font" class="lastPrice" style="float:left;"></p>
+		                      		<p id="font" class="lastPrice" style="float:left; display: none;"></p>
+		                      		<p id="font" class="viewPrice" style="float:left;"></p>
 		                      		<p id="font"class="totalp" style="float:left;">원</p>
 		                     </td>
 		                      
@@ -322,6 +325,7 @@ function sum(){
     const lastPrice = $(".lastPrice");
     const ViewPrice = result.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
     lastPrice.text(result);
+    $(".viewPrice").text(ViewPrice);
  }
 sum();
 </script>

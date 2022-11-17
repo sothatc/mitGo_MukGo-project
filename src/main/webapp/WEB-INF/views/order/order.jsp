@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -101,10 +102,10 @@
 		                        
 		                        	<td style="text-align:center">${Order.PName }</td>
 					            	<td class="pImg" style="text-align:center"><img src="/resources/upload/market/${Order.PImg }"></td>
-						           	<td class="pPrice" style="text-align:center">${Order.PPrice }</td>
+						           	<td class="pPrice" style="text-align:center"><fmt:formatNumber value="${Order.PPrice}" pattern="#,###" /></td>
 						           	<td style="text-align:center">${Order.cartQuan }</td>
 					            	<td class="shipping">무료</td>
-					            	<td style="text-align:center;" class="cartTotalPrice">${Order.PPrice*Order.cartQuan }</td>
+					            	<td style="text-align:center;" class="cartTotalPrice"><fmt:formatNumber value="${Order.PPrice*Order.cartQuan }" pattern="#,###" /></td>
 								 		 
 					            	
 		                    </tr>
@@ -119,7 +120,7 @@
 		                      		<input type="hidden" style="border:none;" class="hiddenPayPrice payPrice" name="productsPrice" readonly>
 		                      		<p class="lastPrice"></p>
 		                        </td>
-		                        <td id="font" >총 합계 : ${Order.PPrice*Order.cartQuan }원</td>
+		                        <td id="font" >총 합계 : <fmt:formatNumber value="${Order.PPrice*Order.cartQuan }" pattern="#,###" />원</td>
 		                        <input type="hidden" class="totalp" value=" ${Order.PPrice*Order.cartQuan }">
 	                      	</tr>
                      	</tbody>
