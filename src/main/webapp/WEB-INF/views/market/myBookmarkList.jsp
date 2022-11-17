@@ -139,7 +139,7 @@
 			                        </div>
 			                    </a>
 			                    <div class="delBtn">
-			                        <button type="button" class="btn btn-danger" onclick="deleteBookmark(this,${bm.bmNo})">삭제</button>
+			                        <button type="button" class="btn btn-danger" style="width: 80px;" onclick="deleteBookmark(this,${bm.bmNo})">삭제</button>
 			                    </div>
 			                </li>
             			</c:otherwise>

@@ -54,9 +54,11 @@ public class StoreController {
 
 	// 맛집 상세 보기
 	@RequestMapping(value = "/storeDetail.do")
-	public String StoreDetail(int storeNo, Model model, Menu m) {
-		Store s = service.selectOneStore(storeNo);
-		model.addAttribute("s", s);
+	public String StoreDetail(int storeNo, String bookmarkId, Model model, Menu m) {
+		HashMap<String, Object> map = service.selectOneStore(storeNo, bookmarkId);
+		model.addAttribute("s", map.get("s"));
+		model.addAttribute("sbm", map.get("sbm"));
+		
 		ArrayList<Menu> list = service.selectMenuList(storeNo);
 		model.addAttribute("list", list);
 		ArrayList<Review> reviewList = service.selectReviewList(storeNo);
@@ -65,7 +67,6 @@ public class StoreController {
 		model.addAttribute("mList", marketList);
 		return "store/storeDetail";
 	}
-	
 
 	// 맛집 이미지 배열로 가져오기
 	@ResponseBody

@@ -30,6 +30,22 @@ height: 100%;
    color: rgb(255, 83, 86) !important;
 }
 
+#bookMark{
+	margin-top : 7px;
+	font-size: 30px;
+}
+
+#bookMark1{
+	margin-top : 7px;
+	font-size: 30px;
+}
+
+#bookMark:hover{
+	cursor: pointer;
+	color: gold;
+	transition-duration : 0.4s;
+}
+
 </style>
 
 <body onload="initTmap()">
@@ -56,13 +72,70 @@ height: 100%;
                <span class="reviewNum" style="color:rgba(255, 83, 86, 0.99); margin-left:10px; float:left;" >★ ${s.rating }</span>
           <span style=" margin-left:20px; font-weight: lighter;">${s.content }</span>
           <div style="margin-right:0; float:right;">
+            <a class="material-symbols-rounded share pointer" id="share">share</a>
             <c:choose>
-              <c:when test="${!empty sessionScope.m }">
-                  <a class="material-symbols-rounded share pointer" id="share">share</a>
-                  <span class="material-symbols-rounded favorite pointer" id="favorite" style="display:none;">favorite</span>
-                  <span class="material-symbols-outlined unfavorite pointer" id="unfavorite" style="float:right; margin-top:10px; margin-right:15px;">favorite</span>
-               </c:when>
+            	<c:when test="${empty sbm }">
+            		<c:choose>
+            			<c:when test="${!empty sessionScope.m }">
+		                  
+		                  <span class="material-icons" id="bookMark" onclick="addBookmark(this, ${s.storeNo}, '${sessionScope.m.memberId }')">
+												bookmark
+											</span>
+											
+							<span class="material-icons" id="bookMark1" style="color: gold; display: none;" onclick="deleteBookmark(this, ${s.storeNo}, '${sessionScope.m.memberId }')">
+												bookmark
+											</span>
+		               </c:when>
+		               
+		               <c:when test="${!empty sessionScope.o }">
+		               		<span class="material-icons" id="bookMark" onclick="addBookmark(this, ${s.storeNo}, '${sessionScope.o.ownerId }')">
+												bookmark
+											</span>
+							
+							<span class="material-icons" id="bookMark1" style="color: gold; display: none;" onclick="deleteBookmark(this, ${s.storeNo}, '${sessionScope.m.memberId }')">
+												bookmark
+											</span>
+		               </c:when>
+		               
+		               <c:otherwise>
+		               		
+		               </c:otherwise>
+            		</c:choose>
+            		
+            	</c:when>
+            	
+            	<c:otherwise>
+            		<c:choose>
+            			<c:when test="${!empty sessionScope.m }">
+		                  <span class="material-icons" id="bookMark1" style="color: gold;" onclick="deleteBookmark(this, ${s.storeNo}, '${sessionScope.m.memberId }')">
+												bookmark
+											</span>
+							
+							<span class="material-icons" id="bookMark" style="display: none;" onclick="addBookmark(this, ${s.storeNo}, '${sessionScope.m.memberId }')">
+												bookmark
+											</span>
+		               </c:when>
+		               
+		               <c:when test="${!empty sessionScope.o }">
+		               		<span class="material-icons" id="bookMark1" style="color: gold;" onclick="deleteBookmark(this, ${s.storeNo}, '${sessionScope.m.memberId }')">
+												bookmark
+											</span>
+							
+							<span class="material-icons" id="bookMark" style="display: none;" onclick="addBookmark(this, ${s.storeNo}, '${sessionScope.m.memberId }')">
+												bookmark
+											</span>
+		               </c:when>
+		               
+		               <c:otherwise>
+		               		
+		               </c:otherwise>
+            		</c:choose>
+            		
+            	</c:otherwise>
+            	
             </c:choose>
+            
+            
             </div>
          </div>
       </div>
@@ -413,6 +486,34 @@ height: 100%;
       
       
       <script>
+      	// --------- 북마크 인서트
+      	function addBookmark(obj, storeNo, bookmarkId){
+      		$("#bookMark").hide();
+      		$("#bookMark1").show();
+      		
+      		$.ajax({
+      			url : "/insertStoreBookmark.do",
+      			type : "post",
+      			data : {storeNo : storeNo, bookmarkId : bookmarkId},
+      			success : function(data){
+      				console.log(data);
+      			}
+      		})
+      	}
+      	
+      	function deleteBookmark(obj, storeNo, bookmarkId){
+      		$("#bookMark1").hide();
+      		$("#bookMark").show();
+      		
+      		$.ajax({
+      			url : "/deleteStoreBookmark.do",
+      			type : "post",
+      			data : {storeNo : storeNo, bookmarkId : bookmarkId},
+      			success : function(data){
+      				console.log(data)
+      			}
+      		})
+      	}
                
        //----------카테고리
        // 1:한식 , 2: 양식, 3: 일식, 4: 중식, 5:분식, 6:육류, 7:씨푸드,8:디저트,9:기타
