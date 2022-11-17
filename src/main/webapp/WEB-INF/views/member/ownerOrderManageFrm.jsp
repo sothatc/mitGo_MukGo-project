@@ -11,6 +11,14 @@
 </head>
 <style type="text/css">
 
+
+	.saveBtn {
+	   background-color: rgb(51, 51, 51) !important;
+	   border: 1px solid rgb(51, 51, 51) !important;
+	   color: #fff !important;
+	   padding: 0 10px 0 10px !important;
+	   border-radius: 5px;
+	}
 	#pageNavi{
 		width: 800px;
 	    text-align: center;
