@@ -25,10 +25,14 @@ public class OrderController {
   }
  
  @RequestMapping(value = "/orderNext.do")
- public String orderNext(Order r, String shippingAddr1, String shippingAddr2) {
-	 r.setShippingAddr(shippingAddr1 +"*"+ shippingAddr2);
-	 int result = service.orderNext(r);
-	 System.out.println(r);
-	 return "order/ordercomplete";
- }
+     public String orderNext(Order r, String shippingAddr1, String shippingAddr2, int[] pNo1, int[] orderQuan1) {
+         r.setShippingAddr(shippingAddr1 + "*" + shippingAddr2);
+         for (int i = 0; i < pNo1.length; i++) {
+             r.setPNo(pNo1[i]);
+             r.setOrderQuan(orderQuan1[i]);
+             int result = service.orderNext(r);
+         }
+         System.out.println(r);
+         return "order/ordercomplete";
+     }
 }

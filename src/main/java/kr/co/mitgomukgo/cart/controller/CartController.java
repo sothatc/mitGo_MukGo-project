@@ -6,10 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import kr.co.mitgomukgo.cart.model.service.CartService;
 import kr.co.mitgomukgo.cart.model.vo.Cart;
+import kr.co.mitgomukgo.member.model.vo.Member;
 
 
 
@@ -33,8 +34,8 @@ public class CartController {
 	
 	   
 	   @RequestMapping(value="/cart.do")
-		public String cart(Model model, Cart c) {
-			ArrayList<Cart> list = service.cartList(c);
+		public String cart(Model model, Cart c, @SessionAttribute Member m) {
+			ArrayList<Cart> list = service.cartList(m.getMemberId());
 			model.addAttribute("list",list);
 			return "cart/cart";
 		}
