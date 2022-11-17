@@ -311,7 +311,7 @@ $("#payBtn").on("click",function(){
     }
 
 	
-const price = $(".lastPrice").val();
+const price = $(".lastPrice").text();
 console.log(price);
 const name = $("#orderName").val();
 const d = new Date();
@@ -349,7 +349,7 @@ function sum(){
     $(".payPrice").val(result);
     const lastPrice = $(".lastPrice");
     const ViewPrice = result.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-    lastPrice.text(ViewPrice);
+    lastPrice.text(result);
  }
 sum();
 </script>
