@@ -6,7 +6,7 @@
 		select count(*) as cnt from order_tbl where member_id = #{memberId}
 	</select>
 	<select id="selectAllOrderList" parameterType="map" resultType="or">
-		
+		<!-- 
 		select * from
         (select rownum as rnum, n.* 
         from (select 
@@ -23,7 +23,7 @@
 		where member_id = #{memberId}
 		order by 4 desc)n)
         where rnum between #{start} and #{end}
-		<!-- 
+		  -->
 		select order_no as orderNo,
 		    member_id as memberId,
 		    order_date as orderDate,
@@ -36,7 +36,7 @@
             imp_uid as impUid
         from order_tbl ot 
         where imp_uid in (select distinct imp_uid from order_tbl where member_id= #{memberId})
-        -->
+        
 	</select>
 	<select id="uidCnt" parameterType="string" resultType="ol">
 		select 
