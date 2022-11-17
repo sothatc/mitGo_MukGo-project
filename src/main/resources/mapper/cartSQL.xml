@@ -51,4 +51,11 @@
 	cart_Quan = cart_Quan + #{cartQuan}
 	where cart_no = #{cartNo}
 </update>
+
+<delete id="deleteCart" parameterType="c">
+	delete from cart
+	where member_id =#{memberId}
+	and p_no = #{pNo}
+
+</delete>
 </mapper>
