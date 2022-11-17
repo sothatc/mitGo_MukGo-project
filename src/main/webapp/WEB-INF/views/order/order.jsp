@@ -132,7 +132,7 @@
         </div>
             
             
-            <form id="order-form" action="/orderNext.do" method="post" autocomplete="off">
+            <form id="order-form" action="/orderDirect.do" method="post" autocomplete="off">
                 
                 <div class="page-title order-title" id="font">주문정보</div>
                 <div class="order-info" id="font">
