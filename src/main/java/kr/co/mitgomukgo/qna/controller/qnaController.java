@@ -320,6 +320,7 @@ public class qnaController {
 		}else {
 			model.addAttribute("list", map.get("list"));
 			model.addAttribute("pageNavi", map.get("pageNavi"));
+			model.addAttribute("keyword", keyword);
 			return "qna/qnaList";
 		}
 	}
