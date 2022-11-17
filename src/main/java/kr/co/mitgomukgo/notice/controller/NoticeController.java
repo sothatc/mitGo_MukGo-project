@@ -281,6 +281,7 @@ public class NoticeController {
 		}else {
 			model.addAttribute("list", list.get("list"));
 			model.addAttribute("pageNavi", list.get("pageNavi"));
+			model.addAttribute("keyword", keyword);
 			return "notice/noticeList";
 		}
 		

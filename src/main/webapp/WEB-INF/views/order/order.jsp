@@ -21,6 +21,7 @@
     background-color : #f5d575;
     text-align: center;
     color: white;
+    line-height: 60px;
     
 }
 
@@ -54,21 +55,21 @@
 <section id="services" class="text-center">
     <div class="container">
         <div class="row">
-            <div class="col-12">
+            <div class="col-12" style:>
                 <div class="intro" id="font">
                     <h1 id="font" >My Order</h1>
                     <h2 id="font">주문/결제</h2>
-                    <div class="cart-option">
+                    <div class="cart-option" style="width : 1300px; align: center;">
                     <div >
-                        <button type="button" id="cart-option">장바구니</button>
+                        <div id="cart-option">장바구니</div>
                     </div>
                     <div class="line"></div>
                     <div>
-                        <button type="button" id="cart-option" style=" background-color : #fdbe02;  color: black; font-weight: 600;">결제</button>
+                        <div id="cart-option" style=" background-color : #fdbe02;  color: black; font-weight: 600;">결제</div>
                     </div>
                     <div class="line"></div>
                     <div>
-                        <button type="button"  id="cart-option">주문완료</button>
+                        <div id="cart-option">주문완료</div>
                     </div>
                 </div>
                 </div>
@@ -132,7 +133,7 @@
         </div>
             
             
-            <form id="order-form" action="/orderNext.do" method="post" autocomplete="off">
+            <form id="order-form" action="/orderDirect.do" method="post" autocomplete="off">
                 
                 <div class="page-title order-title" id="font">주문정보</div>
                 <div class="order-info" id="font">

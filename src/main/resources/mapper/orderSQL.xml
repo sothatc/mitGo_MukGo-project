@@ -65,16 +65,14 @@
 	<!-- 업주 > 주문관리-->
 	<select id="selectAllOrderListOwner" parameterType="map" resultType="ol">
        select 
-		    order_no as orderNo,
+  			order_no as orderNo,
 		    member_id as memberId,
-		    p_no as pNo,
+           (select p_name from market_product mp where ot.p_no = mp.p_no) as pName,
 		    order_date as orderDate,
 		    order_quan as orderQuan,
+            (select p_price from market_product mp where ot.p_no = mp.p_no) as pPrice,
+            (select p_price from market_product mp where ot.p_no = mp.p_no)*order_quan as orderPrice,
 		    order_status as orderStatus,
-		    shipping_phone as shippingPhone,
-		    shipping_addr as shippingAddr,
-		    (select p_name from market_product mp where ot.p_no = mp.p_no) as pName,
-		    (select p_price from market_product mp where ot.p_no = mp.p_no) as pPrice,
             (select owner_no from market_product mp where ot.p_no = mp.p_no) as ownerNo
 		from (select rownum as rnum, n.* from (select * from order_tbl order by order_date desc) n) ot
         where  (select owner_no from market_product mp where ot.p_no = mp.p_no) = #{ownerNo}
@@ -129,9 +127,20 @@
 			</when>		
 		</choose>
 	</select>
+	
+	<!--업주 > 주문관리> 배송상태 지정  -->
+	<update id="updateOrder" parameterType="ol">
+		update order_tbl ot
+		set order_status =#{orderStatus}
+		where order_no = #{orderNo}
+	</update>
 
 	<delete id="cancleOrder" parameterType="int">
 		delete from order_tbl where order_no = #{orderNo}
+	</delete>
+	
+	<delete id="deleteCartAll" parameterType="String">
+		delete from cart where member_id = #{memberId}
 	</delete>
 
 

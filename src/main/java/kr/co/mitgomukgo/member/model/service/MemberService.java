@@ -424,6 +424,10 @@ public class MemberService {
 		return dao.updateOwnerLevel(ownerNo,o);
 	}
 	
+	//업주 > 주문관리> 배송상태 지정
+	public int updateOrderLevel(OrderList ol) {
+		return dao.updateOrderLevel(ol);
+	}
 	
 	//최고관리자 > 회원관리 
 	public HashMap<String, Object> selectMemberList(int reqPage) {
@@ -567,14 +571,16 @@ public class MemberService {
 	
 	//업주관리> 주문관리
 	public HashMap<String, Object> selectAllOrderListOwner(int reqPage, int ownerNo) {
-		int numPerPage = 7;
+		int numPerPage = 10;
 		int end = numPerPage * reqPage;
 		int start = (end-numPerPage)+1;
+
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
 		map.put("ownerNo", ownerNo);
 		ArrayList<OrderList> list = dao.selectAllOrderListOwner(map);
+
 		int totalPage = dao.countAllOrder(ownerNo);
 		int totalMan = 0;
 		if(totalPage % numPerPage == 0) {
@@ -593,7 +599,8 @@ public class MemberService {
 			pageNo = reqPage - 2;
 		}
 		
-		// 페이지 내비 시작
+		
+		//이전 버튼 ownerOrderManageFrm
 		String pageNavi = "";
 		if(pageNo != 1) {
 			pageNavi += "<a href='/ownerOrderManageFrm.do?reqPage=" + (pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 

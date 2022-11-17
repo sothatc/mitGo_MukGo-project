@@ -9,7 +9,7 @@
 	    #{cartQuan},
 	    #{pNo}
 		) </insert>
-<select id="cartList" parameterType="c" resultType="c">
+<select id="cartList" parameterType="string" resultType="c">
 		select 
 		cart_no as cartNo,
 		p_no as pNo, 

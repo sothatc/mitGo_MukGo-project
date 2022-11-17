@@ -83,6 +83,8 @@ public class faqController {
 			return "faq/faqList";
 		}else {
 			model.addAttribute("list", list);
+			model.addAttribute("type", type);
+			model.addAttribute("keyword", keyword);
 			return "faq/faqList";
 		}
 	}

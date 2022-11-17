@@ -18,15 +18,17 @@
 				</p>
 			</div>
 			<div class="col-auto social-icons">
-				<a href="#"><i class='bx bx-cart'></i></a> <a href="#"><i class='bx bx-bookmark-heart'></i></a> 			
 			<c:choose>
 				<c:when test="${empty sessionScope.m && empty sessionScope.o}">
 				</c:when>
 				<c:otherwise>
 					<c:if test="${not empty sessionScope.o}">
+						<a href="/myBookmarkList.do?bookMarkId=${sessionScope.o.ownerId }&reqPage=1"><i class='bx bx-bookmark-heart'></i></a>
 						<a href="/ownerLogout.do"><i class='bx bx-log-out' style="color: green;"></i></a>
 					</c:if>
 					<c:if test="${not empty sessionScope.m}">
+						<a href="/cart.do"><i class='bx bx-cart'></i></a>
+						<a href="/myBookmarkList.do?bookMarkId=${sessionScope.m.memberId }&reqPage=1"><i class='bx bx-bookmark-heart'></i></a> 	
 						<a href="/logout.do"><i class='bx bx-log-out' style="color: green;"></i></a>
 					</c:if>
 				</c:otherwise>
@@ -52,23 +54,6 @@
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="/marketMain.do?reqPage=1&pCategory=10">GOGO마켓</a>
-				</li>
-				
-				<li class="nav-item">
-					<c:choose>
-						<c:when test="${not empty sessionScope.m }">
-							<a class="nav-link" href="/myBookmarkList.do?bookMarkId=${sessionScope.m.memberId }&reqPage=1">내 찜목록</a>
-						</c:when>
-						
-						<c:when test="${not empty sessionScope.o }">
-							<a class="nav-link" href="/myBookmarkList.do?bookMarkId=${sessionScope.o.ownerId }&reqPage=1">내 찜목록</a>
-						</c:when>
-						
-						<c:otherwise>
-							
-						</c:otherwise>
-					</c:choose>
-					
 				</li>
 				
 				<li class="nav-item">
