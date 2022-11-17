@@ -20,8 +20,10 @@
 	width: 350px;
 	height: 35px;
 	margin-right: 20px;
-	border: solid 2px black;
-	border-radius: 20px;
+    margin-left: 20px;
+    border : none;
+	border-bottom: dotted 2px #ffc107;
+	
 	padding-left: 20px;
 }
 .storeList-searchinput>input::placeholder{
