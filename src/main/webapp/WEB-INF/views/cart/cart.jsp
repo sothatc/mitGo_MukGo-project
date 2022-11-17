@@ -71,15 +71,15 @@
                     <h2 id="font">주문/결제</h2>
                     <div class="cart-option">
                     <div>
-                        <button type="button" id="cart-option" style=" background-color : #fdbe02;  color: black; font-weight: 600;">장바구니</button>
+                        <div id="cart-option" style=" background-color : #fdbe02;  color: black; font-weight: 600;">장바구니</div>
                     </div>
                     <div class="line"></div>
                     <div>
-                        <button type="button"  id="cart-option" style="color: white;">결제</button>
+                        <div id="cart-option" style="color: white;">결제</div>
                     </div>
                     <div class="line"></div>
                     <div>
-                        <button type="button"  id="cart-option" style="color: white;">주문완료</button>
+                        <div  id="cart-option" style="color: white;">주문완료</div>
                     </div>
                    </div>
                 </div>
@@ -120,7 +120,7 @@
 					           		 	<input type="hidden" value="${sessionScope.m.memberId }">
 					           		 	<input class="pNo" type="hidden" value="${Cart.PNo }">
 					            	 </td>
-					            	<td class="pImg" style="text-align:center"><img src="/resources/upload/market/${Cart.PImg }"></td>
+					            	<td class="pImg" style="text-align:center"><img src="/resources/upload/market/${Cart.PImg }" ></td>
 						          	<td style="text-align:center">${Cart.PName }</td>
 						           	<td class="pPrice" style="text-align:center"><fmt:formatNumber value="${Cart.PPrice }" pattern="#,###" /></td>
 						           	<td style="text-align:center">${Cart.cartQuan }
@@ -140,8 +140,9 @@
                  		   <tr>
 		                      	<td colspan="6"></td>
 		                      	
-		                      	<td>
+		                      	<td style="font-weight: 600;">
 		                      		<input type="hidden" style="border:none;" class="hiddenPayPrice payPrice" name="productsPrice" readonly>
+		                      		<p style="float: left; margin-right: 5px;">총 합계 : </p>
 		                      		<p id="font" class="lastPrice" style="float:left;"></p>
 		                      		<p id="font" style="float:left;">원</p>
 		                    </td>
@@ -156,7 +157,7 @@
                 </div>
                 
              <div class="cart-btn">
-                     <button type="button" id="font">계속 쇼핑하기</button>
+                     <button type="button" id="font" onclick="location.href='/marketMain.do?reqPage=1&pCategory=10'">계속 쇼핑하기</button>
 	                 
                     <button type="button" class="payBtn" onclick="goToOrder('${sessionScope.m.memberId }');">주문하러 가기</button>
                  </div>
