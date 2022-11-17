@@ -831,6 +831,7 @@ height: 100%;
 
                 modal.classList.remove("hidden");
                 if(ownerId != ""){
+                	modal.classList.add("hidden");
                    document.getElementById('ownerModal').style.display='block';
                 }
                 selectedDate =$("#datePicker").val();
