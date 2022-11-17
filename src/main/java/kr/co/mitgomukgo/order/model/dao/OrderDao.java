@@ -22,6 +22,13 @@ public class OrderDao {
 	}
 
 
+	public int orderNext(Order r) {
+		System.out.println(r);
+		int result = sqlSession.insert("order.nextOrder", r);
+		return result;
+	}
+
+
 
 	
 

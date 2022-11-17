@@ -147,6 +147,7 @@
                 </div>
 				<input type="hidden" id="cart-quantity-sum" name="orderQuan" value="${Order.cartQuan }">
 				<input type="hidden" id="cart-price-sum" name="orderPrice" value="${Order.PPrice }">
+				<input type="hidden" id="cart-price-sum" name="pNo" value="${Order.PNo }">
 				
                <div class="page-title order-title">배송정보</div>
                 <div class="order-info shipping">
