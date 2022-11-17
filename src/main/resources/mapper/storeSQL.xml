@@ -516,4 +516,6 @@
 		as thumbNail
 		from store s order by storeNo desc)b)rb order by DBMS_RANDOM.RANDOM) where rownum <![CDATA[<]]> 7
 	</select>
+	
+	
 </mapper>

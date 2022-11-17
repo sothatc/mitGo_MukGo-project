@@ -13,6 +13,7 @@ import kr.co.mitgomukgo.store.model.vo.Menu;
 import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Review;
 import kr.co.mitgomukgo.store.model.vo.Store;
+import kr.co.mitgomukgo.store.model.vo.StoreBookmark;
 import kr.co.mitgomukgo.store.model.vo.StoreImg;
 import kr.co.mitgomukgo.store.model.vo.StoreJoin;
 
@@ -246,9 +247,24 @@ public class StoreService {
 	}
 	
 	//맛집 상세
-	public Store selectOneStore(int storeNo) {
+	public HashMap<String, Object> selectOneStore(int storeNo, String bookmarkId) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
 		Store s = dao.selectOneStore(storeNo);
-		return s;
+		
+		HashMap<String, Object> bookMap = new HashMap<String, Object>();
+		bookMap.put("storeNo", storeNo);
+		bookMap.put("bookmarkId", bookmarkId);
+		
+		StoreBookmark sbm = dao.selectOneStoreBookmark(bookMap);
+		
+		map.put("s", s);
+		map.put("sbm", sbm);
+		
+		
+		
+		return map;
 	}
 	
 	//맛집 - 조인
