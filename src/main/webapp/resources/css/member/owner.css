@@ -56,6 +56,7 @@ li{
 
 .content{
 	border-top: 1px solid #eee;
+	
 }
 
 /*업체 정보 수정*/
@@ -279,7 +280,9 @@ li{
 	font-size: 14px;
 }
 
-
+#menuList{
+	
+}
 
 
 
