@@ -102,10 +102,10 @@
 							<div class="card-body p-4">
 								<div class="text-center">
 									<!-- Product name-->
-									<h5 id="font">${ma.storeName }<br>${ma.PName }
+									<h5 id="font" style="font-size: 18px;">${ma.storeName }<br>${ma.PName }
 									</h5>
 									<!-- Product price-->
-									<fmt:formatNumber value="${ma.PPrice }" pattern="#,###" /> &#8361;
+									<a style="color:orange;"><fmt:formatNumber  value="${ma.PPrice }" pattern="#,###" />원</a>
 								</div>
 							</div>
 							<!-- Product actions-->
@@ -113,15 +113,21 @@
 								<div class="text-center">
 									<c:choose>
 										<c:when test="${not empty sessionScope.m }">
-											<a class="btn btn-outline-dark mt-auto" href="/marketDetail.do?pNo=${ma.PNo }&bookMarkId=${sessionScope.m.memberId}">View options</a>
+											<a  id="font" class="btn btn-outline-dark mt-auto" href="/marketDetail.do?pNo=${ma.PNo }&bookMarkId=${sessionScope.m.memberId}"
+											style="border:none;  background-color: rgb(248, 245, 206); "
+											>상품 보기</a>
 										</c:when>
 										
 										<c:when test="${not empty sessionScope.o }">
-											<a class="btn btn-outline-dark mt-auto" href="/marketDetail.do?pNo=${ma.PNo }&bookMarkId=${sessionScope.o.ownerId}">View options</a>
+											<a  id="font" class="btn btn-outline-dark mt-auto" href="/marketDetail.do?pNo=${ma.PNo }&bookMarkId=${sessionScope.o.ownerId}"
+											style="border:none;  background-color: rgb(248, 245, 206);" >
+											상품 보기</a>
 										</c:when>
 										
 										<c:otherwise>
-											<a class="btn btn-outline-dark mt-auto" href="/marketDetail.do?pNo=${ma.PNo }">View options</a>
+											<a  id="font"class="btn btn-outline-dark mt-auto" href="/marketDetail.do?pNo=${ma.PNo }"
+											style="border:none;  background-color: rgb(248, 245, 206); "
+											>상품 보기</a>
 										</c:otherwise>
 									</c:choose>
 									
