@@ -147,8 +147,8 @@
                     </div>
                    
                 </div>
-				<input type="hidden" id="cart-quantity-sum" name="orderQuan" value="${Order.cartQuan }">
-				<input type="hidden" id="cart-price-sum" name="orderPrice" value="${Order.PPrice*Order.cartQuan }">
+				<input type="hidden" id="cart-quantity-sum" name="orderQuan1" value="${Order.cartQuan }">
+				<input type="hidden" id="cart-price-sum" name="orderPrice1" value="${Order.PPrice*Order.cartQuan }">
 				<input type="hidden" id="cart-price-sum" name="pNo" value="${Order.PNo }">
 				
                <div class="page-title order-title">배송정보</div>

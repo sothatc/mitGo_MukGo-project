@@ -91,7 +91,7 @@
 								<td>${ol.PName}</td>
 								<td>${ol.orderDate}</td>
 								<td>${ol.orderQuan}</td>
-								<td>${ol.PPrice}</td>
+								<td>${ol.orderPrice}</td>
 								
 								<form action="/updateOrderLevel.do?orderNo=${ol.orderNo}&reqPage=1" method="post">
 								<td class="orderStatusTd">
