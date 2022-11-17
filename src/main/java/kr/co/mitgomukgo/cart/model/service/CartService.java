@@ -25,8 +25,8 @@ public class CartService {
 
 
 
-	public ArrayList<Cart> cartList(Cart c) {
-		ArrayList<Cart> list = dao.cartList(c);
+	public ArrayList<Cart> cartList(String memberId) {
+		ArrayList<Cart> list = dao.cartList(memberId);
 		return (ArrayList<Cart>) list;
 	}
 

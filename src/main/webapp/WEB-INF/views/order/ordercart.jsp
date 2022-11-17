@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -101,10 +102,11 @@
 		                        
 		                        	<td style="text-align:center">${Cart.PName }</td>
 					            	<td class="pImg" style="text-align:center"><img src="/resources/upload/market/${Cart.PImg }"></td>
-						           	<td class="pPrice" style="text-align:center">${Cart.PPrice }</td>
+						           	<td class="pPrice" style="text-align:center"><fmt:formatNumber value="${Cart.PPrice}" pattern="#,###" /></td>
 						           	<td style="text-align:center">${Cart.cartQuan }</td>
 					            	<td class="shipping">무료</td>
-					            	<td style="text-align:center;" class="cartTotalPrice">${Cart.PPrice*Cart.cartQuan }</td>
+					            	<td style="text-align:center; display: none;" class="cartTotalPrice">${Cart.PPrice*Cart.cartQuan }</td>
+					            	<td style="text-align:center;"><fmt:formatNumber value="${Cart.PPrice*Cart.cartQuan }" pattern="#,###" /></td>
 								 		 
 					            	
 		                    </tr>
@@ -117,7 +119,8 @@
 		                      	
 		                      	<td>
 		                      		<input type="hidden" style="border:none;" class="hiddenPayPrice payPrice" name="productsPrice" readonly>
-		                      		<p id="font" class="lastPrice" style="float:left;"></p>
+		                      		<p id="font" class="lastPrice" style="float:left; display: none;"></p>
+		                      		<p id="font" class="viewPrice" style="float:left;"></p>
 		                      		<p id="font"class="totalp" style="float:left;">원</p>
 		                     </td>
 		                      
@@ -135,9 +138,11 @@
                 
                 <div class="page-title order-title" id="font">주문정보</div>
                 <div class="order-info" id="font">
+                <input type="hidden" id="cart-price-sum" name="orderPrice">
                     <div class="order-box">
                         <label for="name" class="order-label">주문자명</label>
                         <input type="text" id="orderName" class="order-input medium" value="${sessionScope.m.memberName }">
+                        <input type="hidden" name="memberId" value="${sessionScope.m.memberId }">
                     </div>
                     <div class="order-box">
                         <label for="phone" class="order-label">전화번호</label>
@@ -146,13 +151,12 @@
                    
                 </div>
                 <c:forEach items="${list }" var="Order">
-				<input type="hidden" id="cart-quantity-sum" name="orderQuan" value="${Order.cartQuan }">
-				<input type="hidden" id="cart-price-sum" name="orderPrice" value="${Order.PPrice }">
-				<input type="hidden" id="cart-price-sum" name="pNo" value="${Order.PNo }">
+				<input type="hidden" id="cart-quantity-sum" name="orderQuan1" value="${Order.cartQuan }">
+				<input type="hidden" name="pNo1" value="${Order.PNo }">
 				</c:forEach>
 				
                <div class="page-title order-title">배송정보</div>
-                <div class="order-info shipping">
+                <div class="order-info shipping" id="font">
                     <div id="same-check">
                         <input type="checkbox" id="order-same" class="order-agree">
                         <label for="order-same"><i class="fa-solid fa-check"></i></label>
@@ -166,7 +170,7 @@
                     </div>
                     <div class="order-box">
                         <label for="shippingPhone" class="order-label">전화번호</label>
-                        <input type="text" name="shippingPhone" id="shippingPhone" class="order-input medium view-order-info" placeholder="010-0000-0000"required>
+                        <input type="text" name="shippingPhone" id="shippingPhone" class="order-input medium view-order-info" placeholder="숫자만 입력 해주세요"required>
                         <input type="text" class="order-input medium hidden-order-info" value="${sessionScope.m.memberPhone }" style="display:none;">
                         <span class="comment"></span>
                     </div>
@@ -203,38 +207,8 @@
                 
             </form>
         </div>
-    
-    
-    
-	<footer>
-        <div class="footer-top text-center">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-6 text-center">
-                        <h4 class="navbar-brand">믿GO먹GO<span class="dot">!</span></h4>
-                        <p id="font">서울 맛집 탐방하기. 서울에서 꼭 먹어봐야 할 음식 리스트! 서울의 감성 카페부터 한식, 중식, 일식, 양식, 아시아식, 채식, 할랄까지 서울 맛집 총정리.</p>
-                        <div class="col-auto social-icons">
-                            <a href="#"><i class='bx bxl-facebook'></i></a>
-                            <a href="#"><i class='bx bxl-twitter'></i></a>
-                            <a href="#"><i class='bx bxl-instagram'></i></a>
-                            <a href="#"><i class='bx bxl-pinterest'></i></a>
-                        </div>
-                        <div class="col-auto conditions-section">
-                            <a href="#">privacy</a>
-                            <a href="#">terms</a>
-                            <a href="#">disclaimer</i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom text-center">
-            <p class="mb-0">Copyright vicpra 2022. All rights Reserved</p> Distributed By <a
-                hrefs="https://themewagon.com">ThemeWagon</a>
-        </div>
-    </footer>
-    
 
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 <script>
 function searchAddr() {
@@ -311,7 +285,7 @@ $("#payBtn").on("click",function(){
     }
 
 	
-const price = $(".lastPrice").val();
+const price = $(".lastPrice").text();
 console.log(price);
 const name = $("#orderName").val();
 const d = new Date();
@@ -345,11 +319,13 @@ function sum(){
     let result = 0;
     for(let i=0; i<cartTotalPrice.length; i++){
        result += Number(cartTotalPrice.eq(i).text());
-    }        
+    }
+    $("#cart-price-sum").val(result)
     $(".payPrice").val(result);
     const lastPrice = $(".lastPrice");
     const ViewPrice = result.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-    lastPrice.text(ViewPrice);
+    lastPrice.text(result);
+    $(".viewPrice").text(ViewPrice);
  }
 sum();
 </script>

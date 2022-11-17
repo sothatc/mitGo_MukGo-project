@@ -96,7 +96,7 @@
                     <option value="content">내용</option>
                 </select>
 
-                <input class="w3-input w3-border w3-round-large" type="text" name="keyword" style="width: 500px; height: 60px; margin-left: 10px;">
+                <input class="w3-input w3-border w3-round-large" type="text" name="keyword" style="width: 500px; height: 60px; margin-left: 10px;" value="${keyword }">
                 <button class="w3-button w3-round-large" style="width: 80px; height: 60px; background-color: rgb(33, 33, 33); color: white;margin-left: 10px;">
                     <span class="material-symbols-outlined">
                     search
@@ -122,114 +122,340 @@
         </div>
 
         <div class="qna-list">
-        
+        	
         	<c:choose>
-	        	<c:when test="${empty list }">
-	        		
-	        		<div class="misMsg">
-	        		<div class="warningMark">
-        				<span class="material-symbols-outlined" style="font-size: 80px;">
-							error
-						</span>
-        			</div>
-	        			${msg }	
-	        		</div>
-	        		
-	        	</c:when>
-	        	
-	        	<c:otherwise>
-	        		<c:forEach items="${list }" var="q" varStatus="i">
-	        			<table class="qna-tbl">
-			                <tr>
-			                    <th>${q.qnaWriter }</th>
-			                    <td>
-			                        <div style="display: flex; justify-content: center;">
-			                        
-			                        	<c:choose>
-			                        		<c:when test="${q.secretStatus == 1 and sessionScope.m.memberClass != 1}">
-			                        			<span class="material-symbols-outlined">
-				                                lock
-				                                </span>
-				                                
-				                                <span onclick="modalMan(this)">
-				                                ${q.qnaTitle }
-				                                </span>
-			                        		</c:when>
-			                        		
-			                        		<c:otherwise>
-			                        			<a href="/qndDetail.do?qnaNo=${q.qnaNo }">${q.qnaTitle }</a>
-			                        		</c:otherwise>
-			                        	</c:choose>
-	
-			                            
-			                        </div>
-			                    </td>
-			                    
-			                    <td>
-			                    	${q.qnaTheme }
-			                    </td>
-			                    
-			                    <td>
-			                        <div style="display: flex; justify-content: center;">
-			                            <span class="material-symbols-outlined">
-			                                visibility
-			                                </span>
-			                                <span>${q.readCnt }</span>
-			                        </div>
-			                        
-			                    </td>
+        		<c:when test="${not empty sessionScope.m }">
+        			<c:choose>
+			        	<c:when test="${empty list }">
+			        		
+			        		<div class="misMsg">
+			        		<div class="warningMark">
+		        				<span class="material-symbols-outlined" style="font-size: 80px;">
+									error
+								</span>
+		        			</div>
+			        			${msg }	
+			        		</div>
+			        		
+			        	</c:when>
+			        	
+			        	<c:otherwise>
+			        		<c:forEach items="${list }" var="q" varStatus="i">
+			        			<table class="qna-tbl">
+					                <tr>
+					                    <th>${q.qnaWriter }</th>
+					                    <td>
+					                        <div style="display: flex; justify-content: center;">
+					                        
+					                        	<c:choose>
+					                        		<c:when test="${q.secretStatus == 1 and sessionScope.m.memberClass != 1 and sessionScope.m.memberId != q.qnaWriter1 }">
+					                        			<span class="material-symbols-outlined">
+						                                lock
+						                                </span>
+						                                
+						                                <span onclick="modalMan(this)">
+						                                ${q.qnaTitle }
+						                                </span>
+					                        		</c:when>
+					                        		
+					                        		<c:otherwise>
+					                        			<a href="/qndDetail.do?qnaNo=${q.qnaNo }">${q.qnaTitle }</a>
+					                        		</c:otherwise>
+					                        	</c:choose>
 			
-			                    <td>
-			                        <div style="display: flex; justify-content: center;">
-			                            <span class="material-symbols-outlined">
-			                                schedule
-			                                </span>
-			                            <span>${q.qnaDate }</span>
-			                        </div>
-			                    </td>
+					                            
+					                        </div>
+					                    </td>
+					                    
+					                    <td>
+					                    	${q.qnaTheme }
+					                    </td>
+					                    
+					                    <td>
+					                        <div style="display: flex; justify-content: center;">
+					                            <span class="material-symbols-outlined">
+					                                visibility
+					                                </span>
+					                                <span>${q.readCnt }</span>
+					                        </div>
+					                        
+					                    </td>
+					
+					                    <td>
+					                        <div style="display: flex; justify-content: center;">
+					                            <span class="material-symbols-outlined">
+					                                schedule
+					                                </span>
+					                            <span>${q.qnaDate }</span>
+					                        </div>
+					                    </td>
+					
+					                    <td>
+					                    	<c:choose>
+					                    		<c:when test="${q.commentStatus == 0 }">
+					                    			<div>답변대기</div>
+					                    		</c:when>
+					                    		
+					                    		<c:otherwise>
+					                    			<div style="color:white; background-color:#0dcaf0; ">답변완료</div>
+					                    		</c:otherwise>
+					                    
+					                    	</c:choose>
+					                    	
+					                        
+					                    </td>
+					                </tr>
+				                </table>
+				                
+				                <div id="id01" class="w3-modal w3-animate-opacity">
+								    <div class="w3-modal-content w3-card-4" style="top: 30%; width: 500px;">
+								      <header class="w3-container w3-teal" style="background-color: #ffc107!important;"> 
+								        <span onclick="delModal(this);" 
+								        class="w3-button w3-large w3-display-topright">&times;</span>
+								        <h2 style="margin-top:10px;">비밀번호 확인</h2>
+								      </header>
+								      <div class="w3-container" style="margin-top: 15px; height: 100px;">
+								        <p style="margin-left: 50px;">비밀번호를 입력하세요.</p>
+								        <form action="/mypageQna.do" method="post" class="pwFrm">
+								        	
+								        	<input type="hidden" name="qnaNo" value="${q.qnaNo }">
+									        <input class="w3-input w3-border w3-round-large" type="password" name="qnaPassword" style="width: 300px;"><br>
+									        <button class="w3-button w3-round" style="margin-left: 10px; background-color: gray; color:white;" onclick="pwChk(this)">확인</button>
+								        </form>
+								      </div>
+								      <footer class="w3-container w3-teal">
+								        <p></p>
+								      </footer>
+								    </div>
+								  </div>
+			        		</c:forEach>
+			        		
+			        	</c:otherwise>
+			        </c:choose>
+        		</c:when>
+        		
+        		<c:when test="${not empty sessionScope.o }">
+        			<c:choose>
+			        	<c:when test="${empty list }">
+			        		
+			        		<div class="misMsg">
+			        		<div class="warningMark">
+		        				<span class="material-symbols-outlined" style="font-size: 80px;">
+									error
+								</span>
+		        			</div>
+			        			${msg }	
+			        		</div>
+			        		
+			        	</c:when>
+			        	
+			        	<c:otherwise>
+			        		<c:forEach items="${list }" var="q" varStatus="i">
+			        			<table class="qna-tbl">
+					                <tr>
+					                    <th>${q.qnaWriter }</th>
+					                    <td>
+					                        <div style="display: flex; justify-content: center;">
+					                        
+					                        	<c:choose>
+					                        		<c:when test="${q.secretStatus == 1 and sessionScope.m.memberClass != 1 and sessionScope.o.ownerId != q.qnaWriter1 }">
+					                        			<span class="material-symbols-outlined">
+						                                lock
+						                                </span>
+						                                
+						                                <span onclick="modalMan(this)">
+						                                ${q.qnaTitle }
+						                                </span>
+					                        		</c:when>
+					                        		
+					                        		<c:otherwise>
+					                        			<a href="/qndDetail.do?qnaNo=${q.qnaNo }">${q.qnaTitle }</a>
+					                        		</c:otherwise>
+					                        	</c:choose>
 			
-			                    <td>
-			                    	<c:choose>
-			                    		<c:when test="${q.commentStatus == 0 }">
-			                    			<div>답변대기</div>
-			                    		</c:when>
-			                    		
-			                    		<c:otherwise>
-			                    			<div style="color:white; background-color:#0dcaf0; ">답변완료</div>
-			                    		</c:otherwise>
-			                    
-			                    	</c:choose>
-			                    	
-			                        
-			                    </td>
-			                </tr>
-		                </table>
-		                
-		                <div id="id01" class="w3-modal w3-animate-opacity">
-						    <div class="w3-modal-content w3-card-4" style="top: 30%; width: 500px;">
-						      <header class="w3-container w3-teal" style="background-color: #ffc107!important;"> 
-						        <span onclick="delModal(this);" 
-						        class="w3-button w3-large w3-display-topright">&times;</span>
-						        <h2 style="margin-top:10px;">비밀번호 확인</h2>
-						      </header>
-						      <div class="w3-container" style="margin-top: 15px; height: 100px;">
-						        <p style="margin-left: 50px;">비밀번호를 입력하세요.</p>
-						        <form action="/mypageQna.do" method="post" class="pwFrm">
-						        	
-						        	<input type="hidden" name="qnaNo" value="${q.qnaNo }">
-							        <input class="w3-input w3-border w3-round-large" type="password" name="qnaPassword" style="width: 300px;"><br>
-							        <button class="w3-button w3-round" style="margin-left: 10px; background-color: gray; color:white;" onclick="pwChk(this)">확인</button>
-						        </form>
-						      </div>
-						      <footer class="w3-container w3-teal">
-						        <p></p>
-						      </footer>
-						    </div>
-						  </div>
-	        		</c:forEach>
-	        		
-	        	</c:otherwise>
-	        </c:choose>
+					                            
+					                        </div>
+					                    </td>
+					                    
+					                    <td>
+					                    	${q.qnaTheme }
+					                    </td>
+					                    
+					                    <td>
+					                        <div style="display: flex; justify-content: center;">
+					                            <span class="material-symbols-outlined">
+					                                visibility
+					                                </span>
+					                                <span>${q.readCnt }</span>
+					                        </div>
+					                        
+					                    </td>
+					
+					                    <td>
+					                        <div style="display: flex; justify-content: center;">
+					                            <span class="material-symbols-outlined">
+					                                schedule
+					                                </span>
+					                            <span>${q.qnaDate }</span>
+					                        </div>
+					                    </td>
+					
+					                    <td>
+					                    	<c:choose>
+					                    		<c:when test="${q.commentStatus == 0 }">
+					                    			<div>답변대기</div>
+					                    		</c:when>
+					                    		
+					                    		<c:otherwise>
+					                    			<div style="color:white; background-color:#0dcaf0; ">답변완료</div>
+					                    		</c:otherwise>
+					                    
+					                    	</c:choose>
+					                    	
+					                        
+					                    </td>
+					                </tr>
+				                </table>
+				                
+				                <div id="id01" class="w3-modal w3-animate-opacity">
+								    <div class="w3-modal-content w3-card-4" style="top: 30%; width: 500px;">
+								      <header class="w3-container w3-teal" style="background-color: #ffc107!important;"> 
+								        <span onclick="delModal(this);" 
+								        class="w3-button w3-large w3-display-topright">&times;</span>
+								        <h2 style="margin-top:10px;">비밀번호 확인</h2>
+								      </header>
+								      <div class="w3-container" style="margin-top: 15px; height: 100px;">
+								        <p style="margin-left: 50px;">비밀번호를 입력하세요.</p>
+								        <form action="/mypageQna.do" method="post" class="pwFrm">
+								        	
+								        	<input type="hidden" name="qnaNo" value="${q.qnaNo }">
+									        <input class="w3-input w3-border w3-round-large" type="password" name="qnaPassword" style="width: 300px;"><br>
+									        <button class="w3-button w3-round" style="margin-left: 10px; background-color: gray; color:white;" onclick="pwChk(this)">확인</button>
+								        </form>
+								      </div>
+								      <footer class="w3-container w3-teal">
+								        <p></p>
+								      </footer>
+								    </div>
+								  </div>
+			        		</c:forEach>
+			        		
+			        	</c:otherwise>
+			        </c:choose>
+        		</c:when>
+        		
+        		<c:otherwise>
+        			<c:choose>
+			        	<c:when test="${empty list }">
+			        		
+			        		<div class="misMsg">
+			        		<div class="warningMark">
+		        				<span class="material-symbols-outlined" style="font-size: 80px;">
+									error
+								</span>
+		        			</div>
+			        			${msg }	
+			        		</div>
+			        		
+			        	</c:when>
+			        	
+			        	<c:otherwise>
+			        		<c:forEach items="${list }" var="q" varStatus="i">
+			        			<table class="qna-tbl">
+					                <tr>
+					                    <th>${q.qnaWriter }</th>
+					                    <td>
+					                        <div style="display: flex; justify-content: center;">
+					                        
+					                        	<c:choose>
+					                        		<c:when test="${q.secretStatus == 1 and sessionScope.m.memberClass != 1 }">
+					                        			<span class="material-symbols-outlined">
+						                                lock
+						                                </span>
+						                                
+						                                <span onclick="modalMan(this)">
+						                                ${q.qnaTitle }
+						                                </span>
+					                        		</c:when>
+					                        		
+					                        		<c:otherwise>
+					                        			<a href="/qndDetail.do?qnaNo=${q.qnaNo }">${q.qnaTitle }</a>
+					                        		</c:otherwise>
+					                        	</c:choose>
+			
+					                            
+					                        </div>
+					                    </td>
+					                    
+					                    <td>
+					                    	${q.qnaTheme }
+					                    </td>
+					                    
+					                    <td>
+					                        <div style="display: flex; justify-content: center;">
+					                            <span class="material-symbols-outlined">
+					                                visibility
+					                                </span>
+					                                <span>${q.readCnt }</span>
+					                        </div>
+					                        
+					                    </td>
+					
+					                    <td>
+					                        <div style="display: flex; justify-content: center;">
+					                            <span class="material-symbols-outlined">
+					                                schedule
+					                                </span>
+					                            <span>${q.qnaDate }</span>
+					                        </div>
+					                    </td>
+					
+					                    <td>
+					                    	<c:choose>
+					                    		<c:when test="${q.commentStatus == 0 }">
+					                    			<div>답변대기</div>
+					                    		</c:when>
+					                    		
+					                    		<c:otherwise>
+					                    			<div style="color:white; background-color:#0dcaf0; ">답변완료</div>
+					                    		</c:otherwise>
+					                    
+					                    	</c:choose>
+					                    	
+					                        
+					                    </td>
+					                </tr>
+				                </table>
+				                
+				                <div id="id01" class="w3-modal w3-animate-opacity">
+								    <div class="w3-modal-content w3-card-4" style="top: 30%; width: 500px;">
+								      <header class="w3-container w3-teal" style="background-color: #ffc107!important;"> 
+								        <span onclick="delModal(this);" 
+								        class="w3-button w3-large w3-display-topright">&times;</span>
+								        <h2 style="margin-top:10px;">비밀번호 확인</h2>
+								      </header>
+								      <div class="w3-container" style="margin-top: 15px; height: 100px;">
+								        <p style="margin-left: 50px;">비밀번호를 입력하세요.</p>
+								        <form action="/mypageQna.do" method="post" class="pwFrm">
+								        	
+								        	<input type="hidden" name="qnaNo" value="${q.qnaNo }">
+									        <input class="w3-input w3-border w3-round-large" type="password" name="qnaPassword" style="width: 300px;"><br>
+									        <button class="w3-button w3-round" style="margin-left: 10px; background-color: gray; color:white;" onclick="pwChk(this)">확인</button>
+								        </form>
+								      </div>
+								      <footer class="w3-container w3-teal">
+								        <p></p>
+								      </footer>
+								    </div>
+								  </div>
+			        		</c:forEach>
+			        		
+			        	</c:otherwise>
+			        </c:choose>
+        		</c:otherwise>
+        	</c:choose>
+        	
+        	
             
         </div>
 		

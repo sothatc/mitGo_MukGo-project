@@ -57,6 +57,14 @@
 			$(this).css("background-color","");
 			$(this).css("color","");
 		})
+		
+		$(".searchIdBtn").on("click",function(e){
+			const checkId = $(".ownerCheckId").val();
+			if(checkId == "") {
+				alert("조회할 아이디를 입력해주세요.");
+				e.preventDefault();
+			}
+		});
 	</script>
 </body>
 </html>

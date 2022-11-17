@@ -6,6 +6,7 @@
 		select count(*) as cnt from order_tbl where member_id = #{memberId}
 	</select>
 	<select id="selectAllOrderList" parameterType="map" resultType="or">
+		<!--  
 		select 
 		    order_no as orderNo,
 		    member_id as memberId,
@@ -19,7 +20,21 @@
 		from order_tbl ot
 		where member_id = #{memberId}
 		order by 4 desc
+		-->
+		select order_no as orderNo,
+		    member_id as memberId,
+		    order_date as orderDate,
+		    order_quan as orderQuan,
+		    order_status as orderStatus,
+		    shipping_phone as shippingPhone,
+		    shipping_addr as shippingAddr,
+		    (select p_name from market_product mp where ot.p_no = mp.p_no) as pName,
+		    (select p_price from market_product mp where ot.p_no = mp.p_no)*order_quan as pPrice,
+            imp_uid
+        from order_tbl ot 
+        where imp_uid in (select distinct imp_uid from order_tbl where member_id= #{memberId})
 	</select>
+	
 	
 	<insert id="nextOrder" parameterType="or">
 	insert into order_tbl values(

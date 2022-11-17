@@ -101,11 +101,11 @@
             	
             		<c:choose>
             			<c:when test="${not empty sessionScope.m }">
-            				<li>
+            				<li class="list">
 			                    <a href="/marketDetail.do?pNo=${bm.PNo }&bookMarkId=${sessionScope.m.memberId}">
 			                        <div class="bookmark-content">
 			                            <div class="img-box">
-			                                <img src="/resources/img/${bm.PImg }" alt="">
+			                                <img src="/resources/upload/market/${bm.PImg }" alt="">
 			                            </div>
 			    
 			                            <div class="bookmark-man">
@@ -123,7 +123,7 @@
             			</c:when>
             			
             			<c:otherwise>
-            				<li>
+            				<li class="list">
 			                    <a href="/marketDetail.do?pNo=${bm.PNo }&bookMarkId=${sessionScope.o.ownerId}">
 			                        <div class="bookmark-content">
 			                            <div class="img-box">
@@ -139,7 +139,7 @@
 			                        </div>
 			                    </a>
 			                    <div class="delBtn">
-			                        <button type="button" class="btn btn-danger" onclick="deleteBookmark(this,${bm.bmNo})">삭제</button>
+			                        <button type="button" class="btn btn-danger" style="width: 80px;" onclick="deleteBookmark(this,${bm.bmNo})">삭제</button>
 			                    </div>
 			                </li>
             			</c:otherwise>
@@ -188,8 +188,8 @@
     				success : function(data){
     					console.log(data);
     					$(obj).parent().parent().remove();
-    					
-    					if($(obj).parent().parent().parent().children().length == 0){
+    					console.log($(".list").length);
+    					if($(".list").length == 0){
     						$(".bookmark-content-list").hide();
     						$(".warningMark1").css("display", "block");
     						$(".noMsg1").css("display", "block");

@@ -7,6 +7,14 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<style>
+.storeList-tag-content>ul>li>a{
+    color: rgb(133, 133, 133);
+    font-weight: 100;
+}
+
+</style>
+
 </head>
 <body>
 	<link rel="stylesheet" href="/resources/css/store/storeList.css">
@@ -27,6 +35,8 @@
 			</div>
 		</div>
 	</section>
+	
+
 	<!-- ////////////////////////////////////////////////////////////////// -->
 	<div class="storeList-content-wrap">
 
@@ -88,7 +98,19 @@
 			<div class="storeList-list-content">
 				<c:forEach items="${list }" var="s">
 					<div class="showList">
-						<a href="/storeDetail.do?storeNo=${s.storeNo }">
+						<c:choose>
+							<c:when test="${not empty sessionScope.m }">
+								<a href="/storeDetail.do?storeNo=${s.storeNo }&bookmarkId=${sessionScope.m.memberId}">
+							</c:when>
+							
+							<c:when test="${not empty sessionScope.o }">
+								<a href="/storeDetail.do?storeNo=${s.storeNo }&bookmarkId=${sessionScope.o.ownerId}">
+							</c:when>
+							
+							<c:otherwise>
+								<a href="/storeDetail.do?storeNo=${s.storeNo }">
+							</c:otherwise>
+						</c:choose>
 							<div>
 								<img src="resources/upload/store/${s.thumbNail }">
 							</div>

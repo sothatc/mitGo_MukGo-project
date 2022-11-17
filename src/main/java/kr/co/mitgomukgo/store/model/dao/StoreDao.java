@@ -15,6 +15,7 @@ import kr.co.mitgomukgo.store.model.vo.Menu;
 import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Review;
 import kr.co.mitgomukgo.store.model.vo.Store;
+import kr.co.mitgomukgo.store.model.vo.StoreBookmark;
 import kr.co.mitgomukgo.store.model.vo.StoreImg;
 import kr.co.mitgomukgo.store.model.vo.StoreJoin;
 
@@ -205,8 +206,10 @@ public class StoreDao {
 		List list = sqlSession.selectList("selectRandomStoreList");
 		return (ArrayList<Store>) list;
 	}
-	
 
-
+	public StoreBookmark selectOneStoreBookmark(HashMap<String, Object> map) {
+		StoreBookmark sbm = sqlSession.selectOne("storeBookmark.selectOneStoreBookmark", map);
+		return sbm;
+	}
 
 }

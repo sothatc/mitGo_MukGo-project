@@ -64,7 +64,7 @@
                     <option value="content">내용</option>
                 </select>
 
-                <input class="w3-input w3-border w3-round-large" type="text" name="keyword" style="width: 500px; height: 60px; margin-left: 10px;">
+                <input class="w3-input w3-border w3-round-large" type="text" name="keyword" style="width: 500px; height: 60px; margin-left: 10px;" value="${keyword }">
                 <button class="w3-button w3-round-large" id="searchBtn" style="width: 80px; height: 60px; background-color: rgb(33, 33, 33); color: white;margin-left: 10px;">
                     <span class="material-symbols-outlined">
                     search

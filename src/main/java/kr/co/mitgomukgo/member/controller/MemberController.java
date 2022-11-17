@@ -602,6 +602,8 @@ public class MemberController {
 		Member m = (Member)session.getAttribute("m");
 		String memberId = m.getMemberId();
 		HashMap<String, Object> map = service.selectAllOrderList(reqPage, memberId);
+		ArrayList<Notice> ncList = service.myPageNcList();
+		model.addAttribute("ncList", ncList);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
 		model.addAttribute("pageNavi", map.get("pageNavi"));

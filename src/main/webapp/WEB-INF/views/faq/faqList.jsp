@@ -60,7 +60,7 @@
                     <option value="content">내용</option>
                 </select>
 
-                <input class="w3-input w3-border w3-round-large" type="text" name="keyword" style="width: 500px; height: 60px; margin-left: 10px;">
+                <input class="w3-input w3-border w3-round-large" type="text" name="keyword" style="width: 500px; height: 60px; margin-left: 10px;" value="${keyword }">
                 <button class="w3-button w3-round-large" style="width: 80px; height: 60px; background-color: rgb(33, 33, 33); color: white;margin-left: 10px;">
                     <span class="material-symbols-outlined">
                     search
@@ -124,11 +124,13 @@
                            ${fn:replace(f.faqContent, newLine, "<br>") }
                         </div>
                     </div>
-
-                    <div class="answer-btn">
-                        <a href="/updateFaqFrm.do?faqNo=${f.faqNo }">수정</a>
-                        <a href="/deleteFaq.do?faqNo=${f.faqNo }">삭제</a>
-                    </div>
+					
+					<c:if test="${not empty sessionScope.m and sessionScope.m.memberClass == 1 }">
+	                    <div class="answer-btn">
+	                        <a href="/updateFaqFrm.do?faqNo=${f.faqNo }">수정</a>
+	                        <a href="/deleteFaq.do?faqNo=${f.faqNo }">삭제</a>
+	                    </div>
+                    </c:if>
 
                 </div>
             </div>
