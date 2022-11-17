@@ -25,6 +25,8 @@ import kr.co.mitgomukgo.member.model.service.MemberService;
 import kr.co.mitgomukgo.member.model.vo.Member;
 import kr.co.mitgomukgo.member.model.vo.Owner;
 import kr.co.mitgomukgo.notice.model.vo.Notice;
+import kr.co.mitgomukgo.order.model.vo.Order;
+import kr.co.mitgomukgo.order.model.vo.OrderList;
 import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import net.nurigo.java_sdk.Coolsms;
@@ -400,6 +402,35 @@ public class MemberController {
 		return "member/admin";
 	}
 	
+	//업주관리> 주문관리
+	@RequestMapping(value="/ownerOrderManageFrm.do")
+	public String ownerOrderManage(Model model, OrderList ol, int reqPage, @SessionAttribute Owner o) {
+		int ownerNo = o.getOwnerNo();
+		HashMap<String, Object> map = service.selectAllOrderListOwner(reqPage, ownerNo);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
+		model.addAttribute("ownerNo", ownerNo);
+		return "member/ownerOrderManageFrm";
+	}
+	
+	//업주관리> 주문관리> 검색기능
+	@RequestMapping(value="/searchOrderOwnerList.do")
+	public String searchOrderOwnerList(Model model, OrderList ol, int reqPage, @SessionAttribute Owner o, String type, String keyword) {
+		int ownerNo = o.getOwnerNo();
+		HashMap<String, Object> map = service.searchOrderOwnerList(reqPage, ownerNo, type, keyword);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
+		model.addAttribute("ownerNo", ownerNo);
+		return "member/ownerOrderManageFrm";
+	}
+	
+	
 	//최고관리자 > 업주관리 > 업주레벨 지정
 	@RequestMapping(value="/updateOwnerLevel.do")
 	public String updateOwnerLevel(int ownerNo, Owner o) {
@@ -556,16 +587,30 @@ public class MemberController {
 	@RequestMapping(value="/orderList.do")
 	public String orderList(HttpSession session, int reqPage, Model model) {
 		Member m = (Member)session.getAttribute("m");
-		int memberNo = m.getMemberNo();
-		HashMap<String, Object> map = service.selectAllOrderList(reqPage, memberNo);
+		String memberId = m.getMemberId();
+		HashMap<String, Object> map = service.selectAllOrderList(reqPage, memberId);
+		ArrayList<Notice> ncList = service.myPageNcList();
+		model.addAttribute("ncList", ncList);
 		model.addAttribute("list", map.get("list"));
 		model.addAttribute("reqPage", reqPage);
 		model.addAttribute("pageNavi", map.get("pageNavi"));
 		model.addAttribute("total", map.get("total"));
 		model.addAttribute("pageNo", map.get("pageNo"));
-		model.addAttribute("memberNo", memberNo);
+		model.addAttribute("memberId", memberId);
 		return "member/orderList";
 	}
-	
+	@RequestMapping(value="/cancleOrder.do")
+	public String cancleOrder(int orderNo, HttpServletRequest request) {
+		int result = service.cancleOrder(orderNo);
+		if(result > 0) {
+			request.setAttribute("msg", "주문이 취소되었습니다.");
+			request.setAttribute("url", "/orderList.do?reqPage=1");
+			return "common/alert";
+		} else {
+			request.setAttribute("msg", "취소 중 문제가 발생했습니다.");
+			request.setAttribute("url", "/orderList.do?reqPage=1");
+			return "common/alert";
+		}
+	}
 }
 

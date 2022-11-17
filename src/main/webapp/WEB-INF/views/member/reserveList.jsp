@@ -72,6 +72,7 @@
 </head>
 <body>
    <jsp:include page="/WEB-INF/views/common/header.jsp" />
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
    <link rel="stylesheet" href="/resources/css/member/owner.css">
    <link rel="stylesheet" href="/resources/css/member/member.css">
    <script src="https://code.jquery.com/jquery-3.6.1.js"></script>
@@ -104,14 +105,18 @@
                            <td>${rs.eatDate }</td>
                            <td>${rs.eatTime }</td>
                            <td>
-                              <c:choose>
-                                 <c:when test="${0 eq rs.RStatus }">
-                                    <button type="button" class="reviewBtn" onclick="WirteReview(this,${rs.reserveNo},${rs.storeNo},'${rs.storeName }')">리뷰쓰기</button>
-                                 </c:when>
-                                 <c:otherwise>
-                                    <button type="button" class="reviewBtn" onclick="updateReview(this,${rs.reserveNo},${rs.storeNo},'${rs.storeName }')">리뷰수정</button>
-                                 </c:otherwise>
-                              </c:choose>
+                           <c:choose>
+                           	<c:when test="${rs.visitStatus == 2}">
+	                              <c:choose>
+	                                 <c:when test="${0 eq rs.RStatus }">
+	                                    <button type="button" class="reviewBtn" onclick="WirteReview(this,${rs.reserveNo},${rs.storeNo},'${rs.storeName }')">리뷰쓰기</button>
+	                                 </c:when>
+	                                 <c:otherwise>
+	                                    <button type="button" class="reviewBtn" onclick="updateReview(this,${rs.reserveNo},${rs.storeNo},'${rs.storeName }')">리뷰수정</button>
+	                                 </c:otherwise>
+	                              </c:choose>
+                           	</c:when>
+	                       </c:choose>
                            <td>
                               <button type="button" class="cancleBtn">취소</button>
                            </td>
@@ -124,57 +129,6 @@
          </div>
       </article>
    </div>
-	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<link rel="stylesheet" href="/resources/css/member/owner.css">
-	<link rel="stylesheet" href="/resources/css/member/member.css">
-	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>
-	<div class="content-wrap">
-		<jsp:include page="/WEB-INF/views/common/memberHeader.jsp" />
-		<article id="content" class="content">
-			<div class="page-content">
-				<div class="reserve-wrap">
-					<div id="menuList">
-						<div class="content-head">
-							<h2>예약 내역</h2>
-						</div>
-						<table class="table" style="text-align: center; vertical-align: middle;">
-							<tr>
-								<th scope="col">예약 번호</th>
-								<th scope="col">가게 이름</th>
-								<th scope="col">예약 접수날짜</th>
-								<th scope="col">예약일</th>
-								<th scope="col">예약 시간</th>
-								<th scope="col">리뷰</th>
-								<th scope="col">예약 취소</th>
-								<input type="hidden" class="nullChk" value="${rs.reserveNo }">
-							</tr>
-							<c:forEach items="${rsList }" var="rs">
-								<tr>
-									<td>${rs.reserveNo }</td>
-									<td>${rs.storeName }</td>
-									<td>${rs.reserveDate }</td>
-									<td>${rs.eatDate }</td>
-									<td>${rs.eatTime }</td>
-									<td>
-										<c:choose>
-											<c:when test="${0 eq rs.RStatus }">
-												<button type="button" class="reviewBtn" onclick="WirteReview(this,${rs.reserveNo},${rs.storeNo},'${rs.storeName }')">리뷰쓰기</button>
-											</c:when>
-											<c:otherwise>
-												<button type="button" class="reviewBtn" onclick="updateReview(this,${rs.reserveNo},${rs.storeNo},'${rs.storeName }')">리뷰수정</button>
-											</c:otherwise>
-										</c:choose>
-									<td>
-										<button type="button" class="cancleBtn">취소</button>
-									</td>
-								</tr>
-							</c:forEach>
-						</table>
-					</div>
-				</div>
-			</div>
-		</article>
-	</div>
 
 
    <jsp:include page="/WEB-INF/views/common/footer.jsp" />
@@ -194,8 +148,8 @@
          $(location).attr('href', "/cancleReserve.do?reserveNo=" + reserveNo);
       }
    });
-   
-   if($(".nullChk").val() == null) {
+   const nullChk = $(".nullChk").val();
+   if(nullChk == "") {
       alert("예약 내역이 존재하지 않습니다.");
    }
    </script>

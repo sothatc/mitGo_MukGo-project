@@ -152,10 +152,10 @@ height: 100%;
                
                
                <div class="slide-navi prev">
-                  <span class="material-icons">arrow_back_ios_new</span>
+                  <span class="material-icons" style="color:#ffc107;">arrow_back_ios_new</span>
                </div>
                <div class="slide-navi next">
-                  <span class="material-icons">arrow_forward_ios</span>
+                  <span class="material-icons" style="color:#ffc107;">arrow_forward_ios</span>
                </div>
             </div>
 
@@ -402,7 +402,7 @@ height: 100%;
        <div class="w3-container" style="font-family:Gowun Dodum;">
            <div id="timeDateModal" class="w3-modal" style="font-family:Gowun Dodum; z-index:2000;">
              <div class="w3-modal-content w3-animate-top w3-card-4" style="width:30%; height: 40%;">
-               <header class="w3-container w3-teal" style="height:10%;"> 
+               <header class="w3-container" style="height:10%; background-color: #ffc107;"> 
                  <span onclick="document.getElementById('timeDateModal').style.display='none'" 
                  class="w3-button w3-display-topright" style="width:5%; height:10%;">&times;</span>
                </header>
@@ -415,7 +415,7 @@ height: 100%;
        <div class="w3-container" style="font-family:Gowun Dodum;">
            <div id="ownerModal" class="w3-modal" style="font-family:Gowun Dodum; z-index:2000;">
              <div class="w3-modal-content w3-animate-top w3-card-4" style="width:30%; height: 40%;">
-               <header class="w3-container w3-teal" style="height:10%;"> 
+               <header class="w3-container" style="height:10%; background-color: #ffc107;"> 
                  <span onclick="document.getElementById('ownerModal').style.display='none'" 
                  class="w3-button w3-display-topright" style="width:5%; height:10%;">&times;</span>
                </header>
@@ -428,7 +428,7 @@ height: 100%;
        <div class="w3-container" style="font-family:Gowun Dodum;">
            <div id="noReserveModal" class="w3-modal" style="font-family:Gowun Dodum; z-index:2000;">
              <div class="w3-modal-content w3-animate-top w3-card-4" style="width:30%; height: 40%;">
-               <header class="w3-container w3-teal" style="height:10%;"> 
+               <header class="w3-container" style="height:10%;background-color: #ffc107;"> 
                  <span onclick="document.getElementById('noReserveModal').style.display='none'" 
                  class="w3-button w3-display-topright" style="width:5%; height:10%;">&times;</span>
                </header>
@@ -444,9 +444,9 @@ height: 100%;
        <div class="w3-container" style="font-family:Gowun Dodum;">
            <div id="shareModal" class="w3-modal" style="font-family:Gowun Dodum; z-index:2000;">
              <div class="w3-modal-content w3-animate-top w3-card-4" style="width:50%; height: 30%;">
-               <header class="w3-container w3-teal" style="height:15%;"> 
+               <header class="w3-container" style="background-color: #ffc107; height:30px;"> 
                  <span onclick="document.getElementById('shareModal').style.display='none'" 
-                 class="w3-button w3-display-topright" style="width:5%; height:15%;">&times;</span>
+                 class="w3-button w3-display-topright" style="height:30px; width:30px; line-height:30px;">&times;</span>
                </header>
                    <h5 style="font-family:Gowun Dodum; text-align: center; font-weight: bolder; margin-top:40px;">공유하기</h5>
                  <div style="width:100%; height:30%;padding:0; margin-top:20px;;display:flex; justify-content: center; align-items: center; color:black;">

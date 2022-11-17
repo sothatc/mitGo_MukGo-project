@@ -12,6 +12,7 @@ import kr.co.mitgomukgo.member.model.vo.Member;
 import kr.co.mitgomukgo.member.model.vo.Owner;
 import kr.co.mitgomukgo.notice.model.vo.Notice;
 import kr.co.mitgomukgo.order.model.vo.Order;
+import kr.co.mitgomukgo.order.model.vo.OrderList;
 import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Store;
 
@@ -153,8 +154,28 @@ public class MemberDao {
 		return result;
 	}
 
+	//업주관리> 주문관리
+	public ArrayList<OrderList> selectAllOrderListOwner(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("order.selectAllOrderListOwner", map);
+		return (ArrayList<OrderList>) list;
+	}
 
-
+	//업주관리> 주문관리 > 총 개수
+	public int countAllOrder(int ownerNo) {
+		return sqlSession.selectOne("order.AllOrderListOwner",ownerNo);
+	}
+	
+	//업주관리> 주문관리> 검색기능
+	public ArrayList<OrderList> searchOrderOwnerList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("order.searchOrderListOwner",map);
+		return (ArrayList<OrderList>) list;
+	}
+	
+	//업주관리> 주문관리> 검색기능 > 총 개수
+	public int searchOrderOwnerListCount(HashMap<String, Object> map) {
+		int result = sqlSession.selectOne("order.searchOrderOwnerListCount", map);
+		return result;
+	}
 
 	public int updateReserve(Reserve rs) {
 		int result = sqlSession.update("reserve.updateReserve", rs);
@@ -225,6 +246,15 @@ public class MemberDao {
 
 	public String selectJoinedOwner(Owner owner) {
 		return sqlSession.selectOne("owner.selectJoinedOwner", owner);
+	}
+
+
+	public int countOrderList(String memberId) {
+		return sqlSession.selectOne("order.countOrderList", memberId);
+	}
+
+	public int cancleOrder(int orderNo) {
+		return sqlSession.delete("order.cancleOrder",orderNo);
 	}
 
 	

@@ -7,9 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.6.1.js"></script>	
 
 <link rel="stylesheet" href="/resources/css/joinFrm.css">
-<script src="https://code.jquery.com/jquery-3.6.1.js"></script>	
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
@@ -29,6 +29,7 @@
                                 <div class="input01">
                                     <label class="label" for="memberName">한글로 2~5자리 이내로 입력해주세요.</label>
                                     <input type="text" id="memberName" name="memberName">
+                                    <img class="icon1" src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/325/flushed-face_1f633.png">
                                 </div>
                                 <p class="text-note"></p>
                             </div>
@@ -37,8 +38,9 @@
                             <span class="tit">아이디</span>
                             <div class="cnt">
                                 <div class="input01" id="input01">
-                                    <label class="label" for="memberId">4~20자리 이내로 입력해주세요.</label>
+                                    <label class="label" for="memberId">영문 4~20자리 이내로 입력해주세요.</label>
                                     <input type="text" id="memberId" name="memberId">
+                                    <img class="icon2" src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/325/flushed-face_1f633.png">
                                 </div>
                                 <p class="text-note"></p>
                                 <button type="button" id="idChkBtn">중복체크</button>
@@ -48,8 +50,9 @@
                             <span class="tit">비밀번호</span>
                             <div class="cnt">
                                 <div class="input01">
-                                    <label class="label" for="memberPw">대/소문자와 숫자를 포함한 최소 8자리를 입력해주세요.(특수기호x)</label>
+                                    <label class="label" for="memberPw">대/소문자와 숫자를 포함한 최소 8자리를 입력해주세요.(특수문자 제외)</label>
                                     <input type="password" id="memberPw" name="memberPw">
+                                    <img class="icon3" src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/325/flushed-face_1f633.png">
                                 </div>
                                 <p class="text-note"></p>
                             </div>
@@ -164,7 +167,7 @@
 				return;
 			}
 			$("[name=checkId]").val(memberId);
-			const popup = window.open("","checkId","left=700px, top=300px, width=300px, height=200px, menubar=no, status=no, scrollbars=yes");
+			const popup = window.open("","checkId","left=700px, top=300px, width=500px, height=200px, menubar=no, status=no, scrollbars=yes");
 			//새창에서 form을 전송하기 위한 연결작업
 			$("[name=checkIdFrm]").attr("target","checkId");
 			$("[name=checkIdFrm]").submit();
@@ -237,6 +240,40 @@
 						$("#authMsg").css("color","red");
 		            }
 		      });
+		$("#memberName").on("keyup",function(){
+			const nameReg = /^[가-힣]{2,5}$/;
+			const name = $("#memberName");
+			nameValue = name.val();
+			const nameComment = name.parent().next();
+			if(nameReg.test(nameValue)){
+				$(".icon1").attr("src","https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/349/grinning-face-with-big-eyes_1f603.png");
+			}else {
+				$(".icon1").attr("src","https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/325/flushed-face_1f633.png");
+			}
+			
+		});
+		$("#memberId").on("keyup",function(){
+			const idReg = /^[A-Za-z]{1}[A-Za-z0-9]{3,19}$/;
+			const id = $("#memberId");
+			idValue = id.val();
+			const idComment = id.parent().next();
+			if(idReg.test(idValue)){
+				$(".icon2").attr("src","https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/349/grinning-face-with-big-eyes_1f603.png");
+			}else {
+				$(".icon2").attr("src","https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/325/flushed-face_1f633.png");
+			}
+		});
+		$("#memberPw").on("keyup",function(){
+			const pwReg = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+			const pw = $("#memberPw");
+			const pwValue = pw.val();
+			const pwComment = pw.parent().next();
+			if(pwReg.test(pwValue)){
+				$(".icon3").attr("src","https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/samsung/349/grinning-face-with-big-eyes_1f603.png");
+			}else {
+				$(".icon3").attr("src","https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/325/flushed-face_1f633.png");
+			}
+		});
 		
 		/*정규표현식 유효성검사*/
 		$("#joinBtn").on("click",function(event){
@@ -250,6 +287,7 @@
 			}else {
 				nameComment.text("* 한글로 2~5자리 이내로 입력해주세요.");
 				nameComment.css("color","red");
+				alert("이름을 입력해주세요.");
 				event.preventDefault();
 			}
 			//아아디 유효성검사
@@ -263,6 +301,7 @@
 			}else {
 				idComment.text("* 4~20자리 이내로 입력해주세요.");
 				idComment.css("color","red");
+				alert("아이디를 입력해주세요.");
 				event.preventDefault();
 			}
 			//비밀번호 유효성 검사
@@ -275,6 +314,7 @@
 			}else {
 				pwComment.text("* 대/소문자와 숫자를 포함한 최소 8자리를 입력해주세요.");
 				pwComment.css("color","red");
+				alert("비밀번호를 입력해주세요.");
 				event.preventDefault();
 			}
 			// 비밀번호 확인 검사

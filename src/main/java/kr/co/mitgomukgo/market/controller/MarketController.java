@@ -71,10 +71,13 @@ public class MarketController {
 	}
 	
 	//주문 관리 이동
+	/*
 	@RequestMapping(value = "/ownerOrderManageFrm.do")
 	public String ownerOrderManageFrm(int reqPage) {
 		return "member/ownerOrderManageFrm";
 	}
+	*/
+	
 	
 
 	@RequestMapping(value = "/addMarketProductFrm.do")

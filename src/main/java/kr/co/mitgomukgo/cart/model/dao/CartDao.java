@@ -34,8 +34,10 @@ public class CartDao {
 
 
 
-	public ArrayList<Cart> ordercart(Cart c, String memberId) {
-		List list = sqlSession.selectList("order.ordercart", c);
+	public ArrayList<Cart> ordercart(String memberId) {
+		System.out.println("다오 들어옴");
+		List list = sqlSession.selectList("cart.cartOrder", memberId);
+		System.out.println("xml갔다옴"+list);
 		return (ArrayList<Cart>) list;
 	}
 

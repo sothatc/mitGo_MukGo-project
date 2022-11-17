@@ -4,15 +4,20 @@
 
    <select id="selectReserveList" parameterType="map" resultType="rs">
       select 
+      	* from
+      	(select rownum as rnum, n.* from (select 
          reserve_no as reserveNo,
          store_no as storeNo,
          store_name as storeName,
          reserve_date as reserveDate,
          eat_date as eatDate,
          eat_time as eatTime,
-         (select count(*) from review rv where rv.reserve_no=r.reserve_no) as rStatus
-      from(select rownum as rnum, n.* from (select * from reserve order by reserve_no desc) n) r
-      where member_no = #{memberNo} and rnum between #{start} and #{end}
+         (select count(*) from review rv where rv.reserve_no=r.reserve_no) as rStatus,
+         visit_status as visitStatus
+       from reserve r
+      where member_no = #{memberNo}
+      order by reserve_no desc)n)
+      where rnum between #{start} and #{end}
    </select>
    
    <!-- 예약관리 총 개수 -->

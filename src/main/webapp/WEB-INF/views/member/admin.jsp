@@ -54,6 +54,7 @@
 <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
 <link rel="stylesheet" href="/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <link rel="stylesheet" href="/resources/css/header/style.css">
 <link rel="stylesheet" href="/resources/css/member/admin.css">
@@ -123,7 +124,7 @@
 	                    	</c:choose>
 	                    </td>
 	                    <td class="ownerEnrollDateTd">${o.ownerEnrollDate }</td>
-	                   <form action="/updateOwnerLevel.do?ownerNo=${o.ownerNo}&reqPage=1" method="post">
+	                    <form action="/updateOwnerLevel.do?ownerNo=${o.ownerNo}&reqPage=1" method="post">
 	                    <td class="ownerStatusTd">
 	                        <c:choose>
 	                    		<c:when test="${o.ownerStatus eq 1 }">

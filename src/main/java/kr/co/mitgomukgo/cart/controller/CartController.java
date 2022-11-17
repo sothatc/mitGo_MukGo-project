@@ -40,10 +40,9 @@ public class CartController {
 		}
 	   
 	   @RequestMapping(value="/ordercart.do")
-		public String ordercart(Model model, Cart c,String memberId) {
-		   c.setMemberId(memberId);
-		   System.out.println(c);
-			ArrayList<Cart> list = service.ordercart(c, memberId);
+		public String ordercart(Model model,String memberId) {
+		    System.out.println(memberId);
+			ArrayList<Cart> list = service.ordercart(memberId);
 			System.out.println(list);
 			model.addAttribute("list",list);
 			return "order/ordercart";

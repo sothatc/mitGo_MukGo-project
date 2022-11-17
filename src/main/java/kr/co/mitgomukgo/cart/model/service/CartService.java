@@ -32,9 +32,9 @@ public class CartService {
 
 
 
-	public ArrayList<Cart> ordercart(Cart c, String memberId) {
-		ArrayList<Cart> list = dao.ordercart(c, memberId);
-		return (ArrayList<Cart>) list;
+	public ArrayList<Cart> ordercart(String memberId) {
+		ArrayList<Cart> list = dao.ordercart(memberId);
+		return list;
 	}
 
 
@@ -80,26 +80,5 @@ public class CartService {
 
 
 
-//	public boolean deleteCart(String productNoArr, String memberId) {
-//		StringTokenizer token = new StringTokenizer(productNoArr, "/");
-//		boolean result = true;
-//
-//		while (token.hasMoreTokens()) {
-//			int proNo = Integer.parseInt(token.nextToken());
-//			Cart c = new Cart();
-//			
-//			c.setMemberId(memberId);
-//			int changeResult = dao.deleteCart(c);
-//			System.out.println(c);
-//			if (changeResult == 0) {
-//				result = false;
-//				break;
-//			}
-//		}
-//		return result;
-//	}
-	
-	
-	
 
 }
