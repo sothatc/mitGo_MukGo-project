@@ -7,6 +7,14 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<style>
+.storeList-tag-content>ul>li>a{
+    color: rgb(133, 133, 133);
+    font-weight: 100;
+}
+
+</style>
+
 </head>
 <body>
 	<link rel="stylesheet" href="/resources/css/store/storeList.css">
@@ -27,6 +35,8 @@
 			</div>
 		</div>
 	</section>
+	
+
 	<!-- ////////////////////////////////////////////////////////////////// -->
 	<div class="storeList-content-wrap">
 
