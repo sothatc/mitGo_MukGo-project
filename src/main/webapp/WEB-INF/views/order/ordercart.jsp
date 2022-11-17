@@ -117,7 +117,7 @@
 		                      	
 		                      	<td>
 		                      		<input type="hidden" style="border:none;" class="hiddenPayPrice payPrice" name="productsPrice" readonly>
-		                      		<p id="font" class="lastPrice totalp" style="float:left;"></p>
+		                      		<p id="font" class="lastPrice" style="float:left;"></p>
 		                      		<p id="font"class="totalp" style="float:left;">원</p>
 		                     </td>
 		                      
@@ -145,9 +145,11 @@
                     </div>
                    
                 </div>
+                <c:forEach items="${list }" var="Order">
 				<input type="hidden" id="cart-quantity-sum" name="orderQuan" value="${Order.cartQuan }">
 				<input type="hidden" id="cart-price-sum" name="orderPrice" value="${Order.PPrice }">
 				<input type="hidden" id="cart-price-sum" name="pNo" value="${Order.PNo }">
+				</c:forEach>
 				
                <div class="page-title order-title">배송정보</div>
                 <div class="order-info shipping">
@@ -271,7 +273,45 @@ $("#order-same").on("change", function(){
 });
 
 $("#payBtn").on("click",function(){
-const price = $(".totalp").val();
+	
+	const shipInfo = $(".shipping").find(".view-order-info");														
+	if(!$("#order-same").prop("checked")) {
+		for(let i=0; i<shipInfo.length; i++) { // 배송정보 빈 칸인지 확인
+			if(shipInfo.eq(i).val() == "") {
+				shipInfo.eq(i).siblings(".comment").text("정보를 입력해주세요.");
+				return;			
+			} else {
+				shipInfo.eq(i).siblings(".comment").text("");
+			}
+			
+			if(i == 0) { // 수령인명 정규식
+				const nameReg = /^[가-힣]{2,4}$/;
+				const val0 = shipInfo.eq(0).val();
+				 if(!(nameReg.test(val0))) {
+					 shipInfo.eq(0).siblings(".comment").text("한글 2~4자로 입력");
+					 //event.preventDefault();
+					 return;		
+				 }
+			} else if (i == 1) { // 수령인 연락처 정규식
+				const phoneReg = /^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$/;
+				const val1 = shipInfo.eq(1).val();
+				if(!(phoneReg.test(val1))) {
+					 shipInfo.eq(1).siblings(".comment").text("010-0000-0000 형식으로 입력");
+					 //event.preventDefault();
+					 return;		
+				 }
+			}
+		} // 배송정보 빈 칸인지 확인 끝
+	} else {
+		shipInfo.siblings(".comment").text("");
+	}
+    if(!$("#info-agree").prop("checked")){
+        alert("정보 제공에 동의해주세요.");
+        return;
+    }
+
+	
+const price = $(".lastPrice").val();
 console.log(price);
 const name = $("#orderName").val();
 const d = new Date();
