@@ -49,12 +49,12 @@
      
      <div class="back">
         <div class="back-main" id="font">
-            <a href="http://127.0.0.1:5501/index.html"><img src="/resources/img/index/카트.png"/></a>
-            <p>HOME</p>
+            <a href="/cart.do"><img src="/resources/img/index/카트.png"/></a>
+            <p>CART</p>
         </div>
         <div class="back-mypage" id="font">
-            <a href="http://127.0.0.1:5501/index.html"><img src="/resources/img/index/홈백.png"/></a>
-            <p>CART</p>
+            <a href="/mainFrm.do"><img src="/resources/img/index/홈백.png"/></a>
+            <p>HOME</p>
             
         </div>
 
