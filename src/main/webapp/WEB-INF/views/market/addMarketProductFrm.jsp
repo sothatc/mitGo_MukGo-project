@@ -106,8 +106,6 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />
-	<script src="/resources/summernote/summernote-lite.js"></script>
-	<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
 	<link rel="stylesheet" href="/resources/summernote/summernote-lite.css">
 	<link rel="stylesheet" href="/resources/css/member/owner.css">
 	<div class="content-wrap">
@@ -170,6 +168,8 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
 		</article>
 	</div>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+	<script src="/resources/summernote/summernote-lite.js"></script>
+	<script src="/resources/summernote/lang/summernote-ko-KR.js"></script>
 	<script>
 		(function($) {
 			'use strict';
