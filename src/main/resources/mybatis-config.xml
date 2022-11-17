@@ -28,5 +28,6 @@
 		<typeAlias type="kr.co.mitgomukgo.qna.model.vo.Qna" alias="q"/>
 		<typeAlias type="kr.co.mitgomukgo.qna.model.vo.QnaFile" alias="qf"/>
 		<typeAlias type="kr.co.mitgomukgo.market.model.vo.BookMark" alias="bm"/>
+		<typeAlias type="kr.co.mitgomukgo.store.model.vo.StoreBookmark" alias="sbm"/>
 	</typeAliases>
 </configuration>

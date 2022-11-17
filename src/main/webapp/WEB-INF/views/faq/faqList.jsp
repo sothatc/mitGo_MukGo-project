@@ -124,11 +124,13 @@
                            ${fn:replace(f.faqContent, newLine, "<br>") }
                         </div>
                     </div>
-
-                    <div class="answer-btn">
-                        <a href="/updateFaqFrm.do?faqNo=${f.faqNo }">수정</a>
-                        <a href="/deleteFaq.do?faqNo=${f.faqNo }">삭제</a>
-                    </div>
+					
+					<c:if test="${not empty sessionScope.m and sessionScope.m.memberClass == 1 }">
+	                    <div class="answer-btn">
+	                        <a href="/updateFaqFrm.do?faqNo=${f.faqNo }">수정</a>
+	                        <a href="/deleteFaq.do?faqNo=${f.faqNo }">삭제</a>
+	                    </div>
+                    </c:if>
 
                 </div>
             </div>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="storeBookmark">
+  <select id="selectOneStoreBookmark" parameterType="map" resultType="sbm">
+  	select 
+  		bm_no as bmNo,
+  		store_no as storeNo,
+  		bookmark_id as bookmarkId
+  	from store_bookmark where store_no = #{storeNo} and bookmark_id = #{bookmarkId}
+  </select>
+  
+  <insert id="insertStoreBookmark" parameterType="sbm">
+  	insert into 
+  	store_bookmark values(sbm_seq.nextval, #{storeNo}, #{bookmarkId})
+  </insert>
+  
+  <delete id="deleteStoreBookmark" parameterType="sbm">
+  	delete from
+  	store_bookmark where store_no = #{storeNo} and bookmark_id = #{bookmarkId}
+  </delete>
+</mapper>

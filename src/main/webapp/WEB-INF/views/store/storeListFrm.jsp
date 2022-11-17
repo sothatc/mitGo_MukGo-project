@@ -88,7 +88,19 @@
 			<div class="storeList-list-content">
 				<c:forEach items="${list }" var="s">
 					<div class="showList">
-						<a href="/storeDetail.do?storeNo=${s.storeNo }">
+						<c:choose>
+							<c:when test="${not empty sessionScope.m }">
+								<a href="/storeDetail.do?storeNo=${s.storeNo }&bookmarkId=${sessionScope.m.memberId}">
+							</c:when>
+							
+							<c:when test="${not empty sessionScope.o }">
+								<a href="/storeDetail.do?storeNo=${s.storeNo }&bookmarkId=${sessionScope.o.ownerId}">
+							</c:when>
+							
+							<c:otherwise>
+								<a href="/storeDetail.do?storeNo=${s.storeNo }">
+							</c:otherwise>
+						</c:choose>
 							<div>
 								<img src="resources/upload/store/${s.thumbNail }">
 							</div>
