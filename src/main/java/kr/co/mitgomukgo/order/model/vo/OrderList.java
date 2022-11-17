@@ -27,4 +27,5 @@ public class OrderList {
 	private String shippingPhone;
 	private String impUid;
 	private int ownerNo;
+	private int uidCount;
 }

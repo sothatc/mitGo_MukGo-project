@@ -24,6 +24,10 @@ public class OrderService {
 		return dao.orderNext(r);
 		
 	}
+
+	public int deleteCart(String memberId) {
+		return dao.deleteCart(memberId);
+	}
 	
 
 //	@Transactional

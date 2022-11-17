@@ -24,15 +24,15 @@
                     <h2 id="font">주문/결제</h2>
                     <div class="cart-option">
                     <div>
-                        <button type="button" id="cart-option" style="color: white;">장바구니</button>
+                        <div id="cart-option" style="color: white; ">장바구니</div>
                     </div>
                     <div class="line"></div>
                     <div>
-                        <button type="button"  id="cart-option" style="color: white;">결제</button>
+                        <div  id="cart-option" style="color: white;">결제</div>
                     </div>
                     <div class="line"></div>
                     <div>
-                        <button type="button"  id="cart-option" style=" background-color : #fdbe02;  color: black; font-weight: 600;">주문완료</button>
+                        <div  id="cart-option" style=" background-color : #fdbe02;  color: black; font-weight: 600;">주문완료</button>
                     </div>
                 </div>
                 </div>
@@ -49,12 +49,12 @@
      
      <div class="back">
         <div class="back-main" id="font">
-            <a href="http://127.0.0.1:5501/index.html"><img src="/resources/img/index/카트.png"/></a>
-            <p>HOME</p>
+            <a href="/cart.do"><img src="/resources/img/index/카트.png"/></a>
+            <p>CART</p>
         </div>
         <div class="back-mypage" id="font">
-            <a href="http://127.0.0.1:5501/index.html"><img src="/resources/img/index/홈백.png"/></a>
-            <p>CART</p>
+            <a href="/mainFrm.do"><img src="/resources/img/index/홈백.png"/></a>
+            <p>HOME</p>
             
         </div>
 

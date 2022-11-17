@@ -6,8 +6,10 @@
 		select count(*) as cnt from order_tbl where member_id = #{memberId}
 	</select>
 	<select id="selectAllOrderList" parameterType="map" resultType="or">
-		<!--  
-		select 
+		<!-- 
+		select * from
+        (select rownum as rnum, n.* 
+        from (select 
 		    order_no as orderNo,
 		    member_id as memberId,
 		    order_date as orderDate,
@@ -19,8 +21,9 @@
 		    (select p_price from market_product mp where ot.p_no = mp.p_no) as pPrice
 		from order_tbl ot
 		where member_id = #{memberId}
-		order by 4 desc
-		-->
+		order by 4 desc)n)
+        where rnum between #{start} and #{end}
+		  -->
 		select order_no as orderNo,
 		    member_id as memberId,
 		    order_date as orderDate,
@@ -30,11 +33,20 @@
 		    shipping_addr as shippingAddr,
 		    (select p_name from market_product mp where ot.p_no = mp.p_no) as pName,
 		    (select p_price from market_product mp where ot.p_no = mp.p_no)*order_quan as pPrice,
-            imp_uid
+            imp_uid as impUid
         from order_tbl ot 
         where imp_uid in (select distinct imp_uid from order_tbl where member_id= #{memberId})
+        
 	</select>
-	
+	<select id="uidCnt" parameterType="string" resultType="ol">
+		select 
+		imp_uid as impUid, 
+		count(*) as uidCount
+		from 
+		order_tbl
+		where member_id = #{memberId}
+		group by imp_uid
+	</select>
 	
 	<insert id="nextOrder" parameterType="or">
 	insert into order_tbl values(
@@ -67,6 +79,7 @@
 		    order_date as orderDate,
 		    order_quan as orderQuan,
             (select p_price from market_product mp where ot.p_no = mp.p_no) as pPrice,
+            (select p_price from market_product mp where ot.p_no = mp.p_no)*order_quan as orderPrice,
 		    order_status as orderStatus,
             (select owner_no from market_product mp where ot.p_no = mp.p_no) as ownerNo
 		from (select rownum as rnum, n.* from (select * from order_tbl order by order_date desc) n) ot
@@ -132,6 +145,10 @@
 
 	<delete id="cancleOrder" parameterType="int">
 		delete from order_tbl where order_no = #{orderNo}
+	</delete>
+	
+	<delete id="deleteCartAll" parameterType="String">
+		delete from cart where member_id = #{memberId}
 	</delete>
 
 

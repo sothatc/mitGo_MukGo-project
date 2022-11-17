@@ -11,6 +11,14 @@
 </head>
 <style type="text/css">
 
+
+	.saveBtn {
+	   background-color: rgb(51, 51, 51) !important;
+	   border: 1px solid rgb(51, 51, 51) !important;
+	   color: #fff !important;
+	   padding: 0 10px 0 10px !important;
+	   border-radius: 5px;
+	}
 	#pageNavi{
 		width: 800px;
 	    text-align: center;
@@ -91,7 +99,7 @@
 								<td>${ol.PName}</td>
 								<td>${ol.orderDate}</td>
 								<td>${ol.orderQuan}</td>
-								<td>${ol.PPrice}</td>
+								<td>${ol.orderPrice}</td>
 								
 								<form action="/updateOrderLevel.do?orderNo=${ol.orderNo}&reqPage=1" method="post">
 								<td class="orderStatusTd">

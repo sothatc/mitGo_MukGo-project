@@ -73,6 +73,7 @@ height: 100%;
           <span style=" margin-left:20px; font-weight: lighter;">${s.content }</span>
           <div style="margin-right:0; float:right;">
             <a class="material-symbols-rounded share pointer" id="share">share</a>
+
             <c:choose>
             	<c:when test="${empty sbm }">
             		<c:choose>
@@ -114,8 +115,7 @@ height: 100%;
             	</c:otherwise>
             	
             </c:choose>
-            
-            
+
             </div>
          </div>
       </div>
@@ -811,6 +811,7 @@ height: 100%;
 
                 modal.classList.remove("hidden");
                 if(ownerId != ""){
+                	modal.classList.add("hidden");
                    document.getElementById('ownerModal').style.display='block';
                 }
                 selectedDate =$("#datePicker").val();
