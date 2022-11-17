@@ -29,7 +29,7 @@
 					<div class="col-12 col-lg-10 offset-lg-1 text-white">
 						<h6 class="text-white text-uppercase" id="font">맛집리스트를 집에서도</h6>
 						<h1 class="display-3 my-4">GOGO마켓 <br />신선, 간편, 프리미엄 밀키트
-						</h1> <a href="/marketMain.do?reqPage=1" class="btn btn-brand" id="font">상품보러가기</a>
+						</h1> <a href="/marketMain.do?reqPage=1&pCategory=10" class="btn btn-brand" id="font">상품보러가기</a>
 					</div>
 				</div>
 			</div>
