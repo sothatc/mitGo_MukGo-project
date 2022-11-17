@@ -87,16 +87,6 @@ height: 100%;
 											</span>
 		               </c:when>
 		               
-		               <c:when test="${!empty sessionScope.o }">
-		               		<span class="material-icons" id="bookMark" onclick="addBookmark(this, ${s.storeNo}, '${sessionScope.o.ownerId }')">
-												bookmark
-											</span>
-							
-							<span class="material-icons" id="bookMark1" style="color: gold; display: none;" onclick="deleteBookmark(this, ${s.storeNo}, '${sessionScope.o.ownerId }')">
-												bookmark
-											</span>
-		               </c:when>
-		               
 		               <c:otherwise>
 		               		
 		               </c:otherwise>
@@ -112,16 +102,6 @@ height: 100%;
 											</span>
 							
 							<span class="material-icons" id="bookMark" style="display: none;" onclick="addBookmark(this, ${s.storeNo}, '${sessionScope.m.memberId }')">
-												bookmark
-											</span>
-		               </c:when>
-		               
-		               <c:when test="${!empty sessionScope.o }">
-		               		<span class="material-icons" id="bookMark1" style="color: gold;" onclick="deleteBookmark(this, ${s.storeNo}, '${sessionScope.o.ownerId }')">
-												bookmark
-											</span>
-							
-							<span class="material-icons" id="bookMark" style="display: none;" onclick="addBookmark(this, ${s.storeNo}, '${sessionScope.o.ownerId }')">
 												bookmark
 											</span>
 		               </c:when>
