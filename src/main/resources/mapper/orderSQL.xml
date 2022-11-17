@@ -67,6 +67,7 @@
 		    order_date as orderDate,
 		    order_quan as orderQuan,
             (select p_price from market_product mp where ot.p_no = mp.p_no) as pPrice,
+            (select p_price from market_product mp where ot.p_no = mp.p_no)*order_quan as orderPrice,
 		    order_status as orderStatus,
             (select owner_no from market_product mp where ot.p_no = mp.p_no) as ownerNo
 		from (select rownum as rnum, n.* from (select * from order_tbl order by order_date desc) n) ot

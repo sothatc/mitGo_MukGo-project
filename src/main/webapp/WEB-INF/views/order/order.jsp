@@ -132,7 +132,7 @@
         </div>
             
             
-            <form id="order-form" action="/orderNext.do" method="post" autocomplete="off">
+            <form id="order-form" action="/orderDirect.do" method="post" autocomplete="off">
                 
                 <div class="page-title order-title" id="font">주문정보</div>
                 <div class="order-info" id="font">
@@ -147,8 +147,8 @@
                     </div>
                    
                 </div>
-				<input type="hidden" id="cart-quantity-sum" name="orderQuan" value="${Order.cartQuan }">
-				<input type="hidden" id="cart-price-sum" name="orderPrice" value="${Order.PPrice*Order.cartQuan }">
+				<input type="hidden" id="cart-quantity-sum" name="orderQuan1" value="${Order.cartQuan }">
+				<input type="hidden" id="cart-price-sum" name="orderPrice1" value="${Order.PPrice*Order.cartQuan }">
 				<input type="hidden" id="cart-price-sum" name="pNo" value="${Order.PNo }">
 				
                <div class="page-title order-title">배송정보</div>
