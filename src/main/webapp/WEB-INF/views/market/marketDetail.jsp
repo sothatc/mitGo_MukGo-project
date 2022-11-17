@@ -347,13 +347,13 @@
 	
 	//장바구니 클릭 시 hidden으로 넘겨주는 값
 	$(".cartBtn").on("click", function(){
-	 	$(".allPrice").attr("value",count*price);
+	 	$(".allPrice").attr("value",price);
 	 	$(".pNumber").attr("value",pNo);
 	 	$(".count").attr("value",count);
 	});
 	
 	$(".buyBtn").on("click", function(){
-	 	$(".allPrice").attr("value",count*price);
+	 	$(".allPrice").attr("value",price);
 	 	$(".pNumber").attr("value",pNo);
 	 	$(".count").attr("value",count);
 	});
