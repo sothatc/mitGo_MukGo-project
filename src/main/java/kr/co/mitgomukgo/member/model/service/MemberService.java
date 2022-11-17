@@ -424,6 +424,10 @@ public class MemberService {
 		return dao.updateOwnerLevel(ownerNo,o);
 	}
 	
+	//업주 > 주문관리> 배송상태 지정
+	public int updateOrderLevel(OrderList ol) {
+		return dao.updateOrderLevel(ol);
+	}
 	
 	//최고관리자 > 회원관리 
 	public HashMap<String, Object> selectMemberList(int reqPage) {
@@ -570,56 +574,59 @@ public class MemberService {
 		int numPerPage = 7;
 		int end = numPerPage * reqPage;
 		int start = (end-numPerPage)+1;
+		System.out.println("end: "+end + " start: "+start);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
 		map.put("ownerNo", ownerNo);
 		ArrayList<OrderList> list = dao.selectAllOrderListOwner(map);
-		int totalPage = dao.countAllOrder(ownerNo);
-		int totalMan = 0;
-		if(totalPage % numPerPage == 0) {
-			totalMan = totalPage / numPerPage;
+		System.out.println(list);
+		int totalCnt = dao.countAllOrder(ownerNo);
+		int totalPage = 0;
+		if(totalCnt % numPerPage == 0) {
+			totalPage = totalCnt / numPerPage;
 		}else {
-			totalMan = totalPage / numPerPage + 1;
+			totalPage = totalCnt / numPerPage + 1;
 		}
 		
-		// 페이지 네비 사이즈
 		int pageNaviSize = 5;
-		
-		// 페이지 시작 번호
-		int pageNo = 1;
-		
-		if(reqPage > 3) {
-			pageNo = reqPage - 2;
-		}
-		
-		// 페이지 내비 시작
-		String pageNavi = "";
-		if(pageNo != 1) {
-			pageNavi += "<a href='/ownerOrderManageFrm.do?reqPage=" + (pageNo - 1) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
-					"            chevron_left\r\n" + 
-					"            </span></a>";
-		}
-		
-		for(int i = 0; i < pageNaviSize; i++) {
-			if(reqPage == pageNo) {
-				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
-			}else {
-				pageNavi += "<a href='/ownerOrderManageFrm.do?reqPage=" + pageNo + "'><span>" + (pageNo) + "</span></a>";
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize+1;
+		//페이지 네비게이션 제작 시작
+		String pageNavi = "<ul class='pagination circle-style'>";
+		//이전 버튼
+	      if(pageNo !=1) {
+	          pageNavi += "<li>";
+	          pageNavi += "<a class='page-item' href='/ownerOrderManageFrm.do?reqPage="+(pageNo-1)+"'>";
+	          pageNavi += "<span class='material-icons'>chevron_left</span>";
+	          pageNavi +="</a></li>";
+	       }
+			//페이지 숫자
+			for(int i=0; i<pageNaviSize; i++) {
+				if(pageNo == reqPage) {
+					pageNavi += "<li>";
+					pageNavi += "<a class='page-item active-page' href='/ownerOrderManageFrm.do?reqPage="+pageNo+"'>";
+					pageNavi += pageNo;
+					pageNavi += "</a></li>";
+				}else {
+					pageNavi += "<li>";
+					pageNavi += "<a class='page-item' href='/ownerOrderManageFrm.do?reqPage="+pageNo+"'>";
+					pageNavi += pageNo;
+					pageNavi += "</a></li>";
+				}
+				pageNo++;
+				if(pageNo > totalPage) {
+					break;
+				}
 			}
-			pageNo++;
-			if(pageNo > totalMan) {
-				break;
-			}
-		}
-			
-			// 다음버튼
-			if(pageNo <= totalMan) {
-				pageNavi += "<a href='/ownerOrderManageFrm.do?reqPage=" + (pageNo) + "'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
-						"            chevron_right\r\n" + 
-						"            </span></a>"; 
-			}
-			
+		
+			//다음 버튼
+		      if(pageNo<=totalPage) {
+		          pageNavi += "<li>";
+		          pageNavi += "<a class='page-item' href='/ownerOrderManageFrm.do?reqPage="+pageNo+"'>";
+		          pageNavi += "<span class='material-icons'>chevron_right</span>";
+		          pageNavi +="</a></li>";
+		       }
+			pageNavi += "</ul>";
 			
 			HashMap<String, Object> orderMap = new HashMap<String, Object>();
 			orderMap.put("list", list);

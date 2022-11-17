@@ -120,7 +120,13 @@ public class MemberDao {
 	}
 	//최고관리자 > 업주관리 > 업주레벨 지정
 	public int updateOwnerLevel(int ownerNo, Owner o) {
-		int result = sqlSession.update("updateLevel", o);
+		int result = sqlSession.update("owner.updateLevel", o);
+		return result;
+	}
+	
+	//업주 > 주문관리> 배송상태 지정
+	public int updateOrderLevel(OrderList ol) {
+		int result = sqlSession.update("order.updateOrder", ol);
 		return result;
 	}
 	
