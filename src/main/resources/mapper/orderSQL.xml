@@ -39,7 +39,9 @@
     <delete id="deleteCart" parameterType="int">
 		delete from cart where cart_no = #{cartNo}
 	</delete>
-	
+	<delete id="cancleOrder" parameterType="int">
+		delete from order_tbl where order_no = #{orderNo}
+	</delete>
 
 </mapper>
 

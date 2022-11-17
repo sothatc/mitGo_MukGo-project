@@ -227,6 +227,14 @@ public class MemberDao {
 		return sqlSession.selectOne("owner.selectJoinedOwner", owner);
 	}
 
+	public int countOrderList(String memberId) {
+		return sqlSession.selectOne("order.countOrderList", memberId);
+	}
+
+	public int cancleOrder(int orderNo) {
+		return sqlSession.delete("order.cancleOrder",orderNo);
+	}
+
 	
 
 
