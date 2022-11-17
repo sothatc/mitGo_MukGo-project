@@ -54,11 +54,11 @@
 <section id="services" class="text-center">
     <div class="container">
         <div class="row">
-            <div class="col-12">
+            <div class="col-12" style:>
                 <div class="intro" id="font">
                     <h1 id="font" >My Order</h1>
                     <h2 id="font">주문/결제</h2>
-                    <div class="cart-option">
+                    <div class="cart-option" style="width : 1300px; align: center;">
                     <div >
                         <button type="button" id="cart-option">장바구니</button>
                     </div>

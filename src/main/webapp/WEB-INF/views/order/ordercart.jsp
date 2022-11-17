@@ -58,7 +58,7 @@
                 <div class="intro" id="font">
                     <h1 id="font" >My Order</h1>
                     <h2 id="font">주문/결제</h2>
-                    <div class="cart-option">
+                    <div class="cart-option" style="width : 1300px; align: center;">
                     <div >
                         <button type="button" id="cart-option">장바구니</button>
                     </div>
@@ -117,12 +117,13 @@
                  		   <tr>
 		                      	<td colspan="5"></td>
 		                      	
-		                      	<td>
+		                      	<td >
 		                      		<input type="hidden" style="border:none;" class="hiddenPayPrice payPrice" name="productsPrice" readonly>
 		                      		<p id="font" class="lastPrice" style="float:left; display: none;"></p>
-		                      		<p id="font" class="viewPrice" style="float:left;"></p>
-		                      		<p id="font"class="totalp" style="float:left;">원</p>
-		                     </td>
+		                      		<p id="font"style="float:left; margin-left: 3px; margin-top: 12px;">합계 :</p>
+		                      		<p id="font" class="viewPrice" style="float:left; margin-left: 50px; margin-top: 12px; color: orange;"></p>
+		                      		<p id="font"class="totalp" style="float:left; margin-left: 3px; margin-top: 10px;">원</p>
+		                        </td>
 		                      
 	                      	</tr>
                      	</tbody>
