@@ -41,9 +41,80 @@
     <delete id="deleteCart" parameterType="int">
 		delete from cart where cart_no = #{cartNo}
 	</delete>
+	
+	
+	<!-- 업주 > 주문관리-->
+	<select id="selectAllOrderListOwner" parameterType="map" resultType="ol">
+       select 
+		    order_no as orderNo,
+		    member_id as memberId,
+		    p_no as pNo,
+		    order_date as orderDate,
+		    order_quan as orderQuan,
+		    order_status as orderStatus,
+		    shipping_phone as shippingPhone,
+		    shipping_addr as shippingAddr,
+		    (select p_name from market_product mp where ot.p_no = mp.p_no) as pName,
+		    (select p_price from market_product mp where ot.p_no = mp.p_no) as pPrice,
+            (select owner_no from market_product mp where ot.p_no = mp.p_no) as ownerNo
+		from (select rownum as rnum, n.* from (select * from order_tbl order by order_date desc) n) ot
+        where  (select owner_no from market_product mp where ot.p_no = mp.p_no) = #{ownerNo}
+        and rnum between #{start} and #{end}
+	</select>
+	
+	<!-- 업주 > 주문관리 > 총 개수-->
+	<select id="AllOrderListOwner" parameterType="map" resultType="int">
+		select
+			count(*)
+		from order_tbl ot
+		where  (select owner_no from market_product mp where ot.p_no = mp.p_no) = #{ownerNo}
+	</select>
+	
+	<!-- 업주 > 주문관리 > 검색-->
+	<select id="searchOrderListOwner" parameterType="map" resultType="ol">
+	       select 
+		    order_no as orderNo,
+		    member_id as memberId,
+		    p_no as pNo,
+		    order_date as orderDate,
+		    order_quan as orderQuan,
+		    order_status as orderStatus,
+		    shipping_phone as shippingPhone,
+		    shipping_addr as shippingAddr,
+		    (select p_name from market_product mp where ot.p_no = mp.p_no) as pName,
+		    (select p_price from market_product mp where ot.p_no = mp.p_no) as pPrice,
+            (select owner_no from market_product mp where ot.p_no = mp.p_no) as ownerNo
+		from (select rownum as rnum, n.* from (select * from order_tbl order by order_date desc) n) ot
+        where  (select owner_no from market_product mp where ot.p_no = mp.p_no) = #{ownerNo}
+        and rnum between #{start} and #{end}
+        <choose>
+			<when test="type.equals('orderNo')">
+			 and order_no like '%'||#{keyword}||'%' 
+			</when>
+			<when test="type.equals('id')">
+			and member_id like '%'||#{keyword}||'%' 
+			</when>			
+		</choose>
+	</select>
+	
+	<!--업주관리> 주문관리> 검색기능 > 총 개수  -->
+	<select id="searchOrderOwnerListCount" parameterType="map" resultType="int">
+		select count(*) from order_tbl ot
+		where  (select owner_no from market_product mp where ot.p_no = mp.p_no) = #{ownerNo}
+		<choose>
+			<when test="type.equals('orderNo')">
+			 and order_no like '%'||#{keyword}||'%' 
+			</when>
+			<when test="type.equals('id')">
+			and member_id like '%'||#{keyword}||'%' 
+			</when>		
+		</choose>
+	</select>
+
 	<delete id="cancleOrder" parameterType="int">
 		delete from order_tbl where order_no = #{orderNo}
 	</delete>
+
 
 </mapper>
 

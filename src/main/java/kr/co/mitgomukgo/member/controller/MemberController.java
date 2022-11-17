@@ -25,6 +25,8 @@ import kr.co.mitgomukgo.member.model.service.MemberService;
 import kr.co.mitgomukgo.member.model.vo.Member;
 import kr.co.mitgomukgo.member.model.vo.Owner;
 import kr.co.mitgomukgo.notice.model.vo.Notice;
+import kr.co.mitgomukgo.order.model.vo.Order;
+import kr.co.mitgomukgo.order.model.vo.OrderList;
 import kr.co.mitgomukgo.store.model.vo.Reserve;
 import kr.co.mitgomukgo.store.model.vo.Store;
 import net.nurigo.java_sdk.Coolsms;
@@ -399,6 +401,35 @@ public class MemberController {
 		model.addAttribute("pageNavi", list.get("pageNavi"));
 		return "member/admin";
 	}
+	
+	//업주관리> 주문관리
+	@RequestMapping(value="/ownerOrderManageFrm.do")
+	public String ownerOrderManage(Model model, OrderList ol, int reqPage, @SessionAttribute Owner o) {
+		int ownerNo = o.getOwnerNo();
+		HashMap<String, Object> map = service.selectAllOrderListOwner(reqPage, ownerNo);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
+		model.addAttribute("ownerNo", ownerNo);
+		return "member/ownerOrderManageFrm";
+	}
+	
+	//업주관리> 주문관리> 검색기능
+	@RequestMapping(value="/searchOrderOwnerList.do")
+	public String searchOrderOwnerList(Model model, OrderList ol, int reqPage, @SessionAttribute Owner o, String type, String keyword) {
+		int ownerNo = o.getOwnerNo();
+		HashMap<String, Object> map = service.searchOrderOwnerList(reqPage, ownerNo, type, keyword);
+		model.addAttribute("list", map.get("list"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("pageNavi", map.get("pageNavi"));
+		model.addAttribute("total", map.get("total"));
+		model.addAttribute("pageNo", map.get("pageNo"));
+		model.addAttribute("ownerNo", ownerNo);
+		return "member/ownerOrderManageFrm";
+	}
+	
 	
 	//최고관리자 > 업주관리 > 업주레벨 지정
 	@RequestMapping(value="/updateOwnerLevel.do")

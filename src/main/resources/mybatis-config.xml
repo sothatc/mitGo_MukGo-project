@@ -20,6 +20,7 @@
 		<typeAlias type="kr.co.mitgomukgo.market.model.vo.Market" alias="ma" />
         <typeAlias type="kr.co.mitgomukgo.cart.model.vo.Cart" alias="c" />
         <typeAlias type="kr.co.mitgomukgo.order.model.vo.Order" alias="or" />
+        <typeAlias type="kr.co.mitgomukgo.order.model.vo.OrderList" alias="ol" />
 
 		<typeAlias type="kr.co.mitgomukgo.store.model.vo.StoreJoin" alias="sj" />
 		<typeAlias type="kr.co.mitgomukgo.store.model.vo.updateRating" alias="rt" />
