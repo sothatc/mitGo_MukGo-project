@@ -31,10 +31,10 @@
 }
 .storeList-searchinput>button {
 	width: 35px;
-	height: 35px;
-	border: solid 2px black;
-	border-radius: 15px;
-	background-color: #ffc107;
+  	height: 35px;
+	border : none;
+	border-radius: 5px;
+  	background-color:#fff2ca;
 }
 .storeList-searchinput>button>span{
 	line-height: 30px;
