@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -101,10 +102,10 @@
 		                        
 		                        	<td style="text-align:center">${Order.PName }</td>
 					            	<td class="pImg" style="text-align:center"><img src="/resources/upload/market/${Order.PImg }"></td>
-						           	<td class="pPrice" style="text-align:center">${Order.PPrice }</td>
+						           	<td class="pPrice" style="text-align:center"><fmt:formatNumber value="${Order.PPrice}" pattern="#,###" /></td>
 						           	<td style="text-align:center">${Order.cartQuan }</td>
 					            	<td class="shipping">무료</td>
-					            	<td style="text-align:center;" class="cartTotalPrice">${Order.PPrice*Order.cartQuan }</td>
+					            	<td style="text-align:center;" class="cartTotalPrice"><fmt:formatNumber value="${Order.PPrice*Order.cartQuan }" pattern="#,###" /></td>
 								 		 
 					            	
 		                    </tr>
@@ -119,7 +120,7 @@
 		                      		<input type="hidden" style="border:none;" class="hiddenPayPrice payPrice" name="productsPrice" readonly>
 		                      		<p class="lastPrice"></p>
 		                        </td>
-		                        <td id="font" >총 합계 : ${Order.PPrice*Order.cartQuan }원</td>
+		                        <td id="font" >총 합계 : <fmt:formatNumber value="${Order.PPrice*Order.cartQuan }" pattern="#,###" />원</td>
 		                        <input type="hidden" class="totalp" value=" ${Order.PPrice*Order.cartQuan }">
 	                      	</tr>
                      	</tbody>
@@ -151,7 +152,7 @@
 				<input type="hidden" id="cart-price-sum" name="pNo" value="${Order.PNo }">
 				
                <div class="page-title order-title">배송정보</div>
-                <div class="order-info shipping">
+                <div class="order-info shipping" id="font">
                     <div id="same-check">
                         <input type="checkbox" id="order-same" class="order-agree">
                         <label for="order-same"><i class="fa-solid fa-check"></i></label>
@@ -165,7 +166,7 @@
                     </div>
                     <div class="order-box">
                         <label for="shippingPhone" class="order-label">전화번호</label>
-                        <input type="text" name="shippingPhone" id="shippingPhone" class="order-input medium view-order-info" placeholder="010-0000-0000"required>
+                        <input type="text" name="shippingPhone" id="shippingPhone" class="order-input medium view-order-info" placeholder=""숫자만 입력 해주세요""required>
                         <input type="text" class="order-input medium hidden-order-info" value="${sessionScope.m.memberPhone }" style="display:none;">
                         <span class="comment"></span>
                     </div>
@@ -203,37 +204,7 @@
             </form>
         </div>
     
-    
-    
-	<footer>
-        <div class="footer-top text-center">
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-lg-6 text-center">
-                        <h4 class="navbar-brand">믿GO먹GO<span class="dot">!</span></h4>
-                        <p id="font">서울 맛집 탐방하기. 서울에서 꼭 먹어봐야 할 음식 리스트! 서울의 감성 카페부터 한식, 중식, 일식, 양식, 아시아식, 채식, 할랄까지 서울 맛집 총정리.</p>
-                        <div class="col-auto social-icons">
-                            <a href="#"><i class='bx bxl-facebook'></i></a>
-                            <a href="#"><i class='bx bxl-twitter'></i></a>
-                            <a href="#"><i class='bx bxl-instagram'></i></a>
-                            <a href="#"><i class='bx bxl-pinterest'></i></a>
-                        </div>
-                        <div class="col-auto conditions-section">
-                            <a href="#">privacy</a>
-                            <a href="#">terms</a>
-                            <a href="#">disclaimer</i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom text-center">
-            <p class="mb-0">Copyright vicpra 2022. All rights Reserved</p> Distributed By <a
-                hrefs="https://themewagon.com">ThemeWagon</a>
-        </div>
-    </footer>
-    
-
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 <script>
 function searchAddr() {
