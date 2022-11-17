@@ -610,6 +610,9 @@ public class MemberController {
 		model.addAttribute("total", map.get("total"));
 		model.addAttribute("pageNo", map.get("pageNo"));
 		model.addAttribute("memberId", memberId);
+		model.addAttribute("uidCntList", map.get("uidCnt"));
+		System.out.println(map.get("list"));
+		System.out.println(map.get("uidCnt"));
 		return "member/orderList";
 	}
 	@RequestMapping(value="/cancleOrder.do")

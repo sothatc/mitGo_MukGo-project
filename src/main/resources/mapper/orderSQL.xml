@@ -30,11 +30,19 @@
 		    shipping_addr as shippingAddr,
 		    (select p_name from market_product mp where ot.p_no = mp.p_no) as pName,
 		    (select p_price from market_product mp where ot.p_no = mp.p_no)*order_quan as pPrice,
-            imp_uid
+            imp_uid as impUid
         from order_tbl ot 
         where imp_uid in (select distinct imp_uid from order_tbl where member_id= #{memberId})
 	</select>
-	
+	<select id="uidCnt" parameterType="string" resultType="ol">
+		select 
+		imp_uid as impUid, 
+		count(*) as uidCount
+		from 
+		order_tbl
+		where member_id = #{memberId}
+		group by imp_uid
+	</select>
 	
 	<insert id="nextOrder" parameterType="or">
 	insert into order_tbl values(

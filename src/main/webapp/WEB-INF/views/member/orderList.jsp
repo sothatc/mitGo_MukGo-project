@@ -43,30 +43,31 @@
 								<th class="th" scope="col">처리</th>
 							</tr>
 							<c:forEach items="${list }" var="orList" varStatus="i">
-								<c:choose>
-									<c:when test="${i.index == 0 }">
-									<tr>
-										<input type="hidden" class="nullChk" value="${orList.orderNo }">
-										<td scope="row">${orList.orderNo }</td>
-										<td scope="row">${orList.PName }</td>
-										<td scope="row">${orList.orderQuan }</td>
-										<td scope="row">${orList.PPrice }</td>
-										<td scope="row">${orList.orderDate }</td>
-										<td scope="row" class="orderStatus">${orList.orderStatus }</td>
+								<c:forEach items="${uidCntList }" var="uidCnt" varStatus="j">
+									<c:if test="${orList.impUid == uidCnt.impUid && uidCnt.uidCount <= 1 }">
+										<tr>
+											<td scope="row">${orList.orderNo }</td>
+											<td scope="row">${orList.PName }</td>
+											<td scope="row">${orList.orderQuan }</td>
+											<td scope="row">${orList.PPrice }</td>
+											<td scope="row">${orList.orderDate }</td>
+											<td scope="row" class="orderStatus">${orList.orderStatus }</td>
+										</tr>		
+									</c:if>
+									
+									<c:if test="${orList.impUid == uidCnt.impUid && uidCnt.uidCount >= 2 }">
 										<c:choose>
-										<c:when test="${orList.orderStatus eq '배송완료' }">
-											<td scope="row"></td>
+										<c:when test="${j.index == 0 }">
+											<tr>
+												<td scope="row">${orList.orderNo }</td>
+												<td scope="row">${orList.PName }</td>
+												<td scope="row">${orList.orderQuan }</td>
+												<td scope="row">${orList.PPrice }</td>
+												<td scope="row">${orList.orderDate }</td>
+												<td scope="row" class="orderStatus">${orList.orderStatus }</td>
+											</tr>
 										</c:when>
 										<c:otherwise>
-											<td scope="row">
-												<button type="button" class="cancleBtn">취소</button>
-											</td>
-										</c:otherwise>
-									</c:choose>
-									</tr>
-									</c:when>
-									<c:otherwise>
-										<c:if test="${orList.impUid eq list[i.index-1].impUid }">
 											<tr>
 												<td scope="row"></td>
 												<td scope="row">${orList.PName }</td>
@@ -74,31 +75,12 @@
 												<td scope="row">${orList.PPrice }</td>
 												<td scope="row">${orList.orderDate }</td>
 												<td scope="row" class="orderStatus">${orList.orderStatus }</td>
-											</tr>		
-										</c:if>
-										<c:if test="${!orList.impUid eq list[i.index-1].impUid }">
-										<tr>
-										<input type="hidden" class="nullChk" value="${orList.orderNo }">
-										<td scope="row">${orList.orderNo }</td>
-										<td scope="row">${orList.PName }</td>
-										<td scope="row">${orList.orderQuan }</td>
-										<td scope="row">${orList.PPrice }</td>
-										<td scope="row">${orList.orderDate }</td>
-										<td scope="row" class="orderStatus">${orList.orderStatus }</td>
-										<c:choose>
-										<c:when test="${orList.orderStatus eq '배송완료' }">
-											<td scope="row"></td>
-										</c:when>
-										<c:otherwise>
-											<td scope="row">
-												<button type="button" class="cancleBtn">취소</button>
-											</td>
+											</tr>
 										</c:otherwise>
 										</c:choose>
-										</tr>
-										</c:if>
-									</c:otherwise>
-								</c:choose>
+									</c:if>	
+								
+								</c:forEach>
 							</c:forEach>
 						</table>
 					</div>
