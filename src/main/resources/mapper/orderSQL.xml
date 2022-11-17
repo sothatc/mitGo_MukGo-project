@@ -134,6 +134,10 @@
 	<delete id="cancleOrder" parameterType="int">
 		delete from order_tbl where order_no = #{orderNo}
 	</delete>
+	
+	<delete id="deleteCartAll" parameterType="String">
+		delete from cart where member_id = #{memberId}
+	</delete>
 
 
 </mapper>
