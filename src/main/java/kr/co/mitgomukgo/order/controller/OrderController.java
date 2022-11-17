@@ -25,8 +25,10 @@ public class OrderController {
   }
  
  @RequestMapping(value = "/orderNext.do")
- public String orderNext(Order r) {
+ public String orderNext(Order r, String shippingAddr1, String shippingAddr2) {
+	 r.setShippingAddr(shippingAddr1 +"*"+ shippingAddr2);
+	 int result = service.orderNext(r);
 	 System.out.println(r);
-	 return"redirect:/";
+	 return "order/ordercomplete";
  }
 }

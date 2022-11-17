@@ -19,6 +19,7 @@
     border-radius: 5px;
     background-color : #f5d575;
     text-align: center;
+    color: white;
     
 }
 
@@ -58,11 +59,11 @@
                     <h2 id="font">주문/결제</h2>
                     <div class="cart-option">
                     <div >
-                        <button type="button" id="cart-option" style=" background-color : #fdbe02;  color: black; font-weight: 600;">장바구니</button>
+                        <button type="button" id="cart-option">장바구니</button>
                     </div>
                     <div class="line"></div>
                     <div>
-                        <button type="button" id="cart-option" >결제</button>
+                        <button type="button" id="cart-option" style=" background-color : #fdbe02;  color: black; font-weight: 600;">결제</button>
                     </div>
                     <div class="line"></div>
                     <div>
@@ -95,31 +96,31 @@
                     
 	                   <tbody>
 		                	
-		                	
+		                <c:forEach items="${list }" var="Cart">
 		                	<tr class="showCartList" id="font">
 		                        
-		                        	<td style="text-align:center">${Order.PName }</td>
-					            	<td class="pImg" style="text-align:center"><img src="/resources/upload/market/${Order.PImg }"></td>
-						           	<td class="pPrice" style="text-align:center">${Order.PPrice }</td>
-						           	<td style="text-align:center">${Order.cartQuan }</td>
+		                        	<td style="text-align:center">${Cart.PName }</td>
+					            	<td class="pImg" style="text-align:center"><img src="/resources/upload/market/${Cart.PImg }"></td>
+						           	<td class="pPrice" style="text-align:center">${Cart.PPrice }</td>
+						           	<td style="text-align:center">${Cart.cartQuan }</td>
 					            	<td class="shipping">무료</td>
-					            	<td style="text-align:center;" class="cartTotalPrice">${Order.PPrice*Order.cartQuan }</td>
+					            	<td style="text-align:center;" class="cartTotalPrice">${Cart.PPrice*Cart.cartQuan }</td>
 								 		 
 					            	
 		                    </tr>
 		             
-		             
+		                 </c:forEach>
 		             
                  		
                  		   <tr>
-		                      	<td colspan="4"></td>
+		                      	<td colspan="5"></td>
 		                      	
 		                      	<td>
 		                      		<input type="hidden" style="border:none;" class="hiddenPayPrice payPrice" name="productsPrice" readonly>
-		                      		<p class="lastPrice"></p>
-		                        </td>
-		                        <td id="font" >총 합계 : ${Order.PPrice*Order.cartQuan }원</td>
-		                        <input type="hidden" class="totalp" value=" ${Order.PPrice*Order.cartQuan }">
+		                      		<p id="font" class="lastPrice totalp" style="float:left;"></p>
+		                      		<p id="font"class="totalp" style="float:left;">원</p>
+		                     </td>
+		                      
 	                      	</tr>
                      	</tbody>
                         
@@ -127,23 +128,26 @@
                             
                </table>
             </div>
-        
-            <form id="order-form" action="/insertOrder.do" method="post" autocomplete="off">
+        </div>
+            
+            
+            <form id="order-form" action="/orderNext.do" method="post" autocomplete="off">
+                
                 <div class="page-title order-title" id="font">주문정보</div>
                 <div class="order-info" id="font">
                     <div class="order-box">
                         <label for="name" class="order-label">주문자명</label>
-                        <input type="text" name="name" id="orderName" class="order-input medium" value="${sessionScope.m.memberName }">
+                        <input type="text" id="orderName" class="order-input medium" value="${sessionScope.m.memberName }">
                     </div>
                     <div class="order-box">
                         <label for="phone" class="order-label">전화번호</label>
-                        <input type="text" name="phone" id="orderPhone" class="order-input medium" value="${sessionScope.m.memberPhone }">
+                        <input type="text"  id="orderPhone" class="order-input medium" value="${sessionScope.m.memberPhone }">
                     </div>
                    
                 </div>
-				<input type="hidden" name="memberNo" value="">
-				<input type="hidden" id="cart-quantity-sum" name="orderQuan">
-				<input type="hidden" id="cart-price-sum" name="orderPrice">
+				<input type="hidden" id="cart-quantity-sum" name="orderQuan" value="${Order.cartQuan }">
+				<input type="hidden" id="cart-price-sum" name="orderPrice" value="${Order.PPrice }">
+				<input type="hidden" id="cart-price-sum" name="pNo" value="${Order.PNo }">
 				
                <div class="page-title order-title">배송정보</div>
                 <div class="order-info shipping">
@@ -179,17 +183,9 @@
                     </div>
                 </div>
                
-                 <div class="page-title order-title" id="font">결제정보</div>
-                <div class="order-info">
-                    <div class="order-box" id="font">
-                        <input type="radio" name="payType" id="order-card" value="card" checked>
-                        <label for="order-card">카드 결제</label>
-                        <input type="radio" name="payType" id="order-cash" value="cash">
-                        <label for="order-cash">무통장입금</label>
-                    </div>
-                </div>
+                 
 
-                <div class="order-info">
+                <div class="order-info" style="padding-top: 80px;">
                     <div id="agree-box" >
                         <input type="checkbox" id="info-agree" class="order-agree">
                         <label for="info-agree"><i class="fa-solid fa-check"></i></label>
@@ -199,7 +195,7 @@
                         <button type="button" id="payBtn">결제하기</button>
                     </div>
                 </div>               
-              </div>
+              
               
               
                 
@@ -303,6 +299,19 @@ IMP.request_pay({
 })
 
 });
+
+function sum(){
+    const cartTotalPrice = $(".cartTotalPrice");
+    let result = 0;
+    for(let i=0; i<cartTotalPrice.length; i++){
+       result += Number(cartTotalPrice.eq(i).text());
+    }        
+    $(".payPrice").val(result);
+    const lastPrice = $(".lastPrice");
+    const ViewPrice = result.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    lastPrice.text(ViewPrice);
+ }
+sum();
 </script>
 
 </body>

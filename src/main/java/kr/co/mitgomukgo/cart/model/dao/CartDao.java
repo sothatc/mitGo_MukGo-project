@@ -36,7 +36,7 @@ public class CartDao {
 
 	public ArrayList<Cart> ordercart(String memberId) {
 		System.out.println("다오 들어옴");
-		List list = sqlSession.selectList("cart.orderCart", memberId);
+		List list = sqlSession.selectList("cart.cartOrder", memberId);
 		System.out.println("xml갔다옴"+list);
 		return (ArrayList<Cart>) list;
 	}
