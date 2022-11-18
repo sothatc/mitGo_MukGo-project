@@ -269,7 +269,7 @@ $("#payBtn").on("click",function(){
 					 return;		
 				 }
 			} else if (i == 1) { // 수령인 연락처 정규식
-				const phoneReg = /^[0-9]{3}-[0-9]{3,4}-[0-9]{4}$/;
+				const phoneReg = /^[0-9]{3}[0-9]{4}[0-9]{4}$/;
 				const val1 = shipInfo.eq(1).val();
 				if(!(phoneReg.test(val1))) {
 					 shipInfo.eq(1).siblings(".comment").text("010-0000-0000 형식으로 입력");
