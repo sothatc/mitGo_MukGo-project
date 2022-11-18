@@ -29,6 +29,11 @@ public class OrderDao {
 	}
 
 
+	public int deleteCart(String memberId) {
+		return sqlSession.delete("deleteCartAll", memberId);
+	}
+
+
 
 	
 

@@ -21,6 +21,7 @@
 		font-size: 35px;
 		padding-bottom: 50px;
 		border-bottom: 1px solid gray;
+		margin-bottom: 100px;
 	}
 	
 	.warningMark {
@@ -108,11 +109,11 @@
         </div>
         
         <div class="category">
-        	<a href="/selectAllStoreBookmark.do?reqPage=1">
+        	<a href="/selectAllStoreBookmark.do?reqPage=1" style="color: gold;">
         		맛집
         	</a>
         	
-        	<a href="/myBookmarkList.do?bookMarkId=${sessionScope.o.ownerId }&reqPage=1" style="color: gold;">
+        	<a href="/myBookmarkList.do?bookMarkId=${sessionScope.m.memberId }&reqPage=1">
         		마켓
         	</a>
         </div>
@@ -125,66 +126,41 @@
 						</span>
         			</div>
         			
-        			<div class="noMsg">${msg }</div>
+        			<div class="noMsg">아직 찜목록이 없습니다.</div>
         	</c:when>
         	
         	<c:otherwise>
         		<div class="bookmark-content-list">
             <ul>
-            	<c:forEach items="${list }" var="bm">
+            	<c:forEach items="${list }" var="sbm">
             	
             		<c:choose>
             			<c:when test="${not empty sessionScope.m }">
             				<li class="list">
-			                    <a href="/marketDetail.do?pNo=${bm.PNo }&bookMarkId=${sessionScope.m.memberId}">
+			                    <a href="/storeDetail.do?storeNo=${sbm.storeNo }&bookmarkId=${sessionScope.m.memberId}">
 			                        <div class="bookmark-content">
 			                            <div class="img-box">
-			                                <img src="/resources/upload/market/${bm.PImg }" alt="">
+			                                <img src="/resources/upload/store/${sbm.thumbNail }" alt="">
 			                            </div>
 			    
 			                            <div class="bookmark-man">
 			                                <ul>
-			                                    <li>${bm.PName }</li>
-			                                    <li>${bm.PPrice }</li>
+			                                    <li>${sbm.storeName }</li>
 			                                </ul>
 			                            </div>
 			                        </div>
 			                    </a>
 			                    <div class="delBtn">
-			                        <button type="button" class="btn btn-danger" onclick="deleteBookmark(this,${bm.bmNo})">삭제</button>
+			                        <button type="button" class="btn btn-danger" onclick="deleteBookmark(this,${sbm.bmNo})">삭제</button>
 			                    </div>
 			                </li>
             			</c:when>
-            			
-            			<c:otherwise>
-            				<li class="list">
-			                    <a href="/marketDetail.do?pNo=${bm.PNo }&bookMarkId=${sessionScope.o.ownerId}">
-			                        <div class="bookmark-content">
-			                            <div class="img-box">
-			                                <img src="/resources/img/${bm.PImg }" alt="">
-			                            </div>
-			    
-			                            <div class="bookmark-man">
-			                                <ul>
-			                                    <li>${bm.PName }</li>
-			                                    <li>${bm.PPrice }</li>
-			                                </ul>
-			                            </div>
-			                        </div>
-			                    </a>
-			                    <div class="delBtn">
-			                        <button type="button" class="btn btn-danger" style="width: 80px;" onclick="deleteBookmark(this,${bm.bmNo})">삭제</button>
-			                    </div>
-			                </li>
-            			</c:otherwise>
             		</c:choose>
-            		
             	</c:forEach>
                 
             </ul>
         </div>
-        	</c:otherwise>
-        </c:choose>
+        	
 
         <div class="warningMark1" style="display: none;">
         	<span class="material-symbols-outlined" style="font-size: 70px;">
@@ -206,9 +182,11 @@
                 </span></a>  -->
                ${pageNavi }
         </div>
-    </div>
+        </c:otherwise>
+        </c:choose>
     </div>
     
+     
     <jsp:include page="/WEB-INF/views/common/footer.jsp" />
     
     <script type="text/javascript">
@@ -216,7 +194,7 @@
     		console.log("야임마!!");
     		if(confirm("삭제하시겠습니까?")){
     			$.ajax({
-    				url : "/deleteBookMarkNo.do",
+    				url : "/deleteStoreBookMarkNo.do",
     				type : "post",
     				data : {bmNo : bmNo},
     				success : function(data){

@@ -43,62 +43,24 @@
 								<th class="th" scope="col">처리</th>
 							</tr>
 							<c:forEach items="${list }" var="orList" varStatus="i">
+							<tr>
+								<input type="hidden" class="nullChk" value="${orList.orderNo }">
+								<td scope="row">${orList.orderNo }</td>
+								<td scope="row">${orList.PName }</td>
+								<td scope="row">${orList.orderQuan }</td>
+								<td scope="row">${orList.PPrice }</td>
+								<td scope="row">${orList.orderDate }</td>
+								<td scope="row" class="orderStatus">${orList.orderStatus }</td>
 								<c:choose>
-									<c:when test="${i.index == 0 }">
-									<tr>
-										<input type="hidden" class="nullChk" value="${orList.orderNo }">
-										<td scope="row">${orList.orderNo }</td>
-										<td scope="row">${orList.PName }</td>
-										<td scope="row">${orList.orderQuan }</td>
-										<td scope="row">${orList.PPrice }</td>
-										<td scope="row">${orList.orderDate }</td>
-										<td scope="row" class="orderStatus">${orList.orderStatus }</td>
-										<c:choose>
-										<c:when test="${orList.orderStatus eq '배송완료' }">
-											<td scope="row"></td>
-										</c:when>
-										<c:otherwise>
-											<td scope="row">
-												<button type="button" class="cancleBtn">취소</button>
-											</td>
-										</c:otherwise>
-									</c:choose>
-									</tr>
+									<c:when test="${orList.orderStatus eq '배송완료' }">
 									</c:when>
 									<c:otherwise>
-										<c:if test="${orList.impUid eq list[i.index-1].impUid }">
-											<tr>
-												<td scope="row"></td>
-												<td scope="row">${orList.PName }</td>
-												<td scope="row">${orList.orderQuan }</td>
-												<td scope="row">${orList.PPrice }</td>
-												<td scope="row">${orList.orderDate }</td>
-												<td scope="row" class="orderStatus">${orList.orderStatus }</td>
-											</tr>		
-										</c:if>
-										<c:if test="${!orList.impUid eq list[i.index-1].impUid }">
-										<tr>
-										<input type="hidden" class="nullChk" value="${orList.orderNo }">
-										<td scope="row">${orList.orderNo }</td>
-										<td scope="row">${orList.PName }</td>
-										<td scope="row">${orList.orderQuan }</td>
-										<td scope="row">${orList.PPrice }</td>
-										<td scope="row">${orList.orderDate }</td>
-										<td scope="row" class="orderStatus">${orList.orderStatus }</td>
-										<c:choose>
-										<c:when test="${orList.orderStatus eq '배송완료' }">
-											<td scope="row"></td>
-										</c:when>
-										<c:otherwise>
-											<td scope="row">
-												<button type="button" class="cancleBtn">취소</button>
-											</td>
-										</c:otherwise>
-										</c:choose>
-										</tr>
-										</c:if>
+										<td scope="row">
+											<button type="button" class="cancleBtn">취소</button>
+										</td>
 									</c:otherwise>
 								</c:choose>
+							</tr>
 							</c:forEach>
 						</table>
 					</div>
@@ -116,7 +78,7 @@
 		}
 		
 		$(".cancleBtn").on("click", function(e) {
-			const orderStatus = $(this).parent().parent().children().eq(7).text();
+			const orderStatus = $(this).parent().parent().children().eq(6).text();
 		    if(orderStatus == "배송중") {
 			   alert("발송중인 상품입니다. 업체에 문의해주세요.");
 			   e.preventDefault();

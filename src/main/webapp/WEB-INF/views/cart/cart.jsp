@@ -140,8 +140,9 @@
                  		   <tr>
 		                      	<td colspan="6"></td>
 		                      	
-		                      	<td>
+		                      	<td style="font-weight: 600;">
 		                      		<input type="hidden" style="border:none;" class="hiddenPayPrice payPrice" name="productsPrice" readonly>
+		                      		<p style="float: left; margin-right: 5px;">총 합계 : </p>
 		                      		<p id="font" class="lastPrice" style="float:left;"></p>
 		                      		<p id="font" style="float:left;">원</p>
 		                    </td>
@@ -156,7 +157,7 @@
                 </div>
                 
              <div class="cart-btn">
-                     <button type="button" id="font">계속 쇼핑하기</button>
+                     <button type="button" id="font" onclick="location.href='/marketMain.do?reqPage=1&pCategory=10'">계속 쇼핑하기</button>
 	                 
                     <button type="button" class="payBtn" onclick="goToOrder('${sessionScope.m.memberId }');">주문하러 가기</button>
                  </div>

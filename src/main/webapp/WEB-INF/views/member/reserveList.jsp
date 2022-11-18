@@ -94,11 +94,10 @@
                         <th scope="col">예약 시간</th>
                         <th scope="col">리뷰</th>
                         <th scope="col">예약 취소</th>
-                        <input type="hidden" class="nullChk" value="${rs.reserveNo }">
                      </tr>
                      <c:forEach items="${list }" var="rs">
                         <tr>
-                           
+	                       <input type="hidden" class="nullChk" value="${rs.reserveNo }">
                            <td>${rs.reserveNo }</td>
                            <td>${rs.storeName }</td>
                            <td>${rs.reserveDate }</td>
@@ -106,7 +105,7 @@
                            <td>${rs.eatTime }</td>
                            <td>
                            <c:choose>
-                           	<c:when test="${rs.visitStatus == 2}">
+                           	<c:when test="${rs.visitStatus == 1 || rs.visitStatus == 2}">
 	                              <c:choose>
 	                                 <c:when test="${0 eq rs.RStatus }">
 	                                    <button type="button" class="reviewBtn" onclick="WirteReview(this,${rs.reserveNo},${rs.storeNo},'${rs.storeName }')">리뷰쓰기</button>

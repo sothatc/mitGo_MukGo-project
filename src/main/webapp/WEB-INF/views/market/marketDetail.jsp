@@ -77,16 +77,6 @@
 									</span>
 				            	</c:when>
 				            	
-				            	<c:when test="${not empty sessionScope.o }">
-				            		<span class="material-icons" id="bookMark" onclick="addBookmark(${ma.PNo}, '${sessionScope.o.ownerId }','${ma.PName}', ${ma.PPrice})">
-										bookmark
-									</span>
-									
-									<span class="material-icons" id="bookMark1" style="color:gold; display: none;" onclick="deleteBookmark(${ma.PNo}, '${sessionScope.o.ownerId }')">
-										bookmark
-									</span>
-				            	</c:when>
-				            	
 				            	<c:otherwise>
 				            		
 				            	</c:otherwise>
@@ -101,17 +91,7 @@
 										bookmark
 									</span>
 									
-									<span class="material-icons" id="bookMark" style="display: none;" onclick="addBookmark(${ma.PNo}, '${sessionScope.o.ownerId }','${ma.PName}', ${ma.PPrice})">
-										bookmark
-									</span>
-				            	</c:when>
-				            	
-				            	<c:when test="${not empty sessionScope.o }">
-				            		<span class="material-icons" id="bookMark1" style="color:gold;" onclick="deleteBookmark(${ma.PNo}, '${sessionScope.o.ownerId }')">
-										bookmark
-									</span>
-									
-									<span class="material-icons" id="bookMark" style="display: none;" onclick="addBookmark(${ma.PNo}, '${sessionScope.o.ownerId }','${ma.PName}', ${ma.PPrice})">
+									<span class="material-icons" id="bookMark" style="display: none;" onclick="addBookmark(${ma.PNo}, '${sessionScope.m.memberId }','${ma.PName}', ${ma.PPrice})">
 										bookmark
 									</span>
 				            	</c:when>
