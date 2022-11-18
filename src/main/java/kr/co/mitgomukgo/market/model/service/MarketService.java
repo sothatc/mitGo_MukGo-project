@@ -52,7 +52,7 @@ public class MarketService {
 			if(reqPage == pageNo) {
 				pageNavi += "<span class='numberDeco'>" + pageNo + "</span>";
 			}else {
-				pageNavi += "<a href='/marketMain.do?reqPage=" +(pageNo - 1)+"&pCategory="+pCategory+"'><span>" + (pageNo) + "</span></a>";
+				pageNavi += "<a href='/marketMain.do?reqPage=" +(pageNo)+"&pCategory="+pCategory+"'><span>" + (pageNo) + "</span></a>";
 			}
 			pageNo++;
 			if(pageNo > totalPage) {
@@ -61,7 +61,7 @@ public class MarketService {
 		}
 		
 		if(pageNo <= totalPage) {
-			pageNavi += "<a href='/marketMain.do?reqPage=" +(pageNo - 1)+"&pCategory="+pCategory+"'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
+			pageNavi += "<a href='/marketMain.do?reqPage=" +(pageNo)+"&pCategory="+pCategory+"'><span class='material-symbols-outlined' style='font-size: 30px;'>\r\n" + 
 					"            chevron_right\r\n" + 
 					"            </span></a>";
 		}
